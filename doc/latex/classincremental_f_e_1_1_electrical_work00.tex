@@ -1,0 +1,138 @@
+\hypertarget{classincremental_f_e_1_1_electrical_work00}{}\section{incremental\+FE\+:\+:Electrical\+Work00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_electrical_work00}\index{incremental\+F\+E\+::\+Electrical\+Work00$<$ spacedim $>$@{incremental\+F\+E\+::\+Electrical\+Work00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$electrical\+\_\+work\+\_\+00.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Electrical\+Work00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classincremental_f_e_1_1_electrical_work00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Electrical\+Work00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classincremental_f_e_1_1_electrical_work00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_electrical_work00_a7b7eb8d9a23e3f8c9447c83d68ea545c}{Electrical\+Work00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_electrical_work00_aa265094f77f4b0cf74ebb25f6b6bdc9f}{global\+\_\+data}, double($\ast$const \hyperlink{classincremental_f_e_1_1_electrical_work00_aa529e919f57a2cb3c6a6d63014431b9c}{function\+\_\+phi})(double, dealii\+::\+Point$<$ spacedim $>$), const double \hyperlink{classincremental_f_e_1_1_electrical_work00_a932398e0ec8ba1599cbb6cb1cdb0bdbc}{alpha}, const unsigned int \hyperlink{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}{method}=1)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classincremental_f_e_1_1_electrical_work00_a7684d818dd3288b1d8d7160b25df6b23}{get\+\_\+h\+\_\+sigma} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, {\bf dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_electrical_work00_aa265094f77f4b0cf74ebb25f6b6bdc9f}{global\+\_\+data}
+\item 
+double($\ast$const \hyperlink{classincremental_f_e_1_1_electrical_work00_aa529e919f57a2cb3c6a6d63014431b9c}{function\+\_\+phi} )(double, dealii\+::\+Point$<$ spacedim $>$)
+\item 
+const double \hyperlink{classincremental_f_e_1_1_electrical_work00_a932398e0ec8ba1599cbb6cb1cdb0bdbc}{alpha}
+\item 
+const unsigned int \hyperlink{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}{method}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Electrical\+Work00$<$ spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$h^\Sigma_\tau = \tilde\varphi (\boldsymbol{D}^- - \boldsymbol{D}^+) \cdot \boldsymbol{n}$,
+
+where $\boldsymbol{D}$ is the dielectric displacement vector, $\boldsymbol{n}$ the outward unit normal on the interface, and $\tilde\varphi$ the prescribed scalar potential (which may depend on location and time).
+
+Ordering of quantities in {\bf Scalar\+Functional\+::e\+\_\+sigma}\+:~\newline
+ \mbox{[}0\mbox{]} $D^-_0 - D^+_0$~\newline
+ \mbox{[}1\mbox{]} $D^-_1 - D^+_1$~\newline
+ \mbox{[}2\mbox{]} $D^-_2 - D^+_2$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!Electrical\+Work00@{Electrical\+Work00}}
+\index{Electrical\+Work00@{Electrical\+Work00}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{Electrical\+Work00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, double($\ast$const function\+\_\+phi)(double, dealii\+::\+Point$<$ spacedim $>$), const double alpha, const unsigned int method=1)}{ElectricalWork00(const std::vector< dealii::GalerkinTools::DependentField< spacedim-1, spacedim >> e_sigma, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim-1 > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, double(*const function_phi)(double, dealii::Point< spacedim >), const double alpha, const unsigned int method=1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::{\bf Electrical\+Work00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+sigma, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{double($\ast$)(double, dealii\+::\+Point$<$ spacedim $>$)}]{function\+\_\+phi, }
+\item[{const double}]{alpha, }
+\item[{const unsigned int}]{method = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_electrical_work00_a7b7eb8d9a23e3f8c9447c83d68ea545c}{}\label{classincremental_f_e_1_1_electrical_work00_a7b7eb8d9a23e3f8c9447c83d68ea545c}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+sigma} & {\bf Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_electrical_work00_aa265094f77f4b0cf74ebb25f6b6bdc9f}{Electrical\+Work00\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em function\+\_\+phi} & \hyperlink{classincremental_f_e_1_1_electrical_work00_aa529e919f57a2cb3c6a6d63014431b9c}{Electrical\+Work00\+::function\+\_\+phi}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_electrical_work00_a932398e0ec8ba1599cbb6cb1cdb0bdbc}{Electrical\+Work00\+::alpha}\\
+\hline
+\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}{Electrical\+Work00\+::method} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}}
+\index{get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{get\+\_\+h\+\_\+sigma(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, dealii\+::\+Vector$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, dealii\+::\+Vector$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_h_sigma(const dealii::Vector< double > &e_sigma, const std::vector< dealii::Vector< double >> &e_sigma_ref, dealii::Vector< double > &hidden_vars, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &h_sigma, dealii::Vector< double > &h_sigma_1, dealii::FullMatrix< double > &h_sigma_2, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::get\+\_\+h\+\_\+sigma (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma, }
+\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
+\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
+\item[{double \&}]{h\+\_\+sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+1, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+2, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_electrical_work00_a7684d818dd3288b1d8d7160b25df6b23}{}\label{classincremental_f_e_1_1_electrical_work00_a7684d818dd3288b1d8d7160b25df6b23}
+see {\bf Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} 
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!alpha@{alpha}}
+\index{alpha@{alpha}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{alpha}{alpha}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_electrical_work00_a932398e0ec8ba1599cbb6cb1cdb0bdbc}{}\label{classincremental_f_e_1_1_electrical_work00_a932398e0ec8ba1599cbb6cb1cdb0bdbc}
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1} (see \hyperlink{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}{Electrical\+Work00\+::method}).
+
+\begin{DoxyWarning}{Warning}
+In the very first time step {\ttfamily alpha=1.\+0} is used irrespective of the value provided for {\ttfamily alpha!} This helps to avoid oscillations of the solution if the initial solution fields are not equilibrated. 
+\end{DoxyWarning}
+\index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!function\+\_\+phi@{function\+\_\+phi}}
+\index{function\+\_\+phi@{function\+\_\+phi}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{function\+\_\+phi}{function_phi}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double($\ast$const {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::function\+\_\+phi) (double, dealii\+::\+Point$<$ spacedim $>$)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_electrical_work00_aa529e919f57a2cb3c6a6d63014431b9c}{}\label{classincremental_f_e_1_1_electrical_work00_aa529e919f57a2cb3c6a6d63014431b9c}
+Function determining $\tilde\varphi(t, \boldsymbol{X})$ ( $t$ is time and $\boldsymbol{X}$ the point in space) \index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!global\+\_\+data@{global\+\_\+data}}
+\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_electrical_work00_aa265094f77f4b0cf74ebb25f6b6bdc9f}{}\label{classincremental_f_e_1_1_electrical_work00_aa265094f77f4b0cf74ebb25f6b6bdc9f}
+global data object \index{incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}!method@{method}}
+\index{method@{method}!incremental\+F\+E\+::\+Electrical\+Work00@{incremental\+F\+E\+::\+Electrical\+Work00}}
+\subsubsection[{\texorpdfstring{method}{method}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const unsigned int {\bf incremental\+F\+E\+::\+Electrical\+Work00}$<$ spacedim $>$\+::method\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}{}\label{classincremental_f_e_1_1_electrical_work00_a6730746f75d7d3ebae632da3e7fd68d5}
+Numerical method ({\ttfamily 0}\+: take derivatives of scalar functional at time corresponding to {\ttfamily alpha}, {\ttfamily 1}\+: weight derivatives at the beginning of the time step and at the end of the time step according to {\ttfamily alpha}) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{electrical__work__00_8h}{electrical\+\_\+work\+\_\+00.\+h}\end{DoxyCompactItemize}

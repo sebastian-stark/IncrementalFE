@@ -1,0 +1,182 @@
+#include <incremental_fe/global_data_incremental_fe.h>
+
+#include <iostream>
+#include <deal.II/base/utilities.h>
+
+using namespace std;
+using namespace dealii;
+using namespace incrementalFE;
+
+template<unsigned int spacedim>
+GlobalDataIncrementalFE<spacedim>::GlobalDataIncrementalFE(const double t_init)
+:
+t(t_init),
+t_ref(t_init),
+t_ref_old(t_init)
+{
+}
+
+template<unsigned int spacedim>
+GlobalDataIncrementalFE<spacedim>::~GlobalDataIncrementalFE()
+{
+	Assert(n_subscriptions() == 0, ExcMessage("You are about to destroy a GlobalDataIncrementalFE, which is currently in use! Make sure that all GlobalDataIncrementalFE objects live at least as long as the objects using them!"));
+}
+
+template<unsigned int spacedim>
+double
+GlobalDataIncrementalFE<spacedim>::get_t()
+const
+{
+	return t;
+}
+
+template<unsigned int spacedim>
+double
+GlobalDataIncrementalFE<spacedim>::get_t_ref()
+const
+{
+	return t_ref;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_t(const double t)
+{
+	Assert(t >= this->t, ExcMessage("The new time must be larger than the old one!"));
+	t_ref_old = this->t_ref;
+	t_ref = this->t;
+	this->t = t;
+	time_step++;
+	reset_t_possible = true;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::reset_t()
+{
+	Assert(reset_t_possible, ExcMessage("You can reset the time only once because only the previous state is stored!"));
+	t = t_ref;
+	t_ref = t_ref_old;
+	time_step--;
+	reset_t_possible = false;
+}
+
+template<unsigned int spacedim>
+unsigned int
+GlobalDataIncrementalFE<spacedim>::get_time_step()
+const
+{
+	return time_step;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::write_error_message(const string error_message)
+{
+	error_messages.push_back(error_message);
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::write_error_message(	const string			error_message,
+														const Point<spacedim>&	location)
+{
+
+	string error_message_ = error_message + " at point (";
+	for(unsigned int coordinate = 0; coordinate < spacedim-1; ++coordinate)
+		error_message_ = error_message_ + Utilities::to_string(location(coordinate)) + ", ";
+	error_message_ = error_message_ + Utilities::to_string(location(spacedim-1)) + ")";
+	error_messages.push_back(error_message_);
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::print_error_messages()
+const
+{
+	cout << "Error messages:\n";
+	for(const auto& error_message: error_messages)
+		cout << "  " << error_message << endl;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::print_last_error_message()
+const
+{
+	cout << "Last error message:\n";
+	cout << "  " << error_messages.back() << endl;
+}
+
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_sym_mode(const bool sym_mode)
+{
+	this->sym_mode = sym_mode;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_max_iter(const unsigned int max_iter)
+{
+	this->max_iter = max_iter;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_max_cutbacks(const unsigned int max_cutbacks)
+{
+	this->max_cutbacks = max_cutbacks;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_threshold_potential_increment(const double threshold_potential_increment)
+{
+	this->threshold_potential_increment = threshold_potential_increment;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_force_linear(const bool force_linear)
+{
+	this->force_linear = force_linear;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_predictor_corrector(const bool predictor_corrector)
+{
+	this->predictor_corrector = predictor_corrector;
+}
+
+template<unsigned int spacedim>
+bool
+GlobalDataIncrementalFE<spacedim>::get_predictor_step()
+const
+{
+	return predictor_step;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_predictor_step(const bool predictor_step)
+{
+	this->predictor_step = predictor_step;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
+{
+	t = t_init;
+	t_ref = t_init;
+	t_ref_old = t_init;
+	time_step = 0;
+	reset_t_possible = false;
+	error_messages.clear();
+}
+
+template class GlobalDataIncrementalFE<2>;
+template class GlobalDataIncrementalFE<3>;

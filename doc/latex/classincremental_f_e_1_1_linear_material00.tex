@@ -1,0 +1,144 @@
+\hypertarget{classincremental_f_e_1_1_linear_material00}{}\section{incremental\+FE\+:\+:Linear\+Material00$<$ dim, spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_linear_material00}\index{incremental\+F\+E\+::\+Linear\+Material00$<$ dim, spacedim $>$@{incremental\+F\+E\+::\+Linear\+Material00$<$ dim, spacedim $>$}}
+
+
+{\ttfamily \#include $<$linear\+\_\+material\+\_\+00.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Linear\+Material00$<$ dim, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classincremental_f_e_1_1_linear_material00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Linear\+Material00$<$ dim, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classincremental_f_e_1_1_linear_material00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_linear_material00_a10b391080fbf7b8198bbfb407abc5216}{Linear\+Material00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_linear_material00_adc2fce8d6428b316b1b5a6245fc93629}{global\+\_\+data}, const dealii\+::\+Full\+Matrix$<$ double $>$ \hyperlink{classincremental_f_e_1_1_linear_material00_ab1be4c9977c7d6671c5893dbfeb21078}{C}, const {\bf dealii\+::\+Vector}$<$ double $>$ \hyperlink{classincremental_f_e_1_1_linear_material00_a4b080a85b2d860bfaadbd1480cb9a69b}{y}, const std\+::string name=\char`\"{}\char`\"{}, const double \hyperlink{classincremental_f_e_1_1_linear_material00_a81a2c21ea6ca1e039fc4991a2db64cfe}{alpha}=1.\+0, const unsigned int \hyperlink{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}{method}=1)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classincremental_f_e_1_1_linear_material00_ab317a4ab3ee26be5f5cf269367875ac8}{get\+\_\+h\+\_\+sigma} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, {\bf dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_linear_material00_adc2fce8d6428b316b1b5a6245fc93629}{global\+\_\+data}
+\item 
+const dealii\+::\+Full\+Matrix$<$ double $>$ \hyperlink{classincremental_f_e_1_1_linear_material00_ab1be4c9977c7d6671c5893dbfeb21078}{C}
+\item 
+const {\bf dealii\+::\+Vector}$<$ double $>$ \hyperlink{classincremental_f_e_1_1_linear_material00_a4b080a85b2d860bfaadbd1480cb9a69b}{y}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_linear_material00_a81a2c21ea6ca1e039fc4991a2db64cfe}{alpha}
+\item 
+const unsigned int \hyperlink{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}{method}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int dim, unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Linear\+Material00$<$ dim, spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$h^\Sigma_\tau = \dfrac{1}{2} {\boldsymbol{e}^\Sigma}^\top \cdot \boldsymbol{C} \cdot \boldsymbol{e}^\Sigma + \boldsymbol{y}^\top \cdot \boldsymbol{e}^\Sigma$,
+
+where the vector $\boldsymbol{e}^\Sigma$ contains a subset of the dependent fields $e^\Sigma_\nu$, and the matrix $\boldsymbol{C}$ as well as the vector $\boldsymbol{y}$ are material specific. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!Linear\+Material00@{Linear\+Material00}}
+\index{Linear\+Material00@{Linear\+Material00}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{Linear\+Material00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const dealii\+::\+Full\+Matrix$<$ double $>$ C, const dealii\+::\+Vector$<$ double $>$ y, const std\+::string name="""", const double alpha=1.\+0, const unsigned int method=1)}{LinearMaterial00(const std::vector< dealii::GalerkinTools::DependentField< dim, spacedim >> e_sigma, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< dim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const dealii::FullMatrix< double > C, const dealii::Vector< double > y, const std::string name="", const double alpha=1.0, const unsigned int method=1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::{\bf Linear\+Material00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$}]{e\+\_\+sigma, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const dealii\+::\+Full\+Matrix$<$ double $>$}]{C, }
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$}]{y, }
+\item[{const std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{const double}]{alpha = {\ttfamily 1.0}, }
+\item[{const unsigned int}]{method = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_linear_material00_a10b391080fbf7b8198bbfb407abc5216}{}\label{classincremental_f_e_1_1_linear_material00_a10b391080fbf7b8198bbfb407abc5216}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+sigma} & {\bf Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_linear_material00_adc2fce8d6428b316b1b5a6245fc93629}{Linear\+Material00\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em C} & \hyperlink{classincremental_f_e_1_1_linear_material00_ab1be4c9977c7d6671c5893dbfeb21078}{Linear\+Material00\+::C}\\
+\hline
+\mbox{\tt in}  & {\em y} & \hyperlink{classincremental_f_e_1_1_linear_material00_a4b080a85b2d860bfaadbd1480cb9a69b}{Linear\+Material00\+::y}\\
+\hline
+\mbox{\tt in}  & {\em name} & {\bf Scalar\+Functional\+::name}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_linear_material00_a81a2c21ea6ca1e039fc4991a2db64cfe}{Linear\+Material00\+::alpha}\\
+\hline
+\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}{Linear\+Material00\+::method} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}}
+\index{get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{get\+\_\+h\+\_\+sigma(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, dealii\+::\+Vector$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, dealii\+::\+Vector$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_h_sigma(const dealii::Vector< double > &e_sigma, const std::vector< dealii::Vector< double >> &e_sigma_ref, dealii::Vector< double > &hidden_vars, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &h_sigma, dealii::Vector< double > &h_sigma_1, dealii::FullMatrix< double > &h_sigma_2, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::get\+\_\+h\+\_\+sigma (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma, }
+\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
+\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
+\item[{double \&}]{h\+\_\+sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+1, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+2, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_ab317a4ab3ee26be5f5cf269367875ac8}{}\label{classincremental_f_e_1_1_linear_material00_ab317a4ab3ee26be5f5cf269367875ac8}
+see {\bf Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} 
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!alpha@{alpha}}
+\index{alpha@{alpha}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{alpha}{alpha}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_a81a2c21ea6ca1e039fc4991a2db64cfe}{}\label{classincremental_f_e_1_1_linear_material00_a81a2c21ea6ca1e039fc4991a2db64cfe}
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1} (see \hyperlink{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}{Linear\+Material00\+::method}).
+
+\begin{DoxyWarning}{Warning}
+In the very first time step {\ttfamily alpha=1.\+0} is used irrespective of the value provided for {\ttfamily alpha!} This helps to avoid oscillations of the solution if the initial solution fields are not equilibrated. 
+\end{DoxyWarning}
+\index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!C@{C}}
+\index{C@{C}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{C}{C}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const dealii\+::\+Full\+Matrix$<$double$>$ {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::C\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_ab1be4c9977c7d6671c5893dbfeb21078}{}\label{classincremental_f_e_1_1_linear_material00_ab1be4c9977c7d6671c5893dbfeb21078}
+$\boldsymbol{C}$ \index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!global\+\_\+data@{global\+\_\+data}}
+\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_adc2fce8d6428b316b1b5a6245fc93629}{}\label{classincremental_f_e_1_1_linear_material00_adc2fce8d6428b316b1b5a6245fc93629}
+global data object \index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!method@{method}}
+\index{method@{method}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{method}{method}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const unsigned int {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::method\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}{}\label{classincremental_f_e_1_1_linear_material00_abc882081c652f94f40a24eb47da078fa}
+Numerical method ({\ttfamily 0}\+: take derivatives of scalar functional at time corresponding to {\ttfamily alpha}, {\ttfamily 1}\+: weight derivatives at the beginning of the time step and at the end of the time step according to {\ttfamily alpha}) \index{incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}!y@{y}}
+\index{y@{y}!incremental\+F\+E\+::\+Linear\+Material00@{incremental\+F\+E\+::\+Linear\+Material00}}
+\subsubsection[{\texorpdfstring{y}{y}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const {\bf dealii\+::\+Vector}$<$double$>$ {\bf incremental\+F\+E\+::\+Linear\+Material00}$<$ dim, spacedim $>$\+::y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_linear_material00_a4b080a85b2d860bfaadbd1480cb9a69b}{}\label{classincremental_f_e_1_1_linear_material00_a4b080a85b2d860bfaadbd1480cb9a69b}
+$\boldsymbol{y}$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{linear__material__00_8h}{linear\+\_\+material\+\_\+00.\+h}\end{DoxyCompactItemize}

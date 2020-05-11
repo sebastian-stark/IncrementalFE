@@ -1,0 +1,166 @@
+\hypertarget{classincremental_f_e_1_1_chemical_potential00}{}\section{incremental\+FE\+:\+:Chemical\+Potential00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_chemical_potential00}\index{incremental\+F\+E\+::\+Chemical\+Potential00$<$ spacedim $>$@{incremental\+F\+E\+::\+Chemical\+Potential00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$chemical\+\_\+potential\+\_\+00.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Chemical\+Potential00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classincremental_f_e_1_1_chemical_potential00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Chemical\+Potential00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classincremental_f_e_1_1_chemical_potential00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_chemical_potential00_a0d7bd487159185d6c178de4d967ead1d}{Chemical\+Potential00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_chemical_potential00_a1dcd80b6f6f2906c38ad490d519e3123}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a4c90a618bdb704a4d8d36438af323408}{RT}, const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a99a75102bed91046fbbf9098de7ecd89}{c0}, const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a64b01fb87580d416b201175e7e819bcb}{mu0}, const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_ad00b92c170d812c26e6429f07dd16790}{alpha}, const unsigned int \hyperlink{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}{method}=1, const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_aa8dbd044f314f694e09c7a1214e4a1a9}{c\+\_\+th\+\_\+c0}=0.\+0)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classincremental_f_e_1_1_chemical_potential00_a43acda281d5e7446c282cf51a3542653}{get\+\_\+h\+\_\+omega} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+omega\+\_\+ref\+\_\+sets, {\bf dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, double \&h\+\_\+omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+omega\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+omega\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_chemical_potential00_a1dcd80b6f6f2906c38ad490d519e3123}{global\+\_\+data}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a4c90a618bdb704a4d8d36438af323408}{RT}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a99a75102bed91046fbbf9098de7ecd89}{c0}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_a64b01fb87580d416b201175e7e819bcb}{mu0}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_ad00b92c170d812c26e6429f07dd16790}{alpha}
+\item 
+const unsigned int \hyperlink{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}{method}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_aa8dbd044f314f694e09c7a1214e4a1a9}{c\+\_\+th\+\_\+c0}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_chemical_potential00_ac3da130e727c8a08f7616cf01c4a2826}{log\+\_\+c\+\_\+th\+\_\+c0}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Chemical\+Potential00$<$ spacedim $>$}
+
+Class defining a domain related scalar functional with the integrand
+
+$h^\Omega_\rho = RTc \left( \ln\dfrac{c}{c_0} + \mu_0 -1 \right)$,
+
+where $R$ is the gas constant, $T$ the temperature, $c_0$ a reference species concentration, $\mu_0$ a corresponding reference value for the potential, and $c$ the species concentration.
+
+This is a chemical potential of a single species (without any non-\/ideality and interactions) for the isothermal case.
+
+Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $c$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!Chemical\+Potential00@{Chemical\+Potential00}}
+\index{Chemical\+Potential00@{Chemical\+Potential00}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{Chemical\+Potential00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double R\+T, const double c0, const double mu0, const double alpha, const unsigned int method=1, const double c\+\_\+th\+\_\+c0=0.\+0)}{ChemicalPotential00(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double RT, const double c0, const double mu0, const double alpha, const unsigned int method=1, const double c_th_c0=0.0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::{\bf Chemical\+Potential00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const double}]{RT, }
+\item[{const double}]{c0, }
+\item[{const double}]{mu0, }
+\item[{const double}]{alpha, }
+\item[{const unsigned int}]{method = {\ttfamily 1}, }
+\item[{const double}]{c\+\_\+th\+\_\+c0 = {\ttfamily 0.0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a0d7bd487159185d6c178de4d967ead1d}{}\label{classincremental_f_e_1_1_chemical_potential00_a0d7bd487159185d6c178de4d967ead1d}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_a1dcd80b6f6f2906c38ad490d519e3123}{Chemical\+Potential00\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em RT} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_a4c90a618bdb704a4d8d36438af323408}{Chemical\+Potential00\+::\+RT}\\
+\hline
+\mbox{\tt in}  & {\em c0} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_a99a75102bed91046fbbf9098de7ecd89}{Chemical\+Potential00\+::c0}\\
+\hline
+\mbox{\tt in}  & {\em mu0} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_a64b01fb87580d416b201175e7e819bcb}{Chemical\+Potential00\+::mu0}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_ad00b92c170d812c26e6429f07dd16790}{Chemical\+Potential00\+::alpha}\\
+\hline
+\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}{Chemical\+Potential00\+::method}\\
+\hline
+\mbox{\tt in}  & {\em c\+\_\+th\+\_\+c0} & \hyperlink{classincremental_f_e_1_1_chemical_potential00_aa8dbd044f314f694e09c7a1214e4a1a9}{Chemical\+Potential00\+::c\+\_\+th\+\_\+c0} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!get\+\_\+h\+\_\+omega@{get\+\_\+h\+\_\+omega}}
+\index{get\+\_\+h\+\_\+omega@{get\+\_\+h\+\_\+omega}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{get\+\_\+h\+\_\+omega(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&e\+\_\+omega\+\_\+ref\+\_\+sets, dealii\+::\+Vector$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, double \&h\+\_\+omega, dealii\+::\+Vector$<$ double $>$ \&h\+\_\+omega\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+omega\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_h_omega(const dealii::Vector< double > &e_omega, const std::vector< dealii::Vector< double >> &e_omega_ref_sets, dealii::Vector< double > &hidden_vars, const dealii::Point< spacedim > &x, double &h_omega, dealii::Vector< double > &h_omega_1, dealii::FullMatrix< double > &h_omega_2, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::get\+\_\+h\+\_\+omega (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+omega, }
+\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+omega\+\_\+ref\+\_\+sets, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
+\item[{double \&}]{h\+\_\+omega, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+omega\+\_\+1, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+omega\+\_\+2, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a43acda281d5e7446c282cf51a3542653}{}\label{classincremental_f_e_1_1_chemical_potential00_a43acda281d5e7446c282cf51a3542653}
+see {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+h\+\_\+omega} 
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!alpha@{alpha}}
+\index{alpha@{alpha}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{alpha}{alpha}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_ad00b92c170d812c26e6429f07dd16790}{}\label{classincremental_f_e_1_1_chemical_potential00_ad00b92c170d812c26e6429f07dd16790}
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1} (see \hyperlink{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}{Chemical\+Potential00\+::method}).
+
+\begin{DoxyWarning}{Warning}
+In the very first time step {\ttfamily alpha=1.\+0} is used irrespective of the value provided for {\ttfamily alpha!} This helps to avoid oscillations of the solution if the initial solution fields are not equilibrated. 
+\end{DoxyWarning}
+\index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!c0@{c0}}
+\index{c0@{c0}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{c0}{c0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::c0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a99a75102bed91046fbbf9098de7ecd89}{}\label{classincremental_f_e_1_1_chemical_potential00_a99a75102bed91046fbbf9098de7ecd89}
+Reference concentration at which chemical potential is $RT\mu_0$ \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!c\+\_\+th\+\_\+c0@{c\+\_\+th\+\_\+c0}}
+\index{c\+\_\+th\+\_\+c0@{c\+\_\+th\+\_\+c0}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{c\+\_\+th\+\_\+c0}{c_th_c0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::c\+\_\+th\+\_\+c0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_aa8dbd044f314f694e09c7a1214e4a1a9}{}\label{classincremental_f_e_1_1_chemical_potential00_aa8dbd044f314f694e09c7a1214e4a1a9}
+Threshold concentration $c_\mathrm{th}/c_0$. The chemical potential expression tends to cause numerical difficulties for very low concentrations -\/ therefore a logarithmic penalty type potential $h^\Omega_\rho = A \ln\dfrac{c}{c_0} + B + RT \mu_0 c$ is used for very small concentrations $c<c_\mathrm{th}$ in order to reduce these difficulties. The constants $A$ and $B$ are determined from the requirement of continuity for $h^\Omega_\rho$ and its first derivative at the concentration $c=c_\mathrm{th}$. \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!global\+\_\+data@{global\+\_\+data}}
+\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a1dcd80b6f6f2906c38ad490d519e3123}{}\label{classincremental_f_e_1_1_chemical_potential00_a1dcd80b6f6f2906c38ad490d519e3123}
+global data object \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!log\+\_\+c\+\_\+th\+\_\+c0@{log\+\_\+c\+\_\+th\+\_\+c0}}
+\index{log\+\_\+c\+\_\+th\+\_\+c0@{log\+\_\+c\+\_\+th\+\_\+c0}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{log\+\_\+c\+\_\+th\+\_\+c0}{log_c_th_c0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::log\+\_\+c\+\_\+th\+\_\+c0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_ac3da130e727c8a08f7616cf01c4a2826}{}\label{classincremental_f_e_1_1_chemical_potential00_ac3da130e727c8a08f7616cf01c4a2826}
+log(c\+\_\+th\+\_\+c0) (store this because its calculation is usually relatively expensive and it is required during every call of the routine \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!method@{method}}
+\index{method@{method}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{method}{method}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const unsigned int {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::method\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}{}\label{classincremental_f_e_1_1_chemical_potential00_ac264752dace0c782bf4c1fe5d620e6dc}
+Numerical method ({\ttfamily 0}\+: take derivatives of scalar functional at time corresponding to {\ttfamily alpha}, {\ttfamily 1}\+: weight derivatives at the beginning of the time step and at the end of the time step according to {\ttfamily alpha}) \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!mu0@{mu0}}
+\index{mu0@{mu0}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{mu0}{mu0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::mu0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a64b01fb87580d416b201175e7e819bcb}{}\label{classincremental_f_e_1_1_chemical_potential00_a64b01fb87580d416b201175e7e819bcb}
+$\mu_0$ \index{incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}!RT@{RT}}
+\index{RT@{RT}!incremental\+F\+E\+::\+Chemical\+Potential00@{incremental\+F\+E\+::\+Chemical\+Potential00}}
+\subsubsection[{\texorpdfstring{RT}{RT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Chemical\+Potential00}$<$ spacedim $>$\+::RT\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_chemical_potential00_a4c90a618bdb704a4d8d36438af323408}{}\label{classincremental_f_e_1_1_chemical_potential00_a4c90a618bdb704a4d8d36438af323408}
+gas constant times absolute temperature 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{chemical__potential__00_8h}{chemical\+\_\+potential\+\_\+00.\+h}\end{DoxyCompactItemize}

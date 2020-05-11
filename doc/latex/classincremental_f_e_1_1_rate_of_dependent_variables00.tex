@@ -1,0 +1,107 @@
+\hypertarget{classincremental_f_e_1_1_rate_of_dependent_variables00}{}\section{incremental\+FE\+:\+:Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_rate_of_dependent_variables00}\index{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$}}
+
+
+{\ttfamily \#include $<$rate\+\_\+of\+\_\+dependent\+\_\+variables\+\_\+00.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classincremental_f_e_1_1_rate_of_dependent_variables00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classincremental_f_e_1_1_rate_of_dependent_variables00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_rate_of_dependent_variables00_a6152bfa1aed705a8ea400ac2fb9bc690}{Rate\+Of\+Dependent\+Variables00} (dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_rate_of_dependent_variables00_a0ae0d07da073985a32f9fc812d13a066}{global\+\_\+data})
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classincremental_f_e_1_1_rate_of_dependent_variables00_ae55e12bfa1bee991b8eb61d1cbf7b907}{get\+\_\+h\+\_\+sigma} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, {\bf dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_rate_of_dependent_variables00_a0ae0d07da073985a32f9fc812d13a066}{global\+\_\+data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int dim, unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00$<$ dim, spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$h^\Sigma_\tau = (e^\Sigma_\nu-e^\Sigma_{\nu,\mathrm{ref}})/\Delta t$,
+
+where $e^\Sigma_\nu$ is the dependent field at the end of the time step, $e^\Sigma_{\nu,\mathrm{ref}}$ is the dependent field in the beginning of the time step, and $\Delta t$ is the length of the time step.
+
+Ordering of quantities in {\bf Scalar\+Functional\+::e\+\_\+sigma}\+:~\newline
+ \mbox{[}0\mbox{]} $e^\Sigma_\nu$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}!Rate\+Of\+Dependent\+Variables00@{Rate\+Of\+Dependent\+Variables00}}
+\index{Rate\+Of\+Dependent\+Variables00@{Rate\+Of\+Dependent\+Variables00}!incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}}
+\subsubsection[{\texorpdfstring{Rate\+Of\+Dependent\+Variables00(dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$ e\+\_\+sigma, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data)}{RateOfDependentVariables00(dealii::GalerkinTools::DependentField< dim, spacedim > e_sigma, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< dim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}$<$ dim, spacedim $>$\+::{\bf Rate\+Of\+Dependent\+Variables00} (
+\begin{DoxyParamCaption}
+\item[{dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$}]{e\+\_\+sigma, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_rate_of_dependent_variables00_a6152bfa1aed705a8ea400ac2fb9bc690}{}\label{classincremental_f_e_1_1_rate_of_dependent_variables00_a6152bfa1aed705a8ea400ac2fb9bc690}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+sigma} & {\bf Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_rate_of_dependent_variables00_a0ae0d07da073985a32f9fc812d13a066}{Rate\+Of\+Dependent\+Variables00\+::global\+\_\+data} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}!get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}}
+\index{get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}!incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}}
+\subsubsection[{\texorpdfstring{get\+\_\+h\+\_\+sigma(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref, dealii\+::\+Vector$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, dealii\+::\+Vector$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_h_sigma(const dealii::Vector< double > &e_sigma, const std::vector< dealii::Vector< double >> &e_sigma_ref, dealii::Vector< double > &hidden_vars, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &h_sigma, dealii::Vector< double > &h_sigma_1, dealii::FullMatrix< double > &h_sigma_2, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}$<$ dim, spacedim $>$\+::get\+\_\+h\+\_\+sigma (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma, }
+\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
+\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
+\item[{double \&}]{h\+\_\+sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+1, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+2, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_rate_of_dependent_variables00_ae55e12bfa1bee991b8eb61d1cbf7b907}{}\label{classincremental_f_e_1_1_rate_of_dependent_variables00_ae55e12bfa1bee991b8eb61d1cbf7b907}
+see {\bf Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} 
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}!global\+\_\+data@{global\+\_\+data}}
+\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00@{incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}}
+\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+Rate\+Of\+Dependent\+Variables00}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_rate_of_dependent_variables00_a0ae0d07da073985a32f9fc812d13a066}{}\label{classincremental_f_e_1_1_rate_of_dependent_variables00_a0ae0d07da073985a32f9fc812d13a066}
+global data object 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{rate__of__dependent__variables__00_8h}{rate\+\_\+of\+\_\+dependent\+\_\+variables\+\_\+00.\+h}\end{DoxyCompactItemize}

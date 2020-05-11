@@ -1,0 +1,139 @@
+\hypertarget{classincremental_f_e_1_1_solver_wrapper}{}\section{incremental\+FE\+:\+:Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_solver_wrapper}\index{incremental\+F\+E\+::\+Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$@{incremental\+F\+E\+::\+Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$}}
+
+
+{\ttfamily \#include $<$solver\+\_\+wrapper.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classincremental_f_e_1_1_solver_wrapper__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classincremental_f_e_1_1_solver_wrapper__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classincremental_f_e_1_1_solver_wrapper_adfb16a432d9fec822d299384c0a9a74e}{reinit\+\_\+matrix} (const dealii\+::\+Sparsity\+Pattern \&sparsity\+\_\+pattern, Matrix\+Type \&matrix) const =0
+\item 
+virtual void \hyperlink{classincremental_f_e_1_1_solver_wrapper_a32ceb887df0c07520f93294b3df01c87}{reinit\+\_\+vector} (const dealii\+::\+Index\+Set index\+\_\+set, {\bf Vector\+Type} \&vect) const =0
+\item 
+virtual void \hyperlink{classincremental_f_e_1_1_solver_wrapper_a1483c02adec285bf663ddf6ec3742403}{solve} (const Matrix\+Type \&system\+\_\+matrix, {\bf Vector\+Type} \&solution, const {\bf Vector\+Type} \&rhs, const bool symmetric) const =0
+\item 
+virtual \hyperlink{classincremental_f_e_1_1_solver_wrapper_a1c3f8c35d9832e3eb76021253c3fdde2}{$\sim$\+Solver\+Wrapper} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Vector\+Type, class Matrix\+Type$>$\\*
+class incremental\+F\+E\+::\+Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$}
+
+This class essentially wraps some functions related to the solver used for the problem and the corresponding data types into a common interface.
+
+The \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} class inherits from {\bf Subscriptor} in order to be able to check that \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} objects are only destroyed when they are not needed anymore by other objects.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Vector\+Type} & the type used for the solution vector and the rhs\\
+\hline
+{\em Matrix\+Type} & the type used for the system matrix \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}!````~Solver\+Wrapper@{$\sim$\+Solver\+Wrapper}}
+\index{````~Solver\+Wrapper@{$\sim$\+Solver\+Wrapper}!incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}}
+\subsubsection[{\texorpdfstring{$\sim$\+Solver\+Wrapper()}{~SolverWrapper()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Vector\+Type, class Matrix\+Type$>$ virtual {\bf incremental\+F\+E\+::\+Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$\+::$\sim${\bf Solver\+Wrapper} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_solver_wrapper_a1c3f8c35d9832e3eb76021253c3fdde2}{}\label{classincremental_f_e_1_1_solver_wrapper_a1c3f8c35d9832e3eb76021253c3fdde2}
+The destructor of \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} essentially checks before destruction that the \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} object is not used by other objects. If this is the case, the program will be aborted. 
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}!reinit\+\_\+matrix@{reinit\+\_\+matrix}}
+\index{reinit\+\_\+matrix@{reinit\+\_\+matrix}!incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}}
+\subsubsection[{\texorpdfstring{reinit\+\_\+matrix(const dealii\+::\+Sparsity\+Pattern \&sparsity\+\_\+pattern, Matrix\+Type \&matrix) const =0}{reinit_matrix(const dealii::SparsityPattern &sparsity_pattern, MatrixType &matrix) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Vector\+Type, class Matrix\+Type$>$ virtual void {\bf incremental\+F\+E\+::\+Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$\+::reinit\+\_\+matrix (
+\begin{DoxyParamCaption}
+\item[{const dealii\+::\+Sparsity\+Pattern \&}]{sparsity\+\_\+pattern, }
+\item[{Matrix\+Type \&}]{matrix}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classincremental_f_e_1_1_solver_wrapper_adfb16a432d9fec822d299384c0a9a74e}{}\label{classincremental_f_e_1_1_solver_wrapper_adfb16a432d9fec822d299384c0a9a74e}
+Reinitialize the matrix {\ttfamily matrix} with a {\bf Sparsity\+Pattern}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sparsity\+\_\+pattern} & The sparsity pattern to use for {\ttfamily matrix} \\
+\hline
+\mbox{\tt in,out}  & {\em matrix} & The matrix to be reinitialized with {\ttfamily sparsity\+\_\+pattern} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classincremental_f_e_1_1_solver_wrapper_u_m_f_p_a_c_k_ac3fc4de28b82a44cb570a45c1a8f36fe}{incremental\+F\+E\+::\+Solver\+Wrapper\+U\+M\+F\+P\+A\+CK}, and \hyperlink{classincremental_f_e_1_1_solver_wrapper_p_e_t_sc_ae2476984bdcee9b2ce9934d967fa4610}{incremental\+F\+E\+::\+Solver\+Wrapper\+P\+E\+T\+Sc}.
+
+\index{incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}!reinit\+\_\+vector@{reinit\+\_\+vector}}
+\index{reinit\+\_\+vector@{reinit\+\_\+vector}!incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}}
+\subsubsection[{\texorpdfstring{reinit\+\_\+vector(const dealii\+::\+Index\+Set index\+\_\+set, Vector\+Type \&vect) const =0}{reinit_vector(const dealii::IndexSet index_set, VectorType &vect) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Vector\+Type, class Matrix\+Type$>$ virtual void {\bf incremental\+F\+E\+::\+Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$\+::reinit\+\_\+vector (
+\begin{DoxyParamCaption}
+\item[{const dealii\+::\+Index\+Set}]{index\+\_\+set, }
+\item[{{\bf Vector\+Type} \&}]{vect}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classincremental_f_e_1_1_solver_wrapper_a32ceb887df0c07520f93294b3df01c87}{}\label{classincremental_f_e_1_1_solver_wrapper_a32ceb887df0c07520f93294b3df01c87}
+Reinit the vector {\ttfamily vect} with a set of indices to be represented by this vector.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em index\+\_\+set} & The index set to be represented by {\ttfamily vect} \\
+\hline
+\mbox{\tt in,out}  & {\em vect} & The vector to be reinitialized with {\ttfamily index\+\_\+set} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classincremental_f_e_1_1_solver_wrapper_u_m_f_p_a_c_k_a63faea4f5b3c02a491d56605428b60fc}{incremental\+F\+E\+::\+Solver\+Wrapper\+U\+M\+F\+P\+A\+CK}, and \hyperlink{classincremental_f_e_1_1_solver_wrapper_p_e_t_sc_a730139be86a4ad57a06bf179efdeacc1}{incremental\+F\+E\+::\+Solver\+Wrapper\+P\+E\+T\+Sc}.
+
+\index{incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}!solve@{solve}}
+\index{solve@{solve}!incremental\+F\+E\+::\+Solver\+Wrapper@{incremental\+F\+E\+::\+Solver\+Wrapper}}
+\subsubsection[{\texorpdfstring{solve(const Matrix\+Type \&system\+\_\+matrix, Vector\+Type \&solution, const Vector\+Type \&rhs, const bool symmetric) const =0}{solve(const MatrixType &system_matrix, VectorType &solution, const VectorType &rhs, const bool symmetric) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Vector\+Type, class Matrix\+Type$>$ virtual void {\bf incremental\+F\+E\+::\+Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$\+::solve (
+\begin{DoxyParamCaption}
+\item[{const Matrix\+Type \&}]{system\+\_\+matrix, }
+\item[{{\bf Vector\+Type} \&}]{solution, }
+\item[{const {\bf Vector\+Type} \&}]{rhs, }
+\item[{const bool}]{symmetric}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classincremental_f_e_1_1_solver_wrapper_a1483c02adec285bf663ddf6ec3742403}{}\label{classincremental_f_e_1_1_solver_wrapper_a1483c02adec285bf663ddf6ec3742403}
+The solve function for the system of linear equations
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em system\+\_\+matrix} & The system\+\_\+matrix\\
+\hline
+\mbox{\tt out}  & {\em solution} & The solution vector\\
+\hline
+\mbox{\tt in}  & {\em rhs} & The right hand side vector\\
+\hline
+\mbox{\tt in}  & {\em symmetric} & A bool indicating whether {\ttfamily system\+\_\+matrix} is symmetric \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classincremental_f_e_1_1_solver_wrapper_u_m_f_p_a_c_k_aac57d12feba760491fb65a15808ce621}{incremental\+F\+E\+::\+Solver\+Wrapper\+U\+M\+F\+P\+A\+CK}, and \hyperlink{classincremental_f_e_1_1_solver_wrapper_p_e_t_sc_a711f8d4e26e941e8d9d01d4214b845cb}{incremental\+F\+E\+::\+Solver\+Wrapper\+P\+E\+T\+Sc}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/\hyperlink{solver__wrapper_8h}{solver\+\_\+wrapper.\+h}\end{DoxyCompactItemize}

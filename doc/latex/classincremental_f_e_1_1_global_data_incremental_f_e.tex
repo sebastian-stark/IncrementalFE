@@ -1,0 +1,314 @@
+\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e}{}\section{incremental\+FE\+:\+:Global\+Data\+Incremental\+FE$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_global_data_incremental_f_e}\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+F\+E$<$ spacedim $>$@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+F\+E$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$global\+\_\+data\+\_\+incremental\+\_\+fe.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Global\+Data\+Incremental\+FE$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classincremental_f_e_1_1_global_data_incremental_f_e__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Global\+Data\+Incremental\+FE$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classincremental_f_e_1_1_global_data_incremental_f_e__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ac31163d303902de96e162419a1547495}{Global\+Data\+Incremental\+FE} (const double t\+\_\+init=0.\+0)
+\item 
+\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a718858c371f43d03f5d1c05560d62a9b}{$\sim$\+Global\+Data\+Incremental\+FE} ()
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af0064c4092b0dbb24817822c3104042f}{get\+\_\+t} () const 
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a81e09842fdcbc393a8bc9ccf3c0cdced}{get\+\_\+t\+\_\+ref} () const 
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}{set\+\_\+t} (const double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{t})
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ab86938372e460e4253c5cc22edffbf94}{reset\+\_\+t} ()
+\item 
+unsigned int \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a1d4f31e2249902397992cff85683c3b4}{get\+\_\+time\+\_\+step} () const 
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a9845e6a20c93b8aec769238ac23106da}{write\+\_\+error\+\_\+message} (const std\+::string error\+\_\+message)
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abf2246df069e3f8be4cd74467803159a}{write\+\_\+error\+\_\+message} (const std\+::string error\+\_\+message, const dealii\+::\+Point$<$ spacedim $>$ \&location)
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a3aaaf483ad4e6dbfc189e7ab2b44d21b}{print\+\_\+error\+\_\+messages} () const 
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a49d0b9cfe7b58e4f5e15e77733983d78}{print\+\_\+last\+\_\+error\+\_\+message} () const 
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a8378d6a77b65364d8036f8a111e86de0}{set\+\_\+sym\+\_\+mode} (const bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}{sym\+\_\+mode})
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}{set\+\_\+force\+\_\+linear} (const bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{force\+\_\+linear}=true)
+\item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a74424d0040a6f5c2aa545288b42483f4}{reinit} (const double t\+\_\+init=0.\+0)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{t}
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{t\+\_\+ref}
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad808aad6cdbfa6eddad05fb85c056d11}{t\+\_\+ref\+\_\+old}
+\item 
+unsigned int \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{time\+\_\+step} = 0
+\item 
+bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}{sym\+\_\+mode} = false
+\item 
+unsigned int \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad15c334652b6a9d6843c360c6e2005ec}{max\+\_\+iter} = 10
+\item 
+unsigned int \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a7ae58573e9cc241a14976bf19351ba63}{max\+\_\+cutbacks} = 10
+\item 
+double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2f7adb8b4f7f8875715e1dbd0edd9ac8}{threshold\+\_\+potential\+\_\+increment} = 1e-\/6
+\item 
+bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{force\+\_\+linear} = false
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}{error\+\_\+messages}
+\item 
+bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a23a3040aa83a8867ccb0a8e88bb8cb9e}{reset\+\_\+t\+\_\+possible} = false
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$unsigned int, class Vector\+Type , class Matrix\+Type $>$ }\\class \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a7ca4ac241626a25b2530ff5bb4f075e8}{F\+E\+Model}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Global\+Data\+Incremental\+F\+E$<$ spacedim $>$}
+
+This class is used to store global data like time, reference time, time step number, iteration number, error messages, etc. for the solution of time dependent, non-\/linear problems.
+
+In particular if objects of classes derived from {\bf Scalar\+Functional} or {\bf Scalar\+Functional$<$spacedim, spacedim$>$} know of the \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE} object in use, global information (e.\+g. the current time and the reference time) is available at the material point level. The latter is important for the implementation of incremental potentials.
+
+The \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} class inherits from {\bf Subscriptor} in order to be able to check that \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} objects are only destroyed when they are not needed anymore by other objects.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em spacedim} & spatial dimension of the problem \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!Global\+Data\+Incremental\+FE@{Global\+Data\+Incremental\+FE}}
+\index{Global\+Data\+Incremental\+FE@{Global\+Data\+Incremental\+FE}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{Global\+Data\+Incremental\+F\+E(const double t\+\_\+init=0.\+0)}{GlobalDataIncrementalFE(const double t_init=0.0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::{\bf Global\+Data\+Incremental\+FE} (
+\begin{DoxyParamCaption}
+\item[{const double}]{t\+\_\+init = {\ttfamily 0.0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ac31163d303902de96e162419a1547495}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ac31163d303902de96e162419a1547495}
+Constructor allowing to construct object with non-\/default initial time
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t\+\_\+init} & initial time \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!````~Global\+Data\+Incremental\+FE@{$\sim$\+Global\+Data\+Incremental\+FE}}
+\index{````~Global\+Data\+Incremental\+FE@{$\sim$\+Global\+Data\+Incremental\+FE}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{$\sim$\+Global\+Data\+Incremental\+F\+E()}{~GlobalDataIncrementalFE()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::$\sim${\bf Global\+Data\+Incremental\+FE} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a718858c371f43d03f5d1c05560d62a9b}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a718858c371f43d03f5d1c05560d62a9b}
+The destructor of \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE} essentially checks before destruction that the \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE} object is not used by other objects. If this is the case, the program will be aborted. 
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!get\+\_\+t@{get\+\_\+t}}
+\index{get\+\_\+t@{get\+\_\+t}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{get\+\_\+t() const }{get_t() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::get\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af0064c4092b0dbb24817822c3104042f}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af0064c4092b0dbb24817822c3104042f}
+\begin{DoxyReturn}{Returns}
+The current time \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{Global\+Data\+Incremental\+F\+E\+::t} 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!get\+\_\+t\+\_\+ref@{get\+\_\+t\+\_\+ref}}
+\index{get\+\_\+t\+\_\+ref@{get\+\_\+t\+\_\+ref}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{get\+\_\+t\+\_\+ref() const }{get_t_ref() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::get\+\_\+t\+\_\+ref (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a81e09842fdcbc393a8bc9ccf3c0cdced}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a81e09842fdcbc393a8bc9ccf3c0cdced}
+\begin{DoxyReturn}{Returns}
+The reference time \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref} 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!get\+\_\+time\+\_\+step@{get\+\_\+time\+\_\+step}}
+\index{get\+\_\+time\+\_\+step@{get\+\_\+time\+\_\+step}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{get\+\_\+time\+\_\+step() const }{get_time_step() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ unsigned int {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::get\+\_\+time\+\_\+step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a1d4f31e2249902397992cff85683c3b4}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a1d4f31e2249902397992cff85683c3b4}
+\begin{DoxyReturn}{Returns}
+current time step number \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{Global\+Data\+Incremental\+F\+E\+::time\+\_\+step} 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!print\+\_\+error\+\_\+messages@{print\+\_\+error\+\_\+messages}}
+\index{print\+\_\+error\+\_\+messages@{print\+\_\+error\+\_\+messages}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{print\+\_\+error\+\_\+messages() const }{print_error_messages() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::print\+\_\+error\+\_\+messages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a3aaaf483ad4e6dbfc189e7ab2b44d21b}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a3aaaf483ad4e6dbfc189e7ab2b44d21b}
+Function to print error messages to screen \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!print\+\_\+last\+\_\+error\+\_\+message@{print\+\_\+last\+\_\+error\+\_\+message}}
+\index{print\+\_\+last\+\_\+error\+\_\+message@{print\+\_\+last\+\_\+error\+\_\+message}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{print\+\_\+last\+\_\+error\+\_\+message() const }{print_last_error_message() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::print\+\_\+last\+\_\+error\+\_\+message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a49d0b9cfe7b58e4f5e15e77733983d78}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a49d0b9cfe7b58e4f5e15e77733983d78}
+Function to print last error message to screen \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!reinit@{reinit}}
+\index{reinit@{reinit}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{reinit(const double t\+\_\+init=0.\+0)}{reinit(const double t_init=0.0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::reinit (
+\begin{DoxyParamCaption}
+\item[{const double}]{t\+\_\+init = {\ttfamily 0.0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a74424d0040a6f5c2aa545288b42483f4}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a74424d0040a6f5c2aa545288b42483f4}
+reset \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{Global\+Data\+Incremental\+F\+E\+::t}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad808aad6cdbfa6eddad05fb85c056d11}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref\+\_\+old}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{Global\+Data\+Incremental\+F\+E\+::time\+\_\+step}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}{Global\+Data\+Incremental\+F\+E\+::error\+\_\+messages}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t\+\_\+init} & time to be used for resetting \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{Global\+Data\+Incremental\+F\+E\+::t}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref}, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad808aad6cdbfa6eddad05fb85c056d11}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref\+\_\+old} \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!reset\+\_\+t@{reset\+\_\+t}}
+\index{reset\+\_\+t@{reset\+\_\+t}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{reset\+\_\+t()}{reset_t()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::reset\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ab86938372e460e4253c5cc22edffbf94}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ab86938372e460e4253c5cc22edffbf94}
+Function resetting time to previous step. This undoes the last call to \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}{Global\+Data\+Incremental\+F\+E\+::set\+\_\+t()}. The function can only be called once after a call of \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}{Global\+Data\+Incremental\+F\+E\+::set\+\_\+t()}. \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!set\+\_\+force\+\_\+linear@{set\+\_\+force\+\_\+linear}}
+\index{set\+\_\+force\+\_\+linear@{set\+\_\+force\+\_\+linear}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{set\+\_\+force\+\_\+linear(const bool force\+\_\+linear=true)}{set_force_linear(const bool force_linear=true)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::set\+\_\+force\+\_\+linear (
+\begin{DoxyParamCaption}
+\item[{const bool}]{force\+\_\+linear = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}
+Sets \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{Global\+Data\+Incremental\+F\+E\+::force\+\_\+linear}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em force\+\_\+linear} & \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{Global\+Data\+Incremental\+F\+E\+::force\+\_\+linear} \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!set\+\_\+sym\+\_\+mode@{set\+\_\+sym\+\_\+mode}}
+\index{set\+\_\+sym\+\_\+mode@{set\+\_\+sym\+\_\+mode}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{set\+\_\+sym\+\_\+mode(const bool sym\+\_\+mode)}{set_sym_mode(const bool sym_mode)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::set\+\_\+sym\+\_\+mode (
+\begin{DoxyParamCaption}
+\item[{const bool}]{sym\+\_\+mode}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a8378d6a77b65364d8036f8a111e86de0}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a8378d6a77b65364d8036f8a111e86de0}
+Sets \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}{Global\+Data\+Incremental\+F\+E\+::sym\+\_\+mode}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sym\+\_\+mode} & \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}{Global\+Data\+Incremental\+F\+E\+::sym\+\_\+mode} \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!set\+\_\+t@{set\+\_\+t}}
+\index{set\+\_\+t@{set\+\_\+t}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{set\+\_\+t(const double t)}{set_t(const double t)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::set\+\_\+t (
+\begin{DoxyParamCaption}
+\item[{const double}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}
+Function setting current time (old time is then stored in \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{Global\+Data\+Incremental\+F\+E\+::t\+\_\+ref}). This function also increments the time step number \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{Global\+Data\+Incremental\+F\+E\+::time\+\_\+step} and checks that the new time is larger than the old time.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t} & current time \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!write\+\_\+error\+\_\+message@{write\+\_\+error\+\_\+message}}
+\index{write\+\_\+error\+\_\+message@{write\+\_\+error\+\_\+message}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{write\+\_\+error\+\_\+message(const std\+::string error\+\_\+message)}{write_error_message(const std::string error_message)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::write\+\_\+error\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{error\+\_\+message}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a9845e6a20c93b8aec769238ac23106da}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a9845e6a20c93b8aec769238ac23106da}
+Function to write an error message to \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}{Global\+Data\+Incremental\+F\+E\+::error\+\_\+messages}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em error\+\_\+message} & string with the error message \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!write\+\_\+error\+\_\+message@{write\+\_\+error\+\_\+message}}
+\index{write\+\_\+error\+\_\+message@{write\+\_\+error\+\_\+message}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{write\+\_\+error\+\_\+message(const std\+::string error\+\_\+message, const dealii\+::\+Point$<$ spacedim $>$ \&location)}{write_error_message(const std::string error_message, const dealii::Point< spacedim > &location)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::write\+\_\+error\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{error\+\_\+message, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{location}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_abf2246df069e3f8be4cd74467803159a}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_abf2246df069e3f8be4cd74467803159a}
+Function to write an error message to \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}{Global\+Data\+Incremental\+F\+E\+::error\+\_\+messages} recording the spatial location at which the error happened (if the error can be related to a point in space)
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em error\+\_\+message} & string with the error message\\
+\hline
+\mbox{\tt in}  & {\em location} & spatial location at which error occurred \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!F\+E\+Model@{F\+E\+Model}}
+\index{F\+E\+Model@{F\+E\+Model}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{F\+E\+Model}{FEModel}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ template$<$unsigned int, class Vector\+Type , class Matrix\+Type $>$ friend class {\bf F\+E\+Model}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a7ca4ac241626a25b2530ff5bb4f075e8}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a7ca4ac241626a25b2530ff5bb4f075e8}
+Allow the \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} class to directly access all members. 
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!error\+\_\+messages@{error\+\_\+messages}}
+\index{error\+\_\+messages@{error\+\_\+messages}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{error\+\_\+messages}{error_messages}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ std\+::vector$<$std\+::string$>$ {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::error\+\_\+messages\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a47301f72bcb3852b2519b23de833f3eb}
+Error messages during solution process \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!force\+\_\+linear@{force\+\_\+linear}}
+\index{force\+\_\+linear@{force\+\_\+linear}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{force\+\_\+linear}{force_linear}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::force\+\_\+linear = false\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}
+If this is set to {\ttfamily true}, only one iteration will be performed in every time step, no matter whether the problem is linear or non-\/linear. \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!max\+\_\+cutbacks@{max\+\_\+cutbacks}}
+\index{max\+\_\+cutbacks@{max\+\_\+cutbacks}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{max\+\_\+cutbacks}{max_cutbacks}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ unsigned int {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::max\+\_\+cutbacks = 10\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a7ae58573e9cc241a14976bf19351ba63}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a7ae58573e9cc241a14976bf19351ba63}
+Maximum number of cutbacks allowed to complete an iteration of a single time step \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!max\+\_\+iter@{max\+\_\+iter}}
+\index{max\+\_\+iter@{max\+\_\+iter}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{max\+\_\+iter}{max_iter}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ unsigned int {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::max\+\_\+iter = 10\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ad15c334652b6a9d6843c360c6e2005ec}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ad15c334652b6a9d6843c360c6e2005ec}
+Maximum number of iterations allowed for solution of a single time step \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!reset\+\_\+t\+\_\+possible@{reset\+\_\+t\+\_\+possible}}
+\index{reset\+\_\+t\+\_\+possible@{reset\+\_\+t\+\_\+possible}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{reset\+\_\+t\+\_\+possible}{reset_t_possible}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::reset\+\_\+t\+\_\+possible = false\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a23a3040aa83a8867ccb0a8e88bb8cb9e}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a23a3040aa83a8867ccb0a8e88bb8cb9e}
+bool used to make sure that time can be reset by \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ab86938372e460e4253c5cc22edffbf94}{Global\+Data\+Incremental\+F\+E\+::reset\+\_\+t()} only once after a call of \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a27354ebc5bf9ec655f5c7cc16ac9876d}{Global\+Data\+Incremental\+F\+E\+::set\+\_\+t()} \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!sym\+\_\+mode@{sym\+\_\+mode}}
+\index{sym\+\_\+mode@{sym\+\_\+mode}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{sym\+\_\+mode}{sym_mode}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::sym\+\_\+mode = false\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a9986ee5bfccc1b5936c585cf0c5a4474}
+If {\ttfamily true\+:} Use symmetric solver \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!t@{t}}
+\index{t@{t}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{t}{t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::t\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_abb14e15389af3772905a3c75e12ed2c0}
+current time \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!t\+\_\+ref@{t\+\_\+ref}}
+\index{t\+\_\+ref@{t\+\_\+ref}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{t\+\_\+ref}{t_ref}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::t\+\_\+ref\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a6ddf751a2f8abff9353d12e469e38f96}
+reference time (previous time) \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!t\+\_\+ref\+\_\+old@{t\+\_\+ref\+\_\+old}}
+\index{t\+\_\+ref\+\_\+old@{t\+\_\+ref\+\_\+old}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{t\+\_\+ref\+\_\+old}{t_ref_old}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::t\+\_\+ref\+\_\+old\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ad808aad6cdbfa6eddad05fb85c056d11}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ad808aad6cdbfa6eddad05fb85c056d11}
+previous reference time \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!threshold\+\_\+potential\+\_\+increment@{threshold\+\_\+potential\+\_\+increment}}
+\index{threshold\+\_\+potential\+\_\+increment@{threshold\+\_\+potential\+\_\+increment}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{threshold\+\_\+potential\+\_\+increment}{threshold_potential_increment}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::threshold\+\_\+potential\+\_\+increment = 1e-\/6\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2f7adb8b4f7f8875715e1dbd0edd9ac8}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2f7adb8b4f7f8875715e1dbd0edd9ac8}
+If the (estimated) increment in the (quadratically approximated) potential is below this threshold, the Newton iteration of a single time step is terminated \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!time\+\_\+step@{time\+\_\+step}}
+\index{time\+\_\+step@{time\+\_\+step}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{time\+\_\+step}{time_step}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ unsigned int {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::time\+\_\+step = 0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}
+current time step number 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/\hyperlink{global__data__incremental__fe_8h}{global\+\_\+data\+\_\+incremental\+\_\+fe.\+h}\end{DoxyCompactItemize}

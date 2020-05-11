@@ -1,0 +1,72 @@
+\form#0:$h^\Omega_\rho = RTc \left( \ln\dfrac{c}{c_0} + \mu_0 -1 \right)$
+\form#1:$R$
+\form#2:$T$
+\form#3:$c_0$
+\form#4:$\mu_0$
+\form#5:$c$
+\form#6:$RT\mu_0$
+\form#7:$c_\mathrm{th}/c_0$
+\form#8:$h^\Omega_\rho = A \ln\dfrac{c}{c_0} + B + RT \mu_0 c$
+\form#9:$c<c_\mathrm{th}$
+\form#10:$A$
+\form#11:$B$
+\form#12:$h^\Omega_\rho$
+\form#13:$c=c_\mathrm{th}$
+\form#14:$h^\Omega_\rho = \dfrac{\Delta t}{2 D ( c^{(\alpha)} + c_0 ) } \dfrac{\boldsymbol{I}-\boldsymbol{I}_\mathrm{ref}}{\Delta t} \cdot \dfrac{\boldsymbol{I}-\boldsymbol{I}_\mathrm{ref}}{\Delta t}$
+\form#15:$h^\Omega_\rho = \dfrac{\Delta t}{2 D ( c^{(\alpha)} + c_0 ) } \dfrac{\boldsymbol{I}}{\Delta t} \cdot \dfrac{\boldsymbol{I}}{\Delta t}$
+\form#16:$c^{(\alpha)} = (1-\alpha)c_\mathrm{ref} + \alpha c$
+\form#17:$\alpha$
+\form#18:$c_\mathrm{ref}$
+\form#19:$\Delta t$
+\form#20:$\boldsymbol{I}$
+\form#21:$\boldsymbol{I}_\mathrm{ref}$
+\form#22:$D$
+\form#23:$ \bar D $
+\form#24:$D = \bar D/(RT)$
+\form#25:$\mu$
+\form#26:$ D = \mu n/F$
+\form#27:$n$
+\form#28:$F$
+\form#29:$c^{(\alpha)}$
+\form#30:$\alpha = 0$
+\form#31:$I_x$
+\form#32:$I_y$
+\form#33:$I_z$
+\form#34:$\boldsymbol{I}-\boldsymbol{I}_\mathrm{ref}$
+\form#35:$h^\Sigma_\tau = \tilde\varphi (\boldsymbol{D}^- - \boldsymbol{D}^+) \cdot \boldsymbol{n}$
+\form#36:$\boldsymbol{D}$
+\form#37:$\boldsymbol{n}$
+\form#38:$\tilde\varphi$
+\form#39:$D^-_0 - D^+_0$
+\form#40:$D^-_1 - D^+_1$
+\form#41:$D^-_2 - D^+_2$
+\form#42:$\tilde\varphi(t, \boldsymbol{X})$
+\form#43:$t$
+\form#44:$\boldsymbol{X}$
+\form#45:$h^\Sigma_\tau = \dfrac{1}{2 d} \dfrac{(I_\mathrm{n}-I_\mathrm{n,ref})^2}{\Delta t}$
+\form#46:$h^\Sigma_\tau = \dfrac{1}{2 d} \dfrac{(I_\mathrm{n})^2}{\Delta t}$
+\form#47:$I_\mathrm{n}$
+\form#48:$I_\mathrm{n,ref}$
+\form#49:$d$
+\form#50:$I_\mathrm{n}-I_\mathrm{n,ref}$
+\form#51:$a$
+\form#52:$h^\Sigma_\tau = \dfrac{1}{2 d} \dfrac{I_\mathrm{n}^2}{\Delta t}$
+\form#53:$h^\Sigma_\tau = \dfrac{1}{2} {\boldsymbol{e}^\Sigma}^\top \cdot \boldsymbol{C} \cdot \boldsymbol{e}^\Sigma + \boldsymbol{y}^\top \boldsymbol{e}^\Sigma$
+\form#54:$\boldsymbol{e}^\Sigma$
+\form#55:$e^\Sigma_\nu$
+\form#56:$\boldsymbol{C}$
+\form#57:$\boldsymbol{y}$
+\form#58:$h^\Omega_\rho = \dfrac{1}{2} {\boldsymbol{e}^\Omega}^\top \cdot \boldsymbol{C} \cdot \boldsymbol{e}^\Omega + \boldsymbol{y}^\top \boldsymbol{e}^\Omega$
+\form#59:$\boldsymbol{e}^\Omega$
+\form#60:$e^\Omega_\lambda$
+\form#61:$h^\Sigma_\tau = \dfrac{1}{2} {\boldsymbol{e}^\Sigma}^\top \cdot \boldsymbol{C} \cdot \boldsymbol{e}^\Sigma + \boldsymbol{y}^\top \cdot \boldsymbol{e}^\Sigma$
+\form#62:$h^\Omega_\rho = \dfrac{1}{2} {\boldsymbol{e}^\Omega}^\top \cdot \boldsymbol{C} \cdot \boldsymbol{e}^\Omega + \boldsymbol{y}^\top \cdot \boldsymbol{e}^\Omega$
+\form#63:$h^\Omega_rho = -\mu \left( \ln\dfrac{c}{c_0} \right)$
+\form#64:$c>0$
+\form#65:$h^\Omega_rho = -\mu \ln\dfrac{c}{c_0}$
+\form#66:$h^\Sigma_\tau = (e^\Sigma_\nu-e^\Sigma_{\nu,\mathrm{ref}})/Delta t$
+\form#67:$e^\Sigma_{\nu,\mathrm{ref}}$
+\form#68:$h^\Omega_\rho = (e^\Omega_\lambda-e^\Omega_{\lambda,\mathrm{ref}})/Delta t$
+\form#69:$e^\Omega_{\lambda,\mathrm{ref}}$
+\form#70:$h^\Sigma_\tau = (e^\Sigma_\nu-e^\Sigma_{\nu,\mathrm{ref}})/\Delta t$
+\form#71:$h^\Omega_\rho = (e^\Omega_\lambda-e^\Omega_{\lambda,\mathrm{ref}})/\Delta t$

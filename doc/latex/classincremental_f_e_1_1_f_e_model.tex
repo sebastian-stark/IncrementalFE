@@ -1,0 +1,318 @@
+\hypertarget{classincremental_f_e_1_1_f_e_model}{}\section{incremental\+FE\+:\+:F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_f_e_model}\index{incremental\+F\+E\+::\+F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$@{incremental\+F\+E\+::\+F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$}}
+
+
+{\ttfamily \#include $<$fe\+\_\+model.\+h$>$}
+
+
+
+Collaboration diagram for incremental\+FE\+:\+:F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classincremental_f_e_1_1_f_e_model__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_f_e_model_a1c4dd1d168c10aed60bfed14fd5f2641}{F\+E\+Model} (const dealii\+::\+Galerkin\+Tools\+::\+Total\+Potential$<$ spacedim $>$ \&total\+\_\+potential, dealii\+::\+Galerkin\+Tools\+::\+Triangulation\+System$<$ spacedim $>$ \&tria\+\_\+system, const dealii\+::\+Mapping$<$ spacedim, spacedim $>$ \&mapping\+\_\+domain, const dealii\+::\+Mapping$<$ spacedim-\/1, spacedim $>$ \&mapping\+\_\+interface, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_f_e_model_aa0619a9d4856459cfcdaf6fb82995496}{global\+\_\+data}, const \hyperlink{classincremental_f_e_1_1_constraints}{Constraints}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_f_e_model_a86375a464ff76f02e74db667f453c6fa}{constraints}, const \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$ \&\hyperlink{classincremental_f_e_1_1_f_e_model_a0340e6f1c6949ff2467cd55fb4264575}{solver\+\_\+wrapper})
+\item 
+int \hyperlink{classincremental_f_e_1_1_f_e_model_a3cf7c696501862875172951b7d73112c}{do\+\_\+time\+\_\+step} (const double t)
+\item 
+std\+::pair$<$ const double, const double $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_af3e39d66a5bd61d9b6122499cb328bb8}{compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution} (const \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$ \&other\+\_\+incremental\+\_\+fe, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature\+\_\+domain, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature\+\_\+interface, const {\bf dealii\+::\+Vector\+Tools\+::\+Norm\+Type} norm\+\_\+type=dealii\+::\+Vector\+Tools\+::\+Norm\+Type\+::\+L2\+\_\+norm, const double exponent=2.) const 
+\item 
+std\+::pair$<$ const double, const double $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_aaba79861a19553e350c18c75cc8fd68b}{compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution} (const dealii\+::\+Function$<$ spacedim $>$ \&exact\+\_\+solution\+\_\+domain, const dealii\+::\+Function$<$ spacedim $>$ \&exact\+\_\+solution\+\_\+interface, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature\+\_\+domain, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature\+\_\+interface, const {\bf dealii\+::\+Vector\+Tools\+::\+Norm\+Type} norm\+\_\+type=dealii\+::\+Vector\+Tools\+::\+Norm\+Type\+::\+L2\+\_\+norm, const double exponent=2.\+0) const 
+\item 
+void \hyperlink{classincremental_f_e_1_1_f_e_model_a8a620d159ca26e9171bdb840bb306f14}{read\+\_\+solution\+\_\+from\+\_\+file} (const std\+::string file\+\_\+name)
+\item 
+void \hyperlink{classincremental_f_e_1_1_f_e_model_adcc8cc23c6c86f49a7f03b72854c1f80}{write\+\_\+solution\+\_\+to\+\_\+file} (const std\+::string file\+\_\+name) const 
+\item 
+const dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$ spacedim $>$ \& \hyperlink{classincremental_f_e_1_1_f_e_model_af729211245ada354c157f3f1677b5067}{get\+\_\+assembly\+\_\+helper} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classincremental_f_e_1_1_f_e_model_a0a3607e99a9a31086cb12b426a50149b}{write\+\_\+output\+\_\+independent\+\_\+fields} (const std\+::string file\+\_\+name\+\_\+domain, const std\+::string file\+\_\+name\+\_\+interface)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$ spacedim $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a05d117d3d24815875729bf0219efb95a}{assembly\+\_\+helper}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_aa0619a9d4856459cfcdaf6fb82995496}{global\+\_\+data}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ const \hyperlink{classincremental_f_e_1_1_constraints}{Constraints}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a86375a464ff76f02e74db667f453c6fa}{constraints}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ const \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$ $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a0340e6f1c6949ff2467cd55fb4264575}{solver\+\_\+wrapper}
+\item 
+dealii\+::\+Sparsity\+Pattern \hyperlink{classincremental_f_e_1_1_f_e_model_aa9415f85bd0dde5e62f4f4047f3d6837}{sparsity\+\_\+pattern}
+\item 
+Matrix\+Type \hyperlink{classincremental_f_e_1_1_f_e_model_a630cedd2c40193ffe48de47368922aec}{system\+\_\+matrix}
+\item 
+{\bf Vector\+Type} \hyperlink{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}{solution}
+\item 
+{\bf Vector\+Type} \hyperlink{classincremental_f_e_1_1_f_e_model_ac14a70972f9d05ee4174070090b6f339}{rhs}
+\item 
+double \hyperlink{classincremental_f_e_1_1_f_e_model_a6ea0377dc55d432c82bc7ccdd8201932}{potential\+\_\+value} = 0.\+0
+\item 
+dealii\+::\+Affine\+Constraints$<$ double $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a0f155b0f56492027fcbb2f7982d42fcf}{hanging\+\_\+node\+\_\+constraints}
+\item 
+dealii\+::\+Affine\+Constraints$<$ double $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a305f5762e5476d48921f6c371df0ab41}{dirichlet\+\_\+constraints}
+\item 
+std\+::vector$<$ std\+::pair$<$ double, std\+::string $>$ $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a587711c4f60083ef739f51f315c3dcec}{times\+\_\+and\+\_\+names\+\_\+domain}
+\item 
+std\+::vector$<$ std\+::pair$<$ double, std\+::string $>$ $>$ \hyperlink{classincremental_f_e_1_1_f_e_model_a519061ab5d7aaf2f8699b766a88f8712}{times\+\_\+and\+\_\+names\+\_\+interface}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$\\*
+class incremental\+F\+E\+::\+F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$}
+
+Class for solution of non-\/linear, time dependent problems formulated in terms of an incremental variational principle.
+
+The solution algorithm within a single time step is based on a Newton-\/\+Raphson scheme together with a line search algorithm enhancing convergence.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em spacedim} & spatial dimension\\
+\hline
+{\em Vector\+Type} & the type used for the solution vector and the rhs, must be consistent with the \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} used\\
+\hline
+{\em Matrix\+Type} & the type used for the system matrix, must be consistent with the \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} used \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!F\+E\+Model@{F\+E\+Model}}
+\index{F\+E\+Model@{F\+E\+Model}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{F\+E\+Model(const dealii\+::\+Galerkin\+Tools\+::\+Total\+Potential$<$ spacedim $>$ \&total\+\_\+potential, dealii\+::\+Galerkin\+Tools\+::\+Triangulation\+System$<$ spacedim $>$ \&tria\+\_\+system, const dealii\+::\+Mapping$<$ spacedim, spacedim $>$ \&mapping\+\_\+domain, const dealii\+::\+Mapping$<$ spacedim-\/1, spacedim $>$ \&mapping\+\_\+interface, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const Constraints$<$ spacedim $>$ \&constraints, const Solver\+Wrapper$<$ Vector\+Type, Matrix\+Type $>$ \&solver\+\_\+wrapper)}{FEModel(const dealii::GalerkinTools::TotalPotential< spacedim > &total_potential, dealii::GalerkinTools::TriangulationSystem< spacedim > &tria_system, const dealii::Mapping< spacedim, spacedim > &mapping_domain, const dealii::Mapping< spacedim-1, spacedim > &mapping_interface, GlobalDataIncrementalFE< spacedim > &global_data, const Constraints< spacedim > &constraints, const SolverWrapper< VectorType, MatrixType > &solver_wrapper)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::{\bf F\+E\+Model} (
+\begin{DoxyParamCaption}
+\item[{const dealii\+::\+Galerkin\+Tools\+::\+Total\+Potential$<$ spacedim $>$ \&}]{total\+\_\+potential, }
+\item[{dealii\+::\+Galerkin\+Tools\+::\+Triangulation\+System$<$ spacedim $>$ \&}]{tria\+\_\+system, }
+\item[{const dealii\+::\+Mapping$<$ spacedim, spacedim $>$ \&}]{mapping\+\_\+domain, }
+\item[{const dealii\+::\+Mapping$<$ spacedim-\/1, spacedim $>$ \&}]{mapping\+\_\+interface, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const {\bf Constraints}$<$ spacedim $>$ \&}]{constraints, }
+\item[{const {\bf Solver\+Wrapper}$<$ {\bf Vector\+Type}, Matrix\+Type $>$ \&}]{solver\+\_\+wrapper}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_f_e_model_a1c4dd1d168c10aed60bfed14fd5f2641}{}\label{classincremental_f_e_1_1_f_e_model_a1c4dd1d168c10aed60bfed14fd5f2641}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em total\+\_\+potential} & {\bf Total\+Potential} object defining the total potential\\
+\hline
+\mbox{\tt in}  & {\em tria\+\_\+system} & {\bf Triangulation\+System} object\\
+\hline
+\mbox{\tt in}  & {\em mapping\+\_\+domain} & {\bf Mapping} to be used on the domain\\
+\hline
+\mbox{\tt in}  & {\em mapping\+\_\+interface} & {\bf Mapping} to be used on the interfaces\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & The global data object to be used, see \hyperlink{classincremental_f_e_1_1_f_e_model_aa0619a9d4856459cfcdaf6fb82995496}{F\+E\+Model\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em constraints} & \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} object, see \hyperlink{classincremental_f_e_1_1_f_e_model_a86375a464ff76f02e74db667f453c6fa}{F\+E\+Model\+::constraints}\\
+\hline
+\mbox{\tt in}  & {\em solver\+\_\+wrapper} & \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} to be used, see \hyperlink{classincremental_f_e_1_1_f_e_model_a0340e6f1c6949ff2467cd55fb4264575}{F\+E\+Model\+::solver\+\_\+wrapper} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution@{compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution}}
+\index{compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution@{compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution(const dealii\+::\+Function$<$ spacedim $>$ \&exact\+\_\+solution\+\_\+domain, const dealii\+::\+Function$<$ spacedim $>$ \&exact\+\_\+solution\+\_\+interface, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature\+\_\+domain, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature\+\_\+interface, const dealii\+::\+Vector\+Tools\+::\+Norm\+Type norm\+\_\+type=dealii\+::\+Vector\+Tools\+::\+Norm\+Type\+::\+L2\+\_\+norm, const double exponent=2.\+0) const }{compute_distance_to_exact_solution(const dealii::Function< spacedim > &exact_solution_domain, const dealii::Function< spacedim > &exact_solution_interface, const dealii::Quadrature< spacedim > quadrature_domain, const dealii::Quadrature< spacedim-1 > quadrature_interface, const dealii::VectorTools::NormType norm_type=dealii::VectorTools::NormType::L2_norm, const double exponent=2.0) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ std\+::pair$<$const double, const double$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::compute\+\_\+distance\+\_\+to\+\_\+exact\+\_\+solution (
+\begin{DoxyParamCaption}
+\item[{const dealii\+::\+Function$<$ spacedim $>$ \&}]{exact\+\_\+solution\+\_\+domain, }
+\item[{const dealii\+::\+Function$<$ spacedim $>$ \&}]{exact\+\_\+solution\+\_\+interface, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature\+\_\+domain, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature\+\_\+interface, }
+\item[{const {\bf dealii\+::\+Vector\+Tools\+::\+Norm\+Type}}]{norm\+\_\+type = {\ttfamily dealii\+:\+:VectorTools\+:\+:NormType\+:\+:L2\+\_\+norm}, }
+\item[{const double}]{exponent = {\ttfamily 2.0}}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_f_e_model_aaba79861a19553e350c18c75cc8fd68b}{}\label{classincremental_f_e_1_1_f_e_model_aaba79861a19553e350c18c75cc8fd68b}
+Function computing the \char`\"{}distance\char`\"{} of the solution vector \hyperlink{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}{F\+E\+Model\+::solution} to an exact solution.
+
+The exact and the numerical solution are subtracted and finally the norm of the resulting difference is computed numerically. This is done for the domain related and the interface related part separately.
+
+Note that the values of the independent scalars are currently not taken into account in this method.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em exact\+\_\+solution\+\_\+domain} & Exact solution on domain (use {\bf Assembly\+Helper\+::get\+\_\+u\+\_\+omega\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying {\bf Assembly\+Helper} needed for this can be obtained by \hyperlink{classincremental_f_e_1_1_f_e_model_af729211245ada354c157f3f1677b5067}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()})\\
+\hline
+\mbox{\tt in}  & {\em exact\+\_\+solution\+\_\+interface} & Exact solution on interface (use {\bf Assembly\+Helper\+::get\+\_\+u\+\_\+omega\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying {\bf Assembly\+Helper} needed for this can be obtained by \hyperlink{classincremental_f_e_1_1_f_e_model_af729211245ada354c157f3f1677b5067}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()})\\
+\hline
+\mbox{\tt in}  & {\em quadrature\+\_\+domain} & {\bf Quadrature} scheme to be used on the domain for the computation of the norm\\
+\hline
+\mbox{\tt in}  & {\em quadrature\+\_\+interface} & {\bf Quadrature} scheme to be used on the interface for the computation of the norm\\
+\hline
+\mbox{\tt in}  & {\em norm\+\_\+type} & Type of the norm\\
+\hline
+\mbox{\tt in}  & {\em exponent} & Exponent of the norm if required\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the norm computed on the domain and the interface, respectively 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution@{compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution}}
+\index{compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution@{compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution(const F\+E\+Model$<$ spacedim, Vector\+Type, Matrix\+Type $>$ \&other\+\_\+incremental\+\_\+fe, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature\+\_\+domain, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature\+\_\+interface, const dealii\+::\+Vector\+Tools\+::\+Norm\+Type norm\+\_\+type=dealii\+::\+Vector\+Tools\+::\+Norm\+Type\+::\+L2\+\_\+norm, const double exponent=2.) const }{compute_distance_to_other_solution(const FEModel< spacedim, VectorType, MatrixType > &other_incremental_fe, const dealii::Quadrature< spacedim > quadrature_domain, const dealii::Quadrature< spacedim-1 > quadrature_interface, const dealii::VectorTools::NormType norm_type=dealii::VectorTools::NormType::L2_norm, const double exponent=2.) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ std\+::pair$<$const double, const double$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution (
+\begin{DoxyParamCaption}
+\item[{const {\bf F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$ \&}]{other\+\_\+incremental\+\_\+fe, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature\+\_\+domain, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature\+\_\+interface, }
+\item[{const {\bf dealii\+::\+Vector\+Tools\+::\+Norm\+Type}}]{norm\+\_\+type = {\ttfamily dealii\+:\+:VectorTools\+:\+:NormType\+:\+:L2\+\_\+norm}, }
+\item[{const double}]{exponent = {\ttfamily 2.}}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_f_e_model_af3e39d66a5bd61d9b6122499cb328bb8}{}\label{classincremental_f_e_1_1_f_e_model_af3e39d66a5bd61d9b6122499cb328bb8}
+Function computing the \char`\"{}distance\char`\"{} of the solution vector \hyperlink{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}{F\+E\+Model\+::solution} of this \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} to the solution vector \hyperlink{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}{F\+E\+Model\+::solution} of another \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} (the \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} objects must be the same apart from the mesh refinement, in particular they must be based on the same coarse mesh).
+
+Note that the values of the independent scalars are currently not taken into account in this method.
+
+For further details see {\bf Assembly\+Helper\+::compute\+\_\+distance\+\_\+to\+\_\+other\+\_\+solution()}.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]Hanging node constraints are currently not taken care of when comparing the solutions. Also not all {\bf Vector\+Tools\+::\+Norm\+Type} norms are implemented yet.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em other\+\_\+incremental\+\_\+fe} & The other \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} object\\
+\hline
+\mbox{\tt in}  & {\em quadrature\+\_\+domain} & {\bf Quadrature} scheme to be used on the domain for the computation of the norm\\
+\hline
+\mbox{\tt in}  & {\em quadrature\+\_\+interface} & {\bf Quadrature} scheme to be used on the interface for the computation of the norm\\
+\hline
+\mbox{\tt in}  & {\em norm\+\_\+type} & Type of the norm (note\+: currently only {\bf Vector\+Tools\+::\+Norm\+Type}\+:\+:{\ttfamily L2\+\_\+norm} and {\bf Vector\+Tools\+::\+Norm\+Type}\+:\+:{\ttfamily Linfty\+\_\+norm} are implemented)\\
+\hline
+\mbox{\tt in}  & {\em exponent} & Exponent of the norm if required. Currently this is unused because no norms with variable exponent are implemented.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the norm computed on the domain and the interface, respectively 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!do\+\_\+time\+\_\+step@{do\+\_\+time\+\_\+step}}
+\index{do\+\_\+time\+\_\+step@{do\+\_\+time\+\_\+step}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{do\+\_\+time\+\_\+step(const double t)}{do_time_step(const double t)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ int {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::do\+\_\+time\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{const double}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_f_e_model_a3cf7c696501862875172951b7d73112c}{}\label{classincremental_f_e_1_1_f_e_model_a3cf7c696501862875172951b7d73112c}
+Method to compute a single time step
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t} & new time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of Newton-\/\+Raphson iterations required for time step, returns -\/1 if no convergence or other error 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!get\+\_\+assembly\+\_\+helper@{get\+\_\+assembly\+\_\+helper}}
+\index{get\+\_\+assembly\+\_\+helper@{get\+\_\+assembly\+\_\+helper}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{get\+\_\+assembly\+\_\+helper()}{get_assembly_helper()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ const dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$spacedim$>$\& {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::get\+\_\+assembly\+\_\+helper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_f_e_model_af729211245ada354c157f3f1677b5067}{}\label{classincremental_f_e_1_1_f_e_model_af729211245ada354c157f3f1677b5067}
+\begin{DoxyReturn}{Returns}
+the \hyperlink{classincremental_f_e_1_1_f_e_model_a05d117d3d24815875729bf0219efb95a}{F\+E\+Model\+::assembly\+\_\+helper} object 
+\end{DoxyReturn}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!read\+\_\+solution\+\_\+from\+\_\+file@{read\+\_\+solution\+\_\+from\+\_\+file}}
+\index{read\+\_\+solution\+\_\+from\+\_\+file@{read\+\_\+solution\+\_\+from\+\_\+file}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{read\+\_\+solution\+\_\+from\+\_\+file(const std\+::string file\+\_\+name)}{read_solution_from_file(const std::string file_name)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ void {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::read\+\_\+solution\+\_\+from\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{file\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_f_e_model_a8a620d159ca26e9171bdb840bb306f14}{}\label{classincremental_f_e_1_1_f_e_model_a8a620d159ca26e9171bdb840bb306f14}
+Reads the solution vector from a file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file\+\_\+name} & Name of the file to be read from (including extension)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This function does nothing then reading the solution vector previously stored with \hyperlink{classincremental_f_e_1_1_f_e_model_adcc8cc23c6c86f49a7f03b72854c1f80}{F\+E\+Model\+::write\+\_\+solution\+\_\+to\+\_\+file} back into the solution vector. It is the user\textquotesingle{}s responsibility that the \hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model} is left in a usable state afterwards. In particular, no checking for the size of the solution vector or for the satisfaction of constraints is done. Also, this function does not read in the values of the hidden variables at the material points. Essentially, the purpose of this function is to make a computed solution available for post-\/processing without having to repeat the entire solution process. In particular, this function is not meant for restarting an analysis at a certain point. 
+\end{DoxyWarning}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!write\+\_\+output\+\_\+independent\+\_\+fields@{write\+\_\+output\+\_\+independent\+\_\+fields}}
+\index{write\+\_\+output\+\_\+independent\+\_\+fields@{write\+\_\+output\+\_\+independent\+\_\+fields}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{write\+\_\+output\+\_\+independent\+\_\+fields(const std\+::string file\+\_\+name\+\_\+domain, const std\+::string file\+\_\+name\+\_\+interface)}{write_output_independent_fields(const std::string file_name_domain, const std::string file_name_interface)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ void {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::write\+\_\+output\+\_\+independent\+\_\+fields (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{file\+\_\+name\+\_\+domain, }
+\item[{const std\+::string}]{file\+\_\+name\+\_\+interface}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a0a3607e99a9a31086cb12b426a50149b}{}\label{classincremental_f_e_1_1_f_e_model_a0a3607e99a9a31086cb12b426a50149b}
+Function to write independent field output. For each time step the output is written to $\ast$.vtu files (one for domain related output and one for interface related output). Generally, the time step number is appended to the file names provided to this function. In addition, $\ast$.pvd records are written for the domain related output and the interface related output (file names according to the input parameters of this function).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file\+\_\+name\+\_\+domain} & File name (without extension) for independent field output on domain\\
+\hline
+\mbox{\tt in}  & {\em file\+\_\+name\+\_\+interface} & File name (without extension) for independent field output on interfaces \\
+\hline
+\end{DoxyParams}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!write\+\_\+solution\+\_\+to\+\_\+file@{write\+\_\+solution\+\_\+to\+\_\+file}}
+\index{write\+\_\+solution\+\_\+to\+\_\+file@{write\+\_\+solution\+\_\+to\+\_\+file}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{write\+\_\+solution\+\_\+to\+\_\+file(const std\+::string file\+\_\+name) const }{write_solution_to_file(const std::string file_name) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ void {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::write\+\_\+solution\+\_\+to\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const std\+::string}]{file\+\_\+name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classincremental_f_e_1_1_f_e_model_adcc8cc23c6c86f49a7f03b72854c1f80}{}\label{classincremental_f_e_1_1_f_e_model_adcc8cc23c6c86f49a7f03b72854c1f80}
+Writes the solution vector to a file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em file\+\_\+name} & Name of the file to be written to (including extension) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!assembly\+\_\+helper@{assembly\+\_\+helper}}
+\index{assembly\+\_\+helper@{assembly\+\_\+helper}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{assembly\+\_\+helper}{assembly_helper}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$spacedim$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::assembly\+\_\+helper\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a05d117d3d24815875729bf0219efb95a}{}\label{classincremental_f_e_1_1_f_e_model_a05d117d3d24815875729bf0219efb95a}
+The {\bf Assembly\+Helper} object defining the problem to be solved \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!constraints@{constraints}}
+\index{constraints@{constraints}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{constraints}{constraints}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ const dealii\+::\+Smart\+Pointer$<$const {\bf Constraints}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::constraints\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a86375a464ff76f02e74db667f453c6fa}{}\label{classincremental_f_e_1_1_f_e_model_a86375a464ff76f02e74db667f453c6fa}
+The \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} object comprising all the constraints to be applied. \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!dirichlet\+\_\+constraints@{dirichlet\+\_\+constraints}}
+\index{dirichlet\+\_\+constraints@{dirichlet\+\_\+constraints}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{dirichlet\+\_\+constraints}{dirichlet_constraints}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ dealii\+::\+Affine\+Constraints$<$double$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::dirichlet\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a305f5762e5476d48921f6c371df0ab41}{}\label{classincremental_f_e_1_1_f_e_model_a305f5762e5476d48921f6c371df0ab41}
+Matrix with Dirichlet type constraints (used internally during the solution process) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!global\+\_\+data@{global\+\_\+data}}
+\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_aa0619a9d4856459cfcdaf6fb82995496}{}\label{classincremental_f_e_1_1_f_e_model_aa0619a9d4856459cfcdaf6fb82995496}
+The \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE} object, which is used to exchange global information about the finite element model, the solution process, etc. In particular, this object contains the time step information, which may be needed to implement the incremental variational principle. \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!hanging\+\_\+node\+\_\+constraints@{hanging\+\_\+node\+\_\+constraints}}
+\index{hanging\+\_\+node\+\_\+constraints@{hanging\+\_\+node\+\_\+constraints}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{hanging\+\_\+node\+\_\+constraints}{hanging_node_constraints}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ dealii\+::\+Affine\+Constraints$<$double$>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::hanging\+\_\+node\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a0f155b0f56492027fcbb2f7982d42fcf}{}\label{classincremental_f_e_1_1_f_e_model_a0f155b0f56492027fcbb2f7982d42fcf}
+Matrix with hanging node constraints (used internally during the solution process) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!potential\+\_\+value@{potential\+\_\+value}}
+\index{potential\+\_\+value@{potential\+\_\+value}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{potential\+\_\+value}{potential_value}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ double {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::potential\+\_\+value = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a6ea0377dc55d432c82bc7ccdd8201932}{}\label{classincremental_f_e_1_1_f_e_model_a6ea0377dc55d432c82bc7ccdd8201932}
+Current value of the total potential (used internally during the solution process) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!rhs@{rhs}}
+\index{rhs@{rhs}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{rhs}{rhs}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ {\bf Vector\+Type} {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::rhs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_ac14a70972f9d05ee4174070090b6f339}{}\label{classincremental_f_e_1_1_f_e_model_ac14a70972f9d05ee4174070090b6f339}
+Right hand side vector (used internally during the solution process) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!solution@{solution}}
+\index{solution@{solution}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{solution}{solution}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ {\bf Vector\+Type} {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::solution\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}{}\label{classincremental_f_e_1_1_f_e_model_a47dd80ff66ec302a9854f522c8a7246d}
+Solution vector with the current solution \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!solver\+\_\+wrapper@{solver\+\_\+wrapper}}
+\index{solver\+\_\+wrapper@{solver\+\_\+wrapper}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{solver\+\_\+wrapper}{solver_wrapper}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ const dealii\+::\+Smart\+Pointer$<$const {\bf Solver\+Wrapper}$<${\bf Vector\+Type}, Matrix\+Type$>$ $>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::solver\+\_\+wrapper\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a0340e6f1c6949ff2467cd55fb4264575}{}\label{classincremental_f_e_1_1_f_e_model_a0340e6f1c6949ff2467cd55fb4264575}
+The \hyperlink{classincremental_f_e_1_1_solver_wrapper}{Solver\+Wrapper} provides the functionality to solve the linear systems. \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!sparsity\+\_\+pattern@{sparsity\+\_\+pattern}}
+\index{sparsity\+\_\+pattern@{sparsity\+\_\+pattern}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{sparsity\+\_\+pattern}{sparsity_pattern}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ dealii\+::\+Sparsity\+Pattern {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::sparsity\+\_\+pattern\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_aa9415f85bd0dde5e62f4f4047f3d6837}{}\label{classincremental_f_e_1_1_f_e_model_aa9415f85bd0dde5e62f4f4047f3d6837}
+The sparsity pattern of the system matrix \hyperlink{classincremental_f_e_1_1_f_e_model_a630cedd2c40193ffe48de47368922aec}{F\+E\+Model\+::system\+\_\+matrix} \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!system\+\_\+matrix@{system\+\_\+matrix}}
+\index{system\+\_\+matrix@{system\+\_\+matrix}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{system\+\_\+matrix}{system_matrix}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ Matrix\+Type {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::system\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a630cedd2c40193ffe48de47368922aec}{}\label{classincremental_f_e_1_1_f_e_model_a630cedd2c40193ffe48de47368922aec}
+System matrix (used internally during the solution process) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!times\+\_\+and\+\_\+names\+\_\+domain@{times\+\_\+and\+\_\+names\+\_\+domain}}
+\index{times\+\_\+and\+\_\+names\+\_\+domain@{times\+\_\+and\+\_\+names\+\_\+domain}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{times\+\_\+and\+\_\+names\+\_\+domain}{times_and_names_domain}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ std\+::vector$<$ std\+::pair$<$double, std\+::string$>$ $>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::times\+\_\+and\+\_\+names\+\_\+domain\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a587711c4f60083ef739f51f315c3dcec}{}\label{classincremental_f_e_1_1_f_e_model_a587711c4f60083ef739f51f315c3dcec}
+Pairs of time and filename written to file (for domain output) \index{incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}!times\+\_\+and\+\_\+names\+\_\+interface@{times\+\_\+and\+\_\+names\+\_\+interface}}
+\index{times\+\_\+and\+\_\+names\+\_\+interface@{times\+\_\+and\+\_\+names\+\_\+interface}!incremental\+F\+E\+::\+F\+E\+Model@{incremental\+F\+E\+::\+F\+E\+Model}}
+\subsubsection[{\texorpdfstring{times\+\_\+and\+\_\+names\+\_\+interface}{times_and_names_interface}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim, class Vector\+Type, class Matrix\+Type$>$ std\+::vector$<$ std\+::pair$<$double, std\+::string$>$ $>$ {\bf incremental\+F\+E\+::\+F\+E\+Model}$<$ spacedim, {\bf Vector\+Type}, Matrix\+Type $>$\+::times\+\_\+and\+\_\+names\+\_\+interface\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_f_e_model_a519061ab5d7aaf2f8699b766a88f8712}{}\label{classincremental_f_e_1_1_f_e_model_a519061ab5d7aaf2f8699b766a88f8712}
+Pairs of time and filename written to file (for interface output) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/\+F\+E/code/incremental\+F\+E/incremental\+\_\+fe/include/incremental\+\_\+fe/\hyperlink{fe__model_8h}{fe\+\_\+model.\+h}\end{DoxyCompactItemize}
