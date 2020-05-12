@@ -1,0 +1,254 @@
+Independent fields defined on domain:
+c_ap (global index=0)
+eta_ap (global index=1)
+eta_se (global index=2)
+u (global index=3)
+
+Independent fields defined on interfaces:
+None
+
+Scalar independent variables:
+constant_displacement (global index=0)
+j_ap (global index=1)
+phi_ap (global index=2)
+
+Old time=0
+New time=0.0135
+
+Old time=0.0135
+New time=0.027
+
+Old time=0.027
+New time=0.0405
+
+Old time=0.0405
+New time=0.054
+
+Old time=0.054
+New time=0.0675
+
+Old time=0.0675
+New time=0.081
+
+Old time=0.081
+New time=0.0945
+
+Old time=0.0945
+New time=0.108
+
+Old time=0.108
+New time=0.1215
+
+Old time=0.1215
+New time=0.135
+
+Old time=0.135
+New time=0.1485
+
+Old time=0.1485
+New time=0.162
+
+Old time=0.162
+New time=0.1755
+
+Old time=0.1755
+New time=0.189
+
+Old time=0.189
+New time=0.2025
+
+Old time=0.2025
+New time=0.216
+
+Old time=0.216
+New time=0.2295
+
+Old time=0.2295
+New time=0.243
+
+Old time=0.243
+New time=0.2565
+
+Old time=0.2565
+New time=0.27
+
+Old time=0.27
+New time=0.2835
+
+Old time=0.2835
+New time=0.297
+
+Old time=0.297
+New time=0.3105
+
+Old time=0.3105
+New time=0.324
+
+Old time=0.324
+New time=0.3375
+
+Old time=0.3375
+New time=0.351
+
+Old time=0.351
+New time=0.3645
+
+Old time=0.3645
+New time=0.378
+
+Old time=0.378
+New time=0.3915
+
+Old time=0.3915
+New time=0.405
+
+Old time=0.405
+New time=0.4185
+
+Old time=0.4185
+New time=0.432
+
+Old time=0.432
+New time=0.4455
+
+Old time=0.4455
+New time=0.459
+
+Old time=0.459
+New time=0.4725
+
+Old time=0.4725
+New time=0.486
+
+Old time=0.486
+New time=0.4995
+
+Old time=0.4995
+New time=0.513
+
+Old time=0.513
+New time=0.5265
+
+Old time=0.5265
+New time=0.54
+
+Old time=0.54
+New time=0.5535
+
+Old time=0.5535
+New time=0.567
+
+Old time=0.567
+New time=0.5805
+ERROR, CUTBACK necessary!
+Old time=0.567
+New time=0.57375
+
+Old time=0.57375
+New time=0.5805
+ERROR, CUTBACK necessary!
+Old time=0.57375
+New time=0.577125
+ERROR, CUTBACK necessary!
+Old time=0.57375
+New time=0.575438
+
+Old time=0.575438
+New time=0.577125
+ERROR, CUTBACK necessary!
+Old time=0.575438
+New time=0.576281
+
+Old time=0.576281
+New time=0.577125
+ERROR, CUTBACK necessary!
+Old time=0.576281
+New time=0.576703
+ERROR, CUTBACK necessary!
+Old time=0.576281
+New time=0.576492
+ERROR, CUTBACK necessary!
+Old time=0.576281
+New time=0.576387
+
+Old time=0.576387
+New time=0.576598
+ERROR, CUTBACK necessary!
+Old time=0.576387
+New time=0.576492
+ERROR, CUTBACK necessary!
+Old time=0.576387
+New time=0.576439
+ERROR, CUTBACK necessary!
+Old time=0.576387
+New time=0.576413
+
+Old time=0.576413
+New time=0.576439
+ERROR, CUTBACK necessary!
+Old time=0.576413
+New time=0.576426
+ERROR, CUTBACK necessary!
+Old time=0.576413
+New time=0.57642
+
+Old time=0.57642
+New time=0.576426
+
+Old time=0.576426
+New time=0.576433
+
+Old time=0.576433
+New time=0.576439
+
+0.0135 145.499 -58.3333
+0.027 146.373 -58.3333
+0.0405 147.133 -58.3333
+0.054 147.849 -58.3333
+0.0675 148.54 -58.3333
+0.081 149.214 -58.3333
+0.0945 149.876 -58.3333
+0.108 150.529 -58.3333
+0.1215 151.174 -58.3333
+0.135 151.814 -58.3333
+0.1485 152.449 -58.3333
+0.162 153.08 -58.3333
+0.1755 153.708 -58.3333
+0.189 154.334 -58.3333
+0.2025 154.959 -58.3333
+0.216 155.582 -58.3333
+0.2295 156.205 -58.3333
+0.243 156.827 -58.3333
+0.2565 157.45 -58.3333
+0.27 158.074 -58.3333
+0.2835 158.074 -39.5315
+0.297 158.074 -29.2443
+0.3105 158.074 -22.1512
+0.324 158.074 -16.9374
+0.3375 158.074 -13.0142
+0.351 158.074 -10.03
+0.3645 158.074 -7.74636
+0.378 158.074 -5.99187
+0.3915 158.074 -4.64016
+0.405 154.106 -113.738
+0.4185 152.666 -112.675
+0.432 151.513 -111.824
+0.4455 150.452 -111.042
+0.459 149.418 -110.278
+0.4725 148.384 -109.515
+0.486 147.337 -108.742
+0.4995 146.269 -107.954
+0.513 145.17 -107.143
+0.5265 144.025 -106.297
+0.54 142.799 -105.393
+0.5535 141.411 -104.369
+0.567 139.542 -102.989
+0.57375 137.693 -101.624
+0.575438 136.47 -100.722
+0.576281 134.435 -99.2199
+0.576387 133.128 -98.2548
+0.576413 132.07 -97.4743
+0.57642 131.391 -96.973
+0.576426 122.24 -90.219
+0.576433 20.6283 -15.2247
+0.576439 0.507257 -0.374381
