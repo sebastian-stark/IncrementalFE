@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 
+#ifdef DEAL_II_WITH_PETSC
 #include <petscmat.h>
+#endif
 
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
 #include <deal.II/lac/block_vector.h>
@@ -423,14 +425,22 @@ void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_solution_vector(SolutionVectorType& vector)
 {
 	auto vector_ptr_sequential = dynamic_cast<Vector<double>*>(&vector);
+#ifdef DEAL_II_WITH_MPI
 	auto vector_ptr_parallel = dynamic_cast<LinearAlgebra::distributed::Vector<double>*>(&vector);
+#endif // DEAL_II_WITH_MPI
 	if(vector_ptr_sequential != nullptr)
 		vector_ptr_sequential->reinit(assembly_helper.system_size());
+#ifdef DEAL_II_WITH_MPI
 	else if(vector_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		Assert(tria_domain_ptr != nullptr, ExcMessage("Internal error!"));
 		vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), tria_domain_ptr->get_communicator());
+	}
+#endif // DEAL_II_WITH_MPI
+	else
+	{
+		Assert(false, ExcMessage("FEModel not used with an appropriate vector type for the solution!"));
 	}
 }
 
@@ -439,8 +449,11 @@ void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_rhs_vector(RHSVectorType& vector)
 {
 	auto vector_ptr_sequential = dynamic_cast<BlockVector<double>*>(&vector);
+#ifdef DEAL_II_WITH_PETSC
+#ifdef DEAL_II_WITH_MPI
 	auto vector_ptr_parallel = dynamic_cast<PETScWrappers::MPI::BlockVector*>(&vector);
-
+#endif // DEAL_II_WITH_PETSC
+#endif // DEAL_II_WITH_MPI
 	auto index_sets = assembly_helper.get_locally_owned_indices_blocks();
 	if(index_sets[1].size() == 0)
 		index_sets.erase(index_sets.begin() + 1);
@@ -452,12 +465,21 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_rhs_vec
 		const std::vector<unsigned int> block_sizes = {index_sets[0].size(), index_sets[1].size()};
 		vector_ptr_sequential->reinit(block_sizes);
 	}
+#ifdef DEAL_II_WITH_PETSC
+#ifdef DEAL_II_WITH_MPI
 	else if(vector_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		Assert(tria_domain_ptr != nullptr, ExcMessage("Internal error!"));
 		vector_ptr_parallel->reinit(index_sets, tria_domain_ptr->get_communicator());
 	}
+#endif // DEAL_II_WITH_PETSC
+#endif // DEAL_II_WITH_MPI
+	else
+	{
+		Assert(false, ExcMessage("FEModel not used with an appropriate block vector for the RHS!"));
+	}
+
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
@@ -465,17 +487,28 @@ void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_matrix(MatrixType& vector)
 {
 	auto matrix_ptr_sequential = dynamic_cast<GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>*>(&vector);
+#ifdef DEAL_II_WITH_PETSC
+#ifdef DEAL_II_WITH_MPI
 	auto matrix_ptr_parallel = dynamic_cast<GalerkinTools::parallel::TwoBlockMatrix<PETScWrappers::MPI::SparseMatrix>*>(&vector);
-
+#endif // DEAL_II_WITH_PETSC
+#endif // DEAL_II_WITH_MPI
 	if(matrix_ptr_sequential != nullptr)
 	{
 		matrix_ptr_sequential->reinit(sparsity_pattern);
 	}
+#ifdef DEAL_II_WITH_PETSC
+#ifdef DEAL_II_WITH_MPI
 	else if(matrix_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		Assert(tria_domain_ptr != nullptr, ExcMessage("You are trying to perform a parallel computation with a sequential triangulation, which is not possible!"));
 		matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), tria_domain_ptr->get_communicator());
+	}
+#endif // DEAL_II_WITH_PETSC
+#endif // DEAL_II_WITH_MPI
+	else
+	{
+		Assert(false, ExcMessage("FEModel not used with an appropriate TwoBlockMatrix for the system matrix!"));
 	}
 }
 
@@ -583,21 +616,27 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::update_rhs_sca
 
 	if(index_set_block_0.n_elements() > 0)
 	{
-		// if we deal with a PETSc matrix, use PETSc method directly because this is way faster
+#if defined(DEAL_II_WITH_MPI) && defined(DEAL_II_WITH_PETSC)
 		auto mtx_ptr = dynamic_cast<PETScWrappers::MPI::SparseMatrix*>(&system_matrix_A);
-		auto vct_ptr = dynamic_cast<PETScWrappers::MPI::Vector*>(&rhs_scaling_vector_block_0);
-		if(mtx_ptr != nullptr)
-		{
-			Assert(vct_ptr != nullptr, ExcMessage("Vector type for scaling vector must be PETScWrappers::MPI::BlockVector!"));
-			const PetscErrorCode ierr = MatGetRowMaxAbs(mtx_ptr->petsc_matrix(), *vct_ptr, nullptr);
-			Assert(ierr == 0, ExcPETScError(ierr));
-			(void)ierr;
-		}
-		else
+#else
+		void* mtx_ptr = nullptr;
+#endif // DEAL_II_WITH_MPI && DEAL_II_WITH_PETSC
+		if(mtx_ptr == nullptr)
 		{
 			for(auto entry = system_matrix_A.begin(*index_set_block_0.begin()); entry != system_matrix_A.end( *index_set_block_0.begin() + index_set_block_0.n_elements() - 1 ); ++entry)
 				if( fabs(entry->value()) > rhs_scaling_vector_block_0[entry->row()] )
 					rhs_scaling_vector_block_0[entry->row()] = fabs(entry->value());
+		}
+		// if we deal with a PETSc matrix, use PETSc method directly because this is way faster
+		else
+		{
+#if defined(DEAL_II_WITH_MPI) && defined(DEAL_II_WITH_PETSC)
+			auto vct_ptr = dynamic_cast<PETScWrappers::MPI::Vector*>(&rhs_scaling_vector_block_0);
+			Assert(vct_ptr != nullptr, ExcMessage("Vector type for scaling vector must be PETScWrappers::MPI::BlockVector!"));
+			const PetscErrorCode ierr = MatGetRowMaxAbs(mtx_ptr->petsc_matrix(), *vct_ptr, nullptr);
+			Assert(ierr == 0, ExcPETScError(ierr));
+			(void)ierr;
+#endif // DEAL_II_WITH_MPI && DEAL_II_WITH_PETSC
 		}
 		rhs_scaling_vector_block_0.compress(VectorOperation::insert);
 	}
@@ -716,7 +755,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::post_refinemen
 template class incrementalFE::FEModel<2, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;
 template class incrementalFE::FEModel<3, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;
 
+#ifdef DEAL_II_WITH_MPI
 #ifdef DEAL_II_WITH_PETSC
 	template class incrementalFE::FEModel<2, LinearAlgebra::distributed::Vector<double>, PETScWrappers::MPI::BlockVector, GalerkinTools::parallel::TwoBlockMatrix<PETScWrappers::MPI::SparseMatrix>>;
 	template class incrementalFE::FEModel<3, LinearAlgebra::distributed::Vector<double>, PETScWrappers::MPI::BlockVector, GalerkinTools::parallel::TwoBlockMatrix<PETScWrappers::MPI::SparseMatrix>>;
 #endif // DEAL_II_WITH_PETSC
+#endif // DEAL_II_WITH_MPI
