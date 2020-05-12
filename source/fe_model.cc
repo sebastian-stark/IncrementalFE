@@ -12,6 +12,7 @@
 #include <deal.II/lac/sparsity_pattern.h>
 #include <deal.II/lac/slepc_solver.h>
 #include <deal.II/lac/parpack_solver.h>
+#include <deal.II/base/conditional_ostream.h>
 
 #include <incremental_fe/fe_model.h>
 #include <galerkin_tools/tools.h>
@@ -78,13 +79,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 																				const AffineConstraints<double>&	custom_constraints,
 																				const AffineConstraints<double>&	ignore_constraints)
 {
+	const unsigned int this_proc = assembly_helper.get_triangulation_system().get_this_proc_n_procs().first;
+	ConditionalOStream pout(cout, (this_proc == 0) && (global_data->get_output_level() > 0));
+
 	Timer timer;
 	timer.start();
 
 	// in a predictor-corrector algorithm each time step starts with the predictor step
 	if(global_data->predictor_corrector)
 	{
-		cout << "Starting predictor" << endl;
+		pout << "Starting predictor" << endl;
 		global_data->predictor_step = true;
 	}
 	else
@@ -102,8 +106,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	update_ghosts(solution_ref);
 
 	timer.stop();
-	cout << "Elapsed CPU time preparation: " << timer.cpu_time() << " seconds." << endl;
-	cout << "Elapsed wall time preparation: " << timer.wall_time() << " seconds." << endl;
+	pout << "Elapsed CPU time preparation: " << timer.cpu_time() << " seconds." << endl;
+	pout << "Elapsed wall time preparation: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
 
@@ -115,16 +119,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	AffineConstraints<double> constraints(assembly_helper.get_locally_relevant_indices());
 	make_constraints(constraints, custom_constraints, ignore_constraints);
 	timer.stop();
-	cout << "Elapsed CPU time constraints: " << timer.cpu_time() << " seconds." << endl;
-	cout << "Elapsed wall time constraints: " << timer.wall_time() << " seconds." << endl;
+	pout << "Elapsed CPU time constraints: " << timer.cpu_time() << " seconds." << endl;
+	pout << "Elapsed wall time constraints: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
 	timer.start();
 	// make sparsity pattern
 	compute_sparsity_pattern(constraints);
 	timer.stop();
-	cout << "Elapsed CPU time sparsity: " << timer.cpu_time() << " seconds." << endl;
-	cout << "Elapsed wall time sparsity: " << timer.wall_time() << " seconds." << endl;
+	pout << "Elapsed CPU time sparsity: " << timer.cpu_time() << " seconds." << endl;
+	pout << "Elapsed wall time sparsity: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
 	// ensure consistency of current solution with constraints
@@ -155,16 +159,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		return -1;
 	}
 	timer.stop();
-	cout << "Elapsed CPU time assembly: " << timer.cpu_time() << " seconds." << endl;
-	cout << "Elapsed wall time assembly: " << timer.wall_time() << " seconds." << endl;
+	pout << "Elapsed CPU time assembly: " << timer.cpu_time() << " seconds." << endl;
+	pout << "Elapsed wall time assembly: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
 	// compute rhs scaling vector
 	timer.start();
 	update_rhs_scaling_vector();
 	timer.stop();
-	cout << "Elapsed CPU time scaling: " << timer.cpu_time() << " seconds." << endl;
-	cout << "Elapsed wall time scaling: " << timer.wall_time() << " seconds." << endl;
+	pout << "Elapsed CPU time scaling: " << timer.cpu_time() << " seconds." << endl;
+	pout << "Elapsed wall time scaling: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
 	// start iteration loop
@@ -174,8 +178,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		timer.start();
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
 		timer.stop();
-		cout << "Elapsed CPU time solve: " << timer.cpu_time() << " seconds." << endl;
-		cout << "Elapsed wall time solve: " << timer.wall_time() << " seconds." << endl;
+		pout << "Elapsed CPU time solve: " << timer.cpu_time() << " seconds." << endl;
+		pout << "Elapsed wall time solve: " << timer.wall_time() << " seconds." << endl;
 		timer.reset();
 
 		// incorporate constraints into solution increment
@@ -193,13 +197,13 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			if(fabs(estimated_potential_increment) < global_data->threshold_potential_increment)
 			{
 				residual = get_residual();
-				cout << "Converged with residual: " << residual << " and potential increment " << estimated_potential_increment << endl << endl;
+				pout << "Converged with residual: " << residual << " and potential increment " << estimated_potential_increment << endl << endl;
 
 				// if this was the predictor step, continue with the corrector step, otherwise the time step is completed
 				if(global_data->predictor_step)
 				{
 					global_data->predictor_step = false;
-					cout << "Starting corrector" << endl;
+					pout << "Starting corrector" << endl;
 					iter = 0;
 					continue;
 				}
@@ -222,7 +226,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// if the problem is linear, quit here
 		if(global_data->force_linear)
 		{
-			cout << "Linear step" << endl;
+			pout << "Linear step" << endl;
 			break;
 		}
 
@@ -245,7 +249,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			else
 			{
 				++cutbacks;
-				cout << "CUTBACK" << endl;
+				pout << "CUTBACK" << endl;
 				if(cutbacks > global_data->max_cutbacks)
 				{
 					global_data->write_error_message("Exceeded the allowed number of cutbacks, solution unconverged!");
@@ -278,8 +282,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			break;
 		}
 
-		cout << "Iteration " << iter << endl;
-		cout << "Residual:" << residual << endl;
+		pout << "Iteration " << iter << endl;
+		pout << "Residual:" << residual << endl;
 
 	}
 
@@ -676,7 +680,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::adjust_delta_s
 	const double max_step = assembly_helper.get_maximum_step_length(solution, solution_ref_sets, delta_solution);
 	if(max_step < 1.0/global_data->safety_distance)
 	{
-		cout << "CORRECTED STEP TO " << global_data->safety_distance * max_step << endl;
+		const unsigned int this_proc = assembly_helper.get_triangulation_system().get_this_proc_n_procs().first;
+		ConditionalOStream pout(cout, (this_proc == 0) && (global_data->get_output_level() > 0));
+		pout << "CORRECTED STEP TO " << global_data->safety_distance * max_step << endl;
 		delta_solution *= global_data->safety_distance * max_step;
 		zero_ghosts(delta_solution);
 		constraints.distribute(delta_solution);

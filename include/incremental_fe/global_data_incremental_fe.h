@@ -130,6 +130,12 @@ private:
 	safety_distance = 0.9;
 
 	/**
+	 * Level of output written to stdout. Currently only 0 (print no output) and 1 (print output) are possible.
+	 */
+	unsigned int
+	output_level = 1;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -289,6 +295,21 @@ public:
 	 */
 	void
 	set_predictor_step(const bool predictor_step = true);
+
+	/**
+	 * @return						GlobalDataIncrementalFE::output_level
+	 */
+	unsigned int
+	get_output_level()
+	const;
+
+	/**
+	 * Sets GlobalDataIncrementalFE::output_level
+	 *
+	 * @param[in]					GlobalDataIncrementalFE::output_level
+	 */
+	void
+	set_output_level(const unsigned int output_level);
 
 	/**
 	 * reset GlobalDataIncrementalFE::t, GlobalDataIncrementalFE::t_ref, GlobalDataIncrementalFE::t_ref_old,

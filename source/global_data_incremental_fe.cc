@@ -167,6 +167,22 @@ GlobalDataIncrementalFE<spacedim>::set_predictor_step(const bool predictor_step)
 }
 
 template<unsigned int spacedim>
+unsigned int
+GlobalDataIncrementalFE<spacedim>::get_output_level()
+const
+{
+	return output_level;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_output_level(const unsigned int output_level)
+{
+	Assert(output_level < 2, ExcMessage("Output level can only be 0 or 1"));
+	this->output_level = output_level;
+}
+
+template<unsigned int spacedim>
 void
 GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
 {
