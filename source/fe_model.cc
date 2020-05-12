@@ -688,6 +688,7 @@ template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, c
 void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::update_ghosts(SolutionVectorType& vector)
 {
+	(void)vector;
 #ifdef DEAL_II_WITH_MPI
 	if(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second > 1)
 	{
@@ -705,6 +706,7 @@ template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, c
 void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::zero_ghosts(SolutionVectorType& vector)
 {
+	(void)vector;
 #ifdef DEAL_II_WITH_MPI
 	if(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second > 1)
 	{
