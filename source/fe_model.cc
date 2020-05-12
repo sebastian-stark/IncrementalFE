@@ -44,9 +44,13 @@ make_hanging_node_constraints(make_hanging_node_constraints)
 	// apply dof renumbering scheme in parallel in order to let dofs form a contiguous range on each processor
 	if(tria_system.get_this_proc_n_procs().second > 1)
 	{
+#ifdef DEAL_II_WITH_MPI
 		Auxiliary::compute_dof_renumbering_contiguous(assembly_helper.get_dof_handler_system(), dof_renumbering);
 		dof_renumbering.add_range(assembly_helper.system_size() - assembly_helper.get_n_stretched_rows(), assembly_helper.system_size() - 1, 0);
 		assembly_helper.get_dof_handler_system().attach_dof_renumbering(dof_renumbering);
+#else
+		Assert(false, ExcMessage("Internal error: deal.II not compiled with MPI, but calculation run with ore than one processor"));
+#endif
 	}
 
 	// compute hanging node constraints (these need only be updated after mesh refinement)
