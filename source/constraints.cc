@@ -13,7 +13,7 @@ Constraints<spacedim>::~Constraints()
 
 template<unsigned int spacedim>
 void
-Constraints<spacedim>::add_dirichletConstraint(const DirichletConstraint<spacedim>& dirichlet_constraint)
+Constraints<spacedim>::add_dirichlet_constraint(const DirichletConstraint<spacedim>& dirichlet_constraint)
 {
 	dirichlet_constraints.push_back(&dirichlet_constraint);
 }

@@ -53,7 +53,7 @@ public:
 	 * @param[in]	dirichlet_constraint	DirichletConstraint object
 	 */
 	void
-	add_dirichletConstraint(const dealii::GalerkinTools::DirichletConstraint<spacedim>& dirichlet_constraint);
+	add_dirichlet_constraint(const dealii::GalerkinTools::DirichletConstraint<spacedim>& dirichlet_constraint);
 
 
 	/**
