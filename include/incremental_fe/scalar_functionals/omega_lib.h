@@ -306,6 +306,100 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
+ * (1) \f$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E}  \f$,
+ *
+ * where \f$D\f$ and $\boldsymbol{E} are conjugate fields.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0] \f$D_x\f$<br>
+ * 																				[1] \f$D_y\f$<br>
+ * 																				[2] \f$D_z\f$<br>
+ * 																				[3] \f$E_x\f$<br>
+ * 																				[4] \f$E_y\f$<br>
+ * 																				[5] \f$E_z\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaMixedTerm01 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaMixedTerm01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+						const std::set<dealii::types::material_id>									domain_of_integration,
+						const dealii::Quadrature<spacedim>											quadrature,
+						GlobalDataIncrementalFE<spacedim>&											global_data,
+						const unsigned int															method,
+						const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 0, 3, 3, 0, method, alpha, "OmegaMixedTerm01")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+		const double D_x = values[0];
+		const double D_y = values[1];
+		const double D_z = values[2];
+		const double E_x = values[3];
+		const double E_y = values[4];
+		const double E_z = values[5];
+
+		if(get<0>(requested_quantities))
+		{
+			omega = - D_x * E_x - D_y * E_y - D_z * E_z;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[0] = -E_x;
+			d_omega[1] = -E_y;
+			d_omega[2] = -E_z;
+			d_omega[3] = -D_x;
+			d_omega[4] = -D_y;
+			d_omega[5] = -D_z;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega(0, 3) = d2_omega(3, 0) = -1.0;
+			d2_omega(1, 4) = d2_omega(4, 1) = -1.0;
+			d2_omega(2, 5) = d2_omega(5, 2) = -1.0;
+		}
+
+		return false;
+	}
+
+};
+
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
  * (1) \f$ h^\Omega_\rho =	-\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) \f$
  *
  * where $\mu\f$ is a Lagrangian multiplier, \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
