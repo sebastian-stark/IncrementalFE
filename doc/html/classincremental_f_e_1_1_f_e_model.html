@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Library IncrementalFE: incrementalFE::FEModel&lt; spacedim, VectorType, MatrixType &gt; Class Template Reference</title>
+<title>Library IncrementalFE: incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,91 +95,141 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_f_e_model-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">incrementalFE::FEModel&lt; spacedim, VectorType, MatrixType &gt; Class Template Reference</div>  </div>
+<div class="title">incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="fe__model_8h_source.html">fe_model.h</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for incrementalFE::FEModel&lt; spacedim, VectorType, MatrixType &gt;:</div>
+Collaboration diagram for incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="classincremental_f_e_1_1_f_e_model__coll__graph.png" border="0" usemap="#incremental_f_e_1_1_f_e_model_3_01spacedim_00_01_vector_type_00_01_matrix_type_01_4_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><img src="classincremental_f_e_1_1_f_e_model__coll__graph.png" border="0" usemap="#incremental_f_e_1_1_f_e_model_3_01spacedim_00_01_solution_vector_type_00_01_r_h_s_vector_type_00_01_matrix_type_01_4_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1c4dd1d168c10aed60bfed14fd5f2641"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a1c4dd1d168c10aed60bfed14fd5f2641">FEModel</a> (const dealii::GalerkinTools::TotalPotential&lt; spacedim &gt; &amp;total_potential, dealii::GalerkinTools::TriangulationSystem&lt; spacedim &gt; &amp;tria_system, const dealii::Mapping&lt; spacedim, spacedim &gt; &amp;mapping_domain, const dealii::Mapping&lt; spacedim-1, spacedim &gt; &amp;mapping_interface, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa0619a9d4856459cfcdaf6fb82995496">global_data</a>, const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a86375a464ff76f02e74db667f453c6fa">constraints</a>, const <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a>&lt; <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0340e6f1c6949ff2467cd55fb4264575">solver_wrapper</a>)</td></tr>
-<tr class="separator:a1c4dd1d168c10aed60bfed14fd5f2641"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf7c696501862875172951b7d73112c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a3cf7c696501862875172951b7d73112c">do_time_step</a> (const double t)</td></tr>
-<tr class="separator:a3cf7c696501862875172951b7d73112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3e39d66a5bd61d9b6122499cb328bb8"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af3e39d66a5bd61d9b6122499cb328bb8">compute_distance_to_other_solution</a> (const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt; &amp;other_incremental_fe, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const double exponent=2.) const </td></tr>
-<tr class="separator:af3e39d66a5bd61d9b6122499cb328bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaba79861a19553e350c18c75cc8fd68b"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aaba79861a19553e350c18c75cc8fd68b">compute_distance_to_exact_solution</a> (const dealii::Function&lt; spacedim &gt; &amp;exact_solution_domain, const dealii::Function&lt; spacedim &gt; &amp;exact_solution_interface, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const double exponent=2.0) const </td></tr>
-<tr class="separator:aaba79861a19553e350c18c75cc8fd68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a620d159ca26e9171bdb840bb306f14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a8a620d159ca26e9171bdb840bb306f14">read_solution_from_file</a> (const std::string file_name)</td></tr>
-<tr class="separator:a8a620d159ca26e9171bdb840bb306f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcc8cc23c6c86f49a7f03b72854c1f80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#adcc8cc23c6c86f49a7f03b72854c1f80">write_solution_to_file</a> (const std::string file_name) const </td></tr>
-<tr class="separator:adcc8cc23c6c86f49a7f03b72854c1f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af729211245ada354c157f3f1677b5067"><td class="memItemLeft" align="right" valign="top">const dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af729211245ada354c157f3f1677b5067">get_assembly_helper</a> ()</td></tr>
-<tr class="separator:af729211245ada354c157f3f1677b5067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230a5830a967893387b9010b9bd9b65b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a230a5830a967893387b9010b9bd9b65b">FEModel</a> (const dealii::GalerkinTools::TotalPotential&lt; spacedim &gt; &amp;total_potential, dealii::GalerkinTools::TriangulationSystem&lt; spacedim &gt; &amp;tria_system, const dealii::Mapping&lt; spacedim, spacedim &gt; &amp;mapping_domain, const dealii::Mapping&lt; spacedim-1, spacedim &gt; &amp;mapping_interface, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">global_data</a>, const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const dealii::GalerkinTools::SolverWrapper&lt; SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a609de66ca9623d737bf3a45a37bb7690">solver_wrapper</a>, const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a>=true)</td></tr>
+<tr class="separator:a230a5830a967893387b9010b9bd9b65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d9513474928ef225245928410f984b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae4d9513474928ef225245928410f984b">~FEModel</a> ()</td></tr>
+<tr class="separator:ae4d9513474928ef225245928410f984b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1528bdeba89d6f4774526a2ed9412047"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a1528bdeba89d6f4774526a2ed9412047">do_time_step</a> (const double t, const dealii::AffineConstraints&lt; double &gt; &amp;custom_constraints=dealii::AffineConstraints&lt; double &gt;(), const dealii::AffineConstraints&lt; double &gt; &amp;ignore_constraints=dealii::AffineConstraints&lt; double &gt;())</td></tr>
+<tr class="separator:a1528bdeba89d6f4774526a2ed9412047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c39fb15e308e6979b55fc4b988b3a2"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af3c39fb15e308e6979b55fc4b988b3a2">compute_distance_to_other_solution</a> (const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; &amp;other_incremental_fe, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const dealii::ComponentMask component_mask_domain=dealii::ComponentMask(), const dealii::ComponentMask component_mask_interface=dealii::ComponentMask(), const double exponent=2.) const </td></tr>
+<tr class="separator:af3c39fb15e308e6979b55fc4b988b3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae785f6ada313fec0811414e3f4294faf"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae785f6ada313fec0811414e3f4294faf">compute_distance_to_exact_solution</a> (const dealii::Function&lt; spacedim &gt; &amp;exact_solution_domain, const dealii::Function&lt; spacedim &gt; &amp;exact_solution_interface, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const dealii::ComponentMask component_mask_domain=dealii::ComponentMask(), const dealii::ComponentMask component_mask_interface=dealii::ComponentMask(), const double exponent=2.0) const </td></tr>
+<tr class="separator:ae785f6ada313fec0811414e3f4294faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb0d11f9d7a71971732d041a5cb4376a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#acb0d11f9d7a71971732d041a5cb4376a">read_solution_from_file</a> (const std::string file_name)</td></tr>
+<tr class="separator:acb0d11f9d7a71971732d041a5cb4376a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd3d4c235f2fd04a41184892e319601"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a7dd3d4c235f2fd04a41184892e319601">write_solution_to_file</a> (const std::string file_name) const </td></tr>
+<tr class="separator:a7dd3d4c235f2fd04a41184892e319601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e13285d3ec061e14dacaaf174ee5bf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2e13285d3ec061e14dacaaf174ee5bf5">write_output_independent_fields</a> (const std::string file_name_domain, const std::string file_name_interface, const unsigned int n_subdivisions=1)</td></tr>
+<tr class="separator:a2e13285d3ec061e14dacaaf174ee5bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32bc459c2816503c0b70a4f1a6730917"><td class="memItemLeft" align="right" valign="top">const dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">get_assembly_helper</a> ()</td></tr>
+<tr class="separator:a32bc459c2816503c0b70a4f1a6730917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab557cb22e2a0bd89cc7f0c2d048524ba"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ab557cb22e2a0bd89cc7f0c2d048524ba">get_potential_value</a> () const </td></tr>
+<tr class="separator:ab557cb22e2a0bd89cc7f0c2d048524ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af838cd26f882b0a70ece37a0199a0384"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af838cd26f882b0a70ece37a0199a0384">attach_data_postprocessor_domain</a> (const dealii::DataPostprocessor&lt; spacedim &gt; &amp;dp)</td></tr>
+<tr class="separator:af838cd26f882b0a70ece37a0199a0384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021c3223c447ac210a9c994abeaa7495"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a021c3223c447ac210a9c994abeaa7495">attach_data_postprocessor_interface</a> (const dealii::DataPostprocessor&lt; spacedim &gt; &amp;dp)</td></tr>
+<tr class="separator:a021c3223c447ac210a9c994abeaa7495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f26087df29cd1355aafbba17d7fedb"><td class="memItemLeft" align="right" valign="top">const SolutionVectorType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae9f26087df29cd1355aafbba17d7fedb">get_solution_vector</a> () const </td></tr>
+<tr class="separator:ae9f26087df29cd1355aafbba17d7fedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a0a3607e99a9a31086cb12b426a50149b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0a3607e99a9a31086cb12b426a50149b">write_output_independent_fields</a> (const std::string file_name_domain, const std::string file_name_interface)</td></tr>
-<tr class="separator:a0a3607e99a9a31086cb12b426a50149b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae792df01f91eab7c12ecf41b7e8c514b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae792df01f91eab7c12ecf41b7e8c514b">reinit_solution_vector</a> (SolutionVectorType &amp;vector)</td></tr>
+<tr class="separator:ae792df01f91eab7c12ecf41b7e8c514b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f0eaa319c21a88310d813fb34213f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa8f0eaa319c21a88310d813fb34213f6">reinit_rhs_vector</a> (RHSVectorType &amp;vector)</td></tr>
+<tr class="separator:aa8f0eaa319c21a88310d813fb34213f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aca9a1d1eb2233b6dbfac86e14a092729">reinit_matrix</a> (MatrixType &amp;matrix)</td></tr>
+<tr class="separator:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac2dbc4fdd4630cce4961a2360dc0f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9ac2dbc4fdd4630cce4961a2360dc0f6">compute_system</a> (const SolutionVectorType &amp;solution_ref, dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
+<tr class="separator:a9ac2dbc4fdd4630cce4961a2360dc0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a7c5c84e081ebe20e373ec5d2abc359b7">compute_sparsity_pattern</a> (const dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
+<tr class="separator:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae96fd0a7b6688ed844059d2636e923cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae96fd0a7b6688ed844059d2636e923cc">make_constraints</a> (dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const dealii::AffineConstraints&lt; double &gt; &amp;custom_constraints=dealii::AffineConstraints&lt; double &gt;(), const dealii::AffineConstraints&lt; double &gt; &amp;ignore_constraints=dealii::AffineConstraints&lt; double &gt;())</td></tr>
+<tr class="separator:ae96fd0a7b6688ed844059d2636e923cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08717e3296b8b304ebaed4a67638dae3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a08717e3296b8b304ebaed4a67638dae3">adjust_constraint_inhomogeneity</a> (dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>) const </td></tr>
+<tr class="separator:a08717e3296b8b304ebaed4a67638dae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ff8db18960919cc440d0053e4d5891"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a42ff8db18960919cc440d0053e4d5891">update_rhs_scaling_vector</a> ()</td></tr>
+<tr class="separator:a42ff8db18960919cc440d0053e4d5891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f82250544410e43abf4812565bfc20"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa8f82250544410e43abf4812565bfc20">compute_estimated_potential_increment</a> (const SolutionVectorType &amp;delta_solution) const </td></tr>
+<tr class="separator:aa8f82250544410e43abf4812565bfc20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fcdba85d0abaca07655c094da98a497"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a3fcdba85d0abaca07655c094da98a497">adjust_delta_solution</a> (SolutionVectorType &amp;delta_solution, const SolutionVectorType &amp;solution_ref, const dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
+<tr class="separator:a3fcdba85d0abaca07655c094da98a497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ecf05b93871cc936364d85d990c80e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a5ecf05b93871cc936364d85d990c80e0">update_ghosts</a> (SolutionVectorType &amp;vector)</td></tr>
+<tr class="separator:a5ecf05b93871cc936364d85d990c80e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb2401c8fde4bea7ed93527ee0e5f8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0eb2401c8fde4bea7ed93527ee0e5f8a">zero_ghosts</a> (SolutionVectorType &amp;vector)</td></tr>
+<tr class="separator:a0eb2401c8fde4bea7ed93527ee0e5f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef0d6e47e00fb6b502d1b21cecc1766"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#abef0d6e47e00fb6b502d1b21cecc1766">get_residual</a> () const </td></tr>
+<tr class="separator:abef0d6e47e00fb6b502d1b21cecc1766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06daeaed072ca50f43eccec359b3da3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae06daeaed072ca50f43eccec359b3da3">post_refinement</a> ()</td></tr>
+<tr class="separator:ae06daeaed072ca50f43eccec359b3da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a05d117d3d24815875729bf0219efb95a"><td class="memItemLeft" align="right" valign="top">dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a05d117d3d24815875729bf0219efb95a">assembly_helper</a></td></tr>
-<tr class="separator:a05d117d3d24815875729bf0219efb95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0619a9d4856459cfcdaf6fb82995496"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa0619a9d4856459cfcdaf6fb82995496">global_data</a></td></tr>
-<tr class="separator:aa0619a9d4856459cfcdaf6fb82995496"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86375a464ff76f02e74db667f453c6fa"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a86375a464ff76f02e74db667f453c6fa">constraints</a></td></tr>
-<tr class="separator:a86375a464ff76f02e74db667f453c6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0340e6f1c6949ff2467cd55fb4264575"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; const <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a>&lt; <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0340e6f1c6949ff2467cd55fb4264575">solver_wrapper</a></td></tr>
-<tr class="separator:a0340e6f1c6949ff2467cd55fb4264575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9415f85bd0dde5e62f4f4047f3d6837"><td class="memItemLeft" align="right" valign="top">dealii::SparsityPattern&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa9415f85bd0dde5e62f4f4047f3d6837">sparsity_pattern</a></td></tr>
-<tr class="separator:aa9415f85bd0dde5e62f4f4047f3d6837"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a630cedd2c40193ffe48de47368922aec"><td class="memItemLeft" align="right" valign="top">MatrixType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a630cedd2c40193ffe48de47368922aec">system_matrix</a></td></tr>
-<tr class="separator:a630cedd2c40193ffe48de47368922aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47dd80ff66ec302a9854f522c8a7246d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a47dd80ff66ec302a9854f522c8a7246d">solution</a></td></tr>
-<tr class="separator:a47dd80ff66ec302a9854f522c8a7246d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac14a70972f9d05ee4174070090b6f339"><td class="memItemLeft" align="right" valign="top"><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac14a70972f9d05ee4174070090b6f339">rhs</a></td></tr>
-<tr class="separator:ac14a70972f9d05ee4174070090b6f339"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ea0377dc55d432c82bc7ccdd8201932"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a6ea0377dc55d432c82bc7ccdd8201932">potential_value</a> = 0.0</td></tr>
-<tr class="separator:a6ea0377dc55d432c82bc7ccdd8201932"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f155b0f56492027fcbb2f7982d42fcf"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0f155b0f56492027fcbb2f7982d42fcf">hanging_node_constraints</a></td></tr>
-<tr class="separator:a0f155b0f56492027fcbb2f7982d42fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305f5762e5476d48921f6c371df0ab41"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a305f5762e5476d48921f6c371df0ab41">dirichlet_constraints</a></td></tr>
-<tr class="separator:a305f5762e5476d48921f6c371df0ab41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587711c4f60083ef739f51f315c3dcec"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a587711c4f60083ef739f51f315c3dcec">times_and_names_domain</a></td></tr>
-<tr class="separator:a587711c4f60083ef739f51f315c3dcec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a519061ab5d7aaf2f8699b766a88f8712"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a519061ab5d7aaf2f8699b766a88f8712">times_and_names_interface</a></td></tr>
-<tr class="separator:a519061ab5d7aaf2f8699b766a88f8712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3bd54f0440c5dcaf08066efd786c341"><td class="memItemLeft" align="right" valign="top">dealii::GalerkinTools::DoFRenumberingOffset&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae3bd54f0440c5dcaf08066efd786c341">dof_renumbering</a></td></tr>
+<tr class="separator:ae3bd54f0440c5dcaf08066efd786c341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937ea806f50796c76a45f36e6ec3cd29"><td class="memItemLeft" align="right" valign="top">dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a937ea806f50796c76a45f36e6ec3cd29">assembly_helper</a></td></tr>
+<tr class="separator:a937ea806f50796c76a45f36e6ec3cd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f80778241b26906af1f571517102dd"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">global_data</a></td></tr>
+<tr class="separator:aa6f80778241b26906af1f571517102dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a622c3c53ea4bee3bdefac06201c70"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a></td></tr>
+<tr class="separator:a33a622c3c53ea4bee3bdefac06201c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609de66ca9623d737bf3a45a37bb7690"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; const dealii::GalerkinTools::SolverWrapper&lt; SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a609de66ca9623d737bf3a45a37bb7690">solver_wrapper</a></td></tr>
+<tr class="separator:a609de66ca9623d737bf3a45a37bb7690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c04f79916df3cc38ac64209051eecd"><td class="memItemLeft" align="right" valign="top">dealii::GalerkinTools::TwoBlockSparsityPattern&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac5c04f79916df3cc38ac64209051eecd">sparsity_pattern</a></td></tr>
+<tr class="separator:ac5c04f79916df3cc38ac64209051eecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc07b7d142d78230bcd55274f35514b3"><td class="memItemLeft" align="right" valign="top">MatrixType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#abc07b7d142d78230bcd55274f35514b3">system_matrix</a></td></tr>
+<tr class="separator:abc07b7d142d78230bcd55274f35514b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02134975db38fcf4f7ce698d605baa30"><td class="memItemLeft" align="right" valign="top">SolutionVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a02134975db38fcf4f7ce698d605baa30">solution</a></td></tr>
+<tr class="separator:a02134975db38fcf4f7ce698d605baa30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba8e9e925aa72d2dd0f86c451b2cf3d6"><td class="memItemLeft" align="right" valign="top">RHSVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">rhs</a></td></tr>
+<tr class="separator:aba8e9e925aa72d2dd0f86c451b2cf3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ea9240ef0084b44471a40f0d64ac54"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a04ea9240ef0084b44471a40f0d64ac54">potential_value</a> = 0.0</td></tr>
+<tr class="separator:a04ea9240ef0084b44471a40f0d64ac54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ffe7f5ecf94f3bdbe27f4ea3e577dc"><td class="memItemLeft" align="right" valign="top">RHSVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">rhs_scaling_vector</a></td></tr>
+<tr class="separator:a26ffe7f5ecf94f3bdbe27f4ea3e577dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af333d1d12e78c27c74b033a85d075d38"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af333d1d12e78c27c74b033a85d075d38">hanging_node_constraints</a></td></tr>
+<tr class="separator:af333d1d12e78c27c74b033a85d075d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea39622157334a3d985c418a3b9ca34"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a4ea39622157334a3d985c418a3b9ca34">dirichlet_constraints</a></td></tr>
+<tr class="separator:a4ea39622157334a3d985c418a3b9ca34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6cc0723bdeb129e330179ed4a87670"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9a6cc0723bdeb129e330179ed4a87670">times_and_names_domain</a></td></tr>
+<tr class="separator:a9a6cc0723bdeb129e330179ed4a87670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0e0ef1be909224dfe6f28484b9d754"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aaa0e0ef1be909224dfe6f28484b9d754">times_and_names_interface</a></td></tr>
+<tr class="separator:aaa0e0ef1be909224dfe6f28484b9d754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf28a249a6d3800401624fc8bc8f3baf"><td class="memItemLeft" align="right" valign="top">std::vector&lt; boost::signals2::connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#acf28a249a6d3800401624fc8bc8f3baf">connections</a></td></tr>
+<tr class="separator:acf28a249a6d3800401624fc8bc8f3baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff2f85b08282289389284138ca708eca"><td class="memItemLeft" align="right" valign="top">std::vector&lt; dealii::SmartPointer&lt; const dealii::DataPostprocessor&lt; spacedim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aff2f85b08282289389284138ca708eca">dp_domain</a></td></tr>
+<tr class="separator:aff2f85b08282289389284138ca708eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeb548ba39fe59036312bb8ba1d8cbf9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; dealii::SmartPointer&lt; const dealii::DataPostprocessor&lt; spacedim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#adeb548ba39fe59036312bb8ba1d8cbf9">dp_interface</a></td></tr>
+<tr class="separator:adeb548ba39fe59036312bb8ba1d8cbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b5910cfba2feb26933ad451ceff628"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a></td></tr>
+<tr class="separator:a65b5910cfba2feb26933ad451ceff628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt;<br />
-class incrementalFE::FEModel&lt; spacedim, VectorType, MatrixType &gt;</h3>
+<div class="textblock"><h3>template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt;<br />
+class incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;</h3>
 
-<p>Class for solution of non-linear, time dependent problems formulated in terms of an incremental variational principle.</p>
-<p>The solution algorithm within a single time step is based on a Newton-Raphson scheme together with a line search algorithm enhancing convergence.</p>
+<p>Class for solution of non-linear, transient problems by one-step time integration.</p>
+<p>The solution algorithm within a single time step is based on a Newton-Raphson scheme together with a residual based line search algorithm enhancing convergence.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">spacedim</td><td>spatial dimension</td></tr>
-    <tr><td class="paramname">VectorType</td><td>the type used for the solution vector and the rhs, must be consistent with the <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a> used</td></tr>
-    <tr><td class="paramname">MatrixType</td><td>the type used for the system matrix, must be consistent with the <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a> used </td></tr>
+    <tr><td class="paramname">SolutionVectorType</td><td>the type used for the solution vector and the rhs, must be consistent with the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> used (in parallel this vector type must permit read access to ghosted entries while write access is not required)</td></tr>
+    <tr><td class="paramname">RHSVectorType</td><td>the type used for the rhs, must be consistent with the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> used (in parallel this vector type must permit write access to ghosted entries while read access is not required)</td></tr>
+    <tr><td class="paramname">MatrixType</td><td>the type used for the system matrix, must be consistent with the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> used </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1c4dd1d168c10aed60bfed14fd5f2641"></a>
+<a class="anchor" id="a230a5830a967893387b9010b9bd9b65b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::<a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> </td>
+          <td class="memname"><a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::<a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> </td>
           <td>(</td>
           <td class="paramtype">const dealii::GalerkinTools::TotalPotential&lt; spacedim &gt; &amp;&#160;</td>
           <td class="paramname"><em>total_potential</em>, </td>
@@ -217,8 +267,14 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a>&lt; <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt; &amp;&#160;</td>
-          <td class="paramname"><em>solver_wrapper</em>&#160;</td>
+          <td class="paramtype">const dealii::GalerkinTools::SolverWrapper&lt; SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern &gt; &amp;&#160;</td>
+          <td class="paramname"><em>solver_wrapper</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>make_hanging_node_constraints</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,28 +286,176 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 <p>Constructor</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">total_potential</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_total_potential.html">TotalPotential</a> object defining the total potential</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tria_system</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_triangulation_system.html">TriangulationSystem</a> object</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping_domain</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classMapping.html">Mapping</a> to be used on the domain</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mapping_interface</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classMapping.html">Mapping</a> to be used on the interfaces</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">global_data</td><td>The global data object to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa0619a9d4856459cfcdaf6fb82995496">FEModel::global_data</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a86375a464ff76f02e74db667f453c6fa">FEModel::constraints</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">solver_wrapper</td><td><a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a> to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0340e6f1c6949ff2467cd55fb4264575">FEModel::solver_wrapper</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">total_potential</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_total_potential.html">TotalPotential</a> object defining the total potential</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tria_system</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_triangulation_system.html">TriangulationSystem</a> object</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping_domain</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classMapping.html">Mapping</a> to be used on the domain</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mapping_interface</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classMapping.html">Mapping</a> to be used on the interfaces</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">global_data</td><td>The global data object to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">FEModel::global_data</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">FEModel::constraints</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">solver_wrapper</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a609de66ca9623d737bf3a45a37bb7690">FEModel::solver_wrapper</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">make_hanging_node_constraints</td><td><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">FEModel::make_hanging_node_constraints</a> </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aaba79861a19553e350c18c75cc8fd68b"></a>
+<a class="anchor" id="ae4d9513474928ef225245928410f984b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt;const double, const double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::compute_distance_to_exact_solution </td>
+          <td class="memname"><a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::~<a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Destructor </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a08717e3296b8b304ebaed4a67638dae3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::adjust_constraint_inhomogeneity </td>
+          <td>(</td>
+          <td class="paramtype">dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function adjusting constraint inhomogeneities associated with Dirichlet type constraints such that constraint object applies to solution increment and not to the solution itself </p>
+
+</div>
+</div>
+<a class="anchor" id="a3fcdba85d0abaca07655c094da98a497"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::adjust_delta_solution </td>
+          <td>(</td>
+          <td class="paramtype">SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>delta_solution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>solution_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Computes maximum allowable step size without obtaining inadmissible state and adjust <code>delta_solution</code> accordingly. The "safety distance" to the domain of inadmissible states is specified by <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a6db92e8e97c6875df1ecf5aa2a3a0345">GlobalDataIncrementalFE::safety_distance</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">delta_solution</td><td>increment direction</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">solution_ref</td><td>reference solution</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td>constraint matrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>maximum allowable step size </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af838cd26f882b0a70ece37a0199a0384"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::attach_data_postprocessor_domain </td>
+          <td>(</td>
+          <td class="paramtype">const dealii::DataPostprocessor&lt; spacedim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Function attaching <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> for domain cells. The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> objects attached are used in <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2e13285d3ec061e14dacaaf174ee5bf5">FEModel::write_output_independent_fields()</a> to generate output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dp</td><td>The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a021c3223c447ac210a9c994abeaa7495"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::attach_data_postprocessor_interface </td>
+          <td>(</td>
+          <td class="paramtype">const dealii::DataPostprocessor&lt; spacedim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Function attaching <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> for interface cells. The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> objects attached are used in <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2e13285d3ec061e14dacaaf174ee5bf5">FEModel::write_output_independent_fields()</a> to generate output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dp</td><td>The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae785f6ada313fec0811414e3f4294faf"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;const double, const double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_distance_to_exact_solution </td>
           <td>(</td>
           <td class="paramtype">const dealii::Function&lt; spacedim &gt; &amp;&#160;</td>
           <td class="paramname"><em>exact_solution_domain</em>, </td>
@@ -277,8 +481,20 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a>&#160;</td>
+          <td class="paramtype">const <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a>&#160;</td>
           <td class="paramname"><em>norm_type</em> = <code>dealii::VectorTools::NormType::L2_norm</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::ComponentMask&#160;</td>
+          <td class="paramname"><em>component_mask_domain</em> = <code>dealii::ComponentMask()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::ComponentMask&#160;</td>
+          <td class="paramname"><em>component_mask_interface</em> = <code>dealii::ComponentMask()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -293,16 +509,18 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function computing the "distance" of the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a47dd80ff66ec302a9854f522c8a7246d">FEModel::solution</a> to an exact solution.</p>
+<p>Function computing the "distance" of the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a02134975db38fcf4f7ce698d605baa30">FEModel::solution</a> to an exact solution.</p>
 <p>The exact and the numerical solution are subtracted and finally the norm of the resulting difference is computed numerically. This is done for the domain related and the interface related part separately.</p>
 <p>Note that the values of the independent scalars are currently not taken into account in this method.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_domain</td><td>Exact solution on domain (use <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html#a396b89981e546af6b9bc0e35634290b3">AssemblyHelper::get_u_omega_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#af729211245ada354c157f3f1677b5067">FEModel::get_assembly_helper()</a>)</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_interface</td><td>Exact solution on interface (use <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html#a396b89981e546af6b9bc0e35634290b3">AssemblyHelper::get_u_omega_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#af729211245ada354c157f3f1677b5067">FEModel::get_assembly_helper()</a>)</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_domain</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the domain for the computation of the norm</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_interface</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the interface for the computation of the norm</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_domain</td><td>Exact solution on domain (use <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#a396b89981e546af6b9bc0e35634290b3">AssemblyHelper::get_u_omega_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">FEModel::get_assembly_helper()</a>)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_interface</td><td>Exact solution on interface (use <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#aca4d34e08f177e8d075c86bb34906f2f">AssemblyHelper::get_u_sigma_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">FEModel::get_assembly_helper()</a>)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_domain</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the domain for the computation of the norm</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_interface</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the interface for the computation of the norm</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">norm_type</td><td>Type of the norm</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_domain</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_interface</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">exponent</td><td>Exponent of the norm if required</td></tr>
   </table>
   </dd>
@@ -311,16 +529,16 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af3e39d66a5bd61d9b6122499cb328bb8"></a>
+<a class="anchor" id="af3c39fb15e308e6979b55fc4b988b3a2"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt;const double, const double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::compute_distance_to_other_solution </td>
+          <td class="memname">std::pair&lt;const double, const double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_distance_to_other_solution </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; &amp;&#160;</td>
           <td class="paramname"><em>other_incremental_fe</em>, </td>
         </tr>
         <tr>
@@ -338,8 +556,20 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a>&#160;</td>
+          <td class="paramtype">const <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a>&#160;</td>
           <td class="paramname"><em>norm_type</em> = <code>dealii::VectorTools::NormType::L2_norm</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::ComponentMask&#160;</td>
+          <td class="paramname"><em>component_mask_domain</em> = <code>dealii::ComponentMask()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::ComponentMask&#160;</td>
+          <td class="paramname"><em>component_mask_interface</em> = <code>dealii::ComponentMask()</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -354,16 +584,18 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function computing the "distance" of the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a47dd80ff66ec302a9854f522c8a7246d">FEModel::solution</a> of this <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> to the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a47dd80ff66ec302a9854f522c8a7246d">FEModel::solution</a> of another <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> (the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> objects must be the same apart from the mesh refinement, in particular they must be based on the same coarse mesh).</p>
+<p>Function computing the "distance" of the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a02134975db38fcf4f7ce698d605baa30">FEModel::solution</a> of this <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> to the solution vector <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a02134975db38fcf4f7ce698d605baa30">FEModel::solution</a> of another <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> (the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> objects must be the same apart from the mesh refinement, in particular they must be based on the same coarse mesh).</p>
 <p>Note that the values of the independent scalars are currently not taken into account in this method.</p>
-<p>For further details see <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html#ae9c18e538e292f3660c6732fb0d3dab2">AssemblyHelper::compute_distance_to_other_solution()</a>.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Hanging node constraints are currently not taken care of when comparing the solutions. Also not all <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a> norms are implemented yet.</dd></dl>
+<p>For further details see <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#ac7860831588d35d05009474f2a695e14">AssemblyHelper::compute_distance_to_other_solution()</a>.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Hanging node constraints are currently not taken care of when comparing the solutions. Also not all <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a> norms are implemented yet.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other_incremental_fe</td><td>The other <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> object</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_domain</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the domain for the computation of the norm</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_interface</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the interface for the computation of the norm</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">norm_type</td><td>Type of the norm (note: currently only <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a>::<code>L2_norm</code> and <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a>::<code>Linfty_norm</code> are implemented)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_domain</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the domain for the computation of the norm</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_interface</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the interface for the computation of the norm</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">norm_type</td><td>Type of the norm (note: currently only <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a>::<code>L2_norm</code> and <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">VectorTools::NormType</a>::<code>Linfty_norm</code> are implemented)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_domain</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_interface</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">exponent</td><td>Exponent of the norm if required. Currently this is unused because no norms with variable exponent are implemented.</td></tr>
   </table>
   </dd>
@@ -372,18 +604,146 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3cf7c696501862875172951b7d73112c"></a>
+<a class="anchor" id="aa8f82250544410e43abf4812565bfc20"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::do_time_step </td>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_estimated_potential_increment </td>
+          <td>(</td>
+          <td class="paramtype">const SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>delta_solution</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>computes estimated potential increment (inner product between <code>delta_solution</code> and <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a>)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">delta_solution</td><td>solution increment</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>estimated potential increment </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7c5c84e081ebe20e373ec5d2abc359b7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_sparsity_pattern </td>
+          <td>(</td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function computing the <a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac5c04f79916df3cc38ac64209051eecd">FEModel::sparsity_pattern</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> to be taken into account </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9ac2dbc4fdd4630cce4961a2360dc0f6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_system </td>
+          <td>(</td>
+          <td class="paramtype">const SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>solution_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function computing current <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> and <a class="el" href="classincremental_f_e_1_1_f_e_model.html#abc07b7d142d78230bcd55274f35514b3">FEModel::system_matrix</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">solution_ref</td><td>The reference solution vector</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td>The constraints object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true:</code> error, <code>false:</code> no error </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1528bdeba89d6f4774526a2ed9412047"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::do_time_step </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>custom_constraints</em> = <code>dealii::AffineConstraints&lt;&#160;double&#160;&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ignore_constraints</em> = <code>dealii::AffineConstraints&lt;&#160;double&#160;&gt;()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -391,6 +751,8 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>new time</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">custom_constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> additional to <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">FEModel::constraints</a> to be taken into consideration (should be closed). This allows e.g. for constraints prescribing individual dofs (e.g. to fix a pressure variable)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ignore_constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object with constraint lines to be ignored. This allows e.g. to eliminate overconstraints at individual vertices resulting e.g. from different constraints imposed on different portions of the boundary.</td></tr>
   </table>
   </dd>
 </dl>
@@ -398,32 +760,172 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af729211245ada354c157f3f1677b5067"></a>
+<a class="anchor" id="a32bc459c2816503c0b70a4f1a6730917"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt;&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::get_assembly_helper </td>
+          <td class="memname">const dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt;&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_assembly_helper </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a05d117d3d24815875729bf0219efb95a">FEModel::assembly_helper</a> object </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a937ea806f50796c76a45f36e6ec3cd29">FEModel::assembly_helper</a> object </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a8a620d159ca26e9171bdb840bb306f14"></a>
+<a class="anchor" id="ab557cb22e2a0bd89cc7f0c2d048524ba"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::read_solution_from_file </td>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_potential_value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a04ea9240ef0084b44471a40f0d64ac54">FEModel::potential_value</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abef0d6e47e00fb6b502d1b21cecc1766"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_residual </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The 2-norm of the scaled version of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a>, for details regarding the scaling see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae9f26087df29cd1355aafbba17d7fedb"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const SolutionVectorType&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_solution_vector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>const reference to solution vector </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae96fd0a7b6688ed844059d2636e923cc"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::make_constraints </td>
+          <td>(</td>
+          <td class="paramtype">dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>constraints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>custom_constraints</em> = <code>dealii::AffineConstraints&lt;&#160;double&#160;&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ignore_constraints</em> = <code>dealii::AffineConstraints&lt;&#160;double&#160;&gt;()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function assembling constraints (combines Dirichlet type constraints, hanging node constraints, custom constraints while taking into account the constraints to be ignored)</p>
+<p>Updates also <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a4ea39622157334a3d985c418a3b9ca34">FEModel::dirichlet_constraints</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>The resulting constraints object</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">custom_constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> additional to <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">FEModel::constraints</a> to be taken into consideration (should be closed). This allows e.g. for constraints prescribing individual dofs (e.g. to fix a pressure variable)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ignore_constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object with constraint lines to be ignored. This allows e.g. to eliminate overconstraints at individual vertices resulting e.g. from different constraints imposed on different portions of the boundary. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae06daeaed072ca50f43eccec359b3da3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::post_refinement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function called automatically after the triangulation system is changed </p>
+
+</div>
+</div>
+<a class="anchor" id="acb0d11f9d7a71971732d041a5cb4376a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::read_solution_from_file </td>
           <td>(</td>
           <td class="paramtype">const std::string&#160;</td>
           <td class="paramname"><em>file_name</em></td><td>)</td>
@@ -438,35 +940,25 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>This function does nothing then reading the solution vector previously stored with <a class="el" href="classincremental_f_e_1_1_f_e_model.html#adcc8cc23c6c86f49a7f03b72854c1f80">FEModel::write_solution_to_file</a> back into the solution vector. It is the user's responsibility that the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> is left in a usable state afterwards. In particular, no checking for the size of the solution vector or for the satisfaction of constraints is done. Also, this function does not read in the values of the hidden variables at the material points. Essentially, the purpose of this function is to make a computed solution available for post-processing without having to repeat the entire solution process. In particular, this function is not meant for restarting an analysis at a certain point. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>This function does nothing apart from reading the solution vector previously stored with <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a7dd3d4c235f2fd04a41184892e319601">FEModel::write_solution_to_file</a> back into the solution vector. It is the user's responsibility that the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> is left in a usable state afterwards. In particular, no checking for the size of the solution vector or for the satisfaction of constraints is done. Also, this function does not read in the values of the hidden variables at the material points. Essentially, the purpose of this function is to make a computed solution available for post-processing without having to repeat the entire solution process. In particular, this function is not meant for restarting an analysis at a certain point. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a0a3607e99a9a31086cb12b426a50149b"></a>
+<a class="anchor" id="aca9a1d1eb2233b6dbfac86e14a092729"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::write_output_independent_fields </td>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::reinit_matrix </td>
           <td>(</td>
-          <td class="paramtype">const std::string&#160;</td>
-          <td class="paramname"><em>file_name_domain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">MatrixType &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const std::string&#160;</td>
-          <td class="paramname"><em>file_name_interface</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -475,25 +967,192 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function to write independent field output. For each time step the output is written to *.vtu files (one for domain related output and one for interface related output). Generally, the time step number is appended to the file names provided to this function. In addition, *.pvd records are written for the domain related output and the interface related output (file names according to the input parameters of this function).</p>
+<p>Reinit a system matrix</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">file_name_domain</td><td>File name (without extension) for independent field output on domain</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">file_name_interface</td><td>File name (without extension) for independent field output on interfaces </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">matrix</td><td>The system matrix to be re-inited </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="adcc8cc23c6c86f49a7f03b72854c1f80"></a>
+<a class="anchor" id="aa8f0eaa319c21a88310d813fb34213f6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::write_solution_to_file </td>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::reinit_rhs_vector </td>
+          <td>(</td>
+          <td class="paramtype">RHSVectorType &amp;&#160;</td>
+          <td class="paramname"><em>vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reinit a rhs type vector</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vector</td><td>The vector to be re-inited </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae792df01f91eab7c12ecf41b7e8c514b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::reinit_solution_vector </td>
+          <td>(</td>
+          <td class="paramtype">SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reinit a solution type vector</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vector</td><td>The vector to be re-inited </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5ecf05b93871cc936364d85d990c80e0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::update_ghosts </td>
+          <td>(</td>
+          <td class="paramtype">SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update the ghost values of <code>vector</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vector</td><td>The vector for which the ghost values are to be imported </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a42ff8db18960919cc440d0053e4d5891"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::update_rhs_scaling_vector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function updating <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> according to current <a class="el" href="classincremental_f_e_1_1_f_e_model.html#abc07b7d142d78230bcd55274f35514b3">FEModel::system_matrix</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a2e13285d3ec061e14dacaaf174ee5bf5"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::write_output_independent_fields </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>file_name_domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>file_name_interface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>n_subdivisions</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Function to write independent field output. The output is written to *.vtu files (one for domain related output and one for interface related output). Generally, the time step number is appended to the file names provided to this function. In addition, *.pvd records are written for the domain related output and the interface related output (file names according to the input parameters of this function).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file_name_domain</td><td>File name (without extension) for independent field output on domain</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">file_name_interface</td><td>File name (without extension) for independent field output on interfaces</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n_subdivisions</td><td>The number of subdivisions of each cell (to get a better representation in case of curved inner cells, higher order elements, etc.) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7dd3d4c235f2fd04a41184892e319601"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::write_solution_to_file </td>
           <td>(</td>
           <td class="paramtype">const std::string&#160;</td>
           <td class="paramname"><em>file_name</em></td><td>)</td>
@@ -511,18 +1170,51 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a0eb2401c8fde4bea7ed93527ee0e5f8a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::zero_ghosts </td>
+          <td>(</td>
+          <td class="paramtype">SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Zero the ghost values of <code>vector</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">vector</td><td>The vector for which the ghost values are to be zeroed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a05d117d3d24815875729bf0219efb95a"></a>
+<a class="anchor" id="a937ea806f50796c76a45f36e6ec3cd29"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::assembly_helper</td>
+          <td class="memname">dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::assembly_helper</td>
         </tr>
       </table>
   </td>
@@ -531,21 +1223,21 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_assembly_helper.html">AssemblyHelper</a> object defining the problem to be solved </p>
+<p>The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> object defining the problem to be solved </p>
 
 </div>
 </div>
-<a class="anchor" id="a86375a464ff76f02e74db667f453c6fa"></a>
+<a class="anchor" id="acf28a249a6d3800401624fc8bc8f3baf"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const dealii::SmartPointer&lt;const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt;spacedim&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::constraints</td>
+          <td class="memname">std::vector&lt;boost::signals2::connection&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::connections</td>
         </tr>
       </table>
   </td>
@@ -554,21 +1246,44 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object comprising all the constraints to be applied. </p>
+<p>A list of connections set up by <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>. This allows for disconnection when the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> object is destructed </p>
 
 </div>
 </div>
-<a class="anchor" id="a305f5762e5476d48921f6c371df0ab41"></a>
+<a class="anchor" id="a33a622c3c53ea4bee3bdefac06201c70"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::dirichlet_constraints</td>
+          <td class="memname">const dealii::SmartPointer&lt;const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt;spacedim&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::constraints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object comprising all the constraints to be applied </p>
+
+</div>
+</div>
+<a class="anchor" id="a4ea39622157334a3d985c418a3b9ca34"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::dirichlet_constraints</td>
         </tr>
       </table>
   </td>
@@ -581,17 +1296,17 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa0619a9d4856459cfcdaf6fb82995496"></a>
+<a class="anchor" id="ae3bd54f0440c5dcaf08066efd786c341"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const dealii::SmartPointer&lt;<a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt;spacedim&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::global_data</td>
+          <td class="memname">dealii::GalerkinTools::DoFRenumberingOffset <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::dof_renumbering</td>
         </tr>
       </table>
   </td>
@@ -600,21 +1315,90 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a> object, which is used to exchange global information about the finite element model, the solution process, etc. In particular, this object contains the time step information, which may be needed to implement the incremental variational principle. </p>
+<p>Object defining dof renumbering scheme of assembly helper (only relevant in parallel) </p>
 
 </div>
 </div>
-<a class="anchor" id="a0f155b0f56492027fcbb2f7982d42fcf"></a>
+<a class="anchor" id="aff2f85b08282289389284138ca708eca"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::hanging_node_constraints</td>
+          <td class="memname">std::vector&lt;dealii::SmartPointer&lt;const dealii::DataPostprocessor&lt;spacedim&gt; &gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::dp_domain</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> objects for domain cells. This allows for user-defined post-processing. </p>
+
+</div>
+</div>
+<a class="anchor" id="adeb548ba39fe59036312bb8ba1d8cbf9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;dealii::SmartPointer&lt;const dealii::DataPostprocessor&lt;spacedim&gt; &gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::dp_interface</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classDataPostprocessor.html">DataPostprocessor</a> objects for interface cells. This allows for user-defined post-processing. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa6f80778241b26906af1f571517102dd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const dealii::SmartPointer&lt;<a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt;spacedim&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::global_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a> object, which is used to exchange global information about the finite element model, the solution process, etc. In particular, this object contains the time step information, which may be needed within the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_total_potential.html">TotalPotential</a> to define the space-time discrete formulation. </p>
+
+</div>
+</div>
+<a class="anchor" id="af333d1d12e78c27c74b033a85d075d38"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::hanging_node_constraints</td>
         </tr>
       </table>
   </td>
@@ -627,17 +1411,40 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6ea0377dc55d432c82bc7ccdd8201932"></a>
+<a class="anchor" id="a65b5910cfba2feb26933ad451ceff628"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::potential_value = 0.0</td>
+          <td class="memname">const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::make_hanging_node_constraints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>determines whether hanging node constraints are taken into account or ignored </p>
+
+</div>
+</div>
+<a class="anchor" id="a04ea9240ef0084b44471a40f0d64ac54"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::potential_value = 0.0</td>
         </tr>
       </table>
   </td>
@@ -650,17 +1457,17 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac14a70972f9d05ee4174070090b6f339"></a>
+<a class="anchor" id="aba8e9e925aa72d2dd0f86c451b2cf3d6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a> <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::rhs</td>
+          <td class="memname">RHSVectorType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::rhs</td>
         </tr>
       </table>
   </td>
@@ -673,17 +1480,40 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a47dd80ff66ec302a9854f522c8a7246d"></a>
+<a class="anchor" id="a26ffe7f5ecf94f3bdbe27f4ea3e577dc"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a> <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::solution</td>
+          <td class="memname">RHSVectorType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::rhs_scaling_vector</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vector used to scale elements of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> before computing 2-norm thereof (each element of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> is scaled by the reciprocal value of the corresponding element of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a>). This scaling is used to avoid ill-conditioning problems. The <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> is computed in the beginning of each time step based on the initial system matrix and then kept constant throughout the time step. Each element in <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> is equal to the maximum norm of the corresponding row in the initial system matrix. </p>
+
+</div>
+</div>
+<a class="anchor" id="a02134975db38fcf4f7ce698d605baa30"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SolutionVectorType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::solution</td>
         </tr>
       </table>
   </td>
@@ -696,17 +1526,17 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0340e6f1c6949ff2467cd55fb4264575"></a>
+<a class="anchor" id="a609de66ca9623d737bf3a45a37bb7690"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const dealii::SmartPointer&lt;const <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a>&lt;<a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::solver_wrapper</td>
+          <td class="memname">const dealii::SmartPointer&lt;const dealii::GalerkinTools::SolverWrapper&lt;SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::solver_wrapper</td>
         </tr>
       </table>
   </td>
@@ -715,21 +1545,21 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The <a class="el" href="classincremental_f_e_1_1_solver_wrapper.html">SolverWrapper</a> provides the functionality to solve the linear systems. </p>
+<p>The <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> provides the functionality to solve the linear systems within each Newton-Raphson iteration </p>
 
 </div>
 </div>
-<a class="anchor" id="aa9415f85bd0dde5e62f4f4047f3d6837"></a>
+<a class="anchor" id="ac5c04f79916df3cc38ac64209051eecd"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">dealii::SparsityPattern <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::sparsity_pattern</td>
+          <td class="memname">dealii::GalerkinTools::TwoBlockSparsityPattern <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::sparsity_pattern</td>
         </tr>
       </table>
   </td>
@@ -738,21 +1568,21 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The sparsity pattern of the system matrix <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a630cedd2c40193ffe48de47368922aec">FEModel::system_matrix</a> </p>
+<p>The sparsity pattern of the system matrix <a class="el" href="classincremental_f_e_1_1_f_e_model.html#abc07b7d142d78230bcd55274f35514b3">FEModel::system_matrix</a> (used internally during the solution process) </p>
 
 </div>
 </div>
-<a class="anchor" id="a630cedd2c40193ffe48de47368922aec"></a>
+<a class="anchor" id="abc07b7d142d78230bcd55274f35514b3"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">MatrixType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::system_matrix</td>
+          <td class="memname">MatrixType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::system_matrix</td>
         </tr>
       </table>
   </td>
@@ -765,17 +1595,17 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a587711c4f60083ef739f51f315c3dcec"></a>
+<a class="anchor" id="a9a6cc0723bdeb129e330179ed4a87670"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::pair&lt;double, std::string&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::times_and_names_domain</td>
+          <td class="memname">std::vector&lt; std::pair&lt;double, std::string&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::times_and_names_domain</td>
         </tr>
       </table>
   </td>
@@ -784,21 +1614,21 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Pairs of time and filename written to file (for domain output) </p>
+<p>Pairs of time and filename of outputs written to files (for domain output). This is used in order to generate files gathering all the output files of the individual time steps into one file, which can be opened for post-processing. </p>
 
 </div>
 </div>
-<a class="anchor" id="a519061ab5d7aaf2f8699b766a88f8712"></a>
+<a class="anchor" id="aaa0e0ef1be909224dfe6f28484b9d754"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
+template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::pair&lt;double, std::string&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/group__output.html#gaf6742de875351b15832c89eaafd6bbff">VectorType</a>, MatrixType &gt;::times_and_names_interface</td>
+          <td class="memname">std::vector&lt; std::pair&lt;double, std::string&gt; &gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::times_and_names_interface</td>
         </tr>
       </table>
   </td>
@@ -807,12 +1637,12 @@ template&lt;unsigned int spacedim, class VectorType, class MatrixType&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Pairs of time and filename written to file (for interface output) </p>
+<p>Pairs of time and filename of outputs written to files (for interface output). This is used in order to generate files gathering all the output files of the individual time steps into one file, which can be opened for post-processing. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sst/FE/code/incrementalFE/incremental_fe/include/incremental_fe/<a class="el" href="fe__model_8h_source.html">fe_model.h</a></li>
+<li>/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/<a class="el" href="fe__model_8h_source.html">fe_model.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

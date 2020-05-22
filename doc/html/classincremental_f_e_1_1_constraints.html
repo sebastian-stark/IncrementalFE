@@ -114,10 +114,12 @@ Collaboration diagram for incrementalFE::Constraints&lt; spacedim &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab77495a668ae8925bd8095c2c80a8624"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_constraints.html#ab77495a668ae8925bd8095c2c80a8624">~Constraints</a> ()</td></tr>
 <tr class="separator:ab77495a668ae8925bd8095c2c80a8624"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdbb5de13bb4af4d032019272baa880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_constraints.html#a9cdbb5de13bb4af4d032019272baa880">add_dirichletConstraint</a> (const dealii::GalerkinTools::DirichletConstraint&lt; spacedim &gt; &amp;dirichlet_constraint)</td></tr>
-<tr class="separator:a9cdbb5de13bb4af4d032019272baa880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6a3580ea81a3cf8ce037fe98e46a15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_constraints.html#a6f6a3580ea81a3cf8ce037fe98e46a15">add_dirichlet_constraint</a> (const dealii::GalerkinTools::DirichletConstraint&lt; spacedim &gt; &amp;dirichlet_constraint)</td></tr>
+<tr class="separator:a6f6a3580ea81a3cf8ce037fe98e46a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a070b000db6079a35095f0c277a773d66"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; const dealii::GalerkinTools::DirichletConstraint&lt; spacedim &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_constraints.html#a070b000db6079a35095f0c277a773d66">get_dirichlet_constraints</a> () const </td></tr>
 <tr class="separator:a070b000db6079a35095f0c277a773d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a958643ec784d58d1263d21ab20c99df1"><td class="memItemLeft" align="right" valign="top">const std::set&lt; const dealii::GalerkinTools::IndependentField&lt; 0, spacedim &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_constraints.html#a958643ec784d58d1263d21ab20c99df1">get_independent_scalars</a> () const </td></tr>
+<tr class="separator:a958643ec784d58d1263d21ab20c99df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -128,8 +130,8 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;unsigned int spacedim&gt;<br />
 class incrementalFE::Constraints&lt; spacedim &gt;</h3>
 
-<p>Class collecting the constraints of the problem. Currently, the class doesn't do much and just collects <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects of the GalerkinTools library. For this purpose, a <code>std::vector</code> could be used as well. However, in the future, the GalerkinTools library may allow for more sophisticated constraints; and then this approach may no longer be feasible.</p>
-<p>The <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> class inherits from <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classSubscriptor.html">Subscriptor</a> in order to be able to check that <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> objects are only destroyed when they are not needed anymore by other objects.</p>
+<p>Class collecting the constraints of the problem. Currently, the class doesn't do much and just collects <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects of the GalerkinTools library. For this purpose, a <code>std::vector</code> could be used as well. However, in the future, the GalerkinTools library may allow for more sophisticated constraints; and then this approach may no longer be feasible.</p>
+<p>The <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> class inherits from <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classSubscriptor.html">Subscriptor</a> in order to be able to check that <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> objects are only destroyed when they are not needed anymore by other objects.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">spacedim</td><td>spatial dimension of the problem </td></tr>
@@ -156,14 +158,14 @@ template&lt;unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9cdbb5de13bb4af4d032019272baa880"></a>
+<a class="anchor" id="a6f6a3580ea81a3cf8ce037fe98e46a15"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;unsigned int spacedim&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_constraints.html">incrementalFE::Constraints</a>&lt; spacedim &gt;::add_dirichletConstraint </td>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_constraints.html">incrementalFE::Constraints</a>&lt; spacedim &gt;::add_dirichlet_constraint </td>
           <td>(</td>
           <td class="paramtype">const dealii::GalerkinTools::DirichletConstraint&lt; spacedim &gt; &amp;&#160;</td>
           <td class="paramname"><em>dirichlet_constraint</em></td><td>)</td>
@@ -171,10 +173,10 @@ template&lt;unsigned int spacedim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add a <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> to <a class="el" href="classincremental_f_e_1_1_constraints.html#aaa6042a72b76026d58416affbf056688">Constraints::dirichlet_constraints</a></p>
+<p>Add a <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> to <a class="el" href="classincremental_f_e_1_1_constraints.html#aaa6042a72b76026d58416affbf056688">Constraints::dirichlet_constraints</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dirichlet_constraint</td><td><a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> object </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dirichlet_constraint</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> object </td></tr>
   </table>
   </dd>
 </dl>
@@ -195,7 +197,25 @@ template&lt;unsigned int spacedim&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>A vector with pointers to the <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects in <a class="el" href="classincremental_f_e_1_1_constraints.html#aaa6042a72b76026d58416affbf056688">Constraints::dirichlet_constraints</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector with pointers to the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects in <a class="el" href="classincremental_f_e_1_1_constraints.html#aaa6042a72b76026d58416affbf056688">Constraints::dirichlet_constraints</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a958643ec784d58d1263d21ab20c99df1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::set&lt; const dealii::GalerkinTools::IndependentField&lt;0, spacedim&gt;* &gt; <a class="el" href="classincremental_f_e_1_1_constraints.html">incrementalFE::Constraints</a>&lt; spacedim &gt;::get_independent_scalars </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The independent scalars involved in the definition of the Dirichlet constraints. </dd></dl>
 
 </div>
 </div>
@@ -219,12 +239,12 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Vector with the <a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects </p>
+<p>Vector with the <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_dirichlet_constraint.html">DirichletConstraint</a> objects </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sst/FE/code/incrementalFE/incremental_fe/include/incremental_fe/<a class="el" href="constraints_8h_source.html">constraints.h</a></li>
+<li>/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/<a class="el" href="constraints_8h_source.html">constraints.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

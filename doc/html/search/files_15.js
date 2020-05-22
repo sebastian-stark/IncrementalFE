@@ -2,7 +2,7 @@ var searchData=
 [
   ['magic_5fnumbers_2eh',['magic_numbers.h',['https://dealii.org/9.0.0/doxygen/deal.II/magic__numbers_8h.html',1,'']]],
   ['main_2eh',['main.h',['https://dealii.org/9.0.0/doxygen/deal.II/main_8h.html',1,'']]],
-  ['mainpage_2edox',['mainpage.dox',['../mainpage_8dox.html',1,'(Global Namespace)'],['../../../../galerkin_tools/doc/html/mainpage_8dox.html',1,'(Global Namespace)']]],
+  ['mainpage_2edox',['mainpage.dox',['../mainpage_8dox.html',1,'(Global Namespace)'],['https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/mainpage_8dox.html',1,'(Global Namespace)']]],
   ['manifold_2ecc',['manifold.cc',['https://dealii.org/9.0.0/doxygen/deal.II/manifold_8cc.html',1,'']]],
   ['manifold_2eh',['manifold.h',['https://dealii.org/9.0.0/doxygen/deal.II/doc_2doxygen_2headers_2manifold_8h.html',1,'(Global Namespace)'],['https://dealii.org/9.0.0/doxygen/deal.II/include_2deal_8II_2grid_2manifold_8h.html',1,'(Global Namespace)']]],
   ['manifold_5flib_2ecc',['manifold_lib.cc',['https://dealii.org/9.0.0/doxygen/deal.II/manifold__lib_8cc.html',1,'']]],

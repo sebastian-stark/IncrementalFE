@@ -1,0 +1,157 @@
+\hypertarget{classincremental_f_e_1_1_kirchhoff_material00}{}\section{incremental\+FE\+:\+:Kirchhoff\+Material00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_kirchhoff_material00}\index{incremental\+F\+E\+::\+Kirchhoff\+Material00$<$ spacedim $>$@{incremental\+F\+E\+::\+Kirchhoff\+Material00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Kirchhoff\+Material00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_kirchhoff_material00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Kirchhoff\+Material00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_kirchhoff_material00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_kirchhoff_material00_aed371b8af0803cbfb69989f78f99d6d0}{Kirchhoff\+Material00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a7dad9ce289d7ebe9363b82a2fd850067}{lambda}, const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a27770f7ae063508ca40aa009925c4a0b}{mu}, const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_ae3992c464bbc9e18a3fc59ffec0b7bc3}{deps}, const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a4471a11a192ede0c9b16ea8ac9a35c4d}{c\+\_\+ref}, const double \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha})
+\item 
+bool \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a5a8beb79b5b3758705bf75fe976f6cac}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a7dad9ce289d7ebe9363b82a2fd850067}{lambda}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a27770f7ae063508ca40aa009925c4a0b}{mu}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_ae3992c464bbc9e18a3fc59ffec0b7bc3}{deps}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a4471a11a192ede0c9b16ea8ac9a35c4d}{c\+\_\+ref}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Kirchhoff\+Material00$<$ spacedim $>$}
+
+Class defining a domain related scalar functional with the integrand
+
+$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]$,
+
+where
+
+$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{E} - \dfrac{\Delta \varepsilon}{3} \left( \dfrac{c}{c^{\mathrm{ref}}} - 1 \right) \mathbf{I} $
+
+and
+
+$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) $
+
+Here, $\boldsymbol{F}$ is the deformation gradient, $c$ is a species concentration, $\lambda$ and $\mu$ are Lame\textquotesingle{}s constants, $\Delta \varepsilon$ describes the magnitude of the isotropic stress free strain related to a change in $c$, and $c^{\mathrm{ref}}$ is the species concentration at which the stress free strain is zero.
+
+The relation represents a Saint Venant -\/ Kirchhoff material with additional isotropic volumetric strain.
+
+Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $F_{xx}$ ~\newline
+ \mbox{[}1\mbox{]} $F_{xy}$ ~\newline
+ \mbox{[}2\mbox{]} $F_{xz}$ ~\newline
+ \mbox{[}3\mbox{]} $F_{yx}$ ~\newline
+ \mbox{[}4\mbox{]} $F_{yy}$ ~\newline
+ \mbox{[}5\mbox{]} $F_{yz}$ ~\newline
+ \mbox{[}6\mbox{]} $F_{zx}$ ~\newline
+ \mbox{[}7\mbox{]} $F_{zy}$ ~\newline
+ \mbox{[}8\mbox{]} $F_{zz}$ ~\newline
+ \mbox{[}9\mbox{]} $c$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!Kirchhoff\+Material00@{Kirchhoff\+Material00}}
+\index{Kirchhoff\+Material00@{Kirchhoff\+Material00}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{Kirchhoff\+Material00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double lambda, const double mu, const double deps, const double c\+\_\+ref, const double alpha)}{KirchhoffMaterial00(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double lambda, const double mu, const double deps, const double c_ref, const double alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::{\bf Kirchhoff\+Material00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const double}]{lambda, }
+\item[{const double}]{mu, }
+\item[{const double}]{deps, }
+\item[{const double}]{c\+\_\+ref, }
+\item[{const double}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_aed371b8af0803cbfb69989f78f99d6d0}{}\label{classincremental_f_e_1_1_kirchhoff_material00_aed371b8af0803cbfb69989f78f99d6d0}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em lambda} & \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a7dad9ce289d7ebe9363b82a2fd850067}{Kirchhoff\+Material00\+::lambda}\\
+\hline
+\mbox{\tt in}  & {\em mu} & \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a27770f7ae063508ca40aa009925c4a0b}{Kirchhoff\+Material00\+::mu}\\
+\hline
+\mbox{\tt in}  & {\em deps} & \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_ae3992c464bbc9e18a3fc59ffec0b7bc3}{Kirchhoff\+Material00\+::deps}\\
+\hline
+\mbox{\tt in}  & {\em c\+\_\+ref} & \hyperlink{classincremental_f_e_1_1_kirchhoff_material00_a4471a11a192ede0c9b16ea8ac9a35c4d}{Kirchhoff\+Material00\+::c\+\_\+ref}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
+\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const dealii::Point< spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
+\item[{double \&}]{omega, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_a5a8beb79b5b3758705bf75fe976f6cac}{}\label{classincremental_f_e_1_1_kirchhoff_material00_a5a8beb79b5b3758705bf75fe976f6cac}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{incremental\+F\+E\+::\+Psi$<$ spacedim, spacedim $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!c\+\_\+ref@{c\+\_\+ref}}
+\index{c\+\_\+ref@{c\+\_\+ref}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{c\+\_\+ref}{c_ref}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::c\+\_\+ref\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_a4471a11a192ede0c9b16ea8ac9a35c4d}{}\label{classincremental_f_e_1_1_kirchhoff_material00_a4471a11a192ede0c9b16ea8ac9a35c4d}
+$c^\mathrm{ref}$ \index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!deps@{deps}}
+\index{deps@{deps}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{deps}{deps}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::deps\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_ae3992c464bbc9e18a3fc59ffec0b7bc3}{}\label{classincremental_f_e_1_1_kirchhoff_material00_ae3992c464bbc9e18a3fc59ffec0b7bc3}
+$\Delta \varepsilon$ \index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!lambda@{lambda}}
+\index{lambda@{lambda}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{lambda}{lambda}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::lambda\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_a7dad9ce289d7ebe9363b82a2fd850067}{}\label{classincremental_f_e_1_1_kirchhoff_material00_a7dad9ce289d7ebe9363b82a2fd850067}
+Lame\textquotesingle{}s constant $\lambda$ \index{incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}!mu@{mu}}
+\index{mu@{mu}!incremental\+F\+E\+::\+Kirchhoff\+Material00@{incremental\+F\+E\+::\+Kirchhoff\+Material00}}
+\subsubsection[{\texorpdfstring{mu}{mu}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Kirchhoff\+Material00}$<$ spacedim $>$\+::mu\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_kirchhoff_material00_a27770f7ae063508ca40aa009925c4a0b}{}\label{classincremental_f_e_1_1_kirchhoff_material00_a27770f7ae063508ca40aa009925c4a0b}
+Lame\textquotesingle{}s constant $\lambda$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}\end{DoxyCompactItemize}

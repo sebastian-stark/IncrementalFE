@@ -1,0 +1,112 @@
+\hypertarget{classincremental_f_e_1_1_omega_mixed_term01}{}\section{incremental\+FE\+:\+:Omega\+Mixed\+Term01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_mixed_term01}\index{incremental\+F\+E\+::\+Omega\+Mixed\+Term01$<$ spacedim $>$@{incremental\+F\+E\+::\+Omega\+Mixed\+Term01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Omega\+Mixed\+Term01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_mixed_term01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Omega\+Mixed\+Term01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_mixed_term01__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_omega_mixed_term01_a45dcc5a37906872c6ab5a5090f87d206}{Omega\+Mixed\+Term01} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{global\+\_\+data}, const unsigned int \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{method}, const double \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{alpha}=0.\+0)
+\item 
+bool \hyperlink{classincremental_f_e_1_1_omega_mixed_term01_a6fe47df6c774ba07cb3455616997dfe7}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Omega\+Mixed\+Term01$<$ spacedim $>$}
+
+Class defining a domain related scalar functional with the integrand
+
+$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E} $,
+
+where $\boldsymbol{D}$ and $\boldsymbol{E}$ are conjugate fields.
+
+Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+\mbox{[}0\mbox{]} $D_x$~\newline
+ \mbox{[}1\mbox{]} $D_y$~\newline
+ \mbox{[}2\mbox{]} $D_z$~\newline
+ \mbox{[}3\mbox{]} $E_x$~\newline
+ \mbox{[}4\mbox{]} $E_y$~\newline
+ \mbox{[}5\mbox{]} $E_z$~\newline
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Omega\+Mixed\+Term01@{incremental\+F\+E\+::\+Omega\+Mixed\+Term01}!Omega\+Mixed\+Term01@{Omega\+Mixed\+Term01}}
+\index{Omega\+Mixed\+Term01@{Omega\+Mixed\+Term01}!incremental\+F\+E\+::\+Omega\+Mixed\+Term01@{incremental\+F\+E\+::\+Omega\+Mixed\+Term01}}
+\subsubsection[{\texorpdfstring{Omega\+Mixed\+Term01(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const unsigned int method, const double alpha=0.\+0)}{OmegaMixedTerm01(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const unsigned int method, const double alpha=0.0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Omega\+Mixed\+Term01}$<$ spacedim $>$\+::{\bf Omega\+Mixed\+Term01} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const unsigned int}]{method, }
+\item[{const double}]{alpha = {\ttfamily 0.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_omega_mixed_term01_a45dcc5a37906872c6ab5a5090f87d206}{}\label{classincremental_f_e_1_1_omega_mixed_term01_a45dcc5a37906872c6ab5a5090f87d206}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Omega\+Mixed\+Term01@{incremental\+F\+E\+::\+Omega\+Mixed\+Term01}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
+\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Omega\+Mixed\+Term01@{incremental\+F\+E\+::\+Omega\+Mixed\+Term01}}
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double, const dealii::Point< spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Mixed\+Term01}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
+\item[{const double}]{, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
+\item[{double \&}]{omega, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities, }
+\item[{const bool}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_mixed_term01_a6fe47df6c774ba07cb3455616997dfe7}{}\label{classincremental_f_e_1_1_omega_mixed_term01_a6fe47df6c774ba07cb3455616997dfe7}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{incremental\+F\+E\+::\+Omega$<$ spacedim, spacedim $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}\end{DoxyCompactItemize}

@@ -2,7 +2,6 @@ var searchData=
 [
   ['eigeninverse',['EigenInverse',['https://dealii.org/9.0.0/doxygen/deal.II/classEigenInverse.html',1,'']]],
   ['eigenpower',['EigenPower',['https://dealii.org/9.0.0/doxygen/deal.II/classEigenPower.html',1,'']]],
-  ['electricalwork00',['ElectricalWork00',['../classincremental_f_e_1_1_electrical_work00.html',1,'incrementalFE']]],
   ['elementinfo',['ElementInfo',['https://dealii.org/9.0.0/doxygen/deal.II/structinternal_1_1MGTransfer_1_1ElementInfo.html',1,'internal::MGTransfer']]],
   ['elementiterator',['ElementIterator',['https://dealii.org/9.0.0/doxygen/deal.II/classIndexSet_1_1ElementIterator.html',1,'IndexSet']]],
   ['embeddedexplicitrungekutta',['EmbeddedExplicitRungeKutta',['https://dealii.org/9.0.0/doxygen/deal.II/classTimeStepping_1_1EmbeddedExplicitRungeKutta.html',1,'TimeStepping']]],

@@ -184,6 +184,15 @@ GlobalDataIncrementalFE<spacedim>::set_output_level(const unsigned int output_le
 
 template<unsigned int spacedim>
 void
+GlobalDataIncrementalFE<spacedim>::set_safety_distance(const double safety_distance)
+{
+	Assert(safety_distance < 1.0, ExcMessage("Safety distance must be smaller than 1.0"));
+	Assert(safety_distance > 0.0, ExcMessage("Safety must be larger than 0.0"));
+	this->safety_distance = safety_distance;
+}
+
+template<unsigned int spacedim>
+void
 GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
 {
 	t = t_init;

@@ -84,7 +84,11 @@ public:
 	 *
 	 * @param[in]		alpha					DualInterfaceDissipation01::alpha
 	 *
+	 * @param[in]		RT						DualInterfaceDissipation01::RT
+	 *
 	 * @param[in]		i0						DualInterfaceDissipation01::i0
+	 *
+	 * @param[in]		threshold				DualInterfaceDissipation01::threshold
 	 */
 	DualInterfaceDissipation01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
 							const std::set<dealii::types::material_id>											domain_of_integration,

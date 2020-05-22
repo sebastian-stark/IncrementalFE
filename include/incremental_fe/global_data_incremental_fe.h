@@ -18,8 +18,7 @@ namespace incrementalFE
  * In particular if objects of classes derived from ScalarFunctional
  * or ScalarFunctional<spacedim, spacedim> know of the GlobalDataIncrementalFE
  * object in use, global information (e.g. the current time and the reference time) is available at
- * the material point level. The latter is important for the implementation of incremental
- * potentials.
+ * the material point level. The latter is important for the implementation of time discrete schemes.
  *
  * The GlobalDataIncrementalFE class inherits from Subscriptor in order to be
  * able to check that GlobalDataIncrementalFE objects are only destroyed when they are
@@ -58,7 +57,7 @@ private:
 	time_step = 0;
 
 	/**
-	 * If @p true: Use symmetric solver
+	 * If @p true: Use symmetric solver if available in FEModel::solver_wrapper
 	 */
 	bool
 	sym_mode = false;
@@ -70,7 +69,7 @@ private:
 	max_iter = 20;
 
 	/**
-	 * Maximum number of cutbacks allowed within line search to complete an iteration of a single time step
+	 * Maximum number of bisections allowed within line search to complete an iteration of a single time step
 	 */
 	unsigned int
 	max_cutbacks = 10;
@@ -87,7 +86,7 @@ private:
 	 * If this is set to @p true, only one iteration is performed for each time step.
 	 * This parameter should be set to @p true for problems which are known to be linear
 	 * (in order to avoid a second iteration),
-	 * but must be set to @p false for problems which are nonlinear.
+	 * but must be set to @p false for problems which are nonlinear (the variable is set to @p false by default).
 	 */
 	bool
 	force_linear = false;
@@ -108,7 +107,12 @@ private:
 	reset_t_possible = false;
 
 	/**
-	 * Indicate whether a predictor-corrector algorithm is used for time integration
+	 * Indicate whether a predictor-corrector algorithm is used for time integration. In the predictor-corrector algorithm,
+	 * the entire Newton-Raphson iteration scheme is performed twice within each time step (one time with GlobalDataIncrementalFE::predictor_step set to @p true,
+	 * and one time with GlobalDataIncrementalFE::predictor_step set to @p false). The starting values for the second Newton-Raphson round are the results of the first round.
+	 * The user can use the value of GlobalDataIncrementalFE::predictor_step within the scalar functional definitions to distinguish between predictor and corrector step; and hidden
+	 * variables can be used to store local information from the predictor step to be available during the corrector step (e.g., it is possible to store the resulting local dependent variables
+	 * at the end of each predictor step in the hidden variables and then base the corrector on these values).
 	 */
 	bool
 	predictor_corrector = false;
@@ -120,9 +124,9 @@ private:
 	predictor_step = false;
 
 	/**
-	 * Safety distance to an inadmissible state within a single Newton-Raphson iteration (<1).
+	 * Safety distance to an inadmissible state within a single Newton-Raphson iteration (0 < GlobalDataIncrementalFE::safety_distance < 1.0).
 	 * The Newton step length will be decreased such that the "distance" between the solution and the
-	 * boundary of the domain of admissibility is decreased by 90% at most during a single iteration.
+	 * boundary of the domain of admissibility is decreased by GlobalDataIncrementalFE::safety_distance at most during a single iteration (1.0 would correspond to no safety distance at all).
 	 * This is used to avoid ill-conditioning problems resulting from a too quick approach of the
 	 * boundary of the domain of admissibility.
 	 */
@@ -171,24 +175,6 @@ public:
 	const;
 
 	/**
-	 * %Function setting current time (old time is then stored in GlobalDataIncrementalFE::t_ref).
-	 * This function also increments the time step number GlobalDataIncrementalFE::time_step
-	 * and checks that the new time is larger than the old time.
-	 *
-	 * @param[in]	t	current time
-	 */
-	void
-	set_t(const double t);
-
-	/**
-	 * %Function resetting time to previous step. This undoes the last call to
-	 * GlobalDataIncrementalFE::set_t(). The function can only be called once
-	 * after a call of GlobalDataIncrementalFE::set_t().
-	 */
-	void
-	reset_t();
-
-	/**
 	 * @return	current time step number GlobalDataIncrementalFE::time_step
 	 */
 	unsigned int
@@ -196,7 +182,8 @@ public:
 	const;
 
 	/**
-	 * %Function to write an error message to GlobalDataIncrementalFE::error_messages
+	 * %Function to write an error message to GlobalDataIncrementalFE::error_messages. This can be used
+	 * in scalar functionals to provide with debug information.
 	 *
 	 * @param[in]	error_message	string with the error message
 	 */
@@ -206,7 +193,8 @@ public:
 	/**
 	 * %Function to write an error message to GlobalDataIncrementalFE::error_messages
 	 * recording the spatial location at which the error happened (if the error can
-	 * be related to a point in space)
+	 * be related to a point in space). This can be used
+	 * in scalar functionals to provide with debug information.
 	 *
 	 * @param[in]	error_message	string with the error message
 	 *
@@ -289,15 +277,7 @@ public:
 	const;
 
 	/**
-	 * Sets GlobalDataIncrementalFE::predictor_step
-	 *
-	 * @param[in]					GlobalDataIncrementalFE::predictor_step
-	 */
-	void
-	set_predictor_step(const bool predictor_step = true);
-
-	/**
-	 * @return						GlobalDataIncrementalFE::output_level
+	 * @return	GlobalDataIncrementalFE::output_level
 	 */
 	unsigned int
 	get_output_level()
@@ -306,10 +286,44 @@ public:
 	/**
 	 * Sets GlobalDataIncrementalFE::output_level
 	 *
-	 * @param[in]					GlobalDataIncrementalFE::output_level
+	 * @param[in]	output_level	GlobalDataIncrementalFE::output_level
 	 */
 	void
 	set_output_level(const unsigned int output_level);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::safety_distance
+	 *
+	 * @param[in]	safety_distance	GlobalDataIncrementalFE::safety_distance
+	 */
+	void
+	set_safety_distance(const double safety_distance);
+
+	/**
+	 * %Function setting current time (old time is then stored in GlobalDataIncrementalFE::t_ref).
+	 * This function also increments the time step number GlobalDataIncrementalFE::time_step
+	 * and checks that the new time is larger than the old time.
+	 *
+	 * @param[in]	t	current time
+	 */
+	void
+	set_t(const double t);
+
+	/**
+	 * %Function resetting time to previous step. This undoes the last call to
+	 * GlobalDataIncrementalFE::set_t(). The function can only be called once
+	 * after a call of GlobalDataIncrementalFE::set_t().
+	 */
+	void
+	reset_t();
+
+	/**
+	 * Sets GlobalDataIncrementalFE::predictor_step
+	 *
+	 * @param[in]	predictor_step	GlobalDataIncrementalFE::predictor_step
+	 */
+	void
+	set_predictor_step(const bool predictor_step = true);
 
 	/**
 	 * reset GlobalDataIncrementalFE::t, GlobalDataIncrementalFE::t_ref, GlobalDataIncrementalFE::t_ref_old,

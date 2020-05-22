@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Library IncrementalFE: /home/sst/FE/code/incrementalFE/incremental_fe/include/incremental_fe/fe_model.h File Reference</title>
+<title>Library IncrementalFE: /home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/fe_model.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,38 +93,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">fe_model.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/sparsity__pattern_8h.html">deal.II/lac/sparsity_pattern.h</a>&gt;</code><br />
-<code>#include &lt;<a class="elRef" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/assembly__helper_8h.html">galerkin_tools/assembly_helper.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/sparsity__pattern_8h.html">deal.II/lac/sparsity_pattern.h</a>&gt;</code><br />
+<code>#include &lt;deal.II/lac/affine_constraints.h&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/data__postprocessor_8h.html">deal.II/numerics/data_postprocessor.h</a>&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/smartpointer_8h.html">deal.II/base/smartpointer.h</a>&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/assembly__helper_8h.html">galerkin_tools/assembly_helper.h</a>&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/solver__wrapper_8h.html">galerkin_tools/solver_wrapper.h</a>&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/two__block__sparsity__pattern_8h.html">galerkin_tools/two_block_sparsity_pattern.h</a>&gt;</code><br />
+<code>#include &lt;<a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/dof__renumbering_8h.html">galerkin_tools/dof_renumbering.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="constraints_8h_source.html">incremental_fe/constraints.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="global__data__incremental__fe_8h_source.html">incremental_fe/global_data_incremental_fe.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="solver__wrapper_8h_source.html">incremental_fe/solver_wrapper.h</a>&gt;</code><br />
+<code>#include &lt;boost/signals2.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for fe_model.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="fe__model_8h__incl.png" border="0" usemap="#_2home_2sst_2_f_e_2code_2incremental_f_e_2incremental__fe_2include_2incremental__fe_2fe__model_8h" alt=""/></div>
-<map name="_2home_2sst_2_f_e_2code_2incremental_f_e_2incremental__fe_2include_2incremental__fe_2fe__model_8h" id="_2home_2sst_2_f_e_2code_2incremental_f_e_2incremental__fe_2include_2incremental__fe_2fe__model_8h">
-<area shape="rect" id="node2" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/sparsity__pattern_8h.html" title="deal.II/lac/sparsity\l_pattern.h" alt="" coords="330,109,459,151"/>
-<area shape="rect" id="node3" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/assembly__helper_8h.html" title="galerkin_tools/assembly\l_helper.h" alt="" coords="484,109,647,151"/>
-<area shape="rect" id="node15" href="constraints_8h.html" title="incremental_fe/constraints.h" alt="" coords="1092,117,1279,143"/>
-<area shape="rect" id="node19" href="global__data__incremental__fe_8h.html" title="incremental_fe/global\l_data_incremental_fe.h" alt="" coords="1344,109,1501,151"/>
-<area shape="rect" id="node22" href="solver__wrapper_8h.html" title="incremental_fe/solver\l_wrapper.h" alt="" coords="1977,109,2124,151"/>
-<area shape="rect" id="node4" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/config_8h.html" title="galerkin_tools/config.h" alt="" coords="157,645,309,672"/>
-<area shape="rect" id="node5" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/config_8h.html" title="galerkin_tools/config.h" alt="" coords="861,645,1013,672"/>
-<area shape="rect" id="node6" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/triangulation__system_8h.html" title="galerkin_tools/triangulation\l_system.h" alt="" coords="397,556,573,597"/>
-<area shape="rect" id="node7" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/dirichlet__constraint_8h.html" title="galerkin_tools/dirichlet\l_constraint.h" alt="" coords="645,467,795,508"/>
-<area shape="rect" id="node9" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/dof__handler__system_8h.html" title="galerkin_tools/dof\l_handler_system.h" alt="" coords="195,467,327,508"/>
-<area shape="rect" id="node10" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/fe__values__interface_8h.html" title="galerkin_tools/fe_values\l_interface.h" alt="" coords="205,377,368,419"/>
-<area shape="rect" id="node11" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/total__potential_8h.html" title="galerkin_tools/total\l_potential.h" alt="" coords="611,199,741,240"/>
-<area shape="rect" id="node8" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/independent__field_8h.html" title="galerkin_tools/independent\l_field.h" alt="" coords="699,556,875,597"/>
-<area shape="rect" id="node12" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/total__potential__contribution_8h.html" title="galerkin_tools/total\l_potential_contribution.h" alt="" coords="603,288,765,329"/>
-<area shape="rect" id="node13" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/scalar__functional_8h.html" title="galerkin_tools/scalar\l_functional.h" alt="" coords="608,377,749,419"/>
-<area shape="rect" id="node14" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag:../../../galerkin_tools/doc/html/" href="../../../galerkin_tools/doc/html/dependent__field_8h.html" title="galerkin_tools/dependent\l_field.h" alt="" coords="454,467,621,508"/>
-<area shape="rect" id="node18" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/subscriptor_8h.html" title="deal.II/base/subscriptor.h" alt="" coords="1199,206,1369,233"/>
-<area shape="rect" id="node21" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/point_8h.html" title="deal.II/base/point.h" alt="" coords="1556,206,1689,233"/>
-<area shape="rect" id="node23" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/dynamic__sparsity__pattern_8h.html" title="deal.II/lac/dynamic\l_sparsity_pattern.h" alt="" coords="1713,199,1847,240"/>
-<area shape="rect" id="node25" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/petsc__sparse__matrix_8h.html" title="deal.II/lac/petsc_sparse\l_matrix.h" alt="" coords="2065,199,2226,240"/>
-<area shape="rect" id="node26" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/vector_8h.html" title="deal.II/lac/vector.h" alt="" coords="2249,206,2380,233"/>
-<area shape="rect" id="node27" doxygen="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/sparse__matrix_8h.html" title="deal.II/lac/sparse\l_matrix.h" alt="" coords="2404,199,2527,240"/>
+<div class="center"><img src="fe__model_8h__incl.png" border="0" usemap="#_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8h" alt=""/></div>
+<map name="_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8h" id="_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8h">
+<area shape="rect" id="node2" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/sparsity__pattern_8h.html" title="deal.II/lac/sparsity\l_pattern.h" alt="" coords="5,109,135,151"/>
+<area shape="rect" id="node4" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/data__postprocessor_8h.html" title="deal.II/numerics/data\l_postprocessor.h" alt="" coords="298,109,442,151"/>
+<area shape="rect" id="node5" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/smartpointer_8h.html" title="deal.II/base/smartpointer.h" alt="" coords="467,117,644,143"/>
+<area shape="rect" id="node6" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/assembly__helper_8h.html" title="galerkin_tools/assembly\l_helper.h" alt="" coords="669,109,831,151"/>
+<area shape="rect" id="node7" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/solver__wrapper_8h.html" title="galerkin_tools/solver\l_wrapper.h" alt="" coords="855,109,997,151"/>
+<area shape="rect" id="node8" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/two__block__sparsity__pattern_8h.html" title="galerkin_tools/two\l_block_sparsity_pattern.h" alt="" coords="1021,109,1191,151"/>
+<area shape="rect" id="node9" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/dof__renumbering_8h.html" title="galerkin_tools/dof\l_renumbering.h" alt="" coords="1216,109,1340,151"/>
+<area shape="rect" id="node10" href="constraints_8h.html" title="incremental_fe/constraints.h" alt="" coords="1546,117,1733,143"/>
+<area shape="rect" id="node15" href="global__data__incremental__fe_8h.html" title="incremental_fe/global\l_data_incremental_fe.h" alt="" coords="1365,109,1522,151"/>
+<area shape="rect" id="node13" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/subscriptor_8h.html" title="deal.II/base/subscriptor.h" alt="" coords="1525,206,1695,233"/>
+<area shape="rect" id="node14" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/dirichlet__constraint_8h.html" title="galerkin_tools/dirichlet\l_constraint.h" alt="" coords="1805,199,1956,240"/>
+<area shape="rect" id="node17" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/point_8h.html" title="deal.II/base/point.h" alt="" coords="1285,206,1418,233"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="fe__model_8h__dep__incl.png" border="0" usemap="#_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8hdep" alt=""/></div>
+<map name="_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8hdep" id="_2home_2sst_2code_2_incremental_f_e_2_incremental_f_e_2include_2incremental__fe_2fe__model_8hdep">
+<area shape="rect" id="node2" href="omega__lib_8h.html" title="/home/sst/code/Incremental\lFE/IncrementalFE/include\l/incremental_fe/scalar_functionals\l/omega_lib.h" alt="" coords="5,109,225,180"/>
+<area shape="rect" id="node3" href="psi__lib_8h.html" title="/home/sst/code/Incremental\lFE/IncrementalFE/include\l/incremental_fe/scalar_functionals\l/psi_lib.h" alt="" coords="249,109,469,180"/>
 </map>
 </div>
 </div>
@@ -132,7 +137,7 @@ Include dependency graph for fe_model.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel&lt; spacedim, VectorType, MatrixType &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>

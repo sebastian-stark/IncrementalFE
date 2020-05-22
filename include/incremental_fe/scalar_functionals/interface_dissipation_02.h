@@ -97,6 +97,8 @@ public:
 	 *
 	 * @param[in]		alpha					InterfaceDissipation02::alpha
 	 *
+	 * @param[in]		RT						InterfaceDissipation01::RT
+	 *
 	 * @param[in]		i0						InterfaceDissipation02::i0
 	 *
 	 * @param[in]		method					InterfaceDissipation02::method

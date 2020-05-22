@@ -27,7 +27,7 @@ namespace incrementalFE
  * 																				[10] \f$u^\mathrm{S(s)}_y\f$<br>
  * 																				[11] \f$u^\mathrm{S(s)}_z\f$<br>
  * 																				[12] \f$c^\mathrm{+}\f$<br>
- * 																				[13] \f$c^\mathrm{-}\f
+ * 																				[13] \f$c^\mathrm{-}\f$<br>
  * 																				[14] \f$F_xx\f$<br>
  * 																				[15] \f$F_xy\f$<br>
  * 																				[16] \f$F_xz\f$<br>

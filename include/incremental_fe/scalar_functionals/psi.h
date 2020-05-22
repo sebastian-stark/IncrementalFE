@@ -14,7 +14,7 @@ namespace incrementalFE
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau = \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] \f$,
+ * \f$ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] \f$,
  *
  * where \f$0\leq \alpha \leq 1 \f$ is a numerical parameter, and \f$q_n\f$ and \f$q_{n+1}\f$ is the value of the state variable \f$q\f$
  * in the beginning of the time step and at the end of the time step, respectively. \f$q\f$ can also be vector valued.
@@ -32,7 +32,7 @@ private:
 	global_data;
 
 	/**
-	 * Numerical parameter between @p 0 and @p 1).
+	 * Numerical parameter between @p 0 and @p 1.
 	 */
 	const double
 	alpha;
@@ -118,7 +118,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Psi_\rho = \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] \f$,
+ * \f$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] \f$,
  *
  * where \f$0\leq \alpha \leq 1 \f$ is a numerical parameter, and \f$q_n\f$ and \f$q_{n+1}\f$ is the value of the state variable \f$q\f$
  * in the beginning of the time step and at the end of the time step, respectively. \f$q\f$ can also be vector valued.
@@ -136,7 +136,7 @@ private:
 	global_data;
 
 	/**
-	 * Numerical parameter between @p 0 and @p 1).
+	 * Numerical parameter between @p 0 and @p 1.
 	 */
 	const double
 	alpha;
@@ -146,7 +146,7 @@ public:
 	/**
 	 * Constructor
 	 *
-	 * @param[in]		e_omega					Dependent fields (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
+	 * @param[in]		e_omega					Dependent fields \f$q\f$
 	 *
 	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
 	 *

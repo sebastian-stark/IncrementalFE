@@ -1,24 +1,14 @@
-<map id="/home/sst/FE/code/incrementalFE/incremental_fe/include/incremental_fe/fe_model.h" name="/home/sst/FE/code/incrementalFE/incremental_fe/include/incremental_fe/fe_model.h">
-<area shape="rect" id="node2" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$sparsity__pattern_8h.html" title="deal.II/lac/sparsity\l_pattern.h" alt="" coords="330,109,459,151"/>
-<area shape="rect" id="node3" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$assembly__helper_8h.html" title="galerkin_tools/assembly\l_helper.h" alt="" coords="484,109,647,151"/>
-<area shape="rect" id="node15" href="$constraints_8h.html" title="incremental_fe/constraints.h" alt="" coords="1092,117,1279,143"/>
-<area shape="rect" id="node19" href="$global__data__incremental__fe_8h.html" title="incremental_fe/global\l_data_incremental_fe.h" alt="" coords="1344,109,1501,151"/>
-<area shape="rect" id="node22" href="$solver__wrapper_8h.html" title="incremental_fe/solver\l_wrapper.h" alt="" coords="1977,109,2124,151"/>
-<area shape="rect" id="node4" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$config_8h.html" title="galerkin_tools/config.h" alt="" coords="157,645,309,672"/>
-<area shape="rect" id="node5" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$config_8h.html" title="galerkin_tools/config.h" alt="" coords="861,645,1013,672"/>
-<area shape="rect" id="node6" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$triangulation__system_8h.html" title="galerkin_tools/triangulation\l_system.h" alt="" coords="397,556,573,597"/>
-<area shape="rect" id="node7" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$dirichlet__constraint_8h.html" title="galerkin_tools/dirichlet\l_constraint.h" alt="" coords="645,467,795,508"/>
-<area shape="rect" id="node9" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$dof__handler__system_8h.html" title="galerkin_tools/dof\l_handler_system.h" alt="" coords="195,467,327,508"/>
-<area shape="rect" id="node10" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$fe__values__interface_8h.html" title="galerkin_tools/fe_values\l_interface.h" alt="" coords="205,377,368,419"/>
-<area shape="rect" id="node11" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$total__potential_8h.html" title="galerkin_tools/total\l_potential.h" alt="" coords="611,199,741,240"/>
-<area shape="rect" id="node8" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$independent__field_8h.html" title="galerkin_tools/independent\l_field.h" alt="" coords="699,556,875,597"/>
-<area shape="rect" id="node12" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$total__potential__contribution_8h.html" title="galerkin_tools/total\l_potential_contribution.h" alt="" coords="603,288,765,329"/>
-<area shape="rect" id="node13" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$scalar__functional_8h.html" title="galerkin_tools/scalar\l_functional.h" alt="" coords="608,377,749,419"/>
-<area shape="rect" id="node14" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/galerkin_tools.tag$dependent__field_8h.html" title="galerkin_tools/dependent\l_field.h" alt="" coords="454,467,621,508"/>
-<area shape="rect" id="node18" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$subscriptor_8h.html" title="deal.II/base/subscriptor.h" alt="" coords="1199,206,1369,233"/>
-<area shape="rect" id="node21" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$point_8h.html" title="deal.II/base/point.h" alt="" coords="1556,206,1689,233"/>
-<area shape="rect" id="node23" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$dynamic__sparsity__pattern_8h.html" title="deal.II/lac/dynamic\l_sparsity_pattern.h" alt="" coords="1713,199,1847,240"/>
-<area shape="rect" id="node25" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$petsc__sparse__matrix_8h.html" title="deal.II/lac/petsc_sparse\l_matrix.h" alt="" coords="2065,199,2226,240"/>
-<area shape="rect" id="node26" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$vector_8h.html" title="deal.II/lac/vector.h" alt="" coords="2249,206,2380,233"/>
-<area shape="rect" id="node27" href="/home/sst/FE/code/incrementalFE/galerkin_tools/doc/deal.tag$sparse__matrix_8h.html" title="deal.II/lac/sparse\l_matrix.h" alt="" coords="2404,199,2527,240"/>
+<map id="/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/fe_model.h" name="/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/fe_model.h">
+<area shape="rect" id="node2" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$sparsity__pattern_8h.html" title="deal.II/lac/sparsity\l_pattern.h" alt="" coords="5,109,135,151"/>
+<area shape="rect" id="node4" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$data__postprocessor_8h.html" title="deal.II/numerics/data\l_postprocessor.h" alt="" coords="298,109,442,151"/>
+<area shape="rect" id="node5" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$smartpointer_8h.html" title="deal.II/base/smartpointer.h" alt="" coords="467,117,644,143"/>
+<area shape="rect" id="node6" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$assembly__helper_8h.html" title="galerkin_tools/assembly\l_helper.h" alt="" coords="669,109,831,151"/>
+<area shape="rect" id="node7" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$solver__wrapper_8h.html" title="galerkin_tools/solver\l_wrapper.h" alt="" coords="855,109,997,151"/>
+<area shape="rect" id="node8" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$two__block__sparsity__pattern_8h.html" title="galerkin_tools/two\l_block_sparsity_pattern.h" alt="" coords="1021,109,1191,151"/>
+<area shape="rect" id="node9" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$dof__renumbering_8h.html" title="galerkin_tools/dof\l_renumbering.h" alt="" coords="1216,109,1340,151"/>
+<area shape="rect" id="node10" href="$constraints_8h.html" title="incremental_fe/constraints.h" alt="" coords="1546,117,1733,143"/>
+<area shape="rect" id="node15" href="$global__data__incremental__fe_8h.html" title="incremental_fe/global\l_data_incremental_fe.h" alt="" coords="1365,109,1522,151"/>
+<area shape="rect" id="node13" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$subscriptor_8h.html" title="deal.II/base/subscriptor.h" alt="" coords="1525,206,1695,233"/>
+<area shape="rect" id="node14" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$dirichlet__constraint_8h.html" title="galerkin_tools/dirichlet\l_constraint.h" alt="" coords="1805,199,1956,240"/>
+<area shape="rect" id="node17" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$point_8h.html" title="deal.II/base/point.h" alt="" coords="1285,206,1418,233"/>
 </map>

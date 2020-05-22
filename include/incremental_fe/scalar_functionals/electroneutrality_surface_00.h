@@ -22,7 +22,7 @@ namespace incrementalFE
  * Ordering of quantities in ScalarFunctional::e_sigma:<br>	[0] \f$D_x\f$<br>
  * 															[1] \f$D_y\f$<br>
  * 															[2] \f$D_z\f$<br>
- * 															[3]	\f$\varphi\f§
+ * 															[3]	\f$\varphi\f$
  */
 template<unsigned int spacedim>
 class ElectroNeutralitySurface00:public dealii::GalerkinTools::ScalarFunctional<spacedim-1, spacedim>

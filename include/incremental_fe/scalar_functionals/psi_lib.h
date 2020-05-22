@@ -13,11 +13,19 @@ namespace incrementalFE
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$h^\Omega_\rho = RTc \left( \ln\dfrac{c}{c_0} - 1 + \mu_0 / (RT) \right)\f$,
+ * \f$h^\Omega_\rho = RT c_0 h\left( \dfrac{c}{c_0} \right)\f$,
  *
- * where \f$R\f$ is the gas constant, \f$T\f$ the temperature, \f$c_0\f$ a
+ * where
+ *
+ * \f$ h(x) = \begin{cases}
+           x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\
+           \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else},
+          \end{cases} \f$
+ *
+ * \f$R\f$ is the gas constant, \f$T\f$ the temperature, \f$c_0\f$ a
  * reference species concentration, \f$\mu_0\f$ a corresponding reference value
- * for the potential, and \f$c\f$ the species concentration.
+ * for the potential, \f$c\f$ the species concentration, and \f$\epsilon \ll 1\f$ a regularization parameter
+ * to avoid ill-conditioning if \f$c\f$ is too close to zero.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$
  */
@@ -94,7 +102,7 @@ public:
 	 *
 	 * @param[in]		mu_0					PsiChemical00::mu_0
 	 *
-	 * @param[in]		alpha					ScalarFunctional<spacedim, spacedim>::alpha
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 *
 	 * @param[in]		eps						PsiChemical00::eps
 	 */
@@ -167,7 +175,7 @@ public:
  *
  * \f$h^\Omega_\rho = \dfrac{a}{2} (c-b)^2\f$,
  *
- * where \f$a\f$ and $b$ are material parameters, and \f$c\f$ the species concentration.
+ * where \f$a\f$ and \f$b\f$ are material parameters, and \f$c\f$ the species concentration.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$
  */
@@ -206,7 +214,7 @@ public:
 	 *
 	 * @param[in]		b						PsiChemical01::b
 	 *
-	 * @param[in]		alpha					ScalarFunctional<spacedim, spacedim>::alpha
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */
 	PsiChemical01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -259,7 +267,7 @@ public:
 /**
  * Class defining a domain related scalar functional such that
  *
- * \f$\dfrac{\mathrm{d} h^\Omega_\rho}{\mathrm{d} p} = p \dfrac{\mathrm{d}c}{\mathrm{d}c}(p) \f$,
+ * \f$\dfrac{\mathrm{d} h^\Omega_\rho}{\mathrm{d} p} = p \dfrac{\mathrm{d}c}{\mathrm{d}p}(p) \f$,
  *
  * where \f$p\f$ is a state variable and \f$c(p)\f$ a function of this state variable.
  *
@@ -272,7 +280,7 @@ class PsiTransformed00 : public incrementalFE::Psi<spacedim, spacedim>
 private:
 
 	/**
-	 * Function \f$c(p)\f$
+	 * %Function \f$c(p)\f$
 	 */
 	const
 	dealii::Function<1>&
@@ -291,7 +299,9 @@ public:
 	 *
 	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
 	 *
-	 * @param[in]		alpha					ScalarFunctional<spacedim, spacedim>::alpha
+	 * @param[in]		c_p						PsiTransformed00::c_p
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */
 	PsiTransformed00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 						const std::set<dealii::types::material_id>									domain_of_integration,
@@ -367,7 +377,7 @@ private:
 	A;
 
 	/**
-	 * Vector \f$b\f$
+	 * %Vector \f$b\f$
 	 */
 	const
 	dealii::Vector<double>
@@ -390,7 +400,7 @@ public:
 	 *
 	 * @param[in]		b						PsiLinear00::b
 	 *
-	 * @param[in]		alpha					ScalarFunctional<spacedim, spacedim>::alpha
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */
 	PsiLinear00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -525,8 +535,8 @@ public:
 	 * @param[in]		deps					KirchhoffMaterial00::deps
 	 *
 	 * @param[in]		c_ref					KirchhoffMaterial00::c_ref
-	 * 	 *
-	 * @param[in]		alpha					ScalarFunctional<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */
 	KirchhoffMaterial00(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 						const std::set<dealii::types::material_id>									domain_of_integration,

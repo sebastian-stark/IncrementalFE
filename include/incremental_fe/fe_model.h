@@ -17,11 +17,10 @@ namespace incrementalFE
 {
 
 /**
- * Class for solution of non-linear, time dependent problems formulated
- * in terms of an incremental variational principle.
+ * Class for solution of non-linear, transient problems by one-step time integration.
  *
  * The solution algorithm within a single time step is based on a Newton-Raphson
- * scheme together with a line search algorithm enhancing convergence.
+ * scheme together with a residual based line search algorithm enhancing convergence.
  *
  * @tparam	SolutionVectorType	the type used for the solution vector and the rhs,
  * 								must be consistent with the SolverWrapper used
@@ -57,7 +56,7 @@ private:
 	 * The GlobalDataIncrementalFE object, which is used to exchange global information about
 	 * the finite element model, the solution process, etc.
 	 * In particular, this object contains the time step information, which
-	 * may be needed to implement the incremental variational principle.
+	 * may be needed within the TotalPotential to define the space-time discrete formulation.
 	 */
 	const dealii::SmartPointer<GlobalDataIncrementalFE<spacedim>>
 	global_data;
@@ -69,7 +68,7 @@ private:
 	constraints;
 
 	/**
-	 * The SolverWrapper provides the functionality to solve the linear systems
+	 * The SolverWrapper provides the functionality to solve the linear systems within each Newton-Raphson iteration
 	 */
 	const dealii::SmartPointer<const dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>>
 	solver_wrapper;
@@ -105,10 +104,10 @@ private:
 	potential_value = 0.0;
 
 	/**
-	 * Vector used to scale elements of rhs before computing 2-norm thereof (each element of rhs is scaled by the reciprocal value of the corresponding element of rhs_scaling_vector).
+	 * %Vector used to scale elements of FEModel::rhs before computing 2-norm thereof (each element of FEModel::rhs is scaled by the reciprocal value of the corresponding element of  FEModel::rhs_scaling_vector).
 	 * This scaling is used to avoid ill-conditioning problems.
-	 * The residual_scaling_vector is computed in the beginning of each time step based on the initial system matrix and then kept constant
-	 * throughout the time step.
+	 * The FEModel::rhs_scaling_vector is computed in the beginning of each time step based on the initial system matrix and then kept constant
+	 * throughout the time step. Each element in FEModel::rhs_scaling_vector is equal to the maximum norm of the corresponding row in the initial system matrix.
 	 */
 	RHSVectorType
 	rhs_scaling_vector;
@@ -159,7 +158,7 @@ private:
 	std::vector<dealii::SmartPointer<const dealii::DataPostprocessor<spacedim>>>
 	dp_interface;
 
-	/*
+	/**
 	 * determines whether hanging node constraints are taken into account or ignored
 	 */
 	const bool
@@ -190,7 +189,7 @@ private:
 	reinit_matrix(MatrixType& matrix);
 
 	/**
-	 * Function computing current rhs and system_matrix
+	 * %Function computing current FEModel::rhs and FEModel::system_matrix
 	 *
 	 * @param[in]	solution_ref	The reference solution vector
 	 *
@@ -203,7 +202,7 @@ private:
 					dealii::AffineConstraints<double>&	constraints);
 
 	/**
-	 * Function computing the sparsity pattern
+	 * %Function computing the FEModel::sparsity_pattern
 	 *
 	 * @param[in]	constraints		Constraints to be taken into account
 	 */
@@ -212,7 +211,7 @@ private:
 
 	/**
 	 *
-	 * Function assembling constraints (combines Dirichlet type constraints, hanging node constraints, custom constraints while taking into account
+	 * %Function assembling constraints (combines Dirichlet type constraints, hanging node constraints, custom constraints while taking into account
 	 * the constraints to be ignored)
 	 *
 	 * Updates also FEModel::dirichlet_constraints
@@ -231,7 +230,7 @@ private:
 						const dealii::AffineConstraints<double>&	ignore_constraints = dealii::AffineConstraints<double>());
 
 	/**
-	 * Function adjusting constraint inhomogeneities associated with Dirichlet type constraints such that constraint object
+	 * %Function adjusting constraint inhomogeneities associated with Dirichlet type constraints such that constraint object
 	 * applies to solution increment and not to the solution itself
 	 */
 	void
@@ -239,13 +238,13 @@ private:
 	const;
 
 	/**
-	 * Function updating FEModel::rhs_scaling_vector
+	 * %Function updating FEModel::rhs_scaling_vector according to current FEModel::system_matrix
 	 */
 	void
 	update_rhs_scaling_vector();
 
 	/**
-	 * computes estimated potential increment (inner product between solution increment and rhs)
+	 * computes estimated potential increment (inner product between @p delta_solution and FEModel::rhs)
 	 *
 	 * @param[in]	delta_solution		solution increment
 	 *
@@ -256,7 +255,8 @@ private:
 	const;
 
 	/**
-	 * computes maximum allowable step size without obtaining inadmissible state and adjusts delta_solution
+	 * Computes maximum allowable step size without obtaining inadmissible state and adjust @p delta_solution accordingly.
+	 * The "safety distance" to the domain of inadmissible states is specified by GlobalDataIncrementalFE::safety_distance.
 	 *
 	 * @param[inout]	delta_solution	increment direction
 	 *
@@ -295,7 +295,7 @@ private:
 	const;
 
 	/**
-	 * Function called automatically after the triangulation system is changed
+	 * %Function called automatically after the triangulation system is changed
 	 */
 	void
 	post_refinement();
@@ -404,7 +404,7 @@ public:
 	 * @param[in]	exact_solution_domain		Exact solution on domain (use AssemblyHelper::get_u_omega_global_component_indices() to obtain information
 	 * 											about the component indexing; the underlying AssemblyHelper needed for this can be obtained by FEModel::get_assembly_helper())
 	 *
-	 * @param[in]	exact_solution_interface	Exact solution on interface (use AssemblyHelper::get_u_omega_global_component_indices() to obtain information
+	 * @param[in]	exact_solution_interface	Exact solution on interface (use AssemblyHelper::get_u_sigma_global_component_indices() to obtain information
 	 * 											about the component indexing; the underlying AssemblyHelper needed for this can be obtained by FEModel::get_assembly_helper())
 	 *
 	 * @param[in]	quadrature_domain			Quadrature scheme to be used on the domain for the computation of the norm
@@ -471,7 +471,7 @@ public:
 	 *
 	 * @param[in]	file_name_interface	File name (without extension) for independent field output on interfaces
 	 *
-	 * @param[in]	n_subdivisions		The number of subdivisions of the cell (to get a better representation in case of curved inner cells, higher order elements, etc.)
+	 * @param[in]	n_subdivisions		The number of subdivisions of each cell (to get a better representation in case of curved inner cells, higher order elements, etc.)
 	 */
 	void
 	write_output_independent_fields(	const std::string 	file_name_domain,

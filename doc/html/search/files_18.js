@@ -29,7 +29,6 @@ var searchData=
   ['path_5fsearch_2eh',['path_search.h',['https://dealii.org/9.0.0/doxygen/deal.II/path__search_8h.html',1,'']]],
   ['patterns_2ecc',['patterns.cc',['https://dealii.org/9.0.0/doxygen/deal.II/patterns_8cc.html',1,'']]],
   ['patterns_2eh',['patterns.h',['https://dealii.org/9.0.0/doxygen/deal.II/patterns_8h.html',1,'']]],
-  ['penalty_5f00_2eh',['penalty_00.h',['../penalty__00_8h.html',1,'']]],
   ['persistent_5ftria_2ecc',['persistent_tria.cc',['https://dealii.org/9.0.0/doxygen/deal.II/persistent__tria_8cc.html',1,'']]],
   ['persistent_5ftria_2eh',['persistent_tria.h',['https://dealii.org/9.0.0/doxygen/deal.II/persistent__tria_8h.html',1,'']]],
   ['petsc_2eh',['petsc.h',['https://dealii.org/9.0.0/doxygen/deal.II/petsc_8h.html',1,'']]],
@@ -98,5 +97,7 @@ var searchData=
   ['process_5fgrid_2ecc',['process_grid.cc',['https://dealii.org/9.0.0/doxygen/deal.II/process__grid_8cc.html',1,'']]],
   ['process_5fgrid_2eh',['process_grid.h',['https://dealii.org/9.0.0/doxygen/deal.II/process__grid_8h.html',1,'']]],
   ['property_5fpool_2ecc',['property_pool.cc',['https://dealii.org/9.0.0/doxygen/deal.II/property__pool_8cc.html',1,'']]],
-  ['property_5fpool_2eh',['property_pool.h',['https://dealii.org/9.0.0/doxygen/deal.II/property__pool_8h.html',1,'']]]
+  ['property_5fpool_2eh',['property_pool.h',['https://dealii.org/9.0.0/doxygen/deal.II/property__pool_8h.html',1,'']]],
+  ['psi_2eh',['psi.h',['../psi_8h.html',1,'']]],
+  ['psi_5flib_2eh',['psi_lib.h',['../psi__lib_8h.html',1,'']]]
 ];

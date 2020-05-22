@@ -55,12 +55,12 @@ const
 		if(get<0>(requested_quantities) || get<1>(requested_quantities))
 		{
 			h_omega_1_ref.reinit(e_omega.size());
-			if(get_values_and_derivatives(e_omega_ref_sets[0], x, h_omega_ref, h_omega_1_ref, h_omega_2_ref, make_tuple(false, true, false)))
+			if(get_values_and_derivatives(e_omega_ref_sets[0], x, h_omega_ref, h_omega_1_ref, h_omega_2_ref, make_tuple(true, true, false)))
 				return true;
 		}
 
 		if(get<0>(requested_quantities))
-			h_omega = h_omega * alpha + h_omega_1_ref * e_omega * (1. - alpha);
+			h_omega = h_omega * alpha + ( h_omega_ref + h_omega_1_ref * e_omega - h_omega_1_ref * e_omega_ref_sets[0] ) * (1. - alpha);
 
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_omega.size(); ++m)
@@ -126,7 +126,7 @@ const
 		}
 
 		if(get<0>(requested_quantities))
-			h_sigma = h_sigma * alpha + h_sigma_1_ref * e_sigma * (1. - alpha);
+			h_sigma = h_sigma * alpha + ( h_sigma_ref + h_sigma_1_ref * e_sigma - h_sigma_1_ref * e_sigma_ref_sets[0] ) * (1. - alpha);
 
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_sigma.size(); ++m)

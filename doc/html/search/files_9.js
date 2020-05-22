@@ -18,7 +18,7 @@ var searchData=
   ['array_5fview_2eh',['array_view.h',['https://dealii.org/9.0.0/doxygen/deal.II/array__view_8h.html',1,'']]],
   ['assemble_5fflags_2eh',['assemble_flags.h',['https://dealii.org/9.0.0/doxygen/deal.II/assemble__flags_8h.html',1,'']]],
   ['assembler_2eh',['assembler.h',['https://dealii.org/9.0.0/doxygen/deal.II/assembler_8h.html',1,'']]],
-  ['assembly_5fhelper_2eh',['assembly_helper.h',['../../../../galerkin_tools/doc/html/assembly__helper_8h.html',1,'']]],
+  ['assembly_5fhelper_2eh',['assembly_helper.h',['https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/assembly__helper_8h.html',1,'']]],
   ['auto_5fderivative_5ffunction_2ecc',['auto_derivative_function.cc',['https://dealii.org/9.0.0/doxygen/deal.II/auto__derivative__function_8cc.html',1,'']]],
   ['auto_5fderivative_5ffunction_2eh',['auto_derivative_function.h',['https://dealii.org/9.0.0/doxygen/deal.II/auto__derivative__function_8h.html',1,'']]],
   ['automatic_5fand_5fsymbolic_5fdifferentiation_2eh',['automatic_and_symbolic_differentiation.h',['https://dealii.org/9.0.0/doxygen/deal.II/automatic__and__symbolic__differentiation_8h.html',1,'']]]

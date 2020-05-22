@@ -18,7 +18,7 @@ namespace incrementalFE
  *
  * where \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, and \f$q\f$ may be vectors.
  *
- * The time discrete approximation is done either by Miehe's method, by the $\alpha$-family, or by the modified $\alpha$-family.
+ * The time discrete approximation is done either by Miehe's method, by the \f$\alpha\f$-family, or by the modified \f$\alpha\f$-family.
  */
 template<unsigned int dim, unsigned int spacedim>
 class Omega: public dealii::GalerkinTools::ScalarFunctional<dim, spacedim>
@@ -33,9 +33,9 @@ private:
 	global_data;
 
 	/**
-	 * Numerical parameter between @p 0 and @p 1).
+	 * Numerical parameter between @p 0 and @p 1.
 	 *
-	 * This parameter is only used for the $\alpha$-family and the modified $\alpha$-family
+	 * This parameter is only used for the \f$\alpha\f$-family and the modified \f$\alpha\f$-family
 	 */
 	const double
 	alpha;
@@ -43,8 +43,8 @@ private:
 	/**
 	 * Temporal discretization
 	 * (@p 0:	Miehe's method,
-	 *  @p 1: 	$\alpha$-family,
-	 *  @p 2:	modified $\alpha$-family)
+	 *  @p 1: 	\f$\alpha\f$-family,
+	 *  @p 2:	modified \f$\alpha\f$-family)
 	 */
 	const unsigned int
 	method;
@@ -176,7 +176,7 @@ public:
  *
  * where \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, and \f$q\f$ may be vectors.
  *
- * The time discrete approximation is done either by Miehe's method, by the $\alpha$-family, or by the modified $\alpha$-family.
+ * The time discrete approximation is done either by Miehe's method, by the \f$\alpha\f$-family, or by the modified \f$\alpha\f$-family.
  */
 template<unsigned int spacedim>
 class Omega<spacedim, spacedim> : public dealii::GalerkinTools::ScalarFunctional<spacedim, spacedim>
@@ -191,9 +191,9 @@ private:
 	global_data;
 
 	/**
-	 * Numerical parameter between @p 0 and @p 1).
+	 * Numerical parameter between @p 0 and @p 1.
 	 *
-	 * This parameter is only used for the $\alpha$-family and the modified $\alpha$-family
+	 * This parameter is only used for the \f$\alpha\f$-family and the modified \f$\alpha\f$-family
 	 */
 	const double
 	alpha;
@@ -201,8 +201,8 @@ private:
 	/**
 	 * Temporal discretization
 	 * (@p 0:	Miehe's method,
-	 *  @p 1: 	$\alpha$-family,
-	 *  @p 2:	modified $\alpha$-family)
+	 *  @p 1: 	\f$\alpha\f$-family,
+	 *  @p 2:	modified \f$\alpha\f$-family)
 	 */
 	const unsigned int
 	method;
@@ -304,7 +304,7 @@ public:
 								dealii::Vector<double>&				d_omega,
 								dealii::FullMatrix<double>&			d2_omega,
 								const std::tuple<bool, bool, bool>	requested_quantities,
-								const bool							compute_dq)
+								const bool							compute_d2q)
 	const = 0;
 
 	/**

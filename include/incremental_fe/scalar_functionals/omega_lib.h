@@ -11,7 +11,7 @@ namespace incrementalFE
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	\dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} \f$,
+ * \f$ h^\Omega_\rho =	\dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} \f$,
  *
  * where \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
  *
@@ -117,9 +117,9 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	-\dfrac{D c}{2} \dot{\boldsymbol{E}} \cdot \dot{\boldsymbol{E}} \f$,
+ * \f$ h^\Omega_\rho =	-\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} \f$,
  *
- * where \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{E}}\f$ the driving force vector for
+ * where \f$c\f$ is the species concentration and \f$\boldsymbol{E}\f$ the driving force vector for
  * the corresponding species flux.
  *
  * The "mobility" \f$D\f$ is related to the usual "diffusion constant" \f$ \bar D \f$ by \f$D = \bar D/(RT)\f$.
@@ -225,7 +225,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho = -\dot{c}\eta  \f$,
+ * \f$ h^\Omega_\rho = -\dot{c}\eta  \f$,
  *
  * where \f$c\f$ is a species concentration and \f$\eta\f$ the corresponding potential.
  *
@@ -306,9 +306,9 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E}  \f$,
+ * \f$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E}  \f$,
  *
- * where \f$D\f$ and $\boldsymbol{E} are conjugate fields.
+ * where \f$\boldsymbol{D}\f$ and \f$\boldsymbol{E}\f$ are conjugate fields.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0] \f$D_x\f$<br>
  * 																				[1] \f$D_y\f$<br>
@@ -400,9 +400,9 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	-\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) \f$
+ * \f$ h^\Omega_\rho =	-\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) \f$
  *
- * where $\mu\f$ is a Lagrangian multiplier, \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
+ * where \f$\mu\f$ is a Lagrangian multiplier, \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0] \f$\nabla \boldsymbol{I}\f$<br>
  * 																				[1] \f$c\f$<br>
@@ -485,9 +485,9 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	-\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
+ * \f$ h^\Sigma_\tau =	-\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
  *
- * where $\mu\f$ is a Lagrangian multiplier, and \f$\dot{\boldsymbol{I}}\f$ a flux.
+ * where \f$\mu\f$ is a Lagrangian multiplier, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
  * This is meant to enforce a zero normal flux condition (e.g. for Raviart-Thomas finite elements).
  *
@@ -579,7 +579,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	\bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
+ * \f$ h^\Sigma_\tau =	\bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
  *
  * where \f$\bar\mu\f$ is a prescribed potential, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
@@ -678,9 +678,9 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	1/(2D) \left[\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right]^2 \f$
+ * \f$ h^\Sigma_\tau =	1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 \f$
  *
- * where \f$\D\f$ is a dissipation constant, and \f$\dot{\boldsymbol{I}}\f$ a flux.
+ * where \f$D\f$ is a dissipation constant, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
  *
  * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$I_x\f$<br>
@@ -786,9 +786,9 @@ public:
 /**
  * Class defining an interface related Butler-Volmer type scalar functional with the integrand
  *
- * (1) \f$ h^\Omega_\rho =	-I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] \f$
+ * \f$ h^\Sigma_\tau =	-I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] \f$
  *
- * where \f$\I_0\f$ is related to the exchange current density \f$i_0\f$ by \f$I_0 = i_0 * RT / F \f$, \f$\beta\f$ is the symmetry factor, and $f\Delta \eta\f$ the thermodynamic driving force.
+ * where \f$I_0\f$ is related to the exchange current density \f$i_0\f$ by \f$I_0 = i_0 \cdot RT / F \f$, \f$\beta\f$ is the symmetry factor, and \f$\Delta \eta\f$ the thermodynamic driving force.
  *
  *
  * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\Delta \eta\f$
@@ -818,7 +818,7 @@ private:
 
 	/**
 	 * Threshold parameter \f$\Delta \eta^\mathrm{th}/RT\f$.
-	 * If \f$|\Delta \eta/RT| > \Delta \eta^\mathrm{th}/RT\f$, the potential is approximated quadratically in order to avoid numerical issues related to large values of the exponential function.
+	 * If \f$|\Delta \eta/RT| > \Delta \eta^\mathrm{th}/RT\f$, the potential is continued by a quadratic function in order to avoid numerical issues related to large values of the exponential function.
 	 */
 	const double
 	threshold;

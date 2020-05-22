@@ -78,6 +78,8 @@ public:
 	 *
 	 * @param[in]		global_data				InterfaceDissipation01::global_data
 	 *
+	 * @param[in]		RT						InterfaceDissipation01::RT
+	 *
 	 * @param[in]		alpha					InterfaceDissipation01::alpha
 	 *
 	 * @param[in]		i0						InterfaceDissipation01::i0

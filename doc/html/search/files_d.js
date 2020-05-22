@@ -3,7 +3,6 @@ var searchData=
   ['eigen_2eh',['eigen.h',['https://dealii.org/9.0.0/doxygen/deal.II/eigen_8h.html',1,'']]],
   ['elasticity_2eh',['elasticity.h',['https://dealii.org/9.0.0/doxygen/deal.II/elasticity_8h.html',1,'']]],
   ['elastoplastictorsion_2eh',['ElastoplasticTorsion.h',['https://dealii.org/9.0.0/doxygen/deal.II/ElastoplasticTorsion_8h.html',1,'']]],
-  ['electrical_5fwork_5f00_2eh',['electrical_work_00.h',['../electrical__work__00_8h.html',1,'']]],
   ['error_5festimator_2ecc',['error_estimator.cc',['https://dealii.org/9.0.0/doxygen/deal.II/error__estimator_8cc.html',1,'']]],
   ['error_5festimator_2eh',['error_estimator.h',['https://dealii.org/9.0.0/doxygen/deal.II/error__estimator_8h.html',1,'']]],
   ['error_5festimator_5f1d_2ecc',['error_estimator_1d.cc',['https://dealii.org/9.0.0/doxygen/deal.II/error__estimator__1d_8cc.html',1,'']]],

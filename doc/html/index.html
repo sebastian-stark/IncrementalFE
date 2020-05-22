@@ -81,9 +81,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">IncrementalFE library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is the documentation of the IncrementalFE library. The main purpose of the library is to help with the solution of problems formulated in terms of incremental variational principles. The library is essentially a wrapper around the functionalities provided by the GalerkinTools library, which adds solution algorithms for non-linear, time-dependent problems.</p>
-<p>As there is presently no version available which works in parallel on distributed memory, the library can only be used for small to medium sized problems, which can be solved on a single machine. Still, the library can be useful in the context of large problems by helping in comparing different finite element formulations based on smaller test problems as well as by providing a reference implementation.</p>
-<p>Before you start, it is recommended to first get an understanding of the GalerkinTools library. Also, a good knowledge of the open source finite element library <a href="http://www.dealii.org">deal.II</a> will be beneficial because the GalerkinTools library builds mainly on that libary. </p>
+<div class="textblock"><p>This is the documentation of the IncrementalFE library. The library builds on the GalerkinTools library and adds some functionality related to the solution of transient problems by one step time integration algorithms. In particular, it includes a Newton-Raphson based solver for the non-linear problems arising in each time step.</p>
+<p>Currently, restriction is made to problems, which involve only first order time derivatives. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
