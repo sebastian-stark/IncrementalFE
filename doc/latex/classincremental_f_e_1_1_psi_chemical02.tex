@@ -1,0 +1,136 @@
+\hypertarget{classincremental_f_e_1_1_psi_chemical02}{}\section{incremental\+FE\+:\+:Psi\+Chemical02$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_chemical02}\index{incremental\+F\+E\+::\+Psi\+Chemical02$<$ spacedim $>$@{incremental\+F\+E\+::\+Psi\+Chemical02$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Psi\+Chemical02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classincremental_f_e_1_1_psi_chemical02__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Psi\+Chemical02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classincremental_f_e_1_1_psi_chemical02__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_psi_chemical02_a0401571a4ff464e6ae4191a0d013bb81}{Psi\+Chemical02} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_psi_chemical02_a4b93e968af97d8497a53be13980ef22e}{RT}, const double \hyperlink{classincremental_f_e_1_1_psi_chemical02_a70426dc3fa6acda53984c2e178ad92c5}{mu\+\_\+0}, const double \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha})
+\item 
+bool \hyperlink{classincremental_f_e_1_1_psi_chemical02_ab45494dcca7ee5787ae1ea11fab44d18}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\item 
+double \hyperlink{classincremental_f_e_1_1_psi_chemical02_a5738025aba5fcadb4d3ffcb0cea103dd}{get\+\_\+maximum\+\_\+step} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&, const {\bf dealii\+::\+Vector}$<$ double $>$ \&delta\+\_\+e\+\_\+omega, const {\bf dealii\+::\+Vector}$<$ double $>$ \&, const dealii\+::\+Point$<$ spacedim $>$ \&) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_psi_chemical02_a4b93e968af97d8497a53be13980ef22e}{RT}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_psi_chemical02_a70426dc3fa6acda53984c2e178ad92c5}{mu\+\_\+0}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Psi\+Chemical02$<$ spacedim $>$}
+
+Class defining chemical potential of charged species moving in fluid
+
+$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$,
+
+where $\mu_0$ is a reference chemical potential, $R$ the gas constant, $T$ the temperature, $c$ the species concentration, and $c^\mathrm{f}$ the fluid concentration
+
+Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $c$~\newline
+ \mbox{[}1\mbox{]} $c^\mathrm{f}$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}!Psi\+Chemical02@{Psi\+Chemical02}}
+\index{Psi\+Chemical02@{Psi\+Chemical02}!incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}}
+\subsubsection[{\texorpdfstring{Psi\+Chemical02(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double R\+T, const double mu\+\_\+0, const double alpha)}{PsiChemical02(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double RT, const double mu_0, const double alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Psi\+Chemical02}$<$ spacedim $>$\+::{\bf Psi\+Chemical02} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const double}]{RT, }
+\item[{const double}]{mu\+\_\+0, }
+\item[{const double}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_psi_chemical02_a0401571a4ff464e6ae4191a0d013bb81}{}\label{classincremental_f_e_1_1_psi_chemical02_a0401571a4ff464e6ae4191a0d013bb81}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em RT} & \hyperlink{classincremental_f_e_1_1_psi_chemical02_a4b93e968af97d8497a53be13980ef22e}{Psi\+Chemical02\+::\+RT}\\
+\hline
+\mbox{\tt in}  & {\em mu\+\_\+0} & \hyperlink{classincremental_f_e_1_1_psi_chemical02_a70426dc3fa6acda53984c2e178ad92c5}{Psi\+Chemical02\+::mu\+\_\+0}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}!get\+\_\+maximum\+\_\+step@{get\+\_\+maximum\+\_\+step}}
+\index{get\+\_\+maximum\+\_\+step@{get\+\_\+maximum\+\_\+step}!incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}}
+\subsubsection[{\texorpdfstring{get\+\_\+maximum\+\_\+step(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&, const dealii\+::\+Vector$<$ double $>$ \&delta\+\_\+e\+\_\+omega, const dealii\+::\+Vector$<$ double $>$ \&, const dealii\+::\+Point$<$ spacedim $>$ \&) const }{get_maximum_step(const dealii::Vector< double > &e_omega, const std::vector< dealii::Vector< double >> &, const dealii::Vector< double > &delta_e_omega, const dealii::Vector< double > &, const dealii::Point< spacedim > &) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ double {\bf incremental\+F\+E\+::\+Psi\+Chemical02}$<$ spacedim $>$\+::get\+\_\+maximum\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+omega, }
+\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{, }
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{delta\+\_\+e\+\_\+omega, }
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_psi_chemical02_a5738025aba5fcadb4d3ffcb0cea103dd}{}\label{classincremental_f_e_1_1_psi_chemical02_a5738025aba5fcadb4d3ffcb0cea103dd}
+see {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+maximum\+\_\+step} \index{incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
+\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}}
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const dealii::Point< spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Psi\+Chemical02}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
+\item[{double \&}]{omega, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_psi_chemical02_ab45494dcca7ee5787ae1ea11fab44d18}{}\label{classincremental_f_e_1_1_psi_chemical02_ab45494dcca7ee5787ae1ea11fab44d18}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{incremental\+F\+E\+::\+Psi$<$ spacedim, spacedim $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}!mu\+\_\+0@{mu\+\_\+0}}
+\index{mu\+\_\+0@{mu\+\_\+0}!incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}}
+\subsubsection[{\texorpdfstring{mu\+\_\+0}{mu_0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi\+Chemical02}$<$ spacedim $>$\+::mu\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_chemical02_a70426dc3fa6acda53984c2e178ad92c5}{}\label{classincremental_f_e_1_1_psi_chemical02_a70426dc3fa6acda53984c2e178ad92c5}
+$\mu_0$ \index{incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}!RT@{RT}}
+\index{RT@{RT}!incremental\+F\+E\+::\+Psi\+Chemical02@{incremental\+F\+E\+::\+Psi\+Chemical02}}
+\subsubsection[{\texorpdfstring{RT}{RT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi\+Chemical02}$<$ spacedim $>$\+::RT\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_chemical02_a4b93e968af97d8497a53be13980ef22e}{}\label{classincremental_f_e_1_1_psi_chemical02_a4b93e968af97d8497a53be13980ef22e}
+$RT$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}\end{DoxyCompactItemize}

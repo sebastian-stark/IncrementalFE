@@ -94,3 +94,14 @@
 \form#93:$c^\mathrm{ref}$
 \form#94:$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$
 \form#95:$c^\mathrm{f}$
+\form#96:$h^\Omega_\rho = p\left( n_0 + c^\mathrm{f} V^\mathrm{f}_\mathrm{m} - J \right)$
+\form#97:$V^\mathrm{f}_\mathrm{m}$
+\form#98:$F_xx$
+\form#99:$F_xy$
+\form#100:$F_xz$
+\form#101:$F_yx$
+\form#102:$F_yy$
+\form#103:$F_yz$
+\form#104:$F_zx$
+\form#105:$F_zy$
+\form#106:$F_zz$

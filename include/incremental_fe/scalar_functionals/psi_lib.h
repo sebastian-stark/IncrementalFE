@@ -1012,6 +1012,167 @@ public:
 };
 
 
+/**
+ * Class defining an incompressibility constraint for a hydrogel through the Lagrangian multiplier term
+ *
+ * \f$h^\Omega_\rho = p\left( n_0 + c^\mathrm{f} V^\mathrm{f}_\mathrm{m} - J \right)\f$,
+ *
+ * where \f$n_0\f$ is the initial concentration of the solid skeleton, \f$c^\mathrm{f}\f$ the fluid concentration,
+ * \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of the fluid, and \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$F_{xx}\f$<br>
+ * 																					[1] \f$F_{xy}\f$<br>
+ * 																					[2] \f$F_{xz}\f$<br>
+ * 																					[3] \f$F_{yx}\f$<br>
+ * 																					[4] \f$F_{yy}\f$<br>
+ * 																					[5] \f$F_{yz}\f$<br>
+ * 																					[6] \f$F_{zx}\f$<br>
+ * 																					[7] \f$F_{zy}\f$<br>
+ * 																					[8] \f$F_{zz}\f$<br>
+ * 																					[9] \f$c^\mathrm{f}\f$<br>
+ * 																					[10] \f$p\f$
+*/
+template<unsigned int spacedim>
+class PsiIncompressibility00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$V^\mathrm{f}_\mathrm{m}\f$
+	 */
+	const double
+	V_m_f;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * If @p true, deformation gradient is considered as parameter in potential (i.e., it is held fixed when computing the first derivative)
+	 */
+	const bool
+	F_as_parameter;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		V_m_f					PsiIncompressibility00::V_m_f
+	 *
+	 * @param[in]		n_0						PsiIncompressibility00::n_0
+	 *
+	 * @param[in]		F_as_parameter			PsiIncompressibility00::F_as_parameter
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiIncompressibility00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+							const std::set<dealii::types::material_id>									domain_of_integration,
+							const dealii::Quadrature<spacedim>											quadrature,
+							GlobalDataIncrementalFE<spacedim>&											global_data,
+							const double																V_m_f,
+							const double																n_0,
+							const bool																	F_as_parameter,
+							const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiIncompressibility00"),
+	V_m_f(V_m_f),
+	n_0(n_0),
+	F_as_parameter(F_as_parameter)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m];
+		const double c_f = values[9];
+		const double p = values[10];
+
+	 	// J and derivatives
+		const double J = get_J(F);
+		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+		}
+
+		if(get<0>(requested_quantities))
+		{
+			if(F_as_parameter)
+				// potential does anyway not exist in this case
+				omega = 0.0;
+			else
+				omega = p * ( V_m_f * c_f + n_0 - J );
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			// don't calculate derivatives w.r.t. deformation gradient if it is only a parameter
+			for(unsigned int m = 0; m < 9; ++m)
+			{
+				if(F_as_parameter)
+					d_omega[m] = 0.0;
+				else
+					d_omega[m] = -p * dJ_dF[m];
+			}
+			d_omega[9] = p * V_m_f;
+			d_omega[10] = V_m_f * c_f + n_0 - J;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+			{
+				for(unsigned int n = 0; n < 9; ++n)
+				{
+					if(F_as_parameter)
+						d2_omega(m, n) = 0.0;
+					else
+						d2_omega(m, n) = -p * d2J_dF2(m, n);
+				}
+				if(F_as_parameter)
+					d2_omega(m, 10) = 0.0;
+				else
+					d2_omega(m, 10) = - dJ_dF[m];
+
+				d2_omega(10, m) = - dJ_dF[m];
+
+			}
+			d2_omega(9, 10) = d2_omega(10, 9) = V_m_f;
+		}
+
+		return false;
+	}
+
+};
+
 
 }
 
