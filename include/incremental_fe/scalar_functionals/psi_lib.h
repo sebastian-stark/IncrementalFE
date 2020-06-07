@@ -553,6 +553,112 @@ public:
 };
 
 /**
+ * Class defining an interface related scalar functional with the integrand
+ *
+ * \f$h^\Sigma_\tau = 1/2 q A q + b q\f$,
+ *
+ * where \f$q\f$ is a state variable, and \f$A\f$ and \f$b\f$ are constants.
+ * The implementation works also for vector valued \f$q\f$, in which case
+ * \f$A\f$ is a matrix and \f$b\f$ a vector.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim-1, spacedim>::e_omega :<br>	[0] \f$q\f$
+ */
+template<unsigned int spacedim>
+class PsiLinearInterface00 : public incrementalFE::Psi<spacedim-1, spacedim>
+{
+
+private:
+
+	/**
+	 * Matrix \f$A\f$
+	 */
+	const
+	dealii::FullMatrix<double>
+	A;
+
+	/**
+	 * %Vector \f$b\f$
+	 */
+	const
+	dealii::Vector<double>
+	b;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		A						PsiLinear00::A
+	 *
+	 * @param[in]		b						PsiLinear00::b
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiLinearInterface00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+							const std::set<dealii::types::material_id>										domain_of_integration,
+							const dealii::Quadrature<spacedim-1>											quadrature,
+							GlobalDataIncrementalFE<spacedim>&												global_data,
+							const dealii::FullMatrix<double>&												A,
+							const dealii::Vector<double>&													b,
+							const double																	alpha)
+	:
+	Psi<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, alpha, "PsiLinearInterface00"),
+	A(A),
+	b(b)
+	{
+		Assert( (A.m() == e_sigma.size()), dealii::ExcMessage("The number of rows of A must coincide with the number of dependent fields!"));
+		Assert( (A.n() == e_sigma.size()), dealii::ExcMessage("The number of columns of A must coincide with the number of dependent fields!"));
+		Assert( (b.size() == e_sigma.size()), dealii::ExcMessage("The number of entries of b must coincide with the number of dependent fields!"));
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+
+		dealii::Vector<double> A_q(b.size());
+		A.vmult(A_q, values);
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = 0.5 * (values * A_q) + values * b;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < b.size(); ++m)
+				d_sigma[m] = A_q[m] + b[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma = A;
+		}
+
+		return false;
+	}
+
+};
+
+
+/**
  * Class defining a domain related scalar functional with the integrand
  *
  * \f$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]\f$,
