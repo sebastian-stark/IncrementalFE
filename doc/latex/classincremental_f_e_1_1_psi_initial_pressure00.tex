@@ -1,0 +1,123 @@
+\hypertarget{classincremental_f_e_1_1_psi_initial_pressure00}{}\section{incremental\+FE\+:\+:Psi\+Initial\+Pressure00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_initial_pressure00}\index{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00$<$ spacedim $>$@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Psi\+Initial\+Pressure00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_psi_initial_pressure00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Psi\+Initial\+Pressure00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_psi_initial_pressure00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_psi_initial_pressure00_a5776a7b2766d5997b63e992df064fc73}{Psi\+Initial\+Pressure00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_psi_initial_pressure00_a8acf3825dbfea2fe0e0ebc5711b93fca}{p\+\_\+0}, const double \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha})
+\item 
+bool \hyperlink{classincremental_f_e_1_1_psi_initial_pressure00_aeb78a4eb41e692ff1b0f75f2695858fb}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_psi_initial_pressure00_a8acf3825dbfea2fe0e0ebc5711b93fca}{p\+\_\+0}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Psi\+Initial\+Pressure00$<$ spacedim $>$}
+
+Class defining an initial pressure term
+
+$h^\Omega_\rho = p_0 J$,
+
+where $p_0$ is the (constant) initial pressure, and $J$ the determinant of the deformation gradient $\boldsymbol{F}$
+
+Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $F_{xx}$~\newline
+ \mbox{[}1\mbox{]} $F_{xy}$~\newline
+ \mbox{[}2\mbox{]} $F_{xz}$~\newline
+ \mbox{[}3\mbox{]} $F_{yx}$~\newline
+ \mbox{[}4\mbox{]} $F_{yy}$~\newline
+ \mbox{[}5\mbox{]} $F_{yz}$~\newline
+ \mbox{[}6\mbox{]} $F_{zx}$~\newline
+ \mbox{[}7\mbox{]} $F_{zy}$~\newline
+ \mbox{[}8\mbox{]} $F_{zz}$~\newline
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}!Psi\+Initial\+Pressure00@{Psi\+Initial\+Pressure00}}
+\index{Psi\+Initial\+Pressure00@{Psi\+Initial\+Pressure00}!incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}}
+\subsubsection[{\texorpdfstring{Psi\+Initial\+Pressure00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double p\+\_\+0, const double alpha)}{PsiInitialPressure00(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double p_0, const double alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}$<$ spacedim $>$\+::{\bf Psi\+Initial\+Pressure00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const double}]{p\+\_\+0, }
+\item[{const double}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_psi_initial_pressure00_a5776a7b2766d5997b63e992df064fc73}{}\label{classincremental_f_e_1_1_psi_initial_pressure00_a5776a7b2766d5997b63e992df064fc73}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em p\+\_\+0} & \hyperlink{classincremental_f_e_1_1_psi_initial_pressure00_a8acf3825dbfea2fe0e0ebc5711b93fca}{Psi\+Initial\+Pressure00\+::p\+\_\+0}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
+\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}}
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const dealii::Point< spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
+\item[{double \&}]{omega, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_psi_initial_pressure00_aeb78a4eb41e692ff1b0f75f2695858fb}{}\label{classincremental_f_e_1_1_psi_initial_pressure00_aeb78a4eb41e692ff1b0f75f2695858fb}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{incremental\+F\+E\+::\+Psi$<$ spacedim, spacedim $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}!p\+\_\+0@{p\+\_\+0}}
+\index{p\+\_\+0@{p\+\_\+0}!incremental\+F\+E\+::\+Psi\+Initial\+Pressure00@{incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}}
+\subsubsection[{\texorpdfstring{p\+\_\+0}{p_0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi\+Initial\+Pressure00}$<$ spacedim $>$\+::p\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_initial_pressure00_a8acf3825dbfea2fe0e0ebc5711b93fca}{}\label{classincremental_f_e_1_1_psi_initial_pressure00_a8acf3825dbfea2fe0e0ebc5711b93fca}
+$p_0$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}\end{DoxyCompactItemize}
