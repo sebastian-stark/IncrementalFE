@@ -146,23 +146,23 @@ Private Attributes</h2></td></tr>
 class incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</h3>
 
 <p>Class defining a domain related scalar functional with the integrand</p>
-<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]$" src="form_68.png"/>,</p>
+<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]$" src="form_70.png"/>,</p>
 <p>where</p>
-<p><img class="formulaInl" alt="$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{E} - \dfrac{\Delta \varepsilon}{3} \left( \dfrac{c}{c^{\mathrm{ref}}} - 1 \right) \mathbf{I} $" src="form_69.png"/></p>
+<p><img class="formulaInl" alt="$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{E} - \dfrac{\Delta \varepsilon}{3} \left( \dfrac{c}{c^{\mathrm{ref}}} - 1 \right) \mathbf{I} $" src="form_71.png"/></p>
 <p>and</p>
-<p><img class="formulaInl" alt="$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) $" src="form_70.png"/></p>
-<p>Here, <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_71.png"/> is the deformation gradient, <img class="formulaInl" alt="$c$" src="form_9.png"/> is a species concentration, <img class="formulaInl" alt="$\lambda$" src="form_72.png"/> and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> are Lame's constants, <img class="formulaInl" alt="$\Delta \varepsilon$" src="form_73.png"/> describes the magnitude of the isotropic stress free strain related to a change in <img class="formulaInl" alt="$c$" src="form_9.png"/>, and <img class="formulaInl" alt="$c^{\mathrm{ref}}$" src="form_74.png"/> is the species concentration at which the stress free strain is zero.</p>
+<p><img class="formulaInl" alt="$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) $" src="form_72.png"/></p>
+<p>Here, <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_73.png"/> is the deformation gradient, <img class="formulaInl" alt="$c$" src="form_9.png"/> is a species concentration, <img class="formulaInl" alt="$\lambda$" src="form_74.png"/> and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> are Lame's constants, <img class="formulaInl" alt="$\Delta \varepsilon$" src="form_75.png"/> describes the magnitude of the isotropic stress free strain related to a change in <img class="formulaInl" alt="$c$" src="form_9.png"/>, and <img class="formulaInl" alt="$c^{\mathrm{ref}}$" src="form_76.png"/> is the species concentration at which the stress free strain is zero.</p>
 <p>The relation represents a Saint Venant - Kirchhoff material with additional isotropic volumetric strain.</p>
 <p>Ordering of quantities in <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#adfed9b70b743ba245a39c3e63b951f96">ScalarFunctional&lt;spacedim, spacedim&gt;::e_omega</a> :<br />
- [0] <img class="formulaInl" alt="$F_{xx}$" src="form_75.png"/> <br />
- [1] <img class="formulaInl" alt="$F_{xy}$" src="form_76.png"/> <br />
- [2] <img class="formulaInl" alt="$F_{xz}$" src="form_77.png"/> <br />
- [3] <img class="formulaInl" alt="$F_{yx}$" src="form_78.png"/> <br />
- [4] <img class="formulaInl" alt="$F_{yy}$" src="form_79.png"/> <br />
- [5] <img class="formulaInl" alt="$F_{yz}$" src="form_80.png"/> <br />
- [6] <img class="formulaInl" alt="$F_{zx}$" src="form_81.png"/> <br />
- [7] <img class="formulaInl" alt="$F_{zy}$" src="form_82.png"/> <br />
- [8] <img class="formulaInl" alt="$F_{zz}$" src="form_83.png"/> <br />
+ [0] <img class="formulaInl" alt="$F_{xx}$" src="form_77.png"/> <br />
+ [1] <img class="formulaInl" alt="$F_{xy}$" src="form_78.png"/> <br />
+ [2] <img class="formulaInl" alt="$F_{xz}$" src="form_79.png"/> <br />
+ [3] <img class="formulaInl" alt="$F_{yx}$" src="form_80.png"/> <br />
+ [4] <img class="formulaInl" alt="$F_{yy}$" src="form_81.png"/> <br />
+ [5] <img class="formulaInl" alt="$F_{yz}$" src="form_82.png"/> <br />
+ [6] <img class="formulaInl" alt="$F_{zx}$" src="form_83.png"/> <br />
+ [7] <img class="formulaInl" alt="$F_{zy}$" src="form_84.png"/> <br />
+ [8] <img class="formulaInl" alt="$F_{zz}$" src="form_85.png"/> <br />
  [9] <img class="formulaInl" alt="$c$" src="form_9.png"/> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aed371b8af0803cbfb69989f78f99d6d0"></a>
@@ -342,7 +342,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$c^\mathrm{ref}$" src="form_87.png"/> </p>
+<p><img class="formulaInl" alt="$c^\mathrm{ref}$" src="form_93.png"/> </p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\Delta \varepsilon$" src="form_73.png"/> </p>
+<p><img class="formulaInl" alt="$\Delta \varepsilon$" src="form_75.png"/> </p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Lame's constant <img class="formulaInl" alt="$\lambda$" src="form_72.png"/> </p>
+<p>Lame's constant <img class="formulaInl" alt="$\lambda$" src="form_74.png"/> </p>
 
 </div>
 </div>
@@ -411,7 +411,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Lame's constant <img class="formulaInl" alt="$\lambda$" src="form_72.png"/> </p>
+<p>Lame's constant <img class="formulaInl" alt="$\mu$" src="form_3.png"/> </p>
 
 </div>
 </div>

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['n',['N',['https://dealii.org/9.0.0/doxygen/deal.II/classFESeries_1_1Legendre.html#a5f0d3f72d2d64597cc06a84d8e247a8c',1,'FESeries::Legendre::N()'],['https://dealii.org/9.0.0/doxygen/deal.II/namespaceLAPACKSupport.html#a8edacd69ab93285f82b7f63c733a86b7',1,'LAPACKSupport::N()']]],
+  ['n_5f0',['n_0',['../classincremental_f_e_1_1_neo_hooke_compression_point00.html#aba531cf944d6455c9aebc49bdcb45019',1,'incrementalFE::NeoHookeCompressionPoint00']]],
   ['n_5factive_5fcells',['n_active_cells',['https://dealii.org/9.0.0/doxygen/deal.II/structinternal_1_1MatrixFreeFunctions_1_1TaskInfo.html#a6ea4657c3c3e6415cac154abfa93a91e',1,'internal::MatrixFreeFunctions::TaskInfo']]],
   ['n_5factive_5fhexes',['n_active_hexes',['https://dealii.org/9.0.0/doxygen/deal.II/structinternal_1_1TriangulationImplementation_1_1NumberCache_3_013_01_4.html#a31144d2e7e1f347eb53289e001682e74',1,'internal::TriangulationImplementation::NumberCache&lt; 3 &gt;']]],
   ['n_5factive_5fhexes_5flevel',['n_active_hexes_level',['https://dealii.org/9.0.0/doxygen/deal.II/structinternal_1_1TriangulationImplementation_1_1NumberCache_3_013_01_4.html#ae5e873f838eeccb020bc45fa1c58e481',1,'internal::TriangulationImplementation::NumberCache&lt; 3 &gt;']]],

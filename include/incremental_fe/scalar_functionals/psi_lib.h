@@ -25,9 +25,86 @@
 #include <deal.II/base/exceptions.h>
 #include <deal.II/base/tensor.h>
 #include <deal.II/base/symmetric_tensor.h>
+#include <deal.II/lac/vector.h>
 
 namespace incrementalFE
 {
+
+namespace
+{
+	double get_J(const dealii::Vector<double>& F)
+	{
+		return	  F[0] * F[4] * F[8]
+				+ F[1] * F[5] * F[6]
+				+ F[2] * F[3] * F[7]
+				- F[2] * F[4] * F[6]
+				- F[1] * F[3] * F[8]
+				- F[0] * F[5] * F[7];
+	}
+
+	void get_dJ_dF(	const dealii::Vector<double>& 	F,
+					dealii::Vector<double>& 		dJ_dF)
+	{
+		dJ_dF[0] = F[4] * F[8] - F[5] * F[7];
+		dJ_dF[1] = F[5] * F[6] - F[3] * F[8];
+		dJ_dF[2] = F[3] * F[7] - F[4] * F[6];
+		dJ_dF[3] = F[2] * F[7] - F[1] * F[8];
+		dJ_dF[4] = F[0] * F[8] - F[2] * F[6];
+		dJ_dF[5] = F[1] * F[6] - F[0] * F[7];
+		dJ_dF[6] = F[1] * F[5] - F[2] * F[4];
+		dJ_dF[7] = F[2] * F[3] - F[0] * F[5];
+		dJ_dF[8] = F[0] * F[4] - F[1] * F[3];
+	}
+
+	void get_d2J_dF2(	const dealii::Vector<double>& F,
+						dealii::FullMatrix<double>& d2J_dF2)
+	{
+		d2J_dF2(4,0) =  F[8];
+		d2J_dF2(5,0) = -F[7];
+		d2J_dF2(7,0) = -F[5];
+		d2J_dF2(8,0) =  F[4];
+
+		d2J_dF2(3,1) = -F[8];
+		d2J_dF2(5,1) =  F[6];
+		d2J_dF2(6,1) =  F[5];
+		d2J_dF2(8,1) = -F[3];
+
+		d2J_dF2(3,2) =  F[7];
+		d2J_dF2(4,2) = -F[6];
+		d2J_dF2(6,2) = -F[4];
+		d2J_dF2(7,2) =  F[3];
+
+		d2J_dF2(1,3) = -F[8];
+		d2J_dF2(2,3) =  F[7];
+		d2J_dF2(7,3) =  F[2];
+		d2J_dF2(8,3) = -F[1];
+
+		d2J_dF2(0,4) =  F[8];
+		d2J_dF2(2,4) = -F[6];
+		d2J_dF2(6,4) = -F[2];
+		d2J_dF2(8,4) =  F[0];
+
+		d2J_dF2(0,5) = -F[7];
+		d2J_dF2(1,5) =  F[6];
+		d2J_dF2(6,5) =  F[1];
+		d2J_dF2(7,5) = -F[0];
+
+		d2J_dF2(1,6) =  F[5];
+		d2J_dF2(2,6) = -F[4];
+		d2J_dF2(4,6) = -F[2];
+		d2J_dF2(5,6) =  F[1];
+
+		d2J_dF2(0,7) = -F[5];
+		d2J_dF2(2,7) =  F[3];
+		d2J_dF2(3,7) =  F[2];
+		d2J_dF2(5,7) = -F[0];
+
+		d2J_dF2(0,8) =  F[4];
+		d2J_dF2(1,8) = -F[3];
+		d2J_dF2(3,8) = -F[1];
+		d2J_dF2(4,8) =  F[0];
+	}
+}
 
 /**
  * Class defining a domain related scalar functional with the integrand
@@ -83,24 +160,6 @@ private:
 	 */
 	const double
 	log_eps;
-
-	/**
-	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
-	 */
-	double
-	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
-						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
-						const dealii::Vector<double>& 				delta_e_omega,
-						const dealii::Vector<double>& 				/*hidden_vars*/,
-						const dealii::Point<spacedim>& 				/*x*/)
-	const
-	{
-		double max_step = - e_omega[0] / delta_e_omega[0];
-		if(isnan(max_step) || (max_step <= 0.0))
-			return DBL_MAX;
-		else
-			return max_step;
-	}
 
 public:
 
@@ -185,6 +244,24 @@ public:
 		}
 
 		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+		double max_step = - e_omega[0] / delta_e_omega[0];
+		if(isnan(max_step) || (max_step <= 0.0))
+			return DBL_MAX;
+		else
+			return max_step;
 	}
 
 };
@@ -517,7 +594,7 @@ private:
 	lambda;
 
 	/**
-	 * Lame's constant \f$\lambda\f$
+	 * Lame's constant \f$\mu\f$
 	 */
 	const double
 	mu;
@@ -631,6 +708,309 @@ public:
 	}
 
 };
+
+/**
+ *
+ * Class defining Neo-Hooke material with "compression point" for hydrogel modeling.
+ * See PhD thesis Acartürk (2009): Simulation of Charged Hydrated Porous Materials, Eq. (3.99)
+ *
+ * The integrand is
+ *
+ * \f$h^\Omega_\rho = \dfrac{\mu}{2} ( \mathrm{tr}\boldsymbol{C} - 3 ) - \mu \mathrm{ln}J + \lambda (1-n_0)^2 \left( \dfrac{J-1}{1-n_0} - \mathrm{ln}\dfrac{J-n_0}{1-n_0} \right) \f$,
+ *
+ * where
+ *
+ * \f$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} \f$ is the right Cauchy-Green deformation tensor, \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$,
+ * \f$n_0\f$ the initial volume fraction of the polymeric backbone, and \f$\mu\f$ and \f$\lambda\f$ Lame's constants.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0]  \f$F_{xx}\f$ <br>
+ * 																					[1]  \f$F_{xy}\f$ <br>
+ * 																					[2]  \f$F_{xz}\f$ <br>
+ * 																					[3]  \f$F_{yx}\f$ <br>
+ * 																					[4]  \f$F_{yy}\f$ <br>
+ * 																					[5]  \f$F_{yz}\f$ <br>
+ * 																					[6]  \f$F_{zx}\f$ <br>
+ * 																					[7]  \f$F_{zy}\f$ <br>
+ * 																					[8]  \f$F_{zz}\f$ <br>
+ */
+template<unsigned int spacedim>
+class NeoHookeCompressionPoint00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Lame's constant \f$\lambda\f$
+	 */
+	const double
+	lambda;
+
+	/**
+	 * Lame's constant \f$\mu\f$
+	 */
+	const double
+	mu;
+
+	/**
+	 * Initial volume fraction of polymeric backbone \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		lambda					NeoHookeCompressionPoint00::lambda
+	 *
+	 * @param[in]		mu						NeoHookeCompressionPoint00::mu
+	 *
+	 * @param[in]		n_0						NeoHookeCompressionPoint00::n_0
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	NeoHookeCompressionPoint00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																lambda,
+								const double																mu,
+								const double																n_0,
+								const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "NeoHookeCompressionPoint00"),
+	lambda(lambda),
+	mu(mu),
+	n_0(n_0)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+
+		// deformation gradient and derived quantities
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m];
+
+		const double J = get_J(F);
+		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+
+		double tr_C = F * F;
+
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+		}
+
+		// compute value of potential
+		if(get<0>(requested_quantities))
+			omega = 0.5 * mu * (tr_C - 3.0) - mu * log(J) + lambda * (1.0 - n_0) * (1.0 - n_0) * ( (J - 1.0) / (1.0 - n_0) - log( (J - n_0) / ( 1.0 - n_0) ) );
+
+
+		// first derivative
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				d_omega[m] = mu * ( F[m] - 1.0 / J * dJ_dF[m] ) + lambda * (1.0 - n_0) * (J - 1.0) / (J - n_0) * dJ_dF[m];
+		}
+
+		// second derivative
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				for(unsigned int n = 0; n < 9; ++n)
+					d2_omega(m, n) = mu * ( 1.0 / J / J * dJ_dF[m] * dJ_dF[n] - 1.0 / J * d2J_dF2(m,n) ) + lambda * (1.0 - n_0) / (J - n_0) * ( ( 1.0 - (J - 1.0) / (J - n_0) ) * dJ_dF[m] * dJ_dF[n] + (J - 1.0) * d2J_dF2(m,n) );
+			for(unsigned int m = 0; m < 9; ++m)
+				d2_omega(m, m) += mu;
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+
+		double factor = 2.0;
+		dealii::Vector<double> e(e_omega.size());
+
+		while(true)
+		{
+			for(unsigned int m = 0; m < e.size(); ++m)
+				e[m] = e_omega[m] + factor * delta_e_omega[m];
+			if(get_J(e) > 0.0)
+				return factor;
+
+			factor *= 0.5;
+			Assert(factor > 0.0, ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
+		}
+
+		return factor;
+	}
+
+};
+
+
+/**
+ * Class defining chemical potential of charged species moving in fluid
+ *
+ * \f$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)\f$,
+ *
+ * where \f$\mu_0\f$ is a reference chemical potential, \f$R\f$ the gas constant, \f$T\f$ the temperature,
+ * \f$c\f$ the species concentration, and \f$c^\mathrm{f}\f$ the fluid concentration
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$<br>
+ * 																					[1] \f$c^\mathrm{f}\f$
+ */
+template<unsigned int spacedim>
+class PsiChemical02 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$RT\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$\mu_0\f$
+	 */
+	const double
+	mu_0;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		RT						PsiChemical02::RT
+	 *
+	 * @param[in]		mu_0					PsiChemical02::mu_0
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiChemical02(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																RT,
+					const double																mu_0,
+					const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical02"),
+	RT(RT),
+	mu_0(mu_0)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		const double c = values[0];
+		const double c_f = values[1];
+
+		const double log_c_c_f = log(c/c_f);
+
+		if(get<0>(requested_quantities))
+		{
+			omega = mu_0 * c + RT * c * (log_c_c_f - 1.0);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[0] = mu_0 + RT * log_c_c_f;
+			d_omega[1] = -RT * c/c_f;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega(0,0) = RT / c;
+			d2_omega(1,1) = RT * c / c_f / c_f;
+			d2_omega(0,1) = d2_omega(1,0) = -RT / c_f;
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+		const double max_step_1 = - e_omega[0] / delta_e_omega[0];
+		const double max_step_2 = - e_omega[1] / delta_e_omega[1];
+		if( (isnan(max_step_1) || (max_step_1 < 0.0)) && (isnan(max_step_2) || (max_step_2 < 0.0)) )
+			return DBL_MAX;
+		else
+		{
+			if(max_step_1 < 0.0)
+				return max_step_2;
+			else if(max_step_2 < 0.0)
+				return max_step_1;
+			else
+				return std::min(max_step_1, max_step_2);
+		}
+	}
+
+};
+
 
 
 }

@@ -902,7 +902,8 @@ EXCLUDE                = ../include/incremental_fe/scalar_functionals/penalty_00
                          ../include/incremental_fe/scalar_functionals/neo_hooke_01.h \
                          ../include/incremental_fe/scalar_functionals/neo_hooke_02.h \
                          ../include/incremental_fe/scalar_functionals/normal_flux_work_00.h \
-                         ../include/incremental_fe/scalar_functionals/normal_flux_work_01.h
+                         ../include/incremental_fe/scalar_functionals/normal_flux_work_01.h \
+                         ../include/incremental_fe/scalar_functionals/dual_fluid_dissipation_03.h
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
