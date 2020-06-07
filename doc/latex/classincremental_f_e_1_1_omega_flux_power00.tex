@@ -27,7 +27,7 @@ Collaboration diagram for incremental\+FE\+:\+:Omega\+Flux\+Power00$<$ spacedim 
 \item 
 \hyperlink{classincremental_f_e_1_1_omega_flux_power00_a90bd37bed7609d188bc543ecd466e198}{Omega\+Flux\+Power00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}, dealii\+::\+Function$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_flux_power00_a9b8beb230f2a0609646ddebe08c1c236}{function\+\_\+mu}, const unsigned int \hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}, const double \hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}=0.\+0)
 \item 
-bool \hyperlink{classincremental_f_e_1_1_omega_flux_power00_a6e690e461414dbedeef9035a656cc20b}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
+bool \hyperlink{classincremental_f_e_1_1_omega_flux_power00_abbcdc6c23167a34199401338b7fe058f}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -91,19 +91,19 @@ Constructor
 \subsection{Member Function Documentation}
 \index{incremental\+F\+E\+::\+Omega\+Flux\+Power00@{incremental\+F\+E\+::\+Omega\+Flux\+Power00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
 \index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Omega\+Flux\+Power00@{incremental\+F\+E\+::\+Omega\+Flux\+Power00}}
-\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double t, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Flux\+Power00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double t, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &sigma, dealii::Vector< double > &d_sigma, dealii::FullMatrix< double > &, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Flux\+Power00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
 \begin{DoxyParamCaption}
 \item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
 \item[{const double}]{t, }
 \item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
 \item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
-\item[{double \&}]{omega, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
+\item[{double \&}]{sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma, }
 \item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{, }
 \item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities, }
 \item[{const bool}]{}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_flux_power00_a6e690e461414dbedeef9035a656cc20b}{}\label{classincremental_f_e_1_1_omega_flux_power00_a6e690e461414dbedeef9035a656cc20b}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_flux_power00_abbcdc6c23167a34199401338b7fe058f}{}\label{classincremental_f_e_1_1_omega_flux_power00_abbcdc6c23167a34199401338b7fe058f}
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{Omega\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
 \end{DoxySeeAlso}

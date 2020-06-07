@@ -561,7 +561,7 @@ public:
  * The implementation works also for vector valued \f$q\f$, in which case
  * \f$A\f$ is a matrix and \f$b\f$ a vector.
  *
- * Ordering of quantities in ScalarFunctional::e_omega :<br>	[0] \f$q\f$
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>	[0] \f$q\f$
  */
 template<unsigned int spacedim>
 class PsiLinearInterface00 : public incrementalFE::Psi<spacedim-1, spacedim>
@@ -1570,7 +1570,6 @@ public:
 	}
 
 };
-
 
 
 }

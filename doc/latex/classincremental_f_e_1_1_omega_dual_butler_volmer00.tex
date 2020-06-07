@@ -27,7 +27,7 @@ Collaboration diagram for incremental\+FE\+:\+:Omega\+Dual\+Butler\+Volmer00$<$ 
 \item 
 \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_a4bc64f76770f63e634478f19798d9d27}{Omega\+Dual\+Butler\+Volmer00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_a37608eb032b6e88dd8c9a7d0f553a0bd}{I\+\_\+0}, const double \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_a8823655ea8aa9eb5668a64c6ee7bf4be}{beta}, const double \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_a2f32c4f92c11646ed2f6741977d9833f}{RT}, const double \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_abdc57ace8b842d20ea8f8941b948db41}{threshold}, const unsigned int \hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}, const double \hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}=0.\+0)
 \item 
-bool \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_af5cc5ae73af89acdea968203cb29e415}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
+bool \hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_ac3678f68c26fd880c2bd11fc357bc342}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -103,19 +103,19 @@ Constructor
 \subsection{Member Function Documentation}
 \index{incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00@{incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
 \index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00@{incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00}}
-\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double, const dealii::Point< spacedim > &, const dealii::Tensor< 1, spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double, const dealii::Point< spacedim > &, const dealii::Tensor< 1, spacedim > &, double &sigma, dealii::Vector< double > &d_sigma, dealii::FullMatrix< double > &d2_sigma, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
 \begin{DoxyParamCaption}
 \item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
 \item[{const double}]{, }
 \item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
 \item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{, }
-\item[{double \&}]{omega, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
-\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
+\item[{double \&}]{sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma, }
 \item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities, }
 \item[{const bool}]{}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_dual_butler_volmer00_af5cc5ae73af89acdea968203cb29e415}{}\label{classincremental_f_e_1_1_omega_dual_butler_volmer00_af5cc5ae73af89acdea968203cb29e415}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_dual_butler_volmer00_ac3678f68c26fd880c2bd11fc357bc342}{}\label{classincremental_f_e_1_1_omega_dual_butler_volmer00_ac3678f68c26fd880c2bd11fc357bc342}
 \begin{DoxySeeAlso}{See also}
 \hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{Omega\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
 \end{DoxySeeAlso}

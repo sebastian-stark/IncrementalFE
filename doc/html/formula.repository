@@ -109,3 +109,19 @@
 \form#108:$p_0$
 \form#109:$h^\Sigma_\tau = 1/2 q A q + b q$
 \form#110:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]$
+\form#111:$ h^\Sigma_\tau = -\boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) $
+\form#112:$\boldsymbol{t}$
+\form#113:$\boldsymbol{u}^+$
+\form#114:$\boldsymbol{u}^-$
+\form#115:$u^0_x$
+\form#116:$u^0_y$
+\form#117:$u^0_z$
+\form#118:$u^1_x$
+\form#119:$u^1_y$
+\form#120:$u^1_z$
+\form#121:$t_x$
+\form#122:$t_y$
+\form#123:$t_z$
+\form#124:$ h^\Sigma_\tau = \boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) $
+\form#125:$\boldsymbol{u}^0$
+\form#126:$\boldsymbol{u}^1$

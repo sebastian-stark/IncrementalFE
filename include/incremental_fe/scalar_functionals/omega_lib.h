@@ -555,9 +555,9 @@ public:
 								const double						/*t*/,
 								const dealii::Point<spacedim>& 		/*x*/,
 								const dealii::Tensor<1, spacedim>&	n,
-								double&								omega,
-								dealii::Vector<double>&				d_omega,
-								dealii::FullMatrix<double>&			d2_omega,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
 								const std::tuple<bool, bool, bool>	requested_quantities,
 								const bool							/*compute_dq*/)
 	const
@@ -572,22 +572,22 @@ public:
 
 		if(get<0>(requested_quantities))
 		{
-			omega = -mu * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
+			sigma = -mu * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
 		}
 
 		if(get<1>(requested_quantities))
 		{
-			d_omega[0] = -mu * n_x;
-			d_omega[1] = -mu * n_y;
-			d_omega[2] = -mu * n_z;
-			d_omega[3] = -(I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
+			d_sigma[0] = -mu * n_x;
+			d_sigma[1] = -mu * n_y;
+			d_sigma[2] = -mu * n_z;
+			d_sigma[3] = -(I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega(0, 3) = d2_omega(3, 0) = -n_x;
-			d2_omega(1, 3) = d2_omega(3, 1) = -n_y;
-			d2_omega(2, 3) = d2_omega(3, 2) = -n_z;
+			d2_sigma(0, 3) = d2_sigma(3, 0) = -n_x;
+			d2_sigma(1, 3) = d2_sigma(3, 1) = -n_y;
+			d2_sigma(2, 3) = d2_sigma(3, 2) = -n_z;
 		}
 
 		return false;
@@ -658,9 +658,9 @@ public:
 								const double						t,
 								const dealii::Point<spacedim>& 		x,
 								const dealii::Tensor<1, spacedim>&	n,
-								double&								omega,
-								dealii::Vector<double>&				d_omega,
-								dealii::FullMatrix<double>&			/*d2_omega*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			/*d2_sigma*/,
 								const std::tuple<bool, bool, bool>	requested_quantities,
 								const bool							/*compute_dq*/)
 	const
@@ -679,14 +679,14 @@ public:
 
 		if(get<0>(requested_quantities))
 		{
-			omega = mu_bar * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
+			sigma = mu_bar * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
 		}
 
 		if(get<1>(requested_quantities))
 		{
-			d_omega[0] = mu_bar * n_x;
-			d_omega[1] = mu_bar * n_y;
-			d_omega[2] = mu_bar * n_z;
+			d_sigma[0] = mu_bar * n_x;
+			d_sigma[1] = mu_bar * n_y;
+			d_sigma[2] = mu_bar * n_z;
 		}
 
 		return false;
@@ -757,9 +757,9 @@ public:
 								const double						/*t*/,
 								const dealii::Point<spacedim>& 		/*x*/,
 								const dealii::Tensor<1, spacedim>&	n,
-								double&								omega,
-								dealii::Vector<double>&				d_omega,
-								dealii::FullMatrix<double>&			d2_omega,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
 								const std::tuple<bool, bool, bool>	requested_quantities,
 								const bool							/*compute_dq*/)
 	const
@@ -774,27 +774,27 @@ public:
 
 		if(get<0>(requested_quantities))
 		{
-			omega = 1.0/(2.0*D) * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
+			sigma = 1.0/(2.0*D) * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z);
 		}
 
 		if(get<1>(requested_quantities))
 		{
-			d_omega[0] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_x;
-			d_omega[1] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_y;
-			d_omega[2] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_z;
+			d_sigma[0] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_x;
+			d_sigma[1] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_y;
+			d_sigma[2] = 1.0/D * (I_x_dot * n_x + I_y_dot * n_y + I_z_dot * n_z) * n_z;
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega(0,0) = 1.0/D * n_x * n_x;
-			d2_omega(0,1) = 1.0/D * n_y * n_x;
-			d2_omega(0,2) = 1.0/D * n_z * n_x;
-			d2_omega(1,0) = 1.0/D * n_x * n_y;
-			d2_omega(1,1) = 1.0/D * n_y * n_y;
-			d2_omega(1,2) = 1.0/D * n_z * n_y;
-			d2_omega(2,0) = 1.0/D * n_x * n_z;
-			d2_omega(2,1) = 1.0/D * n_y * n_z;
-			d2_omega(2,2) = 1.0/D * n_z * n_z;
+			d2_sigma(0,0) = 1.0/D * n_x * n_x;
+			d2_sigma(0,1) = 1.0/D * n_y * n_x;
+			d2_sigma(0,2) = 1.0/D * n_z * n_x;
+			d2_sigma(1,0) = 1.0/D * n_x * n_y;
+			d2_sigma(1,1) = 1.0/D * n_y * n_y;
+			d2_sigma(1,2) = 1.0/D * n_z * n_y;
+			d2_sigma(2,0) = 1.0/D * n_x * n_z;
+			d2_sigma(2,1) = 1.0/D * n_y * n_z;
+			d2_sigma(2,2) = 1.0/D * n_z * n_z;
 		}
 
 		return false;
@@ -894,9 +894,9 @@ public:
 								const double						/*t*/,
 								const dealii::Point<spacedim>& 		/*x*/,
 								const dealii::Tensor<1, spacedim>&	/*n*/,
-								double&								omega,
-								dealii::Vector<double>&				d_omega,
-								dealii::FullMatrix<double>&			d2_omega,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
 								const std::tuple<bool, bool, bool>	requested_quantities,
 								const bool							/*compute_dq*/)
 	const
@@ -925,52 +925,178 @@ public:
 		if(get<0>(requested_quantities))
 		{
 			if(eta / RT > threshold)
-				omega = t1 / beta + t2 / (1.0 - beta) + (t1 - t2) * (eta / RT - threshold) + 0.5 * (beta * t1 + (1.0 - beta) * t2) * (eta / RT - threshold) * (eta / RT - threshold);
+				sigma = t1 / beta + t2 / (1.0 - beta) + (t1 - t2) * (eta / RT - threshold) + 0.5 * (beta * t1 + (1.0 - beta) * t2) * (eta / RT - threshold) * (eta / RT - threshold);
 			else if(eta / RT < -threshold)
-				omega = t1 / beta + t2 / (1.0 - beta) + (t1 - t2) * (eta / RT + threshold) + 0.5 * (beta * t1 + (1.0 - beta) * t2) * (eta / RT + threshold) * (eta / RT + threshold);
+				sigma = t1 / beta + t2 / (1.0 - beta) + (t1 - t2) * (eta / RT + threshold) + 0.5 * (beta * t1 + (1.0 - beta) * t2) * (eta / RT + threshold) * (eta / RT + threshold);
 			else
-				omega = t1/beta + t2/(1.0 - beta);
-			omega *= -I_0;
+				sigma = t1/beta + t2/(1.0 - beta);
+			sigma *= -I_0;
 		}
 
 		if(get<1>(requested_quantities))
 		{
 			if(eta / RT > threshold)
 			{
-				d_omega[0] = (t1 - t2) + (beta * t1 + (1.0 - beta) * t2) * (eta / RT - threshold);
+				d_sigma[0] = (t1 - t2) + (beta * t1 + (1.0 - beta) * t2) * (eta / RT - threshold);
 			}
 			else if(eta / RT < -threshold)
 			{
-				d_omega[0] = (t1 - t2) + (beta * t1 + (1.0 - beta) * t2) * (eta / RT + threshold);
+				d_sigma[0] = (t1 - t2) + (beta * t1 + (1.0 - beta) * t2) * (eta / RT + threshold);
 			}
 			else
 			{
-				d_omega[0] = (t1 - t2);
+				d_sigma[0] = (t1 - t2);
 			}
-			d_omega[0] *= -I_0 / RT;
+			d_sigma[0] *= -I_0 / RT;
 		}
 
 		if(get<2>(requested_quantities))
 		{
 			if(eta / RT > threshold)
 			{
-				d2_omega(0,0) = beta * t1 + (1.0 - beta) * t2;
+				d2_sigma(0,0) = beta * t1 + (1.0 - beta) * t2;
 			}
 			else if(eta / RT < -threshold)
 			{
-				d2_omega(0,0) = beta * t1 + (1.0 - beta) * t2;
+				d2_sigma(0,0) = beta * t1 + (1.0 - beta) * t2;
 			}
 			else
 			{
-				d2_omega(0,0) = beta * t1 + (1.0 - beta) * t2;
+				d2_sigma(0,0) = beta * t1 + (1.0 - beta) * t2;
 			}
-			d2_omega(0,0) *= -I_0 / RT / RT;
+			d2_sigma(0,0) *= -I_0 / RT / RT;
 		}
 
 		return false;
 	}
 
 };
+
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
+ * \f$ h^\Sigma_\tau =	\boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) \f$
+ *
+ * where \f$\boldsymbol{t}\f$ is a Lagrangian multiplier, \f$\boldsymbol{u}^0\f$ the displacement on the 0 side of the interface, and \f$\boldsymbol{u}^1\f$ the displacement on the 1 side of the interface.
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$u^0_x\f$<br>
+ * 															[1]	\f$u^0_y\f$<br>
+ * 															[2]	\f$u^0_z\f$<br>
+ * 															[3] \f$u^1_x\f$<br>
+ * 															[4]	\f$u^1_y\f$<br>
+ * 															[5]	\f$u^1_z\f$<br>
+ * 															[6] \f$t_x\f$<br>
+ * 															[7]	\f$t_y\f$<br>
+ * 															[8]	\f$t_z\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaDisplacementCoupling00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+private:
+
+	/**
+	 * If this is @p true, \f$\boldsymbol{u}^1\f$ is considered as a parameter (i.e., the corresponding first derivatives are set to zero)
+	 */
+	const bool
+	u_1_as_parameter;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		u_1_as_parameter		OmegaDisplacementCoupling00::u_1_as_parameter
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 */
+	OmegaDisplacementCoupling00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const unsigned int																method,
+								const bool																		u_1_as_parameter,
+								const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 0, 6, 3, 0, method, alpha, "OmegaDisplacementCoupling00"),
+	u_1_as_parameter(u_1_as_parameter)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+
+		dealii::Tensor<1,3> u_0, u_1, t;
+
+		for(unsigned int m = 0; m < 3; ++m)
+		{
+			u_0[m] = values[m];
+			u_1[m] = values[m+3];
+			t[m] = values[m+6];
+		}
+
+		const dealii::Tensor<1,3> u_0_u_1 = u_0 - u_1;
+
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = t * u_0_u_1;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d_sigma[m] = t[m];
+				if(u_1_as_parameter)
+					d_sigma[m+3] = 0.0;
+				else
+					d_sigma[m+3] = -t[m];
+				d_sigma[m+6] = u_0_u_1[m];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma.reinit(9,9);
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d2_sigma(m, m+6) = d2_sigma(m+6, m) = 1.0;
+				if(!u_1_as_parameter)
+					d2_sigma(m+3, m+6) = -1.0;
+				d2_sigma(m+6, m+3) = -1.0;
+			}
+		}
+
+		return false;
+	}
+
+};
+
 
 }
 
