@@ -561,7 +561,7 @@ public:
  * The implementation works also for vector valued \f$q\f$, in which case
  * \f$A\f$ is a matrix and \f$b\f$ a vector.
  *
- * Ordering of quantities in ScalarFunctional<spacedim-1, spacedim>::e_omega :<br>	[0] \f$q\f$
+ * Ordering of quantities in ScalarFunctional::e_omega :<br>	[0] \f$q\f$
  */
 template<unsigned int spacedim>
 class PsiLinearInterface00 : public incrementalFE::Psi<spacedim-1, spacedim>
@@ -588,19 +588,19 @@ public:
 	/**
 	 * Constructor
 	 *
-	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 * @param[in]		e_sigma					ScalarFunctional::e_omega
 	 *
-	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
 	 *
-	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
 	 *
-	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 * @param[in]		global_data				Psi::global_data
 	 *
 	 * @param[in]		A						PsiLinear00::A
 	 *
 	 * @param[in]		b						PsiLinear00::b
 	 *
-	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 * @param[in]		alpha					Psi::alpha
 	 */
 	PsiLinearInterface00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
 							const std::set<dealii::types::material_id>										domain_of_integration,
@@ -921,7 +921,7 @@ public:
 		const double J = get_J(F);
 		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
 
-		double tr_C = F * F;
+		const double tr_C = F * F;
 
 		dealii::Vector<double> dJ_dF(9);
 		dealii::FullMatrix<double> d2J_dF2;
@@ -952,6 +952,194 @@ public:
 					d2_omega(m, n) = mu * ( 1.0 / J / J * dJ_dF[m] * dJ_dF[n] - 1.0 / J * d2J_dF2(m,n) ) + lambda * (1.0 - n_0) / (J - n_0) * ( ( 1.0 - (J - 1.0) / (J - n_0) ) * dJ_dF[m] * dJ_dF[n] + (J - 1.0) * d2J_dF2(m,n) );
 			for(unsigned int m = 0; m < 9; ++m)
 				d2_omega(m, m) += mu;
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+
+		double factor = 2.0;
+		dealii::Vector<double> e(e_omega.size());
+
+		while(true)
+		{
+			for(unsigned int m = 0; m < e.size(); ++m)
+				e[m] = e_omega[m] + factor * delta_e_omega[m];
+			if(get_J(e) > 0.0)
+				return factor;
+
+			factor *= 0.5;
+			Assert(factor > 0.0, ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
+		}
+
+		return factor;
+	}
+
+};
+
+
+/**
+ *
+ * Class defining a compressible Neo-Hooke material
+ *
+ * The integrand is
+ *
+ * \f$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]\f$,
+ *
+ * where
+ *
+ * \f$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} \f$ is the right Cauchy-Green deformation tensor, \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$,
+ * and \f$\mu\f$ and \f$\lambda\f$ Lame's constants.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0]  \f$F_{xx}\f$ <br>
+ * 																					[1]  \f$F_{xy}\f$ <br>
+ * 																					[2]  \f$F_{xz}\f$ <br>
+ * 																					[3]  \f$F_{yx}\f$ <br>
+ * 																					[4]  \f$F_{yy}\f$ <br>
+ * 																					[5]  \f$F_{yz}\f$ <br>
+ * 																					[6]  \f$F_{zx}\f$ <br>
+ * 																					[7]  \f$F_{zy}\f$ <br>
+ * 																					[8]  \f$F_{zz}\f$ <br>
+ */
+template<unsigned int spacedim>
+class PsiNeoHooke00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Lame's constant \f$\lambda\f$
+	 */
+	const double
+	lambda;
+
+	/**
+	 * Lame's constant \f$\mu\f$
+	 */
+	const double
+	mu;
+
+	/**
+	 * Function allowing to scale \f$\lambda\f$ and \f$\mu\f$ in dependence on position (the function must provide with the scaling factor)
+	 */
+	const dealii::Function<spacedim>&
+	scaling_function;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		lambda					NeoHooke00::lambda
+	 *
+	 * @param[in]		mu						NeoHooke00::mu
+	 *
+	 * @param[in]		scaling_function		NeoHooket00::scaling_function
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiNeoHooke00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																lambda,
+					const double																mu,
+					const dealii::Function<spacedim>&											scaling_function,
+					const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiNeoHooke00"),
+	lambda(lambda),
+	mu(mu),
+	scaling_function(scaling_function)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		x,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		// scale mu and lambda
+		const double mu_ = scaling_function.value(x) * mu;
+		const double lambda_ = scaling_function.value(x) * lambda;
+
+		// deformation gradient and derived quantities
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m];
+
+		const double I_1 = F * F;
+		const double J = get_J(F);
+		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+		}
+
+		dealii::Vector<double> dI_1(9);
+		dealii::FullMatrix<double> d2I_1;
+		for(unsigned int m = 0; m < 9; ++m)
+			dI_1[m] = 2.0 * F[m];
+		if(get<2>(requested_quantities))
+		{
+			d2I_1.reinit(9,9);
+			for(unsigned int m = 0; m < 9; ++m)
+				d2I_1(m,m) = 2.0;
+		}
+
+		// compute value of potential
+		if(get<0>(requested_quantities))
+			omega = 0.5 * mu_ * (I_1 - 3.0 - 2.0 * log(J)) + 0.5 * lambda_ * log(J) * log(J);
+
+		// first derivatives of potential w.r.t. J and I_1
+		const double dpsi_dI_1 = 0.5 * mu_;
+		const double dpsi_dJ = -mu_/J + lambda_ * log(J)/J;
+
+		// first derivative
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				d_omega[m] = dpsi_dI_1 * dI_1[m] + dpsi_dJ * dJ_dF[m];
+		}
+
+		// second derivative
+		if(get<2>(requested_quantities))
+		{
+			const double d2psi_dJ2 = mu_/J/J + lambda_ * (1.0/J/J) * (1.0 - log(J));
+			for(unsigned int m = 0; m < 9; ++m)
+				for(unsigned int n = 0; n < 9; ++n)
+					d2_omega(m, n) = dpsi_dI_1 * d2I_1(m, n) + dpsi_dJ * d2J_dF2(m, n) + d2psi_dJ2 * dJ_dF[m] * dJ_dF[n];
 		}
 
 		return false;

@@ -107,3 +107,5 @@
 \form#106:$F_zz$
 \form#107:$h^\Omega_\rho = p_0 J$
 \form#108:$p_0$
+\form#109:$h^\Sigma_\tau = 1/2 q A q + b q$
+\form#110:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]$
