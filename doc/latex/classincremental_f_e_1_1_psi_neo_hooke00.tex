@@ -50,7 +50,7 @@ Class defining a compressible Neo-\/\+Hooke material
 
 The integrand is
 
-$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]$,
+$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2$,
 
 where
 
@@ -95,11 +95,11 @@ Constructor
 \hline
 \mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
 \hline
-\mbox{\tt in}  & {\em lambda} & Neo\+Hooke00\+::lambda\\
+\mbox{\tt in}  & {\em lambda} & \hyperlink{classincremental_f_e_1_1_psi_neo_hooke00_a8d6349afc4a3053f86b33db165a9a158}{Psi\+Neo\+Hooke00\+::lambda}\\
 \hline
-\mbox{\tt in}  & {\em mu} & Neo\+Hooke00\+::mu\\
+\mbox{\tt in}  & {\em mu} & \hyperlink{classincremental_f_e_1_1_psi_neo_hooke00_a73d67e211d564b621cfbd934ab1e2924}{Psi\+Neo\+Hooke00\+::mu}\\
 \hline
-\mbox{\tt in}  & {\em scaling\+\_\+function} & Neo\+Hooket00\+::scaling\+\_\+function\\
+\mbox{\tt in}  & {\em scaling\+\_\+function} & \hyperlink{classincremental_f_e_1_1_psi_neo_hooke00_afa1ee9fcb2f0f52c12c07845844e1ed0}{Psi\+Neo\+Hooke00\+::scaling\+\_\+function}\\
 \hline
 \mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha} \\
 \hline
@@ -149,7 +149,7 @@ Lame\textquotesingle{}s constant $\lambda$ \index{incremental\+F\+E\+::\+Psi\+Ne
 Lame\textquotesingle{}s constant $\mu$ \index{incremental\+F\+E\+::\+Psi\+Neo\+Hooke00@{incremental\+F\+E\+::\+Psi\+Neo\+Hooke00}!scaling\+\_\+function@{scaling\+\_\+function}}
 \index{scaling\+\_\+function@{scaling\+\_\+function}!incremental\+F\+E\+::\+Psi\+Neo\+Hooke00@{incremental\+F\+E\+::\+Psi\+Neo\+Hooke00}}
 \subsubsection[{\texorpdfstring{scaling\+\_\+function}{scaling_function}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const dealii\+::\+Function$<$spacedim$>$\& {\bf incremental\+F\+E\+::\+Psi\+Neo\+Hooke00}$<$ spacedim $>$\+::scaling\+\_\+function\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_neo_hooke00_afa1ee9fcb2f0f52c12c07845844e1ed0}{}\label{classincremental_f_e_1_1_psi_neo_hooke00_afa1ee9fcb2f0f52c12c07845844e1ed0}
-{\bf Function} allowing to scale $\lambda$ and $\mu$ in dependence on position (the function must provide with the scaling factor) 
+Function allowing to scale $\lambda$ and $\mu$ in dependence on position (the function must provide with the scaling factor) 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

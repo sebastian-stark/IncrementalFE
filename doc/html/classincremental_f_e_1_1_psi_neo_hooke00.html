@@ -147,7 +147,7 @@ class incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</h3>
 
 <p>Class defining a compressible Neo-Hooke material</p>
 <p>The integrand is</p>
-<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]$" src="form_126.png"/>,</p>
+<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2$" src="form_136.png"/>,</p>
 <p>where</p>
 <p><img class="formulaInl" alt="$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} $" src="form_124.png"/> is the right Cauchy-Green deformation tensor, <img class="formulaInl" alt="$J$" src="form_60.png"/> the determinant of the deformation gradient <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_61.png"/>, and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> and <img class="formulaInl" alt="$\lambda$" src="form_120.png"/> Lame's constants.</p>
 <p>Ordering of quantities in <a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#adfed9b70b743ba245a39c3e63b951f96">ScalarFunctional&lt;spacedim, spacedim&gt;::e_omega</a> :<br />
@@ -238,9 +238,9 @@ template&lt;unsigned int spacedim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">domain_of_integration</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#aa192395f822a64f60df43bf9d36c2f3a">ScalarFunctional&lt;spacedim, spacedim&gt;::domain_of_integration</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag:https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#ab83ee3ae077b211137824b006098382e">ScalarFunctional&lt;spacedim, spacedim&gt;::quadrature</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">global_data</td><td><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#abf0a4804877fd7cc9bd1b90e52760ba9">Psi&lt;spacedim, spacedim&gt;::global_data</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lambda</td><td>NeoHooke00::lambda</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>NeoHooke00::mu</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">scaling_function</td><td>NeoHooket00::scaling_function</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lambda</td><td><a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a8d6349afc4a3053f86b33db165a9a158">PsiNeoHooke00::lambda</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td><a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a73d67e211d564b621cfbd934ab1e2924">PsiNeoHooke00::mu</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scaling_function</td><td><a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#afa1ee9fcb2f0f52c12c07845844e1ed0">PsiNeoHooke00::scaling_function</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#af7b8227188dbdd6ada35b9445d96c79d">Psi&lt;spacedim, spacedim&gt;::alpha</a> </td></tr>
   </table>
   </dd>
@@ -433,7 +433,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><a class="elRef" doxygen="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag:https://dealii.org/9.0.0/doxygen/deal.II/" href="https://dealii.org/9.0.0/doxygen/deal.II/classFunction.html">Function</a> allowing to scale <img class="formulaInl" alt="$\lambda$" src="form_120.png"/> and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> in dependence on position (the function must provide with the scaling factor) </p>
+<p>Function allowing to scale <img class="formulaInl" alt="$\lambda$" src="form_120.png"/> and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> in dependence on position (the function must provide with the scaling factor) </p>
 
 </div>
 </div>

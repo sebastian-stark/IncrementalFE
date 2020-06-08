@@ -7,6 +7,7 @@ var searchData=
   ['omegadivergenceconstraint00',['OmegaDivergenceConstraint00',['../classincremental_f_e_1_1_omega_divergence_constraint00.html',1,'incrementalFE']]],
   ['omegadualbutlervolmer00',['OmegaDualButlerVolmer00',['../classincremental_f_e_1_1_omega_dual_butler_volmer00.html',1,'incrementalFE']]],
   ['omegadualfluiddissipation00',['OmegaDualFluidDissipation00',['../classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html',1,'incrementalFE']]],
+  ['omegadualfluiddissipation01',['OmegaDualFluidDissipation01',['../classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html',1,'incrementalFE']]],
   ['omegadualfluxdissipation00',['OmegaDualFluxDissipation00',['../classincremental_f_e_1_1_omega_dual_flux_dissipation00.html',1,'incrementalFE']]],
   ['omegadualiondissipation00',['OmegaDualIonDissipation00',['../classincremental_f_e_1_1_omega_dual_ion_dissipation00.html',1,'incrementalFE']]],
   ['omegafluxdissipation00',['OmegaFluxDissipation00',['../classincremental_f_e_1_1_omega_flux_dissipation00.html',1,'incrementalFE']]],
@@ -29,8 +30,8 @@ var searchData=
   ['outputflagsbase_3c_20ucdflags_20_3e',['OutputFlagsBase&lt; UcdFlags &gt;',['https://dealii.org/9.0.0/doxygen/deal.II/structDataOutBase_1_1OutputFlagsBase.html',1,'']]],
   ['outputflagsbase_3c_20vtkflags_20_3e',['OutputFlagsBase&lt; VtkFlags &gt;',['https://dealii.org/9.0.0/doxygen/deal.II/structDataOutBase_1_1OutputFlagsBase.html',1,'']]],
   ['outputoperator',['OutputOperator',['https://dealii.org/9.0.0/doxygen/deal.II/classAlgorithms_1_1OutputOperator.html',1,'Algorithms']]],
-  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1SymmetricTensor_3_012_00_01dim_00_01spacedim_01_4_1_1OutputType.html',1,'FEValuesViews::SymmetricTensor']]],
-  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1Vector_1_1OutputType.html',1,'FEValuesViews::Vector']]],
+  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1Tensor_3_012_00_01dim_00_01spacedim_01_4_1_1OutputType.html',1,'FEValuesViews::Tensor']]],
   ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1Scalar_1_1OutputType.html',1,'FEValuesViews::Scalar']]],
-  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1Tensor_3_012_00_01dim_00_01spacedim_01_4_1_1OutputType.html',1,'FEValuesViews::Tensor']]]
+  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1SymmetricTensor_3_012_00_01dim_00_01spacedim_01_4_1_1OutputType.html',1,'FEValuesViews::SymmetricTensor']]],
+  ['outputtype',['OutputType',['https://dealii.org/9.0.0/doxygen/deal.II/structFEValuesViews_1_1Vector_1_1OutputType.html',1,'FEValuesViews::Vector']]]
 ];

@@ -1447,6 +1447,162 @@ public:
 };
 
 
+/**
+ * Class defining Lagrangian multiplier term for equilibrium condition in the case that fluid flows without dissipation, where ions flow in addition with dissipation through the fluid.
+ *
+ * \f$ h^\Omega_\rho =	\nabla \dot{\xi} \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ *
+ * where \f$\xi\f$ is a scalar potential,<br>
+ * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
+ * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
+ * \f$\eta^\mathrm{f}\f$ is the fluid potential,<br>
+ * and \f$\eta^i\f$ are the ion potentials
+ *
+ * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  				\f$\dot{\xi}_{,x}\f$<br>
+ * 																				[1]					\f$\dot{\xi}_{,y}\f$<br>
+ * 																				[2]					\f$\dot{\xi}_{,z}\f$<br>
+ *																				[3]  				\f$\dot{c}^\mathrm{f}\f$<br>
+ * 																				[4]  				\f$\eta^\mathrm{f}_{,x}\f$<br>
+ * 																				[5]  				\f$\eta^\mathrm{f}_{,y}\f$<br>
+ * 																				[6]  				\f$\eta^\mathrm{f}_{,z}\f$<br>
+ * 																				[7] ... [6+3I]		\f$\eta^i_{,x}\f$, \f$\eta^i_{,y}\f$, \f$\eta^i_{,z}\f$ (ordering: xyz, xyz, ...)<br>
+ * 																				[7+3I]				\f$\eta^\mathrm{f}\f$<br>
+ * 																				[8+3I]				\f$c^\mathrm{f}\f$<br>
+ * 																				[9+3I] ... [8+4I]	\f$c^i\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaDualFluidDissipation01 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Number of ionic species \f$I\f$
+	 */
+	const unsigned int
+	I;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		I						OmegaDualFluidDissipation01::I
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaDualFluidDissipation01(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const unsigned int															I,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 1, 3, 4+3*I, 1+I, method, alpha, "OmegaDualFluidDissipation00"),
+	I(I)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		(void)compute_dq;
+		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
+
+		// start indices for respective quantities
+		const unsigned int i_grad_xi_dot = 0;
+		const unsigned int i_c_f_dot = 3;
+		const unsigned int i_grad_eta_f = 4;
+		vector<unsigned int> i_grad_eta_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_grad_eta_i[i] = 7 + 3*i;
+		const unsigned int i_eta_f = 7 + 3*I;
+		const unsigned int i_c_f = 8 + 3*I;
+		vector<unsigned int> i_c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_c_i[i] = 9 + 3*I + i;
+
+		dealii::Tensor<1,3> grad_xi_dot;
+		for(unsigned int m = 0; m < 3; ++m)
+			grad_xi_dot[m] = values[i_grad_xi_dot + m];
+
+		const double c_f_dot = values[i_c_f_dot];
+		const double c_f = values[i_c_f];
+		dealii::Vector<double> c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			c_i[i] = values[i_c_i[i]];
+
+		dealii::Tensor<1,3> grad_eta;
+		for(unsigned int m = 0; m < 3; ++m)
+			grad_eta[m] = values[i_grad_eta_f + m];
+		for(unsigned int i = 0; i < I; ++i)
+			for(unsigned int m = 0; m < 3; ++m)
+				grad_eta[m] += c_i[i]/c_f * values[i_grad_eta_i[i] + m];
+
+		const double eta_f = values[i_eta_f];
+
+
+		if(get<0>(requested_quantities))
+		{
+			omega = grad_xi_dot * grad_eta - eta_f * c_f_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[i_c_f_dot] = -eta_f;
+			d_omega[i_eta_f]   = -c_f_dot;
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d_omega[i_grad_xi_dot + m] = grad_eta[m];
+				d_omega[i_grad_eta_f + m] = grad_xi_dot[m];
+				for(unsigned int i = 0; i < I; ++i)
+					d_omega[i_grad_eta_i[i] + m] = grad_xi_dot[m] * c_i[i]/c_f;
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega.reinit(8 + 3*I, 8 + 3*I);
+
+			d2_omega[i_c_f_dot][i_eta_f] = d2_omega[i_eta_f][i_c_f_dot] = -1.0;
+
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d2_omega[i_grad_xi_dot + m][i_grad_eta_f + m] = d2_omega[i_grad_eta_f + m][i_grad_xi_dot + m] = 1.0;
+				for(unsigned int i = 0; i < I; ++i)
+					d2_omega[i_grad_xi_dot + m][i_grad_eta_i[i] + m] = d2_omega[i_grad_eta_i[i] + m][i_grad_xi_dot + m] = c_i[i]/c_f;
+			}
+		}
+
+		return false;
+
+	}
+};
 
 }
 

@@ -995,7 +995,7 @@ public:
  *
  * The integrand is
  *
- * \f$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]\f$,
+ * \f$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J  \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2\f$,
  *
  * where
  *
@@ -1031,7 +1031,7 @@ private:
 	mu;
 
 	/**
-	 * Function allowing to scale \f$\lambda\f$ and \f$\mu\f$ in dependence on position (the function must provide with the scaling factor)
+	 * %Function allowing to scale \f$\lambda\f$ and \f$\mu\f$ in dependence on position (the function must provide with the scaling factor)
 	 */
 	const dealii::Function<spacedim>&
 	scaling_function;
@@ -1049,11 +1049,11 @@ public:
 	 *
 	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
 	 *
-	 * @param[in]		lambda					NeoHooke00::lambda
+	 * @param[in]		lambda					PsiNeoHooke00::lambda
 	 *
-	 * @param[in]		mu						NeoHooke00::mu
+	 * @param[in]		mu						PsiNeoHooke00::mu
 	 *
-	 * @param[in]		scaling_function		NeoHooket00::scaling_function
+	 * @param[in]		scaling_function		PsiNeoHooke00::scaling_function
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */

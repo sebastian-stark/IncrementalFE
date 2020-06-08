@@ -133,3 +133,11 @@
 \form#132:$\epsilon$
 \form#133:$\ln\epsilon$
 \form#134:$c^\mathrm{ref}$
+\form#135:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2 \right]$
+\form#136:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2$
+\form#137:$ h^\Omega_\rho = \nabla \dot{\xi} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\form#138:$\xi$
+\form#139:$\dot{xi}_{,x}$
+\form#140:$\dot{\xi}_{,x}$
+\form#141:$\dot{\xi}_{,y}$
+\form#142:$\dot{\xi}_{,z}$

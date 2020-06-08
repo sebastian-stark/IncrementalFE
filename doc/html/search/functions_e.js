@@ -21,6 +21,7 @@ var searchData=
   ['omegadivergenceconstraint00',['OmegaDivergenceConstraint00',['../classincremental_f_e_1_1_omega_divergence_constraint00.html#a34e18a491023a4e842d2e44ecff7a455',1,'incrementalFE::OmegaDivergenceConstraint00']]],
   ['omegadualbutlervolmer00',['OmegaDualButlerVolmer00',['../classincremental_f_e_1_1_omega_dual_butler_volmer00.html#a4bc64f76770f63e634478f19798d9d27',1,'incrementalFE::OmegaDualButlerVolmer00']]],
   ['omegadualfluiddissipation00',['OmegaDualFluidDissipation00',['../classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html#a7a0257beaaa9adbfd3d7eb69ff95c88e',1,'incrementalFE::OmegaDualFluidDissipation00']]],
+  ['omegadualfluiddissipation01',['OmegaDualFluidDissipation01',['../classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html#a161e82e383f418ba1ddafc1ac56b2300',1,'incrementalFE::OmegaDualFluidDissipation01']]],
   ['omegadualfluxdissipation00',['OmegaDualFluxDissipation00',['../classincremental_f_e_1_1_omega_dual_flux_dissipation00.html#a4f1fb84afb78bd1718ba36c63fe3a22b',1,'incrementalFE::OmegaDualFluxDissipation00']]],
   ['omegadualiondissipation00',['OmegaDualIonDissipation00',['../classincremental_f_e_1_1_omega_dual_ion_dissipation00.html#a71bc2c3623ac5a949967fc4179d13adf',1,'incrementalFE::OmegaDualIonDissipation00']]],
   ['omegafluxdissipation00',['OmegaFluxDissipation00',['../classincremental_f_e_1_1_omega_flux_dissipation00.html#a37c7be7431a199da9fb1351fcdbe2c3f',1,'incrementalFE::OmegaFluxDissipation00']]],
