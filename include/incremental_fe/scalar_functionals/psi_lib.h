@@ -919,7 +919,7 @@ public:
 			F[m] = values[m];
 
 		const double J = get_J(F);
-		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
 
 		const double tr_C = F * F;
 
@@ -980,7 +980,7 @@ public:
 				return factor;
 
 			factor *= 0.5;
-			Assert(factor > 0.0, ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
+			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
 		}
 
 		return factor;
@@ -1096,7 +1096,7 @@ public:
 
 		const double I_1 = F * F;
 		const double J = get_J(F);
-		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
 
 		dealii::Vector<double> dJ_dF(9);
 		dealii::FullMatrix<double> d2J_dF2;
@@ -1168,7 +1168,7 @@ public:
 				return factor;
 
 			factor *= 0.5;
-			Assert(factor > 0.0, ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
+			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
 		}
 
 		return factor;
@@ -1407,7 +1407,7 @@ public:
 
 	 	// J and derivatives
 		const double J = get_J(F);
-		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
 		dealii::Vector<double> dJ_dF(9);
 		dealii::FullMatrix<double> d2J_dF2;
 		get_dJ_dF(F, dJ_dF);
@@ -1538,7 +1538,7 @@ public:
 
 	 	// J and derivatives
 		const double J = get_J(F);
-		Assert(J > 0, ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
 		dealii::Vector<double> dJ_dF(9);
 		dealii::FullMatrix<double> d2J_dF2;
 		get_dJ_dF(F, dJ_dF);

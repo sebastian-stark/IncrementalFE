@@ -145,8 +145,8 @@ Private Attributes</h2></td></tr>
 class incrementalFE::Psi&lt; spacedim, spacedim &gt;</h3>
 
 <p>Class defining a domain related scalar functional with the integrand</p>
-<p><img class="formulaInl" alt="$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_52.png"/>,</p>
-<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_49.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_50.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_51.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
+<p><img class="formulaInl" alt="$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_98.png"/>,</p>
+<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_95.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_96.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_97.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad6aff88570ea114f34ca92f232759e29"></a>
 <div class="memitem">
@@ -369,14 +369,14 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_53.png"/> and needs to be implemented by classes inheriting from this class</p>
+<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_99.png"/> and needs to be implemented by classes inheriting from this class</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_54.png"/> and its derivatives are evaluated</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_100.png"/> and its derivatives are evaluated</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Position</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_54.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_54.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_54.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_100.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_100.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_100.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">requested_quantities</td><td>Tuple indicating which of the quantities <code>psi</code>, <code>d_psi</code>, <code>d2_psi</code> are to be computed (note that only those quantities are initialized to the correct size, which are actually requested).</td></tr>
   </table>
   </dd>
