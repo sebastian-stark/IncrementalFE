@@ -1350,6 +1350,12 @@ private:
 	const bool
 	F_as_parameter;
 
+	/**
+	 * If @p true, f$c^\mathrm{f}\f$ is considered as parameter in potential (i.e., it is held fixed when computing the first derivative)
+	 */
+	const bool
+	c_f_as_parameter;
+
 public:
 
 	/**
@@ -1369,6 +1375,8 @@ public:
 	 *
 	 * @param[in]		F_as_parameter			PsiIncompressibility00::F_as_parameter
 	 *
+	 * @param[in]		c_f_as_parameter		PsiIncompressibility00::c_f_as_parameter
+	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 */
 	PsiIncompressibility00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
@@ -1378,12 +1386,14 @@ public:
 							const double																V_m_f,
 							const double																n_0,
 							const bool																	F_as_parameter,
+							const bool																	c_f_as_parameter,
 							const double																alpha)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiIncompressibility00"),
 	V_m_f(V_m_f),
 	n_0(n_0),
-	F_as_parameter(F_as_parameter)
+	F_as_parameter(F_as_parameter),
+	c_f_as_parameter(c_f_as_parameter)
 	{
 	}
 
@@ -1435,7 +1445,8 @@ public:
 				for(unsigned int m = 0; m < 9; ++m)
 					d_omega[m] = -p * dJ_dF[m];
 			}
-			d_omega[9] = p * V_m_f;
+			if(!c_f_as_parameter)
+				d_omega[9] = p * V_m_f;
 			d_omega[10] = V_m_f * c_f + n_0 - J;
 		}
 
@@ -1453,7 +1464,9 @@ public:
 				d2_omega(10, m) = -dJ_dF[m];
 
 			}
-			d2_omega(9, 10) = d2_omega(10, 9) = V_m_f;
+			if(!c_f_as_parameter)
+				d2_omega(9, 10) = V_m_f;
+			d2_omega(10, 9) = V_m_f;
 		}
 
 		return false;

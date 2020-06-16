@@ -141,3 +141,10 @@
 \form#140:$\dot{\xi}_{,x}$
 \form#141:$\dot{\xi}_{,y}$
 \form#142:$\dot{\xi}_{,z}$
+\form#143:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right] \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+\form#144:$\eta^\mathrm{int}$
+\form#145:$A^{\mathrm{e^-}}$
+\form#146:$\bar{\varphi}$
+\form#147:$\varphi^\mathrm{c}$
+\form#148:$\bar{\varphi}(\boldsymbol{X}, t)$
+\form#149:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $

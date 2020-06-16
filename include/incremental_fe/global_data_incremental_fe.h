@@ -159,6 +159,12 @@ private:
 	output_level = 1;
 
 	/**
+	 * If true, line search is performed during Newton-Raphson iteration
+	 */
+	bool
+	perform_line_search = true;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -343,6 +349,14 @@ public:
 	 */
 	void
 	set_predictor_step(const bool predictor_step = true);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::perform_line_search
+	 *
+	 * @param[in]	perform_line_search	GlobalDataIncrementalFE::perform_line_search
+	 */
+	void
+	set_perform_line_search(const bool perform_line_search = true);
 
 	/**
 	 * reset GlobalDataIncrementalFE::t, GlobalDataIncrementalFE::t_ref, GlobalDataIncrementalFE::t_ref_old,

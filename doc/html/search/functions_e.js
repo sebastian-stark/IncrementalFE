@@ -24,6 +24,7 @@ var searchData=
   ['omegadualfluiddissipation01',['OmegaDualFluidDissipation01',['../classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html#a161e82e383f418ba1ddafc1ac56b2300',1,'incrementalFE::OmegaDualFluidDissipation01']]],
   ['omegadualfluxdissipation00',['OmegaDualFluxDissipation00',['../classincremental_f_e_1_1_omega_dual_flux_dissipation00.html#a4f1fb84afb78bd1718ba36c63fe3a22b',1,'incrementalFE::OmegaDualFluxDissipation00']]],
   ['omegadualiondissipation00',['OmegaDualIonDissipation00',['../classincremental_f_e_1_1_omega_dual_ion_dissipation00.html#a71bc2c3623ac5a949967fc4179d13adf',1,'incrementalFE::OmegaDualIonDissipation00']]],
+  ['omegaelectrolysis00',['OmegaElectrolysis00',['../classincremental_f_e_1_1_omega_electrolysis00.html#aeead020666687a08d0dd021ad771c83a',1,'incrementalFE::OmegaElectrolysis00']]],
   ['omegafluxdissipation00',['OmegaFluxDissipation00',['../classincremental_f_e_1_1_omega_flux_dissipation00.html#a37c7be7431a199da9fb1351fcdbe2c3f',1,'incrementalFE::OmegaFluxDissipation00']]],
   ['omegafluxpower00',['OmegaFluxPower00',['../classincremental_f_e_1_1_omega_flux_power00.html#a90bd37bed7609d188bc543ecd466e198',1,'incrementalFE::OmegaFluxPower00']]],
   ['omegainterfacefluxdissipation00',['OmegaInterfaceFluxDissipation00',['../classincremental_f_e_1_1_omega_interface_flux_dissipation00.html#a57559567b075fc91c5d43d6d1da03b1e',1,'incrementalFE::OmegaInterfaceFluxDissipation00']]],

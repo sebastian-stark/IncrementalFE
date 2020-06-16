@@ -138,6 +138,7 @@ var searchData=
   ['set_5fowned_5findices',['set_owned_indices',['https://dealii.org/9.0.0/doxygen/deal.II/classUtilities_1_1MPI_1_1Partitioner.html#a209816de3a347481b172efc7b2afa11e',1,'Utilities::MPI::Partitioner']]],
   ['set_5fparameters',['set_parameters',['https://dealii.org/9.0.0/doxygen/deal.II/classFunctions_1_1StokesCosine.html#aaa7ce4ab612de845d73c8699800400bf',1,'Functions::StokesCosine']]],
   ['set_5fparent',['set_parent',['https://dealii.org/9.0.0/doxygen/deal.II/classCellAccessor.html#ac7f559666292ef3769b136e0a1516dfd',1,'CellAccessor']]],
+  ['set_5fperform_5fline_5fsearch',['set_perform_line_search',['../classincremental_f_e_1_1_global_data_incremental_f_e.html#ad3cd830a41c4b92c69d2083864ac7478',1,'incrementalFE::GlobalDataIncrementalFE']]],
   ['set_5fpermutation',['set_permutation',['https://dealii.org/9.0.0/doxygen/deal.II/classPreconditionBlock.html#abd7c2ed032b5e1037cbe21ba691b7a23',1,'PreconditionBlock']]],
   ['set_5fpoints',['set_points',['https://dealii.org/9.0.0/doxygen/deal.II/classKDTree.html#acf36eb13581d3118e6f1cc200d63c958',1,'KDTree::set_points()'],['https://dealii.org/9.0.0/doxygen/deal.II/classKDTree.html#acf36eb13581d3118e6f1cc200d63c958',1,'KDTree&lt; spacedim &gt;::set_points()']]],
   ['set_5fprecision',['set_precision',['https://dealii.org/9.0.0/doxygen/deal.II/classTableHandler.html#af4766582d0900d3095fc2efad21ae83e',1,'TableHandler']]],

@@ -1604,6 +1604,173 @@ public:
 	}
 };
 
+
+/**
+ * Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
+ *
+ * \f$ h^\Sigma_\tau =	-\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else}  \end{cases} \f$
+ *
+ * where \f$\eta^\mathrm{int}\f$ is the electrochemical potential in the interior of the domain,<br>
+ * \f$F\f$ is Faraday's constant,<br>
+ * \f$A^{\mathrm{e^-}}\f$ is the number of electrons added to the solution during the reaction,<br>
+ * \f$\bar{\varphi}\f$ the prescribed external electrical potential,<br>
+ * \f$\varphi^\mathrm{c}\f$ the overpotential required to start the reaction,<br>
+ * and \f$R\f$ an "interface resistance"
+ *
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\eta^\mathrm{int}\f$
+ */
+template<unsigned int spacedim>
+class OmegaElectrolysis00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+private:
+
+	/**
+	 * \f$F\f$
+	 */
+	const double
+	F;
+
+	/**
+	 * \f$R\f$
+	 */
+	const double
+	R;
+
+	/**
+	 * \f$A^{\mathrm{e^-}}\f$
+	 */
+	const double
+	A_e;
+
+	/**
+	 * \f$\varphi^\mathrm{c}\f$
+	 */
+	const double
+	phi_c;
+
+
+	/**
+	 * %Function determining \f$\bar{\varphi}(\boldsymbol{X}, t)\f$
+	 */
+	dealii::Function<spacedim>&
+	phi_bar;
+
+	/**
+	 * This parameter is used to make the system definite in the range where the reaction does not take place.
+	 * It represents a fraction of the second derivative of the potential in the range where the reaction does take place.
+	 * This fraction is output as second derivative in the range where the reaction does not take place.
+	 */
+	const double
+	regularization;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		F						OmegaElectrolysis00::F
+	 *
+	 * @param[in]		R						OmegaElectrolysis00::R
+	 *
+	 * @param[in]		A_e						OmegaElectrolysis00::A_e
+	 *
+	 * @param[in]		phi_c					OmegaElectrolysis00::phi_c
+	 *
+	 * @param[in]		phi_bar					OmegaElectrolysis00::phi_bar
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 *
+	 * @param[in]		regularization			OmegaElectrolysis00::regularization
+	 */
+	OmegaElectrolysis00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+						const std::set<dealii::types::material_id>										domain_of_integration,
+						const dealii::Quadrature<spacedim-1>											quadrature,
+						GlobalDataIncrementalFE<spacedim>&												global_data,
+						const double																	F,
+						const double																	R,
+						const double																	A_e,
+						const double																	phi_c,
+						dealii::Function<spacedim>&														phi_bar,
+						const unsigned int																method,
+						const double																	alpha = 0.0,
+						const double																	regularization = 1e-12)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 0, 0, 1, 0, method, alpha, "OmegaElectrolysis00"),
+	F(F),
+	R(R),
+	A_e(A_e),
+	phi_c(phi_c),
+	phi_bar(phi_bar),
+	regularization(regularization)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+
+		const double time_old = phi_bar.get_time();
+		phi_bar.set_time(t);
+		const double eta_bar_ = A_e * F * phi_bar.value(x);
+		phi_bar.set_time(time_old);
+		const double eta_c = A_e * F * phi_c;
+
+		const double eta_int = values[0];
+		const double delta_eta = eta_int + eta_bar_;
+
+		if(get<0>(requested_quantities))
+		{
+			if(delta_eta >= eta_c)
+				sigma = -1.0 / (2.0 * R) * (delta_eta - eta_c) * (delta_eta - eta_c);
+			else
+				sigma = 0.0;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			if(delta_eta >= eta_c)
+				d_sigma[0] = -1.0 / R * (delta_eta - eta_c);
+			else
+				d_sigma = 0.0;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			if(delta_eta >= eta_c)
+				d2_sigma[0][0] = -1.0 / R;
+			else
+				// small second derivative to ensure definiteness of system
+				d2_sigma[0][0] = -regularization / R;
+		}
+
+		return false;
+	}
+
+};
+
 }
 
 

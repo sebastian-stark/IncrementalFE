@@ -157,6 +157,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab86938372e460e4253c5cc22edffbf94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8037538c6a7fc8b05168fe006ed2083"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#ae8037538c6a7fc8b05168fe006ed2083">set_predictor_step</a> (const bool <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#afe172fdb882f9dd0cd5f963386dd2ffb">predictor_step</a>=true)</td></tr>
 <tr class="separator:ae8037538c6a7fc8b05168fe006ed2083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3cd830a41c4b92c69d2083864ac7478"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#ad3cd830a41c4b92c69d2083864ac7478">set_perform_line_search</a> (const bool <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2253a9b142315cbccac38c8b8dc83824">perform_line_search</a>=true)</td></tr>
+<tr class="separator:ad3cd830a41c4b92c69d2083864ac7478"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74424d0040a6f5c2aa545288b42483f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a74424d0040a6f5c2aa545288b42483f4">reinit</a> (const double t_init=0.0)</td></tr>
 <tr class="separator:a74424d0040a6f5c2aa545288b42483f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -192,6 +194,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a6db92e8e97c6875df1ecf5aa2a3a0345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d5cf3ecf70ec61771bbcfe45d0e6b5d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a0d5cf3ecf70ec61771bbcfe45d0e6b5d">output_level</a> = 1</td></tr>
 <tr class="separator:a0d5cf3ecf70ec61771bbcfe45d0e6b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2253a9b142315cbccac38c8b8dc83824"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2253a9b142315cbccac38c8b8dc83824">perform_line_search</a> = true</td></tr>
+<tr class="separator:a2253a9b142315cbccac38c8b8dc83824"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -520,6 +524,31 @@ template&lt;unsigned int spacedim&gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">output_level</td><td><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a0d5cf3ecf70ec61771bbcfe45d0e6b5d">GlobalDataIncrementalFE::output_level</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad3cd830a41c4b92c69d2083864ac7478"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::set_perform_line_search </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>perform_line_search</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2253a9b142315cbccac38c8b8dc83824">GlobalDataIncrementalFE::perform_line_search</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">perform_line_search</td><td><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2253a9b142315cbccac38c8b8dc83824">GlobalDataIncrementalFE::perform_line_search</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -876,6 +905,29 @@ template&lt;unsigned int spacedim&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Level of output written to stdout. Currently only 0 (print no output) and 1 (print output) are possible. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2253a9b142315cbccac38c8b8dc83824"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::perform_line_search = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>If true, line search is performed during Newton-Raphson iteration </p>
 
 </div>
 </div>

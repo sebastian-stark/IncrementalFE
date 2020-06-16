@@ -265,6 +265,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			}
 
 			residual = get_residual();
+			if(!global_data->perform_line_search)
+				break;
+
 			if( (iter == 0) || (residual < residual_old) )
 			{
 				break;

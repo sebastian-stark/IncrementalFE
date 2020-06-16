@@ -212,6 +212,13 @@ GlobalDataIncrementalFE<spacedim>::set_safety_distance(const double safety_dista
 
 template<unsigned int spacedim>
 void
+GlobalDataIncrementalFE<spacedim>::set_perform_line_search(const bool perform_line_search)
+{
+	this->perform_line_search = perform_line_search;
+}
+
+template<unsigned int spacedim>
+void
 GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
 {
 	t = t_init;

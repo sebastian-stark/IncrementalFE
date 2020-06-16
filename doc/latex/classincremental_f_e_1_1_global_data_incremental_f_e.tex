@@ -69,6 +69,8 @@ void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ab86938372e
 \item 
 void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae8037538c6a7fc8b05168fe006ed2083}{set\+\_\+predictor\+\_\+step} (const bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_afe172fdb882f9dd0cd5f963386dd2ffb}{predictor\+\_\+step}=true)
 \item 
+void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad3cd830a41c4b92c69d2083864ac7478}{set\+\_\+perform\+\_\+line\+\_\+search} (const bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}{perform\+\_\+line\+\_\+search}=true)
+\item 
 void \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a74424d0040a6f5c2aa545288b42483f4}{reinit} (const double t\+\_\+init=0.\+0)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
@@ -103,6 +105,8 @@ bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_afe172fdb88
 double \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6db92e8e97c6875df1ecf5aa2a3a0345}{safety\+\_\+distance} = 0.\+9
 \item 
 unsigned int \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0d5cf3ecf70ec61771bbcfe45d0e6b5d}{output\+\_\+level} = 1
+\item 
+bool \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}{perform\+\_\+line\+\_\+search} = true
 \end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -294,6 +298,20 @@ Sets \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0d5cf3ecf7
 \mbox{\tt in}  & {\em output\+\_\+level} & \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0d5cf3ecf70ec61771bbcfe45d0e6b5d}{Global\+Data\+Incremental\+F\+E\+::output\+\_\+level} \\
 \hline
 \end{DoxyParams}
+\index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!set\+\_\+perform\+\_\+line\+\_\+search@{set\+\_\+perform\+\_\+line\+\_\+search}}
+\index{set\+\_\+perform\+\_\+line\+\_\+search@{set\+\_\+perform\+\_\+line\+\_\+search}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{set\+\_\+perform\+\_\+line\+\_\+search(const bool perform\+\_\+line\+\_\+search=true)}{set_perform_line_search(const bool perform_line_search=true)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::set\+\_\+perform\+\_\+line\+\_\+search (
+\begin{DoxyParamCaption}
+\item[{const bool}]{perform\+\_\+line\+\_\+search = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ad3cd830a41c4b92c69d2083864ac7478}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ad3cd830a41c4b92c69d2083864ac7478}
+Sets \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}{Global\+Data\+Incremental\+F\+E\+::perform\+\_\+line\+\_\+search}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em perform\+\_\+line\+\_\+search} & \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}{Global\+Data\+Incremental\+F\+E\+::perform\+\_\+line\+\_\+search} \\
+\hline
+\end{DoxyParams}
 \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!set\+\_\+predictor\+\_\+corrector@{set\+\_\+predictor\+\_\+corrector}}
 \index{set\+\_\+predictor\+\_\+corrector@{set\+\_\+predictor\+\_\+corrector}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
 \subsubsection[{\texorpdfstring{set\+\_\+predictor\+\_\+corrector(const bool predictor\+\_\+corrector=true)}{set_predictor_corrector(const bool predictor_corrector=true)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::set\+\_\+predictor\+\_\+corrector (
@@ -433,7 +451,10 @@ Maximum number of bisections allowed within line search to complete an iteration
 Maximum number of iterations allowed for solution of a single time step \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!output\+\_\+level@{output\+\_\+level}}
 \index{output\+\_\+level@{output\+\_\+level}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
 \subsubsection[{\texorpdfstring{output\+\_\+level}{output_level}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ unsigned int {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::output\+\_\+level = 1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a0d5cf3ecf70ec61771bbcfe45d0e6b5d}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a0d5cf3ecf70ec61771bbcfe45d0e6b5d}
-Level of output written to stdout. Currently only 0 (print no output) and 1 (print output) are possible. \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!predictor\+\_\+corrector@{predictor\+\_\+corrector}}
+Level of output written to stdout. Currently only 0 (print no output) and 1 (print output) are possible. \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!perform\+\_\+line\+\_\+search@{perform\+\_\+line\+\_\+search}}
+\index{perform\+\_\+line\+\_\+search@{perform\+\_\+line\+\_\+search}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
+\subsubsection[{\texorpdfstring{perform\+\_\+line\+\_\+search}{perform_line_search}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::perform\+\_\+line\+\_\+search = true\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2253a9b142315cbccac38c8b8dc83824}
+If true, line search is performed during Newton-\/\+Raphson iteration \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!predictor\+\_\+corrector@{predictor\+\_\+corrector}}
 \index{predictor\+\_\+corrector@{predictor\+\_\+corrector}!incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}
 \subsubsection[{\texorpdfstring{predictor\+\_\+corrector}{predictor_corrector}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}$<$ spacedim $>$\+::predictor\+\_\+corrector = false\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a5cc0d20e5e389c149bbd288f57dee953}{}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a5cc0d20e5e389c149bbd288f57dee953}
 Indicate whether a predictor-\/corrector algorithm is used for time integration. In the predictor-\/corrector algorithm, the entire Newton-\/\+Raphson iteration scheme is performed twice within each time step (one time with \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_afe172fdb882f9dd0cd5f963386dd2ffb}{Global\+Data\+Incremental\+F\+E\+::predictor\+\_\+step} set to {\ttfamily true}, and one time with \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_afe172fdb882f9dd0cd5f963386dd2ffb}{Global\+Data\+Incremental\+F\+E\+::predictor\+\_\+step} set to {\ttfamily false}). The starting values for the second Newton-\/\+Raphson round are the results of the first round. The user can use the value of \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_afe172fdb882f9dd0cd5f963386dd2ffb}{Global\+Data\+Incremental\+F\+E\+::predictor\+\_\+step} within the scalar functional definitions to distinguish between predictor and corrector step; and hidden variables can be used to store local information from the predictor step to be available during the corrector step (e.\+g., it is possible to store the resulting local dependent variables at the end of each predictor step in the hidden variables and then base the corrector on these values). \index{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE@{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}!predictor\+\_\+step@{predictor\+\_\+step}}
