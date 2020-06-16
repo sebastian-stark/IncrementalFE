@@ -1608,7 +1608,7 @@ public:
 /**
  * Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
  *
- * \f$ h^\Sigma_\tau =	-\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else}  \end{cases} \f$
+ * \f$ h^\Sigma_\tau =	-\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else}  \end{cases} \f$
  *
  * where \f$\eta^\mathrm{int}\f$ is the electrochemical potential in the interior of the domain,<br>
  * \f$F\f$ is Faraday's constant,<br>
@@ -1734,9 +1734,9 @@ public:
 
 		const double time_old = phi_bar.get_time();
 		phi_bar.set_time(t);
-		const double eta_bar_ = A_e * F * phi_bar.value(x);
+		const double eta_bar_ = -A_e * F * phi_bar.value(x);
 		phi_bar.set_time(time_old);
-		const double eta_c = A_e * F * phi_c;
+		const double eta_c = -A_e * F * phi_c;
 
 		const double eta_int = values[0];
 		const double delta_eta = eta_int + eta_bar_;
