@@ -1183,7 +1183,20 @@ public:
  * \f$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)\f$,
  *
  * where \f$\mu_0\f$ is a reference chemical potential, \f$R\f$ the gas constant, \f$T\f$ the temperature,
- * \f$c\f$ the species concentration, and \f$c^\mathrm{f}\f$ the fluid concentration
+ * \f$c\f$ the species concentration, and \f$c^\mathrm{f}\f$ the fluid concentration.
+ *
+ * In order to circumvent numerical problems for low species concentrations, the scalar functional may be regularized according to
+ *
+ * \f$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)\f$,
+ *
+ * where
+ *
+ * \f$ h(x) = \begin{cases}
+ *          x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\
+ *          \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else},
+ *         \end{cases} \f$,
+ *
+ * with \f$\epsilon \ll 1\f$ being a regularization parameter.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$<br>
  * 																					[1] \f$c^\mathrm{f}\f$
@@ -1206,6 +1219,30 @@ private:
 	const double
 	mu_0;
 
+	/**
+	 * \f$\epsilon\f$
+	 */
+	const double
+	eps;
+
+	/**
+	 * \f$c_0 / c^\mathrm{f}_0\f$
+	 */
+	const double
+	c_0_c_f_0;
+
+	/**
+	 * \f$\ln(\epsilon)\f$
+	 */
+	const double
+	log_eps;
+
+	/**
+	 * \f$\ln(c_0 / c^\mathrm{f}_0)\f$
+	 */
+	const double
+	log_c_0_c_f_0;
+
 public:
 
 	/**
@@ -1224,6 +1261,10 @@ public:
 	 * @param[in]		mu_0					PsiChemical02::mu_0
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		eps						PsiChemical02::eps
+	 *
+	 * @param[in]		c_0_c_f_0				PsiChemical02::c_f_c_f_0
 	 */
 	PsiChemical02(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -1231,11 +1272,17 @@ public:
 					GlobalDataIncrementalFE<spacedim>&											global_data,
 					const double																RT,
 					const double																mu_0,
-					const double																alpha)
+					const double																alpha,
+					const double																eps = 0.0,
+					const double																c_0_c_f_0 = 1.0)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical02"),
 	RT(RT),
-	mu_0(mu_0)
+	mu_0(mu_0),
+	eps(eps),
+	c_0_c_f_0(c_0_c_f_0),
+	log_eps(log(eps)),
+	log_c_0_c_f_0(log(c_0_c_f_0))
 	{
 	}
 
@@ -1254,24 +1301,54 @@ public:
 		const double c = values[0];
 		const double c_f = values[1];
 
+		if(c == 0)
+			return true;
+
 		const double log_c_c_f = log(c/c_f);
+
+		const double c_c_0_c_f_0_c_f = (c / c_f) / c_0_c_f_0;
 
 		if(get<0>(requested_quantities))
 		{
-			omega = mu_0 * c + RT * c * (log_c_c_f - 1.0);
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				omega = mu_0 * c + RT * c * (log_c_c_f - 1.0);
+			}
+			else
+			{
+				omega = (mu_0 + RT * log_c_0_c_f_0) * c + RT * c_f * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps + 1.0 ) - 1.0 );
+			}
+
 		}
 
 		if(get<1>(requested_quantities))
 		{
-			d_omega[0] = mu_0 + RT * log_c_c_f;
-			d_omega[1] = -RT * c/c_f;
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d_omega[0] = mu_0 + RT * log_c_c_f;
+				d_omega[1] = -RT * c/c_f;
+			}
+			else
+			{
+				d_omega[0] = mu_0 + RT * log_c_0_c_f_0 + RT * c_f / c * c_0_c_f_0 * eps * log_eps;
+				d_omega[1] = RT * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps ) - 1.0 );
+			}
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega(0,0) = RT / c;
-			d2_omega(1,1) = RT * c / c_f / c_f;
-			d2_omega(0,1) = d2_omega(1,0) = -RT / c_f;
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d2_omega(0,0) = RT / c;
+				d2_omega(1,1) = RT * c / c_f / c_f;
+				d2_omega(0,1) = d2_omega(1,0) = -RT / c_f;
+			}
+			else
+			{
+				d2_omega(0,0) = -RT * c_f / c / c * c_0_c_f_0 * eps * log_eps;
+				d2_omega(1,1) = -RT * c_0_c_f_0 * eps * log_eps / c_f;
+				d2_omega(0,1) = d2_omega(1,0) = RT * c_0_c_f_0 * eps * log_eps / c;
+			}
 		}
 
 		return false;

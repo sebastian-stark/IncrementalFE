@@ -148,3 +148,8 @@
 \form#147:$\varphi^\mathrm{c}$
 \form#148:$\bar{\varphi}(\boldsymbol{X}, t)$
 \form#149:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+\form#150:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+\form#151:$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)$
+\form#152:$c_0 / c^\mathrm{f}_0$
+\form#153:$\ln(\epsilon)$
+\form#154:$\ln(c_0 / c^\mathrm{f}_0)$

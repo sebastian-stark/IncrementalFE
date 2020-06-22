@@ -1,0 +1,166 @@
+\hypertarget{classincremental_f_e_1_1_omega_electrolysis00}{}\section{incremental\+FE\+:\+:Omega\+Electrolysis00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_electrolysis00}\index{incremental\+F\+E\+::\+Omega\+Electrolysis00$<$ spacedim $>$@{incremental\+F\+E\+::\+Omega\+Electrolysis00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+:\+:Omega\+Electrolysis00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{classincremental_f_e_1_1_omega_electrolysis00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+:\+:Omega\+Electrolysis00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{classincremental_f_e_1_1_omega_electrolysis00__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_aeead020666687a08d0dd021ad771c83a}{Omega\+Electrolysis00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}{F}, const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a1961fc52f44812e204ed81278a1bfa91}{R}, const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_af015904f2eb09848ed82ca739410096e}{A\+\_\+e}, const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ab69759b01a0d2e728c35fb94c9570f6e}{phi\+\_\+c}, dealii\+::\+Function$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ac489e8ba97912c01587b14b945cbf0b7}{phi\+\_\+bar}, const unsigned int \hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}, const double \hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}=0.\+0, const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}{regularization}=1e-\/12)
+\item 
+bool \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ac2bf76c266936461a5b8cfb7a60624da}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}{F}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a1961fc52f44812e204ed81278a1bfa91}{R}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_af015904f2eb09848ed82ca739410096e}{A\+\_\+e}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ab69759b01a0d2e728c35fb94c9570f6e}{phi\+\_\+c}
+\item 
+dealii\+::\+Function$<$ spacedim $>$ \& \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ac489e8ba97912c01587b14b945cbf0b7}{phi\+\_\+bar}
+\item 
+const double \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}{regularization}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\\*
+class incremental\+F\+E\+::\+Omega\+Electrolysis00$<$ spacedim $>$}
+
+Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
+
+$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+
+where $\eta^\mathrm{int}$ is the electrochemical potential in the interior of the domain,~\newline
+ $F$ is Faraday\textquotesingle{}s constant,~\newline
+ $A^{\mathrm{e^-}}$ is the number of electrons added to the solution during the reaction,~\newline
+ $\bar{\varphi}$ the prescribed external electrical potential,~\newline
+ $\varphi^\mathrm{c}$ the overpotential required to start the reaction,~\newline
+ and $R$ an \char`\"{}interface resistance\char`\"{}
+
+Ordering of quantities in {\bf Scalar\+Functional\+::e\+\_\+sigma} \+:~\newline
+\mbox{[}0\mbox{]} $\eta^\mathrm{int}$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!Omega\+Electrolysis00@{Omega\+Electrolysis00}}
+\index{Omega\+Electrolysis00@{Omega\+Electrolysis00}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{Omega\+Electrolysis00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double F, const double R, const double A\+\_\+e, const double phi\+\_\+c, dealii\+::\+Function$<$ spacedim $>$ \&phi\+\_\+bar, const unsigned int method, const double alpha=0.\+0, const double regularization=1e-\/12)}{OmegaElectrolysis00(const std::vector< dealii::GalerkinTools::DependentField< spacedim-1, spacedim >> e_sigma, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim-1 > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double F, const double R, const double A_e, const double phi_c, dealii::Function< spacedim > &phi_bar, const unsigned int method, const double alpha=0.0, const double regularization=1e-12)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::{\bf Omega\+Electrolysis00} (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+sigma, }
+\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
+\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature, }
+\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
+\item[{const double}]{F, }
+\item[{const double}]{R, }
+\item[{const double}]{A\+\_\+e, }
+\item[{const double}]{phi\+\_\+c, }
+\item[{dealii\+::\+Function$<$ spacedim $>$ \&}]{phi\+\_\+bar, }
+\item[{const unsigned int}]{method, }
+\item[{const double}]{alpha = {\ttfamily 0.0}, }
+\item[{const double}]{regularization = {\ttfamily 1e-\/12}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_aeead020666687a08d0dd021ad771c83a}{}\label{classincremental_f_e_1_1_omega_electrolysis00_aeead020666687a08d0dd021ad771c83a}
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e\+\_\+sigma} & {\bf Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{Omega\+::global\+\_\+data}\\
+\hline
+\mbox{\tt in}  & {\em F} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}{Omega\+Electrolysis00\+::F}\\
+\hline
+\mbox{\tt in}  & {\em R} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a1961fc52f44812e204ed81278a1bfa91}{Omega\+Electrolysis00\+::R}\\
+\hline
+\mbox{\tt in}  & {\em A\+\_\+e} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_af015904f2eb09848ed82ca739410096e}{Omega\+Electrolysis00\+::\+A\+\_\+e}\\
+\hline
+\mbox{\tt in}  & {\em phi\+\_\+c} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ab69759b01a0d2e728c35fb94c9570f6e}{Omega\+Electrolysis00\+::phi\+\_\+c}\\
+\hline
+\mbox{\tt in}  & {\em phi\+\_\+bar} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ac489e8ba97912c01587b14b945cbf0b7}{Omega\+Electrolysis00\+::phi\+\_\+bar}\\
+\hline
+\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{Omega\+::method}\\
+\hline
+\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{Omega\+::alpha}\\
+\hline
+\mbox{\tt in}  & {\em regularization} & \hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}{Omega\+Electrolysis00\+::regularization} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
+\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double t, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &, double &sigma, dealii::Vector< double > &d_sigma, dealii::FullMatrix< double > &d2_sigma, const std::tuple< bool, bool, bool > requested_quantities, const bool) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
+\begin{DoxyParamCaption}
+\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
+\item[{const double}]{t, }
+\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
+\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{, }
+\item[{double \&}]{sigma, }
+\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma, }
+\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma, }
+\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities, }
+\item[{const bool}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ac2bf76c266936461a5b8cfb7a60624da}{}\label{classincremental_f_e_1_1_omega_electrolysis00_ac2bf76c266936461a5b8cfb7a60624da}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{Omega\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!A\+\_\+e@{A\+\_\+e}}
+\index{A\+\_\+e@{A\+\_\+e}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{A\+\_\+e}{A_e}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::A\+\_\+e\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_af015904f2eb09848ed82ca739410096e}{}\label{classincremental_f_e_1_1_omega_electrolysis00_af015904f2eb09848ed82ca739410096e}
+$A^{\mathrm{e^-}}$ \index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!F@{F}}
+\index{F@{F}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{F}{F}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::F\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}{}\label{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}
+$F$ \index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!phi\+\_\+bar@{phi\+\_\+bar}}
+\index{phi\+\_\+bar@{phi\+\_\+bar}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{phi\+\_\+bar}{phi_bar}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ dealii\+::\+Function$<$spacedim$>$\& {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::phi\+\_\+bar\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ac489e8ba97912c01587b14b945cbf0b7}{}\label{classincremental_f_e_1_1_omega_electrolysis00_ac489e8ba97912c01587b14b945cbf0b7}
+Function determining $\bar{\varphi}(\boldsymbol{X}, t)$ \index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!phi\+\_\+c@{phi\+\_\+c}}
+\index{phi\+\_\+c@{phi\+\_\+c}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{phi\+\_\+c}{phi_c}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::phi\+\_\+c\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ab69759b01a0d2e728c35fb94c9570f6e}{}\label{classincremental_f_e_1_1_omega_electrolysis00_ab69759b01a0d2e728c35fb94c9570f6e}
+$\varphi^\mathrm{c}$ \index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!R@{R}}
+\index{R@{R}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{R}{R}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::R\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_a1961fc52f44812e204ed81278a1bfa91}{}\label{classincremental_f_e_1_1_omega_electrolysis00_a1961fc52f44812e204ed81278a1bfa91}
+$R$ \index{incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}!regularization@{regularization}}
+\index{regularization@{regularization}!incremental\+F\+E\+::\+Omega\+Electrolysis00@{incremental\+F\+E\+::\+Omega\+Electrolysis00}}
+\subsubsection[{\texorpdfstring{regularization}{regularization}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Electrolysis00}$<$ spacedim $>$\+::regularization\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}{}\label{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}
+This parameter is used to make the system definite in the range where the reaction does not take place. It represents a fraction of the second derivative of the potential in the range where the reaction does take place. This fraction is output as second derivative in the range where the reaction does not take place. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}\end{DoxyCompactItemize}
