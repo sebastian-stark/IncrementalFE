@@ -3,48 +3,8 @@ SET(_target_src
     global_data_incremental_fe.cc
     fe_model.cc
     constraints.cc
-    scalar_functionals/chemical_potential_00.cc
-    scalar_functionals/linear_material_00.cc
-    scalar_functionals/dissipation_species_flux_00.cc
-    scalar_functionals/dual_dissipation_species_flux_00.cc
-    scalar_functionals/penalty_00.cc
-    scalar_functionals/electrical_work_00.cc
-    scalar_functionals/normal_flux_work_01.cc
-    scalar_functionals/rate_of_dependent_variables_00.cc
-    scalar_functionals/interface_dissipation_00.cc
-    scalar_functionals/dual_interface_dissipation_00.cc
-    scalar_functionals/dissipation_species_flux_01.cc
-    scalar_functionals/dual_dissipation_species_flux_01.cc
-    scalar_functionals/chemical_potential_01.cc
-    scalar_functionals/neo_hooke_00.cc
-    scalar_functionals/interface_dissipation_01.cc
-    scalar_functionals/interface_dissipation_02.cc
-    scalar_functionals/dual_interface_dissipation_01.cc
-    scalar_functionals/dual_interface_dissipation_02.cc
-    scalar_functionals/zero_normal_flux_00.cc
-    scalar_functionals/neo_hooke_01.cc
-    scalar_functionals/neo_hooke_02.cc
-    scalar_functionals/chemical_potential_02.cc
-    scalar_functionals/chemical_potential_03.cc
-    scalar_functionals/incompressibility_constraint_00.cc
-	scalar_functionals/fluid_dissipation_00.cc
-	scalar_functionals/fluid_dissipation_01.cc
-	scalar_functionals/dual_fluid_dissipation_00.cc
-	scalar_functionals/dual_fluid_dissipation_01.cc
-	scalar_functionals/dual_fluid_dissipation_02.cc
-	scalar_functionals/ion_dissipation_00.cc
-	scalar_functionals/dual_ion_dissipation_00.cc
-	scalar_functionals/initial_osmotic_pressure_00.cc
-	scalar_functionals/normal_flux_work_00.cc
-    scalar_functionals/normal_flux_work_01.cc
-	scalar_functionals/electroneutrality_surface_00.cc
-	scalar_functionals/electrostatic_enthalpy_00.cc
-	scalar_functionals/solution_gel_interaction_00.cc
-	scalar_functionals/incompressibility_constraint_01.cc
-	scalar_functionals/unidirectional_displacement_coupling_00.cc
-	scalar_functionals/pressure_work_00.cc
-	scalar_functionals/omega.cc
-	scalar_functionals/psi.cc
+    scalar_functionals/omega.cc
+    scalar_functionals/psi.cc
 )
 
 #define the debug and release targets of the library incremental_fe
