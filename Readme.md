@@ -33,3 +33,6 @@ Installation of the IncrementalFE library is through cmake:
 (6) make install
 (7) optionally set an environment variable to INCREMENTAL_FE_DIR=/path/to/install/dir
 (8) optionally run the tests (first cd /path/to/folder/build, then ctest)
+
+Acknowledgements:
+The IncrementalFE library has been developed during a project supported by the Deutsche Forschungsgemeinschaft (DFG) under Grants STA 1593/1-1 and STA 1593/2-1.
