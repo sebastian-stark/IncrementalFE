@@ -1,0 +1,99 @@
+\hypertarget{classincremental_f_e_1_1_psi_incompressibility01}{}\doxysection{incremental\+FE\+::Psi\+Incompressibility01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_incompressibility01}\index{incrementalFE::PsiIncompressibility01$<$ spacedim $>$@{incrementalFE::PsiIncompressibility01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Psi\+Incompressibility01$<$ spacedim $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classincremental_f_e_1_1_psi_incompressibility01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Psi\+Incompressibility01$<$ spacedim $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classincremental_f_e_1_1_psi_incompressibility01__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility01_ae367a94cf29aa81d4b4c49a5c2b8ef53}{Psi\+Incompressibility01}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha}})
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility01_ad2ca9358bd1bb39e1f7de76874c48fb0}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Psi\+Incompressibility01$<$ spacedim $>$}
+
+Class defining an incompressibility constraint in that the determinant of a symmetric tensor is constrained to 1.
+
+$h^\Omega_\rho = -p\left( J - 1 \right)$,
+
+where $J=\det(\boldsymbol{Q})$, $\boldsymbol{Q}$ is a symmetric tensor and $p$ the Lagrangian multiplier (the \char`\"{}pressure\char`\"{}).
+
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $Q_{xx}$~\newline
+ \mbox{[}1\mbox{]} $Q_{xy}$~\newline
+ \mbox{[}2\mbox{]} $Q_{xz}$~\newline
+ \mbox{[}3\mbox{]} $Q_{yy}$~\newline
+ \mbox{[}4\mbox{]} $Q_{yz}$~\newline
+ \mbox{[}5\mbox{]} $Q_{zz}$~\newline
+ \mbox{[}6\mbox{]} $p$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_incompressibility01_ae367a94cf29aa81d4b4c49a5c2b8ef53}\label{classincremental_f_e_1_1_psi_incompressibility01_ae367a94cf29aa81d4b4c49a5c2b8ef53}} 
+\index{incrementalFE::PsiIncompressibility01$<$ spacedim $>$@{incrementalFE::PsiIncompressibility01$<$ spacedim $>$}!PsiIncompressibility01@{PsiIncompressibility01}}
+\index{PsiIncompressibility01@{PsiIncompressibility01}!incrementalFE::PsiIncompressibility01$<$ spacedim $>$@{incrementalFE::PsiIncompressibility01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{PsiIncompressibility01()}{PsiIncompressibility01()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility01}{incremental\+F\+E\+::\+Psi\+Incompressibility01}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility01}{Psi\+Incompressibility01}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_incompressibility01_ad2ca9358bd1bb39e1f7de76874c48fb0}\label{classincremental_f_e_1_1_psi_incompressibility01_ad2ca9358bd1bb39e1f7de76874c48fb0}} 
+\index{incrementalFE::PsiIncompressibility01$<$ spacedim $>$@{incrementalFE::PsiIncompressibility01$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::PsiIncompressibility01$<$ spacedim $>$@{incrementalFE::PsiIncompressibility01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility01}{incremental\+F\+E\+::\+Psi\+Incompressibility01}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{incremental\+F\+E\+::\+Psi$<$ spacedim, spacedim $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}}\end{DoxyCompactItemize}

@@ -225,7 +225,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			double estimated_potential_increment = compute_estimated_potential_increment(delta_solution);
 
 			// check termination criterion
-			if(fabs(estimated_potential_increment) < global_data->threshold_potential_increment)
+			residual = get_residual();
+
+			if((fabs(estimated_potential_increment) < global_data->threshold_potential_increment) && (residual < 1e-15))
 			{
 				residual = get_residual();
 				pout << "Converged with residual: " << residual << " and potential increment " << estimated_potential_increment << endl << endl;
