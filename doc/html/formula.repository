@@ -1,155 +1,160 @@
-\form#0:$ h^\Sigma_\tau = \omega(\dot{v}, \dot{q}, \mu, q; t) $
-\form#1:$\dot{v}$
-\form#2:$\dot{q}$
-\form#3:$\mu$
-\form#4:$q$
-\form#5:$\alpha$
-\form#6:$ h^\Omega_\rho = \omega(\dot{v}, \dot{q}, \mu, q; t) $
-\form#7:$\omega$
-\form#8:$ h^\Omega_\rho = \dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} $
-\form#9:$c$
-\form#10:$\dot{\boldsymbol{I}}$
-\form#11:$D$
-\form#12:$ \bar D $
-\form#13:$D = \bar D/(RT)$
-\form#14:$ D = \mu n/F$
-\form#15:$n$
-\form#16:$F$
-\form#17:$I_x$
-\form#18:$I_y$
-\form#19:$I_z$
-\form#20:$ h^\Omega_\rho = -\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} $
-\form#21:$\boldsymbol{E}$
-\form#22:$E_x$
-\form#23:$E_y$
-\form#24:$E_z$
-\form#25:$ h^\Omega_\rho = -\dot{c}\eta $
-\form#26:$\eta$
-\form#27:$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E} $
-\form#28:$\boldsymbol{D}$
-\form#29:$D_x$
-\form#30:$D_y$
-\form#31:$D_z$
-\form#32:$ h^\Omega_\rho = -\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) $
-\form#33:$\nabla \boldsymbol{I}$
-\form#34:$ h^\Sigma_\tau = -\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
-\form#35:$ h^\Sigma_\tau = \bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
-\form#36:$\bar\mu$
-\form#37:$ h^\Sigma_\tau = 1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 $
-\form#38:$ h^\Sigma_\tau = -I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] $
-\form#39:$I_0$
-\form#40:$i_0$
-\form#41:$I_0 = i_0 \cdot RT / F $
-\form#42:$\beta$
-\form#43:$\Delta \eta$
-\form#44:$ h^\Sigma_\tau = \boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) $
-\form#45:$\boldsymbol{t}$
-\form#46:$\boldsymbol{u}^0$
-\form#47:$\boldsymbol{u}^1$
-\form#48:$u^0_x$
-\form#49:$u^0_y$
-\form#50:$u^0_z$
-\form#51:$u^1_x$
-\form#52:$u^1_y$
-\form#53:$u^1_z$
-\form#54:$t_x$
-\form#55:$t_y$
-\form#56:$t_z$
-\form#57:$ h^\Omega_\rho = -\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $
-\form#58:$c^\mathrm{f}$
-\form#59:$V^\mathrm{f}_\mathrm{m}$
-\form#60:$J$
-\form#61:$\boldsymbol{F}$
-\form#62:$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}$
-\form#63:$\dot{c}$
-\form#64:$\eta_{,x}$
-\form#65:$\eta_{,y}$
-\form#66:$\eta_{,z}$
-\form#67:$F_{xx}$
-\form#68:$F_{xy}$
-\form#69:$F_{xz}$
-\form#70:$F_{yx}$
-\form#71:$F_{yy}$
-\form#72:$F_{yz}$
-\form#73:$F_{zx}$
-\form#74:$F_{zy}$
-\form#75:$F_{zz}$
-\form#76:$ h^\Omega_\rho = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
-\form#77:$c^i$
-\form#78:$i$
-\form#79:$1$
-\form#80:$I$
-\form#81:$\eta^\mathrm{f}$
-\form#82:$\eta^i$
-\form#83:$\dot{c}^\mathrm{f}$
-\form#84:$\eta^\mathrm{f}_{,x}$
-\form#85:$\eta^\mathrm{f}_{,y}$
-\form#86:$\eta^\mathrm{f}_{,z}$
-\form#87:$\eta^i_{,x}$
-\form#88:$\eta^i_{,y}$
-\form#89:$\eta^i_{,z}$
-\form#90:$\bar \mu(t)$
-\form#91:$RT$
-\form#92:$\Delta \eta^\mathrm{th}/RT$
-\form#93:$|\Delta \eta/RT| > \Delta \eta^\mathrm{th}/RT$
-\form#94:$ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $
-\form#95:$0\leq \alpha \leq 1 $
-\form#96:$q_n$
-\form#97:$q_{n+1}$
-\form#98:$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $
-\form#99:$\psi(q)$
-\form#100:$\psi$
-\form#101:$h^\Omega_\rho = RT c_0 h\left( \dfrac{c}{c_0} \right)$
-\form#102:$ h(x) = \begin{cases} x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\ \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else}, \end{cases} $
-\form#103:$R$
-\form#104:$T$
-\form#105:$c_0$
-\form#106:$\mu_0$
-\form#107:$\epsilon \ll 1$
-\form#108:$h^\Omega_\rho = \dfrac{a}{2} (c-b)^2$
-\form#109:$a$
-\form#110:$b$
-\form#111:$\dfrac{\mathrm{d} h^\Omega_\rho}{\mathrm{d} p} = p \dfrac{\mathrm{d}c}{\mathrm{d}p}(p) $
-\form#112:$p$
-\form#113:$c(p)$
-\form#114:$h^\Omega_\rho = 1/2 q A q + b q$
-\form#115:$A$
-\form#116:$h^\Sigma_\tau = 1/2 q A q + b q$
-\form#117:$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]$
-\form#118:$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{E} - \dfrac{\Delta \varepsilon}{3} \left( \dfrac{c}{c^{\mathrm{ref}}} - 1 \right) \mathbf{I} $
-\form#119:$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) $
-\form#120:$\lambda$
-\form#121:$\Delta \varepsilon$
-\form#122:$c^{\mathrm{ref}}$
-\form#123:$h^\Omega_\rho = \dfrac{\mu}{2} ( \mathrm{tr}\boldsymbol{C} - 3 ) - \mu \mathrm{ln}J + \lambda (1-n_0)^2 \left( \dfrac{J-1}{1-n_0} - \mathrm{ln}\dfrac{J-n_0}{1-n_0} \right) $
-\form#124:$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} $
-\form#125:$n_0$
-\form#126:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} * \left(\mathrm{ln}J\right)^2 \right]$
-\form#127:$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$
-\form#128:$h^\Omega_\rho = p\left( n_0 + c^\mathrm{f} V^\mathrm{f}_\mathrm{m} - J \right)$
-\form#129:$h^\Omega_\rho = p_0 J$
-\form#130:$p_0$
-\form#131:$RT\mu_0$
-\form#132:$\epsilon$
-\form#133:$\ln\epsilon$
-\form#134:$c^\mathrm{ref}$
-\form#135:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J ) + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2 \right]$
-\form#136:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2$
-\form#137:$ h^\Omega_\rho = \nabla \dot{\xi} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
-\form#138:$\xi$
-\form#139:$\dot{xi}_{,x}$
-\form#140:$\dot{\xi}_{,x}$
-\form#141:$\dot{\xi}_{,y}$
-\form#142:$\dot{\xi}_{,z}$
-\form#143:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right] \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
-\form#144:$\eta^\mathrm{int}$
-\form#145:$A^{\mathrm{e^-}}$
-\form#146:$\bar{\varphi}$
-\form#147:$\varphi^\mathrm{c}$
-\form#148:$\bar{\varphi}(\boldsymbol{X}, t)$
-\form#149:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} + A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} + A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
-\form#150:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
-\form#151:$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)$
-\form#152:$c_0 / c^\mathrm{f}_0$
-\form#153:$\ln(\epsilon)$
-\form#154:$\ln(c_0 / c^\mathrm{f}_0)$
+\_form#0:$ h^\Sigma_\tau = \omega(\dot{v}, \dot{q}, \mu, q; t) $
+\_form#1:$\dot{v}$
+\_form#2:$\dot{q}$
+\_form#3:$\mu$
+\_form#4:$q$
+\_form#5:$\alpha$
+\_form#6:$ h^\Omega_\rho = \omega(\dot{v}, \dot{q}, \mu, q; t) $
+\_form#7:$\omega$
+\_form#8:$ h^\Omega_\rho = \dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} $
+\_form#9:$c$
+\_form#10:$\dot{\boldsymbol{I}}$
+\_form#11:$D$
+\_form#12:$ \bar D $
+\_form#13:$D = \bar D/(RT)$
+\_form#14:$ D = \mu n/F$
+\_form#15:$n$
+\_form#16:$F$
+\_form#17:$I_x$
+\_form#18:$I_y$
+\_form#19:$I_z$
+\_form#20:$ h^\Omega_\rho = -\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} $
+\_form#21:$\boldsymbol{E}$
+\_form#22:$E_x$
+\_form#23:$E_y$
+\_form#24:$E_z$
+\_form#25:$ h^\Omega_\rho = -\dot{c}\eta $
+\_form#26:$\eta$
+\_form#27:$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E} $
+\_form#28:$\boldsymbol{D}$
+\_form#29:$D_x$
+\_form#30:$D_y$
+\_form#31:$D_z$
+\_form#32:$ h^\Omega_\rho = -\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) $
+\_form#33:$\nabla \boldsymbol{I}$
+\_form#34:$ h^\Sigma_\tau = -\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
+\_form#35:$ h^\Sigma_\tau = \bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
+\_form#36:$\bar\mu$
+\_form#37:$ h^\Sigma_\tau = 1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 $
+\_form#38:$ h^\Sigma_\tau = -I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] $
+\_form#39:$I_0$
+\_form#40:$i_0$
+\_form#41:$I_0 = i_0 \cdot RT / F $
+\_form#42:$\beta$
+\_form#43:$\Delta \eta$
+\_form#44:$ h^\Sigma_\tau = \boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) $
+\_form#45:$\boldsymbol{t}$
+\_form#46:$\boldsymbol{u}^0$
+\_form#47:$\boldsymbol{u}^1$
+\_form#48:$u^0_x$
+\_form#49:$u^0_y$
+\_form#50:$u^0_z$
+\_form#51:$u^1_x$
+\_form#52:$u^1_y$
+\_form#53:$u^1_z$
+\_form#54:$t_x$
+\_form#55:$t_y$
+\_form#56:$t_z$
+\_form#57:$ h^\Omega_\rho = -\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $
+\_form#58:$c^\mathrm{f}$
+\_form#59:$V^\mathrm{f}_\mathrm{m}$
+\_form#60:$J$
+\_form#61:$\boldsymbol{F}$
+\_form#62:$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}$
+\_form#63:$\dot{c}$
+\_form#64:$\eta_{,x}$
+\_form#65:$\eta_{,y}$
+\_form#66:$\eta_{,z}$
+\_form#67:$F_{xx}$
+\_form#68:$F_{xy}$
+\_form#69:$F_{xz}$
+\_form#70:$F_{yx}$
+\_form#71:$F_{yy}$
+\_form#72:$F_{yz}$
+\_form#73:$F_{zx}$
+\_form#74:$F_{zy}$
+\_form#75:$F_{zz}$
+\_form#76:$ h^\Omega_\rho = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#77:$c^i$
+\_form#78:$i$
+\_form#79:$1$
+\_form#80:$I$
+\_form#81:$\eta^\mathrm{f}$
+\_form#82:$\eta^i$
+\_form#83:$\dot{c}^\mathrm{f}$
+\_form#84:$\eta^\mathrm{f}_{,x}$
+\_form#85:$\eta^\mathrm{f}_{,y}$
+\_form#86:$\eta^\mathrm{f}_{,z}$
+\_form#87:$\eta^i_{,x}$
+\_form#88:$\eta^i_{,y}$
+\_form#89:$\eta^i_{,z}$
+\_form#90:$ h^\Omega_\rho = \nabla \dot{\xi} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#91:$\xi$
+\_form#92:$\dot{\xi}_{,x}$
+\_form#93:$\dot{\xi}_{,y}$
+\_form#94:$\dot{\xi}_{,z}$
+\_form#95:$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+\_form#96:$\eta^\mathrm{int}$
+\_form#97:$A^{\mathrm{e^-}}$
+\_form#98:$\bar{\varphi}$
+\_form#99:$\varphi^\mathrm{c}$
+\_form#100:$R$
+\_form#101:$\bar \mu(t)$
+\_form#102:$RT$
+\_form#103:$\Delta \eta^\mathrm{th}/RT$
+\_form#104:$|\Delta \eta/RT| > \Delta \eta^\mathrm{th}/RT$
+\_form#105:$\bar{\varphi}(\boldsymbol{X}, t)$
+\_form#106:$ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $
+\_form#107:$0\leq \alpha \leq 1 $
+\_form#108:$q_n$
+\_form#109:$q_{n+1}$
+\_form#110:$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $
+\_form#111:$\psi(q)$
+\_form#112:$\psi$
+\_form#113:$h^\Omega_\rho = RT c_0 h\left( \dfrac{c}{c_0} \right)$
+\_form#114:$ h(x) = \begin{cases} x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\ \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else}, \end{cases} $
+\_form#115:$T$
+\_form#116:$c_0$
+\_form#117:$\mu_0$
+\_form#118:$\epsilon \ll 1$
+\_form#119:$h^\Omega_\rho = \dfrac{a}{2} (c-b)^2$
+\_form#120:$a$
+\_form#121:$b$
+\_form#122:$\dfrac{\mathrm{d} h^\Omega_\rho}{\mathrm{d} p} = p \dfrac{\mathrm{d}c}{\mathrm{d}p}(p) $
+\_form#123:$p$
+\_form#124:$c(p)$
+\_form#125:$h^\Omega_\rho = 1/2 q A q + b q$
+\_form#126:$A$
+\_form#127:$h^\Sigma_\tau = 1/2 q A q + b q$
+\_form#128:$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]$
+\_form#129:$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{E} - \dfrac{\Delta \varepsilon}{3} \left( \dfrac{c}{c^{\mathrm{ref}}} - 1 \right) \mathbf{I} $
+\_form#130:$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) $
+\_form#131:$\lambda$
+\_form#132:$\Delta \varepsilon$
+\_form#133:$c^{\mathrm{ref}}$
+\_form#134:$h^\Omega_\rho = \dfrac{\mu}{2} ( \mathrm{tr}\boldsymbol{C} - 3 ) - \mu \mathrm{ln}J + \lambda (1-n_0)^2 \left( \dfrac{J-1}{1-n_0} - \mathrm{ln}\dfrac{J-n_0}{1-n_0} \right) $
+\_form#135:$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} $
+\_form#136:$n_0$
+\_form#137:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2$
+\_form#138:$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$
+\_form#139:$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)$
+\_form#140:$h^\Omega_\rho = p\left( n_0 + c^\mathrm{f} V^\mathrm{f}_\mathrm{m} - J \right)$
+\_form#141:$h^\Omega_\rho = p_0 J$
+\_form#142:$p_0$
+\_form#143:$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{Q} \cdot \left(\boldsymbol{E} + \dfrac{1}{2} \boldsymbol{I} \right) \cdot \boldsymbol{Q} - \dfrac{1}{2} \mathbf{I} $
+\_form#144:$\boldsymbol{Q}$
+\_form#145:$ \boldsymbol{F} = \boldsymbol{F}^\mathrm{e} \cdot \boldsymbol{Q}^{-1} $
+\_form#146:$\boldsymbol{F}^\mathrm{e}$
+\_form#147:$Q_{xx}$
+\_form#148:$Q_{xy}$
+\_form#149:$Q_{xz}$
+\_form#150:$Q_{yy}$
+\_form#151:$Q_{yz}$
+\_form#152:$Q_{zz}$
+\_form#153:$RT\mu_0$
+\_form#154:$\epsilon$
+\_form#155:$\ln\epsilon$
+\_form#156:$c^\mathrm{ref}$
+\_form#157:$c_0 / c^\mathrm{f}_0$
+\_form#158:$\ln(\epsilon)$
+\_form#159:$\ln(c_0 / c^\mathrm{f}_0)$

@@ -165,6 +165,19 @@ private:
 	perform_line_search = true;
 
 	/**
+	 * Key indicating when to rebuild the sparsity pattern:<br>
+	 * 0 - in the beginning of each FEModel::do_time_step() (default)<br>
+	 * 1 - only before the next time step (afterwards, GlobalDataIncrementalFE::analyze will be set to 2)<br>
+	 * >=2 - do not rebuild
+	 *
+	 * @warning		The user must ensure that  GlobalDataIncrementalFE::compute_sparsity_pattern=0 or  GlobalDataIncrementalFE::compute_sparsity_pattern=1
+	 * 				whenever the sparsity pattern of the matrix needs to be adjusted (during the first time step; when constraints have changed; when dofs have changed; ...).
+	 * 				Currently, no internal checking is performed.
+	 */
+	unsigned int
+	compute_sparsity_pattern = 0;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -367,6 +380,14 @@ public:
 	 */
 	void
 	reinit(const double t_init = 0.0);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::compute_sparsity_pattern
+	 *
+	 * @param[in]	compute_sparsity_pattern	GlobalDataIncrementalFE::compute_sparsity_pattern
+	 */
+	void
+	set_compute_sparsity_pattern(const unsigned int compute_sparsity_pattern = 0);
 
 };
 

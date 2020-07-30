@@ -1662,6 +1662,261 @@ public:
 };
 
 
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$h^\Omega_\rho = \dfrac{\lambda}{2} \left[\mathrm{tr}\left(\boldsymbol{E}^\mathrm{e}\right)\right]^2 + \mu\mathrm{tr}\left[\left(\boldsymbol{E}^\mathrm{e}\right)^2\right]\f$,
+ *
+ * where
+ *
+ * \f$ \boldsymbol{E}^\mathrm{e} = \boldsymbol{Q} \cdot \left(\boldsymbol{E} + \dfrac{1}{2} \boldsymbol{I} \right) \cdot \boldsymbol{Q} - \dfrac{1}{2} \mathbf{I} \f$
+ *
+ * and
+ *
+ * \f$ \boldsymbol{E} = \dfrac{1}{2} ( \boldsymbol{F}^\top \cdot \boldsymbol{F} - \boldsymbol{I} ) \f$
+ *
+ * Here, \f$\boldsymbol{F}\f$ is the deformation gradient, \f$\boldsymbol{Q}\f$ the inverse of the plastic right stretch tensor, and \f$\lambda\f$ and \f$\mu\f$ are Lame's constants.
+ * The scalar functional describes
+ * the strain energy of an elastic plastic material, with elastic strains assumed to be small and plastic strains large. The ansatz is based on the multiplicative split
+ * \f$ \boldsymbol{F} = \boldsymbol{F}^\mathrm{e} \cdot \boldsymbol{Q}^{-1} \f$ of the deformation gradient, where \f$\boldsymbol{F}^\mathrm{e}\f$ is the elastic deformation
+ * contribution, which is, without loss of generality, assumed to include a rotation part.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0]   \f$F_{xx}\f$ <br>
+ * 																					[1]   \f$F_{xy}\f$ <br>
+ * 																					[2]   \f$F_{xz}\f$ <br>
+ * 																					[3]   \f$F_{yx}\f$ <br>
+ * 																					[4]   \f$F_{yy}\f$ <br>
+ * 																					[5]   \f$F_{yz}\f$ <br>
+ * 																					[6]   \f$F_{zx}\f$ <br>
+ * 																					[7]   \f$F_{zy}\f$ <br>
+ * 																					[8]   \f$F_{zz}\f$ <br>
+ * 																					[9]   \f$Q_{xx}\f$ <br>
+ * 																					[10]  \f$Q_{xy}\f$ <br>
+ * 																					[11]  \f$Q_{xz}\f$ <br>
+ * 																					[12]  \f$Q_{yy}\f$ <br>
+ * 																					[13]  \f$Q_{yz}\f$ <br>
+ * 																					[14]  \f$Q_{zz}\f$
+ */
+template<unsigned int spacedim>
+class PsiElasticPlasticMaterial00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Lame's constant \f$\lambda\f$
+	 */
+	const double
+	lambda;
+
+	/**
+	 * Lame's constant \f$\mu\f$
+	 */
+	const double
+	mu;
+
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		lambda					PsiElasticPlasticMaterial00::lambda
+	 *
+	 * @param[in]		mu						PsiElasticPlasticMaterial00::mu
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiElasticPlasticMaterial00(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>											domain_of_integration,
+								const dealii::Quadrature<spacedim>													quadrature,
+								GlobalDataIncrementalFE<spacedim>&													global_data,
+								const double																		lambda,
+								const double																		mu,
+								const double																		alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "ElasticPlasticMaterial00"),
+	lambda(lambda),
+	mu(mu)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+
+		// don't waste time with memory allocations
+		static dealii::Vector<double> T(6), dPsi_dE(6), dPsi_dQ(6), dPsi_dF(9);
+		static dealii::FullMatrix<double> dE_dF(6,9), A(6,6), B(6,6), dT_dE(6,6), dT_dQ(6,6), dA_dQ_T(6,6), dB_dQ_T(6,6), P(9,9), d2Psi_dE2(6,6), d2Psi_dE_dQ(6,6), d2Psi_dQ2(6,6), d2Psi_dF_dE(9,6), d2Psi_dF2(9,9), d2Psi_dF_dQ(9,6);
+
+		// note: expressions have been obtained by using Octave's symbolic package and the ccode code generation feature.
+		// the compiler should be able to optimize this by common subexpression replacement
+
+		const double F_11 = values[0];	const double F_12 = values[1];	const double F_13 = values[2];
+		const double F_21 = values[3];	const double F_22 = values[4];	const double F_23 = values[5];
+		const double F_31 = values[6];	const double F_32 = values[7];	const double F_33 = values[8];
+
+		const double Q_11 = values[9];	const double Q_12 = values[10];	const double Q_13 = values[11];
+										const double Q_22 = values[12];	const double Q_23 = values[13];
+																		const double Q_33 = values[14];
+
+		const double E_11 = 0.5*(F_11 * F_11) + 0.5*(F_21 * F_21) + 0.5*(F_31 * F_31) - 0.5;	const double E_12 = 0.5*F_11*F_12 + 0.5*F_21*F_22 + 0.5*F_31*F_32;						const double E_13 = 0.5*F_11*F_13 + 0.5*F_21*F_23 + 0.5*F_31*F_33;
+																								const double E_22 = 0.5*(F_12 * F_12) + 0.5*(F_22 * F_22) + 0.5*(F_32 * F_32) - 0.5;	const double E_23 = 0.5*F_12*F_13 + 0.5*F_22*F_23 + 0.5*F_32*F_33;
+																																														const double E_33 = 0.5*(F_13 * F_13) + 0.5*(F_23* F_23) + 0.5*(F_33* F_33) - 0.5;
+
+		if(get<1>(requested_quantities) || get<2>(requested_quantities))
+		{
+			dE_dF(0,0) = F_11;			dE_dF(0,1) = 0;			dE_dF(0,2) = 0;			dE_dF(0,3) = F_21;			dE_dF(0,4) = 0;			dE_dF(0,5) = 0;			dE_dF(0,6) = F_31;			dE_dF(0,7) = 0;			dE_dF(0,8) = 0;
+			dE_dF(1,0) = 0.5*F_12;		dE_dF(1,1) = 0.5*F_11;	dE_dF(1,2) = 0;			dE_dF(1,3) = 0.5*F_22;		dE_dF(1,4) = 0.5*F_21;	dE_dF(1,5) = 0;			dE_dF(1,6) = 0.5*F_32;		dE_dF(1,7) = 0.5*F_31;	dE_dF(1,8) = 0;
+			dE_dF(2,0) = 0.5*F_13;		dE_dF(2,1) = 0;			dE_dF(2,2) = 0.5*F_11;	dE_dF(2,3) = 0.5*F_23;		dE_dF(2,4) = 0;			dE_dF(2,5) = 0.5*F_21;	dE_dF(2,6) = 0.5*F_33;		dE_dF(2,7) = 0;			dE_dF(2,8) = 0.5*F_31;
+			dE_dF(3,0) = 0;				dE_dF(3,1) = F_12;		dE_dF(3,2) = 0;			dE_dF(3,3) = 0;				dE_dF(3,4) = F_22;		dE_dF(3,5) = 0;			dE_dF(3,6) = 0;				dE_dF(3,7) = F_32;		dE_dF(3,8) = 0;
+			dE_dF(4,0) = 0;				dE_dF(4,1) = 0.5*F_13;	dE_dF(4,2) = 0.5*F_12;	dE_dF(4,3) = 0;				dE_dF(4,4) = 0.5*F_23;	dE_dF(4,5) = 0.5*F_22;	dE_dF(4,6) = 0;				dE_dF(4,7) = 0.5*F_33;	dE_dF(4,8) = 0.5*F_32;
+			dE_dF(5,0) = 0;				dE_dF(5,1) = 0;			dE_dF(5,2) = F_13;		dE_dF(5,3) = 0;				dE_dF(5,4) = 0;			dE_dF(5,5) = F_23;		dE_dF(5,6) = 0;				dE_dF(5,7) = 0;			dE_dF(5,8) = F_33;
+		}
+
+		if(get<1>(requested_quantities) || get<2>(requested_quantities))
+		{
+
+			T[0] = lambda*(Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 3.0/2.0) + 2*mu*(Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) - 0.5);
+			T[1] = 2*mu*  (Q_12*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_22*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_23*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)));
+			T[2] = 2*mu*  (Q_13*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_23*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_33*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)));
+			T[3] = lambda*(Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 3.0/2.0) + 2*mu*(Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) - 0.5);
+			T[4] = 2*mu*  (Q_13*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_23*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_33*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)));
+			T[5] = lambda*(Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 3.0/2.0) + 2*mu*(Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 0.5);
+
+			A(0,0) = Q_11*Q_11;		A(0,1) = 2*Q_11*Q_12;				A(0,2) = 2*Q_11*Q_13;				A(0,3) = Q_12*Q_12;		A(0,4) = 2*Q_12*Q_13;				A(0,5) = Q_13*Q_13;
+			A(1,0) = 2*Q_11*Q_12;	A(1,1) = 2*Q_11*Q_22 + 2*Q_12*Q_12;	A(1,2) = 2*Q_11*Q_23 + 2*Q_12*Q_13;	A(1,3) = 2*Q_12*Q_22;	A(1,4) = 2*Q_12*Q_23 + 2*Q_13*Q_22;	A(1,5) = 2*Q_13*Q_23;
+			A(2,0) = 2*Q_11*Q_13;	A(2,1) = 2*Q_11*Q_23 + 2*Q_12*Q_13;	A(2,2) = 2*Q_11*Q_33 + 2*Q_13*Q_13;	A(2,3) = 2*Q_12*Q_23;	A(2,4) = 2*Q_12*Q_33 + 2*Q_13*Q_23;	A(2,5) = 2*Q_13*Q_33;
+			A(3,0) = Q_12*Q_12;		A(3,1) = 2*Q_12*Q_22;				A(3,2) = 2*Q_12*Q_23;				A(3,3) = Q_22*Q_22;		A(3,4) = 2*Q_22*Q_23;				A(3,5) = Q_23*Q_23;
+			A(4,0) = 2*Q_12*Q_13;	A(4,1) = 2*Q_12*Q_23 + 2*Q_13*Q_22;	A(4,2) = 2*Q_12*Q_33 + 2*Q_13*Q_23;	A(4,3) = 2*Q_22*Q_23;	A(4,4) = 2*Q_22*Q_33 + 2*Q_23*Q_23;	A(4,5) = 2*Q_23*Q_33;
+			A(5,0) = Q_13*Q_13;		A(5,1) = 2*Q_13*Q_23;				A(5,2) = 2*Q_13*Q_33;				A(5,3) = Q_23*Q_23;		A(5,4) = 2*Q_23*Q_33;				A(5,5) = Q_33*Q_33;
+
+			B(0,0) = 2*E_12*Q_12 + 2*E_13*Q_13 + 2*Q_11*(E_11 + 0.5);			B(0,1) = 2*E_12*Q_22 + 2*E_13*Q_23 + 2*Q_12*(E_11 + 0.5);										B(0,2) = 2*E_12*Q_23 + 2*E_13*Q_33 + 2*Q_13*(E_11 + 0.5);										B(0,3) = 0;															B(0,4) = 0;																						B(0,5) = 0;
+			B(1,0) = 2*E_12*Q_11 + 2*E_23*Q_13 + 2*Q_12*(E_22 + 0.5);			B(1,1) = 4*E_12*Q_12 + 2*E_13*Q_13 + 2*E_23*Q_23 + 2*Q_11*(E_11 + 0.5) + 2*Q_22*(E_22 + 0.5);	B(1,2) = 2*E_12*Q_13 + 2*E_23*Q_33 + 2*Q_23*(E_22 + 0.5);										B(1,3) = 2*E_12*Q_22 + 2*E_13*Q_23 + 2*Q_12*(E_11 + 0.5);			B(1,4) = 2*E_12*Q_23 + 2*E_13*Q_33 + 2*Q_13*(E_11 + 0.5);										B(1,5) = 0;
+			B(2,0) = 2*E_13*Q_11 + 2*E_23*Q_12 + 2*Q_13*(E_33 + 0.5);			B(2,1) = 2*E_13*Q_12 + 2*E_23*Q_22 + 2*Q_23*(E_33 + 0.5);										B(2,2) = 2*E_12*Q_12 + 4*E_13*Q_13 + 2*E_23*Q_23 + 2*Q_11*(E_11 + 0.5) + 2*Q_33*(E_33 + 0.5);	B(2,3) = 0;															B(2,4) = 2*E_12*Q_22 + 2*E_13*Q_23 + 2*Q_12*(E_11 + 0.5);										B(2,5) = 2*E_12*Q_23 + 2*E_13*Q_33 + 2*Q_13*(E_11 + 0.5);
+			B(3,0) = 0;															B(3,1) = 2*E_12*Q_11 + 2*E_23*Q_13 + 2*Q_12*(E_22 + 0.5);										B(3,2) = 0;																						B(3,3) = 2*E_12*Q_12 + 2*E_23*Q_23 + 2*Q_22*(E_22 + 0.5);			B(3,4) = 2*E_12*Q_13 + 2*E_23*Q_33 + 2*Q_23*(E_22 + 0.5);										B(3,5) = 0;
+			B(4,0) = 0;															B(4,1) = 2*E_13*Q_11 + 2*E_23*Q_12 + 2*Q_13*(E_33 + 0.5);										B(4,2) = 2*E_12*Q_11 + 2*E_23*Q_13 + 2*Q_12*(E_22 + 0.5);										B(4,3) = 2*E_13*Q_12 + 2*E_23*Q_22 + 2*Q_23*(E_33 + 0.5);			B(4,4) = 2*E_12*Q_12 + 2*E_13*Q_13 + 4*E_23*Q_23 + 2*Q_22*(E_22 + 0.5) + 2*Q_33*(E_33 + 0.5);	B(4,5) = 2*E_12*Q_13 + 2*E_23*Q_33 + 2*Q_23*(E_22 + 0.5);
+			B(5,0) = 0;															B(5,1) = 0;																						B(5,2) = 2*E_13*Q_11 + 2*E_23*Q_12 + 2*Q_13*(E_33 + 0.5);										B(5,3) = 0;															B(5,4) = 2*E_13*Q_12 + 2*E_23*Q_22 + 2*Q_23*(E_33 + 0.5);										B(5,5) = 2*E_13*Q_13 + 2*E_23*Q_23 + 2*Q_33*(E_33 + 0.5);
+
+			A.vmult(dPsi_dE, T);
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			dT_dE(0,0) = 2.0*Q_11*Q_11*mu + lambda*(Q_11*Q_11 + Q_12*Q_12 + Q_13*Q_13);			dT_dE(0,1) = 4.0*Q_11*Q_12*mu + lambda*(2.0*Q_11*Q_12 + 2.0*Q_12*Q_22 + 2.0*Q_13*Q_23);			dT_dE(0,2) = 4.0*Q_11*Q_13*mu + lambda*(2.0*Q_11*Q_13 + 2.0*Q_12*Q_23 + 2.0*Q_13*Q_33);			dT_dE(0,3) = 2.0*Q_12*Q_12*mu + lambda*(Q_12*Q_12 + Q_22*Q_22 + Q_23*Q_23);			dT_dE(0,4) = 4.0*Q_12*Q_13*mu + lambda*(2.0*Q_12*Q_13 + 2.0*Q_22*Q_23 + 2.0*Q_23*Q_33);			dT_dE(0,5) = 2.0*Q_13*Q_13*mu + lambda*(Q_13*Q_13 + Q_23*Q_23 + Q_33*Q_33);
+			dT_dE(1,0) = 2.0*Q_11*Q_12*mu;														dT_dE(1,1) = 2.0*mu*(Q_11*Q_22 + Q_12*Q_12);													dT_dE(1,2) = 2.0*mu*(Q_11*Q_23 + Q_12*Q_13);													dT_dE(1,3) = 2.0*Q_12*Q_22*mu;														dT_dE(1,4) = 2.0*mu*(Q_12*Q_23 + Q_13*Q_22);													dT_dE(1,5) = 2.0*Q_13*Q_23*mu;
+			dT_dE(2,0) = 2.0*Q_11*Q_13*mu;														dT_dE(2,1) = 2.0*mu*(Q_11*Q_23 + Q_12*Q_13);													dT_dE(2,2) = 2.0*mu*(Q_11*Q_33 + Q_13*Q_13);													dT_dE(2,3) = 2.0*Q_12*Q_23*mu;														dT_dE(2,4) = 2.0*mu*(Q_12*Q_33 + Q_13*Q_23);													dT_dE(2,5) = 2.0*Q_13*Q_33*mu;
+			dT_dE(3,0) = 2.0*Q_12*Q_12*mu + lambda*(Q_11*Q_11 + Q_12*Q_12 + Q_13*Q_13);			dT_dE(3,1) = 4.0*Q_12*Q_22*mu + lambda*(2.0*Q_11*Q_12 + 2.0*Q_12*Q_22 + 2.0*Q_13*Q_23);			dT_dE(3,2) = 4.0*Q_12*Q_23*mu + lambda*(2.0*Q_11*Q_13 + 2.0*Q_12*Q_23 + 2.0*Q_13*Q_33);			dT_dE(3,3) = 2.0*Q_22*Q_22*mu + lambda*(Q_12*Q_12 + Q_22*Q_22 + Q_23*Q_23);			dT_dE(3,4) = 4.0*Q_22*Q_23*mu + lambda*(2.0*Q_12*Q_13 + 2.0*Q_22*Q_23 + 2.0*Q_23*Q_33);			dT_dE(3,5) = 2.0*Q_23*Q_23*mu + lambda*(Q_13*Q_13 + Q_23*Q_23 + Q_33*Q_33);
+			dT_dE(4,0) = 2.0*Q_12*Q_13*mu;														dT_dE(4,1) = 2.0*mu*(Q_12*Q_23 + Q_13*Q_22);													dT_dE(4,2) = 2.0*mu*(Q_12*Q_33 + Q_13*Q_23);													dT_dE(4,3) = 2.0*Q_22*Q_23*mu;														dT_dE(4,4) = 2.0*mu*(Q_22*Q_33 + Q_23*Q_23);													dT_dE(4,5) = 2.0*Q_23*Q_33*mu;
+			dT_dE(5,0) = 2.0*Q_13*Q_13*mu + lambda*(Q_11*Q_11 + Q_12*Q_12 + Q_13*Q_13);			dT_dE(5,1) = 4.0*Q_13*Q_23*mu + lambda*(2.0*Q_11*Q_12 + 2.0*Q_12*Q_22 + 2.0*Q_13*Q_23);			dT_dE(5,2) = 4.0*Q_13*Q_33*mu + lambda*(2.0*Q_11*Q_13 + 2.0*Q_12*Q_23 + 2.0*Q_13*Q_33);			dT_dE(5,3) = 2.0*Q_23*Q_23*mu + lambda*(Q_12*Q_12 + Q_22*Q_22 + Q_23*Q_23);			dT_dE(5,4) = 4.0*Q_23*Q_33*mu + lambda*(2.0*Q_12*Q_13 + 2.0*Q_22*Q_23 + 2.0*Q_23*Q_33);			dT_dE(5,5) = 2.0*Q_33*Q_33*mu + lambda*(Q_13*Q_13 + Q_23*Q_23 + Q_33*Q_33);
+
+			dT_dQ(0,0) = lambda*(2.0*E_12*Q_12 + 2.0*E_13*Q_13 + 2.0*Q_11*(E_11 + 0.5)) + 2.0*mu*(2.0*E_12*Q_12 + 2.0*E_13*Q_13 + 2.0*Q_11*(E_11 + 0.5));	dT_dQ(0,1) = lambda*(2.0*E_12*Q_11 + 2.0*E_12*Q_22 + 2.0*E_13*Q_23 + 2.0*E_23*Q_13 + 2.0*Q_12*(E_11 + 0.5) + 2.0*Q_12*(E_22 + 0.5)) + 2.0*mu*(2.0*E_12*Q_11 + 2.0*E_23*Q_13 + 2.0*Q_12*(E_22 + 0.5));			dT_dQ(0,2) = lambda*(2.0*E_12*Q_23 + 2.0*E_13*Q_11 + 2.0*E_13*Q_33 + 2.0*E_23*Q_12 + 2.0*Q_13*(E_11 + 0.5) + 2.0*Q_13*(E_33 + 0.5)) + 2.0*mu*(2.0*E_13*Q_11 + 2.0*E_23*Q_12 + 2.0*Q_13*(E_33 + 0.5));	dT_dQ(0,3) = lambda*(2.0*E_12*Q_12 + 2.0*E_23*Q_23 + 2.0*Q_22*(E_22 + 0.5));																	dT_dQ(0,4) = lambda*(2.0*E_12*Q_13 + 2.0*E_13*Q_12 + 2.0*E_23*Q_22 + 2.0*E_23*Q_33 + 2.0*Q_23*(E_22 + 0.5) + 2.0*Q_23*(E_33 + 0.5));																			dT_dQ(0,5) = lambda*(2.0*E_13*Q_13 + 2.0*E_23*Q_23 + 2.0*Q_33*(E_33 + 0.5));
+			dT_dQ(1,0) = 2.0*mu*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5));																				dT_dQ(1,1) = 2.0*mu*(2.0*E_12*Q_12 + E_13*Q_13 + E_23*Q_23 + Q_11*(E_11 + 0.5) + Q_22*(E_22 + 0.5));																											dT_dQ(1,2) = 2.0*mu*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5));																																		dT_dQ(1,3) = 2.0*mu*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5));																				dT_dQ(1,4) = 2.0*mu*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5));																																				dT_dQ(1,5) = 0;
+			dT_dQ(2,0) = 2.0*mu*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5));																				dT_dQ(2,1) = 2.0*mu*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5));																																				dT_dQ(2,2) = 2.0*mu*(E_12*Q_12 + 2.0*E_13*Q_13 + E_23*Q_23 + Q_11*(E_11 + 0.5) + Q_33*(E_33 + 0.5));																									dT_dQ(2,3) = 0;																																	dT_dQ(2,4) = 2.0*mu*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5));																																				dT_dQ(2,5) = 2.0*mu*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5));
+			dT_dQ(3,0) = lambda*(2.0*E_12*Q_12 + 2.0*E_13*Q_13 + 2.0*Q_11*(E_11 + 0.5));																	dT_dQ(3,1) = lambda*(2.0*E_12*Q_11 + 2.0*E_12*Q_22 + 2.0*E_13*Q_23 + 2.0*E_23*Q_13 + 2.0*Q_12*(E_11 + 0.5) + 2.0*Q_12*(E_22 + 0.5)) + 2.0*mu*(2.0*E_12*Q_22 + 2.0*E_13*Q_23 + 2.0*Q_12*(E_11 + 0.5));			dT_dQ(3,2) = lambda*(2.0*E_12*Q_23 + 2.0*E_13*Q_11 + 2.0*E_13*Q_33 + 2.0*E_23*Q_12 + 2.0*Q_13*(E_11 + 0.5) + 2.0*Q_13*(E_33 + 0.5));																	dT_dQ(3,3) = lambda*(2.0*E_12*Q_12 + 2.0*E_23*Q_23 + 2.0*Q_22*(E_22 + 0.5)) + 2.0*mu*(2.0*E_12*Q_12 + 2.0*E_23*Q_23 + 2.0*Q_22*(E_22 + 0.5));	dT_dQ(3,4) = lambda*(2.0*E_12*Q_13 + 2.0*E_13*Q_12 + 2.0*E_23*Q_22 + 2.0*E_23*Q_33 + 2.0*Q_23*(E_22 + 0.5) + 2.0*Q_23*(E_33 + 0.5)) + 2.0*mu*(2.0*E_13*Q_12 + 2.0*E_23*Q_22 + 2.0*Q_23*(E_33 + 0.5));			dT_dQ(3,5) = lambda*(2.0*E_13*Q_13 + 2.0*E_23*Q_23 + 2.0*Q_33*(E_33 + 0.5));
+			dT_dQ(4,0) = 0;																																	dT_dQ(4,1) = 2.0*mu*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5));																																				dT_dQ(4,2) = 2.0*mu*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5));																																		dT_dQ(4,3) = 2.0*mu*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5));																				dT_dQ(4,4) = 2.0*mu*(E_12*Q_12 + E_13*Q_13 + 2.0*E_23*Q_23 + Q_22*(E_22 + 0.5) + Q_33*(E_33 + 0.5));																											dT_dQ(4,5) = 2.0*mu*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5));
+			dT_dQ(5,0) = lambda*(2.0*E_12*Q_12 + 2.0*E_13*Q_13 + 2.0*Q_11*(E_11 + 0.5));																	dT_dQ(5,1) = lambda*(2.0*E_12*Q_11 + 2.0*E_12*Q_22 + 2.0*E_13*Q_23 + 2.0*E_23*Q_13 + 2.0*Q_12*(E_11 + 0.5) + 2.0*Q_12*(E_22 + 0.5));																			dT_dQ(5,2) = lambda*(2.0*E_12*Q_23 + 2.0*E_13*Q_11 + 2.0*E_13*Q_33 + 2.0*E_23*Q_12 + 2.0*Q_13*(E_11 + 0.5) + 2.0*Q_13*(E_33 + 0.5)) + 2.0*mu*(2.0*E_12*Q_23 + 2.0*E_13*Q_33 + 2.0*Q_13*(E_11 + 0.5));	dT_dQ(5,3) = lambda*(2.0*E_12*Q_12 + 2.0*E_23*Q_23 + 2.0*Q_22*(E_22 + 0.5));																	dT_dQ(5,4) = lambda*(2.0*E_12*Q_13 + 2.0*E_13*Q_12 + 2.0*E_23*Q_22 + 2.0*E_23*Q_33 + 2.0*Q_23*(E_22 + 0.5) + 2.0*Q_23*(E_33 + 0.5)) + 2.0*mu*(2.0*E_12*Q_13 + 2.0*E_23*Q_33 + 2.0*Q_23*(E_22 + 0.5));			dT_dQ(5,5) = lambda*(2.0*E_13*Q_13 + 2.0*E_23*Q_23 + 2.0*Q_33*(E_33 + 0.5)) + 2.0*mu*(2.0*E_13*Q_13 + 2.0*E_23*Q_23 + 2.0*Q_33*(E_33 + 0.5));
+
+			dA_dQ_T(0,0) = 2.0*Q_11*T[0] + 2.0*Q_12*T[1] + 2.0*Q_13*T[2];	dA_dQ_T(0,1) = 2.0*Q_11*T[1] + 2.0*Q_12*T[3] + 2.0*Q_13*T[4];								dA_dQ_T(0,2) = 2.0*Q_11*T[2] + 2.0*Q_12*T[4] + 2.0*Q_13*T[5];								dA_dQ_T(0,3) = 0;												dA_dQ_T(0,4) = 0;																			dA_dQ_T(0,5) = 0;
+			dA_dQ_T(1,0) = 2.0*Q_12*T[0] + 2.0*Q_22*T[1] + 2.0*Q_23*T[2];	dA_dQ_T(1,1) = 2.0*Q_11*T[0] + 4*Q_12*T[1] + 2.0*Q_13*T[2] + 2.0*Q_22*T[3] + 2.0*Q_23*T[4];	dA_dQ_T(1,2) = 2.0*Q_12*T[2] + 2.0*Q_22*T[4] + 2.0*Q_23*T[5];								dA_dQ_T(1,3) = 2.0*Q_11*T[1] + 2.0*Q_12*T[3] + 2.0*Q_13*T[4];	dA_dQ_T(1,4) = 2.0*Q_11*T[2] + 2.0*Q_12*T[4] + 2.0*Q_13*T[5];								dA_dQ_T(1,5) = 0;
+			dA_dQ_T(2,0) = 2.0*Q_13*T[0] + 2.0*Q_23*T[1] + 2.0*Q_33*T[2];	dA_dQ_T(2,1) = 2.0*Q_13*T[1] + 2.0*Q_23*T[3] + 2.0*Q_33*T[4];								dA_dQ_T(2,2) = 2.0*Q_11*T[0] + 2.0*Q_12*T[1] + 4*Q_13*T[2] + 2.0*Q_23*T[4] + 2.0*Q_33*T[5];	dA_dQ_T(2,3) = 0;												dA_dQ_T(2,4) = 2.0*Q_11*T[1] + 2.0*Q_12*T[3] + 2.0*Q_13*T[4];								dA_dQ_T(2,5) = 2.0*Q_11*T[2] + 2.0*Q_12*T[4] + 2.0*Q_13*T[5];
+			dA_dQ_T(3,0) = 0;												dA_dQ_T(3,1) = 2.0*Q_12*T[0] + 2.0*Q_22*T[1] + 2.0*Q_23*T[2];								dA_dQ_T(3,2) = 0;																			dA_dQ_T(3,3) = 2.0*Q_12*T[1] + 2.0*Q_22*T[3] + 2.0*Q_23*T[4];	dA_dQ_T(3,4) = 2.0*Q_12*T[2] + 2.0*Q_22*T[4] + 2.0*Q_23*T[5];								dA_dQ_T(3,5) = 0;
+			dA_dQ_T(4,0) = 0;												dA_dQ_T(4,1) = 2.0*Q_13*T[0] + 2.0*Q_23*T[1] + 2.0*Q_33*T[2];								dA_dQ_T(4,2) = 2.0*Q_12*T[0] + 2.0*Q_22*T[1] + 2.0*Q_23*T[2];								dA_dQ_T(4,3) = 2.0*Q_13*T[1] + 2.0*Q_23*T[3] + 2.0*Q_33*T[4];	dA_dQ_T(4,4) = 2.0*Q_12*T[1] + 2.0*Q_13*T[2] + 2.0*Q_22*T[3] + 4*Q_23*T[4] + 2.0*Q_33*T[5];	dA_dQ_T(4,5) = 2.0*Q_12*T[2] + 2.0*Q_22*T[4] + 2.0*Q_23*T[5];
+			dA_dQ_T(5,0) = 0;												dA_dQ_T(5,1) = 0;																			dA_dQ_T(5,2) = 2.0*Q_13*T[0] + 2.0*Q_23*T[1] + 2.0*Q_33*T[2];								dA_dQ_T(5,3) = 0;												dA_dQ_T(5,4) = 2.0*Q_13*T[1] + 2.0*Q_23*T[3] + 2.0*Q_33*T[4];								dA_dQ_T(5,5) = 2.0*Q_13*T[2] + 2.0*Q_23*T[4] + 2.0*Q_33*T[5];
+
+			dB_dQ_T(0,0) = 2.0*T[0]*(E_11 + 0.5);					dB_dQ_T(0,1) = 2.0*E_12*T[0] + 2.0*T[1]*(E_11 + 0.5);									dB_dQ_T(0,2) = 2.0*E_13*T[0] + 2.0*T[2]*(E_11 + 0.5);									dB_dQ_T(0,3) = 2.0*E_12*T[1];							dB_dQ_T(0,4) = 2.0*E_12*T[2] + 2.0*E_13*T[1];											dB_dQ_T(0,5) = 2.0*E_13*T[2];
+			dB_dQ_T(1,0) = 2.0*E_12*T[0] + 2.0*T[1]*(E_11 + 0.5);	dB_dQ_T(1,1) = 4*E_12*T[1] + 2.0*T[0]*(E_22 + 0.5) + 2.0*T[3]*(E_11 + 0.5);				dB_dQ_T(1,2) = 2.0*E_12*T[2] + 2.0*E_13*T[1] + 2.0*E_23*T[0] + 2.0*T[4]*(E_11 + 0.5);	dB_dQ_T(1,3) = 2.0*E_12*T[3] + 2.0*T[1]*(E_22 + 0.5);	dB_dQ_T(1,4) = 2.0*E_12*T[4] + 2.0*E_13*T[3] + 2.0*E_23*T[1] + 2.0*T[2]*(E_22 + 0.5);	dB_dQ_T(1,5) = 2.0*E_13*T[4] + 2.0*E_23*T[2];
+			dB_dQ_T(2,0) = 2.0*E_13*T[0] + 2.0*T[2]*(E_11 + 0.5);	dB_dQ_T(2,1) = 2.0*E_12*T[2] + 2.0*E_13*T[1] + 2.0*E_23*T[0] + 2.0*T[4]*(E_11 + 0.5);	dB_dQ_T(2,2) = 4*E_13*T[2] + 2.0*T[0]*(E_33 + 0.5) + 2.0*T[5]*(E_11 + 0.5);				dB_dQ_T(2,3) = 2.0*E_12*T[4] + 2.0*E_23*T[1];			dB_dQ_T(2,4) = 2.0*E_12*T[5] + 2.0*E_13*T[4] + 2.0*E_23*T[2] + 2.0*T[1]*(E_33 + 0.5);	dB_dQ_T(2,5) = 2.0*E_13*T[5] + 2.0*T[2]*(E_33 + 0.5);
+			dB_dQ_T(3,0) = 2.0*E_12*T[1];							dB_dQ_T(3,1) = 2.0*E_12*T[3] + 2.0*T[1]*(E_22 + 0.5);									dB_dQ_T(3,2) = 2.0*E_12*T[4] + 2.0*E_23*T[1];											dB_dQ_T(3,3) = 2.0*T[3]*(E_22 + 0.5);					dB_dQ_T(3,4) = 2.0*E_23*T[3] + 2.0*T[4]*(E_22 + 0.5);									dB_dQ_T(3,5) = 2.0*E_23*T[4];
+			dB_dQ_T(4,0) = 2.0*E_12*T[2] + 2.0*E_13*T[1];			dB_dQ_T(4,1) = 2.0*E_12*T[4] + 2.0*E_13*T[3] + 2.0*E_23*T[1] + 2.0*T[2]*(E_22 + 0.5);	dB_dQ_T(4,2) = 2.0*E_12*T[5] + 2.0*E_13*T[4] + 2.0*E_23*T[2] + 2.0*T[1]*(E_33 + 0.5);	dB_dQ_T(4,3) = 2.0*E_23*T[3] + 2.0*T[4]*(E_22 + 0.5);	dB_dQ_T(4,4) = 4*E_23*T[4] + 2.0*T[3]*(E_33 + 0.5) + 2.0*T[5]*(E_22 + 0.5);				dB_dQ_T(4,5) = 2.0*E_23*T[5] + 2.0*T[4]*(E_33 + 0.5);
+			dB_dQ_T(5,0) = 2.0*E_13*T[2];							dB_dQ_T(5,1) = 2.0*E_13*T[4] + 2.0*E_23*T[2];											dB_dQ_T(5,2) = 2.0*E_13*T[5] + 2.0*T[2]*(E_33 + 0.5);									dB_dQ_T(5,3) = 2.0*E_23*T[4];							dB_dQ_T(5,4) = 2.0*E_23*T[5] + 2.0*T[4]*(E_33 + 0.5);									dB_dQ_T(5,5) = 2.0*T[5]*(E_33 + 0.5);
+
+			P(0,0) = dPsi_dE[0];		P(0,1) = 0.5*dPsi_dE[1];		P(0,2) = 0.5*dPsi_dE[2];
+			P(1,0) = 0.5*dPsi_dE[1];	P(1,1) = dPsi_dE[3];			P(1,2) = 0.5*dPsi_dE[4];
+			P(2,0) = 0.5*dPsi_dE[2];	P(2,1) = 0.5*dPsi_dE[4];		P(2,2) = dPsi_dE[5];
+			P(3,3) = dPsi_dE[0];		P(3,4) = 0.5*dPsi_dE[1];		P(3,5) = 0.5*dPsi_dE[2];
+			P(4,3) = 0.5*dPsi_dE[1];	P(4,4) = dPsi_dE[3];			P(4,5) = 0.5*dPsi_dE[4];
+			P(5,3) = 0.5*dPsi_dE[2];	P(5,4) = 0.5*dPsi_dE[4];		P(5,5) = dPsi_dE[5];
+			P(6,6) = dPsi_dE[0];		P(6,7) = 0.5*dPsi_dE[1];		P(6,8) = 0.5*dPsi_dE[2];
+			P(7,6) = 0.5*dPsi_dE[1];	P(7,7) = dPsi_dE[3];			P(7,8) = 0.5*dPsi_dE[4];
+			P(8,6) = 0.5*dPsi_dE[2];	P(8,7) = 0.5*dPsi_dE[4];		P(8,8) = dPsi_dE[5];
+		}
+
+		if(get<0>(requested_quantities))
+		{
+			const double tr_E_e = Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5))+ Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 1.5;
+			omega = 0.5 * lambda * tr_E_e * tr_E_e
+					+ mu*(	2.0*(Q_11*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_12*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_13*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)))
+							   *(Q_12*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_22*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_23*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)))
+						  + 2.0*(Q_11*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_12*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_13*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)))
+						       *(Q_13*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_23*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_33*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)))
+						  + 2.0*(Q_12*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_22*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_23*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)))
+						       *(Q_13*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_23*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_33*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)))
+						  + 1.0*(Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) - 0.5)
+						       * (Q_11*(E_12*Q_12 + E_13*Q_13 + Q_11*(E_11 + 0.5)) + Q_12*(E_12*Q_11 + E_23*Q_13 + Q_12*(E_22 + 0.5)) + Q_13*(E_13*Q_11 + E_23*Q_12 + Q_13*(E_33 + 0.5)) - 0.5)
+						  + 1.0*(Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) - 0.5)
+						       * (Q_12*(E_12*Q_22 + E_13*Q_23 + Q_12*(E_11 + 0.5)) + Q_22*(E_12*Q_12 + E_23*Q_23 + Q_22*(E_22 + 0.5)) + Q_23*(E_13*Q_12 + E_23*Q_22 + Q_23*(E_33 + 0.5)) - 0.5)
+						  + 1.0*(Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 0.5)
+						       * (Q_13*(E_12*Q_23 + E_13*Q_33 + Q_13*(E_11 + 0.5)) + Q_23*(E_12*Q_13 + E_23*Q_33 + Q_23*(E_22 + 0.5)) + Q_33*(E_13*Q_13 + E_23*Q_23 + Q_33*(E_33 + 0.5)) - 0.5));
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			B.vmult(dPsi_dQ, T);
+			dE_dF.Tvmult(dPsi_dF, dPsi_dE);
+			for(unsigned int i = 0; i < 9; ++i)
+				d_omega[i] = dPsi_dF[i];
+			for(unsigned int i = 9; i < 15; ++i)
+				d_omega[i] = dPsi_dQ[i - 9];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2Psi_dF2 = P;
+			d2Psi_dE_dQ = dA_dQ_T;
+			d2Psi_dQ2 = dB_dQ_T;
+
+			A.mmult(d2Psi_dE2, dT_dE);
+			A.mmult(d2Psi_dE_dQ, dT_dQ, true);
+			B.mmult(d2Psi_dQ2, dT_dQ, true);
+			dE_dF.Tmmult(d2Psi_dF_dE, d2Psi_dE2);
+			dE_dF.TmTmult(d2Psi_dF2, d2Psi_dF_dE, true);
+			dE_dF.Tmmult(d2Psi_dF_dQ, d2Psi_dE_dQ);
+			for(unsigned int i = 0; i < 9; ++i)
+				for(unsigned int j = 0; j < 9; ++j)
+					d2_omega(i,j) = d2Psi_dF2(i,j);
+			for(unsigned int i = 0; i < 9; ++i)
+				for(unsigned int j = 9; j < 15; ++j)
+					d2_omega(i,j) = d2_omega(j,i) = d2Psi_dF_dQ(i,j - 9);
+			for(unsigned int i = 9; i < 15; ++i)
+				for(unsigned int j = 9; j < 15; ++j)
+					d2_omega(i,j) = d2Psi_dQ2(i - 9,j - 9);
+		}
+
+		return false;
+	}
+
+};
+
+
+
 }
 
 

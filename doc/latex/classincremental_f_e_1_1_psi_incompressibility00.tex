@@ -1,41 +1,41 @@
-\hypertarget{classincremental_f_e_1_1_psi_incompressibility00}{}\section{incremental\+FE\+:\+:Psi\+Incompressibility00$<$ spacedim $>$ Class Template Reference}
-\label{classincremental_f_e_1_1_psi_incompressibility00}\index{incremental\+F\+E\+::\+Psi\+Incompressibility00$<$ spacedim $>$@{incremental\+F\+E\+::\+Psi\+Incompressibility00$<$ spacedim $>$}}
+\hypertarget{classincremental_f_e_1_1_psi_incompressibility00}{}\doxysection{incremental\+FE\+::Psi\+Incompressibility00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_incompressibility00}\index{incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}}
 
 
 {\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
 
 
 
-Inheritance diagram for incremental\+FE\+:\+:Psi\+Incompressibility00$<$ spacedim $>$\+:\nopagebreak
+Inheritance diagram for incremental\+FE\+::Psi\+Incompressibility00$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=264pt]{classincremental_f_e_1_1_psi_incompressibility00__inherit__graph}
+\includegraphics[width=283pt]{classincremental_f_e_1_1_psi_incompressibility00__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for incremental\+FE\+:\+:Psi\+Incompressibility00$<$ spacedim $>$\+:\nopagebreak
+Collaboration diagram for incremental\+FE\+::Psi\+Incompressibility00$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=264pt]{classincremental_f_e_1_1_psi_incompressibility00__coll__graph}
+\includegraphics[width=283pt]{classincremental_f_e_1_1_psi_incompressibility00__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Private Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const double \hyperlink{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}{V\+\_\+m\+\_\+f}
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}{V\+\_\+m\+\_\+f}}
 \item 
-const double \hyperlink{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}{n\+\_\+0}
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}{n\+\_\+0}}
 \item 
-const bool \hyperlink{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}{F\+\_\+as\+\_\+parameter}
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}{F\+\_\+as\+\_\+parameter}}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\doxysubsection*{Additional Inherited Members}
 
 
-\subsection{Detailed Description}
-\subsubsection*{template$<$unsigned int spacedim$>$\\*
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
 class incremental\+F\+E\+::\+Psi\+Incompressibility00$<$ spacedim $>$}
 
 Class defining an incompressibility constraint for a hydrogel through the Lagrangian multiplier term
@@ -44,7 +44,7 @@ $h^\Omega_\rho = p\left( n_0 + c^\mathrm{f} V^\mathrm{f}_\mathrm{m} - J \right)$
 
 where $n_0$ is the initial concentration of the solid skeleton, $c^\mathrm{f}$ the fluid concentration, $V^\mathrm{f}_\mathrm{m}$ the molar volume of the fluid, and $J$ the determinant of the deformation gradient $\boldsymbol{F}$
 
-Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
  \mbox{[}0\mbox{]} $F_{xx}$~\newline
  \mbox{[}1\mbox{]} $F_{xy}$~\newline
  \mbox{[}2\mbox{]} $F_{xz}$~\newline
@@ -57,18 +57,30 @@ Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+
  \mbox{[}9\mbox{]} $c^\mathrm{f}$~\newline
  \mbox{[}10\mbox{]} $p$ 
 
-\subsection{Member Data Documentation}
-\index{incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}!F\+\_\+as\+\_\+parameter@{F\+\_\+as\+\_\+parameter}}
-\index{F\+\_\+as\+\_\+parameter@{F\+\_\+as\+\_\+parameter}!incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}}
-\subsubsection[{\texorpdfstring{F\+\_\+as\+\_\+parameter}{F_as_parameter}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const bool {\bf incremental\+F\+E\+::\+Psi\+Incompressibility00}$<$ spacedim $>$\+::F\+\_\+as\+\_\+parameter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}{}\label{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}
-If {\ttfamily true}, deformation gradient is considered as parameter in potential (i.\+e., it is held fixed when computing the first derivative) \index{incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}!n\+\_\+0@{n\+\_\+0}}
-\index{n\+\_\+0@{n\+\_\+0}!incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}}
-\subsubsection[{\texorpdfstring{n\+\_\+0}{n_0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi\+Incompressibility00}$<$ spacedim $>$\+::n\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}{}\label{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}
-$n_0$ \index{incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}!V\+\_\+m\+\_\+f@{V\+\_\+m\+\_\+f}}
-\index{V\+\_\+m\+\_\+f@{V\+\_\+m\+\_\+f}!incremental\+F\+E\+::\+Psi\+Incompressibility00@{incremental\+F\+E\+::\+Psi\+Incompressibility00}}
-\subsubsection[{\texorpdfstring{V\+\_\+m\+\_\+f}{V_m_f}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi\+Incompressibility00}$<$ spacedim $>$\+::V\+\_\+m\+\_\+f\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}{}\label{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}\label{classincremental_f_e_1_1_psi_incompressibility00_aca72a8996f35c7dbd664765af62dec95}} 
+\index{incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}!F\_as\_parameter@{F\_as\_parameter}}
+\index{F\_as\_parameter@{F\_as\_parameter}!incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{F\_as\_parameter}{F\_as\_parameter}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00}{incremental\+F\+E\+::\+Psi\+Incompressibility00}}$<$ spacedim $>$\+::F\+\_\+as\+\_\+parameter\hspace{0.3cm}{\ttfamily [private]}}
+
+If {\ttfamily true}, deformation gradient is considered as parameter in potential (i.\+e., it is held fixed when computing the first derivative) \mbox{\Hypertarget{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}\label{classincremental_f_e_1_1_psi_incompressibility00_a21e9fc511e9410d0fbc9d0514f801f69}} 
+\index{incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}!n\_0@{n\_0}}
+\index{n\_0@{n\_0}!incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n\_0}{n\_0}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00}{incremental\+F\+E\+::\+Psi\+Incompressibility00}}$<$ spacedim $>$\+::n\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+$n_0$ \mbox{\Hypertarget{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}\label{classincremental_f_e_1_1_psi_incompressibility00_adb4a98d91d9105e56d71b1c2bbb731fe}} 
+\index{incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}!V\_m\_f@{V\_m\_f}}
+\index{V\_m\_f@{V\_m\_f}!incrementalFE::PsiIncompressibility00$<$ spacedim $>$@{incrementalFE::PsiIncompressibility00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{V\_m\_f}{V\_m\_f}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_incompressibility00}{incremental\+F\+E\+::\+Psi\+Incompressibility00}}$<$ spacedim $>$\+::V\+\_\+m\+\_\+f\hspace{0.3cm}{\ttfamily [private]}}
+
 $V^\mathrm{f}_\mathrm{m}$ 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}\end{DoxyCompactItemize}
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}}\end{DoxyCompactItemize}

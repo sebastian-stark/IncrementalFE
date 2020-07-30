@@ -1,8 +1,11 @@
 <map id="/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/scalar_functionals/psi.h" name="/home/sst/code/IncrementalFE/IncrementalFE/include/incremental_fe/scalar_functionals/psi.h">
-<area shape="rect" id="node2" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$full__matrix_8h.html" title="deal.II/lac/full_matrix.h" alt="" coords="5,117,160,143"/>
-<area shape="rect" id="node3" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$vector_8h.html" title="deal.II/lac/vector.h" alt="" coords="184,117,315,143"/>
-<area shape="rect" id="node4" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$point_8h.html" title="deal.II/base/point.h" alt="" coords="325,199,459,225"/>
-<area shape="rect" id="node5" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$scalar__functional_8h.html" title="galerkin_tools/scalar\l_functional.h" alt="" coords="389,109,531,151"/>
-<area shape="rect" id="node6" href="$global__data__incremental__fe_8h.html" title="incremental_fe/global\l_data_incremental_fe.h" alt="" coords="555,109,712,151"/>
-<area shape="rect" id="node9" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$subscriptor_8h.html" title="deal.II/base/subscriptor.h" alt="" coords="687,199,857,225"/>
+<area shape="rect" id="node1" title=" " alt="" coords="241,5,523,61"/>
+<area shape="rect" id="node2" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$full__matrix_8h.html" title=" " alt="" coords="5,117,177,143"/>
+<area shape="rect" id="node3" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$vector_8h.html" title=" " alt="" coords="201,117,344,143"/>
+<area shape="rect" id="node4" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$point_8h.html" title=" " alt="" coords="357,199,503,225"/>
+<area shape="rect" id="node5" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/galerkin_tools.tag$scalar__functional_8h.html" title=" " alt="" coords="419,109,577,151"/>
+<area shape="rect" id="node6" href="$global__data__incremental__fe_8h.html" title=" " alt="" coords="601,109,776,151"/>
+<area shape="rect" id="node7" title=" " alt="" coords="574,199,633,225"/>
+<area shape="rect" id="node8" title=" " alt="" coords="657,199,720,225"/>
+<area shape="rect" id="node9" href="/home/sst/code/IncrementalFE/IncrementalFE/doc/deal.tag$subscriptor_8h.html" title=" " alt="" coords="744,199,929,225"/>
 </map>

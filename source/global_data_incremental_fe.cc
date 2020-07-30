@@ -219,6 +219,13 @@ GlobalDataIncrementalFE<spacedim>::set_perform_line_search(const bool perform_li
 
 template<unsigned int spacedim>
 void
+GlobalDataIncrementalFE<spacedim>::set_compute_sparsity_pattern(const unsigned int compute_sparsity_pattern)
+{
+	this->compute_sparsity_pattern = compute_sparsity_pattern;
+}
+
+template<unsigned int spacedim>
+void
 GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
 {
 	t = t_init;

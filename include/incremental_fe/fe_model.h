@@ -89,7 +89,7 @@ private:
 	/**
 	 * The SolverWrapper provides the functionality to solve the linear systems within each Newton-Raphson iteration
 	 */
-	const dealii::SmartPointer<const dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>>
+	const dealii::SmartPointer<dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>>
 	solver_wrapper;
 
 	/**
@@ -109,6 +109,12 @@ private:
 	 */
 	SolutionVectorType
 	solution;
+
+	/**
+	 * Solution vector with the reference solution
+	 */
+	SolutionVectorType
+	solution_ref;
 
 	/**
 	 * Right hand side vector (used internally during the solution process)
@@ -182,6 +188,12 @@ private:
 	 */
 	const bool
 	make_hanging_node_constraints;
+
+	/**
+	 * total time spent for linear solver during last time step
+	 */
+	double
+	solve_time_last_step = 0.0;
 
 	/**
 	 * Reinit a solution type vector
@@ -346,7 +358,7 @@ public:
 			const dealii::Mapping<spacedim-1, spacedim>&																								mapping_interface,
 			GlobalDataIncrementalFE<spacedim>&																											global_data,
 			const Constraints<spacedim>&																												constraints,
-			const dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
+			dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
 			const bool																																	make_hanging_node_constraints = true);
 
 	/**
@@ -531,6 +543,34 @@ public:
 	const SolutionVectorType&
 	get_solution_vector()
 	const;
+
+	/**
+	 * @return		reference to solution vector
+	 */
+	SolutionVectorType&
+	get_solution_vector();
+
+
+	/**
+	 * @return		const reference to reference solution vector
+	 */
+	const SolutionVectorType&
+	get_solution_ref_vector()
+	const;
+
+	/**
+	 * @return		reference to reference solution vector
+	 */
+	SolutionVectorType&
+	get_solution_ref_vector();
+
+	/**
+	 * return FEModel::solve_time_last_step
+	 */
+	double
+	get_solve_time_last_step()
+	const;
+
 
 };
 

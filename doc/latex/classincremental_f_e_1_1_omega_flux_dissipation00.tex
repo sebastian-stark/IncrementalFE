@@ -1,44 +1,44 @@
-\hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00}{}\section{incremental\+FE\+:\+:Omega\+Flux\+Dissipation00$<$ spacedim $>$ Class Template Reference}
-\label{classincremental_f_e_1_1_omega_flux_dissipation00}\index{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00$<$ spacedim $>$@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00$<$ spacedim $>$}}
+\hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00}{}\doxysection{incremental\+FE\+::Omega\+Flux\+Dissipation00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_flux_dissipation00}\index{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}}
 
 
 {\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
 
 
 
-Inheritance diagram for incremental\+FE\+:\+:Omega\+Flux\+Dissipation00$<$ spacedim $>$\+:\nopagebreak
+Inheritance diagram for incremental\+FE\+::Omega\+Flux\+Dissipation00$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_flux_dissipation00__inherit__graph}
+\includegraphics[width=244pt]{classincremental_f_e_1_1_omega_flux_dissipation00__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for incremental\+FE\+:\+:Omega\+Flux\+Dissipation00$<$ spacedim $>$\+:\nopagebreak
+Collaboration diagram for incremental\+FE\+::Omega\+Flux\+Dissipation00$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_flux_dissipation00__coll__graph}
+\includegraphics[width=244pt]{classincremental_f_e_1_1_omega_flux_dissipation00__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}{Omega\+Flux\+Dissipation00} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{D}, const unsigned int \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{method}, const double \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{alpha}=0.\+0)
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}{Omega\+Flux\+Dissipation00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{D}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{alpha}}=0.\+0)
 \item 
-bool \hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_a7b9ccca9346b229a5e7f4f2254d932ec}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ae1189d7eedba56295ee1e0acd2b9229f}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
 \end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const double \hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{D}
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{D}}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\doxysubsection*{Additional Inherited Members}
 
 
-\subsection{Detailed Description}
-\subsubsection*{template$<$unsigned int spacedim$>$\\*
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
 class incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00$<$ spacedim $>$}
 
 Class defining a domain related scalar functional with the integrand
@@ -49,77 +49,68 @@ where $c$ is the species concentration and $\dot{\boldsymbol{I}}$ the correspond
 
 The \char`\"{}mobility\char`\"{} $D$ is related to the usual \char`\"{}diffusion constant\char`\"{} $ \bar D $ by $D = \bar D/(RT)$. Moreover, it is related to the electrical mobility $\mu$ by $ D = \mu n/F$, where $n$ is the charge per molecule of the mobile species in multiples of the elementary charge and $F$ Faraday\textquotesingle{}s constant.
 
-Ordering of quantities in {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
 \mbox{[}0\mbox{]} $I_x$~\newline
  \mbox{[}1\mbox{]} $I_y$~\newline
  \mbox{[}2\mbox{]} $I_z$~\newline
  \mbox{[}3\mbox{]} $c$ 
 
-\subsection{Constructor \& Destructor Documentation}
-\index{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}!Omega\+Flux\+Dissipation00@{Omega\+Flux\+Dissipation00}}
-\index{Omega\+Flux\+Dissipation00@{Omega\+Flux\+Dissipation00}!incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}
-\subsubsection[{\texorpdfstring{Omega\+Flux\+Dissipation00(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double D, const unsigned int method, const double alpha=0.\+0)}{OmegaFluxDissipation00(const std::vector< dealii::GalerkinTools::DependentField< spacedim, spacedim >> e_omega, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< spacedim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double D, const unsigned int method, const double alpha=0.0)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}$<$ spacedim $>$\+::{\bf Omega\+Flux\+Dissipation00} (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega, }
-\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
-\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature, }
-\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
-\item[{const double}]{D, }
-\item[{const unsigned int}]{method, }
-\item[{const double}]{alpha = {\ttfamily 0.0}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}{}\label{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}\label{classincremental_f_e_1_1_omega_flux_dissipation00_a37c7be7431a199da9fb1351fcdbe2c3f}} 
+\index{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}!OmegaFluxDissipation00@{OmegaFluxDissipation00}}
+\index{OmegaFluxDissipation00@{OmegaFluxDissipation00}!incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaFluxDissipation00()}{OmegaFluxDissipation00()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00}{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00}{Omega\+Flux\+Dissipation00}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{D,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 Constructor
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em e\+\_\+omega} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
 \hline
-\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
 \hline
-\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
 \hline
-\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}\\
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
 \hline
-\mbox{\tt in}  & {\em D} & \hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{Omega\+Flux\+Dissipation00\+::D}\\
+\mbox{\texttt{ in}}  & {\em D} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{Omega\+Flux\+Dissipation00\+::D}}\\
 \hline
-\mbox{\tt in}  & {\em method} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}\\
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
 \hline
-\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha} \\
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}} \\
 \hline
 \end{DoxyParams}
 
 
-\subsection{Member Function Documentation}
-\index{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
-\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}
-\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const }{get_values_and_derivatives(const dealii::Vector< double > &values, const double, const dealii::Point< spacedim > &, double &omega, dealii::Vector< double > &d_omega, dealii::FullMatrix< double > &d2_omega, const std::tuple< bool, bool, bool > requested_quantities, const bool compute_dq) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
-\begin{DoxyParamCaption}
-\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
-\item[{const double}]{, }
-\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{, }
-\item[{double \&}]{omega, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega, }
-\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega, }
-\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities, }
-\item[{const bool}]{compute\+\_\+dq}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_a7b9ccca9346b229a5e7f4f2254d932ec}{}\label{classincremental_f_e_1_1_omega_flux_dissipation00_a7b9ccca9346b229a5e7f4f2254d932ec}
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_ae1189d7eedba56295ee1e0acd2b9229f}\label{classincremental_f_e_1_1_omega_flux_dissipation00_ae1189d7eedba56295ee1e0acd2b9229f}} 
+\index{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00}{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
 \begin{DoxySeeAlso}{See also}
-\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()} 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
 \end{DoxySeeAlso}
 
 
-Implements \hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{incremental\+F\+E\+::\+Omega$<$ spacedim, spacedim $>$}.
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{incremental\+F\+E\+::\+Omega$<$ spacedim, spacedim $>$}}.
 
 
 
-\subsection{Member Data Documentation}
-\index{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}!D@{D}}
-\index{D@{D}!incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00@{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}
-\subsubsection[{\texorpdfstring{D}{D}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}$<$ spacedim $>$\+::D\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}{}\label{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}\label{classincremental_f_e_1_1_omega_flux_dissipation00_ac0bf17df1157750f539c2cb1a2aabcd4}} 
+\index{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}!D@{D}}
+\index{D@{D}!incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$@{incrementalFE::OmegaFluxDissipation00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_dissipation00}{incremental\+F\+E\+::\+Omega\+Flux\+Dissipation00}}$<$ spacedim $>$\+::D\hspace{0.3cm}{\ttfamily [private]}}
+
 mobility 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}\end{DoxyCompactItemize}
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

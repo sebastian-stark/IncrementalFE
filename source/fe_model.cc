@@ -48,7 +48,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::FEModel(	const
 																			const Mapping<spacedim-1, spacedim>&																		mapping_interface,
 																			GlobalDataIncrementalFE<spacedim>&																			global_data,
 																			const Constraints<spacedim>&																				constraints,
-																			const SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
+																			SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
 																			const bool																									make_hanging_node_constraints)
 :
 assembly_helper(total_potential, tria_system, mapping_domain, mapping_interface, constraints.get_independent_scalars()),
@@ -105,6 +105,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	const unsigned int this_proc = assembly_helper.get_triangulation_system().get_this_proc_n_procs().first;
 	ConditionalOStream pout(cout, (this_proc == 0) && (global_data->get_output_level() > 0));
 
+	solve_time_last_step = 0.0;
+
 	Timer timer;
 	timer.start();
 
@@ -121,7 +123,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	bool error = false;
 
 	// old/reference values of solution
-	SolutionVectorType solution_ref = solution;
+	solution_ref = solution;
 
 
 	// make sure that ghosts are imported
@@ -146,13 +148,18 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	pout << "Elapsed wall time constraints: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
 
-	timer.start();
-	// make sparsity pattern
-	compute_sparsity_pattern(constraints);
-	timer.stop();
-	pout << "Elapsed CPU time sparsity: " << timer.cpu_time() << " seconds." << endl;
-	pout << "Elapsed wall time sparsity: " << timer.wall_time() << " seconds." << endl;
-	timer.reset();
+	if(global_data->compute_sparsity_pattern < 2)
+	{
+		timer.start();
+		// make sparsity pattern
+		compute_sparsity_pattern(constraints);
+		timer.stop();
+		pout << "Elapsed CPU time sparsity: " << timer.cpu_time() << " seconds." << endl;
+		pout << "Elapsed wall time sparsity: " << timer.wall_time() << " seconds." << endl;
+		timer.reset();
+		if(global_data->compute_sparsity_pattern == 1)
+			global_data->set_compute_sparsity_pattern(2);
+	}
 
 	// ensure consistency of current solution with constraints
 	zero_ghosts(solution);
@@ -200,6 +207,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// solve the system
 		timer.start();
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
+		solve_time_last_step += timer.wall_time();
 		timer.stop();
 		pout << "Elapsed CPU time solve: " << timer.cpu_time() << " seconds." << endl;
 		pout << "Elapsed wall time solve: " << timer.wall_time() << " seconds." << endl;
@@ -447,6 +455,36 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solution_v
 const
 {
 	return solution;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+SolutionVectorType&
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solution_vector()
+{
+	return solution;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+const SolutionVectorType&
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solution_ref_vector()
+const
+{
+	return solution_ref;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+SolutionVectorType&
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solution_ref_vector()
+{
+	return solution_ref;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+double
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solve_time_last_step()
+const
+{
+	return solve_time_last_step;
 }
 
 

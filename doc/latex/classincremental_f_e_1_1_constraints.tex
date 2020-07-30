@@ -1,52 +1,52 @@
-\hypertarget{classincremental_f_e_1_1_constraints}{}\section{incremental\+FE\+:\+:Constraints$<$ spacedim $>$ Class Template Reference}
-\label{classincremental_f_e_1_1_constraints}\index{incremental\+F\+E\+::\+Constraints$<$ spacedim $>$@{incremental\+F\+E\+::\+Constraints$<$ spacedim $>$}}
+\hypertarget{classincremental_f_e_1_1_constraints}{}\doxysection{incremental\+FE\+::Constraints$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_constraints}\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
 
 
 {\ttfamily \#include $<$constraints.\+h$>$}
 
 
 
-Inheritance diagram for incremental\+FE\+:\+:Constraints$<$ spacedim $>$\+:\nopagebreak
+Inheritance diagram for incremental\+FE\+::Constraints$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=216pt]{classincremental_f_e_1_1_constraints__inherit__graph}
+\includegraphics[width=229pt]{classincremental_f_e_1_1_constraints__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for incremental\+FE\+:\+:Constraints$<$ spacedim $>$\+:\nopagebreak
+Collaboration diagram for incremental\+FE\+::Constraints$<$ spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=216pt]{classincremental_f_e_1_1_constraints__coll__graph}
+\includegraphics[width=229pt]{classincremental_f_e_1_1_constraints__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}{$\sim$\+Constraints} ()
+\mbox{\hyperlink{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}{$\sim$\+Constraints}} ()
 \item 
-void \hyperlink{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}{add\+\_\+dirichlet\+\_\+constraint} (const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&dirichlet\+\_\+constraint)
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}{add\+\_\+dirichlet\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&dirichlet\+\_\+constraint)
 \item 
-const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $\ast$ $>$ \hyperlink{classincremental_f_e_1_1_constraints_a070b000db6079a35095f0c277a773d66}{get\+\_\+dirichlet\+\_\+constraints} () const 
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}{get\+\_\+dirichlet\+\_\+constraints}} () const
 \item 
-const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$ \hyperlink{classincremental_f_e_1_1_constraints_a958643ec784d58d1263d21ab20c99df1}{get\+\_\+independent\+\_\+scalars} () const 
+const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}{get\+\_\+independent\+\_\+scalars}} () const
 \end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $>$ $>$ \hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{dirichlet\+\_\+constraints}
+std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{dirichlet\+\_\+constraints}}
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-\subsubsection*{template$<$unsigned int spacedim$>$\\*
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
 class incremental\+F\+E\+::\+Constraints$<$ spacedim $>$}
 
-Class collecting the constraints of the problem. Currently, the class doesn\textquotesingle{}t do much and just collects {\bf Dirichlet\+Constraint} objects of the Galerkin\+Tools library. For this purpose, a {\ttfamily std\+::vector} could be used as well. However, in the future, the Galerkin\+Tools library may allow for more sophisticated constraints; and then this approach may no longer be feasible.
+Class collecting the constraints of the problem. Currently, the class doesn\textquotesingle{}t do much and just collects \textbf{ Dirichlet\+Constraint} objects of the Galerkin\+Tools library. For this purpose, a {\ttfamily std\+::vector} could be used as well. However, in the future, the Galerkin\+Tools library may allow for more sophisticated constraints; and then this approach may no longer be feasible.
 
-The \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} class inherits from {\bf Subscriptor} in order to be able to check that \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} objects are only destroyed when they are not needed anymore by other objects.
+The \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} class inherits from \textbf{ Subscriptor} in order to be able to check that \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} objects are only destroyed when they are not needed anymore by other objects.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -55,59 +55,63 @@ The \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} class inherits
 \end{DoxyTemplParams}
 
 
-\subsection{Constructor \& Destructor Documentation}
-\index{incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}!````~Constraints@{$\sim$\+Constraints}}
-\index{````~Constraints@{$\sim$\+Constraints}!incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}}
-\subsubsection[{\texorpdfstring{$\sim$\+Constraints()}{~Constraints()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Constraints}$<$ spacedim $>$\+::$\sim${\bf Constraints} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}{}\label{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}
-The destructor of \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} essentially checks before destruction that the \hyperlink{classincremental_f_e_1_1_constraints}{Constraints} object is not used by other objects. If this is the case, the program will be aborted. 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}\label{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!````~Constraints@{$\sim$Constraints}}
+\index{````~Constraints@{$\sim$Constraints}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$Constraints()}{~Constraints()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::$\sim$\mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\subsection{Member Function Documentation}
-\index{incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}!add\+\_\+dirichlet\+\_\+constraint@{add\+\_\+dirichlet\+\_\+constraint}}
-\index{add\+\_\+dirichlet\+\_\+constraint@{add\+\_\+dirichlet\+\_\+constraint}!incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}}
-\subsubsection[{\texorpdfstring{add\+\_\+dirichlet\+\_\+constraint(const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&dirichlet\+\_\+constraint)}{add_dirichlet_constraint(const dealii::GalerkinTools::DirichletConstraint< spacedim > &dirichlet_constraint)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ void {\bf incremental\+F\+E\+::\+Constraints}$<$ spacedim $>$\+::add\+\_\+dirichlet\+\_\+constraint (
-\begin{DoxyParamCaption}
-\item[{const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&}]{dirichlet\+\_\+constraint}
-\end{DoxyParamCaption}
-)}\hypertarget{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}{}\label{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}
-Add a {\bf Dirichlet\+Constraint} to \hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints}
+The destructor of \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} essentially checks before destruction that the \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} object is not used by other objects. If this is the case, the program will be aborted. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}\label{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!add\_dirichlet\_constraint@{add\_dirichlet\_constraint}}
+\index{add\_dirichlet\_constraint@{add\_dirichlet\_constraint}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{add\_dirichlet\_constraint()}{add\_dirichlet\_constraint()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+dirichlet\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&}]{dirichlet\+\_\+constraint }\end{DoxyParamCaption})}
+
+Add a \textbf{ Dirichlet\+Constraint} to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints}}
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em dirichlet\+\_\+constraint} & {\bf Dirichlet\+Constraint} object \\
+\mbox{\texttt{ in}}  & {\em dirichlet\+\_\+constraint} & \textbf{ Dirichlet\+Constraint} object \\
 \hline
 \end{DoxyParams}
-\index{incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}!get\+\_\+dirichlet\+\_\+constraints@{get\+\_\+dirichlet\+\_\+constraints}}
-\index{get\+\_\+dirichlet\+\_\+constraints@{get\+\_\+dirichlet\+\_\+constraints}!incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}}
-\subsubsection[{\texorpdfstring{get\+\_\+dirichlet\+\_\+constraints() const }{get_dirichlet_constraints() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$$\ast$ $>$ {\bf incremental\+F\+E\+::\+Constraints}$<$ spacedim $>$\+::get\+\_\+dirichlet\+\_\+constraints (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\hypertarget{classincremental_f_e_1_1_constraints_a070b000db6079a35095f0c277a773d66}{}\label{classincremental_f_e_1_1_constraints_a070b000db6079a35095f0c277a773d66}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}\label{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_dirichlet\_constraints@{get\_dirichlet\_constraints}}
+\index{get\_dirichlet\_constraints@{get\_dirichlet\_constraints}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dirichlet\_constraints()}{get\_dirichlet\_constraints()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+dirichlet\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
 \begin{DoxyReturn}{Returns}
-A vector with pointers to the {\bf Dirichlet\+Constraint} objects in \hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints} 
+A vector with pointers to the \textbf{ Dirichlet\+Constraint} objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints}} 
 \end{DoxyReturn}
-\index{incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}!get\+\_\+independent\+\_\+scalars@{get\+\_\+independent\+\_\+scalars}}
-\index{get\+\_\+independent\+\_\+scalars@{get\+\_\+independent\+\_\+scalars}!incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}}
-\subsubsection[{\texorpdfstring{get\+\_\+independent\+\_\+scalars() const }{get_independent_scalars() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$0, spacedim$>$$\ast$ $>$ {\bf incremental\+F\+E\+::\+Constraints}$<$ spacedim $>$\+::get\+\_\+independent\+\_\+scalars (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\hypertarget{classincremental_f_e_1_1_constraints_a958643ec784d58d1263d21ab20c99df1}{}\label{classincremental_f_e_1_1_constraints_a958643ec784d58d1263d21ab20c99df1}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}\label{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_independent\_scalars@{get\_independent\_scalars}}
+\index{get\_independent\_scalars@{get\_independent\_scalars}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_independent\_scalars()}{get\_independent\_scalars()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$0, spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+independent\+\_\+scalars (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
 \begin{DoxyReturn}{Returns}
 The independent scalars involved in the definition of the Dirichlet constraints. 
 \end{DoxyReturn}
 
 
-\subsection{Member Data Documentation}
-\index{incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}!dirichlet\+\_\+constraints@{dirichlet\+\_\+constraints}}
-\index{dirichlet\+\_\+constraints@{dirichlet\+\_\+constraints}!incremental\+F\+E\+::\+Constraints@{incremental\+F\+E\+::\+Constraints}}
-\subsubsection[{\texorpdfstring{dirichlet\+\_\+constraints}{dirichlet_constraints}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int spacedim$>$ std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$ $>$ $>$ {\bf incremental\+F\+E\+::\+Constraints}$<$ spacedim $>$\+::dirichlet\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{}\label{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}
-Vector with the {\bf Dirichlet\+Constraint} objects 
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}\label{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!dirichlet\_constraints@{dirichlet\_constraints}}
+\index{dirichlet\_constraints@{dirichlet\_constraints}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{dirichlet\_constraints}{dirichlet\_constraints}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$ $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::dirichlet\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}
+
+Vector with the \textbf{ Dirichlet\+Constraint} objects 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/\hyperlink{constraints_8h}{constraints.\+h}\end{DoxyCompactItemize}
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/\mbox{\hyperlink{constraints_8h}{constraints.\+h}}\end{DoxyCompactItemize}

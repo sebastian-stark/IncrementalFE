@@ -1,49 +1,49 @@
-\hypertarget{classincremental_f_e_1_1_psi}{}\section{incremental\+FE\+:\+:Psi$<$ dim, spacedim $>$ Class Template Reference}
-\label{classincremental_f_e_1_1_psi}\index{incremental\+F\+E\+::\+Psi$<$ dim, spacedim $>$@{incremental\+F\+E\+::\+Psi$<$ dim, spacedim $>$}}
+\hypertarget{classincremental_f_e_1_1_psi}{}\doxysection{incremental\+FE\+::Psi$<$ dim, spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi}\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
 
 
 {\ttfamily \#include $<$psi.\+h$>$}
 
 
 
-Inheritance diagram for incremental\+FE\+:\+:Psi$<$ dim, spacedim $>$\+:\nopagebreak
+Inheritance diagram for incremental\+FE\+::Psi$<$ dim, spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=203pt]{classincremental_f_e_1_1_psi__inherit__graph}
+\includegraphics[width=216pt]{classincremental_f_e_1_1_psi__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for incremental\+FE\+:\+:Psi$<$ dim, spacedim $>$\+:\nopagebreak
+Collaboration diagram for incremental\+FE\+::Psi$<$ dim, spacedim $>$\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=203pt]{classincremental_f_e_1_1_psi__coll__graph}
+\includegraphics[width=216pt]{classincremental_f_e_1_1_psi__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}{Psi} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}, const double \hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}=0.\+0, const std\+::string name=\char`\"{}Psi\char`\"{})
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}{Psi}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}}=0.\+0, const std\+::string name=\char`\"{}Psi\char`\"{})
 \item 
-virtual \hyperlink{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}{$\sim$\+Psi} ()=default
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}{$\sim$\+Psi}} ()=default
 \item 
-virtual bool \hyperlink{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}{get\+\_\+values\+\_\+and\+\_\+derivatives} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&{\bf values}, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&psi, {\bf dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+psi, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+psi, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const =0
+virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&psi, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+psi, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+psi, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const =0
 \item 
-bool \hyperlink{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}{get\+\_\+h\+\_\+sigma} (const {\bf dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, {\bf dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, {\bf dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}{get\+\_\+h\+\_\+sigma}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final
 \end{DoxyCompactItemize}
-\subsection*{Private Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const dealii\+::\+Smart\+Pointer$<$ \hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}$<$ spacedim $>$ $>$ \hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}
+const dealii\+::\+Smart\+Pointer$<$ \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}
 \item 
-const double \hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}}
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-\subsubsection*{template$<$unsigned int dim, unsigned int spacedim$>$\\*
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int dim, unsigned int spacedim$>$\newline
 class incremental\+F\+E\+::\+Psi$<$ dim, spacedim $>$}
 
 Class defining an interface related scalar functional with the integrand
@@ -52,91 +52,72 @@ $ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_
 
 where $0\leq \alpha \leq 1 $ is a numerical parameter, and $q_n$ and $q_{n+1}$ is the value of the state variable $q$ in the beginning of the time step and at the end of the time step, respectively. $q$ can also be vector valued. 
 
-\subsection{Constructor \& Destructor Documentation}
-\index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!Psi@{Psi}}
-\index{Psi@{Psi}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{Psi(const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ dealii\+::types\+::material\+\_\+id $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, Global\+Data\+Incremental\+F\+E$<$ spacedim $>$ \&global\+\_\+data, const double alpha=0.\+0, const std\+::string name=""Psi"")}{Psi(const std::vector< dealii::GalerkinTools::DependentField< dim, spacedim >> e_sigma, const std::set< dealii::types::material_id > domain_of_integration, const dealii::Quadrature< dim > quadrature, GlobalDataIncrementalFE< spacedim > &global_data, const double alpha=0.0, const std::string name="Psi")}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::{\bf Psi} (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$}]{e\+\_\+sigma, }
-\item[{const std\+::set$<$ {\bf dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration, }
-\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature, }
-\item[{{\bf Global\+Data\+Incremental\+FE}$<$ spacedim $>$ \&}]{global\+\_\+data, }
-\item[{const double}]{alpha = {\ttfamily 0.0}, }
-\item[{const std\+::string}]{name = {\ttfamily \char`\"{}Psi$<$~dim,~spacedim~$>$\char`\"{}}}
-\end{DoxyParamCaption}
-)}\hypertarget{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}{}\label{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}\label{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!Psi@{Psi}}
+\index{Psi@{Psi}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{Psi()}{Psi()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_psi}{Psi}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{alpha = {\ttfamily 0.0},  }\item[{const std\+::string}]{name = {\ttfamily \char`\"{}Psi$<$~dim,~spacedim~$>$\char`\"{}} }\end{DoxyParamCaption})}
+
 Constructor
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em e\+\_\+sigma} & Dependent fields $q$\\
+\mbox{\texttt{ in}}  & {\em e\+\_\+sigma} & Dependent fields $q$\\
 \hline
-\mbox{\tt in}  & {\em domain\+\_\+of\+\_\+integration} & {\bf Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
 \hline
-\mbox{\tt in}  & {\em quadrature} & {\bf Scalar\+Functional\+::quadrature}\\
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional\+::quadrature}\\
 \hline
-\mbox{\tt in}  & {\em global\+\_\+data} & \hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{Psi\+::global\+\_\+data}\\
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{Psi\+::global\+\_\+data}}\\
 \hline
-\mbox{\tt in}  & {\em alpha} & \hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{Psi\+::alpha}\\
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{Psi\+::alpha}}\\
 \hline
-\mbox{\tt in}  & {\em name} & {\bf Scalar\+Functional\+::name} \\
+\mbox{\texttt{ in}}  & {\em name} & \textbf{ Scalar\+Functional\+::name} \\
 \hline
 \end{DoxyParams}
-\index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!````~Psi@{$\sim$\+Psi}}
-\index{````~Psi@{$\sim$\+Psi}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{$\sim$\+Psi()=default}{~Psi()=default}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ virtual {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::$\sim${\bf Psi} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}{}\label{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}\label{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!````~Psi@{$\sim$Psi}}
+\index{````~Psi@{$\sim$Psi}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$Psi()}{~Psi()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::$\sim$\mbox{\hyperlink{classincremental_f_e_1_1_psi}{Psi}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
 Destructor 
 
-\subsection{Member Function Documentation}
-\index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}}
-\index{get\+\_\+h\+\_\+sigma@{get\+\_\+h\+\_\+sigma}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{get\+\_\+h\+\_\+sigma(const dealii\+::\+Vector$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ dealii\+::\+Vector$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, dealii\+::\+Vector$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, dealii\+::\+Vector$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final}{get_h_sigma(const dealii::Vector< double > &e_sigma, const std::vector< dealii::Vector< double >> &e_sigma_ref_sets, dealii::Vector< double > &hidden_vars, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &h_sigma, dealii::Vector< double > &h_sigma_1, dealii::FullMatrix< double > &h_sigma_2, const std::tuple< bool, bool, bool > requested_quantities) const final}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ bool {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::get\+\_\+h\+\_\+sigma (
-\begin{DoxyParamCaption}
-\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma, }
-\item[{const std\+::vector$<$ {\bf dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref\+\_\+sets, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars, }
-\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
-\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
-\item[{double \&}]{h\+\_\+sigma, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+1, }
-\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+2, }
-\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [final]}}\hypertarget{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}{}\label{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}
-see {\bf Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} \index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}}
-\index{get\+\_\+values\+\_\+and\+\_\+derivatives@{get\+\_\+values\+\_\+and\+\_\+derivatives}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{get\+\_\+values\+\_\+and\+\_\+derivatives(const dealii\+::\+Vector$<$ double $>$ \&values, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&psi, dealii\+::\+Vector$<$ double $>$ \&d\+\_\+psi, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+psi, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const =0}{get_values_and_derivatives(const dealii::Vector< double > &values, const dealii::Point< spacedim > &x, const dealii::Tensor< 1, spacedim > &n, double &psi, dealii::Vector< double > &d_psi, dealii::FullMatrix< double > &d2_psi, const std::tuple< bool, bool, bool > requested_quantities) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ virtual bool {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (
-\begin{DoxyParamCaption}
-\item[{const {\bf dealii\+::\+Vector}$<$ double $>$ \&}]{values, }
-\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x, }
-\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n, }
-\item[{double \&}]{psi, }
-\item[{{\bf dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+psi, }
-\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+psi, }
-\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}{}\label{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}\label{classincremental_f_e_1_1_psi_ab4e1abcaff9497eac5eb3c953f2c303a}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!get\_h\_sigma@{get\_h\_sigma}}
+\index{get\_h\_sigma@{get\_h\_sigma}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_h\_sigma()}{get\_h\_sigma()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::get\+\_\+h\+\_\+sigma (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref\+\_\+sets,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{h\+\_\+sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+1,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{h\+\_\+sigma\+\_\+2,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}}
+
+see \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} \mbox{\Hypertarget{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}\label{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{psi,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+psi,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+psi,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
 This function defines $\psi(q)$ and needs to be implemented by classes inheriting from this class
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em values} & Values at which $\psi$ and its derivatives are evaluated\\
+\mbox{\texttt{ in}}  & {\em values} & Values at which $\psi$ and its derivatives are evaluated\\
 \hline
-\mbox{\tt in}  & {\em x} & Position\\
+\mbox{\texttt{ in}}  & {\em x} & Position\\
 \hline
-\mbox{\tt in}  & {\em n} & Normal vector\\
+\mbox{\texttt{ in}}  & {\em n} & Normal vector\\
 \hline
-\mbox{\tt out}  & {\em psi} & Value of $\psi$\\
+\mbox{\texttt{ out}}  & {\em psi} & Value of $\psi$\\
 \hline
-\mbox{\tt out}  & {\em d\+\_\+psi} & Values of first derivatives of $\psi$ w.\+r.\+t. $q$\\
+\mbox{\texttt{ out}}  & {\em d\+\_\+psi} & Values of first derivatives of $\psi$ w.\+r.\+t. $q$\\
 \hline
-\mbox{\tt out}  & {\em d2\+\_\+psi} & Values of second derivatives of $\psi$ w.\+r.\+t. $q$\\
+\mbox{\texttt{ out}}  & {\em d2\+\_\+psi} & Values of second derivatives of $\psi$ w.\+r.\+t. $q$\\
 \hline
-\mbox{\tt in}  & {\em requested\+\_\+quantities} & Tuple indicating which of the quantities {\ttfamily psi}, {\ttfamily d\+\_\+psi}, {\ttfamily d2\+\_\+psi} are to be computed (note that only those quantities are initialized to the correct size, which are actually requested).\\
+\mbox{\texttt{ in}}  & {\em requested\+\_\+quantities} & Tuple indicating which of the quantities {\ttfamily psi}, {\ttfamily d\+\_\+psi}, {\ttfamily d2\+\_\+psi} are to be computed (note that only those quantities are initialized to the correct size, which are actually requested).\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -144,19 +125,27 @@ This function defines $\psi(q)$ and needs to be implemented by classes inheritin
 \end{DoxyReturn}
 
 
-Implemented in \hyperlink{classincremental_f_e_1_1_psi_linear_interface00_afd49f47bcebe274d4d96bd2fa9d83d15}{incremental\+F\+E\+::\+Psi\+Linear\+Interface00$<$ spacedim $>$}.
+Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_psi_linear_interface00_a5484f908e32ff84cc12501a33243f30f}{incremental\+F\+E\+::\+Psi\+Linear\+Interface00$<$ spacedim $>$}}.
 
 
 
-\subsection{Member Data Documentation}
-\index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!alpha@{alpha}}
-\index{alpha@{alpha}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{alpha}{alpha}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const double {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{}\label{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}
-Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \index{incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}!global\+\_\+data@{global\+\_\+data}}
-\index{global\+\_\+data@{global\+\_\+data}!incremental\+F\+E\+::\+Psi@{incremental\+F\+E\+::\+Psi}}
-\subsubsection[{\texorpdfstring{global\+\_\+data}{global_data}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$unsigned int dim, unsigned int spacedim$>$ const dealii\+::\+Smart\+Pointer$<${\bf Global\+Data\+Incremental\+FE}$<$spacedim$>$ $>$ {\bf incremental\+F\+E\+::\+Psi}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{}\label{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}\label{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!alpha@{alpha}}
+\index{alpha@{alpha}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
+
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}\label{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!global\_data@{global\_data}}
+\index{global\_data@{global\_data}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+const dealii\+::\+Smart\+Pointer$<$\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$spacedim$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
 global data object 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\hyperlink{psi_8h}{psi.\+h}\end{DoxyCompactItemize}
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{psi_8h}{psi.\+h}}\end{DoxyCompactItemize}
