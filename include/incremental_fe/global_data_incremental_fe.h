@@ -102,6 +102,13 @@ private:
 	threshold_potential_increment = 1e-14;
 
 	/**
+	 * Additional termination criterion for Newton-Raphson iteration. In addition to GlobalDataIncrementalFE::threshold_potential_increment,
+	 * also the (scaled) residual is checked to be below the given tolerance. If @p threshold_residual is negative, checking is disabled (default).
+	 */
+	double
+	threshold_residual = -1.0;
+
+	/**
 	 * If this is set to @p true, only one iteration is performed for each time step.
 	 * This parameter should be set to @p true for problems which are known to be linear
 	 * (in order to avoid a second iteration),
@@ -289,6 +296,14 @@ public:
 	 */
 	void
 	set_threshold_potential_increment(const double threshold_potential_increment);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::threshold_residual
+	 *
+	 * @param[in]	threshold_potential_residual	GlobalDataIncrementalFE::threshold_potential_residual;
+	 */
+	void
+	set_threshold_residual(const double threshold_residual);
 
 	/**
 	 * Sets GlobalDataIncrementalFE::force_linear

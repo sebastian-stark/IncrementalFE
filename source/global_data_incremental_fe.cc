@@ -158,6 +158,13 @@ GlobalDataIncrementalFE<spacedim>::set_threshold_potential_increment(const doubl
 
 template<unsigned int spacedim>
 void
+GlobalDataIncrementalFE<spacedim>::set_threshold_residual(const double threshold_residual)
+{
+	this->threshold_residual = threshold_residual;
+}
+
+template<unsigned int spacedim>
+void
 GlobalDataIncrementalFE<spacedim>::set_force_linear(const bool force_linear)
 {
 	this->force_linear = force_linear;

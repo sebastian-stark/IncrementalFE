@@ -1771,6 +1771,129 @@ public:
 
 };
 
+
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$ h^\Omega_\rho =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
+ *
+ * where \f$\boldsymbol{d} = -\dfrac{1}{2}\left( \boldsymbol{Q}^{-1} \cdot \dot{\boldsymbol{Q}} + \dot{\boldsymbol{Q}} \cdot \boldsymbol{Q}^{-1} \right)\f$ is the stretching associated with the
+ * symmetric right plastic stretch tensor \f$\boldsymbol{Q}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
+ *
+ * This describes an isotropic Norton type creep relation and can be used together with PsiElasticPlasticMaterial00 to model creep at large strains and small elastic deformations.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{Q}_xx\f$<br>
+ * 																				[1]  \f$\dot{Q}_xy\f$<br>
+ * 																				[2]  \f$\dot{Q}_xz\f$<br>
+ * 																				[3]  \f$\dot{Q}_yy\f$<br>
+ * 																				[4]  \f$\dot{Q}_yz\f$<br>
+ * 																				[5]  \f$\dot{Q}_zz\f$<br>
+ * 																				[6]  \f$Q_xx\f$<br>
+ * 																				[7]  \f$Q_xy\f$<br>
+ * 																				[8]  \f$Q_xz\f$<br>
+ * 																				[9]  \f$Q_yy\f$<br>
+ * 																				[10] \f$Q_yz\f$<br>
+ * 																				[11] \f$Q_zz\f$
+ */
+template<unsigned int spacedim>
+class OmegaViscousDissipation00 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * material parameter
+	 */
+	const double A;
+
+	/**
+	 * material parameter (creep exponent)
+	 */
+	const double n;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		A						OmegaViscousDissipation00::A
+	 *
+	 * @param[in]		n						OmegaViscousDissipation00::n
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaViscousDissipation00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																A,
+								const double																n,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 0, 6, 0, 6, method, alpha, "OmegaViscousDissipation00"),
+	A(A),
+	n(n)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+/*		dealii::Tensor<1, 3> i;
+		for(unsigned int m = 0; m < 3; ++m)
+			i[m] = values[m];
+		const double q = values[3] > 1e-16 ? values[3] : 1e-16;
+
+		if(get<0>(requested_quantities))
+		{
+			omega = 1.0 / ( 2.0 * D * q) * i * i;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+				d_omega[m] = 1.0 / ( D * q ) * i[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+				d2_omega(m, m) = 1.0 / ( D * q );
+
+			if(compute_dq && (q > 1e-16))
+			{
+				for(unsigned int m = 0; m < 3; ++m)
+					d2_omega(m, 3) = - 1.0 / ( D * q * q ) * i[m];
+			}
+		}
+
+		return false;*/
+	}
+
+};
+
 }
 
 

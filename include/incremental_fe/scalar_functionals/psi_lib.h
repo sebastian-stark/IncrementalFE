@@ -2075,6 +2075,37 @@ public:
 		return false;
 	}
 
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+
+		double factor = 2.0;
+		static dealii::Vector<double> F(9), Q(6);
+		while(true)
+		{
+
+			for(unsigned int m = 0; m < 9; ++m)
+				F[m] = e_omega[m] + factor * delta_e_omega[m];
+			for(unsigned int m = 9; m < 15; ++m)
+				Q[m - 9] = e_omega[m] + factor * delta_e_omega[m];
+			if( (get_J(F) > 0.0) && (get_J(Q, true) > 0.0))
+				return factor;
+
+			factor *= 0.5;
+			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient and that of Q stays positive!"));
+		}
+
+		return factor;
+	}
+
 };
 
 
