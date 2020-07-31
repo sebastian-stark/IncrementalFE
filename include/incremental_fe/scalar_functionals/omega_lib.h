@@ -21,6 +21,7 @@
 #define INCREMENTALFE_SCALARFUNCTIONALS_OMEGALIB_H_
 
 #include <incremental_fe/scalar_functionals/omega.h>
+#include <incremental_fe/scalar_functionals/psi_lib.h>
 #include <incremental_fe/fe_model.h>
 #include <deal.II/base/exceptions.h>
 
@@ -1778,22 +1779,22 @@ public:
  * \f$ h^\Omega_\rho =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
  *
  * where \f$\boldsymbol{d} = -\dfrac{1}{2}\left( \boldsymbol{Q}^{-1} \cdot \dot{\boldsymbol{Q}} + \dot{\boldsymbol{Q}} \cdot \boldsymbol{Q}^{-1} \right)\f$ is the stretching associated with the
- * symmetric right plastic stretch tensor \f$\boldsymbol{Q}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
+ * symmetric right plastic stretch tensor \f$\boldsymbol{Q}^{-1}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
  *
  * This describes an isotropic Norton type creep relation and can be used together with PsiElasticPlasticMaterial00 to model creep at large strains and small elastic deformations.
  *
- * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{Q}_xx\f$<br>
- * 																				[1]  \f$\dot{Q}_xy\f$<br>
- * 																				[2]  \f$\dot{Q}_xz\f$<br>
- * 																				[3]  \f$\dot{Q}_yy\f$<br>
- * 																				[4]  \f$\dot{Q}_yz\f$<br>
- * 																				[5]  \f$\dot{Q}_zz\f$<br>
- * 																				[6]  \f$Q_xx\f$<br>
- * 																				[7]  \f$Q_xy\f$<br>
- * 																				[8]  \f$Q_xz\f$<br>
- * 																				[9]  \f$Q_yy\f$<br>
- * 																				[10] \f$Q_yz\f$<br>
- * 																				[11] \f$Q_zz\f$
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{Q}_{xx}\f$<br>
+ * 																				[1]  \f$\dot{Q}_{xy}\f$<br>
+ * 																				[2]  \f$\dot{Q}_{xz}\f$<br>
+ * 																				[3]  \f$\dot{Q}_{yy}\f$<br>
+ * 																				[4]  \f$\dot{Q}_{yz}\f$<br>
+ * 																				[5]  \f$\dot{Q}_{zz}\f$<br>
+ * 																				[6]  \f$Q_{xx}\f$<br>
+ * 																				[7]  \f$Q_{xy}\f$<br>
+ * 																				[8]  \f$Q_{xz}\f$<br>
+ * 																				[9]  \f$Q_{yy}\f$<br>
+ * 																				[10] \f$Q_{yz}\f$<br>
+ * 																				[11] \f$Q_{zz}\f$
  */
 template<unsigned int spacedim>
 class OmegaViscousDissipation00 : public incrementalFE::Omega<spacedim, spacedim>
@@ -1861,35 +1862,133 @@ public:
 								const bool							compute_dq)
 	const
 	{
-/*		dealii::Tensor<1, 3> i;
-		for(unsigned int m = 0; m < 3; ++m)
-			i[m] = values[m];
-		const double q = values[3] > 1e-16 ? values[3] : 1e-16;
-
-		if(get<0>(requested_quantities))
+		dealii::Vector<double> Q_dot(6), Q(6), Q_inv(6);
+		for(unsigned int m = 0; m < 6; ++m)
 		{
-			omega = 1.0 / ( 2.0 * D * q) * i * i;
+			Q_dot[m] = values[m];
+			Q[m] = values[m + 6];
 		}
+		dealii::SymmetricTensor<2,3> Q_t_inv;
+		Q_t_inv[0][0] = Q[0];	Q_t_inv[0][1] = Q[1];	Q_t_inv[0][2] = Q[2];
+								Q_t_inv[1][1] = Q[3];	Q_t_inv[1][2] = Q[4];
+														Q_t_inv[2][2] = Q[5];
+		Q_t_inv = invert(Q_t_inv);
+		Q_inv[0] = Q_t_inv[0][0];	Q_inv[1] = Q_t_inv[0][1];	Q_inv[2] = Q_t_inv[0][2];
+									Q_inv[3] = Q_t_inv[1][1];	Q_inv[4] = Q_t_inv[1][2];
+																Q_inv[5] = Q_t_inv[2][2];
 
-		if(get<1>(requested_quantities))
+		dealii::Vector<double> d(9);
+		d[0] = -Q_dot[0]*Q_inv[0] - Q_dot[1]*Q_inv[1] - Q_dot[2]*Q_inv[2];
+		d[1] = -0.5*Q_dot[0]*Q_inv[1] - 0.5*Q_dot[1]*Q_inv[0] - 0.5*Q_dot[1]*Q_inv[3] - 0.5*Q_dot[2]*Q_inv[4] - 0.5*Q_dot[3]*Q_inv[1] - 0.5*Q_dot[4]*Q_inv[2];
+		d[2] = -0.5*Q_dot[0]*Q_inv[2] - 0.5*Q_dot[1]*Q_inv[4] - 0.5*Q_dot[2]*Q_inv[0] - 0.5*Q_dot[2]*Q_inv[5] - 0.5*Q_dot[4]*Q_inv[1] - 0.5*Q_dot[5]*Q_inv[2];
+		d[3] = -0.5*Q_dot[0]*Q_inv[1] - 0.5*Q_dot[1]*Q_inv[0] - 0.5*Q_dot[1]*Q_inv[3] - 0.5*Q_dot[2]*Q_inv[4] - 0.5*Q_dot[3]*Q_inv[1] - 0.5*Q_dot[4]*Q_inv[2];
+		d[4] = -Q_dot[1]*Q_inv[1] - Q_dot[3]*Q_inv[3] - Q_dot[4]*Q_inv[4];
+		d[5] = -0.5*Q_dot[1]*Q_inv[2] - 0.5*Q_dot[2]*Q_inv[1] - 0.5*Q_dot[3]*Q_inv[4] - 0.5*Q_dot[4]*Q_inv[3] - 0.5*Q_dot[4]*Q_inv[5] - 0.5*Q_dot[5]*Q_inv[4];
+		d[6] = -0.5*Q_dot[0]*Q_inv[2] - 0.5*Q_dot[1]*Q_inv[4] - 0.5*Q_dot[2]*Q_inv[0] - 0.5*Q_dot[2]*Q_inv[5] - 0.5*Q_dot[4]*Q_inv[1] - 0.5*Q_dot[5]*Q_inv[2];
+		d[7] = -0.5*Q_dot[1]*Q_inv[2] - 0.5*Q_dot[2]*Q_inv[1] - 0.5*Q_dot[3]*Q_inv[4] - 0.5*Q_dot[4]*Q_inv[3] - 0.5*Q_dot[4]*Q_inv[5] - 0.5*Q_dot[5]*Q_inv[4];
+		d[8] = -Q_dot[2]*Q_inv[2] - Q_dot[4]*Q_inv[4] - Q_dot[5]*Q_inv[5];
+
+		const double dd = d * d;
+		const double dd_n = pow(dd, n);
+
+		static dealii::FullMatrix<double> dd_dQ_dot(9,6), d2delta_dd2(9,9), d2delta_dd2_dd_dQ_dot(9,6), dd_dQ_dot_d2delta_dd2_dd_dQ_dot(6,6), dd_dQ_inv(9,6), d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv(6,6), d_d2d_dQ_dot_d_Q_inv(6,6), d2delta_dQ_dot_dQ_inv(6,6), d2delta_dQ_dot_dQ(6,6), dB_dQ(6,6), dQ_inv_dQ(6,6);
+		static dealii::Vector<double> B(6), ddetQ_dQ(6);
+		if( (get<1>(requested_quantities)) || (get<2>(requested_quantities)))
 		{
-			for(unsigned int m = 0; m < 3; ++m)
-				d_omega[m] = 1.0 / ( D * q ) * i[m];
+			dd_dQ_dot(0,0) = -Q_inv[0];		dd_dQ_dot(0,1) = -Q_inv[1];						dd_dQ_dot(0,2) = -Q_inv[2];						dd_dQ_dot(0,3) = 0;				dd_dQ_dot(0,4) = 0;								dd_dQ_dot(0,5) = 0;
+			dd_dQ_dot(1,0) = -0.5*Q_inv[1];	dd_dQ_dot(1,1) = -0.5*Q_inv[0] - 0.5*Q_inv[3];	dd_dQ_dot(1,2) = -0.5*Q_inv[4];					dd_dQ_dot(1,3) = -0.5*Q_inv[1];	dd_dQ_dot(1,4) = -0.5*Q_inv[2];					dd_dQ_dot(1,5) = 0;
+			dd_dQ_dot(2,0) = -0.5*Q_inv[2];	dd_dQ_dot(2,1) = -0.5*Q_inv[4];					dd_dQ_dot(2,2) = -0.5*Q_inv[0] - 0.5*Q_inv[5];	dd_dQ_dot(2,3) = 0;				dd_dQ_dot(2,4) = -0.5*Q_inv[1];					dd_dQ_dot(2,5) = -0.5*Q_inv[2];
+			dd_dQ_dot(3,0) = -0.5*Q_inv[1];	dd_dQ_dot(3,1) = -0.5*Q_inv[0] - 0.5*Q_inv[3];	dd_dQ_dot(3,2) = -0.5*Q_inv[4];					dd_dQ_dot(3,3) = -0.5*Q_inv[1];	dd_dQ_dot(3,4) = -0.5*Q_inv[2];					dd_dQ_dot(3,5) = 0;
+			dd_dQ_dot(4,0) = 0;				dd_dQ_dot(4,1) = -Q_inv[1];						dd_dQ_dot(4,2) = 0;								dd_dQ_dot(4,3) = -Q_inv[3];		dd_dQ_dot(4,4) = -Q_inv[4];						dd_dQ_dot(4,5) = 0;
+			dd_dQ_dot(5,0) = 0;				dd_dQ_dot(5,1) = -0.5*Q_inv[2];					dd_dQ_dot(5,2) = -0.5*Q_inv[1];					dd_dQ_dot(5,3) = -0.5*Q_inv[4];	dd_dQ_dot(5,4) = -0.5*Q_inv[3] - 0.5*Q_inv[5];	dd_dQ_dot(5,5) = -0.5*Q_inv[4];
+			dd_dQ_dot(6,0) = -0.5*Q_inv[2];	dd_dQ_dot(6,1) = -0.5*Q_inv[4];					dd_dQ_dot(6,2) = -0.5*Q_inv[0] - 0.5*Q_inv[5];	dd_dQ_dot(6,3) = 0;				dd_dQ_dot(6,4) = -0.5*Q_inv[1];					dd_dQ_dot(6,5) = -0.5*Q_inv[2];
+			dd_dQ_dot(7,0) = 0;				dd_dQ_dot(7,1) = -0.5*Q_inv[2];					dd_dQ_dot(7,2) = -0.5*Q_inv[1];					dd_dQ_dot(7,3) = -0.5*Q_inv[4];	dd_dQ_dot(7,4) = -0.5*Q_inv[3] - 0.5*Q_inv[5];	dd_dQ_dot(7,5) = -0.5*Q_inv[4];
+			dd_dQ_dot(8,0) = 0;				dd_dQ_dot(8,1) = 0;								dd_dQ_dot(8,2) = -Q_inv[2];						dd_dQ_dot(8,3) = 0;				dd_dQ_dot(8,4) = -Q_inv[4];						dd_dQ_dot(8,5) = -Q_inv[5];
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			for(unsigned int m = 0; m < 3; ++m)
-				d2_omega(m, m) = 1.0 / ( D * q );
+			dd_dQ_inv(0,0) = -Q_dot[0];		dd_dQ_inv(0,1) = -Q_dot[1];						dd_dQ_inv(0,2) = -Q_dot[2];						dd_dQ_inv(0,3) = 0;				dd_dQ_inv(0,4) = 0;								dd_dQ_inv(0,5) = 0;
+			dd_dQ_inv(1,0) = -0.5*Q_dot[1];	dd_dQ_inv(1,1) = -0.5*Q_dot[0] - 0.5*Q_dot[3];	dd_dQ_inv(1,2) = -0.5*Q_dot[4];					dd_dQ_inv(1,3) = -0.5*Q_dot[1];	dd_dQ_inv(1,4) = -0.5*Q_dot[2];					dd_dQ_inv(1,5) = 0;
+			dd_dQ_inv(2,0) = -0.5*Q_dot[2];	dd_dQ_inv(2,1) = -0.5*Q_dot[4];					dd_dQ_inv(2,2) = -0.5*Q_dot[0] - 0.5*Q_dot[5];	dd_dQ_inv(2,3) = 0;				dd_dQ_inv(2,4) = -0.5*Q_dot[1];					dd_dQ_inv(2,5) = -0.5*Q_dot[2];
+			dd_dQ_inv(3,0) = -0.5*Q_dot[1];	dd_dQ_inv(3,1) = -0.5*Q_dot[0] - 0.5*Q_dot[3];	dd_dQ_inv(3,2) = -0.5*Q_dot[4];					dd_dQ_inv(3,3) = -0.5*Q_dot[1];	dd_dQ_inv(3,4) = -0.5*Q_dot[2];					dd_dQ_inv(3,5) = 0;
+			dd_dQ_inv(4,0) = 0;				dd_dQ_inv(4,1) = -Q_dot[1];						dd_dQ_inv(4,2) = 0;								dd_dQ_inv(4,3) = -Q_dot[3];		dd_dQ_inv(4,4) = -Q_dot[4];						dd_dQ_inv(4,5) = 0;
+			dd_dQ_inv(5,0) = 0;				dd_dQ_inv(5,1) = -0.5*Q_dot[2];					dd_dQ_inv(5,2) = -0.5*Q_dot[1];					dd_dQ_inv(5,3) = -0.5*Q_dot[4];	dd_dQ_inv(5,4) = -0.5*Q_dot[3] - 0.5*Q_dot[5];	dd_dQ_inv(5,5) = -0.5*Q_dot[4];
+			dd_dQ_inv(6,0) = -0.5*Q_dot[2];	dd_dQ_inv(6,1) = -0.5*Q_dot[4];					dd_dQ_inv(6,2) = -0.5*Q_dot[0] - 0.5*Q_dot[5];	dd_dQ_inv(6,3) = 0;				dd_dQ_inv(6,4) = -0.5*Q_dot[1];					dd_dQ_inv(6,5) = -0.5*Q_dot[2];
+			dd_dQ_inv(7,0) = 0;				dd_dQ_inv(7,1) = -0.5*Q_dot[2];					dd_dQ_inv(7,2) = -0.5*Q_dot[1];					dd_dQ_inv(7,3) = -0.5*Q_dot[4];	dd_dQ_inv(7,4) = -0.5*Q_dot[3] - 0.5*Q_dot[5];	dd_dQ_inv(7,5) = -0.5*Q_dot[4];
+			dd_dQ_inv(8,0) = 0;				dd_dQ_inv(8,1) = 0;								dd_dQ_inv(8,2) = -Q_dot[2];						dd_dQ_inv(8,3) = 0;				dd_dQ_inv(8,4) = -Q_dot[4];						dd_dQ_inv(8,5) = -Q_dot[5];
 
-			if(compute_dq && (q > 1e-16))
-			{
-				for(unsigned int m = 0; m < 3; ++m)
-					d2_omega(m, 3) = - 1.0 / ( D * q * q ) * i[m];
-			}
+			d_d2d_dQ_dot_d_Q_inv(0,0) = -d[0];							d_d2d_dQ_dot_d_Q_inv(0,1) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(0,2) = -1.0/2.0*d[2] - 1.0/2.0*d[6];	d_d2d_dQ_dot_d_Q_inv(0,3) = 0;								d_d2d_dQ_dot_d_Q_inv(0,4) = 0;								d_d2d_dQ_dot_d_Q_inv(0,5) = 0;
+			d_d2d_dQ_dot_d_Q_inv(1,0) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(1,1) = -d[0] - d[4];					d_d2d_dQ_dot_d_Q_inv(1,2) = -1.0/2.0*d[5] - 1.0/2.0*d[7];	d_d2d_dQ_dot_d_Q_inv(1,3) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(1,4) = -1.0/2.0*d[2] - 1.0/2.0*d[6];	d_d2d_dQ_dot_d_Q_inv(1,5) = 0;
+			d_d2d_dQ_dot_d_Q_inv(2,0) = -1.0/2.0*d[2] - 1.0/2.0*d[6];	d_d2d_dQ_dot_d_Q_inv(2,1) = -1.0/2.0*d[5] - 1.0/2.0*d[7];	d_d2d_dQ_dot_d_Q_inv(2,2) = -d[0] - d[8];					d_d2d_dQ_dot_d_Q_inv(2,3) = 0;								d_d2d_dQ_dot_d_Q_inv(2,4) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(2,5) = -1.0/2.0*d[2] - 1.0/2.0*d[6];
+			d_d2d_dQ_dot_d_Q_inv(3,0) = 0;								d_d2d_dQ_dot_d_Q_inv(3,1) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(3,2) = 0;								d_d2d_dQ_dot_d_Q_inv(3,3) = -d[4];							d_d2d_dQ_dot_d_Q_inv(3,4) = -1.0/2.0*d[5] - 1.0/2.0*d[7];	d_d2d_dQ_dot_d_Q_inv(3,5) = 0;
+			d_d2d_dQ_dot_d_Q_inv(4,0) = 0;								d_d2d_dQ_dot_d_Q_inv(4,1) = -1.0/2.0*d[2] - 1.0/2.0*d[6];	d_d2d_dQ_dot_d_Q_inv(4,2) = -1.0/2.0*d[1] - 1.0/2.0*d[3];	d_d2d_dQ_dot_d_Q_inv(4,3) = -1.0/2.0*d[5] - 1.0/2.0*d[7];	d_d2d_dQ_dot_d_Q_inv(4,4) = -d[4] - d[8];					d_d2d_dQ_dot_d_Q_inv(4,5) = -1.0/2.0*d[5] - 1.0/2.0*d[7];
+			d_d2d_dQ_dot_d_Q_inv(5,0) = 0;								d_d2d_dQ_dot_d_Q_inv(5,1) = 0;								d_d2d_dQ_dot_d_Q_inv(5,2) = -1.0/2.0*d[2] - 1.0/2.0*d[6];	d_d2d_dQ_dot_d_Q_inv(5,3) = 0;								d_d2d_dQ_dot_d_Q_inv(5,4) = -1.0/2.0*d[5] - 1.0/2.0*d[7];	d_d2d_dQ_dot_d_Q_inv(5,5) = -d[8];
+
+			B[0] =  Q[3]*Q[5] - Q[4]*Q[4];
+			B[1] = -Q[1]*Q[5] + Q[2]*Q[4];
+			B[2] =  Q[1]*Q[4] - Q[2]*Q[3];
+			B[3] =  Q[0]*Q[5] - Q[2]*Q[2];
+			B[4] = -Q[0]*Q[4] + Q[1]*Q[2];
+			B[5] =  Q[0]*Q[3] - Q[1]*Q[1];
+
+			dB_dQ(0,0) = 0;		dB_dQ(0,1) = 0;			dB_dQ(0,2) = 0;			dB_dQ(0,3) = Q[5];		dB_dQ(0,4) = -2.0*Q[4];	dB_dQ(0,5) = Q[3];
+			dB_dQ(1,0) = 0;		dB_dQ(1,1) = -Q[5];		dB_dQ(1,2) = Q[4];		dB_dQ(1,3) = 0;			dB_dQ(1,4) = Q[2];		dB_dQ(1,5) = -Q[1];
+			dB_dQ(2,0) = 0;		dB_dQ(2,1) = Q[4];		dB_dQ(2,2) = -Q[3];		dB_dQ(2,3) = -Q[2];		dB_dQ(2,4) = Q[1];		dB_dQ(2,5) = 0;
+			dB_dQ(3,0) = Q[5];	dB_dQ(3,1) = 0;			dB_dQ(3,2) = -2.0*Q[2];	dB_dQ(3,3) = 0;			dB_dQ(3,4) = 0;			dB_dQ(3,5) = Q[0];
+			dB_dQ(4,0) = -Q[4];	dB_dQ(4,1) = Q[2];		dB_dQ(4,2) = Q[1];		dB_dQ(4,3) = 0;			dB_dQ(4,4) = -Q[0];		dB_dQ(4,5) = 0;
+			dB_dQ(5,0) = Q[3];	dB_dQ(5,1) = -2.0*Q[1];	dB_dQ(5,2) = 0;			dB_dQ(5,3) = Q[0];		dB_dQ(5,4) = 0;			dB_dQ(5,5) = 0;
+
+			const double detQ = get_J(Q, true);
+			get_dJ_dF(Q, ddetQ_dQ, true);
+			for(unsigned int i = 0; i < 6; ++i)
+				for(unsigned int j = 0; j < 6; ++j)
+					dQ_inv_dQ(i,j) = ( dB_dQ(i,j) - B[i] * ddetQ_dQ[j] / detQ ) / detQ;
+
 		}
 
-		return false;*/
+		if(get<0>(requested_quantities))
+		{
+			omega = 0.5 * A/n * dd_n;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			dealii::Vector<double> d_dd_dQ_dot(6);
+			dd_dQ_dot.Tvmult(d_dd_dQ_dot, d);
+			for(unsigned int m = 0; m < 6; ++m)
+				d_omega[m] = A * dd_n / dd * d_dd_dQ_dot[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 9; ++i)
+			{
+				for(unsigned int j = 0; j < 9; ++j)
+					d2delta_dd2(i,j) = 2.0 * A * (n - 1.0) * dd_n / dd / dd * d[i] * d[j];
+				d2delta_dd2(i,i) += A * dd_n / dd;
+			}
+			d2delta_dd2.mmult(d2delta_dd2_dd_dQ_dot, dd_dQ_dot);
+			dd_dQ_dot.Tmmult(dd_dQ_dot_d2delta_dd2_dd_dQ_dot, d2delta_dd2_dd_dQ_dot);
+			for(unsigned int i = 0; i < 6; ++i)
+				for(unsigned int j = 0; j < 6; ++j)
+					d2_omega(i,j) = dd_dQ_dot_d2delta_dd2_dd_dQ_dot(i,j);
+
+			if(compute_dq)
+			{
+				d2delta_dd2_dd_dQ_dot.Tmmult(d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv, dd_dQ_inv);
+				for(unsigned int i = 0; i < 6; ++i)
+					for(unsigned int j = 0; j < 6; ++j)
+						d2delta_dQ_dot_dQ_inv(i,j) = d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv(i,j) + A * dd_n / dd * d_d2d_dQ_dot_d_Q_inv(i,j);
+				d2delta_dQ_dot_dQ_inv.mmult(d2delta_dQ_dot_dQ, dQ_inv_dQ);
+				for(unsigned int i = 0; i < 6; ++i)
+					for(unsigned int j = 0; j < 6; ++j)
+						d2_omega(i,j + 6) = d2delta_dQ_dot_dQ(i,j);
+			}
+
+		}
+
+		return false;
 	}
 
 };

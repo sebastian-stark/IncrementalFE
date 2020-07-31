@@ -1512,14 +1512,42 @@ $(function() {
 <div class="line"><a name="l02075"></a><span class="lineno"> 2075</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l02076"></a><span class="lineno"> 2076</span>&#160;    }</div>
 <div class="line"><a name="l02077"></a><span class="lineno"> 2077</span>&#160; </div>
-<div class="line"><a name="l02078"></a><span class="lineno"> 2078</span>&#160;};</div>
-<div class="line"><a name="l02079"></a><span class="lineno"> 2079</span>&#160; </div>
-<div class="line"><a name="l02080"></a><span class="lineno"> 2080</span>&#160; </div>
-<div class="line"><a name="l02081"></a><span class="lineno"> 2081</span>&#160; </div>
-<div class="line"><a name="l02082"></a><span class="lineno"> 2082</span>&#160;}</div>
-<div class="line"><a name="l02083"></a><span class="lineno"> 2083</span>&#160; </div>
-<div class="line"><a name="l02084"></a><span class="lineno"> 2084</span>&#160; </div>
-<div class="line"><a name="l02085"></a><span class="lineno"> 2085</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_SCALARFUNCTIONALS_PSILIB_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l02081"></a><span class="lineno"> 2081</span>&#160;    <span class="keywordtype">double</span></div>
+<div class="line"><a name="l02082"></a><span class="lineno"><a class="line" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#abe68f0acfa909ffe059f7ace85bac6d3"> 2082</a></span>&#160;    <a class="code" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#abe68f0acfa909ffe059f7ace85bac6d3">get_maximum_step</a>(   <span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp;               e_omega,</div>
+<div class="line"><a name="l02083"></a><span class="lineno"> 2083</span>&#160;                        <span class="keyword">const</span> std::vector&lt;dealii::Vector&lt;double&gt;&gt;&amp;  <span class="comment">/*e_omega_ref_sets*/</span>,</div>
+<div class="line"><a name="l02084"></a><span class="lineno"> 2084</span>&#160;                        <span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp;               delta_e_omega,</div>
+<div class="line"><a name="l02085"></a><span class="lineno"> 2085</span>&#160;                        <span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp;               <span class="comment">/*hidden_vars*/</span>,</div>
+<div class="line"><a name="l02086"></a><span class="lineno"> 2086</span>&#160;                        <span class="keyword">const</span> dealii::Point&lt;spacedim&gt;&amp;              <span class="comment">/*x*/</span>)<span class="keyword"></span></div>
+<div class="line"><a name="l02087"></a><span class="lineno"> 2087</span>&#160;<span class="keyword">    const</span></div>
+<div class="line"><a name="l02088"></a><span class="lineno"> 2088</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l02089"></a><span class="lineno"> 2089</span>&#160; </div>
+<div class="line"><a name="l02090"></a><span class="lineno"> 2090</span>&#160;        <span class="keywordtype">double</span> factor = 2.0;</div>
+<div class="line"><a name="l02091"></a><span class="lineno"> 2091</span>&#160;        <span class="keyword">static</span> dealii::Vector&lt;double&gt; <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#aa87528a28ad8a95fa89a3876e6f986c8">F</a>(9), Q(6);</div>
+<div class="line"><a name="l02092"></a><span class="lineno"> 2092</span>&#160;        <span class="keywordflow">while</span>(<span class="keyword">true</span>)</div>
+<div class="line"><a name="l02093"></a><span class="lineno"> 2093</span>&#160;        {</div>
+<div class="line"><a name="l02094"></a><span class="lineno"> 2094</span>&#160; </div>
+<div class="line"><a name="l02095"></a><span class="lineno"> 2095</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m = 0; m &lt; 9; ++m)</div>
+<div class="line"><a name="l02096"></a><span class="lineno"> 2096</span>&#160;                <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#aa87528a28ad8a95fa89a3876e6f986c8">F</a>[m] = e_omega[m] + factor * delta_e_omega[m];</div>
+<div class="line"><a name="l02097"></a><span class="lineno"> 2097</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m = 9; m &lt; 15; ++m)</div>
+<div class="line"><a name="l02098"></a><span class="lineno"> 2098</span>&#160;                Q[m - 9] = e_omega[m] + factor * delta_e_omega[m];</div>
+<div class="line"><a name="l02099"></a><span class="lineno"> 2099</span>&#160;            <span class="keywordflow">if</span>( (get_J(<a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#aa87528a28ad8a95fa89a3876e6f986c8">F</a>) &gt; 0.0) &amp;&amp; (get_J(Q, <span class="keyword">true</span>) &gt; 0.0))</div>
+<div class="line"><a name="l02100"></a><span class="lineno"> 2100</span>&#160;                <span class="keywordflow">return</span> factor;</div>
+<div class="line"><a name="l02101"></a><span class="lineno"> 2101</span>&#160; </div>
+<div class="line"><a name="l02102"></a><span class="lineno"> 2102</span>&#160;            factor *= 0.5;</div>
+<div class="line"><a name="l02103"></a><span class="lineno"> 2103</span>&#160;            <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(factor &gt; 0.0, <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">dealii::ExcMessage</a>(<span class="stringliteral">&quot;Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient and that of Q stays positive!&quot;</span>));</div>
+<div class="line"><a name="l02104"></a><span class="lineno"> 2104</span>&#160;        }</div>
+<div class="line"><a name="l02105"></a><span class="lineno"> 2105</span>&#160; </div>
+<div class="line"><a name="l02106"></a><span class="lineno"> 2106</span>&#160;        <span class="keywordflow">return</span> factor;</div>
+<div class="line"><a name="l02107"></a><span class="lineno"> 2107</span>&#160;    }</div>
+<div class="line"><a name="l02108"></a><span class="lineno"> 2108</span>&#160; </div>
+<div class="line"><a name="l02109"></a><span class="lineno"> 2109</span>&#160;};</div>
+<div class="line"><a name="l02110"></a><span class="lineno"> 2110</span>&#160; </div>
+<div class="line"><a name="l02111"></a><span class="lineno"> 2111</span>&#160; </div>
+<div class="line"><a name="l02112"></a><span class="lineno"> 2112</span>&#160; </div>
+<div class="line"><a name="l02113"></a><span class="lineno"> 2113</span>&#160;}</div>
+<div class="line"><a name="l02114"></a><span class="lineno"> 2114</span>&#160; </div>
+<div class="line"><a name="l02115"></a><span class="lineno"> 2115</span>&#160; </div>
+<div class="line"><a name="l02116"></a><span class="lineno"> 2116</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_SCALARFUNCTIONALS_PSILIB_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_neo_hooke00_html_a8d6349afc4a3053f86b33db165a9a158"><div class="ttname"><a href="classincremental_f_e_1_1_psi_neo_hooke00.html#a8d6349afc4a3053f86b33db165a9a158">incrementalFE::PsiNeoHooke00::lambda</a></div><div class="ttdeci">const double lambda</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1083</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_incompressibility00_html_aca72a8996f35c7dbd664765af62dec95"><div class="ttname"><a href="classincremental_f_e_1_1_psi_incompressibility00.html#aca72a8996f35c7dbd664765af62dec95">incrementalFE::PsiIncompressibility00::F_as_parameter</a></div><div class="ttdeci">const bool F_as_parameter</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1486</div></div>
@@ -1532,6 +1560,7 @@ $(function() {
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical02_html_a35ebf4f4790fd12b1660146f2714704a"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical02.html#a35ebf4f4790fd12b1660146f2714704a">incrementalFE::PsiChemical02::log_c_0_c_f_0</a></div><div class="ttdeci">const double log_c_0_c_f_0</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1302</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_incompressibility01_html"><div class="ttname"><a href="classincremental_f_e_1_1_psi_incompressibility01.html">incrementalFE::PsiIncompressibility01</a></div><div class="ttdef"><b>Definition:</b> psi_lib.h:1629</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_elastic_plastic_material00_html_aa9f7d892dbf2eb27903c13d1f67e8bfa"><div class="ttname"><a href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00::get_values_and_derivatives</a></div><div class="ttdeci">bool get_values_and_derivatives(const dealii::Vector&lt; double &gt; &amp;values, const dealii::Point&lt; spacedim &gt; &amp;, double &amp;omega, dealii::Vector&lt; double &gt; &amp;d_omega, dealii::FullMatrix&lt; double &gt; &amp;d2_omega, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1918</div></div>
+<div class="ttc" id="aclassincremental_f_e_1_1_psi_elastic_plastic_material00_html_abe68f0acfa909ffe059f7ace85bac6d3"><div class="ttname"><a href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#abe68f0acfa909ffe059f7ace85bac6d3">incrementalFE::PsiElasticPlasticMaterial00::get_maximum_step</a></div><div class="ttdeci">double get_maximum_step(const dealii::Vector&lt; double &gt; &amp;e_omega, const std::vector&lt; dealii::Vector&lt; double &gt;&gt; &amp;, const dealii::Vector&lt; double &gt; &amp;delta_e_omega, const dealii::Vector&lt; double &gt; &amp;, const dealii::Point&lt; spacedim &gt; &amp;) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2082</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_linear_interface00_html"><div class="ttname"><a href="classincremental_f_e_1_1_psi_linear_interface00.html">incrementalFE::PsiLinearInterface00</a></div><div class="ttdef"><b>Definition:</b> psi_lib.h:625</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_initial_pressure00_html_a8acf3825dbfea2fe0e0ebc5711b93fca"><div class="ttname"><a href="classincremental_f_e_1_1_psi_initial_pressure00.html#a8acf3825dbfea2fe0e0ebc5711b93fca">incrementalFE::PsiInitialPressure00::p_0</a></div><div class="ttdeci">const double p_0</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1744</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_neo_hooke00_html_afa1ee9fcb2f0f52c12c07845844e1ed0"><div class="ttname"><a href="classincremental_f_e_1_1_psi_neo_hooke00.html#afa1ee9fcb2f0f52c12c07845844e1ed0">incrementalFE::PsiNeoHooke00::scaling_function</a></div><div class="ttdeci">const dealii::Function&lt; spacedim &gt; &amp; scaling_function</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1095</div></div>

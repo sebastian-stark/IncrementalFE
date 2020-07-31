@@ -124,6 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a892280978280b21be48bafed07d7c60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09f0851c50886a9f57996558c08fc108"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a09f0851c50886a9f57996558c08fc108">set_threshold_potential_increment</a> (const double <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2f7adb8b4f7f8875715e1dbd0edd9ac8">threshold_potential_increment</a>)</td></tr>
 <tr class="separator:a09f0851c50886a9f57996558c08fc108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552c44097fe7241bb20a3cdca6f75fab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a552c44097fe7241bb20a3cdca6f75fab">set_threshold_residual</a> (const double <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a75738f9c13b8b545090674ae7972cdb7">threshold_residual</a>)</td></tr>
+<tr class="separator:a552c44097fe7241bb20a3cdca6f75fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba65d5da0031c2f1bc1ceb87dc524b8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#aba65d5da0031c2f1bc1ceb87dc524b8d">set_force_linear</a> (const bool <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a37c1d42902e74f13f3c4ba82d2dabd67">force_linear</a>=true)</td></tr>
 <tr class="separator:aba65d5da0031c2f1bc1ceb87dc524b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82d4ae6026b8c8a4a4da1c54e81fd64a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a82d4ae6026b8c8a4a4da1c54e81fd64a">set_predictor_corrector</a> (const bool <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a5cc0d20e5e389c149bbd288f57dee953">predictor_corrector</a>=true)</td></tr>
@@ -167,6 +169,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a7ae58573e9cc241a14976bf19351ba63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f7adb8b4f7f8875715e1dbd0edd9ac8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2f7adb8b4f7f8875715e1dbd0edd9ac8">threshold_potential_increment</a> = 1<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-14</td></tr>
 <tr class="separator:a2f7adb8b4f7f8875715e1dbd0edd9ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75738f9c13b8b545090674ae7972cdb7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a75738f9c13b8b545090674ae7972cdb7">threshold_residual</a> = -1.0</td></tr>
+<tr class="separator:a75738f9c13b8b545090674ae7972cdb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37c1d42902e74f13f3c4ba82d2dabd67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a37c1d42902e74f13f3c4ba82d2dabd67">force_linear</a> = false</td></tr>
 <tr class="separator:a37c1d42902e74f13f3c4ba82d2dabd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47301f72bcb3852b2519b23de833f3eb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a47301f72bcb3852b2519b23de833f3eb">error_messages</a></td></tr>
@@ -765,6 +769,33 @@ template&lt;unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="a552c44097fe7241bb20a3cdca6f75fab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552c44097fe7241bb20a3cdca6f75fab">&#9670;&nbsp;</a></span>set_threshold_residual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::set_threshold_residual </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>threshold_residual</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a75738f9c13b8b545090674ae7972cdb7">GlobalDataIncrementalFE::threshold_residual</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">threshold_residual</td><td>GlobalDataIncrementalFE::threshold_potential_residual; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a9845e6a20c93b8aec769238ac23106da"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9845e6a20c93b8aec769238ac23106da">&#9670;&nbsp;</a></span>write_error_message() <span class="overload">[1/2]</span></h2>
 
@@ -1260,6 +1291,31 @@ template&lt;unsigned int spacedim&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Termination criterion for Newton-Raphson iteration. If the estimated increment in the (quadratically approximated) potential is below this threshold, the Newton-Raphson iteration of a single time step is terminated. </p>
+
+</div>
+</div>
+<a id="a75738f9c13b8b545090674ae7972cdb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75738f9c13b8b545090674ae7972cdb7">&#9670;&nbsp;</a></span>threshold_residual</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::threshold_residual = -1.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Additional termination criterion for Newton-Raphson iteration. In addition to <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2f7adb8b4f7f8875715e1dbd0edd9ac8">GlobalDataIncrementalFE::threshold_potential_increment</a>, also the (scaled) residual is checked to be below the given tolerance. If <code>threshold_residual</code> is negative, checking is disabled (default). </p>
 
 </div>
 </div>

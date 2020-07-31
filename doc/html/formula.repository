@@ -160,3 +160,24 @@
 \_form#159:$\ln(c_0 / c^\mathrm{f}_0)$
 \_form#160:$h^\Omega_\rho = -p\left( J - 1 \right)$
 \_form#161:$J=\det(\boldsymbol{Q})$
+\_form#162:$ h^\Omega_\rho = \dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n $
+\_form#163:$\boldsymbol{d} = -\dfrac{1}{2}\left( \boldsymbol{Q}^{-1} \cdot \dot{\boldsymbol{Q}} + \dot{\boldsymbol{Q}} \cdot \boldsymbol{Q}^{-1} \right)$
+\_form#164:$\dot{Q}_xx$
+\_form#165:$\dot{Q}_xy$
+\_form#166:$\dot{Q}_xz$
+\_form#167:$\dot{Q}_yy$
+\_form#168:$\dot{Q}_yz$
+\_form#169:$\dot{Q}_zz$
+\_form#170:$Q_xx$
+\_form#171:$Q_xy$
+\_form#172:$Q_xz$
+\_form#173:$Q_yy$
+\_form#174:$Q_yz$
+\_form#175:$Q_zz$
+\_form#176:$\boldsymbol{Q}^{-1}$
+\_form#177:$\dot{Q}_{xx}$
+\_form#178:$\dot{Q}_{xy}$
+\_form#179:$\dot{Q}_{xz}$
+\_form#180:$\dot{Q}_{yy}$
+\_form#181:$\dot{Q}_{yz}$
+\_form#182:$\dot{Q}_{zz}$

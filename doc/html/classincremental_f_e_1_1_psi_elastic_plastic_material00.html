@@ -103,6 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab7c7c3dff7601c0d4328e5bf69ab2db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f7d892dbf2eb27903c13d1f67e8bfa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">get_values_and_derivatives</a> (const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>, const dealii::Point&lt; spacedim &gt; &amp;, double &amp;omega, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;d_omega, dealii::FullMatrix&lt; double &gt; &amp;d2_omega, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const</td></tr>
 <tr class="separator:aa9f7d892dbf2eb27903c13d1f67e8bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe68f0acfa909ffe059f7ace85bac6d3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#abe68f0acfa909ffe059f7ace85bac6d3">get_maximum_step</a> (const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_omega, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;delta_e_omega, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;, const dealii::Point&lt; spacedim &gt; &amp;) const</td></tr>
+<tr class="separator:abe68f0acfa909ffe059f7ace85bac6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html">incrementalFE::Psi&lt; spacedim, spacedim &gt;</a></td></tr>
 <tr class="memitem:ad6aff88570ea114f34ca92f232759e29 inherit pub_methods_classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#ad6aff88570ea114f34ca92f232759e29">Psi</a> (const std::vector&lt; dealii::GalerkinTools::DependentField&lt; spacedim, spacedim &gt;&gt; e_omega, const std::set&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacetypes.html#afb65af4be8a9a1d09a0c3ecc967c9d4c">dealii::types::material_id</a> &gt; domain_of_integration, const dealii::Quadrature&lt; spacedim &gt; quadrature, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#abf0a4804877fd7cc9bd1b90e52760ba9">global_data</a>, const double <a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#af7b8227188dbdd6ada35b9445d96c79d">alpha</a>=0.0, const std::string name=&quot;Psi&quot;)</td></tr>
 <tr class="separator:ad6aff88570ea114f34ca92f232759e29 inherit pub_methods_classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,6 +230,63 @@ template&lt;unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="abe68f0acfa909ffe059f7ace85bac6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe68f0acfa909ffe059f7ace85bac6d3">&#9670;&nbsp;</a></span>get_maximum_step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html">incrementalFE::PsiElasticPlasticMaterial00</a>&lt; spacedim &gt;::get_maximum_step </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>e_omega</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>delta_e_omega</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const dealii::Point&lt; spacedim &gt; &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>see <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#aba0e5304e9786bf28a25483d467e5d70">ScalarFunctional&lt;spacedim, spacedim&gt;::get_maximum_step</a> </p>
+
+</div>
+</div>
 <a id="aa9f7d892dbf2eb27903c13d1f67e8bfa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9f7d892dbf2eb27903c13d1f67e8bfa">&#9670;&nbsp;</a></span>get_values_and_derivatives()</h2>
 

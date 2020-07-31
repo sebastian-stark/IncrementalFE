@@ -300,7 +300,7 @@ public:
 	/**
 	 * Sets GlobalDataIncrementalFE::threshold_residual
 	 *
-	 * @param[in]	threshold_potential_residual	GlobalDataIncrementalFE::threshold_potential_residual;
+	 * @param[in]	threshold_residual	GlobalDataIncrementalFE::threshold_potential_residual;
 	 */
 	void
 	set_threshold_residual(const double threshold_residual);

@@ -28,6 +28,8 @@ Collaboration diagram for incremental\+FE\+::Psi\+Elastic\+Plastic\+Material00$<
 \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00_ab7c7c3dff7601c0d4328e5bf69ab2db9}{Psi\+Elastic\+Plastic\+Material00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00_af9e598a7504e1498455a66daabe8f5f1}{lambda}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00_aff4b664270de9729e48012ebfce7a26f}{mu}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha}})
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00_aa9f7d892dbf2eb27903c13d1f67e8bfa}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00_abe68f0acfa909ffe059f7ace85bac6d3}{get\+\_\+maximum\+\_\+step}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&delta\+\_\+e\+\_\+omega, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&, const dealii\+::\+Point$<$ spacedim $>$ \&) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -103,7 +105,14 @@ Constructor
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_psi_elastic_plastic_material00_aa9f7d892dbf2eb27903c13d1f67e8bfa}\label{classincremental_f_e_1_1_psi_elastic_plastic_material00_aa9f7d892dbf2eb27903c13d1f67e8bfa}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_elastic_plastic_material00_abe68f0acfa909ffe059f7ace85bac6d3}\label{classincremental_f_e_1_1_psi_elastic_plastic_material00_abe68f0acfa909ffe059f7ace85bac6d3}} 
+\index{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$@{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$}!get\_maximum\_step@{get\_maximum\_step}}
+\index{get\_maximum\_step@{get\_maximum\_step}!incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$@{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_step()}{get\_maximum\_step()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_elastic_plastic_material00}{incremental\+F\+E\+::\+Psi\+Elastic\+Plastic\+Material00}}$<$ spacedim $>$\+::get\+\_\+maximum\+\_\+step (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+omega,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{delta\+\_\+e\+\_\+omega,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+see \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+maximum\+\_\+step} \mbox{\Hypertarget{classincremental_f_e_1_1_psi_elastic_plastic_material00_aa9f7d892dbf2eb27903c13d1f67e8bfa}\label{classincremental_f_e_1_1_psi_elastic_plastic_material00_aa9f7d892dbf2eb27903c13d1f67e8bfa}} 
 \index{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$@{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
 \index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$@{incrementalFE::PsiElasticPlasticMaterial00$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
