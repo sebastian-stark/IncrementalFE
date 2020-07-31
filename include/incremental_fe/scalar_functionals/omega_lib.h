@@ -1888,9 +1888,6 @@ public:
 		d[7] = -0.5*Q_dot[1]*Q_inv[2] - 0.5*Q_dot[2]*Q_inv[1] - 0.5*Q_dot[3]*Q_inv[4] - 0.5*Q_dot[4]*Q_inv[3] - 0.5*Q_dot[4]*Q_inv[5] - 0.5*Q_dot[5]*Q_inv[4];
 		d[8] = -Q_dot[2]*Q_inv[2] - Q_dot[4]*Q_inv[4] - Q_dot[5]*Q_inv[5];
 
-		const double dd = d * d;
-		const double dd_n = pow(dd, n);
-
 		static dealii::FullMatrix<double> dd_dQ_dot(9,6), d2delta_dd2(9,9), d2delta_dd2_dd_dQ_dot(9,6), dd_dQ_dot_d2delta_dd2_dd_dQ_dot(6,6), dd_dQ_inv(9,6), d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv(6,6), d_d2d_dQ_dot_d_Q_inv(6,6), d2delta_dQ_dot_dQ_inv(6,6), d2delta_dQ_dot_dQ(6,6), dB_dQ(6,6), dQ_inv_dQ(6,6);
 		static dealii::Vector<double> B(6), ddetQ_dQ(6);
 		if( (get<1>(requested_quantities)) || (get<2>(requested_quantities)))
@@ -1947,6 +1944,11 @@ public:
 
 		}
 
+		const double dd = d * d;
+		const double dd_n = dd > 0.0 ? pow(dd, n) : 0.0;
+		const double dd_n_1 = dd > 0.0 ? pow(dd, n-1) : 0.0;
+		const double dd_n_2 = dd > 0.0 ? pow(dd, n-2) : 0.0;
+
 		if(get<0>(requested_quantities))
 		{
 			omega = 0.5 * A/n * dd_n;
@@ -1957,7 +1959,7 @@ public:
 			dealii::Vector<double> d_dd_dQ_dot(6);
 			dd_dQ_dot.Tvmult(d_dd_dQ_dot, d);
 			for(unsigned int m = 0; m < 6; ++m)
-				d_omega[m] = A * dd_n / dd * d_dd_dQ_dot[m];
+				d_omega[m] = A * dd_n_1 * d_dd_dQ_dot[m];
 		}
 
 		if(get<2>(requested_quantities))
@@ -1965,8 +1967,8 @@ public:
 			for(unsigned int i = 0; i < 9; ++i)
 			{
 				for(unsigned int j = 0; j < 9; ++j)
-					d2delta_dd2(i,j) = 2.0 * A * (n - 1.0) * dd_n / dd / dd * d[i] * d[j];
-				d2delta_dd2(i,i) += A * dd_n / dd;
+					d2delta_dd2(i,j) = 2.0 * A * (n - 1.0) * dd_n_2 * d[i] * d[j];
+				d2delta_dd2(i,i) += A * dd_n_1;
 			}
 			d2delta_dd2.mmult(d2delta_dd2_dd_dQ_dot, dd_dQ_dot);
 			dd_dQ_dot.Tmmult(dd_dQ_dot_d2delta_dd2_dd_dQ_dot, d2delta_dd2_dd_dQ_dot);
@@ -1974,12 +1976,13 @@ public:
 				for(unsigned int j = 0; j < 6; ++j)
 					d2_omega(i,j) = dd_dQ_dot_d2delta_dd2_dd_dQ_dot(i,j);
 
+
 			if(compute_dq)
 			{
 				d2delta_dd2_dd_dQ_dot.Tmmult(d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv, dd_dQ_inv);
 				for(unsigned int i = 0; i < 6; ++i)
 					for(unsigned int j = 0; j < 6; ++j)
-						d2delta_dQ_dot_dQ_inv(i,j) = d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv(i,j) + A * dd_n / dd * d_d2d_dQ_dot_d_Q_inv(i,j);
+						d2delta_dQ_dot_dQ_inv(i,j) = d2delta_dd2_dd_dQ_dot_T_dd_dQ_inv(i,j) + A * dd_n_1 * d_d2d_dQ_dot_d_Q_inv(i,j);
 				d2delta_dQ_dot_dQ_inv.mmult(d2delta_dQ_dot_dQ, dQ_inv_dQ);
 				for(unsigned int i = 0; i < 6; ++i)
 					for(unsigned int j = 0; j < 6; ++j)
