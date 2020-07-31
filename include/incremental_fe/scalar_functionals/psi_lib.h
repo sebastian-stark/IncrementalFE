@@ -1877,6 +1877,12 @@ private:
 	const double
 	mu;
 
+	/**
+	 * Maximum allowable plastic strain increment in an iteration
+	 */
+	const double
+	max_strain_increment;
+
 
 public:
 
@@ -1896,6 +1902,8 @@ public:
 	 * @param[in]		mu						PsiElasticPlasticMaterial00::mu
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		mu						PsiElasticPlasticMaterial00::max_strain_increment
 	 */
 	PsiElasticPlasticMaterial00(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 								const std::set<dealii::types::material_id>											domain_of_integration,
@@ -1903,11 +1911,13 @@ public:
 								GlobalDataIncrementalFE<spacedim>&													global_data,
 								const double																		lambda,
 								const double																		mu,
-								const double																		alpha)
+								const double																		alpha,
+								const double																		max_strain_increment = 0.01)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "ElasticPlasticMaterial00"),
 	lambda(lambda),
-	mu(mu)
+	mu(mu),
+	max_strain_increment(max_strain_increment)
 	{
 	}
 
@@ -2097,13 +2107,23 @@ public:
 			for(unsigned int m = 9; m < 15; ++m)
 				Q[m - 9] = e_omega[m] + factor * delta_e_omega[m];
 			if( (get_J(F) > 0.0) && (get_J(Q, true) > 0.0))
-				return factor;
+				break;
 
 			factor *= 0.5;
 			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient and that of Q stays positive!"));
 		}
+		double max_rel = 1.0;
+		for(unsigned int m = 0; m < 6; ++m)
+		{
+			if(fabs(delta_e_omega[9 + m]) / max_strain_increment > max_rel)
+				max_rel = fabs(delta_e_omega[9 + m]) / max_strain_increment;
+		}
+		const double factor2 = max_rel > 1.0 ? 1.0 / max_rel : 1.0;
 
-		return factor;
+		if((factor == 2.0) && (max_rel == 1.0))
+			return DBL_MAX;
+		else
+			return std::min(factor, factor2);
 	}
 
 };
