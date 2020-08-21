@@ -137,10 +137,10 @@ Additional Inherited Members</h2></td></tr>
 class incrementalFE::OmegaDualButlerVolmer00&lt; spacedim &gt;</h3>
 
 <p>Class defining an interface related Butler-Volmer type scalar functional with the integrand</p>
-<p><img class="formulaInl" alt="$ h^\Sigma_\tau = -I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] $" src="form_38.png"/></p>
-<p>where <img class="formulaInl" alt="$I_0$" src="form_39.png"/> is related to the exchange current density <img class="formulaInl" alt="$i_0$" src="form_40.png"/> by <img class="formulaInl" alt="$I_0 = i_0 \cdot RT / F $" src="form_41.png"/>, <img class="formulaInl" alt="$\beta$" src="form_42.png"/> is the symmetry factor, and <img class="formulaInl" alt="$\Delta \eta$" src="form_43.png"/> the thermodynamic driving force.</p>
+<p><img class="formulaInl" alt="$ h^\Sigma_\tau = -I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] $" src="form_44.png"/></p>
+<p>where <img class="formulaInl" alt="$I_0$" src="form_45.png"/> is related to the exchange current density <img class="formulaInl" alt="$i_0$" src="form_46.png"/> by <img class="formulaInl" alt="$I_0 = i_0 \cdot RT / F $" src="form_47.png"/>, <img class="formulaInl" alt="$\beta$" src="form_48.png"/> is the symmetry factor, and <img class="formulaInl" alt="$\Delta \eta$" src="form_49.png"/> the thermodynamic driving force.</p>
 <p>Ordering of quantities in <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a86662b03a63219227993a2c6c07aefc1">ScalarFunctional::e_sigma</a> :<br  />
-[0] <img class="formulaInl" alt="$\Delta \eta$" src="form_43.png"/> </p>
+[0] <img class="formulaInl" alt="$\Delta \eta$" src="form_49.png"/> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4bc64f76770f63e634478f19798d9d27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bc64f76770f63e634478f19798d9d27">&#9670;&nbsp;</a></span>OmegaDualButlerVolmer00()</h2>
@@ -350,7 +350,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>parameter <img class="formulaInl" alt="$\beta$" src="form_42.png"/> </p>
+<p>parameter <img class="formulaInl" alt="$\beta$" src="form_48.png"/> </p>
 
 </div>
 </div>
@@ -375,7 +375,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>parameter <img class="formulaInl" alt="$I_0$" src="form_39.png"/> </p>
+<p>parameter <img class="formulaInl" alt="$I_0$" src="form_45.png"/> </p>
 
 </div>
 </div>
@@ -400,7 +400,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$RT$" src="form_102.png"/> </p>
+<p><img class="formulaInl" alt="$RT$" src="form_142.png"/> </p>
 
 </div>
 </div>
@@ -425,7 +425,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Threshold parameter <img class="formulaInl" alt="$\Delta \eta^\mathrm{th}/RT$" src="form_103.png"/>. If <img class="formulaInl" alt="$|\Delta \eta/RT| &gt; \Delta \eta^\mathrm{th}/RT$" src="form_104.png"/>, the potential is continued by a quadratic function in order to avoid numerical issues related to large values of the exponential function. </p>
+<p>Threshold parameter <img class="formulaInl" alt="$\Delta \eta^\mathrm{th}/RT$" src="form_143.png"/>. If <img class="formulaInl" alt="$|\Delta \eta/RT| &gt; \Delta \eta^\mathrm{th}/RT$" src="form_144.png"/>, the potential is continued by a quadratic function in order to avoid numerical issues related to large values of the exponential function. </p>
 
 </div>
 </div>

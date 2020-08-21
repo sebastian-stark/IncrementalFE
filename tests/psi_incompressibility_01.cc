@@ -13,10 +13,11 @@ using namespace incrementalFE;
 
 template<unsigned int spacedim>
 void
-check()
+check(const bool symmetric)
 {
 
-	vector<DependentField<spacedim, spacedim>> dependent_fields(7, DependentField<spacedim, spacedim>("q"));
+	unsigned int N = symmetric ? 7 : 10;
+	vector<DependentField<spacedim, spacedim>> dependent_fields(N, DependentField<spacedim, spacedim>("q"));
 
 	const double alpha = 0.5;
 
@@ -27,7 +28,8 @@ check()
 																{},
 																QGauss<spacedim>(1),
 																global_data,
-																alpha);
+																alpha,
+																symmetric);
 
 	Vector<double> e_omega(dependent_fields.size());
 	vector<Vector<double>> e_omega_ref_sets(1);
@@ -41,18 +43,36 @@ check()
 		val = cos(a);
 		a = a + 0.1;
 	}
-	e_omega[0] += 1.0;
-	e_omega[3] += 1.0;
-	e_omega[5] += 1.0;
+	if(symmetric)
+	{
+		e_omega[0] += 1.0;
+		e_omega[3] += 1.0;
+		e_omega[5] += 1.0;
+	}
+	else
+	{
+		e_omega[0] += 1.0;
+		e_omega[4] += 1.0;
+		e_omega[8] += 1.0;
+	}
 
 	for(auto& val : e_omega_ref_sets[0])
 	{
 		val = sin(a);
 		a = a + 0.1;
 	}
-	e_omega_ref_sets[0][0] += 1.0;
-	e_omega_ref_sets[0][3] += 1.0;
-	e_omega_ref_sets[0][5] += 1.0;
+	if(symmetric)
+	{
+		e_omega_ref_sets[0][0] += 1.0;
+		e_omega_ref_sets[0][3] += 1.0;
+		e_omega_ref_sets[0][5] += 1.0;
+	}
+	else
+	{
+		e_omega_ref_sets[0][0] += 1.0;
+		e_omega_ref_sets[0][4] += 1.0;
+		e_omega_ref_sets[0][8] += 1.0;
+	}
 
 	psi_incompressibility_01.compare_derivatives_with_numerical_derivatives(e_omega,
 																			e_omega_ref_sets,
@@ -64,8 +84,15 @@ check()
 int main()
 {
 	cout << "### 2D-Case ###\n\n";
-	check<2>();
+	check<2>(true);
 
 	cout << "\n### 3D-Case ###\n\n";
-	check<3>();
+	check<3>(true);
+
+	cout << "### 2D-Case ###\n\n";
+	check<2>(false);
+
+	cout << "\n### 3D-Case ###\n\n";
+	check<3>(false);
+
 }

@@ -1,0 +1,160 @@
+\hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{}\doxysection{incremental\+FE\+::Psi\+Neo\+Hooke\+Lagrange00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Psi\+Neo\+Hooke\+Lagrange00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classincremental_f_e_1_1_psi_neo_hooke_lagrange00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Psi\+Neo\+Hooke\+Lagrange00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classincremental_f_e_1_1_psi_neo_hooke_lagrange00__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a38c599d9498d008b8f520373d1ef59f7}{Psi\+Neo\+Hooke\+Lagrange00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a824814b8cdb080c4ba44521aa7ca1e52}{lambda}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a9464383ed35d1ec6c6b0b93d9ab779e8}{mu}}, const dealii\+::\+Function$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a43b21958aaaafe9897349f591da5a586}{scaling\+\_\+function}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{alpha}})
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a0a930a5f49cb001179590c819fbce3c5}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&x, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a226fc039fcf60924a507f21c9160d0b9}{get\+\_\+maximum\+\_\+step}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&delta\+\_\+e\+\_\+omega, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&, const dealii\+::\+Point$<$ spacedim $>$ \&) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a824814b8cdb080c4ba44521aa7ca1e52}{lambda}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a9464383ed35d1ec6c6b0b93d9ab779e8}{mu}}
+\item 
+const dealii\+::\+Function$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a43b21958aaaafe9897349f591da5a586}{scaling\+\_\+function}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00$<$ spacedim $>$}
+
+Class defining a scalar functional enforcing the equilibrium equation associated with a compressible Neo-\/\+Hooke material by means of an Lagrangian multiplier
+
+The integrand is
+
+$h^\Omega_\rho = \boldsymbol{\lambda} : \left( \mu \boldsymbol{F} + \lambda \dfrac{\ln J}{J} - \mu \dfrac{1}{J} \right)$,
+
+where
+
+$J$ the determinant of the deformation gradient $\boldsymbol{F}$, $\boldsymbol{\lambda}$ are the Lagrangian multipliers, and $\mu$ and $\lambda$ Lame\textquotesingle{}s constants.
+
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $F_{xx}$ ~\newline
+ \mbox{[}1\mbox{]} $F_{xy}$ ~\newline
+ \mbox{[}2\mbox{]} $F_{xz}$ ~\newline
+ \mbox{[}3\mbox{]} $F_{yx}$ ~\newline
+ \mbox{[}4\mbox{]} $F_{yy}$ ~\newline
+ \mbox{[}5\mbox{]} $F_{yz}$ ~\newline
+ \mbox{[}6\mbox{]} $F_{zx}$ ~\newline
+ \mbox{[}7\mbox{]} $F_{zy}$ ~\newline
+ \mbox{[}8\mbox{]} $F_{zz}$ ~\newline
+ \mbox{[}9\mbox{]} $\lambda_{xx}$ ~\newline
+ \mbox{[}10\mbox{]} $\lambda_{xy}$ ~\newline
+ \mbox{[}11\mbox{]} $\lambda_{xz}$ ~\newline
+ \mbox{[}12\mbox{]} $\lambda_{yx}$ ~\newline
+ \mbox{[}13\mbox{]} $\lambda_{yy}$ ~\newline
+ \mbox{[}14\mbox{]} $\lambda_{yz}$ ~\newline
+ \mbox{[}15\mbox{]} $\lambda_{zx}$ ~\newline
+ \mbox{[}16\mbox{]} $\lambda_{zy}$ ~\newline
+ \mbox{[}17\mbox{]} $\lambda_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a38c599d9498d008b8f520373d1ef59f7}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a38c599d9498d008b8f520373d1ef59f7}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!PsiNeoHookeLagrange00@{PsiNeoHookeLagrange00}}
+\index{PsiNeoHookeLagrange00@{PsiNeoHookeLagrange00}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{PsiNeoHookeLagrange00()}{PsiNeoHookeLagrange00()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{Psi\+Neo\+Hooke\+Lagrange00}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{lambda,  }\item[{const double}]{mu,  }\item[{const dealii\+::\+Function$<$ spacedim $>$ \&}]{scaling\+\_\+function,  }\item[{const double}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}{Psi$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em lambda} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a824814b8cdb080c4ba44521aa7ca1e52}{Psi\+Neo\+Hooke\+Lagrange00\+::lambda}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em mu} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a9464383ed35d1ec6c6b0b93d9ab779e8}{Psi\+Neo\+Hooke\+Lagrange00\+::mu}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em scaling\+\_\+function} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a43b21958aaaafe9897349f591da5a586}{Psi\+Neo\+Hooke\+Lagrange00\+::scaling\+\_\+function}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_af7b8227188dbdd6ada35b9445d96c79d}{Psi$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a226fc039fcf60924a507f21c9160d0b9}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a226fc039fcf60924a507f21c9160d0b9}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!get\_maximum\_step@{get\_maximum\_step}}
+\index{get\_maximum\_step@{get\_maximum\_step}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_step()}{get\_maximum\_step()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::get\+\_\+maximum\+\_\+step (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+omega,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{delta\+\_\+e\+\_\+omega,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+see \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+maximum\+\_\+step} \mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a0a930a5f49cb001179590c819fbce3c5}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a0a930a5f49cb001179590c819fbce3c5}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{incremental\+F\+E\+::\+Psi$<$ spacedim, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a824814b8cdb080c4ba44521aa7ca1e52}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a824814b8cdb080c4ba44521aa7ca1e52}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!lambda@{lambda}}
+\index{lambda@{lambda}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{lambda}{lambda}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::lambda\hspace{0.3cm}{\ttfamily [private]}}
+
+Lame\textquotesingle{}s constant $\lambda$ \mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a9464383ed35d1ec6c6b0b93d9ab779e8}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a9464383ed35d1ec6c6b0b93d9ab779e8}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!mu@{mu}}
+\index{mu@{mu}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{mu}{mu}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::mu\hspace{0.3cm}{\ttfamily [private]}}
+
+Lame\textquotesingle{}s constant $\mu$ \mbox{\Hypertarget{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a43b21958aaaafe9897349f591da5a586}\label{classincremental_f_e_1_1_psi_neo_hooke_lagrange00_a43b21958aaaafe9897349f591da5a586}} 
+\index{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}!scaling\_function@{scaling\_function}}
+\index{scaling\_function@{scaling\_function}!incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$@{incrementalFE::PsiNeoHookeLagrange00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{scaling\_function}{scaling\_function}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const dealii\+::\+Function$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange00}{incremental\+F\+E\+::\+Psi\+Neo\+Hooke\+Lagrange00}}$<$ spacedim $>$\+::scaling\+\_\+function\hspace{0.3cm}{\ttfamily [private]}}
+
+Function allowing to scale $\lambda$ and $\mu$ in dependence on position (the function must provide with the scaling factor) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}}\end{DoxyCompactItemize}

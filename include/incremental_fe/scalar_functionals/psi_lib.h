@@ -1094,6 +1094,12 @@ private:
 	const dealii::Function<spacedim>&
 	scaling_function;
 
+	/**
+	 * Global indices for which corresponding rows in the finite element systems are set to be zero
+	 */
+	set<unsigned int> const*
+	ignore_dof_indices;
+
 public:
 
 	/**
@@ -1114,6 +1120,8 @@ public:
 	 * @param[in]		scaling_function		PsiNeoHooke00::scaling_function
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		ignore_dof_indices		PsiNeoHooke00::ignore_dof_indices
 	 */
 	PsiNeoHooke00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -1122,12 +1130,14 @@ public:
 					const double																lambda,
 					const double																mu,
 					const dealii::Function<spacedim>&											scaling_function,
-					const double																alpha)
+					const double																alpha,
+					set<unsigned int> const*													ignore_dof_indices = nullptr)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiNeoHooke00"),
 	lambda(lambda),
 	mu(mu),
-	scaling_function(scaling_function)
+	scaling_function(scaling_function),
+	ignore_dof_indices(ignore_dof_indices)
 	{
 	}
 
@@ -1232,7 +1242,253 @@ public:
 		return factor;
 	}
 
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::modify_K_cell_f_cell
+	 */
+	void
+	modify_K_cell_f_cell(	const dealii::GalerkinTools::DomainCellDoFIterator<spacedim>&	domain_cell,
+							dealii::FullMatrix<double>&										K_cell,
+							dealii::Vector<double>&											f_cell,
+							const std::vector<unsigned int>&								scalar_functional_indices_to_cell_shapefuns,
+							const std::vector<unsigned int>&								scalar_functional_indices_to_independent_scalar_indices)
+	const
+	{
+		if(ignore_dof_indices != nullptr)
+		{
+			static vector<unsigned int> dof_indices_local_global;
+			dof_indices_local_global.resize(domain_cell->get_fe().n_dofs_per_cell());
+			domain_cell.get_dof_indices(dof_indices_local_global);
+			for(unsigned int shapefun = 0; shapefun < scalar_functional_indices_to_cell_shapefuns.size(); ++shapefun)
+			{
+				const unsigned int global_dof_index = dof_indices_local_global[scalar_functional_indices_to_cell_shapefuns[shapefun]];
+				if(ignore_dof_indices->find(dof_indices_local_global[scalar_functional_indices_to_cell_shapefuns[shapefun]]) != ignore_dof_indices->end())
+				{
+					for(unsigned int n = 0; n < K_cell.n(); ++n)
+						K_cell(shapefun, n) = 0.0;
+					f_cell(shapefun) = 0.0;
+				}
+			}
+		}
+	}
+
 };
+
+
+/**
+ *
+ * Class defining a scalar functional enforcing the equilibrium equation associated with a compressible Neo-Hooke material by means of an Lagrangian multiplier
+ *
+ * The integrand is
+ *
+ * \f$h^\Omega_\rho = \boldsymbol{\lambda} : \left( \mu \boldsymbol{F} + \lambda \dfrac{\ln J}{J} - \mu \dfrac{1}{J} \right)\f$,
+ *
+ * where
+ *
+ * \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$, \f$\boldsymbol{\lambda}\f$ are the Lagrangian multipliers,
+ * and \f$\mu\f$ and \f$\lambda\f$ Lame's constants.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0]  \f$F_{xx}\f$ <br>
+ * 																					[1]  \f$F_{xy}\f$ <br>
+ * 																					[2]  \f$F_{xz}\f$ <br>
+ * 																					[3]  \f$F_{yx}\f$ <br>
+ * 																					[4]  \f$F_{yy}\f$ <br>
+ * 																					[5]  \f$F_{yz}\f$ <br>
+ * 																					[6]  \f$F_{zx}\f$ <br>
+ * 																					[7]  \f$F_{zy}\f$ <br>
+ * 																					[8]  \f$F_{zz}\f$ <br>
+ * 																					[9]  \f$\lambda_{xx}\f$ <br>
+ * 																					[10] \f$\lambda_{xy}\f$ <br>
+ * 																					[11] \f$\lambda_{xz}\f$ <br>
+ * 																					[12] \f$\lambda_{yx}\f$ <br>
+ * 																					[13] \f$\lambda_{yy}\f$ <br>
+ * 																					[14] \f$\lambda_{yz}\f$ <br>
+ * 																					[15] \f$\lambda_{zx}\f$ <br>
+ * 																					[16] \f$\lambda_{zy}\f$ <br>
+ * 																					[17] \f$\lambda_{zz}\f$
+ */
+template<unsigned int spacedim>
+class PsiNeoHookeLagrange00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Lame's constant \f$\lambda\f$
+	 */
+	const double
+	lambda;
+
+	/**
+	 * Lame's constant \f$\mu\f$
+	 */
+	const double
+	mu;
+
+	/**
+	 * %Function allowing to scale \f$\lambda\f$ and \f$\mu\f$ in dependence on position (the function must provide with the scaling factor)
+	 */
+	const dealii::Function<spacedim>&
+	scaling_function;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		lambda					PsiNeoHookeLagrange00::lambda
+	 *
+	 * @param[in]		mu						PsiNeoHookeLagrange00::mu
+	 *
+	 * @param[in]		scaling_function		PsiNeoHookeLagrange00::scaling_function
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiNeoHookeLagrange00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+							const std::set<dealii::types::material_id>									domain_of_integration,
+							const dealii::Quadrature<spacedim>											quadrature,
+							GlobalDataIncrementalFE<spacedim>&											global_data,
+							const double																lambda,
+							const double																mu,
+							const dealii::Function<spacedim>&											scaling_function,
+							const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiNeoHookeLagrange00"),
+	lambda(lambda),
+	mu(mu),
+	scaling_function(scaling_function)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		x,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		// scale mu and lambda
+		const double mu_ = scaling_function.value(x) * mu;
+		const double lambda_ = scaling_function.value(x) * lambda;
+
+		// deformation gradient and derived quantities
+		dealii::Vector<double> F(9), L(9);
+		for(unsigned int m = 0; m < 9; ++m)
+		{
+			F[m] = values[m];
+			L[m] = values[m + 9];
+		}
+
+		const double J = get_J(F);
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2(9,9);
+		get_dJ_dF(F, dJ_dF);
+		get_d2J_dF2(F, d2J_dF2);
+		const double dJ_dF_L = dJ_dF * L;
+		dealii::Vector<double> d2J_dF2_L(9);
+		d2J_dF2.vmult(d2J_dF2_L, L);
+
+		// first derivatives of potential w.r.t. J and I_1
+		const double dpsi_dJ = (-mu_ + lambda_ * log(J))/J;
+		const double d2psi_dJ2 = (mu_ - lambda_ * log(J) + lambda_)/J/J;
+
+		// compute value of potential
+		if(get<0>(requested_quantities))
+		{
+			omega = 0.0;
+			for(unsigned int m = 0; m < 9; ++m)
+				omega += L[m] * ( mu_ * F[m] + dpsi_dJ * dJ_dF[m] );
+		}
+
+
+		// first derivative
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+			{
+				d_omega[m] = L[m] * mu_ + dpsi_dJ * d2J_dF2_L[m] + d2psi_dJ2 * dJ_dF_L * dJ_dF[m];
+				d_omega[m + 9] = mu_ * F[m] + dpsi_dJ * dJ_dF[m];
+			}
+		}
+
+		// second derivative
+		if(get<2>(requested_quantities))
+		{
+			dealii::FullMatrix<double> L_d3J_dF3(9,9);
+			L_d3J_dF3(0,0) = 0;		L_d3J_dF3(0,1) = 0;		L_d3J_dF3(0,2) = 0;		L_d3J_dF3(0,3) = 0;		L_d3J_dF3(0,4) = L[8];	L_d3J_dF3(0,5) = -L[7];	L_d3J_dF3(0,6) = 0;		L_d3J_dF3(0,7) = -L[5];	L_d3J_dF3(0,8) = L[4];
+			L_d3J_dF3(1,0) = 0;		L_d3J_dF3(1,1) = 0;		L_d3J_dF3(1,2) = 0;		L_d3J_dF3(1,3) = -L[8];	L_d3J_dF3(1,4) = 0;		L_d3J_dF3(1,5) = L[6];	L_d3J_dF3(1,6) = L[5];	L_d3J_dF3(1,7) = 0;		L_d3J_dF3(1,8) = -L[3];
+			L_d3J_dF3(2,0) = 0;		L_d3J_dF3(2,1) = 0;		L_d3J_dF3(2,2) = 0;		L_d3J_dF3(2,3) = L[7];	L_d3J_dF3(2,4) = -L[6];	L_d3J_dF3(2,5) = 0;		L_d3J_dF3(2,6) = -L[4];	L_d3J_dF3(2,7) = L[3];	L_d3J_dF3(2,8) = 0;
+			L_d3J_dF3(3,0) = 0;		L_d3J_dF3(3,1) = -L[8];	L_d3J_dF3(3,2) = L[7];	L_d3J_dF3(3,3) = 0;		L_d3J_dF3(3,4) = 0;		L_d3J_dF3(3,5) = 0;		L_d3J_dF3(3,6) = 0;		L_d3J_dF3(3,7) = L[2];	L_d3J_dF3(3,8) = -L[1];
+			L_d3J_dF3(4,0) = L[8];	L_d3J_dF3(4,1) = 0;		L_d3J_dF3(4,2) = -L[6];	L_d3J_dF3(4,3) = 0;		L_d3J_dF3(4,4) = 0;		L_d3J_dF3(4,5) = 0;		L_d3J_dF3(4,6) = -L[2];	L_d3J_dF3(4,7) = 0;		L_d3J_dF3(4,8) = L[0];
+			L_d3J_dF3(5,0) = -L[7];	L_d3J_dF3(5,1) = L[6];	L_d3J_dF3(5,2) = 0;		L_d3J_dF3(5,3) = 0;		L_d3J_dF3(5,4) = 0;		L_d3J_dF3(5,5) = 0;		L_d3J_dF3(5,6) = L[1];	L_d3J_dF3(5,7) = -L[0];	L_d3J_dF3(5,8) = 0;
+			L_d3J_dF3(6,0) = 0;		L_d3J_dF3(6,1) = L[5];	L_d3J_dF3(6,2) = -L[4];	L_d3J_dF3(6,3) = 0;		L_d3J_dF3(6,4) = -L[2];	L_d3J_dF3(6,5) = L[1];	L_d3J_dF3(6,6) = 0;		L_d3J_dF3(6,7) = 0;		L_d3J_dF3(6,8) = 0;
+			L_d3J_dF3(7,0) = -L[5];	L_d3J_dF3(7,1) = 0;		L_d3J_dF3(7,2) = L[3];	L_d3J_dF3(7,3) = L[2];	L_d3J_dF3(7,4) = 0;		L_d3J_dF3(7,5) = -L[0];	L_d3J_dF3(7,6) = 0;		L_d3J_dF3(7,7) = 0;		L_d3J_dF3(7,8) = 0;
+			L_d3J_dF3(8,0) = L[4];	L_d3J_dF3(8,1) = -L[3];	L_d3J_dF3(8,2) = 0;		L_d3J_dF3(8,3) = -L[1];	L_d3J_dF3(8,4) = L[0];	L_d3J_dF3(8,5) = 0;		L_d3J_dF3(8,6) = 0;		L_d3J_dF3(8,7) = 0;		L_d3J_dF3(8,8) = 0;
+
+			const double dpsi_dJ = (-mu_ + lambda_ * log(J))/J;
+			const double d2psi_dJ2 = (mu_ - lambda_ * log(J) + lambda_)/J/J;
+
+			const double d3psi_dJ3 = (-2.0 * mu_ + 2.0 * lambda_ * log(J) - 3.0 * lambda_)/J/J/J;
+
+			for(unsigned int m = 0; m < 9; ++m)
+			{
+				for(unsigned int n = 0; n < 9; ++n)
+				{
+					d2_omega(m, n) = dpsi_dJ * L_d3J_dF3(m, n) + d2psi_dJ2 * (d2J_dF2_L[m] * dJ_dF[n] + d2J_dF2_L[n] * dJ_dF[m]) + d3psi_dJ3 * dJ_dF_L * dJ_dF[m] * dJ_dF[n] + d2psi_dJ2 * dJ_dF_L * d2J_dF2(m, n);
+					d2_omega(m + 9, n) = d2_omega(m, n + 9) = dpsi_dJ * d2J_dF2(m, n) + d2psi_dJ2 * dJ_dF[m] * dJ_dF[n];
+				}
+				d2_omega(m + 9, m) += mu_;
+				d2_omega(m, m + 9) += mu_;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+
+		double factor = 2.0;
+		dealii::Vector<double> e(9);
+
+		while(true)
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				e[m] = e_omega[m] + factor * delta_e_omega[m];
+			if(get_J(e) > 0.0)
+				return factor;
+
+			factor *= 0.5;
+			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
+		}
+
+		return factor;
+	}
+
+};
+
 
 
 /**
@@ -1611,23 +1867,43 @@ public:
 
 
 /**
- * Class defining an incompressibility constraint in that the determinant of a symmetric tensor is constrained to 1.
+ * Class defining an incompressibility constraint in that the determinant of a symmetric or unsymmetric rank 2 tensor is constrained to 1.
  *
  * \f$h^\Omega_\rho = -p\left( J - 1 \right)\f$,
  *
- * where \f$J=\det(\boldsymbol{Q})\f$, \f$\boldsymbol{Q}\f$ is a symmetric tensor and \f$p\f$ the Lagrangian multiplier (the "pressure").
+ * where \f$J=\det(\boldsymbol{Q})\f$, \f$\boldsymbol{Q}\f$ is a rank 2 tensor and \f$p\f$ the Lagrangian multiplier (the "pressure").
  *
- * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$Q_{xx}\f$<br>
- * 																					[1] \f$Q_{xy}\f$<br>
- * 																					[2] \f$Q_{xz}\f$<br>
- * 																					[3] \f$Q_{yy}\f$<br>
- * 																					[4] \f$Q_{yz}\f$<br>
- * 																					[5] \f$Q_{zz}\f$<br>
- * 																					[6] \f$p\f$
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega for symmetric case:<br>	[0] \f$Q_{xx}\f$<br>
+ * 																									[1] \f$Q_{xy}\f$<br>
+ * 																									[2] \f$Q_{xz}\f$<br>
+ * 																									[3] \f$Q_{yy}\f$<br>
+ * 																									[4] \f$Q_{yz}\f$<br>
+ * 																									[5] \f$Q_{zz}\f$<br>
+ * 																									[6] \f$p\f$
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega for unsymmetric case:<br>	[0] \f$Q_{xx}\f$<br>
+ * 																										[1] \f$Q_{xy}\f$<br>
+ * 																										[2] \f$Q_{xz}\f$<br>
+ * 																										[3] \f$Q_{xy}\f$<br>
+ * 																										[4] \f$Q_{yy}\f$<br>
+ * 																										[5] \f$Q_{yz}\f$<br>
+ * 																										[6] \f$Q_{zx}\f$<br>
+ * 																										[7] \f$Q_{zy}\f$<br>
+ * 																										[8] \f$Q_{zz}\f$<br>
+ * 																										[9] \f$p\f$
+
 */
 template<unsigned int spacedim>
 class PsiIncompressibility01 : public incrementalFE::Psi<spacedim, spacedim>
 {
+private:
+
+	/**
+	 * Indicates whether \f$\boldsymbol{Q}\f$ is symmetric
+	 */
+	const bool
+	symmetric = true;
+
 
 public:
 
@@ -1643,14 +1919,18 @@ public:
 	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		symmetric				PsiIncompressibility01::symmetric
 	 */
 	PsiIncompressibility01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 							const std::set<dealii::types::material_id>									domain_of_integration,
 							const dealii::Quadrature<spacedim>											quadrature,
 							GlobalDataIncrementalFE<spacedim>&											global_data,
-							const double																alpha)
+							const double																alpha,
+							const bool																	symmetric = false)
 	:
-	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiIncompressibility01")
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiIncompressibility01"),
+	symmetric(symmetric)
 	{
 	}
 
@@ -1666,21 +1946,22 @@ public:
 								const std::tuple<bool, bool, bool>	requested_quantities)
 	const
 	{
-		dealii::Vector<double> Q(6);
-		for(unsigned int m = 0; m < 6; ++m)
+		const unsigned int N = symmetric ? 6 : 9;
+		dealii::Vector<double> Q(N);
+		for(unsigned int m = 0; m < N; ++m)
 			Q[m] = values[m];
-		const double p = values[6];
+		const double p = values[N];
 
 	 	// J and derivatives
-		const double J = get_J(Q, true);
+		const double J = get_J(Q, symmetric);
 		Assert(J > 0, dealii::ExcMessage("The determinant of Q must be greater than zero"));
-		dealii::Vector<double> dJ_dQ(6);
+		dealii::Vector<double> dJ_dQ(N);
 		dealii::FullMatrix<double> d2J_dQ2;
-		get_dJ_dF(Q, dJ_dQ, true);
+		get_dJ_dF(Q, dJ_dQ, symmetric);
 		if(get<2>(requested_quantities))
 		{
-			d2J_dQ2.reinit(6,6);
-			get_d2J_dF2(Q, d2J_dQ2, true);
+			d2J_dQ2.reinit(N,N);
+			get_d2J_dF2(Q, d2J_dQ2, symmetric);
 		}
 
 		if(get<0>(requested_quantities))
@@ -1690,21 +1971,19 @@ public:
 
 		if(get<1>(requested_quantities))
 		{
-			d_omega.reinit(7);
 			// don't calculate derivatives w.r.t. deformation gradient if it is only a parameter
-			for(unsigned int m = 0; m < 6; ++m)
+			for(unsigned int m = 0; m < N; ++m)
 				d_omega[m] = -p * dJ_dQ[m];
-			d_omega[6] = 1.0 - J;
+			d_omega[N] = 1.0 - J;
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega.reinit(7,7);
-			for(unsigned int m = 0; m < 6; ++m)
+			for(unsigned int m = 0; m < N; ++m)
 			{
-				for(unsigned int n = 0; n < 6; ++n)
+				for(unsigned int n = 0; n < N; ++n)
 					d2_omega(m, n) = -p * d2J_dQ2(m, n);
-				d2_omega(6, m) = d2_omega(m, 6) = -dJ_dQ[m];
+				d2_omega(N, m) = d2_omega(m, N) = -dJ_dQ[m];
 			}
 		}
 
@@ -1903,16 +2182,16 @@ public:
 	 *
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 *
-	 * @param[in]		mu						PsiElasticPlasticMaterial00::max_strain_increment
+	 * @param[in]		max_strain_increment	PsiElasticPlasticMaterial00::max_strain_increment
 	 */
 	PsiElasticPlasticMaterial00(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
-								const std::set<dealii::types::material_id>											domain_of_integration,
-								const dealii::Quadrature<spacedim>													quadrature,
-								GlobalDataIncrementalFE<spacedim>&													global_data,
-								const double																		lambda,
-								const double																		mu,
-								const double																		alpha,
-								const double																		max_strain_increment = 0.01)
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																lambda,
+								const double																mu,
+								const double																alpha,
+								const double																max_strain_increment = 0.01)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "ElasticPlasticMaterial00"),
 	lambda(lambda),
@@ -2112,18 +2391,7 @@ public:
 			factor *= 0.5;
 			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient and that of Q stays positive!"));
 		}
-		double max_rel = 1.0;
-		for(unsigned int m = 0; m < 6; ++m)
-		{
-			if(fabs(delta_e_omega[9 + m]) / max_strain_increment > max_rel)
-				max_rel = fabs(delta_e_omega[9 + m]) / max_strain_increment;
-		}
-		const double factor2 = max_rel > 1.0 ? 1.0 / max_rel : 1.0;
-
-		if((factor == 2.0) && (max_rel == 1.0))
-			return DBL_MAX;
-		else
-			return std::min(factor, factor2);
+		return factor;
 	}
 
 };

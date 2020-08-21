@@ -118,8 +118,8 @@ Private Attributes</h2></td></tr>
 class incrementalFE::Psi&lt; dim, spacedim &gt;</h3>
 
 <p>Class defining an interface related scalar functional with the integrand</p>
-<p><img class="formulaInl" alt="$ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_106.png"/>,</p>
-<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_107.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_108.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_109.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
+<p><img class="formulaInl" alt="$ h^\Sigma_\tau = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_146.png"/>,</p>
+<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_147.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_148.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_149.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae8a4aab5ee5381799379b8de2bc1f67d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8a4aab5ee5381799379b8de2bc1f67d">&#9670;&nbsp;</a></span>Psi()</h2>
@@ -362,15 +362,15 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_111.png"/> and needs to be implemented by classes inheriting from this class</p>
+<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_151.png"/> and needs to be implemented by classes inheriting from this class</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_112.png"/> and its derivatives are evaluated</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_152.png"/> and its derivatives are evaluated</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Position</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>Normal vector</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_112.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_112.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_112.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_152.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_152.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_152.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">requested_quantities</td><td>Tuple indicating which of the quantities <code>psi</code>, <code>d_psi</code>, <code>d2_psi</code> are to be computed (note that only those quantities are initialized to the correct size, which are actually requested).</td></tr>
   </table>
   </dd>

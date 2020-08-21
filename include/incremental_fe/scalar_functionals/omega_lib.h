@@ -646,7 +646,7 @@ public:
 						const unsigned int																method,
 						const double																	alpha = 0.0)
 	:
-	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 3, 0, 0, 0, method, alpha, "OmegaZeroNormalFlux00"),
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 3, 0, 0, 0, method, alpha, "OmegaFluxPower00"),
 	function_mu(function_mu)
 	{
 	}
@@ -688,6 +688,105 @@ public:
 			d_sigma[0] = mu_bar * n_x;
 			d_sigma[1] = mu_bar * n_y;
 			d_sigma[2] = mu_bar * n_z;
+		}
+
+		return false;
+	}
+
+};
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
+ * \f$ h^\Sigma_\tau =	-\bar{\boldsymbol{f}}(t) \dot{\boldsymbol{u}} \f$
+ *
+ * where \f$\bar{\boldsymbol{f}}\f$ is the prescribed traction, and \f$\dot{\boldsymbol{u}}\f$ the corresponding displacement.
+ *
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\dot{u}_x\f$<br>
+ * 															[1]	\f$\dot{u}_y\f$<br>
+ * 															[2]	\f$\dot{u}_z\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaTraction00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+private:
+
+	/**
+	 * %Function determining \f$\bar{\boldsymbol{f}}(t)\f$ (must have three components)
+	 */
+	dealii::Function<spacedim>&
+	function_f;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		function_f				OmegaTraction00::function_f
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 */
+	OmegaTraction00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+						const std::set<dealii::types::material_id>										domain_of_integration,
+						const dealii::Quadrature<spacedim-1>											quadrature,
+						GlobalDataIncrementalFE<spacedim>&												global_data,
+						dealii::Function<spacedim>&														function_f,
+						const unsigned int																method,
+						const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 0, 3, 0, 0, method, alpha, "OmegaTraction00"),
+	function_f(function_f)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			/*d2_sigma*/,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+
+		const double time_old = function_f.get_time();
+		function_f.set_time(t);
+		const double f_x = function_f.value(x, 0);
+		const double f_y = function_f.value(x, 1);
+		const double f_z = function_f.value(x, 2);
+		function_f.set_time(time_old);
+
+		const double u_x_dot = values[0];
+		const double u_y_dot = values[1];
+		const double u_z_dot = values[2];
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = - (f_x * u_x_dot + f_y * u_y_dot + f_z * u_z_dot);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_sigma[0] = -f_x;
+			d_sigma[1] = -f_y;
+			d_sigma[2] = -f_z;
 		}
 
 		return false;
@@ -1862,6 +1961,7 @@ public:
 								const bool							compute_dq)
 	const
 	{
+
 		dealii::Vector<double> Q_dot(6), Q(6), Q_inv(6);
 		for(unsigned int m = 0; m < 6; ++m)
 		{
@@ -1946,8 +2046,8 @@ public:
 
 		const double dd = d * d;
 		const double dd_n = dd > 0.0 ? pow(dd, n) : 0.0;
-		const double dd_n_1 = dd > 0.0 ? pow(dd, n-1) : 0.0;
-		const double dd_n_2 = dd > 0.0 ? pow(dd, n-2) : 0.0;
+		const double dd_n_1 = dd > 0.0 ? pow(dd, n-1.0) : 0.0;
+		const double dd_n_2 = dd > 0.0 ? pow(dd, n-2.0) : 0.0;
 
 		if(get<0>(requested_quantities))
 		{
@@ -1973,9 +2073,10 @@ public:
 			d2delta_dd2.mmult(d2delta_dd2_dd_dQ_dot, dd_dQ_dot);
 			dd_dQ_dot.Tmmult(dd_dQ_dot_d2delta_dd2_dd_dQ_dot, d2delta_dd2_dd_dQ_dot);
 			for(unsigned int i = 0; i < 6; ++i)
+			{
 				for(unsigned int j = 0; j < 6; ++j)
 					d2_omega(i,j) = dd_dQ_dot_d2delta_dd2_dd_dQ_dot(i,j);
-
+			}
 
 			if(compute_dq)
 			{
@@ -1992,6 +2093,358 @@ public:
 		}
 
 		return false;
+	}
+
+};
+
+
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$ h^\Omega_\rho =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
+ *
+ * where \f$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \dot{\boldsymbol{F}} + \dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1} \right)\f$ is the stretching associated with the
+ * deformation gradient \f$\boldsymbol{F}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
+ *
+ * In order to avoid singular second derivatives,
+ *
+ * \f$h^\Omega_\rho =	\dfrac{A_0}{2} \boldsymbol{d}:\boldsymbol{d}\f$
+ *
+ * is used if \f$\sqrt{\boldsymbol{d}:\boldsymbol{d}} < d_\mathrm{th}\f$, with \f$d_\mathrm{th}\ll 1\f$ and \f$A_0 = A d_\mathrm{th}^{2(n-1)} \f$. In practice, \f$d_\mathrm{th}\f$ should
+ * be chosen such that it is slightly smaller than the maximum of \f$\sqrt{\boldsymbol{d}:\boldsymbol{d}}\f$ in the problem. If \f$n > 1\f$, \f$d_\mathrm{th}\f$ should be set to zero.
+ *
+ * This describes an isotropic Norton type creep relation at large strains.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{F}_{xx}\f$<br>
+ * 																				[1]  \f$\dot{F}_{xy}\f$<br>
+ * 																				[2]  \f$\dot{F}_{xz}\f$<br>
+ * 																				[3]  \f$\dot{F}_{yx}\f$<br>
+ * 																				[4]  \f$\dot{F}_{yy}\f$<br>
+ * 																				[5]  \f$\dot{F}_{yz}\f$<br>
+ * 																				[6]  \f$\dot{F}_{zx}\f$<br>
+ * 																				[7]  \f$\dot{F}_{zy}\f$<br>
+ * 																				[8]  \f$\dot{F}_{zz}\f$<br>
+ * 																				[9]  \f$F_{xx}\f$<br>
+ * 																				[10] \f$F_{xy}\f$<br>
+ * 																				[11] \f$F_{xz}\f$<br>
+ * 																				[12] \f$F_{yx}\f$<br>
+ * 																				[13] \f$F_{yy}\f$<br>
+ * 																				[14] \f$F_{yz}\f$<br>
+ * 																				[15] \f$F_{zx}\f$<br>
+ * 																				[16] \f$F_{zy}\f$<br>
+ * 																				[17] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaViscousDissipation01 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * material parameter
+	 */
+	const double
+	A;
+
+	/**
+	 * material parameter (creep exponent)
+	 */
+	const double
+	n;
+
+	/**
+	 * Uniaxial threshold stretching below which potential is quadratically approximated with regard to the stretching
+	 */
+	const double
+	d_th = 1e-8;
+
+	/**
+	 * global data object
+	 */
+	GlobalDataIncrementalFE<spacedim>&
+	global_data;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		A						OmegaViscousDissipation01::A
+	 *
+	 * @param[in]		n						OmegaViscousDissipation01::n
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		d_th					OmegaViscousDissipation01::d_th
+	 */
+	OmegaViscousDissipation01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																A,
+								const double																n,
+								const unsigned int															method,
+								const double																alpha = 0.0,
+								const double																d_th = 1e-8)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 0, 9, 0, 9, method, alpha, "OmegaViscousDissipation01"),
+	A(A),
+	n(n),
+	d_th(d_th),
+	global_data(global_data)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		dealii::Vector<double> F_dot(9), F(9), F_inv(9);
+		for(unsigned int m = 0; m < 9; ++m)
+		{
+			F_dot[m] = values[m];
+			F[m] = values[m + 9];
+		}
+		dealii::Tensor<2,3> F_t_inv;
+		F_t_inv[0][0] = F[0];	F_t_inv[0][1] = F[1];	F_t_inv[0][2] = F[2];
+		F_t_inv[1][0] = F[3];	F_t_inv[1][1] = F[4];	F_t_inv[1][2] = F[5];
+		F_t_inv[2][0] = F[6];	F_t_inv[2][1] = F[7];	F_t_inv[2][2] = F[8];
+		F_t_inv = invert(F_t_inv);
+		F_inv[0] = F_t_inv[0][0];	F_inv[1] = F_t_inv[0][1];	F_inv[2] = F_t_inv[0][2];
+		F_inv[3] = F_t_inv[1][0];	F_inv[4] = F_t_inv[1][1];	F_inv[5] = F_t_inv[1][2];
+		F_inv[6] = F_t_inv[2][0];	F_inv[7] = F_t_inv[2][1];	F_inv[8] = F_t_inv[2][2];
+
+		dealii::Vector<double> d(9);
+		d[0] = F_dot[0]*F_inv[0] + 0.5*F_dot[1]*F_inv[3] + 0.5*F_dot[2]*F_inv[6] + 0.5*F_dot[3]*F_inv[1] + 0.5*F_dot[6]*F_inv[2];
+		d[1] = 0.5*F_dot[0]*F_inv[1] + 0.5*F_dot[1]*F_inv[0] + 0.5*F_dot[1]*F_inv[4] + 0.5*F_dot[2]*F_inv[7] + 0.5*F_dot[4]*F_inv[1] + 0.5*F_dot[7]*F_inv[2];
+		d[2] = 0.5*F_dot[0]*F_inv[2] + 0.5*F_dot[1]*F_inv[5] + 0.5*F_dot[2]*F_inv[0] + 0.5*F_dot[2]*F_inv[8] + 0.5*F_dot[5]*F_inv[1] + 0.5*F_dot[8]*F_inv[2];
+		d[3] = 0.5*F_dot[0]*F_inv[3] + 0.5*F_dot[3]*F_inv[0] + 0.5*F_dot[3]*F_inv[4] + 0.5*F_dot[4]*F_inv[3] + 0.5*F_dot[5]*F_inv[6] + 0.5*F_dot[6]*F_inv[5];
+		d[4] = 0.5*F_dot[1]*F_inv[3] + 0.5*F_dot[3]*F_inv[1] + F_dot[4]*F_inv[4] + 0.5*F_dot[5]*F_inv[7] + 0.5*F_dot[7]*F_inv[5];
+		d[5] = 0.5*F_dot[2]*F_inv[3] + 0.5*F_dot[3]*F_inv[2] + 0.5*F_dot[4]*F_inv[5] + 0.5*F_dot[5]*F_inv[4] + 0.5*F_dot[5]*F_inv[8] + 0.5*F_dot[8]*F_inv[5];
+		d[6] = 0.5*F_dot[0]*F_inv[6] + 0.5*F_dot[3]*F_inv[7] + 0.5*F_dot[6]*F_inv[0] + 0.5*F_dot[6]*F_inv[8] + 0.5*F_dot[7]*F_inv[3] + 0.5*F_dot[8]*F_inv[6];
+		d[7] = 0.5*F_dot[1]*F_inv[6] + 0.5*F_dot[4]*F_inv[7] + 0.5*F_dot[6]*F_inv[1] + 0.5*F_dot[7]*F_inv[4] + 0.5*F_dot[7]*F_inv[8] + 0.5*F_dot[8]*F_inv[7];
+		d[8] = 0.5*F_dot[2]*F_inv[6] + 0.5*F_dot[5]*F_inv[7] + 0.5*F_dot[6]*F_inv[2] + 0.5*F_dot[7]*F_inv[5] + F_dot[8]*F_inv[8];
+
+		static dealii::Vector<double> ddetF_dF(9), d_dd_dF_dot(9), d_dd_dF_inv(9);
+		static dealii::FullMatrix<double> dd_dF_dot(9,9), dd_dF_inv(9,9), d_d2d_dF_dot_d_F_inv(9,9), d2delta_dF_dot2(9,9), d2delta_dF_dot_dF_inv(9,9), d2delta_dF_dot_dF(9,9), dF_inv_dF(9,9);
+		if( (get<1>(requested_quantities)) || (get<2>(requested_quantities)))
+		{
+			dd_dF_dot(0,0) = F_inv[0];		dd_dF_dot(0,1) = 0.5*F_inv[3];					dd_dF_dot(0,2) = 0.5*F_inv[6];					dd_dF_dot(0,3) = 0.5*F_inv[1];					dd_dF_dot(0,4) = 0;				dd_dF_dot(0,5) = 0;								dd_dF_dot(0,6) = 0.5*F_inv[2];					dd_dF_dot(0,7) = 0;								dd_dF_dot(0,8) = 0;
+			dd_dF_dot(1,0) = 0.5*F_inv[1];	dd_dF_dot(1,1) = 0.5*F_inv[0] + 0.5*F_inv[4];	dd_dF_dot(1,2) = 0.5*F_inv[7];					dd_dF_dot(1,3) = 0;								dd_dF_dot(1,4) = 0.5*F_inv[1];	dd_dF_dot(1,5) = 0;								dd_dF_dot(1,6) = 0;								dd_dF_dot(1,7) = 0.5*F_inv[2];					dd_dF_dot(1,8) = 0;
+			dd_dF_dot(2,0) = 0.5*F_inv[2];	dd_dF_dot(2,1) = 0.5*F_inv[5];					dd_dF_dot(2,2) = 0.5*F_inv[0] + 0.5*F_inv[8];	dd_dF_dot(2,3) = 0;								dd_dF_dot(2,4) = 0;				dd_dF_dot(2,5) = 0.5*F_inv[1];					dd_dF_dot(2,6) = 0;								dd_dF_dot(2,7) = 0;								dd_dF_dot(2,8) = 0.5*F_inv[2];
+			dd_dF_dot(3,0) = 0.5*F_inv[3];	dd_dF_dot(3,1) = 0;								dd_dF_dot(3,2) = 0;								dd_dF_dot(3,3) = 0.5*F_inv[0] + 0.5*F_inv[4];	dd_dF_dot(3,4) = 0.5*F_inv[3];	dd_dF_dot(3,5) = 0.5*F_inv[6];					dd_dF_dot(3,6) = 0.5*F_inv[5];					dd_dF_dot(3,7) = 0;								dd_dF_dot(3,8) = 0;
+			dd_dF_dot(4,0) = 0;				dd_dF_dot(4,1) = 0.5*F_inv[3];					dd_dF_dot(4,2) = 0;								dd_dF_dot(4,3) = 0.5*F_inv[1];					dd_dF_dot(4,4) = F_inv[4];		dd_dF_dot(4,5) = 0.5*F_inv[7];					dd_dF_dot(4,6) = 0;								dd_dF_dot(4,7) = 0.5*F_inv[5];					dd_dF_dot(4,8) = 0;
+			dd_dF_dot(5,0) = 0;				dd_dF_dot(5,1) = 0;								dd_dF_dot(5,2) = 0.5*F_inv[3];					dd_dF_dot(5,3) = 0.5*F_inv[2];					dd_dF_dot(5,4) = 0.5*F_inv[5];	dd_dF_dot(5,5) = 0.5*F_inv[4] + 0.5*F_inv[8];	dd_dF_dot(5,6) = 0;								dd_dF_dot(5,7) = 0;								dd_dF_dot(5,8) = 0.5*F_inv[5];
+			dd_dF_dot(6,0) = 0.5*F_inv[6];	dd_dF_dot(6,1) = 0;								dd_dF_dot(6,2) = 0;								dd_dF_dot(6,3) = 0.5*F_inv[7];					dd_dF_dot(6,4) = 0;				dd_dF_dot(6,5) = 0;								dd_dF_dot(6,6) = 0.5*F_inv[0] + 0.5*F_inv[8];	dd_dF_dot(6,7) = 0.5*F_inv[3];					dd_dF_dot(6,8) = 0.5*F_inv[6];
+			dd_dF_dot(7,0) = 0;				dd_dF_dot(7,1) = 0.5*F_inv[6];					dd_dF_dot(7,2) = 0;								dd_dF_dot(7,3) = 0;								dd_dF_dot(7,4) = 0.5*F_inv[7];	dd_dF_dot(7,5) = 0;								dd_dF_dot(7,6) = 0.5*F_inv[1];					dd_dF_dot(7,7) = 0.5*F_inv[4] + 0.5*F_inv[8];	dd_dF_dot(7,8) = 0.5*F_inv[7];
+			dd_dF_dot(8,0) = 0;				dd_dF_dot(8,1) = 0;								dd_dF_dot(8,2) = 0.5*F_inv[6];					dd_dF_dot(8,3) = 0;								dd_dF_dot(8,4) = 0;				dd_dF_dot(8,5) = 0.5*F_inv[7];					dd_dF_dot(8,6) = 0.5*F_inv[2];					dd_dF_dot(8,7) = 0.5*F_inv[5];					dd_dF_dot(8,8) = F_inv[8];
+
+			dd_dF_dot.Tvmult(d_dd_dF_dot, d);
+		}
+
+		const double dd = d * d;
+		const double sqrt_dd = sqrt(dd);
+		const double A_0 = A * pow(d_th, 2.0 * (n - 1.0));
+		const double h = sqrt_dd > d_th ? A / n * pow(dd, n) : A_0 * dd;
+		const double dh = sqrt_dd > d_th ? A * pow(dd, n - 1.0) : A_0;
+		const double d2h = sqrt_dd > d_th ? A * (n - 1.0) * pow(dd, n - 2.0) : 0.0;
+
+//		if(sqrt_dd < d_th)
+//			global_data.set_not_converged_at_local_level();
+
+		if(get<0>(requested_quantities))
+		{
+			omega = 0.5 * h;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				d_omega[m] = dh * d_dd_dF_dot[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			dd_dF_dot.Tmmult(d2delta_dF_dot2, dd_dF_dot);
+			d2delta_dF_dot2 *= dh;
+			for(unsigned int i = 0; i < 9; ++i)
+				for(unsigned int j = 0; j < 9; ++j)
+					d2delta_dF_dot2(i,j) += 2.0 * d2h * d_dd_dF_dot[i] * d_dd_dF_dot[j];
+
+			for(unsigned int i = 0; i < 9; ++i)
+				for(unsigned int j = 0; j < 9; ++j)
+					d2_omega(i,j) = d2delta_dF_dot2(i,j);
+
+
+			if(compute_dq)
+			{
+				dd_dF_inv(0,0) = F_dot[0];		dd_dF_inv(0,1) = 0.5*F_dot[3];					dd_dF_inv(0,2) = 0.5*F_dot[6];					dd_dF_inv(0,3) = 0.5*F_dot[1];					dd_dF_inv(0,4) = 0;				dd_dF_inv(0,5) = 0;								dd_dF_inv(0,6) = 0.5*F_dot[2];					dd_dF_inv(0,7) = 0;								dd_dF_inv(0,8) = 0;
+				dd_dF_inv(1,0) = 0.5*F_dot[1];	dd_dF_inv(1,1) = 0.5*F_dot[0] + 0.5*F_dot[4];	dd_dF_inv(1,2) = 0.5*F_dot[7];					dd_dF_inv(1,3) = 0;								dd_dF_inv(1,4) = 0.5*F_dot[1];	dd_dF_inv(1,5) = 0;								dd_dF_inv(1,6) = 0;								dd_dF_inv(1,7) = 0.5*F_dot[2];					dd_dF_inv(1,8) = 0;
+				dd_dF_inv(2,0) = 0.5*F_dot[2];	dd_dF_inv(2,1) = 0.5*F_dot[5];					dd_dF_inv(2,2) = 0.5*F_dot[0] + 0.5*F_dot[8];	dd_dF_inv(2,3) = 0;								dd_dF_inv(2,4) = 0;				dd_dF_inv(2,5) = 0.5*F_dot[1];					dd_dF_inv(2,6) = 0;								dd_dF_inv(2,7) = 0;								dd_dF_inv(2,8) = 0.5*F_dot[2];
+				dd_dF_inv(3,0) = 0.5*F_dot[3];	dd_dF_inv(3,1) = 0;								dd_dF_inv(3,2) = 0;								dd_dF_inv(3,3) = 0.5*F_dot[0] + 0.5*F_dot[4];	dd_dF_inv(3,4) = 0.5*F_dot[3];	dd_dF_inv(3,5) = 0.5*F_dot[6];					dd_dF_inv(3,6) = 0.5*F_dot[5];					dd_dF_inv(3,7) = 0;								dd_dF_inv(3,8) = 0;
+				dd_dF_inv(4,0) = 0;				dd_dF_inv(4,1) = 0.5*F_dot[3];					dd_dF_inv(4,2) = 0;								dd_dF_inv(4,3) = 0.5*F_dot[1];					dd_dF_inv(4,4) = F_dot[4];		dd_dF_inv(4,5) = 0.5*F_dot[7];					dd_dF_inv(4,6) = 0;								dd_dF_inv(4,7) = 0.5*F_dot[5];					dd_dF_inv(4,8) = 0;
+				dd_dF_inv(5,0) = 0;				dd_dF_inv(5,1) = 0;								dd_dF_inv(5,2) = 0.5*F_dot[3];					dd_dF_inv(5,3) = 0.5*F_dot[2];					dd_dF_inv(5,4) = 0.5*F_dot[5];	dd_dF_inv(5,5) = 0.5*F_dot[4] + 0.5*F_dot[8];	dd_dF_inv(5,6) = 0;								dd_dF_inv(5,7) = 0;								dd_dF_inv(5,8) = 0.5*F_dot[5];
+				dd_dF_inv(6,0) = 0.5*F_dot[6];	dd_dF_inv(6,1) = 0;								dd_dF_inv(6,2) = 0;								dd_dF_inv(6,3) = 0.5*F_dot[7];					dd_dF_inv(6,4) = 0;				dd_dF_inv(6,5) = 0;								dd_dF_inv(6,6) = 0.5*F_dot[0] + 0.5*F_dot[8];	dd_dF_inv(6,7) = 0.5*F_dot[3];					dd_dF_inv(6,8) = 0.5*F_dot[6];
+				dd_dF_inv(7,0) = 0;				dd_dF_inv(7,1) = 0.5*F_dot[6];					dd_dF_inv(7,2) = 0;								dd_dF_inv(7,3) = 0;								dd_dF_inv(7,4) = 0.5*F_dot[7];	dd_dF_inv(7,5) = 0;								dd_dF_inv(7,6) = 0.5*F_dot[1];					dd_dF_inv(7,7) = 0.5*F_dot[4] + 0.5*F_dot[8];	dd_dF_inv(7,8) = 0.5*F_dot[7];
+				dd_dF_inv(8,0) = 0;				dd_dF_inv(8,1) = 0;								dd_dF_inv(8,2) = 0.5*F_dot[6];					dd_dF_inv(8,3) = 0;								dd_dF_inv(8,4) = 0;				dd_dF_inv(8,5) = 0.5*F_dot[7];					dd_dF_inv(8,6) = 0.5*F_dot[2];					dd_dF_inv(8,7) = 0.5*F_dot[5];					dd_dF_inv(8,8) = F_dot[8];
+
+				d_d2d_dF_dot_d_F_inv(0,0) = d[0];				d_d2d_dF_dot_d_F_inv(0,1) = 0.5*d[1];			d_d2d_dF_dot_d_F_inv(0,2) = 0.5*d[2];				d_d2d_dF_dot_d_F_inv(0,3) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(0,4) = 0;					d_d2d_dF_dot_d_F_inv(0,5) = 0;					d_d2d_dF_dot_d_F_inv(0,6) = 0.5*d[6];			d_d2d_dF_dot_d_F_inv(0,7) = 0;					d_d2d_dF_dot_d_F_inv(0,8) = 0;
+				d_d2d_dF_dot_d_F_inv(1,0) = 0.5*d[1];	 		d_d2d_dF_dot_d_F_inv(1,1) = 0;					d_d2d_dF_dot_d_F_inv(1,2) = 0;						d_d2d_dF_dot_d_F_inv(1,3) = 0.5*d[0] + 0.5*d[4];d_d2d_dF_dot_d_F_inv(1,4) = 0.5*d[1];			d_d2d_dF_dot_d_F_inv(1,5) = 0.5*d[2];			d_d2d_dF_dot_d_F_inv(1,6) = 0.5*d[7];			d_d2d_dF_dot_d_F_inv(1,7) = 0;					d_d2d_dF_dot_d_F_inv(1,8) = 0;
+				d_d2d_dF_dot_d_F_inv(2,0) = 0.5*d[2];			d_d2d_dF_dot_d_F_inv(2,1) = 0;					d_d2d_dF_dot_d_F_inv(2,2) = 0;						d_d2d_dF_dot_d_F_inv(2,3) = 0.5*d[5];			d_d2d_dF_dot_d_F_inv(2,4) = 0;					d_d2d_dF_dot_d_F_inv(2,5) = 0;					d_d2d_dF_dot_d_F_inv(2,6) = 0.5*d[0] + 0.5*d[8];d_d2d_dF_dot_d_F_inv(2,7) = 0.5*d[1];			d_d2d_dF_dot_d_F_inv(2,8) = 0.5*d[2];
+				d_d2d_dF_dot_d_F_inv(3,0) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(3,1) = 0.5*d[0] + 0.5*d[4];d_d2d_dF_dot_d_F_inv(3,2) = 0.5*d[5];				d_d2d_dF_dot_d_F_inv(3,3) = 0;					d_d2d_dF_dot_d_F_inv(3,4) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(3,5) = 0;					d_d2d_dF_dot_d_F_inv(3,6) = 0;					d_d2d_dF_dot_d_F_inv(3,7) = 0.5*d[6];			d_d2d_dF_dot_d_F_inv(3,8) = 0;
+				d_d2d_dF_dot_d_F_inv(4,0) = 0;					d_d2d_dF_dot_d_F_inv(4,1) = 0.5*d[1];			d_d2d_dF_dot_d_F_inv(4,2) = 0;						d_d2d_dF_dot_d_F_inv(4,3) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(4,4) = d[4];				d_d2d_dF_dot_d_F_inv(4,5) = 0.5*d[5];			d_d2d_dF_dot_d_F_inv(4,6) = 0;					d_d2d_dF_dot_d_F_inv(4,7) = 0.5*d[7];			d_d2d_dF_dot_d_F_inv(4,8) = 0;
+				d_d2d_dF_dot_d_F_inv(5,0) = 0;					d_d2d_dF_dot_d_F_inv(5,1) = 0.5*d[2];			d_d2d_dF_dot_d_F_inv(5,2) = 0;						d_d2d_dF_dot_d_F_inv(5,3) = 0;					d_d2d_dF_dot_d_F_inv(5,4) = 0.5*d[5];			d_d2d_dF_dot_d_F_inv(5,5) = 0;					d_d2d_dF_dot_d_F_inv(5,6) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(5,7) = 0.5*d[4] + 0.5*d[8];d_d2d_dF_dot_d_F_inv(5,8) = 0.5*d[5];
+				d_d2d_dF_dot_d_F_inv(6,0) = 0.5*d[6];			d_d2d_dF_dot_d_F_inv(6,1) = 0.5*d[7];			d_d2d_dF_dot_d_F_inv(6,2) = 0.5*d[0] + 0.5*d[8];	d_d2d_dF_dot_d_F_inv(6,3) = 0;					d_d2d_dF_dot_d_F_inv(6,4) = 0;					d_d2d_dF_dot_d_F_inv(6,5) = 0.5*d[3];			d_d2d_dF_dot_d_F_inv(6,6) = 0;					d_d2d_dF_dot_d_F_inv(6,7) = 0;					d_d2d_dF_dot_d_F_inv(6,8) = 0.5*d[6];
+				d_d2d_dF_dot_d_F_inv(7,0) = 0;					d_d2d_dF_dot_d_F_inv(7,1) = 0;					d_d2d_dF_dot_d_F_inv(7,2) = 0.5*d[1];				d_d2d_dF_dot_d_F_inv(7,3) = 0.5*d[6];			d_d2d_dF_dot_d_F_inv(7,4) = 0.5*d[7];			d_d2d_dF_dot_d_F_inv(7,5) = 0.5*d[4] + 0.5*d[8];d_d2d_dF_dot_d_F_inv(7,6) = 0;					d_d2d_dF_dot_d_F_inv(7,7) = 0;					d_d2d_dF_dot_d_F_inv(7,8) = 0.5*d[7];
+				d_d2d_dF_dot_d_F_inv(8,0) = 0;					d_d2d_dF_dot_d_F_inv(8,1) = 0;					d_d2d_dF_dot_d_F_inv(8,2) = 0.5*d[2];				d_d2d_dF_dot_d_F_inv(8,3) = 0;					d_d2d_dF_dot_d_F_inv(8,4) = 0;					d_d2d_dF_dot_d_F_inv(8,5) = 0.5*d[5];			d_d2d_dF_dot_d_F_inv(8,6) = 0.5*d[6];			d_d2d_dF_dot_d_F_inv(8,7) = 0.5*d[7];			d_d2d_dF_dot_d_F_inv(8,8) = d[8];
+
+				dF_inv_dF(0,0) = -F[4]*F[4]*F[8]*F[8] + 2.0*F[4]*F[5]*F[7]*F[8] - F[5]*F[5]*F[7]*F[7];
+				dF_inv_dF(0,1) = F[3]*F[4]*F[8]*F[8] - F[3]*F[5]*F[7]*F[8] - F[4]*F[5]*F[6]*F[8] + F[5]*F[5]*F[6]*F[7];
+				dF_inv_dF(0,2) = -F[3]*F[4]*F[7]*F[8] + F[3]*F[5]*F[7]*F[7] + F[4]*F[4]*F[6]*F[8] - F[4]*F[5]*F[6]*F[7];
+				dF_inv_dF(0,3) = F[1]*F[4]*F[8]*F[8] - F[1]*F[5]*F[7]*F[8] - F[2]*F[4]*F[7]*F[8] + F[2]*F[5]*F[7]*F[7];
+				dF_inv_dF(0,4) = -F[1]*F[3]*F[8]*F[8] + F[1]*F[5]*F[6]*F[8] + F[2]*F[3]*F[7]*F[8] - F[2]*F[5]*F[6]*F[7];
+				dF_inv_dF(0,5) = F[1]*F[3]*F[7]*F[8] - F[1]*F[4]*F[6]*F[8] - F[2]*F[3]*F[7]*F[7] + F[2]*F[4]*F[6]*F[7];
+				dF_inv_dF(0,6) = -F[1]*F[4]*F[5]*F[8] + F[1]*F[5]*F[5]*F[7] + F[2]*F[4]*F[4]*F[8] - F[2]*F[4]*F[5]*F[7];
+				dF_inv_dF(0,7) = F[1]*F[3]*F[5]*F[8] - F[1]*F[5]*F[5]*F[6] - F[2]*F[3]*F[4]*F[8] + F[2]*F[4]*F[5]*F[6];
+				dF_inv_dF(0,8) = -F[1]*F[3]*F[5]*F[7] + F[1]*F[4]*F[5]*F[6] + F[2]*F[3]*F[4]*F[7] - F[2]*F[4]*F[4]*F[6];
+				dF_inv_dF(1,0) = F[1]*F[4]*F[8]*F[8] - F[1]*F[5]*F[7]*F[8] - F[2]*F[4]*F[7]*F[8] + F[2]*F[5]*F[7]*F[7];
+				dF_inv_dF(1,1) = -F[0]*F[4]*F[8]*F[8] + F[0]*F[5]*F[7]*F[8] + F[2]*F[4]*F[6]*F[8] - F[2]*F[5]*F[6]*F[7];
+				dF_inv_dF(1,2) = F[0]*F[4]*F[7]*F[8] - F[0]*F[5]*F[7]*F[7] - F[1]*F[4]*F[6]*F[8] + F[1]*F[5]*F[6]*F[7];
+				dF_inv_dF(1,3) = -F[1]*F[1]*F[8]*F[8] + 2.0*F[1]*F[2]*F[7]*F[8] - F[2]*F[2]*F[7]*F[7];
+				dF_inv_dF(1,4) = F[0]*F[1]*F[8]*F[8] - F[0]*F[2]*F[7]*F[8] - F[1]*F[2]*F[6]*F[8] + F[2]*F[2]*F[6]*F[7];
+				dF_inv_dF(1,5) = -F[0]*F[1]*F[7]*F[8] + F[0]*F[2]*F[7]*F[7] + F[1]*F[1]*F[6]*F[8] - F[1]*F[2]*F[6]*F[7];
+				dF_inv_dF(1,6) = F[1]*F[1]*F[5]*F[8] - F[1]*F[2]*F[4]*F[8] - F[1]*F[2]*F[5]*F[7] + F[2]*F[2]*F[4]*F[7];
+				dF_inv_dF(1,7) = -F[0]*F[1]*F[5]*F[8] + F[0]*F[2]*F[4]*F[8] + F[1]*F[2]*F[5]*F[6] - F[2]*F[2]*F[4]*F[6];
+				dF_inv_dF(1,8) = F[0]*F[1]*F[5]*F[7] - F[0]*F[2]*F[4]*F[7] - F[1]*F[1]*F[5]*F[6] + F[1]*F[2]*F[4]*F[6];
+				dF_inv_dF(2,0) = -F[1]*F[4]*F[5]*F[8] + F[1]*F[5]*F[5]*F[7] + F[2]*F[4]*F[4]*F[8] - F[2]*F[4]*F[5]*F[7];
+				dF_inv_dF(2,1) = F[0]*F[4]*F[5]*F[8] - F[0]*F[5]*F[5]*F[7] - F[2]*F[3]*F[4]*F[8] + F[2]*F[3]*F[5]*F[7];
+				dF_inv_dF(2,2) = -F[0]*F[4]*F[4]*F[8] + F[0]*F[4]*F[5]*F[7] + F[1]*F[3]*F[4]*F[8] - F[1]*F[3]*F[5]*F[7];
+				dF_inv_dF(2,3) = F[1]*F[1]*F[5]*F[8] - F[1]*F[2]*F[4]*F[8] - F[1]*F[2]*F[5]*F[7] + F[2]*F[2]*F[4]*F[7];
+				dF_inv_dF(2,4) = -F[0]*F[1]*F[5]*F[8] + F[0]*F[2]*F[5]*F[7] + F[1]*F[2]*F[3]*F[8] - F[2]*F[2]*F[3]*F[7];
+				dF_inv_dF(2,5) = F[0]*F[1]*F[4]*F[8] - F[0]*F[2]*F[4]*F[7] - F[1]*F[1]*F[3]*F[8] + F[1]*F[2]*F[3]*F[7];
+				dF_inv_dF(2,6) = -F[1]*F[1]*F[5]*F[5] + 2.0*F[1]*F[2]*F[4]*F[5] - F[2]*F[2]*F[4]*F[4];
+				dF_inv_dF(2,7) = F[0]*F[1]*F[5]*F[5] - F[0]*F[2]*F[4]*F[5] - F[1]*F[2]*F[3]*F[5] + F[2]*F[2]*F[3]*F[4];
+				dF_inv_dF(2,8) = -F[0]*F[1]*F[4]*F[5] + F[0]*F[2]*F[4]*F[4] + F[1]*F[1]*F[3]*F[5] - F[1]*F[2]*F[3]*F[4];
+				dF_inv_dF(3,0) = F[3]*F[4]*F[8]*F[8] - F[3]*F[5]*F[7]*F[8] - F[4]*F[5]*F[6]*F[8] + F[5]*F[5]*F[6]*F[7];
+				dF_inv_dF(3,1) = -F[3]*F[3]*F[8]*F[8] + 2.0*F[3]*F[5]*F[6]*F[8] - F[5]*F[5]*F[6]*F[6];
+				dF_inv_dF(3,2) = F[3]*F[3]*F[7]*F[8] - F[3]*F[4]*F[6]*F[8] - F[3]*F[5]*F[6]*F[7] + F[4]*F[5]*F[6]*F[6];
+				dF_inv_dF(3,3) = -F[0]*F[4]*F[8]*F[8] + F[0]*F[5]*F[7]*F[8] + F[2]*F[4]*F[6]*F[8] - F[2]*F[5]*F[6]*F[7];
+				dF_inv_dF(3,4) = F[0]*F[3]*F[8]*F[8] - F[0]*F[5]*F[6]*F[8] - F[2]*F[3]*F[6]*F[8] + F[2]*F[5]*F[6]*F[6];
+				dF_inv_dF(3,5) = -F[0]*F[3]*F[7]*F[8] + F[0]*F[4]*F[6]*F[8] + F[2]*F[3]*F[6]*F[7] - F[2]*F[4]*F[6]*F[6];
+				dF_inv_dF(3,6) = F[0]*F[4]*F[5]*F[8] - F[0]*F[5]*F[5]*F[7] - F[2]*F[3]*F[4]*F[8] + F[2]*F[3]*F[5]*F[7];
+				dF_inv_dF(3,7) = -F[0]*F[3]*F[5]*F[8] + F[0]*F[5]*F[5]*F[6] + F[2]*F[3]*F[3]*F[8] - F[2]*F[3]*F[5]*F[6];
+				dF_inv_dF(3,8) = F[0]*F[3]*F[5]*F[7] - F[0]*F[4]*F[5]*F[6] - F[2]*F[3]*F[3]*F[7] + F[2]*F[3]*F[4]*F[6];
+				dF_inv_dF(4,0) = -F[1]*F[3]*F[8]*F[8] + F[1]*F[5]*F[6]*F[8] + F[2]*F[3]*F[7]*F[8] - F[2]*F[5]*F[6]*F[7];
+				dF_inv_dF(4,1) = F[0]*F[3]*F[8]*F[8] - F[0]*F[5]*F[6]*F[8] - F[2]*F[3]*F[6]*F[8] + F[2]*F[5]*F[6]*F[6];
+				dF_inv_dF(4,2) = -F[0]*F[3]*F[7]*F[8] + F[0]*F[5]*F[6]*F[7] + F[1]*F[3]*F[6]*F[8] - F[1]*F[5]*F[6]*F[6];
+				dF_inv_dF(4,3) = F[0]*F[1]*F[8]*F[8] - F[0]*F[2]*F[7]*F[8] - F[1]*F[2]*F[6]*F[8] + F[2]*F[2]*F[6]*F[7];
+				dF_inv_dF(4,4) = -F[0]*F[0]*F[8]*F[8] + 2.0*F[0]*F[2]*F[6]*F[8] - F[2]*F[2]*F[6]*F[6];
+				dF_inv_dF(4,5) = F[0]*F[0]*F[7]*F[8] - F[0]*F[1]*F[6]*F[8] - F[0]*F[2]*F[6]*F[7] + F[1]*F[2]*F[6]*F[6];
+				dF_inv_dF(4,6) = -F[0]*F[1]*F[5]*F[8] + F[0]*F[2]*F[5]*F[7] + F[1]*F[2]*F[3]*F[8] - F[2]*F[2]*F[3]*F[7];
+				dF_inv_dF(4,7) = F[0]*F[0]*F[5]*F[8] - F[0]*F[2]*F[3]*F[8] - F[0]*F[2]*F[5]*F[6] + F[2]*F[2]*F[3]*F[6];
+				dF_inv_dF(4,8) = -F[0]*F[0]*F[5]*F[7] + F[0]*F[1]*F[5]*F[6] + F[0]*F[2]*F[3]*F[7] - F[1]*F[2]*F[3]*F[6];
+				dF_inv_dF(5,0) = F[1]*F[3]*F[5]*F[8] - F[1]*F[5]*F[5]*F[6] - F[2]*F[3]*F[4]*F[8] + F[2]*F[4]*F[5]*F[6];
+				dF_inv_dF(5,1) = -F[0]*F[3]*F[5]*F[8] + F[0]*F[5]*F[5]*F[6] + F[2]*F[3]*F[3]*F[8] - F[2]*F[3]*F[5]*F[6];
+				dF_inv_dF(5,2) = F[0]*F[3]*F[4]*F[8] - F[0]*F[4]*F[5]*F[6] - F[1]*F[3]*F[3]*F[8] + F[1]*F[3]*F[5]*F[6];
+				dF_inv_dF(5,3) = -F[0]*F[1]*F[5]*F[8] + F[0]*F[2]*F[4]*F[8] + F[1]*F[2]*F[5]*F[6] - F[2]*F[2]*F[4]*F[6];
+				dF_inv_dF(5,4) = F[0]*F[0]*F[5]*F[8] - F[0]*F[2]*F[3]*F[8] - F[0]*F[2]*F[5]*F[6] + F[2]*F[2]*F[3]*F[6];
+				dF_inv_dF(5,5) = -F[0]*F[0]*F[4]*F[8] + F[0]*F[1]*F[3]*F[8] + F[0]*F[2]*F[4]*F[6] - F[1]*F[2]*F[3]*F[6];
+				dF_inv_dF(5,6) = F[0]*F[1]*F[5]*F[5] - F[0]*F[2]*F[4]*F[5] - F[1]*F[2]*F[3]*F[5] + F[2]*F[2]*F[3]*F[4];
+				dF_inv_dF(5,7) = -F[0]*F[0]*F[5]*F[5] + 2.0*F[0]*F[2]*F[3]*F[5] - F[2]*F[2]*F[3]*F[3];
+				dF_inv_dF(5,8) = F[0]*F[0]*F[4]*F[5] - F[0]*F[1]*F[3]*F[5] - F[0]*F[2]*F[3]*F[4] + F[1]*F[2]*F[3]*F[3];
+				dF_inv_dF(6,0) = -F[3]*F[4]*F[7]*F[8] + F[3]*F[5]*F[7]*F[7] + F[4]*F[4]*F[6]*F[8] - F[4]*F[5]*F[6]*F[7];
+				dF_inv_dF(6,1) = F[3]*F[3]*F[7]*F[8] - F[3]*F[4]*F[6]*F[8] - F[3]*F[5]*F[6]*F[7] + F[4]*F[5]*F[6]*F[6];
+				dF_inv_dF(6,2) = -F[3]*F[3]*F[7]*F[7] + 2.0*F[3]*F[4]*F[6]*F[7] - F[4]*F[4]*F[6]*F[6];
+				dF_inv_dF(6,3) = F[0]*F[4]*F[7]*F[8] - F[0]*F[5]*F[7]*F[7] - F[1]*F[4]*F[6]*F[8] + F[1]*F[5]*F[6]*F[7];
+				dF_inv_dF(6,4) = -F[0]*F[3]*F[7]*F[8] + F[0]*F[5]*F[6]*F[7] + F[1]*F[3]*F[6]*F[8] - F[1]*F[5]*F[6]*F[6];
+				dF_inv_dF(6,5) = F[0]*F[3]*F[7]*F[7] - F[0]*F[4]*F[6]*F[7] - F[1]*F[3]*F[6]*F[7] + F[1]*F[4]*F[6]*F[6];
+				dF_inv_dF(6,6) = -F[0]*F[4]*F[4]*F[8] + F[0]*F[4]*F[5]*F[7] + F[1]*F[3]*F[4]*F[8] - F[1]*F[3]*F[5]*F[7];
+				dF_inv_dF(6,7) = F[0]*F[3]*F[4]*F[8] - F[0]*F[4]*F[5]*F[6] - F[1]*F[3]*F[3]*F[8] + F[1]*F[3]*F[5]*F[6];
+				dF_inv_dF(6,8) = -F[0]*F[3]*F[4]*F[7] + F[0]*F[4]*F[4]*F[6] + F[1]*F[3]*F[3]*F[7] - F[1]*F[3]*F[4]*F[6];
+				dF_inv_dF(7,0) = F[1]*F[3]*F[7]*F[8] - F[1]*F[4]*F[6]*F[8] - F[2]*F[3]*F[7]*F[7] + F[2]*F[4]*F[6]*F[7];
+				dF_inv_dF(7,1) = -F[0]*F[3]*F[7]*F[8] + F[0]*F[4]*F[6]*F[8] + F[2]*F[3]*F[6]*F[7] - F[2]*F[4]*F[6]*F[6];
+				dF_inv_dF(7,2) = F[0]*F[3]*F[7]*F[7] - F[0]*F[4]*F[6]*F[7] - F[1]*F[3]*F[6]*F[7] + F[1]*F[4]*F[6]*F[6];
+				dF_inv_dF(7,3) = -F[0]*F[1]*F[7]*F[8] + F[0]*F[2]*F[7]*F[7] + F[1]*F[1]*F[6]*F[8] - F[1]*F[2]*F[6]*F[7];
+				dF_inv_dF(7,4) = F[0]*F[0]*F[7]*F[8] - F[0]*F[1]*F[6]*F[8] - F[0]*F[2]*F[6]*F[7] + F[1]*F[2]*F[6]*F[6];
+				dF_inv_dF(7,5) = -F[0]*F[0]*F[7]*F[7] + 2.0*F[0]*F[1]*F[6]*F[7] - F[1]*F[1]*F[6]*F[6];
+				dF_inv_dF(7,6) = F[0]*F[1]*F[4]*F[8] - F[0]*F[2]*F[4]*F[7] - F[1]*F[1]*F[3]*F[8] + F[1]*F[2]*F[3]*F[7];
+				dF_inv_dF(7,7) = -F[0]*F[0]*F[4]*F[8] + F[0]*F[1]*F[3]*F[8] + F[0]*F[2]*F[4]*F[6] - F[1]*F[2]*F[3]*F[6];
+				dF_inv_dF(7,8) = F[0]*F[0]*F[4]*F[7] - F[0]*F[1]*F[3]*F[7] - F[0]*F[1]*F[4]*F[6] + F[1]*F[1]*F[3]*F[6];
+				dF_inv_dF(8,0) = -F[1]*F[3]*F[5]*F[7] + F[1]*F[4]*F[5]*F[6] + F[2]*F[3]*F[4]*F[7] - F[2]*F[4]*F[4]*F[6];
+				dF_inv_dF(8,1) = F[0]*F[3]*F[5]*F[7] - F[0]*F[4]*F[5]*F[6] - F[2]*F[3]*F[3]*F[7] + F[2]*F[3]*F[4]*F[6];
+				dF_inv_dF(8,2) = -F[0]*F[3]*F[4]*F[7] + F[0]*F[4]*F[4]*F[6] + F[1]*F[3]*F[3]*F[7] - F[1]*F[3]*F[4]*F[6];
+				dF_inv_dF(8,3) = F[0]*F[1]*F[5]*F[7] - F[0]*F[2]*F[4]*F[7] - F[1]*F[1]*F[5]*F[6] + F[1]*F[2]*F[4]*F[6];
+				dF_inv_dF(8,4) = -F[0]*F[0]*F[5]*F[7] + F[0]*F[1]*F[5]*F[6] + F[0]*F[2]*F[3]*F[7] - F[1]*F[2]*F[3]*F[6];
+				dF_inv_dF(8,5) = F[0]*F[0]*F[4]*F[7] - F[0]*F[1]*F[3]*F[7] - F[0]*F[1]*F[4]*F[6] + F[1]*F[1]*F[3]*F[6];
+				dF_inv_dF(8,6) = -F[0]*F[1]*F[4]*F[5] + F[0]*F[2]*F[4]*F[4] + F[1]*F[1]*F[3]*F[5] - F[1]*F[2]*F[3]*F[4];
+				dF_inv_dF(8,7) = F[0]*F[0]*F[4]*F[5] - F[0]*F[1]*F[3]*F[5] - F[0]*F[2]*F[3]*F[4] + F[1]*F[2]*F[3]*F[3];
+				dF_inv_dF(8,8) = -F[0]*F[0]*F[4]*F[4] + 2.0*F[0]*F[1]*F[3]*F[4] - F[1]*F[1]*F[3]*F[3];
+				dF_inv_dF *= 1.0/get_J(F)/get_J(F);
+
+				dd_dF_inv.Tvmult(d_dd_dF_inv, d);
+				dd_dF_dot.Tmmult(d2delta_dF_dot_dF_inv, dd_dF_inv);
+				d2delta_dF_dot_dF_inv *= dh;
+				for(unsigned int i = 0; i < 9; ++i)
+					for(unsigned int j = 0; j < 9; ++j)
+						d2delta_dF_dot_dF_inv(i,j) += 2.0 * d2h * d_dd_dF_dot[i] * d_dd_dF_inv[j] + dh * d_d2d_dF_dot_d_F_inv(i,j);
+				d2delta_dF_dot_dF_inv.mmult(d2delta_dF_dot_dF, dF_inv_dF);
+				for(unsigned int i = 0; i < 9; ++i)
+					for(unsigned int j = 0; j < 9; ++j)
+						d2_omega(i,j + 9) = d2delta_dF_dot_dF(i,j);
+			}
+
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+
+		double factor = 2.0;
+		static dealii::Vector<double> F(9);
+		while(true)
+		{
+
+			for(unsigned int m = 0; m < 9; ++m)
+				F[m] = e_omega[m] + factor * delta_e_omega[m];
+			if( (get_J(F) > 0.0) )
+				break;
+
+			factor *= 0.5;
+			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient and that of Q stays positive!"));
+		}
+		return factor;
 	}
 
 };

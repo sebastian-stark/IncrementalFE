@@ -117,6 +117,13 @@ private:
 	solution_ref;
 
 	/**
+	 * Solution vector with the solution increment during the last successfully completed time increment. This is used to
+	 * obtain an initial guess for the Newton-Raphson iteration in case GlobalDataIncrementalFE::use_previous_increment_for_initial_guess == @p true
+	 */
+	SolutionVectorType
+	delta_solution_last_step;
+
+	/**
 	 * Right hand side vector (used internally during the solution process)
 	 */
 	RHSVectorType

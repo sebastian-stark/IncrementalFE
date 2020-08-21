@@ -128,19 +128,19 @@ class incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</h3>
 
 <p>Class defining Neo-Hooke material with "compression point" for hydrogel modeling. See PhD thesis Acartürk (2009): Simulation of Charged Hydrated Porous Materials, Eq. (3.99)</p>
 <p>The integrand is</p>
-<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\mu}{2} ( \mathrm{tr}\boldsymbol{C} - 3 ) - \mu \mathrm{ln}J + \lambda (1-n_0)^2 \left( \dfrac{J-1}{1-n_0} - \mathrm{ln}\dfrac{J-n_0}{1-n_0} \right) $" src="form_134.png"/>,</p>
+<p><img class="formulaInl" alt="$h^\Omega_\rho = \dfrac{\mu}{2} ( \mathrm{tr}\boldsymbol{C} - 3 ) - \mu \mathrm{ln}J + \lambda (1-n_0)^2 \left( \dfrac{J-1}{1-n_0} - \mathrm{ln}\dfrac{J-n_0}{1-n_0} \right) $" src="form_173.png"/>,</p>
 <p>where</p>
-<p><img class="formulaInl" alt="$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} $" src="form_135.png"/> is the right Cauchy-Green deformation tensor, <img class="formulaInl" alt="$J$" src="form_60.png"/> the determinant of the deformation gradient <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_61.png"/>, <img class="formulaInl" alt="$n_0$" src="form_136.png"/> the initial volume fraction of the polymeric backbone, and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> and <img class="formulaInl" alt="$\lambda$" src="form_131.png"/> Lame's constants.</p>
+<p><img class="formulaInl" alt="$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} $" src="form_174.png"/> is the right Cauchy-Green deformation tensor, <img class="formulaInl" alt="$J$" src="form_66.png"/> the determinant of the deformation gradient <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_67.png"/>, <img class="formulaInl" alt="$n_0$" src="form_175.png"/> the initial volume fraction of the polymeric backbone, and <img class="formulaInl" alt="$\mu$" src="form_3.png"/> and <img class="formulaInl" alt="$\lambda$" src="form_170.png"/> Lame's constants.</p>
 <p>Ordering of quantities in <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#adfed9b70b743ba245a39c3e63b951f96">ScalarFunctional&lt;spacedim, spacedim&gt;::e_omega</a> :<br  />
- [0] <img class="formulaInl" alt="$F_{xx}$" src="form_67.png"/> <br  />
- [1] <img class="formulaInl" alt="$F_{xy}$" src="form_68.png"/> <br  />
- [2] <img class="formulaInl" alt="$F_{xz}$" src="form_69.png"/> <br  />
- [3] <img class="formulaInl" alt="$F_{yx}$" src="form_70.png"/> <br  />
- [4] <img class="formulaInl" alt="$F_{yy}$" src="form_71.png"/> <br  />
- [5] <img class="formulaInl" alt="$F_{yz}$" src="form_72.png"/> <br  />
- [6] <img class="formulaInl" alt="$F_{zx}$" src="form_73.png"/> <br  />
- [7] <img class="formulaInl" alt="$F_{zy}$" src="form_74.png"/> <br  />
- [8] <img class="formulaInl" alt="$F_{zz}$" src="form_75.png"/> <br  />
+ [0] <img class="formulaInl" alt="$F_{xx}$" src="form_73.png"/> <br  />
+ [1] <img class="formulaInl" alt="$F_{xy}$" src="form_74.png"/> <br  />
+ [2] <img class="formulaInl" alt="$F_{xz}$" src="form_75.png"/> <br  />
+ [3] <img class="formulaInl" alt="$F_{yx}$" src="form_76.png"/> <br  />
+ [4] <img class="formulaInl" alt="$F_{yy}$" src="form_77.png"/> <br  />
+ [5] <img class="formulaInl" alt="$F_{yz}$" src="form_78.png"/> <br  />
+ [6] <img class="formulaInl" alt="$F_{zx}$" src="form_79.png"/> <br  />
+ [7] <img class="formulaInl" alt="$F_{zy}$" src="form_80.png"/> <br  />
+ [8] <img class="formulaInl" alt="$F_{zz}$" src="form_81.png"/> <br  />
  </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8ebddd648a42cf4ff992b8e2db221f42"></a>
@@ -376,7 +376,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Lame's constant <img class="formulaInl" alt="$\lambda$" src="form_131.png"/> </p>
+<p>Lame's constant <img class="formulaInl" alt="$\lambda$" src="form_170.png"/> </p>
 
 </div>
 </div>
@@ -426,7 +426,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initial volume fraction of polymeric backbone <img class="formulaInl" alt="$n_0$" src="form_136.png"/> </p>
+<p>Initial volume fraction of polymeric backbone <img class="formulaInl" alt="$n_0$" src="form_175.png"/> </p>
 
 </div>
 </div>

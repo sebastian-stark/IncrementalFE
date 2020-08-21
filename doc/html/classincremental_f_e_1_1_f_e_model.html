@@ -166,6 +166,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a02134975db38fcf4f7ce698d605baa30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5f39fec8540d81155770764f945f572"><td class="memItemLeft" align="right" valign="top">SolutionVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad5f39fec8540d81155770764f945f572">solution_ref</a></td></tr>
 <tr class="separator:ad5f39fec8540d81155770764f945f572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac345bc49f279268b08f98f6a95dd6a32"><td class="memItemLeft" align="right" valign="top">SolutionVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac345bc49f279268b08f98f6a95dd6a32">delta_solution_last_step</a></td></tr>
+<tr class="separator:ac345bc49f279268b08f98f6a95dd6a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba8e9e925aa72d2dd0f86c451b2cf3d6"><td class="memItemLeft" align="right" valign="top">RHSVectorType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">rhs</a></td></tr>
 <tr class="separator:aba8e9e925aa72d2dd0f86c451b2cf3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04ea9240ef0084b44471a40f0d64ac54"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a04ea9240ef0084b44471a40f0d64ac54">potential_value</a> = 0.0</td></tr>
@@ -1394,6 +1396,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>The <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object comprising all the constraints to be applied </p>
+
+</div>
+</div>
+<a id="ac345bc49f279268b08f98f6a95dd6a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac345bc49f279268b08f98f6a95dd6a32">&#9670;&nbsp;</a></span>delta_solution_last_step</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SolutionVectorType <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::delta_solution_last_step</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Solution vector with the solution increment during the last successfully completed time increment. This is used to obtain an initial guess for the Newton-Raphson iteration in case <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#af94c89d99685ca7e610a883cf97b690a">GlobalDataIncrementalFE::use_previous_increment_for_initial_guess</a> == <code>true</code> </p>
 
 </div>
 </div>

@@ -133,16 +133,16 @@ Private Attributes</h2></td></tr>
 class incrementalFE::PsiChemical02&lt; spacedim &gt;</h3>
 
 <p>Class defining chemical potential of charged species moving in fluid</p>
-<p><img class="formulaInl" alt="$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$" src="form_138.png"/>,</p>
-<p>where <img class="formulaInl" alt="$\mu_0$" src="form_117.png"/> is a reference chemical potential, <img class="formulaInl" alt="$R$" src="form_100.png"/> the gas constant, <img class="formulaInl" alt="$T$" src="form_115.png"/> the temperature, <img class="formulaInl" alt="$c$" src="form_9.png"/> the species concentration, and <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_58.png"/> the fluid concentration.</p>
+<p><img class="formulaInl" alt="$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)$" src="form_177.png"/>,</p>
+<p>where <img class="formulaInl" alt="$\mu_0$" src="form_157.png"/> is a reference chemical potential, <img class="formulaInl" alt="$R$" src="form_106.png"/> the gas constant, <img class="formulaInl" alt="$T$" src="form_155.png"/> the temperature, <img class="formulaInl" alt="$c$" src="form_9.png"/> the species concentration, and <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_64.png"/> the fluid concentration.</p>
 <p>In order to circumvent numerical problems for low species concentrations, the scalar functional may be regularized according to</p>
-<p><img class="formulaInl" alt="$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)$" src="form_139.png"/>,</p>
+<p><img class="formulaInl" alt="$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)$" src="form_178.png"/>,</p>
 <p>where</p>
-<p><img class="formulaInl" alt="$ h(x) = \begin{cases} x [ \ln(x)-1] \quad&amp;\mathrm{if}\quad x&gt;\epsilon\\ \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&amp;\mathrm{else}, \end{cases} $" src="form_114.png"/>,</p>
-<p>with <img class="formulaInl" alt="$\epsilon \ll 1$" src="form_118.png"/> being a regularization parameter.</p>
+<p><img class="formulaInl" alt="$ h(x) = \begin{cases} x [ \ln(x)-1] \quad&amp;\mathrm{if}\quad x&gt;\epsilon\\ \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&amp;\mathrm{else}, \end{cases} $" src="form_154.png"/>,</p>
+<p>with <img class="formulaInl" alt="$\epsilon \ll 1$" src="form_158.png"/> being a regularization parameter.</p>
 <p>Ordering of quantities in <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#adfed9b70b743ba245a39c3e63b951f96">ScalarFunctional&lt;spacedim, spacedim&gt;::e_omega</a> :<br  />
  [0] <img class="formulaInl" alt="$c$" src="form_9.png"/><br  />
- [1] <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_58.png"/> </p>
+ [1] <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_64.png"/> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a82b105addb1311b165edfcdfbd4d0699"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82b105addb1311b165edfcdfbd4d0699">&#9670;&nbsp;</a></span>PsiChemical02()</h2>
@@ -384,7 +384,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$c_0 / c^\mathrm{f}_0$" src="form_157.png"/> </p>
+<p><img class="formulaInl" alt="$c_0 / c^\mathrm{f}_0$" src="form_194.png"/> </p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\epsilon$" src="form_154.png"/> </p>
+<p><img class="formulaInl" alt="$\epsilon$" src="form_191.png"/> </p>
 
 </div>
 </div>
@@ -434,7 +434,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\ln(c_0 / c^\mathrm{f}_0)$" src="form_159.png"/> </p>
+<p><img class="formulaInl" alt="$\ln(c_0 / c^\mathrm{f}_0)$" src="form_196.png"/> </p>
 
 </div>
 </div>
@@ -459,7 +459,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\ln(\epsilon)$" src="form_158.png"/> </p>
+<p><img class="formulaInl" alt="$\ln(\epsilon)$" src="form_195.png"/> </p>
 
 </div>
 </div>
@@ -484,7 +484,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\mu_0$" src="form_117.png"/> </p>
+<p><img class="formulaInl" alt="$\mu_0$" src="form_157.png"/> </p>
 
 </div>
 </div>
@@ -509,7 +509,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$RT$" src="form_102.png"/> </p>
+<p><img class="formulaInl" alt="$RT$" src="form_142.png"/> </p>
 
 </div>
 </div>

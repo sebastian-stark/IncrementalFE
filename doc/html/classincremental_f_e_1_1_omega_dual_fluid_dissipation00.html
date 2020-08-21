@@ -135,26 +135,26 @@ Additional Inherited Members</h2></td></tr>
 class incrementalFE::OmegaDualFluidDissipation00&lt; spacedim &gt;</h3>
 
 <p>Class defining dual dissipation associated with flux of fluid through a solid skeleton, where ions flow in addition through the fluid.</p>
-<p><img class="formulaInl" alt="$ h^\Omega_\rho = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$" src="form_76.png"/>,</p>
-<p>where <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_58.png"/> is the fluid concentration,<br  />
- <img class="formulaInl" alt="$c^i$" src="form_77.png"/> are the ion concentrations ( <img class="formulaInl" alt="$i$" src="form_78.png"/> runs from <img class="formulaInl" alt="$1$" src="form_79.png"/> to <img class="formulaInl" alt="$I$" src="form_80.png"/>),<br  />
- <img class="formulaInl" alt="$\eta^\mathrm{f}$" src="form_81.png"/> is the fluid potential,<br  />
- <img class="formulaInl" alt="$\eta^i$" src="form_82.png"/> are the ion potentials,<br  />
- <img class="formulaInl" alt="$V^\mathrm{f}_\mathrm{m}$" src="form_59.png"/> the molar volume of the fluid,<br  />
- <img class="formulaInl" alt="$J$" src="form_60.png"/> the determinant of the deformation gradient <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_61.png"/>,<br  />
- <img class="formulaInl" alt="$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}$" src="form_62.png"/>,<br  />
+<p><img class="formulaInl" alt="$ h^\Omega_\rho = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$" src="form_82.png"/>,</p>
+<p>where <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_64.png"/> is the fluid concentration,<br  />
+ <img class="formulaInl" alt="$c^i$" src="form_83.png"/> are the ion concentrations ( <img class="formulaInl" alt="$i$" src="form_84.png"/> runs from <img class="formulaInl" alt="$1$" src="form_85.png"/> to <img class="formulaInl" alt="$I$" src="form_86.png"/>),<br  />
+ <img class="formulaInl" alt="$\eta^\mathrm{f}$" src="form_87.png"/> is the fluid potential,<br  />
+ <img class="formulaInl" alt="$\eta^i$" src="form_88.png"/> are the ion potentials,<br  />
+ <img class="formulaInl" alt="$V^\mathrm{f}_\mathrm{m}$" src="form_65.png"/> the molar volume of the fluid,<br  />
+ <img class="formulaInl" alt="$J$" src="form_66.png"/> the determinant of the deformation gradient <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_67.png"/>,<br  />
+ <img class="formulaInl" alt="$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}$" src="form_68.png"/>,<br  />
  and <img class="formulaInl" alt="$D$" src="form_11.png"/> a "fluid mobility".</p>
 <dl class="section warning"><dt>Warning</dt><dd>Currently, the derivatives required for the <img class="formulaInl" alt="$\alpha$" src="form_5.png"/>-family for temporal discretization are not implemented!</dd></dl>
 <p>Ordering of quantities in <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional_3_01spacedim_00_01spacedim_01_4.html#adfed9b70b743ba245a39c3e63b951f96">ScalarFunctional&lt;spacedim, spacedim&gt;::e_omega</a> :<br  />
-[0] <img class="formulaInl" alt="$\dot{c}^\mathrm{f}$" src="form_83.png"/><br  />
- [1] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,x}$" src="form_84.png"/><br  />
- [2] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,y}$" src="form_85.png"/><br  />
- [3] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,z}$" src="form_86.png"/><br  />
- [4] ... [3+3I] <img class="formulaInl" alt="$\eta^i_{,x}$" src="form_87.png"/>, <img class="formulaInl" alt="$\eta^i_{,y}$" src="form_88.png"/>, <img class="formulaInl" alt="$\eta^i_{,z}$" src="form_89.png"/> (ordering: xyz, xyz, ...)<br  />
- [4+3I] <img class="formulaInl" alt="$\eta^\mathrm{f}$" src="form_81.png"/><br  />
- [5+3I] <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_58.png"/><br  />
- [6+3I] ... [5+4I] <img class="formulaInl" alt="$c^i$" src="form_77.png"/><br  />
- [6+4I] ... [14+4I] <img class="formulaInl" alt="$F_{xx}$" src="form_67.png"/>, <img class="formulaInl" alt="$F_{xy}$" src="form_68.png"/>, <img class="formulaInl" alt="$F_{xz}$" src="form_69.png"/>, <img class="formulaInl" alt="$F_{yx}$" src="form_70.png"/>, <img class="formulaInl" alt="$F_{yy}$" src="form_71.png"/>, <img class="formulaInl" alt="$F_{yz}$" src="form_72.png"/>, <img class="formulaInl" alt="$F_{zx}$" src="form_73.png"/>, <img class="formulaInl" alt="$F_{zy}$" src="form_74.png"/>, <img class="formulaInl" alt="$F_{zz}$" src="form_75.png"/> </p>
+[0] <img class="formulaInl" alt="$\dot{c}^\mathrm{f}$" src="form_89.png"/><br  />
+ [1] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,x}$" src="form_90.png"/><br  />
+ [2] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,y}$" src="form_91.png"/><br  />
+ [3] <img class="formulaInl" alt="$\eta^\mathrm{f}_{,z}$" src="form_92.png"/><br  />
+ [4] ... [3+3I] <img class="formulaInl" alt="$\eta^i_{,x}$" src="form_93.png"/>, <img class="formulaInl" alt="$\eta^i_{,y}$" src="form_94.png"/>, <img class="formulaInl" alt="$\eta^i_{,z}$" src="form_95.png"/> (ordering: xyz, xyz, ...)<br  />
+ [4+3I] <img class="formulaInl" alt="$\eta^\mathrm{f}$" src="form_87.png"/><br  />
+ [5+3I] <img class="formulaInl" alt="$c^\mathrm{f}$" src="form_64.png"/><br  />
+ [6+3I] ... [5+4I] <img class="formulaInl" alt="$c^i$" src="form_83.png"/><br  />
+ [6+4I] ... [14+4I] <img class="formulaInl" alt="$F_{xx}$" src="form_73.png"/>, <img class="formulaInl" alt="$F_{xy}$" src="form_74.png"/>, <img class="formulaInl" alt="$F_{xz}$" src="form_75.png"/>, <img class="formulaInl" alt="$F_{yx}$" src="form_76.png"/>, <img class="formulaInl" alt="$F_{yy}$" src="form_77.png"/>, <img class="formulaInl" alt="$F_{yz}$" src="form_78.png"/>, <img class="formulaInl" alt="$F_{zx}$" src="form_79.png"/>, <img class="formulaInl" alt="$F_{zy}$" src="form_80.png"/>, <img class="formulaInl" alt="$F_{zz}$" src="form_81.png"/> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7a0257beaaa9adbfd3d7eb69ff95c88e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a0257beaaa9adbfd3d7eb69ff95c88e">&#9670;&nbsp;</a></span>OmegaDualFluidDissipation00()</h2>
@@ -376,7 +376,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of ionic species <img class="formulaInl" alt="$I$" src="form_80.png"/> </p>
+<p>Number of ionic species <img class="formulaInl" alt="$I$" src="form_86.png"/> </p>
 
 </div>
 </div>
@@ -401,7 +401,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>molar volume of fluid <img class="formulaInl" alt="$V^\mathrm{f}_\mathrm{m}$" src="form_59.png"/> </p>
+<p>molar volume of fluid <img class="formulaInl" alt="$V^\mathrm{f}_\mathrm{m}$" src="form_65.png"/> </p>
 
 </div>
 </div>

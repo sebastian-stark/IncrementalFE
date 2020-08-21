@@ -102,6 +102,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 																				const AffineConstraints<double>&	custom_constraints,
 																				const AffineConstraints<double>&	ignore_constraints)
 {
+
 	const unsigned int this_proc = assembly_helper.get_triangulation_system().get_this_proc_n_procs().first;
 	ConditionalOStream pout(cout, (this_proc == 0) && (global_data->get_output_level() > 0));
 
@@ -162,9 +163,10 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	}
 
 	// ensure consistency of current solution with constraints
-	zero_ghosts(solution);
+/*	zero_ghosts(solution);
 	constraints.distribute(solution);
-	update_ghosts(solution);
+	update_ghosts(solution);*/
+
 
 	// solution increment of Newton-Raphson iteration
 	SolutionVectorType delta_solution;
@@ -180,9 +182,21 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	// bring constraints in appropriate form for solution increment
 	adjust_constraint_inhomogeneity(constraints);
 
+	// use previous increment as initial guess if requested
+	if( (global_data->use_previous_increment_for_initial_guess) && (delta_solution_last_step.size() == solution.size()) )
+	{
+		delta_solution = delta_solution_last_step;
+		zero_ghosts(delta_solution);
+		constraints.distribute(delta_solution);
+		update_ghosts(delta_solution);
+		adjust_delta_solution(delta_solution, solution_ref, constraints);
+		solution += delta_solution;
+		adjust_constraint_inhomogeneity(constraints);
+	}
+
 	timer.start();
 	// assemble the system for the first iteration (before doing so, bring the constraints in the appropriate form)
-	if(compute_system(solution_ref, constraints))
+	if(compute_system(solution, constraints))
 	{
 		solution = solution_ref;
 		global_data->reset_t();
@@ -200,6 +214,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	pout << "Elapsed CPU time scaling: " << timer.cpu_time() << " seconds." << endl;
 	pout << "Elapsed wall time scaling: " << timer.wall_time() << " seconds." << endl;
 	timer.reset();
+
+
 
 	// start iteration loop
 	for(;;)
@@ -227,7 +243,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			// check termination criterion
 			if(global_data->threshold_residual > 0.0)
 				residual = get_residual();
-			if((fabs(estimated_potential_increment) < global_data->threshold_potential_increment) && ( (global_data->threshold_residual <= 0.0) || (residual < global_data->threshold_residual) ))
+			if((fabs(estimated_potential_increment) < global_data->threshold_potential_increment) && ( (global_data->threshold_residual <= 0.0) || (residual < global_data->threshold_residual) ) && (global_data->converged_at_local_level))
 			{
 				if(global_data->threshold_residual <= 0.0)
 					residual = get_residual();
@@ -242,14 +258,17 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 					continue;
 				}
 				else
+				{
+					delta_solution_last_step = solution;
+					delta_solution_last_step -= solution_ref;
 					break;
+				}
 			}
 		}
 
 		// compute maximum step size and adjust delta_solution accordingly (this avoids that an inadmissible solution is obtained)
 		if(!global_data->force_linear)
 			adjust_delta_solution(delta_solution, solution_ref, constraints);
-
 
 		// update solution
 		solution += delta_solution;
@@ -276,7 +295,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			}
 
 			residual = get_residual();
-			if(!global_data->perform_line_search)
+			if( (!global_data->perform_line_search) || (residual < 1e-4))
 				break;
 
 			if( (iter == 0) || (residual < residual_old) )
@@ -588,6 +607,8 @@ bool
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system(	const SolutionVectorType& 	solution_ref,
 																					AffineConstraints<double>&	constraints)
 {
+	global_data->converged_at_local_level = true;
+
 	// initialize system matrix, rhs vector, rhs scaling vector
 	reinit_matrix(system_matrix);
 	reinit_rhs_vector(rhs);
@@ -607,6 +628,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	}
 	else
 	{
+		if(global_data->converged_at_local_level == false)
+			cout << "Not converged at local level!" << endl;
 		// just to be sure
 		constraints.set_zero(rhs);
 		return false;
@@ -805,9 +828,12 @@ const
 	// the scaling currently only applies to the first block of the system (i.e., the block related to FE dofs)
 	auto& scaled_rhs_block_0 = scaled_rhs.block(0);
 	const auto& rhs_scaling_vector_block_0 = rhs_scaling_vector.block(0);
-	for(const auto& m : scaled_rhs_block_0.locally_owned_elements())
-		scaled_rhs_block_0[m] = scaled_rhs_block_0[m] / rhs_scaling_vector_block_0[m];
-	scaled_rhs_block_0.compress(VectorOperation::insert);
+	if(global_data->scale_residual)
+	{
+		for(const auto& m : scaled_rhs_block_0.locally_owned_elements())
+			scaled_rhs_block_0[m] = scaled_rhs_block_0[m] / rhs_scaling_vector_block_0[m];
+		scaled_rhs_block_0.compress(VectorOperation::insert);
+	}
 
 	// compute the residual
 	double residual_0 = 0.0;

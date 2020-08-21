@@ -93,6 +93,8 @@ Solution\+Vector\+Type \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a0213
 \item 
 Solution\+Vector\+Type \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ad5f39fec8540d81155770764f945f572}{solution\+\_\+ref}}
 \item 
+Solution\+Vector\+Type \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ac345bc49f279268b08f98f6a95dd6a32}{delta\+\_\+solution\+\_\+last\+\_\+step}}
+\item 
 R\+H\+S\+Vector\+Type \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}{rhs}}
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a04ea9240ef0084b44471a40f0d64ac54}{potential\+\_\+value}} = 0.\+0
@@ -630,7 +632,14 @@ A list of connections set up by \mbox{\hyperlink{classincremental_f_e_1_1_f_e_mo
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
 const dealii\+::\+Smart\+Pointer$<$const \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}}$<$spacedim$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::constraints\hspace{0.3cm}{\ttfamily [private]}}
 
-The \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} object comprising all the constraints to be applied \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a4ea39622157334a3d985c418a3b9ca34}\label{classincremental_f_e_1_1_f_e_model_a4ea39622157334a3d985c418a3b9ca34}} 
+The \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} object comprising all the constraints to be applied \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_ac345bc49f279268b08f98f6a95dd6a32}\label{classincremental_f_e_1_1_f_e_model_ac345bc49f279268b08f98f6a95dd6a32}} 
+\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!delta\_solution\_last\_step@{delta\_solution\_last\_step}}
+\index{delta\_solution\_last\_step@{delta\_solution\_last\_step}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
+\doxysubsubsection{\texorpdfstring{delta\_solution\_last\_step}{delta\_solution\_last\_step}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
+Solution\+Vector\+Type \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::delta\+\_\+solution\+\_\+last\+\_\+step\hspace{0.3cm}{\ttfamily [private]}}
+
+Solution vector with the solution increment during the last successfully completed time increment. This is used to obtain an initial guess for the Newton-\/\+Raphson iteration in case \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}{Global\+Data\+Incremental\+F\+E\+::use\+\_\+previous\+\_\+increment\+\_\+for\+\_\+initial\+\_\+guess}} == {\ttfamily true} \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a4ea39622157334a3d985c418a3b9ca34}\label{classincremental_f_e_1_1_f_e_model_a4ea39622157334a3d985c418a3b9ca34}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!dirichlet\_constraints@{dirichlet\_constraints}}
 \index{dirichlet\_constraints@{dirichlet\_constraints}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{dirichlet\_constraints}{dirichlet\_constraints}}

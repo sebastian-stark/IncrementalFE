@@ -1,0 +1,176 @@
+\hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01}{}\doxysection{incremental\+FE\+::Omega\+Viscous\+Dissipation01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_viscous_dissipation01}\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Viscous\+Dissipation01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classincremental_f_e_1_1_omega_viscous_dissipation01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Viscous\+Dissipation01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classincremental_f_e_1_1_omega_viscous_dissipation01__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_aacc583a1b2caccf00da1a9fc0a0fcd35}{Omega\+Viscous\+Dissipation01}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_abbc20b86ab7417e4884e199d741ab1f3}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a79c5903b19b46423875bb1840b2eff8c}{A}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a5902550f474ddafcea1b1e5f5232cd37}{n}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{alpha}}=0.\+0, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a9fa3f1cdbb8058939148a9bf8237ca57}{d\+\_\+th}}=1\textbf{ e}-\/8)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a794a4e2e77cb590f3fcea84c7939d4b3}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a9ef650bfc38681f32de4ff204cc09a35}{get\+\_\+maximum\+\_\+step}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&delta\+\_\+e\+\_\+omega, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&, const dealii\+::\+Point$<$ spacedim $>$ \&) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a79c5903b19b46423875bb1840b2eff8c}{A}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a5902550f474ddafcea1b1e5f5232cd37}{n}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a9fa3f1cdbb8058939148a9bf8237ca57}{d\+\_\+th}} = 1\textbf{ e}-\/8
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_abbc20b86ab7417e4884e199d741ab1f3}{global\+\_\+data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01$<$ spacedim $>$}
+
+Class defining a domain related scalar functional with the integrand
+
+$ h^\Omega_\rho = \dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n $,
+
+where $\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \dot{\boldsymbol{F}} + \dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1} \right)$ is the stretching associated with the deformation gradient $\boldsymbol{F}$, and $A$ and $n$ are material parameters.
+
+In order to avoid singular second derivatives,
+
+$h^\Omega_\rho = \dfrac{A_0}{2} \boldsymbol{d}:\boldsymbol{d}$
+
+is used if $\sqrt{\boldsymbol{d}:\boldsymbol{d}} < d_\mathrm{th}$, with $d_\mathrm{th}\ll 1$ and $A_0 = A d_\mathrm{th}^{2(n-1)} $. In practice, $d_\mathrm{th}$ should be chosen such that it is slightly smaller than the maximum of $\sqrt{\boldsymbol{d}:\boldsymbol{d}}$ in the problem. If $n > 1$, $d_\mathrm{th}$ should be set to zero.
+
+This describes an isotropic Norton type creep relation at large strains.
+
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+\mbox{[}0\mbox{]} $\dot{F}_{xx}$~\newline
+ \mbox{[}1\mbox{]} $\dot{F}_{xy}$~\newline
+ \mbox{[}2\mbox{]} $\dot{F}_{xz}$~\newline
+ \mbox{[}3\mbox{]} $\dot{F}_{yx}$~\newline
+ \mbox{[}4\mbox{]} $\dot{F}_{yy}$~\newline
+ \mbox{[}5\mbox{]} $\dot{F}_{yz}$~\newline
+ \mbox{[}6\mbox{]} $\dot{F}_{zx}$~\newline
+ \mbox{[}7\mbox{]} $\dot{F}_{zy}$~\newline
+ \mbox{[}8\mbox{]} $\dot{F}_{zz}$~\newline
+ \mbox{[}9\mbox{]} $F_{xx}$~\newline
+ \mbox{[}10\mbox{]} $F_{xy}$~\newline
+ \mbox{[}11\mbox{]} $F_{xz}$~\newline
+ \mbox{[}12\mbox{]} $F_{yx}$~\newline
+ \mbox{[}13\mbox{]} $F_{yy}$~\newline
+ \mbox{[}14\mbox{]} $F_{yz}$~\newline
+ \mbox{[}15\mbox{]} $F_{zx}$~\newline
+ \mbox{[}16\mbox{]} $F_{zy}$~\newline
+ \mbox{[}17\mbox{]} $F_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_aacc583a1b2caccf00da1a9fc0a0fcd35}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_aacc583a1b2caccf00da1a9fc0a0fcd35}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!OmegaViscousDissipation01@{OmegaViscousDissipation01}}
+\index{OmegaViscousDissipation01@{OmegaViscousDissipation01}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaViscousDissipation01()}{OmegaViscousDissipation01()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{Omega\+Viscous\+Dissipation01}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{A,  }\item[{const double}]{n,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0},  }\item[{const double}]{d\+\_\+th = {\ttfamily 1\textbf{ e}-\/8} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em A} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a79c5903b19b46423875bb1840b2eff8c}{Omega\+Viscous\+Dissipation01\+::A}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em n} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a5902550f474ddafcea1b1e5f5232cd37}{Omega\+Viscous\+Dissipation01\+::n}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em d\+\_\+th} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01_a9fa3f1cdbb8058939148a9bf8237ca57}{Omega\+Viscous\+Dissipation01\+::d\+\_\+th}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_a9ef650bfc38681f32de4ff204cc09a35}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_a9ef650bfc38681f32de4ff204cc09a35}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!get\_maximum\_step@{get\_maximum\_step}}
+\index{get\_maximum\_step@{get\_maximum\_step}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_step()}{get\_maximum\_step()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::get\+\_\+maximum\+\_\+step (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+omega,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{delta\+\_\+e\+\_\+omega,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+see \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+maximum\+\_\+step} \mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_a794a4e2e77cb590f3fcea84c7939d4b3}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_a794a4e2e77cb590f3fcea84c7939d4b3}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{incremental\+F\+E\+::\+Omega$<$ spacedim, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_a79c5903b19b46423875bb1840b2eff8c}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_a79c5903b19b46423875bb1840b2eff8c}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!A@{A}}
+\index{A@{A}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::A\hspace{0.3cm}{\ttfamily [private]}}
+
+material parameter \mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_a9fa3f1cdbb8058939148a9bf8237ca57}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_a9fa3f1cdbb8058939148a9bf8237ca57}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!d\_th@{d\_th}}
+\index{d\_th@{d\_th}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{d\_th}{d\_th}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::d\+\_\+th = 1\textbf{ e}-\/8\hspace{0.3cm}{\ttfamily [private]}}
+
+Uniaxial threshold stretching below which potential is quadratically approximated with regard to the stretching \mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_abbc20b86ab7417e4884e199d741ab1f3}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_abbc20b86ab7417e4884e199d741ab1f3}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!global\_data@{global\_data}}
+\index{global\_data@{global\_data}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+global data object \mbox{\Hypertarget{classincremental_f_e_1_1_omega_viscous_dissipation01_a5902550f474ddafcea1b1e5f5232cd37}\label{classincremental_f_e_1_1_omega_viscous_dissipation01_a5902550f474ddafcea1b1e5f5232cd37}} 
+\index{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}!n@{n}}
+\index{n@{n}!incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$@{incrementalFE::OmegaViscousDissipation01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_viscous_dissipation01}{incremental\+F\+E\+::\+Omega\+Viscous\+Dissipation01}}$<$ spacedim $>$\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+material parameter (creep exponent) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

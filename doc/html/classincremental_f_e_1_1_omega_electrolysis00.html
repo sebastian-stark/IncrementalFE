@@ -141,15 +141,15 @@ Additional Inherited Members</h2></td></tr>
 class incrementalFE::OmegaElectrolysis00&lt; spacedim &gt;</h3>
 
 <p>Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand</p>
-<p><img class="formulaInl" alt="$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &amp;\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) &gt; 0\\ 0\quad &amp;\mathrm{else} \end{cases} $" src="form_95.png"/></p>
-<p>where <img class="formulaInl" alt="$\eta^\mathrm{int}$" src="form_96.png"/> is the electrochemical potential in the interior of the domain,<br  />
+<p><img class="formulaInl" alt="$ h^\Sigma_\tau = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &amp;\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) &gt; 0\\ 0\quad &amp;\mathrm{else} \end{cases} $" src="form_101.png"/></p>
+<p>where <img class="formulaInl" alt="$\eta^\mathrm{int}$" src="form_102.png"/> is the electrochemical potential in the interior of the domain,<br  />
  <img class="formulaInl" alt="$F$" src="form_16.png"/> is Faraday's constant,<br  />
- <img class="formulaInl" alt="$A^{\mathrm{e^-}}$" src="form_97.png"/> is the number of electrons added to the solution during the reaction,<br  />
- <img class="formulaInl" alt="$\bar{\varphi}$" src="form_98.png"/> the prescribed external electrical potential,<br  />
- <img class="formulaInl" alt="$\varphi^\mathrm{c}$" src="form_99.png"/> the overpotential required to start the reaction,<br  />
- and <img class="formulaInl" alt="$R$" src="form_100.png"/> an "interface resistance"</p>
+ <img class="formulaInl" alt="$A^{\mathrm{e^-}}$" src="form_103.png"/> is the number of electrons added to the solution during the reaction,<br  />
+ <img class="formulaInl" alt="$\bar{\varphi}$" src="form_104.png"/> the prescribed external electrical potential,<br  />
+ <img class="formulaInl" alt="$\varphi^\mathrm{c}$" src="form_105.png"/> the overpotential required to start the reaction,<br  />
+ and <img class="formulaInl" alt="$R$" src="form_106.png"/> an "interface resistance"</p>
 <p>Ordering of quantities in <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a86662b03a63219227993a2c6c07aefc1">ScalarFunctional::e_sigma</a> :<br  />
-[0] <img class="formulaInl" alt="$\eta^\mathrm{int}$" src="form_96.png"/> </p>
+[0] <img class="formulaInl" alt="$\eta^\mathrm{int}$" src="form_102.png"/> </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeead020666687a08d0dd021ad771c83a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeead020666687a08d0dd021ad771c83a">&#9670;&nbsp;</a></span>OmegaElectrolysis00()</h2>
@@ -373,7 +373,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$A^{\mathrm{e^-}}$" src="form_97.png"/> </p>
+<p><img class="formulaInl" alt="$A^{\mathrm{e^-}}$" src="form_103.png"/> </p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function determining <img class="formulaInl" alt="$\bar{\varphi}(\boldsymbol{X}, t)$" src="form_105.png"/> </p>
+<p>Function determining <img class="formulaInl" alt="$\bar{\varphi}(\boldsymbol{X}, t)$" src="form_145.png"/> </p>
 
 </div>
 </div>
@@ -448,7 +448,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$\varphi^\mathrm{c}$" src="form_99.png"/> </p>
+<p><img class="formulaInl" alt="$\varphi^\mathrm{c}$" src="form_105.png"/> </p>
 
 </div>
 </div>
@@ -473,7 +473,7 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p><img class="formulaInl" alt="$R$" src="form_100.png"/> </p>
+<p><img class="formulaInl" alt="$R$" src="form_106.png"/> </p>
 
 </div>
 </div>

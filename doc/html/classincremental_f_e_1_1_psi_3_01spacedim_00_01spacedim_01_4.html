@@ -81,7 +81,7 @@ Inheritance diagram for incrementalFE::Psi&lt; spacedim, spacedim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4__inherit__graph.png" border="0" usemap="#incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map" id="incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="272,365,459,407"/>
+<area shape="rect" title=" " alt="" coords="272,397,459,439"/>
 <area shape="rect" href="classincremental_f_e_1_1_kirchhoff_material00.html" title=" " alt="" coords="552,5,737,47"/>
 <area shape="rect" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html" title=" " alt="" coords="507,71,783,112"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_chemical00.html" title=" " alt="" coords="535,136,755,177"/>
@@ -93,8 +93,9 @@ Inheritance diagram for incrementalFE::Psi&lt; spacedim, spacedim &gt;:</div>
 <area shape="rect" href="classincremental_f_e_1_1_psi_initial_pressure00.html" title=" " alt="" coords="551,528,738,569"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_linear00.html" title=" " alt="" coords="545,593,744,635"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_neo_hooke00.html" title=" " alt="" coords="531,659,758,700"/>
-<area shape="rect" href="classincremental_f_e_1_1_psi_transformed00.html" title=" " alt="" coords="524,724,765,765"/>
-<area shape="rect" title=" " alt="" coords="5,358,224,414"/>
+<area shape="rect" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html" title=" " alt="" coords="539,724,750,765"/>
+<area shape="rect" href="classincremental_f_e_1_1_psi_transformed00.html" title=" " alt="" coords="524,789,765,831"/>
+<area shape="rect" title=" " alt="" coords="5,390,224,446"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -130,8 +131,8 @@ Private Attributes</h2></td></tr>
 class incrementalFE::Psi&lt; spacedim, spacedim &gt;</h3>
 
 <p>Class defining a domain related scalar functional with the integrand</p>
-<p><img class="formulaInl" alt="$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_110.png"/>,</p>
-<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_107.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_108.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_109.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
+<p><img class="formulaInl" alt="$ h^\Omega_\rho = \alpha \psi(q_{n+1}) + (1-\alpha) \left[ \psi(q_n) + \psi_q(q_n) (q_{n+1} - q_n)\right] $" src="form_150.png"/>,</p>
+<p>where <img class="formulaInl" alt="$0\leq \alpha \leq 1 $" src="form_147.png"/> is a numerical parameter, and <img class="formulaInl" alt="$q_n$" src="form_148.png"/> and <img class="formulaInl" alt="$q_{n+1}$" src="form_149.png"/> is the value of the state variable <img class="formulaInl" alt="$q$" src="form_4.png"/> in the beginning of the time step and at the end of the time step, respectively. <img class="formulaInl" alt="$q$" src="form_4.png"/> can also be vector valued. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad6aff88570ea114f34ca92f232759e29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad6aff88570ea114f34ca92f232759e29">&#9670;&nbsp;</a></span>Psi()</h2>
@@ -362,21 +363,21 @@ template&lt;unsigned int spacedim&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_111.png"/> and needs to be implemented by classes inheriting from this class</p>
+<p>This function defines <img class="formulaInl" alt="$\psi(q)$" src="form_151.png"/> and needs to be implemented by classes inheriting from this class</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_112.png"/> and its derivatives are evaluated</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">values</td><td>Values at which <img class="formulaInl" alt="$\psi$" src="form_152.png"/> and its derivatives are evaluated</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Position</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_112.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_112.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_112.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">psi</td><td>Value of <img class="formulaInl" alt="$\psi$" src="form_152.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d_psi</td><td>Values of first derivatives of <img class="formulaInl" alt="$\psi$" src="form_152.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">d2_psi</td><td>Values of second derivatives of <img class="formulaInl" alt="$\psi$" src="form_152.png"/> w.r.t. <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">requested_quantities</td><td>Tuple indicating which of the quantities <code>psi</code>, <code>d_psi</code>, <code>d2_psi</code> are to be computed (note that only those quantities are initialized to the correct size, which are actually requested).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> indicates that an error has occurred in the function </dd></dl>
 
-<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a49b4a67e26ad8a34d61fea6a348017d3">incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_initial_pressure00.html#ab73f396d058eeba3de66c054781aff8b">incrementalFE::PsiInitialPressure00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_incompressibility01.html#ad2ca9358bd1bb39e1f7de76874c48fb0">incrementalFE::PsiIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#addfb3bb4446157cfe28064f34f67429d">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#ab062fe5ffbea799d817b3106d15cefc3">incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_kirchhoff_material00.html#aac6a9a65711a61f97f5a22fd581d884e">incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_linear00.html#a67659a64476352053fd55c6441336283">incrementalFE::PsiLinear00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_transformed00.html#a4d996bc1b437b748918c0c031267b5b9">incrementalFE::PsiTransformed00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical01.html#a75fc8b6eb7a68ad30d27e1de6738366d">incrementalFE::PsiChemical01&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a52e3a124fe8200a1cad668b12d4be439">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html#a0a930a5f49cb001179590c819fbce3c5">incrementalFE::PsiNeoHookeLagrange00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a49b4a67e26ad8a34d61fea6a348017d3">incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_initial_pressure00.html#ab73f396d058eeba3de66c054781aff8b">incrementalFE::PsiInitialPressure00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_incompressibility01.html#ad2ca9358bd1bb39e1f7de76874c48fb0">incrementalFE::PsiIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#addfb3bb4446157cfe28064f34f67429d">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#ab062fe5ffbea799d817b3106d15cefc3">incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_kirchhoff_material00.html#aac6a9a65711a61f97f5a22fd581d884e">incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_linear00.html#a67659a64476352053fd55c6441336283">incrementalFE::PsiLinear00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_transformed00.html#a4d996bc1b437b748918c0c031267b5b9">incrementalFE::PsiTransformed00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical01.html#a75fc8b6eb7a68ad30d27e1de6738366d">incrementalFE::PsiChemical01&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a52e3a124fe8200a1cad668b12d4be439">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>.</p>
 
 </div>
 </div>

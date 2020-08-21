@@ -185,6 +185,24 @@ private:
 	compute_sparsity_pattern = 0;
 
 	/**
+	 * If this is set to @p false, the Newton-Raphson iteration is not terminated irrespective of the residual.
+	 */
+	bool
+	converged_at_local_level = true;
+
+	/**
+	 * If this is set to @p true, the previous solution increment is used to obtain an initial guess for the Newton-Raphson iteration
+	 */
+	bool
+	use_previous_increment_for_initial_guess = false;
+
+	/**
+	 * determines whether to use rhs scaling for residual calculation
+	 */
+	bool
+	scale_residual = true;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -403,6 +421,29 @@ public:
 	 */
 	void
 	set_compute_sparsity_pattern(const unsigned int compute_sparsity_pattern = 0);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::converged_at_local_level to @p false
+	 */
+	void
+	set_not_converged_at_local_level();
+
+	/**
+	 * Sets GlobalDataIncrementalFE::use_previous_increment_for_initial_guess
+	 *
+	 * @param[in]	use_previous_increment_for_initial_guess	GlobalDataIncrementalFE::use_previous_increment_for_initial_guess
+	 */
+	void
+	set_use_previous_increment_for_initial_guess(const bool use_previous_increment_for_initial_guess = true);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::scale_residual
+	 *
+	 * @param[in]	scale_residual	GlobalDataIncrementalFE::scale_residual
+	 */
+	void
+	set_scale_residual(const bool scale_residual = true);
+
 
 };
 

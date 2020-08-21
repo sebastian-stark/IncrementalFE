@@ -243,5 +243,27 @@ GlobalDataIncrementalFE<spacedim>::reinit(const double t_init)
 	error_messages.clear();
 }
 
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_not_converged_at_local_level()
+{
+	converged_at_local_level = false;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_use_previous_increment_for_initial_guess(const bool use_previous_increment_for_initial_guess)
+{
+	this->use_previous_increment_for_initial_guess = use_previous_increment_for_initial_guess;
+}
+
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_scale_residual(const bool scale_residual)
+{
+	this->scale_residual = scale_residual;
+}
+
+
 template class GlobalDataIncrementalFE<2>;
 template class GlobalDataIncrementalFE<3>;
