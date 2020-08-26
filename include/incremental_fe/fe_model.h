@@ -151,10 +151,10 @@ private:
 	hanging_node_constraints;
 
 	/**
-	 * Matrix with Dirichlet type constraints (used internally during the solution process)
+	 * Matrix with all combined constraints (used internally during the solution process)
 	 */
 	dealii::AffineConstraints<double>
-	dirichlet_constraints;
+	all_constraints;
 
 	/**
 	 * Pairs of time and filename of outputs written to files (for domain output).
@@ -194,7 +194,14 @@ private:
 	 * determines whether hanging node constraints are taken into account or ignored
 	 */
 	const bool
-	make_hanging_node_constraints;
+	make_hanging_node_constraints = true;
+
+	/**
+	 * if @p true, system matrix is treated as a single block. This is useful in case the A block of the
+	 * block system is singular.
+	 */
+	const bool
+	single_block = false;
 
 	/**
 	 * total time spent for linear solver during last time step
@@ -358,6 +365,8 @@ public:
 	 * @param[in]	solver_wrapper					SolverWrapper to be used, see FEModel::solver_wrapper
 	 *
 	 * @param[in]	make_hanging_node_constraints	FEModel::make_hanging_node_constraints
+	 *
+	 * @param[in]	single_block					FEModel::single_block
 	 */
 	FEModel(const dealii::GalerkinTools::TotalPotential<spacedim>&																						total_potential,
 			dealii::GalerkinTools::TriangulationSystem<spacedim>&																						tria_system,
@@ -365,8 +374,9 @@ public:
 			const dealii::Mapping<spacedim-1, spacedim>&																								mapping_interface,
 			GlobalDataIncrementalFE<spacedim>&																											global_data,
 			const Constraints<spacedim>&																												constraints,
-			dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
-			const bool																																	make_hanging_node_constraints = true);
+			dealii::GalerkinTools::SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern>&		solver_wrapper,
+			const bool																																	make_hanging_node_constraints = true,
+			const bool																																	single_block = false);
 
 	/**
 	 * Destructor

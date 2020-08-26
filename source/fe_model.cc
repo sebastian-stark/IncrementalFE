@@ -48,14 +48,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::FEModel(	const
 																			const Mapping<spacedim-1, spacedim>&																		mapping_interface,
 																			GlobalDataIncrementalFE<spacedim>&																			global_data,
 																			const Constraints<spacedim>&																				constraints,
-																			SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, GalerkinTools::TwoBlockSparsityPattern>&	solver_wrapper,
-																			const bool																									make_hanging_node_constraints)
+																			SolverWrapper<SolutionVectorType, RHSVectorType, MatrixType, GalerkinTools::TwoBlockSparsityPattern>&		solver_wrapper,
+																			const bool																									make_hanging_node_constraints,
+																			const bool																									single_block)
 :
 assembly_helper(total_potential, tria_system, mapping_domain, mapping_interface, constraints.get_independent_scalars()),
 global_data(&global_data),
 constraints(&constraints),
 solver_wrapper(&solver_wrapper),
-make_hanging_node_constraints(make_hanging_node_constraints)
+make_hanging_node_constraints(make_hanging_node_constraints),
+single_block(single_block)
 {
 	// connect post_refinement() to post refinement signal of triangulation system
 	connections.push_back(tria_system.post_refinement.connect(0, boost::bind(&FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::post_refinement, this)));
@@ -167,7 +169,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	constraints.distribute(solution);
 	update_ghosts(solution);*/
 
-
 	// solution increment of Newton-Raphson iteration
 	SolutionVectorType delta_solution;
 	reinit_solution_vector(delta_solution);
@@ -202,6 +203,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		global_data->reset_t();
 		return -1;
 	}
+
 	timer.stop();
 	pout << "Elapsed CPU time assembly: " << timer.cpu_time() << " seconds." << endl;
 	pout << "Elapsed wall time assembly: " << timer.wall_time() << " seconds." << endl;
@@ -222,7 +224,35 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	{
 		// solve the system
 		timer.start();
+
+/*		FILE* printout = fopen ("K_1.dat","w");
+		unsigned int dim = sparsity_pattern.n_cols();
+		for(unsigned i = 0; i < dim; ++i)
+		{
+			for(unsigned j = 0; j < dim; ++j)
+			{
+				if(sparsity_pattern.exists(i,j))
+					fprintf(printout, "%- 1.16e ", system_matrix(i,j));
+				else
+					fprintf(printout, "%- 1.16e ", 0.0);
+			}
+			fprintf(printout, "\n");
+		}
+		fclose(printout);
+
+		FILE* printout2 = fopen ("f.dat","w");
+		for(unsigned i = 0; i < dim; ++i)
+		{
+			fprintf(printout2, "%- 1.16e\n", rhs(i));
+		}
+		fclose(printout2);
+
+		Assert(false, ExcMessage("Break"));
+		*/
+
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
+
+
 		solve_time_last_step += timer.wall_time();
 		timer.stop();
 		pout << "Elapsed CPU time solve: " << timer.cpu_time() << " seconds." << endl;
@@ -232,7 +262,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// incorporate constraints into solution increment
 		zero_ghosts(delta_solution);
 		constraints.distribute(delta_solution);
-		update_ghosts(delta_solution);
 
 		// only perform check of termination criterion starting from the second iteration
 		if(iter > 0)
@@ -295,7 +324,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			}
 
 			residual = get_residual();
-			if( (!global_data->perform_line_search) || (residual < 1e-4))
+			if( (!global_data->perform_line_search) /*|| (residual < 1e-4)*/)
 				break;
 
 			if( (iter == 0) || (residual < residual_old) )
@@ -544,7 +573,15 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_rhs_vec
 	auto vector_ptr_parallel = dynamic_cast<PETScWrappers::MPI::BlockVector*>(&vector);
 #endif // DEAL_II_WITH_PETSC
 #endif // DEAL_II_WITH_MPI
-	auto index_sets = assembly_helper.get_locally_owned_indices_blocks();
+	std::vector<dealii::IndexSet> index_sets;
+	if(!single_block)
+		index_sets = assembly_helper.get_locally_owned_indices_blocks();
+	else
+	{
+		index_sets.push_back(assembly_helper.get_locally_owned_indices());
+		index_sets.push_back(IndexSet());
+	}
+
 	if(index_sets[1].size() == 0)
 		index_sets.erase(index_sets.begin() + 1);
 	if(index_sets[0].size() == 0)
@@ -628,6 +665,32 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	}
 	else
 	{
+
+/*		FILE* printout = fopen("K.dat","w");
+
+		unsigned int dim = sparsity_pattern.n_cols();
+		for(unsigned i = 0; i < dim; ++i)
+		{
+			//cout << i << " of " << dim << endl;
+			for(unsigned j = 0; j < dim; ++j)
+			{
+				if(sparsity_pattern.exists(i,j))
+					if(fabs(system_matrix(i,j)) > 1e-16)
+						fprintf(printout, "%i %i %- 1.16e\n", i, j, system_matrix(i,j));
+			}
+		}
+		fclose(printout);
+
+		FILE* printout2 = fopen("f.dat","w");
+
+		for(unsigned i = 0; i < dim; ++i)
+		{
+			fprintf(printout2, "%- 1.16e\n", rhs.block(0)(i));
+		}
+		fclose(printout2);
+
+		Assert(false, ExcMessage("break"));*/
+
 		if(global_data->converged_at_local_level == false)
 			cout << "Not converged at local level!" << endl;
 		// just to be sure
@@ -640,7 +703,11 @@ template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, c
 void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_sparsity_pattern(const AffineConstraints<double>& constraints)
 {
-	sparsity_pattern.reinit(assembly_helper);
+	if(!single_block)
+		sparsity_pattern.reinit(assembly_helper);
+	else
+		sparsity_pattern.reinit(assembly_helper.get_locally_relevant_indices(), assembly_helper.system_size());
+
 	assembly_helper.generate_sparsity_pattern_by_simulation(sparsity_pattern, constraints);
 #ifdef DEAL_II_WITH_MPI
 	const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
@@ -667,16 +734,17 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::make_constrain
 	all_ignore_constraints.merge(hanging_node_constraints, AffineConstraints<double>::MergeConflictBehavior::left_object_wins, true);
 	all_ignore_constraints.merge(ignore_constraints, AffineConstraints<double>::MergeConflictBehavior::left_object_wins, true);
 	all_ignore_constraints.close();
-	dirichlet_constraints.reinit(assembly_helper.get_locally_relevant_indices());
-	assembly_helper.make_dirichlet_constraints(	dirichlet_constraints,
+	all_constraints.reinit(assembly_helper.get_locally_relevant_indices());
+	assembly_helper.make_dirichlet_constraints(	all_constraints,
 												this->constraints->get_dirichlet_constraints(),
 												all_ignore_constraints);
-	dirichlet_constraints.close();
-	dirichlet_constraints.merge(custom_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
+	all_constraints.close();
+	all_constraints.merge(custom_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
 
 	// combine hanging node constraints and dirichlet constraints
-	constraints.merge(hanging_node_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
-	constraints.merge(dirichlet_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
+	all_constraints.merge(hanging_node_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
+	constraints.merge(all_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);
+
 	constraints.close();
 
 	return;
@@ -688,7 +756,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::adjust_constra
 const
 {
 	double inhomogeneity;
-	for(const auto& line : dirichlet_constraints.get_lines())
+	for(const auto& line : all_constraints.get_lines())
 	{
 		const unsigned int constraint_index = line.index;
 		inhomogeneity = line.inhomogeneity - solution[constraint_index];
@@ -703,7 +771,15 @@ void
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::update_rhs_scaling_vector()
 {
 	reinit_rhs_vector(rhs_scaling_vector);
-	const auto index_sets = assembly_helper.get_locally_owned_indices_blocks();
+	std::vector<dealii::IndexSet> index_sets;
+	if(!single_block)
+		index_sets = assembly_helper.get_locally_owned_indices_blocks();
+	else
+	{
+		index_sets.push_back(assembly_helper.get_locally_owned_indices());
+		index_sets.push_back(IndexSet());
+	}
+
 	const auto& index_set_block_0 = index_sets[0];
 	auto& system_matrix_A = system_matrix.get_A();
 	auto& rhs_scaling_vector_block_0 = rhs_scaling_vector.block(0);

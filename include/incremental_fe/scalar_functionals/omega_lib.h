@@ -1631,8 +1631,6 @@ public:
 	const
 	{
 
-		(void)compute_dq;
-		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
 
 		// start indices for respective quantities
 		const unsigned int i_grad_xi_dot = 0;
@@ -1687,8 +1685,6 @@ public:
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega.reinit(8 + 3*I, 8 + 3*I);
-
 			d2_omega[i_c_f_dot][i_eta_f] = d2_omega[i_eta_f][i_c_f_dot] = -1.0;
 
 			for(unsigned int m = 0; m < 3; ++m)
@@ -1696,6 +1692,22 @@ public:
 				d2_omega[i_grad_xi_dot + m][i_grad_eta_f + m] = d2_omega[i_grad_eta_f + m][i_grad_xi_dot + m] = 1.0;
 				for(unsigned int i = 0; i < I; ++i)
 					d2_omega[i_grad_xi_dot + m][i_grad_eta_i[i] + m] = d2_omega[i_grad_eta_i[i] + m][i_grad_xi_dot + m] = c_i[i]/c_f;
+			}
+
+			if(compute_dq)
+			{
+				for(unsigned int m = 0; m < 3; ++m)
+				{
+					d2_omega[i_grad_xi_dot + m][i_c_f] = (values[i_grad_eta_f + m] - grad_eta[m]) / c_f;
+					for(unsigned int i = 0; i < I; ++i)
+						d2_omega[i_grad_xi_dot + m][i_c_i[i]] = values[i_grad_eta_i[i] + m] / c_f;
+					for(unsigned int i = 0; i < I; ++i)
+					{
+						d2_omega[i_grad_eta_i[i] + m][i_c_f] = -grad_xi_dot[m] * c_i[i]/c_f/c_f;
+						d2_omega[i_grad_eta_i[i] + m][i_c_i[i]] = grad_xi_dot[m] * 1.0/c_f;
+					}
+				}
+
 			}
 		}
 
