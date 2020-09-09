@@ -1034,7 +1034,7 @@ public:
 		{
 			for(unsigned int m = 0; m < e.size(); ++m)
 				e[m] = e_omega[m] + factor * delta_e_omega[m];
-			if(get_J(e) > 0.0)
+			if(get_J(e) > n_0)
 				return factor;
 
 			factor *= 0.5;
@@ -1053,12 +1053,12 @@ public:
  *
  * The integrand is
  *
- * \f$h^\Omega_\rho = \dfrac{\mu}{2} \left[ \mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}J  \right] + \dfrac{\lambda}{2} \left(\mathrm{ln}J\right)^2\f$,
+ * \f$h^\Omega_\rho = \dfrac{\mu}{2} \left[ J^{2/3}_0\mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}(J J_0)  \right] + \dfrac{\lambda}{2} \left[\mathrm{ln}(J J_0)\right]^2\f$,
  *
  * where
  *
  * \f$ \boldsymbol{C} =\boldsymbol{F}^\top \cdot \boldsymbol{F} \f$ is the right Cauchy-Green deformation tensor, \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$,
- * and \f$\mu\f$ and \f$\lambda\f$ Lame's constants.
+ * \f$\mu\f$ and \f$\lambda\f$ Lame's constants, and \f$J_0\f$ a volumetric strain offset between the natural state of the material and the reference state.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0]  \f$F_{xx}\f$ <br>
  * 																					[1]  \f$F_{xy}\f$ <br>
@@ -1087,6 +1087,12 @@ private:
 	 */
 	const double
 	mu;
+
+	/**
+	 * volumetric strain offset \f$J_0\f$
+	 */
+	const double
+	J_0;
 
 	/**
 	 * %Function allowing to scale \f$\lambda\f$ and \f$\mu\f$ in dependence on position (the function must provide with the scaling factor)
@@ -1131,11 +1137,13 @@ public:
 					const double																mu,
 					const dealii::Function<spacedim>&											scaling_function,
 					const double																alpha,
-					set<unsigned int> const*													ignore_dof_indices = nullptr)
+					set<unsigned int> const*													ignore_dof_indices = nullptr,
+					const double																J_0 = 1.0)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiNeoHooke00"),
 	lambda(lambda),
 	mu(mu),
+	J_0(J_0),
 	scaling_function(scaling_function),
 	ignore_dof_indices(ignore_dof_indices)
 	{
@@ -1161,6 +1169,8 @@ public:
 		dealii::Vector<double> F(9);
 		for(unsigned int m = 0; m < 9; ++m)
 			F[m] = values[m];
+
+		const double J_0_23 = pow(J_0, 2.0/3.0);
 
 		const double I_1 = F * F;
 		const double J = get_J(F);
@@ -1188,11 +1198,11 @@ public:
 
 		// compute value of potential
 		if(get<0>(requested_quantities))
-			omega = 0.5 * mu_ * (I_1 - 3.0 - 2.0 * log(J)) + 0.5 * lambda_ * log(J) * log(J);
+			omega = (0.5 * mu_ * (J_0_23 * I_1 - 3.0 - 2.0 * log(J_0 * J)) + 0.5 * lambda_ * log(J * J_0) * log(J * J_0)) / J_0;
 
 		// first derivatives of potential w.r.t. J and I_1
-		const double dpsi_dI_1 = 0.5 * mu_;
-		const double dpsi_dJ = -mu_/J + lambda_ * log(J)/J;
+		const double dpsi_dI_1 = (0.5 * mu_ * J_0_23) / J_0;
+		const double dpsi_dJ = (-mu_/J + lambda_ * log(J * J_0) / J) / J_0;
 
 		// first derivative
 		if(get<1>(requested_quantities))
@@ -1204,7 +1214,7 @@ public:
 		// second derivative
 		if(get<2>(requested_quantities))
 		{
-			const double d2psi_dJ2 = mu_/J/J + lambda_ * (1.0/J/J) * (1.0 - log(J));
+			const double d2psi_dJ2 = (mu_/J/J + lambda_ * (1.0/J/J) * (1.0 - log(J * J_0))) / J_0;
 			for(unsigned int m = 0; m < 9; ++m)
 				for(unsigned int n = 0; n < 9; ++n)
 					d2_omega(m, n) = dpsi_dI_1 * d2I_1(m, n) + dpsi_dJ * d2J_dF2(m, n) + d2psi_dJ2 * dJ_dF[m] * dJ_dF[n];
@@ -1695,6 +1705,860 @@ public:
 	}
 
 };
+
+/**
+ * Class defining chemical potential according to
+ *
+ * \f$h^\Omega_\rho = \psi_0 c^\mathrm{f}\f$,
+ *
+ * where \f$c^\mathrm{f} = \dfrac{J - n_0}{V^\mathrm{f}_\mathrm{m}}\f$, \f$\psi_0\f$, \f$n_0\f$,  \f$V^\mathrm{f}_\mathrm{m}\f$ are material parameters and \f$ J = \det\boldsymbol{F}\f$ is the determinant of the deformation gradient \f$\boldsymbol{F}\f$.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$F_{xx}\f$<br>
+ * 																					[1] \f$F_{xy}\f$<br>
+ * 																					[2] \f$F_{xz}\f$<br>
+ * 																					[3] \f$F_{yx}\f$<br>
+ * 																					[4] \f$F_{yy}\f$<br>
+ * 																					[5] \f$F_{yz}\f$<br>
+ * 																					[6] \f$F_{zx}\f$<br>
+ * 																					[7] \f$F_{zy}\f$<br>
+ * 																					[8] \f$F_{zz}\f$<br>
+ */
+template<unsigned int spacedim>
+class PsiChemical03 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$\psi_0\f$
+	 */
+	const double
+	psi_0;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 */
+	const double
+	V_m_f;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		psi_0					PsiChemical03::psi_0
+	 *
+	 * @param[in]		n_0						PsiChemical03::n_0
+	 *
+	 * @param[in]		V_m_f					PsiChemical03::V_m_f
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiChemical03(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																psi_0,
+					const double																n_0,
+					const double																V_m_f,
+					const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical03"),
+	psi_0(psi_0),
+	n_0(n_0),
+	V_m_f(V_m_f)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m];
+
+	 	// J and derivatives
+		const double J = get_J(F);
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+		}
+
+		if(get<0>(requested_quantities))
+		{
+			omega = psi_0 * ( J - n_0 ) / V_m_f;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				d_omega[m] = psi_0 / V_m_f * dJ_dF[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				for(unsigned int n = 0; n < 9; ++n)
+					d2_omega(m, n) = psi_0 / V_m_f * d2J_dF2(m, n);
+		}
+
+		return false;
+	}
+};
+
+
+/**
+ * Class defining chemical potential of charged species moving in fluid
+ *
+ * \f$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)\f$,
+ *
+ * where \f$\mu_0\f$ is a reference chemical potential, \f$R\f$ the gas constant, \f$T\f$ the temperature,
+ * \f$c\f$ the species concentration, \f$c^\mathrm{f} = \dfrac{J - n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, \f$ J = \det\boldsymbol{F}\f$ the
+ * determinant of the deformation gradient \f$\boldsymbol{F}\f$, and \f$n_0\f$ and \f$V^\mathrm{f}_\mathrm{m}\f$ are constants.
+ *
+ * In order to circumvent numerical problems for low species concentrations, the scalar functional may be regularized according to
+ *
+ * \f$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)\f$,
+ *
+ * where
+ *
+ * \f$ h(x) = \begin{cases}
+ *          x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\
+ *          \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else},
+ *         \end{cases} \f$,
+ *
+ * with \f$\epsilon \ll 1\f$ being a regularization parameter.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$<br>
+ * 																					[1] \f$F_{xx}\f$<br>
+ * 																					[2] \f$F_{xy}\f$<br>
+ * 																					[3] \f$F_{xz}\f$<br>
+ * 																					[4] \f$F_{yx}\f$<br>
+ * 																					[5] \f$F_{yy}\f$<br>
+ * 																					[6] \f$F_{yz}\f$<br>
+ * 																					[7] \f$F_{zx}\f$<br>
+ * 																					[8] \f$F_{zy}\f$<br>
+ * 																					[9] \f$F_{zz}\f$<br>
+ */
+template<unsigned int spacedim>
+class PsiChemical04 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$RT\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$\mu_0\f$
+	 */
+	const double
+	mu_0;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 */
+	const double
+	V_m_f;
+
+	/**
+	 * \f$\epsilon\f$
+	 */
+	const double
+	eps;
+
+	/**
+	 * \f$c_0 / c^\mathrm{f}_0\f$
+	 */
+	const double
+	c_0_c_f_0;
+
+	/**
+	 * \f$\ln(\epsilon)\f$
+	 */
+	const double
+	log_eps;
+
+	/**
+	 * \f$\ln(c_0 / c^\mathrm{f}_0)\f$
+	 */
+	const double
+	log_c_0_c_f_0;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		RT						PsiChemical04::RT
+	 *
+	 * @param[in]		mu_0					PsiChemical04::mu_0
+	 *
+	 * @param[in]		n_0						PsiChemical04::n_0
+	 *
+	 * @param[in]		V_m_f					PsiChemical04::V_m_f
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		eps						PsiChemical04::eps
+	 *
+	 * @param[in]		c_0_c_f_0				PsiChemical04::c_f_c_f_0
+	 */
+	PsiChemical04(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																RT,
+					const double																mu_0,
+					const double																n_0,
+					const double																V_m_f,
+					const double																alpha,
+					const double																eps = 0.0,
+					const double																c_0_c_f_0 = 1.0)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical04"),
+	RT(RT),
+	mu_0(mu_0),
+	n_0(n_0),
+	V_m_f(V_m_f),
+	eps(eps),
+	c_0_c_f_0(c_0_c_f_0),
+	log_eps(log(eps)),
+	log_c_0_c_f_0(log(c_0_c_f_0))
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		const double c = values[0];
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m + 1];
+
+
+	 	// J and derivatives
+		const double J = get_J(F);
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+		}
+
+		const double c_f = (J - n_0) / V_m_f;
+
+		if(c == 0)
+			return true;
+
+		const double log_c_c_f = log(c/c_f);
+
+		const double c_c_0_c_f_0_c_f = (c / c_f) / c_0_c_f_0;
+
+		if(get<0>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+				omega = mu_0 * c + RT * c * (log_c_c_f - 1.0);
+			else
+				omega = (mu_0 + RT * log_c_0_c_f_0) * c + RT * c_f * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps + 1.0 ) - 1.0 );
+
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d_omega[0] = mu_0 + RT * log_c_c_f;
+				for(unsigned m = 0; m < 9; ++m)
+					d_omega[1 + m] = -RT * c/c_f * dJ_dF[m] / V_m_f;
+			}
+			else
+			{
+				d_omega[0] = mu_0 + RT * log_c_0_c_f_0 + RT * c_f / c * c_0_c_f_0 * eps * log_eps;
+				for(unsigned m = 0; m < 9; ++m)
+					d_omega[1 + m] = RT * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps ) - 1.0 ) * dJ_dF[m] / V_m_f;
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d2_omega(0,0) = RT / c;
+				for(unsigned m = 0; m < 9; ++m)
+					for(unsigned n = 0; n < 9; ++n)
+						d2_omega(1 + m,1 + n) = RT * c / c_f / c_f * dJ_dF[m] / V_m_f * dJ_dF[n] / V_m_f - RT * c/c_f * d2J_dF2(m,n) / V_m_f;
+				for(unsigned m = 0; m < 9; ++m)
+					d2_omega(0,1 + m) = d2_omega(1 + m,0) = -RT / c_f  * dJ_dF[m] / V_m_f;
+			}
+			else
+			{
+				d2_omega(0,0) = -RT * c_f / c / c * c_0_c_f_0 * eps * log_eps;
+				for(unsigned m = 0; m < 9; ++m)
+					for(unsigned n = 0; n < 9; ++n)
+						d2_omega(1 + m,1 + n) = -RT * c_0_c_f_0 * eps * log_eps / c_f * dJ_dF[m] / V_m_f * dJ_dF[n] / V_m_f + RT * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps ) - 1.0 ) * d2J_dF2(m,n) / V_m_f;
+				for(unsigned m = 0; m < 9; ++m)
+					d2_omega(0,1 + m) = d2_omega(1 + m,0) = RT * c_0_c_f_0 * eps * log_eps / c * dJ_dF[m] / V_m_f;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+		double max_step = - e_omega[0] / delta_e_omega[0];
+		if(isnan(max_step) || (max_step <= 0.0))
+			return DBL_MAX;
+		else
+			return max_step;
+	}
+
+};
+
+
+/**
+ * Class defining chemical potential of charged species moving in fluid
+ *
+ * \f$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)\f$,
+ *
+ * where \f$\mu_0\f$ is a reference chemical potential, \f$R\f$ the gas constant, \f$T\f$ the temperature,
+ * \f$c\f$ the species concentration, \f$c^\mathrm{f} = \dfrac{1 + \tr{\boldsymbol{\varepsilon}} - n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, \f$ \boldsymbol{\varepsilon}\f$ the
+ * infinitesimal strain tensor, and \f$n_0\f$ and \f$V^\mathrm{f}_\mathrm{m}\f$ are constants.
+ *
+ * In order to circumvent numerical problems for low species concentrations, the scalar functional may be regularized according to
+ *
+ * \f$h^\Omega_\rho = RT c^\mathrm{f} \dfrac{c_0}{c^\mathrm{f}_0} h\left( \dfrac{c c^\mathrm{f}_0}{c^\mathrm{f} c_0} \right)\f$,
+ *
+ * where
+ *
+ * \f$ h(x) = \begin{cases}
+ *          x [ \ln(x)-1] \quad&\mathrm{if}\quad x>\epsilon\\
+ *          \epsilon \{ \ln(\epsilon) [ \ln(x) - \ln(\epsilon) + 1] - 1\} \quad&\mathrm{else},
+ *         \end{cases} \f$,
+ *
+ * with \f$\epsilon \ll 1\f$ being a regularization parameter.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$<br>
+ * 																					[1] \f$\tr{\boldsymbol{\varepsilon}}\f$
+ */
+template<unsigned int spacedim>
+class PsiChemical05 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$RT\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$\mu_0\f$
+	 */
+	const double
+	mu_0;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 */
+	const double
+	V_m_f;
+
+	/**
+	 * \f$\epsilon\f$
+	 */
+	const double
+	eps;
+
+	/**
+	 * \f$c_0 / c^\mathrm{f}_0\f$
+	 */
+	const double
+	c_0_c_f_0;
+
+	/**
+	 * \f$\ln(\epsilon)\f$
+	 */
+	const double
+	log_eps;
+
+	/**
+	 * \f$\ln(c_0 / c^\mathrm{f}_0)\f$
+	 */
+	const double
+	log_c_0_c_f_0;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		RT						PsiChemical05::RT
+	 *
+	 * @param[in]		mu_0					PsiChemical05::mu_0
+	 *
+	 * @param[in]		n_0						PsiChemical05::n_0
+	 *
+	 * @param[in]		V_m_f					PsiChemical05::V_m_f
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 *
+	 * @param[in]		eps						PsiChemical05::eps
+	 *
+	 * @param[in]		c_0_c_f_0				PsiChemical04::c_f_c_f_0
+	 */
+	PsiChemical05(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																RT,
+					const double																mu_0,
+					const double																n_0,
+					const double																V_m_f,
+					const double																alpha,
+					const double																eps = 0.0,
+					const double																c_0_c_f_0 = 1.0)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical05"),
+	RT(RT),
+	mu_0(mu_0),
+	n_0(n_0),
+	V_m_f(V_m_f),
+	eps(eps),
+	c_0_c_f_0(c_0_c_f_0),
+	log_eps(log(eps)),
+	log_c_0_c_f_0(log(c_0_c_f_0))
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		const double c = values[0];
+		const double c_f = (1 + values[1] - n_0) / V_m_f;
+
+		if(c == 0)
+			return true;
+
+		const double log_c_c_f = log(c/c_f);
+
+		const double c_c_0_c_f_0_c_f = (c / c_f) / c_0_c_f_0;
+
+		if(get<0>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				omega = mu_0 * c + RT * c * (log_c_c_f - 1.0);
+			}
+			else
+			{
+				omega = (mu_0 + RT * log_c_0_c_f_0) * c + RT * c_f * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps + 1.0 ) - 1.0 );
+			}
+
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d_omega[0] = mu_0 + RT * log_c_c_f;
+				d_omega[1] = -RT * c/c_f * 1 / V_m_f;
+			}
+			else
+			{
+				d_omega[0] = mu_0 + RT * log_c_0_c_f_0 + RT * c_f / c * c_0_c_f_0 * eps * log_eps;
+				d_omega[1] = RT * c_0_c_f_0 * eps * ( log_eps * ( log_c_c_f - log_c_0_c_f_0 - log_eps ) - 1.0 ) / V_m_f;
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			if(c_c_0_c_f_0_c_f > eps)
+			{
+				d2_omega(0,0) = RT / c;
+				d2_omega(1,1) = RT * c / c_f / c_f / V_m_f / V_m_f;
+				d2_omega(0,1) = d2_omega(1,0) = -RT / c_f / V_m_f;
+			}
+			else
+			{
+				d2_omega(0,0) = -RT * c_f / c / c * c_0_c_f_0 * eps * log_eps;
+				d2_omega(1,1) = -RT * c_0_c_f_0 * eps * log_eps / c_f / V_m_f / V_m_f;
+				d2_omega(0,1) = d2_omega(1,0) = RT * c_0_c_f_0 * eps * log_eps / c / V_m_f;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * see ScalarFunctional<spacedim, spacedim>::get_maximum_step
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				/*hidden_vars*/,
+						const dealii::Point<spacedim>& 				/*x*/)
+	const
+	{
+		double max_step = - e_omega[0] / delta_e_omega[0];
+		if(isnan(max_step) || (max_step <= 0.0))
+			return DBL_MAX;
+		else
+			return max_step;
+	}
+
+};
+
+
+/**
+ * Class defining the free energy of mixing between solvent and polymeric backbone for a hydrogel
+ *
+ * \f$h^\Omega_\rho = \dfrac{RT}{V^\mathrm{f}_\mathrm{m}} \left[ (J-n_0)\ln\left( 1-\dfrac{n_0}{J} \right) - \chi n^2_0 \dfrac{1}{J}  \right]\f$,
+ *
+ * where \f$R\f$ is the gas constant, \f$T\f$ the absolute temperature, \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of solvent, \f$n_0\f$ the initial volume fraction
+ * of the polymer, \f$\chi\f$ a material parameter, and \f$J = \det\boldsymbol{F}\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$F_{xx}\f$<br>
+ * 																					[1] \f$F_{xy}\f$<br>
+ * 																					[2] \f$F_{xz}\f$<br>
+ * 																					[3] \f$F_{yx}\f$<br>
+ * 																					[4] \f$F_{yy}\f$<br>
+ * 																					[5] \f$F_{yz}\f$<br>
+ * 																					[6] \f$F_{zx}\f$<br>
+ * 																					[7] \f$F_{zy}\f$<br>
+ * 																					[8] \f$F_{zz}\f$<br>
+*/
+template<unsigned int spacedim>
+class PsiChemical06 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$R T\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * \f$V^\mathrm{f}_\mathrm{m}\f$
+	 */
+	const double
+	V_m_f;
+
+	/**
+	 * \f$\chi\f$
+	 */
+	const double
+	chi;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		RT						PsiChemical06::RT
+	 *
+	 * @param[in]		n_0						PsiChemical06::n_0
+	 *
+	 * @param[in]		V_m_f					PsiChemical06::V_m_f
+	 *
+	 * @param[in]		chi						PsiChemical06::chi
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiChemical06(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																RT,
+					const double																n_0,
+					const double																V_m_f,
+					const double																chi,
+					const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical06"),
+	RT(RT),
+	n_0(n_0),
+	V_m_f(V_m_f),
+	chi(chi)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		dealii::Vector<double> F(9);
+		for(unsigned int m = 0; m < 9; ++m)
+			F[m] = values[m];
+
+	 	// J and derivatives
+		const double J = get_J(F);
+		Assert(J > 0, dealii::ExcMessage("The determinant of the deformation gradient must be greater than zero"));
+		dealii::Vector<double> dJ_dF(9);
+		dealii::FullMatrix<double> d2J_dF2;
+		get_dJ_dF(F, dJ_dF);
+		const double domega_dJ = RT / V_m_f * ( log(1 - n_0 / J) + n_0 / J + chi * n_0 * n_0 / J / J );
+		double d2omega_dJ2;
+		if(get<2>(requested_quantities))
+		{
+			d2J_dF2.reinit(9,9);
+			get_d2J_dF2(F, d2J_dF2);
+			d2omega_dJ2 = RT / V_m_f * n_0 / J / J * ( J / (J - n_0) - 1.0 - 2.0 * chi * n_0 / J );
+		}
+
+		if(get<0>(requested_quantities))
+		{
+			omega = RT * (J - n_0) / V_m_f * log(1 - n_0 / J) - RT * chi * n_0 * n_0 / V_m_f / J;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				d_omega[m] = domega_dJ * dJ_dF[m];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 9; ++m)
+				for(unsigned int n = 0; n < 9; ++n)
+					d2_omega(m, n) = domega_dJ * d2J_dF2(m,n) + d2omega_dJ2 * dJ_dF[m] * dJ_dF[n];
+		}
+
+		return false;
+	}
+
+};
+
+
+/**
+ * Class defining the free energy of mixing between solvent and polymeric backbone for a hydrogel
+ *
+ * \f$h^\Omega_\rho = \dfrac{RT}{V^\mathrm{f}_\mathrm{m}} \left[ (J-n_0)\ln\left( 1-\dfrac{n_0}{J} \right) - \chi n^2_0 \dfrac{1}{J}  \right]\f$,
+ *
+ * where \f$R\f$ is the gas constant, \f$T\f$ the absolute temperature, \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of solvent, \f$n_0\f$ the initial volume fraction
+ * of the polymer, \f$\chi\f$ a material parameter, and \f$J = c^\mathrm{f} V^\mathrm{f}_\mathrm{m} + n_0\f$ the determinant of the deformation gradient expressed in terms of the solvent concentration \f$c^\mathrm{f}\f$.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c^\mathrm{f}\f$
+*/
+template<unsigned int spacedim>
+class PsiChemical07 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * \f$R T\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$n_0\f$
+	 */
+	const double
+	n_0;
+
+	/**
+	 * \f$V^\mathrm{f}_\mathrm{m}\f$
+	 */
+	const double
+	V_m_f;
+
+	/**
+	 * \f$\chi\f$
+	 */
+	const double
+	chi;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		RT						PsiChemical07::RT
+	 *
+	 * @param[in]		n_0						PsiChemical07::n_0
+	 *
+	 * @param[in]		V_m_f					PsiChemical07::V_m_f
+	 *
+	 * @param[in]		chi						PsiChemical07::chi
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiChemical07(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+					const std::set<dealii::types::material_id>									domain_of_integration,
+					const dealii::Quadrature<spacedim>											quadrature,
+					GlobalDataIncrementalFE<spacedim>&											global_data,
+					const double																RT,
+					const double																n_0,
+					const double																V_m_f,
+					const double																chi,
+					const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical07"),
+	RT(RT),
+	n_0(n_0),
+	V_m_f(V_m_f),
+	chi(chi)
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+		const double J = V_m_f * values[0] + n_0;
+
+		if(get<0>(requested_quantities))
+		{
+			omega = RT * (J - n_0) / V_m_f * log(1 - n_0 / J) - RT * chi * n_0 * n_0 / V_m_f / J;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[0] = RT * ( log(1 - n_0 / J) + n_0 / J + chi * n_0 * n_0 / J / J );
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega(0,0) = V_m_f * RT * n_0 / J / J * ( J / (J - n_0) - 1.0 - 2.0 * chi * n_0 / J );
+		}
+
+		return false;
+	}
+
+};
+
 
 
 /**

@@ -1,0 +1,25 @@
+### 2D-Case ###
+
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000001
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000003
+                                                                                                         Value of integrand = -1.22701134
+FINISHED CHECKING DERIVATIVES
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000017
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000033
+                                                                                                         Value of integrand =  1.29626262
+FINISHED CHECKING DERIVATIVES
+
+### 3D-Case ###
+
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000001
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000003
+                                                                                                         Value of integrand = -1.22701134
+FINISHED CHECKING DERIVATIVES
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000017
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000033
+                                                                                                         Value of integrand =  1.29626262
+FINISHED CHECKING DERIVATIVES
