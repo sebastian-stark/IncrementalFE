@@ -26,6 +26,7 @@
 #include <deal.II/base/tensor.h>
 #include <deal.II/base/symmetric_tensor.h>
 #include <deal.II/lac/vector.h>
+#include <deal.II/lac/lapack_full_matrix.h>
 
 namespace incrementalFE
 {
@@ -1219,7 +1220,6 @@ public:
 				for(unsigned int n = 0; n < 9; ++n)
 					d2_omega(m, n) = dpsi_dI_1 * d2I_1(m, n) + dpsi_dJ * d2J_dF2(m, n) + d2psi_dJ2 * dJ_dF[m] * dJ_dF[n];
 		}
-
 		return false;
 	}
 
@@ -1260,7 +1260,7 @@ public:
 							dealii::FullMatrix<double>&										K_cell,
 							dealii::Vector<double>&											f_cell,
 							const std::vector<unsigned int>&								scalar_functional_indices_to_cell_shapefuns,
-							const std::vector<unsigned int>&								scalar_functional_indices_to_independent_scalar_indices)
+							const std::vector<unsigned int>&								/*scalar_functional_indices_to_independent_scalar_indices*/)
 	const
 	{
 		if(ignore_dof_indices != nullptr)
@@ -1270,7 +1270,6 @@ public:
 			domain_cell.get_dof_indices(dof_indices_local_global);
 			for(unsigned int shapefun = 0; shapefun < scalar_functional_indices_to_cell_shapefuns.size(); ++shapefun)
 			{
-				const unsigned int global_dof_index = dof_indices_local_global[scalar_functional_indices_to_cell_shapefuns[shapefun]];
 				if(ignore_dof_indices->find(dof_indices_local_global[scalar_functional_indices_to_cell_shapefuns[shapefun]]) != ignore_dof_indices->end())
 				{
 					for(unsigned int n = 0; n < K_cell.n(); ++n)
@@ -1673,6 +1672,7 @@ public:
 				d2_omega(1,1) = -RT * c_0_c_f_0 * eps * log_eps / c_f;
 				d2_omega(0,1) = d2_omega(1,0) = RT * c_0_c_f_0 * eps * log_eps / c;
 			}
+
 		}
 
 		return false;
@@ -2055,6 +2055,20 @@ public:
 				for(unsigned m = 0; m < 9; ++m)
 					d2_omega(0,1 + m) = d2_omega(1 + m,0) = RT * c_0_c_f_0 * eps * log_eps / c * dJ_dF[m] / V_m_f;
 			}
+
+//			dealii::LAPACKFullMatrix<double> d2_omega_lapack(d2_omega.m());
+//			d2_omega_lapack = d2_omega;
+//			d2_omega_lapack.compute_eigenvalues();
+//			for(unsigned int m = 0; m < d2_omega.m(); ++m)
+//			{
+//				cout << d2_omega_lapack.eigenvalue(m).real() << endl;
+/*				if(d2_omega_lapack.eigenvalue(m).real() < 0.0)
+				{
+					cout << "FAILED" << endl;
+					AssertThrow(false, dealii::ExcMessage("FAILED"));
+				}*/
+//			}
+//			cout << endl;
 		}
 
 		return false;
@@ -2412,7 +2426,7 @@ public:
 		dealii::FullMatrix<double> d2J_dF2;
 		get_dJ_dF(F, dJ_dF);
 		const double domega_dJ = RT / V_m_f * ( log(1 - n_0 / J) + n_0 / J + chi * n_0 * n_0 / J / J );
-		double d2omega_dJ2;
+		double d2omega_dJ2 = 0.0;
 		if(get<2>(requested_quantities))
 		{
 			d2J_dF2.reinit(9,9);

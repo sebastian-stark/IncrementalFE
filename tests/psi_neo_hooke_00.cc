@@ -79,8 +79,7 @@ check()
 	psi_neo_hooke_00.compare_derivatives_with_numerical_derivatives(e_omega,
 																	e_omega_ref_sets,
 																	hidden_vars,
-																	x,
-																	"derivatives.dat");
+																	x);
 }
 
 

@@ -265,5 +265,5 @@ GlobalDataIncrementalFE<spacedim>::set_scale_residual(const bool scale_residual)
 }
 
 
-template class GlobalDataIncrementalFE<2>;
-template class GlobalDataIncrementalFE<3>;
+template class incrementalFE::GlobalDataIncrementalFE<2>;
+template class incrementalFE::GlobalDataIncrementalFE<3>;
