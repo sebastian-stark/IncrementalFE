@@ -31,7 +31,7 @@ namespace incrementalFE
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho =	\dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} \f$,
+ * \f$ \omega^\Omega =	\dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} \f$,
  *
  * where \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
  *
@@ -137,7 +137,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho =	-\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} \f$,
+ * \f$ \omega^\Omega =	-\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} \f$,
  *
  * where \f$c\f$ is the species concentration and \f$\boldsymbol{E}\f$ the driving force vector for
  * the corresponding species flux.
@@ -245,7 +245,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho = -\dot{c}\eta  \f$,
+ * \f$ \omega^\Omega = -\dot{c}\eta  \f$,
  *
  * where \f$c\f$ is a species concentration and \f$\eta\f$ the corresponding potential.
  *
@@ -326,7 +326,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E}  \f$,
+ * \f$ \omega^\Omega = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E}  \f$,
  *
  * where \f$\boldsymbol{D}\f$ and \f$\boldsymbol{E}\f$ are conjugate fields.
  *
@@ -420,7 +420,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho =	-\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) \f$
+ * \f$ \omega^\Omega =	-\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) \f$
  *
  * where \f$\mu\f$ is a Lagrangian multiplier, \f$c\f$ is the species concentration and \f$\dot{\boldsymbol{I}}\f$ the corresponding flux.
  *
@@ -505,7 +505,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	-\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
+ * \f$ \omega^\Sigma =	-\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
  *
  * where \f$\mu\f$ is a Lagrangian multiplier, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
@@ -599,7 +599,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	\bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
+ * \f$ \omega^\Sigma =	\bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} \f$
  *
  * where \f$\bar\mu\f$ is a prescribed potential, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
@@ -698,7 +698,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	-\bar{\boldsymbol{f}}(t) \dot{\boldsymbol{u}} \f$
+ * \f$ \omega^\Sigma =	-\bar{\boldsymbol{f}}(t) \dot{\boldsymbol{u}} \f$
  *
  * where \f$\bar{\boldsymbol{f}}\f$ is the prescribed traction, and \f$\dot{\boldsymbol{u}}\f$ the corresponding displacement.
  *
@@ -797,7 +797,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 \f$
+ * \f$ \omega^\Sigma =	1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 \f$
  *
  * where \f$D\f$ is a dissipation constant, and \f$\dot{\boldsymbol{I}}\f$ a flux.
  *
@@ -905,7 +905,7 @@ public:
 /**
  * Class defining an interface related Butler-Volmer type scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	-I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] \f$
+ * \f$ \omega^\Sigma =	-I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] \f$
  *
  * where \f$I_0\f$ is related to the exchange current density \f$i_0\f$ by \f$I_0 = i_0 \cdot RT / F \f$, \f$\beta\f$ is the symmetry factor, and \f$\Delta \eta\f$ the thermodynamic driving force.
  *
@@ -1076,7 +1076,7 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
- * \f$ h^\Sigma_\tau =	\boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) \f$
+ * \f$ \omega^\Sigma =	\boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) \f$
  *
  * where \f$\boldsymbol{t}\f$ is a Lagrangian multiplier, \f$\boldsymbol{u}^0\f$ the displacement on the 0 side of the interface, and \f$\boldsymbol{u}^1\f$ the displacement on the 1 side of the interface.
  *
@@ -1201,7 +1201,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.
  *
- * \f$ h^\Omega_\rho =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
+ * \f$ \omega^\Omega =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
  *
  * where \f$c\f$ is the species concentration,<br>
  * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
@@ -1356,7 +1356,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.
  *
- * \f$ h^\Omega_\rho =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
+ * \f$ \omega^\Omega =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
  *
  * where \f$c\f$ is the species concentration,<br>
  * \f$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, with \f$n_0\f$ being a material parameter,<br>
@@ -1522,7 +1522,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of fluid through a solid skeleton, where ions flow in addition through the fluid.
  *
- * \f$ h^\Omega_\rho =	-\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}}  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ * \f$ \omega^\Omega =	-\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}}  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
  *
  * where \f$c^\mathrm{f}\f$ is the fluid concentration,<br>
  * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
@@ -1716,7 +1716,7 @@ public:
 /**
  * Class defining Lagrangian multiplier term for equilibrium condition in the case that fluid flows without dissipation, where ions flow in addition with dissipation through the fluid.
  *
- * \f$ h^\Omega_\rho =	\nabla \dot{\xi} \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ * \f$ \omega^\Omega =	\nabla \dot{\xi} \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
  *
  * where \f$\xi\f$ is a scalar potential,<br>
  * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
@@ -1885,7 +1885,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of fluid through a solid skeleton, where ions flow in addition through the fluid.
  *
- * \f$ h^\Omega_\rho =	-\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}}  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ * \f$ \omega^\Omega =	-\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}}  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
  *
  * where \f$c^\mathrm{f} = \dfrac{J - n_0}{V^\mathrm{f}_\mathrm{m}}\f$ is the fluid concentration, with \f$ n_0\f$ being a material parameter.<br>
  * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
@@ -2107,10 +2107,10 @@ public:
 /**
  * Class defining Lagrangian multiplier term for equilibrium condition in the case that fluid flows without dissipation, where ions flow in addition with dissipation through the fluid.
  *
- * \f$ h^\Omega_\rho =	\nabla \dot{\xi} \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ * \f$ \omega^\Omega =	\nabla \dot{\xi} \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
  *
  * where \f$\xi\f$ is a scalar potential,<br>
- * \f$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration with \f$J=\det\boldsymbol{F}\f$ being the determinant of the deformation gradient  \f$\boldsymbol{F}\f$ and \f$n_0\f$ and \f$V^_\mathrm{f}_\mathrm{m}\f$ being parameters,<br>
+ * \f$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration with \f$J=\det\boldsymbol{F}\f$ being the determinant of the deformation gradient  \f$\boldsymbol{F}\f$ and \f$n_0\f$ and \f$V^\mathrm{f}_\mathrm{m}\f$ being parameters,<br>
  * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
  * \f$\eta^\mathrm{f}\f$ is the fluid potential,<br>
  * and \f$\eta^i\f$ are the ion potentials
@@ -2311,7 +2311,7 @@ public:
 /**
  * Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
  *
- * \f$ h^\Sigma_\tau =	-\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else}  \end{cases} \f$
+ * \f$ \omega^\Sigma =	-\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else}  \end{cases} \f$
  *
  * where \f$\eta^\mathrm{int}\f$ is the electrochemical potential in the interior of the domain,<br>
  * \f$F\f$ is Faraday's constant,<br>
@@ -2478,7 +2478,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
+ * \f$ \omega^\Omega =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
  *
  * where \f$\boldsymbol{d} = -\dfrac{1}{2}\left( \boldsymbol{Q}^{-1} \cdot \dot{\boldsymbol{Q}} + \dot{\boldsymbol{Q}} \cdot \boldsymbol{Q}^{-1} \right)\f$ is the stretching associated with the
  * symmetric right plastic stretch tensor \f$\boldsymbol{Q}^{-1}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
@@ -2704,7 +2704,7 @@ public:
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$ h^\Omega_\rho =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
+ * \f$ \omega^\Omega =	\dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n \f$,
  *
  * where \f$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \dot{\boldsymbol{F}} + \dot{\boldsymbol{F}} \cdot \boldsymbol{F}^{-1} \right)\f$ is the stretching associated with the
  * deformation gradient \f$\boldsymbol{F}\f$, and \f$A\f$ and \f$n\f$ are material parameters.
@@ -3050,6 +3050,531 @@ public:
 		return factor;
 	}
 
+};
+
+/**
+ * Class defining Lagrangian multiplier term coupling fluid velocity to fluid flux.
+ *
+ * \f$ \omega^\Omega =	\boldsymbol{t} \cdot \left( \boldsymbol{v} - \dot{\boldsymbol{u}} - \dfrac{1}{c} \boldsymbol{F}\cdot \boldsymbol{I} \right)\f$,
+ *
+ * where \f$t\f$ is the Lagrangian multiplier,<br>
+ * \f$\boldsymbol{v}\f$ the fluid velocity,<br>
+ * \f$\boldsymbol{u}\f$ the velocity of the moving fictitious skeleton,<br>
+ * \f$c\f$ the fluid concentration,<br>
+ * \f$\boldsymbol{F}\f$ the deformation gradient related to the motion of the fictitious skeleton,<br>
+ * and \f$\boldsymbol{I}\f$ is the fluid flux.
+ *
+ * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{u}_x\f$<br>
+ * 																				[1]	 \f$\dot{u}_y\f$<br>
+ * 																				[2]	 \f$\dot{u}_z\f$<br>
+ *																				[3]  \f$v_x\f$<br>
+ * 																				[4]  \f$v_y\f$<br>
+ * 																				[5]  \f$v_z\f$<br>
+ * 																				[6]  \f$I_x\f$<br>
+ * 																				[7]  \f$I_y\f$<br>
+ * 																				[8]  \f$I_z\f$<br>
+ * 																				[9]	 \f$t_x\f$<br>
+ * 																				[10] \f$t_y\f$<br>
+ * 																				[11] \f$t_z\f$<br>
+ * 																				[12] \f$c\f$<br>
+ * 																				[13] \f$F_{xx}\f$<br>
+ * 																				[14] \f$F_{xy}\f$<br>
+ * 																				[15] \f$F_{xz}\f$<br>
+ * 																				[16] \f$F_{yx}\f$<br>
+ * 																				[17] \f$F_{yy}\f$<br>
+ * 																				[18] \f$F_{yz}\f$<br>
+ * 																				[19] \f$F_{zx}\f$<br>
+ * 																				[20] \f$F_{zy}\f$<br>
+ * 																				[21] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaVelocityFlux00 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaVelocityFlux00(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 3, 6, 3, 10, method, alpha, "OmegaVelocityFlux00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		(void)compute_dq;
+		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
+
+		// start indices for respective quantities
+		const unsigned int i_u_dot = 0;
+		const unsigned int i_v = 3;
+		const unsigned int i_I = 6;
+		const unsigned int i_t = 9;
+		const unsigned int i_c = 12;
+		const unsigned int i_F = 13;
+
+		dealii::Tensor<1,3> u_dot, v, I, t_;
+		dealii::Tensor<2,3> F;
+		for(unsigned int i = 0; i < 3; ++i)
+		{
+			u_dot[i] = values[i_u_dot + i];
+			v[i] = values[i_v + i];
+			I[i] = values[i_I + i];
+			t_[i] = values[i_t + i];
+		}
+		const double c = values[i_c];
+		for(unsigned int i = 0; i < 3; ++i)
+			for(unsigned int j = 0; j < 3; ++j)
+				F[i][j] = values[i_F + i * 3 + j];
+
+		dealii::Tensor<1,3> c_F_I = 1.0/c * F * I;
+		dealii::Tensor<1,3> c_t_F = 1.0/c * transpose(F) * t_;
+
+		if(get<0>(requested_quantities))
+		{
+			omega = t_ * (v - u_dot - c_F_I);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 3; ++i)
+			{
+				d_omega[i_u_dot + i] = -t_[i];
+				d_omega[i_v + i] = t_[i];
+				d_omega[i_I + i] = -c_t_F[i];
+				d_omega[i_t + i] = (v - u_dot - c_F_I)[i];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 3; ++i)
+			{
+				d2_omega[i_u_dot + i][i_t + i] = d2_omega[i_t + i][i_u_dot + i] = -1.0;
+				d2_omega[i_v + i][i_t + i] = d2_omega[i_t + i][i_v + i] = 1.0;
+				for(unsigned int j = 0; j < 3; ++j)
+					d2_omega[i_I + i][i_t + j] = d2_omega[i_t + j][i_I + i] = -1.0 / c * F[j][i];
+			}
+		}
+
+		return false;
+
+	}
+};
+
+
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$ \omega^\Omega =	\dfrac{J \eta}{2} (\boldsymbol{d}:\boldsymbol{d}) \f$,
+ *
+ * where \f$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{v} + \nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1} \right)\f$ is the stretching,
+ * \f$\boldsymbol{F}\f$ is the deformation gradient associated with the background solid skeleton, \f$eta\f$ is the viscosity, and \f$J = \det\boldsymbol{F}\f$.
+ *
+ * This describes a viscous fluid.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$v_{x,x}\f$<br>
+ * 																				[1]  \f$v_{x,y}\f$<br>
+ * 																				[2]  \f$v_{x,z}\f$<br>
+ * 																				[3]  \f$v_{y,x}\f$<br>
+ * 																				[4]  \f$v_{y,y}\f$<br>
+ * 																				[5]  \f$v_{y,z}\f$<br>
+ * 																				[6]  \f$v_{z,x}\f$<br>
+ * 																				[7]  \f$v_{z,y}\f$<br>
+ * 																				[8]  \f$v_{z,z}\f$<br>
+ * 																				[9]  \f$F_{xx}\f$<br>
+ * 																				[10] \f$F_{xy}\f$<br>
+ * 																				[11] \f$F_{xz}\f$<br>
+ * 																				[12] \f$F_{yx}\f$<br>
+ * 																				[13] \f$F_{yy}\f$<br>
+ * 																				[14] \f$F_{yz}\f$<br>
+ * 																				[15] \f$F_{zx}\f$<br>
+ * 																				[16] \f$F_{zy}\f$<br>
+ * 																				[17] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaViscousDissipation02 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * material parameter
+	 */
+	const double
+	eta;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		eta						OmegaViscousDissipation01::eta
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaViscousDissipation02(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																eta,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 0, 9, 0, 9, method, alpha, "OmegaViscousDissipation02"),
+	eta(eta)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+		(void)compute_dq;
+		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
+
+		dealii::Tensor<2,3> grad_ref_v, F, F_inv, C_inv, grad_v, delta;
+		for(unsigned int r = 0; r < 3; ++r)
+		{
+			for(unsigned int S = 0; S < 3; ++S)
+			{
+				grad_ref_v[r][S] = values[3 * r + S];
+				F[r][S] = values[9 + 3 * r + S];
+			}
+		}
+		F_inv = invert(F);
+		C_inv = F_inv * transpose(F_inv);
+		grad_v = grad_ref_v * F_inv;
+		delta[0][0] = delta[1][1] = delta[2][2] = 1.0;
+		const double J = determinant(F);
+
+		if(get<0>(requested_quantities))
+		{
+			omega = 0.5 * J * eta * ( trace(grad_v * transpose(grad_v)) + trace(grad_v * grad_v) );
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			dealii::Tensor<2,3> T;
+			T = J * eta * (grad_v + transpose(grad_v)) * transpose(F_inv);
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int S = 0; S < 3; ++S)
+					d_omega[r * 3 + S] = T[r][S];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int S = 0; S < 3; ++S)
+					for(unsigned int p = 0; p < 3; ++p)
+						for(unsigned int Q = 0; Q < 3; ++Q)
+							d2_omega(r * 3 + S, p * 3 + Q) = J * eta * (delta[r][p] * C_inv[S][Q] + F_inv[Q][r] * F_inv[S][p]);
+		}
+
+		return false;
+	}
+};
+
+
+/**
+ * Class defining a domain related scalar functional  constraining the tangential relative velocity between a fluid and a solid surface to zero
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{u}_{x}\f$<br>
+ * 																				[1]  \f$\dot{u}_{y}\f$<br>
+ * 																				[2]  \f$v_{x}\f$<br>
+ * 																				[3]  \f$v_{y}\f$<br>
+ * 																				[4]  \f$\lambda\f$<br>
+ * 																				[5]  \f$F_{xx}\f$<br>
+ * 																				[6]  \f$F_{xy}\f$<br>
+ * 																				[7]  \f$F_{yx}\f$<br>
+ * 																				[8]  \f$F_{yy}\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaZeroTangentialFlux2D00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaZeroTangentialFlux2D00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const unsigned int																method,
+								const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 2, 2, 1, 4, method, alpha, "OmegaZeroTangentialFlux2D00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	n,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+		(void)compute_dq;
+		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
+		Assert(spacedim == 2, dealii::ExcMessage("This is currently only implemented in two dimensions!"));
+
+		const double dv_0 = values[0] - values[2];
+		const double dv_1 = values[1] - values[3];
+		const double lambda = values[4];
+
+		dealii::Tensor<1, spacedim> n_, t_;
+		dealii::Tensor<2, spacedim> F;
+		F[0][0] = values[5];
+		F[0][1] = values[6];
+		F[1][0] = values[7];
+		F[1][1] = values[8];
+		n_ = transpose(invert(F)) * n;
+		n_ *= 1.0 / sqrt(n_ * n_);
+		t_[0] = n_[1];
+		t_[1] = -n_[0];
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = lambda * ( t_[0] * dv_0 + t_[1] * dv_1 );
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_sigma[0] = lambda * t_[0];
+			d_sigma[1] = lambda * t_[1];
+			d_sigma[2] = -lambda * t_[0];
+			d_sigma[3] = -lambda * t_[1];
+			d_sigma[4] = t_[0] * dv_0 + t_[1] * dv_1;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma(0,4) = d2_sigma(4,0) = t_[0];
+			d2_sigma(1,4) = d2_sigma(4,1) = t_[1];
+			d2_sigma(2,4) = d2_sigma(4,2) = -t_[0];
+			d2_sigma(3,4) = d2_sigma(4,3) = -t_[1];
+		}
+
+		return false;
+	}
+};
+
+/**
+ * Class defining the following functions
+ *
+ * \f$ \omega^\mathrm{C} = -\dot{\bar{J}}\varphi\f$ for prescribed current loading (loading type J),
+ * \f$ \omega^\mathrm{C} = -\dot{J}(\varphi - \bar{\varphi})\f$ for prescribed voltage loading (loading type V),
+ * \f$ \omega^\mathrm{C} = - \dfrac{1}{2 R^\mathrm{el}} \varphi^2\f$ for discharging through electrical resistance \f$R^\mathrm{el}\f$ (loading type R),
+ *
+ * The loading type can be changed at any time by changing OmegaElectricalLoading::loading_type.
+ *
+ * Similarly, the prescribed current, the prescribed voltage, and the electrical resistance can be changed at any time by assigning the respective variables
+ * OmegaElectricalLoading::j_bar, OmegaElectricalLoading::phi, and OmegaElectricalLoading::R_el.
+ *
+ * Ordering of quantities in ScalarFunctional<0, spacedim>::C :<br>	[0]  \f$J\f$<br>
+ * 																	[1]  \f$\varphi\f$
+ */
+template<unsigned int spacedim>
+class OmegaElectricalLoading : public incrementalFE::Omega<0, spacedim>
+{
+
+public:
+
+	/**
+	 * electrical current if loading type J
+	 */
+	double
+	j_bar = 0.0;
+
+	/**
+	 * prescribed voltage if loading type V
+	 */
+	double
+	phi = 0.0;
+
+	/**
+	 * prescribed resistance if loading type R
+	 */
+	double
+	R_el = 0.0;
+
+	/**
+	 * 0 : prescribed current		(loading type J)
+	 * 1 : prescribed voltage		(loading type V)
+	 * 2 : prescribed resistance	(loading type R)
+	 */
+	unsigned int
+	loading_type = 0;
+
+	/**
+	 * constructor
+	 *
+	 * @param[in]		C						TotalPotentialContribution::C
+	 *
+	 * @param[in]		global_data				Omega<0, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<0, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<0, spacedim>::alpha
+	 */
+	OmegaElectricalLoading(	const std::vector<const dealii::GalerkinTools::IndependentField<0, spacedim>*>	C,
+							GlobalDataIncrementalFE<spacedim>&												global_data,
+							const unsigned int																method,
+							const double																	alpha)
+	:
+	Omega<0, spacedim>(C, global_data, 1, 0, 1, 0, method, alpha, "OmegaElectricalLoading")
+	{
+	}
+
+	bool get_values_and_derivatives(const dealii::Vector<double>& 		values,
+									const double						/*t*/,
+									double&								omega,
+									dealii::Vector<double>&				d_omega,
+									dealii::FullMatrix<double>&			d2_omega,
+									const std::tuple<bool, bool, bool>	requested_quantities,
+									const bool							/*compute_d2q*/)
+	const
+	{
+		const double j_ap = values[0];
+		const double phi_ap = values[1];
+
+		if(loading_type == 0)
+		{
+			if(get<0>(requested_quantities))
+				omega = -j_bar * phi_ap;
+
+			if(get<1>(requested_quantities))
+			{
+				d_omega[0] = 0.0;
+				d_omega[1] = -j_bar;
+			}
+
+			if(get<2>(requested_quantities))
+			{
+				d2_omega(0,0) = 0.0;
+				d2_omega(1,1) = 0.0;
+				d2_omega(0,1) = d2_omega(1,0) = 0.0;
+			}
+		}
+		else if(loading_type == 1)
+		{
+			if(get<0>(requested_quantities))
+				omega = -j_ap * (phi_ap - phi);
+
+			if(get<1>(requested_quantities))
+			{
+				d_omega[0] = -(phi_ap - phi);
+				d_omega[1] = -j_ap;
+			}
+
+			if(get<2>(requested_quantities))
+			{
+				d2_omega(0,0) = 0.0;
+				d2_omega(1,1) = 0.0;
+				d2_omega(0,1) = d2_omega(1,0) = -1.0;
+			}
+		}
+		else if(loading_type == 2)
+		{
+			if(get<0>(requested_quantities))
+				omega = -0.5 / R_el * phi_ap * phi_ap;
+
+			if(get<1>(requested_quantities))
+			{
+				d_omega[0] = 0.0;
+				d_omega[1] = -1.0 / R_el * phi_ap;
+			}
+
+			if(get<2>(requested_quantities))
+			{
+				d2_omega(0,0) = 0.0;
+				d2_omega(1,1) = -1.0 / R_el;
+				d2_omega(0,1) = d2_omega(1,0) = 0.0;
+			}
+		}
+		else
+		{
+			Assert(false, dealii::ExcMessage("Unknown loading type!"));
+		}
+
+		return false;
+	}
 };
 
 }

@@ -27,16 +27,36 @@ Collaboration diagram for incremental\+FE\+::Constraints$<$ spacedim $>$\+:\nopa
 \item 
 \mbox{\hyperlink{classincremental_f_e_1_1_constraints_ab77495a668ae8925bd8095c2c80a8624}{$\sim$\+Constraints}} ()
 \item 
-void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}{add\+\_\+dirichlet\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&dirichlet\+\_\+constraint)
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a175a510cdecac4710d203eaf495b9af1}{add\+\_\+dirichlet\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&dirichlet\+\_\+constraint, const double eval\+\_\+time=1.\+0)
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a7cfbc9db3f165af1277b5652ca9e8a35}{add\+\_\+point\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim, spacedim $>$ \&point\+\_\+constraint, const double eval\+\_\+time=1.\+0)
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a1c76efebcd160d921d0b34d7ee11ec87}{add\+\_\+point\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim-\/1, spacedim $>$ \&point\+\_\+constraint, const double eval\+\_\+time=1.\+0)
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a24947a8db7f56ab508d5dacb263b162c}{add\+\_\+point\+\_\+constraint}} (const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ 0, spacedim $>$ \&point\+\_\+constraint, const double eval\+\_\+time=1.\+0)
 \item 
 const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}{get\+\_\+dirichlet\+\_\+constraints}} () const
 \item 
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim, spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a0816d66cd0cd61581ccc56352a2019a1}{get\+\_\+point\+\_\+constraints\+\_\+domain}} () const
+\item 
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim-\/1, spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_af3f92a6860ae867ecc06ad129328c89b}{get\+\_\+point\+\_\+constraints\+\_\+interface}} () const
+\item 
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ 0, spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_ab24ae1229790edee6d5ab7146057f799}{get\+\_\+point\+\_\+constraints\+\_\+C}} () const
+\item 
 const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}{get\+\_\+independent\+\_\+scalars}} () const
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaced3150f751c28a801926e0e3675e10}{set\+\_\+time}} (const double begin\+\_\+time\+\_\+step, const double end\+\_\+time\+\_\+step) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{dirichlet\+\_\+constraints}}
+std\+::vector$<$ std\+::pair$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ $>$, double $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a09c6e6159ef046baf2f460e42a8518f0}{dirichlet\+\_\+constraints}}
+\item 
+std\+::vector$<$ std\+::pair$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim, spacedim $>$ $>$, double $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4ae87574f87aec09d2d3014348ae1c7b}{point\+\_\+constraints\+\_\+domain}}
+\item 
+std\+::vector$<$ std\+::pair$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim-\/1, spacedim $>$ $>$, double $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4129a0bafb912ac39c1d3bc28bb2b9f5}{point\+\_\+constraints\+\_\+interface}}
+\item 
+std\+::vector$<$ std\+::pair$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ 0, spacedim $>$ $>$, double $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a083dc1adfe8f79f0f16733dd6a13b5b3}{point\+\_\+constraints\+\_\+C}}
 \end{DoxyCompactItemize}
 
 
@@ -44,7 +64,7 @@ std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$ const dealii\+::\+Galerkin\+Tools
 \subsubsection*{template$<$unsigned int spacedim$>$\newline
 class incremental\+F\+E\+::\+Constraints$<$ spacedim $>$}
 
-Class collecting the constraints of the problem. Currently, the class doesn\textquotesingle{}t do much and just collects \textbf{ Dirichlet\+Constraint} objects of the Galerkin\+Tools library. For this purpose, a {\ttfamily std\+::vector} could be used as well. However, in the future, the Galerkin\+Tools library may allow for more sophisticated constraints; and then this approach may no longer be feasible.
+Class collecting the constraints of the problem.
 
 The \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} class inherits from \textbf{ Subscriptor} in order to be able to check that \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} objects are only destroyed when they are not needed anymore by other objects.
 
@@ -66,18 +86,68 @@ The \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} class i
 The destructor of \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} essentially checks before destruction that the \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} object is not used by other objects. If this is the case, the program will be aborted. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}\label{classincremental_f_e_1_1_constraints_a6f6a3580ea81a3cf8ce037fe98e46a15}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a175a510cdecac4710d203eaf495b9af1}\label{classincremental_f_e_1_1_constraints_a175a510cdecac4710d203eaf495b9af1}} 
 \index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!add\_dirichlet\_constraint@{add\_dirichlet\_constraint}}
 \index{add\_dirichlet\_constraint@{add\_dirichlet\_constraint}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{add\_dirichlet\_constraint()}{add\_dirichlet\_constraint()}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
-void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+dirichlet\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&}]{dirichlet\+\_\+constraint }\end{DoxyParamCaption})}
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+dirichlet\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$ spacedim $>$ \&}]{dirichlet\+\_\+constraint,  }\item[{const double}]{eval\+\_\+time = {\ttfamily 1.0} }\end{DoxyParamCaption})}
 
-Add a \textbf{ Dirichlet\+Constraint} to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints}}
+Add a \textbf{ Dirichlet\+Constraint} to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a09c6e6159ef046baf2f460e42a8518f0}{Constraints\+::dirichlet\+\_\+constraints}}
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em dirichlet\+\_\+constraint} & \textbf{ Dirichlet\+Constraint} object \\
+\mbox{\texttt{ in}}  & {\em dirichlet\+\_\+constraint} & \textbf{ Dirichlet\+Constraint} object\\
+\hline
+\mbox{\texttt{ in}}  & {\em eval\+\_\+time} & Evaluation time of constraint, see Constraints\+::dirichlet\+\_\+constraints\+\_\+domain\+\_\+eval\+\_\+time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a24947a8db7f56ab508d5dacb263b162c}\label{classincremental_f_e_1_1_constraints_a24947a8db7f56ab508d5dacb263b162c}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!add\_point\_constraint@{add\_point\_constraint}}
+\index{add\_point\_constraint@{add\_point\_constraint}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{add\_point\_constraint()}{add\_point\_constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+point\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ 0, spacedim $>$ \&}]{point\+\_\+constraint,  }\item[{const double}]{eval\+\_\+time = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+Add an independent scalar related Point\+Constraint to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a083dc1adfe8f79f0f16733dd6a13b5b3}{Constraints\+::point\+\_\+constraints\+\_\+C}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em point\+\_\+constraint} & Point\+Constraint object\\
+\hline
+\mbox{\texttt{ in}}  & {\em eval\+\_\+time} & Evaluation time of constraint, see Constraints\+::point\+\_\+constraints\+\_\+\+C\+\_\+eval\+\_\+time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a7cfbc9db3f165af1277b5652ca9e8a35}\label{classincremental_f_e_1_1_constraints_a7cfbc9db3f165af1277b5652ca9e8a35}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!add\_point\_constraint@{add\_point\_constraint}}
+\index{add\_point\_constraint@{add\_point\_constraint}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{add\_point\_constraint()}{add\_point\_constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+point\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim, spacedim $>$ \&}]{point\+\_\+constraint,  }\item[{const double}]{eval\+\_\+time = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+Add a domain-\/related Point\+Constraint to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4ae87574f87aec09d2d3014348ae1c7b}{Constraints\+::point\+\_\+constraints\+\_\+domain}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em point\+\_\+constraint} & Point\+Constraint object\\
+\hline
+\mbox{\texttt{ in}}  & {\em eval\+\_\+time} & Evaluation time of constraint, see Constraints\+::point\+\_\+constraints\+\_\+domain\+\_\+eval\+\_\+time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a1c76efebcd160d921d0b34d7ee11ec87}\label{classincremental_f_e_1_1_constraints_a1c76efebcd160d921d0b34d7ee11ec87}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!add\_point\_constraint@{add\_point\_constraint}}
+\index{add\_point\_constraint@{add\_point\_constraint}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{add\_point\_constraint()}{add\_point\_constraint()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::add\+\_\+point\+\_\+constraint (\begin{DoxyParamCaption}\item[{const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$ spacedim-\/1, spacedim $>$ \&}]{point\+\_\+constraint,  }\item[{const double}]{eval\+\_\+time = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+Add an interface-\/related Point\+Constraint to \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4129a0bafb912ac39c1d3bc28bb2b9f5}{Constraints\+::point\+\_\+constraints\+\_\+interface}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em point\+\_\+constraint} & Point\+Constraint object\\
+\hline
+\mbox{\texttt{ in}}  & {\em eval\+\_\+time} & Evaluation time of constraint, see Constraints\+::point\+\_\+constraints\+\_\+interface\+\_\+eval\+\_\+time \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}\label{classincremental_f_e_1_1_constraints_affbb56b906ba6cd817cf918bc9ff23c0}} 
@@ -88,7 +158,7 @@ Add a \textbf{ Dirichlet\+Constraint} to \mbox{\hyperlink{classincremental_f_e_1
 const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+dirichlet\+\_\+constraints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 \begin{DoxyReturn}{Returns}
-A vector with pointers to the \textbf{ Dirichlet\+Constraint} objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}{Constraints\+::dirichlet\+\_\+constraints}} 
+A vector with pointers to the \textbf{ Dirichlet\+Constraint} objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a09c6e6159ef046baf2f460e42a8518f0}{Constraints\+::dirichlet\+\_\+constraints}} 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}\label{classincremental_f_e_1_1_constraints_af51722fecb3b4a84874bbaf9363b4ca3}} 
 \index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_independent\_scalars@{get\_independent\_scalars}}
@@ -98,19 +168,110 @@ A vector with pointers to the \textbf{ Dirichlet\+Constraint} objects in \mbox{\
 const std\+::set$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$0, spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+independent\+\_\+scalars (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 \begin{DoxyReturn}{Returns}
-The independent scalars involved in the definition of the Dirichlet constraints. 
+The independent scalars involved in the definition of the constraints. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_ab24ae1229790edee6d5ab7146057f799}\label{classincremental_f_e_1_1_constraints_ab24ae1229790edee6d5ab7146057f799}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_point\_constraints\_C@{get\_point\_constraints\_C}}
+\index{get\_point\_constraints\_C@{get\_point\_constraints\_C}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_point\_constraints\_C()}{get\_point\_constraints\_C()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$0, spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+point\+\_\+constraints\+\_\+C (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+A vector with pointers to the independent scalar related constraint objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a083dc1adfe8f79f0f16733dd6a13b5b3}{Constraints\+::point\+\_\+constraints\+\_\+C}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a0816d66cd0cd61581ccc56352a2019a1}\label{classincremental_f_e_1_1_constraints_a0816d66cd0cd61581ccc56352a2019a1}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_point\_constraints\_domain@{get\_point\_constraints\_domain}}
+\index{get\_point\_constraints\_domain@{get\_point\_constraints\_domain}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_point\_constraints\_domain()}{get\_point\_constraints\_domain()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$spacedim, spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+point\+\_\+constraints\+\_\+domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+A vector with pointers to the domain related constraint objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4ae87574f87aec09d2d3014348ae1c7b}{Constraints\+::point\+\_\+constraints\+\_\+domain}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_af3f92a6860ae867ecc06ad129328c89b}\label{classincremental_f_e_1_1_constraints_af3f92a6860ae867ecc06ad129328c89b}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!get\_point\_constraints\_interface@{get\_point\_constraints\_interface}}
+\index{get\_point\_constraints\_interface@{get\_point\_constraints\_interface}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_point\_constraints\_interface()}{get\_point\_constraints\_interface()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$spacedim-\/1, spacedim$>$$\ast$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::get\+\_\+point\+\_\+constraints\+\_\+interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+A vector with pointers to the interface related constraint objects in \mbox{\hyperlink{classincremental_f_e_1_1_constraints_a4129a0bafb912ac39c1d3bc28bb2b9f5}{Constraints\+::point\+\_\+constraints\+\_\+interface}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_aaced3150f751c28a801926e0e3675e10}\label{classincremental_f_e_1_1_constraints_aaced3150f751c28a801926e0e3675e10}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!set\_time@{set\_time}}
+\index{set\_time@{set\_time}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{set\_time()}{set\_time()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::set\+\_\+time (\begin{DoxyParamCaption}\item[{const double}]{begin\+\_\+time\+\_\+step,  }\item[{const double}]{end\+\_\+time\+\_\+step }\end{DoxyParamCaption}) const}
+
+Update the evaluation time of the constraints for the upcoming time-\/step
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em begin\+\_\+time\+\_\+step} & Time at the start of the time step\\
+\hline
+\mbox{\texttt{ in}}  & {\em end\+\_\+time\+\_\+step} & Time at the end of the time step \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}\label{classincremental_f_e_1_1_constraints_aaa6042a72b76026d58416affbf056688}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a09c6e6159ef046baf2f460e42a8518f0}\label{classincremental_f_e_1_1_constraints_a09c6e6159ef046baf2f460e42a8518f0}} 
 \index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!dirichlet\_constraints@{dirichlet\_constraints}}
 \index{dirichlet\_constraints@{dirichlet\_constraints}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{dirichlet\_constraints}{dirichlet\_constraints}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
-std\+::vector$<$ dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$ $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::dirichlet\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}
+std\+::vector$<$ std\+::pair$<$dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Dirichlet\+Constraint$<$spacedim$>$ $>$, double$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::dirichlet\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}
 
-Vector with the \textbf{ Dirichlet\+Constraint} objects 
+Vector with the \textbf{ Dirichlet\+Constraint} objects
+
+The first element of each pair is the constraint.
+
+The second entry of each pair defines the instant of time within a time step, at which the time dependent functions of the corresponding constraint (e.\+g. the constraint inhomogeneities) are evaluated. In particular, values in the range \mbox{[}0, 1\mbox{]} are admissible for each entry, where e.\+g. 0 means that the time dependent functions are evaluated at the time corresponding to the beginning of the time step and 1 means that they are evaluated at the time corresponding to the end of the time step.
+
+Typically, the constraints for state and process variables are evaluated at the end of the time step, while constraints for Lagrangian multipliers are evaluated at the instant of time corresponding to the time integration parameter $\alpha$. \mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a083dc1adfe8f79f0f16733dd6a13b5b3}\label{classincremental_f_e_1_1_constraints_a083dc1adfe8f79f0f16733dd6a13b5b3}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!point\_constraints\_C@{point\_constraints\_C}}
+\index{point\_constraints\_C@{point\_constraints\_C}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{point\_constraints\_C}{point\_constraints\_C}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+std\+::vector$<$ std\+::pair$<$dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$0, spacedim$>$ $>$, double$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::point\+\_\+constraints\+\_\+C\hspace{0.3cm}{\ttfamily [private]}}
+
+Vector with independent scalar related constraints
+
+The first element of each pair is the constraint.
+
+The second entry of each pair defines the instant of time within a time step, at which the time dependent functions of the corresponding constraint (e.\+g. the constraint inhomogeneities) are evaluated. In particular, values in the range \mbox{[}0, 1\mbox{]} are admissible for each entry, where e.\+g. 0 means that the time dependent functions are evaluated at the time corresponding to the beginning of the time step and 1 means that they are evaluated at the time corresponding to the end of the time step.
+
+Typically, the constraints for state and process variables are evaluated at the end of the time step, while constraints for Lagrangian multipliers are evaluated at the instant of time corresponding to the time integration parameter $\alpha$. \mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a4ae87574f87aec09d2d3014348ae1c7b}\label{classincremental_f_e_1_1_constraints_a4ae87574f87aec09d2d3014348ae1c7b}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!point\_constraints\_domain@{point\_constraints\_domain}}
+\index{point\_constraints\_domain@{point\_constraints\_domain}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{point\_constraints\_domain}{point\_constraints\_domain}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+std\+::vector$<$ std\+::pair$<$dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$spacedim, spacedim$>$ $>$, double$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::point\+\_\+constraints\+\_\+domain\hspace{0.3cm}{\ttfamily [private]}}
+
+Vector with domain related point constraints
+
+The first element of each pair is the constraint.
+
+The second entry of each pair defines the instant of time within a time step, at which the time dependent functions of the corresponding constraint (e.\+g. the constraint inhomogeneities) are evaluated. In particular, values in the range \mbox{[}0, 1\mbox{]} are admissible for each entry, where e.\+g. 0 means that the time dependent functions are evaluated at the time corresponding to the beginning of the time step and 1 means that they are evaluated at the time corresponding to the end of the time step.
+
+Typically, the constraints for state and process variables are evaluated at the end of the time step, while constraints for Lagrangian multipliers are evaluated at the instant of time corresponding to the time integration parameter $\alpha$. \mbox{\Hypertarget{classincremental_f_e_1_1_constraints_a4129a0bafb912ac39c1d3bc28bb2b9f5}\label{classincremental_f_e_1_1_constraints_a4129a0bafb912ac39c1d3bc28bb2b9f5}} 
+\index{incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}!point\_constraints\_interface@{point\_constraints\_interface}}
+\index{point\_constraints\_interface@{point\_constraints\_interface}!incrementalFE::Constraints$<$ spacedim $>$@{incrementalFE::Constraints$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{point\_constraints\_interface}{point\_constraints\_interface}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+std\+::vector$<$ std\+::pair$<$dealii\+::\+Smart\+Pointer$<$const dealii\+::\+Galerkin\+Tools\+::\+Point\+Constraint$<$spacedim-\/1, spacedim$>$ $>$, double$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{incremental\+F\+E\+::\+Constraints}}$<$ spacedim $>$\+::point\+\_\+constraints\+\_\+interface\hspace{0.3cm}{\ttfamily [private]}}
+
+Vector with interface related point constraints
+
+The first element of each pair is the constraint.
+
+The second entry of each pair defines the instant of time within a time step, at which the time dependent functions of the corresponding constraint (e.\+g. the constraint inhomogeneities) are evaluated. In particular, values in the range \mbox{[}0, 1\mbox{]} are admissible for each entry, where e.\+g. 0 means that the time dependent functions are evaluated at the time corresponding to the beginning of the time step and 1 means that they are evaluated at the time corresponding to the end of the time step.
+
+Typically, the constraints for state and process variables are evaluated at the end of the time step, while constraints for Lagrangian multipliers are evaluated at the instant of time corresponding to the time integration parameter $\alpha$. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

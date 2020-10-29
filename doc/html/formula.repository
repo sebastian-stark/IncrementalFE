@@ -206,3 +206,72 @@
 \_form#205:$\lambda_{zx}$
 \_form#206:$\lambda_{zy}$
 \_form#207:$\lambda_{zz}$
+\_form#208:$ \omega^\Sigma = \omega^\Sigma(\dot{v}, \dot{q}, \mu, q; t) $
+\_form#209:$ \omega^\Omega = \omega^\Omega(\dot{v}, \dot{q}, \mu, q; t) $
+\_form#210:$ \omega^\mathrm{C} = \omega^\mathrm{C}(\dot{v}, \dot{q}, \mu, q; t) $
+\_form#211:$ \omega^\Omega = \dfrac{1}{2 D c} \dot{\boldsymbol{I}} \cdot \dot{\boldsymbol{I}} $
+\_form#212:$ \omega^\Omega = -\dfrac{D c}{2} \boldsymbol{E} \cdot \boldsymbol{E} $
+\_form#213:$ \omega^\Omega = -\dot{c}\eta $
+\_form#214:$ \omega^\Omega = -\dot{\boldsymbol{D}} \cdot \boldsymbol{E} $
+\_form#215:$ \omega^\Omega = -\mu ( \nabla \cdot \dot{\boldsymbol{I}} + \dot{c} ) $
+\_form#216:$ \omega^\Sigma = -\mu \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
+\_form#217:$ \omega^\Sigma = \bar\mu(t) \dot{\boldsymbol{I}} \cdot \boldsymbol{n} $
+\_form#218:$ \omega^\Sigma = -\bar{\boldsymbol{f}}(t) \dot{\boldsymbol{u}} $
+\_form#219:$ \omega^\Sigma = 1/(2D) \left(\dot{\boldsymbol{I}} \cdot \boldsymbol{n}\right)^2 $
+\_form#220:$ \omega^\Sigma = -I_0\left[ \dfrac{1}{1-\beta} \exp\left( - \dfrac{1-\beta}{RT} \Delta \eta \right) + \dfrac{1}{\beta} \exp\left( \dfrac{\beta}{RT} \Delta \eta \right) \right] $
+\_form#221:$ \omega^\Sigma = \boldsymbol{t} \cdot \left( \boldsymbol{u}^0 - \boldsymbol{u}^1 \right) $
+\_form#222:$ \omega^\Omega = -\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $
+\_form#223:$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}$
+\_form#224:$ \omega^\Omega = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#225:$ \omega^\Omega = \nabla \dot{\xi} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#226:$c^\mathrm{f} = \dfrac{J - n_0}{V^\mathrm{f}_\mathrm{m}}$
+\_form#227:$ n_0$
+\_form#228:$J=\det\boldsymbol{F}$
+\_form#229:$ \omega^\Sigma = -\begin{cases} \dfrac{1}{2R} \left[ \eta^\mathrm{int} - A^{\mathrm{e^-}} F \left(\bar{\varphi} - \varphi^\mathrm{c}\right) \right]^2 \quad &\mathrm{if} \quad \eta^\mathrm{int} - A^{\mathrm{e^-}}F\left(\bar{\varphi} - \varphi^\mathrm{c} \right) > 0\\ 0\quad &\mathrm{else} \end{cases} $
+\_form#230:$ \omega^\Omega = \dfrac{A}{2n} (\boldsymbol{d}:\boldsymbol{d})^n $
+\_form#231:$ \omega^\Omega = \boldsymbol{t} \cdot \left( \boldsymbol{v} - \dot{\boldsymbol{u}} - \dfrac{1}{c} \boldsymbol{F}\cdot \boldsymbol{I} \right)$
+\_form#232:$t$
+\_form#233:$\boldsymbol{v}$
+\_form#234:$\boldsymbol{u}$
+\_form#235:$\boldsymbol{I}$
+\_form#236:$v_x$
+\_form#237:$v_y$
+\_form#238:$v_z$
+\_form#239:$ \omega^\Omega = \dfrac{J \eta}{2} (\boldsymbol{d}:\boldsymbol{d}) $
+\_form#240:$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{v} + \nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1} \right)$
+\_form#241:$eta$
+\_form#242:$J = \det\boldsymbol{F}$
+\_form#243:$v_{x,x}$
+\_form#244:$v_{x,y}$
+\_form#245:$v_{x,z}$
+\_form#246:$v_{y,x}$
+\_form#247:$v_{y,y}$
+\_form#248:$v_{y,z}$
+\_form#249:$v_{z,x}$
+\_form#250:$v_{z,y}$
+\_form#251:$v_{z,z}$
+\_form#252:$\dot{u}_{x}$
+\_form#253:$\dot{u}_{y}$
+\_form#254:$v_{x}$
+\_form#255:$v_{y}$
+\_form#256:$ \omega^\mathrm{C} = -\dot{\bar{J}}\varphi$
+\_form#257:$ \omega^\mathrm{C} = -\dot{J}(\varphi - \bar{\varphi})$
+\_form#258:$ \omega^\mathrm{C} = - \dfrac{1}{2 R^\mathrm{el}} \varphi^2$
+\_form#259:$R^\mathrm{el}$
+\_form#260:$\varphi$
+\_form#261:$h^\Omega_\rho = \dfrac{\mu}{2} \left[ J^{2/3}_0\mathrm{tr}\boldsymbol{C} - 3 - 2 \mathrm{ln}(J J_0) \right] + \dfrac{\lambda}{2} \left[\mathrm{ln}(J J_0)\right]^2$
+\_form#262:$J_0$
+\_form#263:$h^\Omega_\rho = \psi_0 c^\mathrm{f}$
+\_form#264:$\psi_0$
+\_form#265:$ J = \det\boldsymbol{F}$
+\_form#266:$c^\mathrm{f} = \dfrac{1 + \mathrm{tr}{\boldsymbol{\varepsilon}} - n_0}{V^\mathrm{f}_\mathrm{m}}$
+\_form#267:$ \boldsymbol{\varepsilon}$
+\_form#268:$\mathrm{tr}{\boldsymbol{\varepsilon}}$
+\_form#269:$h^\Omega_\rho = \dfrac{RT}{V^\mathrm{f}_\mathrm{m}} \left[ (J-n_0)\ln\left( 1-\dfrac{n_0}{J} \right) - \chi n^2_0 \dfrac{1}{J} \right]$
+\_form#270:$\chi$
+\_form#271:$J = c^\mathrm{f} V^\mathrm{f}_\mathrm{m} + n_0$
+\_form#272:$V_\mathrm{m}^\mathrm{f}$
+\_form#273:$R T$
+\_form#274:$\omega^\Sigma$
+\_form#275:$\omega^\Omega$
+\_form#276:$\omega^\mathrm{C}$

@@ -428,6 +428,10 @@ public:
 	 *
 	 * @param[in]	exponent					Exponent of the norm if required. Currently this is unused because no norms with variable exponent are implemented.
 	 *
+	 * @param[in]	scaling_domain				Scaling factors to be used for errors of individual solution components on domain
+	 *
+	 * @param[in]	scaling_interface			Scaling factors to be used for errors of individual solution components on interface
+	 *
 	 * @return									The value of the norm computed on the domain and the interface, respectively
 	 */
 	std::pair<const double, const double>
@@ -437,7 +441,9 @@ public:
 										const dealii::VectorTools::NormType										norm_type = dealii::VectorTools::NormType::L2_norm,
 										const dealii::ComponentMask												component_mask_domain = dealii::ComponentMask(),
 										const dealii::ComponentMask												component_mask_interface = dealii::ComponentMask(),
-										const double															exponent = 2.)
+										const double															exponent = 2.0,
+										const dealii::Vector<double>											scaling_domain = dealii::Vector<double>(),
+										const dealii::Vector<double>											scaling_interface = dealii::Vector<double>())
 	const;
 
 	/**

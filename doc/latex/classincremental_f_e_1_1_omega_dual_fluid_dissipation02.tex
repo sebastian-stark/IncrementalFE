@@ -1,0 +1,169 @@
+\hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{}\doxysection{incremental\+FE\+::Omega\+Dual\+Fluid\+Dissipation02$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Dual\+Fluid\+Dissipation02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classincremental_f_e_1_1_omega_dual_fluid_dissipation02__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Dual\+Fluid\+Dissipation02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classincremental_f_e_1_1_omega_dual_fluid_dissipation02__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_aaf66fa3bbada2cf7b4ff0ea11f345338}{Omega\+Dual\+Fluid\+Dissipation02}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{global\+\_\+data}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a648d295704f62b4f2cdc3318076ccd20}{I}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a3bc73d8ade60db6248787280ef0fbf45}{D}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ac7bdda376a6f8e7ff23390a5f66f0b2b}{n\+\_\+0}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ae884e8ddd516760fe820623c73ed7732}{V\+\_\+m\+\_\+f}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a0964f07e56cbd88759059666182dd064}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a648d295704f62b4f2cdc3318076ccd20}{I}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a3bc73d8ade60db6248787280ef0fbf45}{D}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ac7bdda376a6f8e7ff23390a5f66f0b2b}{n\+\_\+0}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ae884e8ddd516760fe820623c73ed7732}{V\+\_\+m\+\_\+f}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02$<$ spacedim $>$}
+
+Class defining dual dissipation associated with flux of fluid through a solid skeleton, where ions flow in addition through the fluid.
+
+$ \omega^\Omega = -\dfrac{D J}{2 V^\mathrm{f}_\mathrm{m}} \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) \cdot \boldsymbol{C}^{-1} \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$,
+
+where $c^\mathrm{f} = \dfrac{J - n_0}{V^\mathrm{f}_\mathrm{m}}$ is the fluid concentration, with $ n_0$ being a material parameter.~\newline
+ $c^i$ are the ion concentrations ( $i$ runs from $1$ to $I$),~\newline
+ $\eta^\mathrm{f}$ is the fluid potential,~\newline
+ $\eta^i$ are the ion potentials,~\newline
+ $V^\mathrm{f}_\mathrm{m}$ the molar volume of the fluid,~\newline
+ $J$ the determinant of the deformation gradient $\boldsymbol{F}$,~\newline
+ $\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}$,~\newline
+ and $D$ a \char`\"{}fluid mobility\char`\"{}.
+
+\begin{DoxyWarning}{Warning}
+Currently, the derivatives required for the $\alpha$-\/family for temporal discretization are not implemented!
+\end{DoxyWarning}
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+\mbox{[}0\mbox{]} $\dot{F}_{xx}$~\newline
+ \mbox{[}1\mbox{]} $\dot{F}_{xy}$~\newline
+ \mbox{[}2\mbox{]} $\dot{F}_{xz}$~\newline
+ \mbox{[}3\mbox{]} $\dot{F}_{yx}$~\newline
+ \mbox{[}4\mbox{]} $\dot{F}_{yy}$~\newline
+ \mbox{[}5\mbox{]} $\dot{F}_{yz}$~\newline
+ \mbox{[}6\mbox{]} $\dot{F}_{zx}$~\newline
+ \mbox{[}7\mbox{]} $\dot{F}_{zy}$~\newline
+ \mbox{[}8\mbox{]} $\dot{F}_{zz}$~\newline
+ \mbox{[}9\mbox{]} $\eta^\mathrm{f}_{,x}$~\newline
+ \mbox{[}10\mbox{]} $\eta^\mathrm{f}_{,y}$~\newline
+ \mbox{[}11\mbox{]} $\eta^\mathrm{f}_{,z}$~\newline
+ \mbox{[}12\mbox{]} ... \mbox{[}11+3I\mbox{]} $\eta^i_{,x}$, $\eta^i_{,y}$, $\eta^i_{,z}$ (ordering\+: xyz, xyz, ...)~\newline
+ \mbox{[}12+3I\mbox{]} $\eta^\mathrm{f}$~\newline
+ \mbox{[}13+3I\mbox{]} ... \mbox{[}12+4I\mbox{]} $c^i$~\newline
+ \mbox{[}13+4I\mbox{]} ... \mbox{[}21+4I\mbox{]} $F_{xx}$, $F_{xy}$, $F_{xz}$, $F_{yx}$, $F_{yy}$, $F_{yz}$, $F_{zx}$, $F_{zy}$, $F_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_aaf66fa3bbada2cf7b4ff0ea11f345338}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_aaf66fa3bbada2cf7b4ff0ea11f345338}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!OmegaDualFluidDissipation02@{OmegaDualFluidDissipation02}}
+\index{OmegaDualFluidDissipation02@{OmegaDualFluidDissipation02}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaDualFluidDissipation02()}{OmegaDualFluidDissipation02()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{Omega\+Dual\+Fluid\+Dissipation02}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{I,  }\item[{const double}]{D,  }\item[{const double}]{n\+\_\+0,  }\item[{const double}]{V\+\_\+m\+\_\+f,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em I} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a648d295704f62b4f2cdc3318076ccd20}{Omega\+Dual\+Fluid\+Dissipation02\+::I}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em D} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a3bc73d8ade60db6248787280ef0fbf45}{Omega\+Dual\+Fluid\+Dissipation02\+::D}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em n\+\_\+0} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ac7bdda376a6f8e7ff23390a5f66f0b2b}{Omega\+Dual\+Fluid\+Dissipation02\+::n\+\_\+0}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em V\+\_\+m\+\_\+f} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ae884e8ddd516760fe820623c73ed7732}{Omega\+Dual\+Fluid\+Dissipation02\+::\+V\+\_\+m\+\_\+f}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a0964f07e56cbd88759059666182dd064}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a0964f07e56cbd88759059666182dd064}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{incremental\+F\+E\+::\+Omega$<$ spacedim, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a3bc73d8ade60db6248787280ef0fbf45}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a3bc73d8ade60db6248787280ef0fbf45}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!D@{D}}
+\index{D@{D}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::D\hspace{0.3cm}{\ttfamily [private]}}
+
+mobility $D$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a648d295704f62b4f2cdc3318076ccd20}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_a648d295704f62b4f2cdc3318076ccd20}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!I@{I}}
+\index{I@{I}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{I}{I}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::I\hspace{0.3cm}{\ttfamily [private]}}
+
+Number of ionic species $I$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ac7bdda376a6f8e7ff23390a5f66f0b2b}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ac7bdda376a6f8e7ff23390a5f66f0b2b}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!n\_0@{n\_0}}
+\index{n\_0@{n\_0}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n\_0}{n\_0}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::n\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+$n_0$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ae884e8ddd516760fe820623c73ed7732}\label{classincremental_f_e_1_1_omega_dual_fluid_dissipation02_ae884e8ddd516760fe820623c73ed7732}} 
+\index{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}!V\_m\_f@{V\_m\_f}}
+\index{V\_m\_f@{V\_m\_f}!incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$@{incrementalFE::OmegaDualFluidDissipation02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{V\_m\_f}{V\_m\_f}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_fluid_dissipation02}{incremental\+F\+E\+::\+Omega\+Dual\+Fluid\+Dissipation02}}$<$ spacedim $>$\+::V\+\_\+m\+\_\+f\hspace{0.3cm}{\ttfamily [private]}}
+
+molar volume of fluid $V^\mathrm{f}_\mathrm{m}$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

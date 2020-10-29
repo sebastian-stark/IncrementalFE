@@ -80,14 +80,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a901064b51d687bac85781904c0da99e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a901064b51d687bac85781904c0da99e8">FEModel</a> (const dealii::GalerkinTools::TotalPotential&lt; spacedim &gt; &amp;total_potential, dealii::GalerkinTools::TriangulationSystem&lt; spacedim &gt; &amp;tria_system, const dealii::Mapping&lt; spacedim, spacedim &gt; &amp;mapping_domain, const dealii::Mapping&lt; spacedim-1, spacedim &gt; &amp;mapping_interface, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">global_data</a>, const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, dealii::GalerkinTools::SolverWrapper&lt; SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad53a49fc1326472b11e3e3273b5f6f7b">solver_wrapper</a>, const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a>=true)</td></tr>
-<tr class="separator:a901064b51d687bac85781904c0da99e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a85e9c068ca9ba6959b2aa3dc25812d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a3a85e9c068ca9ba6959b2aa3dc25812d">FEModel</a> (const dealii::GalerkinTools::TotalPotential&lt; spacedim &gt; &amp;total_potential, dealii::GalerkinTools::TriangulationSystem&lt; spacedim &gt; &amp;tria_system, const dealii::Mapping&lt; spacedim, spacedim &gt; &amp;mapping_domain, const dealii::Mapping&lt; spacedim-1, spacedim &gt; &amp;mapping_interface, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">global_data</a>, const <a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, dealii::GalerkinTools::SolverWrapper&lt; SolutionVectorType, RHSVectorType, MatrixType, dealii::GalerkinTools::TwoBlockSparsityPattern &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad53a49fc1326472b11e3e3273b5f6f7b">solver_wrapper</a>, const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a>=true, const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html#ace70f6d085e2b37c0241f9eb0ca5d178">single_block</a>=false)</td></tr>
+<tr class="separator:a3a85e9c068ca9ba6959b2aa3dc25812d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4d9513474928ef225245928410f984b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae4d9513474928ef225245928410f984b">~FEModel</a> ()</td></tr>
 <tr class="separator:ae4d9513474928ef225245928410f984b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1528bdeba89d6f4774526a2ed9412047"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a1528bdeba89d6f4774526a2ed9412047">do_time_step</a> (const double t, const dealii::AffineConstraints&lt; double &gt; &amp;custom_constraints=dealii::AffineConstraints&lt; double &gt;(), const dealii::AffineConstraints&lt; double &gt; &amp;ignore_constraints=dealii::AffineConstraints&lt; double &gt;())</td></tr>
 <tr class="separator:a1528bdeba89d6f4774526a2ed9412047"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e4abf57ffcdab99c4dd358eec524465"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a5e4abf57ffcdab99c4dd358eec524465">compute_distance_to_other_solution</a> (const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; &amp;other_incremental_fe, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const dealii::ComponentMask component_mask_domain=dealii::ComponentMask(), const dealii::ComponentMask component_mask_interface=dealii::ComponentMask(), const double exponent=2.) const</td></tr>
-<tr class="separator:a5e4abf57ffcdab99c4dd358eec524465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5e7dc18c6acecde5265ff9f39e40ed"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9a5e7dc18c6acecde5265ff9f39e40ed">compute_distance_to_other_solution</a> (const <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt; &amp;other_incremental_fe, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const dealii::ComponentMask component_mask_domain=dealii::ComponentMask(), const dealii::ComponentMask component_mask_interface=dealii::ComponentMask(), const double exponent=2.0, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; scaling_domain=<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;(), const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; scaling_interface=<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;()) const</td></tr>
+<tr class="separator:a9a5e7dc18c6acecde5265ff9f39e40ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd4646e08210f326f304814808e92e0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; const double, const double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0dd4646e08210f326f304814808e92e0">compute_distance_to_exact_solution</a> (const dealii::Function&lt; spacedim &gt; &amp;exact_solution_domain, const dealii::Function&lt; spacedim &gt; &amp;exact_solution_interface, const dealii::Quadrature&lt; spacedim &gt; quadrature_domain, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature_interface, const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__numerics.html#ga69967cb7a148a7169963126249213db1">dealii::VectorTools::NormType</a> norm_type=dealii::VectorTools::NormType::L2_norm, const dealii::ComponentMask component_mask_domain=dealii::ComponentMask(), const dealii::ComponentMask component_mask_interface=dealii::ComponentMask(), const double exponent=2.0) const</td></tr>
 <tr class="separator:a0dd4646e08210f326f304814808e92e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb0d11f9d7a71971732d041a5cb4376a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#acb0d11f9d7a71971732d041a5cb4376a">read_solution_from_file</a> (const std::string file_name)</td></tr>
@@ -176,8 +176,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a26ffe7f5ecf94f3bdbe27f4ea3e577dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af333d1d12e78c27c74b033a85d075d38"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af333d1d12e78c27c74b033a85d075d38">hanging_node_constraints</a></td></tr>
 <tr class="separator:af333d1d12e78c27c74b033a85d075d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ea39622157334a3d985c418a3b9ca34"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a4ea39622157334a3d985c418a3b9ca34">dirichlet_constraints</a></td></tr>
-<tr class="separator:a4ea39622157334a3d985c418a3b9ca34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d19299b9672ffed39968bfb79236b97"><td class="memItemLeft" align="right" valign="top">dealii::AffineConstraints&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a6d19299b9672ffed39968bfb79236b97">all_constraints</a></td></tr>
+<tr class="separator:a6d19299b9672ffed39968bfb79236b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a6cc0723bdeb129e330179ed4a87670"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9a6cc0723bdeb129e330179ed4a87670">times_and_names_domain</a></td></tr>
 <tr class="separator:a9a6cc0723bdeb129e330179ed4a87670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa0e0ef1be909224dfe6f28484b9d754"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; double, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aaa0e0ef1be909224dfe6f28484b9d754">times_and_names_interface</a></td></tr>
@@ -188,8 +188,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aff2f85b08282289389284138ca708eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeb548ba39fe59036312bb8ba1d8cbf9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; dealii::SmartPointer&lt; const dealii::DataPostprocessor&lt; spacedim &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#adeb548ba39fe59036312bb8ba1d8cbf9">dp_interface</a></td></tr>
 <tr class="separator:adeb548ba39fe59036312bb8ba1d8cbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65b5910cfba2feb26933ad451ceff628"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a></td></tr>
+<tr class="memitem:a65b5910cfba2feb26933ad451ceff628"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">make_hanging_node_constraints</a> = true</td></tr>
 <tr class="separator:a65b5910cfba2feb26933ad451ceff628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace70f6d085e2b37c0241f9eb0ca5d178"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ace70f6d085e2b37c0241f9eb0ca5d178">single_block</a> = false</td></tr>
+<tr class="separator:ace70f6d085e2b37c0241f9eb0ca5d178"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a490d7393aa94d765ec0e2c302b2afe44"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a490d7393aa94d765ec0e2c302b2afe44">solve_time_last_step</a> = 0.0</td></tr>
 <tr class="separator:a490d7393aa94d765ec0e2c302b2afe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -208,8 +210,8 @@ class incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, Ma
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a901064b51d687bac85781904c0da99e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a901064b51d687bac85781904c0da99e8">&#9670;&nbsp;</a></span>FEModel()</h2>
+<a id="a3a85e9c068ca9ba6959b2aa3dc25812d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a85e9c068ca9ba6959b2aa3dc25812d">&#9670;&nbsp;</a></span>FEModel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +264,13 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>make_hanging_node_constraints</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>make_hanging_node_constraints</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>single_block</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -281,7 +289,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
     <tr><td class="paramdir">[in]</td><td class="paramname">global_data</td><td>The global data object to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">FEModel::global_data</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td><a class="el" href="classincremental_f_e_1_1_constraints.html">Constraints</a> object, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">FEModel::constraints</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">solver_wrapper</td><td><a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_solver_wrapper.html">SolverWrapper</a> to be used, see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad53a49fc1326472b11e3e3273b5f6f7b">FEModel::solver_wrapper</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">make_hanging_node_constraints</td><td><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">FEModel::make_hanging_node_constraints</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">make_hanging_node_constraints</td><td><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">FEModel::make_hanging_node_constraints</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">single_block</td><td><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ace70f6d085e2b37c0241f9eb0ca5d178">FEModel::single_block</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -529,8 +538,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
-<a id="a5e4abf57ffcdab99c4dd358eec524465"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e4abf57ffcdab99c4dd358eec524465">&#9670;&nbsp;</a></span>compute_distance_to_other_solution()</h2>
+<a id="a9a5e7dc18c6acecde5265ff9f39e40ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5e7dc18c6acecde5265ff9f39e40ed">&#9670;&nbsp;</a></span>compute_distance_to_other_solution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -577,7 +586,19 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>exponent</em> = <code>2.</code>&#160;</td>
+          <td class="paramname"><em>exponent</em> = <code>2.0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>scaling_domain</em> = <code><a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt;&#160;double&#160;&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>scaling_interface</em> = <code><a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt;&#160;double&#160;&gt;()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -599,6 +620,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
     <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_domain</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">component_mask_interface</td><td>Domain related solution components to be included in the calculation. If the <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/classComponentMask.html">ComponentMask</a> is empty, all components will be included</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">exponent</td><td>Exponent of the norm if required. Currently this is unused because no norms with variable exponent are implemented.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scaling_domain</td><td>Scaling factors to be used for errors of individual solution components on domain</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scaling_interface</td><td>Scaling factors to be used for errors of individual solution components on interface</td></tr>
   </table>
   </dd>
 </dl>
@@ -980,7 +1003,7 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Function assembling constraints (combines Dirichlet type constraints, hanging node constraints, custom constraints while taking into account the constraints to be ignored)</p>
-<p>Updates also <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a4ea39622157334a3d985c418a3b9ca34">FEModel::dirichlet_constraints</a></p>
+<p>Updates also FEModel::dirichlet_constraints</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">constraints</td><td>The resulting constraints object</td></tr>
@@ -1324,6 +1347,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6d19299b9672ffed39968bfb79236b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d19299b9672ffed39968bfb79236b97">&#9670;&nbsp;</a></span>all_constraints</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::all_constraints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Matrix with all combined constraints (used internally during the solution process) </p>
+
+</div>
+</div>
 <a id="a937ea806f50796c76a45f36e6ec3cd29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a937ea806f50796c76a45f36e6ec3cd29">&#9670;&nbsp;</a></span>assembly_helper</h2>
 
@@ -1421,31 +1469,6 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Solution vector with the solution increment during the last successfully completed time increment. This is used to obtain an initial guess for the Newton-Raphson iteration in case <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#af94c89d99685ca7e610a883cf97b690a">GlobalDataIncrementalFE::use_previous_increment_for_initial_guess</a> == <code>true</code> </p>
-
-</div>
-</div>
-<a id="a4ea39622157334a3d985c418a3b9ca34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ea39622157334a3d985c418a3b9ca34">&#9670;&nbsp;</a></span>dirichlet_constraints</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">dealii::AffineConstraints&lt;double&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::dirichlet_constraints</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Matrix with Dirichlet type constraints (used internally during the solution process) </p>
 
 </div>
 </div>
@@ -1586,7 +1609,7 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::make_hanging_node_constraints</td>
+          <td class="memname">const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::make_hanging_node_constraints = true</td>
         </tr>
       </table>
   </td>
@@ -1671,6 +1694,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Vector used to scale elements of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> before computing 2-norm thereof (each element of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> is scaled by the reciprocal value of the corresponding element of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a>). This scaling is used to avoid ill-conditioning problems. The <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> is computed in the beginning of each time step based on the initial system matrix and then kept constant throughout the time step. Each element in <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> is equal to the maximum norm of the corresponding row in the initial system matrix. </p>
+
+</div>
+</div>
+<a id="ace70f6d085e2b37c0241f9eb0ca5d178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace70f6d085e2b37c0241f9eb0ca5d178">&#9670;&nbsp;</a></span>single_block</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::single_block = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>if <code>true</code>, system matrix is treated as a single block. This is useful in case the A block of the block system is singular. </p>
 
 </div>
 </div>

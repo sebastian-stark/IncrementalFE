@@ -87,12 +87,26 @@ $(function() {
 , <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html#a9ef650bfc38681f32de4ff204cc09a35">incrementalFE::OmegaViscousDissipation01&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a0e615fbb99f3fb0826992f4eb925c947">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#aaef5025406632ddf15caba21e3b87689">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical04.html#aba80df17ebfab249a40b0f3622adf132">incrementalFE::PsiChemical04&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical05.html#a117b02c605803ab5f0cc85b748530bc8">incrementalFE::PsiChemical05&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#abe68f0acfa909ffe059f7ace85bac6d3">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#ac4f63e29f0f160673ff31b857a372c76">incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html#a226fc039fcf60924a507f21c9160d0b9">incrementalFE::PsiNeoHookeLagrange00&lt; spacedim &gt;</a>
 </li>
 <li>get_output_level()
 : <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a2a5480a5855d46a985b295c117c1f9ba">incrementalFE::GlobalDataIncrementalFE&lt; spacedim &gt;</a>
+</li>
+<li>get_point_constraints_C()
+: <a class="el" href="classincremental_f_e_1_1_constraints.html#ab24ae1229790edee6d5ab7146057f799">incrementalFE::Constraints&lt; spacedim &gt;</a>
+</li>
+<li>get_point_constraints_domain()
+: <a class="el" href="classincremental_f_e_1_1_constraints.html#a0816d66cd0cd61581ccc56352a2019a1">incrementalFE::Constraints&lt; spacedim &gt;</a>
+</li>
+<li>get_point_constraints_interface()
+: <a class="el" href="classincremental_f_e_1_1_constraints.html#af3f92a6860ae867ecc06ad129328c89b">incrementalFE::Constraints&lt; spacedim &gt;</a>
+</li>
+<li>get_potential_contribution()
+: <a class="el" href="classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4.html#a786177db6c1a6bab9b6b9a6042de740c">incrementalFE::Omega&lt; 0, spacedim &gt;</a>
 </li>
 <li>get_potential_value()
 : <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aef592e091e60e8b3f99f601a59a68da6">incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;</a>
@@ -125,14 +139,19 @@ $(function() {
 : <a class="el" href="classincremental_f_e_1_1_kirchhoff_material00.html#aac6a9a65711a61f97f5a22fd581d884e">incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#ab062fe5ffbea799d817b3106d15cefc3">incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega.html#a2f35d862aefa11151de5b7c7411e45df">incrementalFE::Omega&lt; dim, spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4.html#ace9582d6e68158ec659efec34d46e912">incrementalFE::Omega&lt; 0, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a40131354ef0a28ca48a0e6c9ed33aa33">incrementalFE::Omega&lt; spacedim, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_displacement_coupling00.html#af4d521887a8dad96e5f76f21fd7a5f1e">incrementalFE::OmegaDisplacementCoupling00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_divergence_constraint00.html#abf4f1c8217a266dd3afec26d140759b5">incrementalFE::OmegaDivergenceConstraint00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_dual_butler_volmer00.html#abfe801c8e442fdd7f93247abb6d67a1a">incrementalFE::OmegaDualButlerVolmer00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html#ae6aba81c3a697c74f24a14aa889f9c4a">incrementalFE::OmegaDualFluidDissipation00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html#a5e0bf3610ca448e0134bfa08c4c14dad">incrementalFE::OmegaDualFluidDissipation01&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation02.html#a0964f07e56cbd88759059666182dd064">incrementalFE::OmegaDualFluidDissipation02&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation03.html#a311456c3d75f03d70dc086d03ea82cc9">incrementalFE::OmegaDualFluidDissipation03&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_dual_flux_dissipation00.html#a74ae73b7e52de1c084992628ab2a6328">incrementalFE::OmegaDualFluxDissipation00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation00.html#aa7e62ef3ded75ea3c6e67977c2cc2d3d">incrementalFE::OmegaDualIonDissipation00&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation01.html#abd77284b0740481711eb7b7953dd6386">incrementalFE::OmegaDualIonDissipation01&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_electrical_loading.html#a44024c68177f639d43cb2302ee29c72f">incrementalFE::OmegaElectricalLoading&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_electrolysis00.html#a8cee1ed8dec328c9cc6ee1218004ea27">incrementalFE::OmegaElectrolysis00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_flux_dissipation00.html#ae1189d7eedba56295ee1e0acd2b9229f">incrementalFE::OmegaFluxDissipation00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_flux_power00.html#afaa7da6d5f94c687383b53448b58b4e3">incrementalFE::OmegaFluxPower00&lt; spacedim &gt;</a>
@@ -140,14 +159,22 @@ $(function() {
 , <a class="el" href="classincremental_f_e_1_1_omega_mixed_term00.html#af873a7c1117c3fd63de2b0a7879d3aef">incrementalFE::OmegaMixedTerm00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_mixed_term01.html#a0093470d676684f47e72a86bbe4a222d">incrementalFE::OmegaMixedTerm01&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_traction00.html#a368e582df0d5edb5251f89c8c77f9ca3">incrementalFE::OmegaTraction00&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_velocity_flux00.html#a68636b19c80896557dd1f85ef1bdfa91">incrementalFE::OmegaVelocityFlux00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation00.html#af2d3ed2d8e3d59d070eaf6dd7348209f">incrementalFE::OmegaViscousDissipation00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html#a794a4e2e77cb590f3fcea84c7939d4b3">incrementalFE::OmegaViscousDissipation01&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation02.html#a1d8cff0b7c0d77d191daa4b5cedb3a72">incrementalFE::OmegaViscousDissipation02&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_zero_normal_flux00.html#a9ae9e272e911ebe50c2eee73c75ec4ad">incrementalFE::OmegaZeroNormalFlux00&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_zero_tangential_flux2_d00.html#abb0d4658e864dc6e53d765fa0996afa7">incrementalFE::OmegaZeroTangentialFlux2D00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi.html#a2622e8f84590e8a821984181e31fbc76">incrementalFE::Psi&lt; dim, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#a17f3559c196edb5487b591bb6061667e">incrementalFE::Psi&lt; spacedim, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a52e3a124fe8200a1cad668b12d4be439">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_chemical01.html#a75fc8b6eb7a68ad30d27e1de6738366d">incrementalFE::PsiChemical01&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#addfb3bb4446157cfe28064f34f67429d">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical03.html#a60b290fc79c88a5525dc447a2e3f0637">incrementalFE::PsiChemical03&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical04.html#ac93560346243d92ccdf2dad1fe286802">incrementalFE::PsiChemical04&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical05.html#ad62b3f30e8a8e5e79885f30e0faafaac">incrementalFE::PsiChemical05&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical06.html#afd9e4632ee3152f93dca35db3a0ddcd2">incrementalFE::PsiChemical06&lt; spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_psi_chemical07.html#a3a870334fcf35b6f1a9efccafeeb6229">incrementalFE::PsiChemical07&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_incompressibility01.html#ad2ca9358bd1bb39e1f7de76874c48fb0">incrementalFE::PsiIncompressibility01&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi_initial_pressure00.html#ab73f396d058eeba3de66c054781aff8b">incrementalFE::PsiInitialPressure00&lt; spacedim &gt;</a>
@@ -160,6 +187,7 @@ $(function() {
 <li>global_data
 : <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa6f80778241b26906af1f571517102dd">incrementalFE::FEModel&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega.html#abd23d288a7a4a43f9b528be968cd2113">incrementalFE::Omega&lt; dim, spacedim &gt;</a>
+, <a class="el" href="classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4.html#a01b6835b2f31ed622c67a6efc7d754d5">incrementalFE::Omega&lt; 0, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#afffe781a5a2032ec003032adc78e1bf3">incrementalFE::Omega&lt; spacedim, spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html#abbc20b86ab7417e4884e199d741ab1f3">incrementalFE::OmegaViscousDissipation01&lt; spacedim &gt;</a>
 , <a class="el" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">incrementalFE::Psi&lt; dim, spacedim &gt;</a>

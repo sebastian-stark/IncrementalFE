@@ -1,0 +1,225 @@
+\hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4}{}\doxysection{incremental\+FE\+::Omega$<$ 0, spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4}\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega$<$ 0, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega$<$ 0, spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a8fff364aeafde01e2dcb7e055150f7e3}{Omega}} (const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$ \textbf{ C}, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}{global\+\_\+data}}, const unsigned int n\+\_\+v\+\_\+dot, const unsigned int n\+\_\+q\+\_\+dot, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aa57bdaa8fe076404a2a6c687717d38c3}{n\+\_\+mu}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ab6e0ca6e8eb4d3aa0ae121d819cff4d8}{n\+\_\+q}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}{alpha}}=0.\+0, const std\+::string \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a432893cb79c8c36282feacee2e9f4c64}{name}}=\char`\"{}Omega\char`\"{})
+\item 
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aeb76d28f57374510abad63f1f80c004b}{$\sim$\+Omega}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ace9582d6e68158ec659efec34d46e912}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double t, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+d2q) const =0
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a786177db6c1a6bab9b6b9a6042de740c}{get\+\_\+potential\+\_\+contribution}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&H\+\_\+omega\+\_\+\+H\+\_\+sigma\+\_\+C, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&C\+\_\+ref\+\_\+sets, double \&Pi, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&Pi\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&Pi\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ \&requested\+\_\+quantities) const final
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a54064ecef58cb7475d46e1c69fc5ad1c}{n\+\_\+v\+\_\+q\+\_\+dot}}
+\item 
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aa57bdaa8fe076404a2a6c687717d38c3}{n\+\_\+mu}}
+\item 
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ab6e0ca6e8eb4d3aa0ae121d819cff4d8}{n\+\_\+q}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const dealii\+::\+Smart\+Pointer$<$ \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}{global\+\_\+data}}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}{alpha}}
+\item 
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}{method}}
+\item 
+\textbf{ dealii\+::\+Vector}$<$ double $>$ \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a7b34891e349838ece9da2f8269bd3554}{state\+\_\+vars}}
+\item 
+const std\+::string \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a432893cb79c8c36282feacee2e9f4c64}{name}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega$<$ 0, spacedim $>$}
+
+Class defining the time discrete approximation of a contribution to the incremental potential depending only unknowns not depending upon time
+
+$ \omega^\mathrm{C} = \omega^\mathrm{C}(\dot{v}, \dot{q}, \mu, q; t) $,
+
+where $\dot{v}$, $\dot{q}$, $\mu$, and $q$ may be vectors.
+
+The time discrete approximation is done either by Miehe\textquotesingle{}s method, by the $\alpha$-\/family, or by the modified $\alpha$-\/family.
+
+\begin{DoxyWarning}{Warning}
+This class is currently largely untested! 
+\end{DoxyWarning}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]Test this class \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a8fff364aeafde01e2dcb7e055150f7e3}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a8fff364aeafde01e2dcb7e055150f7e3}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!Omega@{Omega}}
+\index{Omega@{Omega}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{Omega()}{Omega()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega}{Omega}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$}]{C,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{n\+\_\+v\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+q\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+mu,  }\item[{const unsigned int}]{n\+\_\+q,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0},  }\item[{const std\+::string}]{name = {\ttfamily \char`\"{}Omega$<$~0,~spacedim~$>$\char`\"{}} }\end{DoxyParamCaption})}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em C} & Unknowns entering the potential contribution (in the order $\dot{v}$, $\dot{q}$, $\mu$, $q$)\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{Omega\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em n\+\_\+v\+\_\+dot} & The number of $\dot{v}$\\
+\hline
+\mbox{\texttt{ in}}  & {\em n\+\_\+q\+\_\+dot} & The number of $\dot{q}$\\
+\hline
+\mbox{\texttt{ in}}  & {\em n\+\_\+mu} & The number of $\mu$\\
+\hline
+\mbox{\texttt{ in}}  & {\em n\+\_\+q} & The number of $q$\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{Omega\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{Omega\+::alpha}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em name} & \textbf{ Scalar\+Functional\+::name} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aeb76d28f57374510abad63f1f80c004b}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aeb76d28f57374510abad63f1f80c004b}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!````~Omega@{$\sim$Omega}}
+\index{````~Omega@{$\sim$Omega}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$Omega()}{~Omega()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::$\sim$\mbox{\hyperlink{classincremental_f_e_1_1_omega}{Omega}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a786177db6c1a6bab9b6b9a6042de740c}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a786177db6c1a6bab9b6b9a6042de740c}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!get\_potential\_contribution@{get\_potential\_contribution}}
+\index{get\_potential\_contribution@{get\_potential\_contribution}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_potential\_contribution()}{get\_potential\_contribution()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::get\+\_\+potential\+\_\+contribution (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{H\+\_\+omega\+\_\+\+H\+\_\+sigma\+\_\+C,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{C\+\_\+ref\+\_\+sets,  }\item[{double \&}]{Pi,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{Pi\+\_\+1,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{Pi\+\_\+2,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$ \&}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}}
+
+see \textbf{ Total\+Potential\+Contribution}\+:get\+\_\+potential\+\_\+contribution \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ace9582d6e68158ec659efec34d46e912}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ace9582d6e68158ec659efec34d46e912}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{t,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+d2q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This function defines $\omega^\mathrm{C}$ and needs to be implemented by classes inheriting from this class
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em values} & Values at which $\omega^\mathrm{C}$ and its derivatives are evaluated (in the order $\dot{v}$, $\dot{q}$, $\mu$, $q$)\\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & Time at which $\omega^\mathrm{C}$ is evaluated\\
+\hline
+\mbox{\texttt{ out}}  & {\em omega} & Value of $\omega^\mathrm{C}$\\
+\hline
+\mbox{\texttt{ out}}  & {\em d\+\_\+omega} & Values of first derivatives of $\omega^\mathrm{C}$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order)\\
+\hline
+\mbox{\texttt{ out}}  & {\em d2\+\_\+omega} & Values of second derivatives of $\omega^\mathrm{C}$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order). If {\ttfamily compute\+\_\+d2q} == {\ttfamily true}, also the derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ need to be computed. In this case, {\ttfamily d2\+\_\+omega} is initialized to the size \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} x \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{Omega\+::n\+\_\+q}}, so that derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ can be stored in the rightmost part of the matrix.\\
+\hline
+\mbox{\texttt{ in}}  & {\em requested\+\_\+quantities} & Tuple indicating which of the quantities {\ttfamily omega}, {\ttfamily d\+\_\+omega}, {\ttfamily d2\+\_\+omega} are to be computed. Note that only those quantities are passed in initialized to the correct size, which are actually requested\\
+\hline
+\mbox{\texttt{ in}}  & {\em compute\+\_\+d2q} & If {\ttfamily true}, also compute second derivatives w.\+r.\+t. $q$\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} indicates that an error has occurred in the function 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a44024c68177f639d43cb2302ee29c72f}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading$<$ spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!alpha@{alpha}}
+\index{alpha@{alpha}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
+
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1}.
+
+This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!global\_data@{global\_data}}
+\index{global\_data@{global\_data}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const dealii\+::\+Smart\+Pointer$<$\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$spacedim$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+global data object \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!method@{method}}
+\index{method@{method}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{method}{method}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::method\hspace{0.3cm}{\ttfamily [private]}}
+
+Temporal discretization ({\ttfamily 0}\+: Miehe\textquotesingle{}s method, {\ttfamily 1}\+: $\alpha$-\/family, {\ttfamily 2}\+: modified $\alpha$-\/family) \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aa57bdaa8fe076404a2a6c687717d38c3}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aa57bdaa8fe076404a2a6c687717d38c3}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!n\_mu@{n\_mu}}
+\index{n\_mu@{n\_mu}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n\_mu}{n\_mu}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::n\+\_\+mu}
+
+Number of Lagrangian multiplier variables \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ab6e0ca6e8eb4d3aa0ae121d819cff4d8}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ab6e0ca6e8eb4d3aa0ae121d819cff4d8}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!n\_q@{n\_q}}
+\index{n\_q@{n\_q}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n\_q}{n\_q}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::n\+\_\+q}
+
+Number of state variables \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a54064ecef58cb7475d46e1c69fc5ad1c}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a54064ecef58cb7475d46e1c69fc5ad1c}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!n\_v\_q\_dot@{n\_v\_q\_dot}}
+\index{n\_v\_q\_dot@{n\_v\_q\_dot}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{n\_v\_q\_dot}{n\_v\_q\_dot}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::n\+\_\+v\+\_\+q\+\_\+dot}
+
+Sum of components in $\dot{v}$ and $\dot{q}$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a432893cb79c8c36282feacee2e9f4c64}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a432893cb79c8c36282feacee2e9f4c64}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!name@{name}}
+\index{name@{name}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const std\+::string \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+Name of this potential contribution \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a7b34891e349838ece9da2f8269bd3554}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a7b34891e349838ece9da2f8269bd3554}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!state\_vars@{state\_vars}}
+\index{state\_vars@{state\_vars}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{state\_vars}{state\_vars}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\textbf{ dealii\+::\+Vector}$<$double$>$ \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::state\+\_\+vars\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+This vector is used to store the state variables entering the contribution as parameters (only needed for modified $\alpha$-\/family) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega_8h}{omega.\+h}}\end{DoxyCompactItemize}

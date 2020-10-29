@@ -1129,6 +1129,8 @@ public:
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 *
 	 * @param[in]		ignore_dof_indices		PsiNeoHooke00::ignore_dof_indices
+	 *
+	 * @param[in]		J_0						PsiNeoHooke00::J_0
 	 */
 	PsiNeoHooke00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -1742,7 +1744,7 @@ private:
 	n_0;
 
 	/**
-	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 * \f$V_\mathrm{m}^\mathrm{f}\f$
 	 */
 	const double
 	V_m_f;
@@ -1892,7 +1894,7 @@ private:
 	n_0;
 
 	/**
-	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 * \f$V_\mathrm{m}^\mathrm{f}\f$
 	 */
 	const double
 	V_m_f;
@@ -2101,7 +2103,7 @@ public:
  * \f$h^\Omega_\rho = \mu_0 c + RT c \left( \ln\dfrac{c}{c^\mathrm{f}} - 1 \right)\f$,
  *
  * where \f$\mu_0\f$ is a reference chemical potential, \f$R\f$ the gas constant, \f$T\f$ the temperature,
- * \f$c\f$ the species concentration, \f$c^\mathrm{f} = \dfrac{1 + \tr{\boldsymbol{\varepsilon}} - n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, \f$ \boldsymbol{\varepsilon}\f$ the
+ * \f$c\f$ the species concentration, \f$c^\mathrm{f} = \dfrac{1 + \mathrm{tr}{\boldsymbol{\varepsilon}} - n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, \f$ \boldsymbol{\varepsilon}\f$ the
  * infinitesimal strain tensor, and \f$n_0\f$ and \f$V^\mathrm{f}_\mathrm{m}\f$ are constants.
  *
  * In order to circumvent numerical problems for low species concentrations, the scalar functional may be regularized according to
@@ -2118,7 +2120,7 @@ public:
  * with \f$\epsilon \ll 1\f$ being a regularization parameter.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$<br>
- * 																					[1] \f$\tr{\boldsymbol{\varepsilon}}\f$
+ * 																					[1] \f$\mathrm{tr}{\boldsymbol{\varepsilon}}\f$
  */
 template<unsigned int spacedim>
 class PsiChemical05 : public incrementalFE::Psi<spacedim, spacedim>
@@ -2145,7 +2147,7 @@ private:
 	n_0;
 
 	/**
-	 * \f$\V_\mathrm{m}^\mathrm{f}\f$
+	 * \f$V_\mathrm{m}^\mathrm{f}\f$
 	 */
 	const double
 	V_m_f;

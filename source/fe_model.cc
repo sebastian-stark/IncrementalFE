@@ -391,10 +391,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_distan
 																										const VectorTools::NormType												norm_type,
 																										const ComponentMask														component_mask_domain,
 																										const ComponentMask														component_mask_interface,
-																										const double															exponent)
+																										const double															exponent,
+																										const Vector<double>													scaling_domain,
+																										const Vector<double>													scaling_interface)
 const
 {
-	return assembly_helper.compute_distance_to_other_solution(solution, other_incremental_fe.solution, other_incremental_fe.assembly_helper, quadrature_domain, quadrature_interface, norm_type, component_mask_domain, component_mask_interface, exponent);
+	return assembly_helper.compute_distance_to_other_solution(solution, other_incremental_fe.solution, other_incremental_fe.assembly_helper, quadrature_domain, quadrature_interface, norm_type, component_mask_domain, component_mask_interface, exponent, scaling_domain, scaling_interface);
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
@@ -735,8 +737,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::make_constrain
 	all_ignore_constraints.merge(ignore_constraints, AffineConstraints<double>::MergeConflictBehavior::left_object_wins, true);
 	all_ignore_constraints.close();
 	all_constraints.reinit(assembly_helper.get_locally_relevant_indices());
+	this->constraints->set_time(global_data->get_t_ref(), global_data->get_t());
 	assembly_helper.make_dirichlet_constraints(	all_constraints,
 												this->constraints->get_dirichlet_constraints(),
+												this->constraints->get_point_constraints_domain(),
+												this->constraints->get_point_constraints_interface(),
+												this->constraints->get_point_constraints_C(),
 												all_ignore_constraints);
 	all_constraints.close();
 	all_constraints.merge(custom_constraints, AffineConstraints<double>::MergeConflictBehavior::no_conflicts_allowed, true);

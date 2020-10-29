@@ -1,0 +1,153 @@
+\hypertarget{classincremental_f_e_1_1_omega_electrical_loading}{}\doxysection{incremental\+FE\+::Omega\+Electrical\+Loading$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_electrical_loading}\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Electrical\+Loading$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classincremental_f_e_1_1_omega_electrical_loading__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Electrical\+Loading$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classincremental_f_e_1_1_omega_electrical_loading__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_aca773aecfe5b57714fb5c633513ae95e}{Omega\+Electrical\+Loading}} (const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$ \textbf{ C}, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}{global\+\_\+data}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}{alpha}})
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a44024c68177f639d43cb2302ee29c72f}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, double \&omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a93aad8c864f394c9bd96175360db9cb6}{j\+\_\+bar}} = 0.\+0
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a695e7c0d11f234fd178bad5ff68ba916}{phi}} = 0.\+0
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a5a8015330aeecc9073215e709d3107ec}{R\+\_\+el}} = 0.\+0
+\item 
+unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_ab46e1a903ac7e5d63ffaf9f4b4822c7a}{loading\+\_\+type}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Electrical\+Loading$<$ spacedim $>$}
+
+Class defining the following functions
+
+$ \omega^\mathrm{C} = -\dot{\bar{J}}\varphi$ for prescribed current loading (loading type J), $ \omega^\mathrm{C} = -\dot{J}(\varphi - \bar{\varphi})$ for prescribed voltage loading (loading type V), $ \omega^\mathrm{C} = - \dfrac{1}{2 R^\mathrm{el}} \varphi^2$ for discharging through electrical resistance $R^\mathrm{el}$ (loading type R),
+
+The loading type can be changed at any time by changing \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_ab46e1a903ac7e5d63ffaf9f4b4822c7a}{Omega\+Electrical\+Loading\+::loading\+\_\+type}}.
+
+Similarly, the prescribed current, the prescribed voltage, and the electrical resistance can be changed at any time by assigning the respective variables \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a93aad8c864f394c9bd96175360db9cb6}{Omega\+Electrical\+Loading\+::j\+\_\+bar}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a695e7c0d11f234fd178bad5ff68ba916}{Omega\+Electrical\+Loading\+::phi}}, and \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading_a5a8015330aeecc9073215e709d3107ec}{Omega\+Electrical\+Loading\+::\+R\+\_\+el}}.
+
+Ordering of quantities in Scalar\+Functional$<$0, spacedim$>$\+::C \+:~\newline
+ \mbox{[}0\mbox{]} $J$~\newline
+ \mbox{[}1\mbox{]} $\varphi$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_aca773aecfe5b57714fb5c633513ae95e}\label{classincremental_f_e_1_1_omega_electrical_loading_aca773aecfe5b57714fb5c633513ae95e}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!OmegaElectricalLoading@{OmegaElectricalLoading}}
+\index{OmegaElectricalLoading@{OmegaElectricalLoading}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaElectricalLoading()}{OmegaElectricalLoading()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{Omega\+Electrical\+Loading}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ const dealii\+::\+Galerkin\+Tools\+::\+Independent\+Field$<$ 0, spacedim $>$ $\ast$ $>$}]{C,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em C} & \textbf{ Total\+Potential\+Contribution\+::C}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}{Omega$<$0, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a0dbc5db5df3ec058f2d5a14b0cf517c1}{Omega$<$0, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4b4b8ff3c5b9976d3993f2c980ce2d97}{Omega$<$0, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_a44024c68177f639d43cb2302ee29c72f}\label{classincremental_f_e_1_1_omega_electrical_loading_a44024c68177f639d43cb2302ee29c72f}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{t,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+d2q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+This function defines $\omega^\mathrm{C}$ and needs to be implemented by classes inheriting from this class
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em values} & Values at which $\omega^\mathrm{C}$ and its derivatives are evaluated (in the order $\dot{v}$, $\dot{q}$, $\mu$, $q$)\\
+\hline
+\mbox{\texttt{ in}}  & {\em t} & Time at which $\omega^\mathrm{C}$ is evaluated\\
+\hline
+\mbox{\texttt{ out}}  & {\em omega} & Value of $\omega^\mathrm{C}$\\
+\hline
+\mbox{\texttt{ out}}  & {\em d\+\_\+omega} & Values of first derivatives of $\omega^\mathrm{C}$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order)\\
+\hline
+\mbox{\texttt{ out}}  & {\em d2\+\_\+omega} & Values of second derivatives of $\omega^\mathrm{C}$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order). If {\ttfamily compute\+\_\+d2q} == {\ttfamily true}, also the derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ need to be computed. In this case, {\ttfamily d2\+\_\+omega} is initialized to the size \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} x \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{Omega\+::n\+\_\+q}}, so that derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ can be stored in the rightmost part of the matrix.\\
+\hline
+\mbox{\texttt{ in}}  & {\em requested\+\_\+quantities} & Tuple indicating which of the quantities {\ttfamily omega}, {\ttfamily d\+\_\+omega}, {\ttfamily d2\+\_\+omega} are to be computed. Note that only those quantities are passed in initialized to the correct size, which are actually requested\\
+\hline
+\mbox{\texttt{ in}}  & {\em compute\+\_\+d2q} & If {\ttfamily true}, also compute second derivatives w.\+r.\+t. $q$\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} indicates that an error has occurred in the function 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ace9582d6e68158ec659efec34d46e912}{incremental\+F\+E\+::\+Omega$<$ 0, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_a93aad8c864f394c9bd96175360db9cb6}\label{classincremental_f_e_1_1_omega_electrical_loading_a93aad8c864f394c9bd96175360db9cb6}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!j\_bar@{j\_bar}}
+\index{j\_bar@{j\_bar}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{j\_bar}{j\_bar}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::j\+\_\+bar = 0.\+0}
+
+electrical current if loading type J \mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_ab46e1a903ac7e5d63ffaf9f4b4822c7a}\label{classincremental_f_e_1_1_omega_electrical_loading_ab46e1a903ac7e5d63ffaf9f4b4822c7a}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!loading\_type@{loading\_type}}
+\index{loading\_type@{loading\_type}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{loading\_type}{loading\_type}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::loading\+\_\+type = 0}
+
+0 \+: prescribed current (loading type J) 1 \+: prescribed voltage (loading type V) 2 \+: prescribed resistance (loading type R) \mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_a695e7c0d11f234fd178bad5ff68ba916}\label{classincremental_f_e_1_1_omega_electrical_loading_a695e7c0d11f234fd178bad5ff68ba916}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!phi@{phi}}
+\index{phi@{phi}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{phi}{phi}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::phi = 0.\+0}
+
+prescribed voltage if loading type V \mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrical_loading_a5a8015330aeecc9073215e709d3107ec}\label{classincremental_f_e_1_1_omega_electrical_loading_a5a8015330aeecc9073215e709d3107ec}} 
+\index{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}!R\_el@{R\_el}}
+\index{R\_el@{R\_el}!incrementalFE::OmegaElectricalLoading$<$ spacedim $>$@{incrementalFE::OmegaElectricalLoading$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{R\_el}{R\_el}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrical_loading}{incremental\+F\+E\+::\+Omega\+Electrical\+Loading}}$<$ spacedim $>$\+::R\+\_\+el = 0.\+0}
+
+prescribed resistance if loading type R 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

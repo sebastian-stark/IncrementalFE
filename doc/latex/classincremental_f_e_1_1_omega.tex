@@ -59,7 +59,7 @@ class incremental\+F\+E\+::\+Omega$<$ dim, spacedim $>$}
 
 Class defining the time discrete approximation of an interface related scalar functional with the integrand
 
-$ h^\Sigma_\tau = \omega(\dot{v}, \dot{q}, \mu, q; t) $,
+$ \omega^\Sigma = \omega^\Sigma(\dot{v}, \dot{q}, \mu, q; t) $,
 
 where $\dot{v}$, $\dot{q}$, $\mu$, and $q$ may be vectors.
 
@@ -124,23 +124,23 @@ see \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} \mbox{\Hypertarget{cla
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
 virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ dim, spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{t,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{omega,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+omega,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+omega,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+d2q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-This function defines $\omega$ and needs to be implemented by classes inheriting from this class
+This function defines $\omega^\Sigma$ and needs to be implemented by classes inheriting from this class
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em values} & Values at which $\omega$ and its derivatives are evaluated (in the order $\dot{v}$, $\dot{q}$, $\mu$, $q$)\\
+\mbox{\texttt{ in}}  & {\em values} & Values at which $\omega^\Sigma$ and its derivatives are evaluated (in the order $\dot{v}$, $\dot{q}$, $\mu$, $q$)\\
 \hline
-\mbox{\texttt{ in}}  & {\em t} & Time at which $\omega$ is evaluated\\
+\mbox{\texttt{ in}}  & {\em t} & Time at which $\omega^\Sigma$ is evaluated\\
 \hline
 \mbox{\texttt{ in}}  & {\em x} & Position\\
 \hline
 \mbox{\texttt{ in}}  & {\em n} & Normal vector\\
 \hline
-\mbox{\texttt{ out}}  & {\em omega} & Value of $\omega$\\
+\mbox{\texttt{ out}}  & {\em omega} & Value of $\omega^\Sigma$\\
 \hline
-\mbox{\texttt{ out}}  & {\em d\+\_\+omega} & Values of first derivatives of $\omega$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order)\\
+\mbox{\texttt{ out}}  & {\em d\+\_\+omega} & Values of first derivatives of $\omega^\Sigma$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order)\\
 \hline
-\mbox{\texttt{ out}}  & {\em d2\+\_\+omega} & Values of second derivatives of $\omega$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order). If {\ttfamily compute\+\_\+d2q} == {\ttfamily true}, also the derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ need to be computed. In this case, {\ttfamily d2\+\_\+omega} is initialized to the size \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} x \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{Omega\+::n\+\_\+q}}, so that derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ can be stored in the rightmost part of the matrix.\\
+\mbox{\texttt{ out}}  & {\em d2\+\_\+omega} & Values of second derivatives of $\omega^\Sigma$ w.\+r.\+t. $\dot{v}$, $\dot{q}$, $\mu$ (in this order). If {\ttfamily compute\+\_\+d2q} == {\ttfamily true}, also the derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ need to be computed. In this case, {\ttfamily d2\+\_\+omega} is initialized to the size \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} x \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804b0dc15726f3423332880}{Omega\+::n\+\_\+v\+\_\+q\+\_\+dot}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{Omega\+::n\+\_\+mu}} + \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{Omega\+::n\+\_\+q}}, so that derivatives of {\ttfamily d\+\_\+omega} w.\+r.\+t. $q$ can be stored in the rightmost part of the matrix.\\
 \hline
 \mbox{\texttt{ in}}  & {\em requested\+\_\+quantities} & Tuple indicating which of the quantities {\ttfamily omega}, {\ttfamily d\+\_\+omega}, {\ttfamily d2\+\_\+omega} are to be computed. Note that only those quantities are passed in initialized to the correct size, which are actually requested\\
 \hline
@@ -152,7 +152,7 @@ This function defines $\omega$ and needs to be implemented by classes inheriting
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_omega_interface_flux_dissipation00_ac0fd530029ec25b4684f1c2e644362b8}{incremental\+F\+E\+::\+Omega\+Interface\+Flux\+Dissipation00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux00_a9ae9e272e911ebe50c2eee73c75ec4ad}{incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_displacement_coupling00_af4d521887a8dad96e5f76f21fd7a5f1e}{incremental\+F\+E\+::\+Omega\+Displacement\+Coupling00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_abfe801c8e442fdd7f93247abb6d67a1a}{incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power00_afaa7da6d5f94c687383b53448b58b4e3}{incremental\+F\+E\+::\+Omega\+Flux\+Power00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a8cee1ed8dec328c9cc6ee1218004ea27}{incremental\+F\+E\+::\+Omega\+Electrolysis00$<$ spacedim $>$}}, and \mbox{\hyperlink{classincremental_f_e_1_1_omega_traction00_a368e582df0d5edb5251f89c8c77f9ca3}{incremental\+F\+E\+::\+Omega\+Traction00$<$ spacedim $>$}}.
+Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_omega_interface_flux_dissipation00_ac0fd530029ec25b4684f1c2e644362b8}{incremental\+F\+E\+::\+Omega\+Interface\+Flux\+Dissipation00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux00_a9ae9e272e911ebe50c2eee73c75ec4ad}{incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux2_d00_abb0d4658e864dc6e53d765fa0996afa7}{incremental\+F\+E\+::\+Omega\+Zero\+Tangential\+Flux2\+D00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_displacement_coupling00_af4d521887a8dad96e5f76f21fd7a5f1e}{incremental\+F\+E\+::\+Omega\+Displacement\+Coupling00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_butler_volmer00_abfe801c8e442fdd7f93247abb6d67a1a}{incremental\+F\+E\+::\+Omega\+Dual\+Butler\+Volmer00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power00_afaa7da6d5f94c687383b53448b58b4e3}{incremental\+F\+E\+::\+Omega\+Flux\+Power00$<$ spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a8cee1ed8dec328c9cc6ee1218004ea27}{incremental\+F\+E\+::\+Omega\+Electrolysis00$<$ spacedim $>$}}, and \mbox{\hyperlink{classincremental_f_e_1_1_omega_traction00_a368e582df0d5edb5251f89c8c77f9ca3}{incremental\+F\+E\+::\+Omega\+Traction00$<$ spacedim $>$}}.
 
 
 

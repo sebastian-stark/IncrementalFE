@@ -32,9 +32,34 @@ Constraints<spacedim>::~Constraints()
 
 template<unsigned int spacedim>
 void
-Constraints<spacedim>::add_dirichlet_constraint(const DirichletConstraint<spacedim>& dirichlet_constraint)
+Constraints<spacedim>::add_dirichlet_constraint(const DirichletConstraint<spacedim>& 	dirichlet_constraint,
+												const double 							eval_time)
 {
-	dirichlet_constraints.push_back(&dirichlet_constraint);
+	dirichlet_constraints.push_back(make_pair(&dirichlet_constraint, eval_time));
+}
+
+template<unsigned int spacedim>
+void
+Constraints<spacedim>::add_point_constraint(const PointConstraint<spacedim, spacedim>& 	point_constraint,
+											const double 								eval_time)
+{
+	point_constraints_domain.push_back(make_pair(&point_constraint, eval_time));
+}
+
+template<unsigned int spacedim>
+void
+Constraints<spacedim>::add_point_constraint(const PointConstraint<spacedim-1, spacedim>& 	point_constraint,
+											const double 									eval_time)
+{
+	point_constraints_interface.push_back(make_pair(&point_constraint, eval_time));
+}
+
+template<unsigned int spacedim>
+void
+Constraints<spacedim>::add_point_constraint(const PointConstraint<0, spacedim>& 	point_constraint,
+											const double 							eval_time)
+{
+	point_constraints_C.push_back(make_pair(&point_constraint, eval_time));
 }
 
 template<unsigned int spacedim>
@@ -44,7 +69,40 @@ const
 {
 	vector< const DirichletConstraint<spacedim>* > return_;
 	for(const auto& constraint : dirichlet_constraints)
-		return_.push_back(constraint);
+		return_.push_back(constraint.first);
+	return return_;
+}
+
+template<unsigned int spacedim>
+const vector< const PointConstraint<spacedim, spacedim>* >
+Constraints<spacedim>::get_point_constraints_domain()
+const
+{
+	vector< const PointConstraint<spacedim, spacedim>* > return_;
+	for(const auto& constraint : point_constraints_domain)
+		return_.push_back(constraint.first);
+	return return_;
+}
+
+template<unsigned int spacedim>
+const vector< const PointConstraint<spacedim-1, spacedim>* >
+Constraints<spacedim>::get_point_constraints_interface()
+const
+{
+	vector< const PointConstraint<spacedim-1, spacedim>* > return_;
+	for(const auto& constraint : point_constraints_interface)
+		return_.push_back(constraint.first);
+	return return_;
+}
+
+template<unsigned int spacedim>
+const vector< const PointConstraint<0, spacedim>* >
+Constraints<spacedim>::get_point_constraints_C()
+const
+{
+	vector< const PointConstraint<0, spacedim>* > return_;
+	for(const auto& constraint : point_constraints_C)
+		return_.push_back(constraint.first);
 	return return_;
 }
 
@@ -56,12 +114,49 @@ const
 	set< const IndependentField<0, spacedim>* > ret;
 	for(const auto& constraint : dirichlet_constraints)
 	{
-		if(constraint->independent_scalar != nullptr)
-			ret.insert(constraint->independent_scalar);
+		if(constraint.first->independent_scalar != nullptr)
+			ret.insert(constraint.first->independent_scalar);
 	}
+	for(const auto& constraint : point_constraints_C)
+	{
+		ret.insert(constraint.first->independent_field);
+	}
+
 	return ret;
 }
 
-template class Constraints<2>;
-template class Constraints<3>;
+template<unsigned int spacedim>
+void
+Constraints<spacedim>::set_time(const double begin_time_step,
+								const double end_time_step)
+const
+{
+	for(const auto& constraint : dirichlet_constraints)
+	{
+		const double t = begin_time_step + constraint.second * (end_time_step - begin_time_step);
+		constraint.first->set_time(t);
+	}
+
+	for(const auto& constraint : point_constraints_domain)
+	{
+		const double t = begin_time_step + constraint.second * (end_time_step - begin_time_step);
+		constraint.first->set_time(t);
+	}
+
+	for(const auto& constraint : point_constraints_interface)
+	{
+		const double t = begin_time_step + constraint.second * (end_time_step - begin_time_step);
+		constraint.first->set_time(t);
+	}
+
+	for(const auto& constraint : point_constraints_C)
+	{
+		const double t = begin_time_step + constraint.second * (end_time_step - begin_time_step);
+		constraint.first->set_time(t);
+	}
+
+}
+
+template class incrementalFE::Constraints<2>;
+template class incrementalFE::Constraints<3>;
 
