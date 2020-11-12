@@ -59,6 +59,12 @@ private:
 public:
 
 	/**
+	 * if this is true, ScalarFunctional::get_h_sigma() will always return the value of the potential independent of what alpha is used.
+	 */
+	bool
+	always_compute_potential_value = false;
+
+	/**
 	 * Constructor
 	 *
 	 * @param[in]		e_sigma					Dependent fields \f$q\f$
@@ -161,6 +167,12 @@ private:
 	alpha;
 
 public:
+
+	/**
+	 * if this is true, ScalarFunctional<spacedim, spacedim>::get_h_omega() will always return the value of the potential independent of what alpha is used.
+	 */
+	bool
+	always_compute_potential_value = false;
 
 	/**
 	 * Constructor

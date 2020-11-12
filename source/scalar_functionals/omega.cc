@@ -130,7 +130,7 @@ const
 	// sort into return quantities
 	if(get<0>(requested_quantities))
 	{
-		if(method != 1)
+		if((method != 1) && compute_potential_value)
 			h_omega = dt * omega;
 		else
 			h_omega = 0.0;
@@ -273,7 +273,7 @@ const
 	// sort into return quantities
 	if(get<0>(requested_quantities))
 	{
-		if(method != 1)
+		if((method != 1) && compute_potential_value)
 			h_sigma = dt * sigma;
 		else
 			h_sigma = 0.0;
@@ -415,7 +415,7 @@ const
 	// sort into return quantities
 	if(get<0>(requested_quantities))
 	{
-		if(method != 1)
+		if((method != 1) && compute_potential_value)
 			Pi = dt * omega;
 		else
 			Pi = 0.0;

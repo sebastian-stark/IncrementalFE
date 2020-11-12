@@ -79,7 +79,10 @@ const
 		}
 
 		if(get<0>(requested_quantities))
-			h_omega = h_omega * alpha + ( h_omega_ref + h_omega_1_ref * e_omega - h_omega_1_ref * e_omega_ref_sets[0] ) * (1. - alpha);
+		{
+			if(!always_compute_potential_value)
+				h_omega = h_omega * alpha + ( h_omega_ref + h_omega_1_ref * e_omega - h_omega_1_ref * e_omega_ref_sets[0] ) * (1. - alpha);
+		}
 
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_omega.size(); ++m)
@@ -145,7 +148,10 @@ const
 		}
 
 		if(get<0>(requested_quantities))
-			h_sigma = h_sigma * alpha + ( h_sigma_ref + h_sigma_1_ref * e_sigma - h_sigma_1_ref * e_sigma_ref_sets[0] ) * (1. - alpha);
+		{
+			if(!always_compute_potential_value)
+				h_sigma = h_sigma * alpha + ( h_sigma_ref + h_sigma_1_ref * e_sigma - h_sigma_1_ref * e_sigma_ref_sets[0] ) * (1. - alpha);
+		}
 
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_sigma.size(); ++m)
@@ -158,7 +164,7 @@ const
 	return false;
 }
 
-template class Psi<2,2>;
-template class Psi<3,3>;
-template class Psi<1,2>;
-template class Psi<2,3>;
+template class incrementalFE::Psi<2,2>;
+template class incrementalFE::Psi<3,3>;
+template class incrementalFE::Psi<1,2>;
+template class incrementalFE::Psi<2,3>;

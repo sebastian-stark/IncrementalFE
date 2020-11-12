@@ -90,6 +90,12 @@ public:
 	n_q;
 
 	/**
+	 * indicates whether potential value is to be computed when ScalarFunctional::get_h_sigma() is called
+	 */
+	bool
+	compute_potential_value = true;
+
+	/**
 	 * Constructor
 	 *
 	 * @param[in]		e_sigma					Dependent fields (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
@@ -246,6 +252,12 @@ public:
 	 */
 	const unsigned int
 	n_q;
+
+	/**
+	 * indicates whether potential value is to be computed when ScalarFunctional<spacedim, spacedim>::get_h_omega() is called
+	 */
+	bool
+	compute_potential_value = true;
 
 	/**
 	 * Constructor
@@ -418,6 +430,12 @@ public:
 	 */
 	const unsigned int
 	n_q;
+
+	/**
+	 * indicates whether potential value is to be computed when TotalPotentialContribution::get_potential_contribution() is called
+	 */
+	bool
+	compute_potential_value = true;
 
 	/**
 	 * Constructor

@@ -190,6 +190,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		zero_ghosts(delta_solution);
 		constraints.distribute(delta_solution);
 		update_ghosts(delta_solution);
+		update_ghosts(solution_ref);
 		adjust_delta_solution(delta_solution, solution_ref, constraints);
 		solution += delta_solution;
 		adjust_constraint_inhomogeneity(constraints);
@@ -297,7 +298,11 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 
 		// compute maximum step size and adjust delta_solution accordingly (this avoids that an inadmissible solution is obtained)
 		if(!global_data->force_linear)
+		{
+			update_ghosts(delta_solution);
+			update_ghosts(solution_ref);
 			adjust_delta_solution(delta_solution, solution_ref, constraints);
+		}
 
 		// update solution
 		solution += delta_solution;
