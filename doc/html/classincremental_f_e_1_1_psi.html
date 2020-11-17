@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_psi-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -105,6 +106,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2622e8f84590e8a821984181e31fbc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4e1abcaff9497eac5eb3c953f2c303a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ab4e1abcaff9497eac5eb3c953f2c303a">get_h_sigma</a> (const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_sigma, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_sigma_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;n, double &amp;h_sigma, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_sigma_1, dealii::FullMatrix&lt; double &gt; &amp;h_sigma_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
 <tr class="separator:ab4e1abcaff9497eac5eb3c953f2c303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a17bf6a889ca06a4079541339c4d34cd8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a17bf6a889ca06a4079541339c4d34cd8">always_compute_potential_value</a> = false</td></tr>
+<tr class="separator:a17bf6a889ca06a4079541339c4d34cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -404,6 +410,23 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Numerical parameter between <code>0</code> and <code>1</code>. </p>
+
+</div>
+</div>
+<a id="a17bf6a889ca06a4079541339c4d34cd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17bf6a889ca06a4079541339c4d34cd8">&#9670;&nbsp;</a></span>always_compute_potential_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::always_compute_potential_value = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>if this is true, <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a1b9874b2fd591c844ecfcd1db8212c54">ScalarFunctional::get_h_sigma()</a> will always return the value of the potential independent of what alpha is used. </p>
 
 </div>
 </div>

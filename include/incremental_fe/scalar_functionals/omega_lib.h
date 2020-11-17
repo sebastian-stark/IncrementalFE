@@ -1201,7 +1201,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.
  *
- * \f$ \omega^\Omega =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
+ * \f$ \omega^\Omega =	-\dfrac{D c J}{2 c^\mathrm{f} V^\mathrm{f}_\mathrm{m}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
  *
  * where \f$c\f$ is the species concentration,<br>
  * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
@@ -1214,8 +1214,6 @@ public:
  * The "mobility" \f$D\f$ is related to the usual "diffusion constant" \f$ \bar D \f$ by \f$D = \bar D/(RT)\f$.
  * Moreover, it is related to the electrical mobility \f$\mu\f$ by \f$ D = \mu n/F\f$, where \f$n\f$ is the charge per
  * molecule of the mobile species in multiples of the elementary charge and \f$F\f$ Faraday's constant.
- *
- * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{c}\f$<br>
  * 																				[1]  \f$\eta_{,x}\f$<br>
@@ -1304,9 +1302,6 @@ public:
 	const
 	{
 
-		(void)compute_dq;
-		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
-
 		const double c_dot = values[0];
 		dealii::Tensor<1,3> grad_eta;
 		for(unsigned int m = 0; m < 3; ++m)
@@ -1320,9 +1315,10 @@ public:
 				F[m][n] = values[7 + m * 3 + n];
 		C = transpose(F) * F;
 		C_inv = invert(C);
-		const double n_f = c_f / determinant(F) * V_m_f;
-		const dealii::Tensor<1, 3> C_inv_grad_eta = C_inv * grad_eta;
-		const double grad_eta_C_inv_grad_eta = C_inv_grad_eta * grad_eta;
+		const double J = determinant(F);
+		const double n_f = c_f / J * V_m_f;
+		const dealii::Tensor<1, 3> A = C_inv * grad_eta;
+		const double grad_eta_C_inv_grad_eta = A * grad_eta;
 
 		if(get<0>(requested_quantities))
 		{
@@ -1333,17 +1329,38 @@ public:
 		{
 			d_omega[0] = -eta;
 			for(unsigned int m = 0; m < 3; ++m)
-				d_omega[m + 1] = -D * c / n_f * C_inv_grad_eta[m];
+				d_omega[m + 1] = -D * c / n_f * A[m];
 			d_omega[4] = -c_dot;
 		}
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega.reinit(5,5);
+			d2_omega = 0.0;
 			for(unsigned int m = 0; m < 3; ++m)
 				for(unsigned int n = 0; n < 3; ++n)
 					d2_omega(m + 1, n + 1) = -D * c / n_f * C_inv[m][n];
 			d2_omega(0, 4) = d2_omega(4, 0) = -1.0;
+
+			if(compute_dq)
+			{
+				const dealii::Tensor<1,3> F_A = F * A;
+				const dealii::Tensor<2,3> F_C_inv = F * C_inv;
+				dealii::Vector<double> F_vect(9), dJ_dF(9);
+				for(unsigned i = 0; i < 9; ++i)
+					F_vect[i] = values[7 + i];
+				get_dJ_dF(F_vect, dJ_dF);
+
+				for(unsigned int L = 0; L < 3; ++L)
+				{
+					for(unsigned int m = 0; m < 3; ++m)
+						for(unsigned int M = 0; M < 3; ++M)
+							d2_omega[1 + L][7 + m * 3 + M] = (- D / V_m_f * A[L] * dJ_dF[m * 3 + M] + D * J / V_m_f * (C_inv[L][M] * F_A[m] + A[M] * F_C_inv[m][L] ) ) * c / c_f;
+					d2_omega[1 + L][5] = - D * J / V_m_f * 1.0 / c_f * A[L];
+					d2_omega[1 + L][6] = D * J / V_m_f * c / c_f / c_f * A[L];
+				}
+			}
+
+
 		}
 
 		return false;
@@ -1356,7 +1373,7 @@ public:
 /**
  * Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.
  *
- * \f$ \omega^\Omega =	-\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
+ * \f$ \omega^\Omega =	-\dfrac{D c J}{2 c^\mathrm{f} V^\mathrm{f}_\mathrm{m}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} \f$,
  *
  * where \f$c\f$ is the species concentration,<br>
  * \f$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}\f$ the fluid concentration, with \f$n_0\f$ being a material parameter,<br>
@@ -1533,8 +1550,6 @@ public:
  * \f$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}\f$,<br>
  * and \f$D\f$ a "fluid mobility".
  *
- * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
- *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  				\f$\dot{c}^\mathrm{f}\f$<br>
  * 																				[1]  				\f$\eta^\mathrm{f}_{,x}\f$<br>
  * 																				[2]  				\f$\eta^\mathrm{f}_{,y}\f$<br>
@@ -1624,10 +1639,6 @@ public:
 								const bool							compute_dq)
 	const
 	{
-
-		(void)compute_dq;
-		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
-
 		// start indices for respective quantities
 		const unsigned int i_c_f_dot = 0;
 		const unsigned int i_grad_eta_f = 1;
@@ -1648,12 +1659,21 @@ public:
 		for(unsigned int i = 0; i < I; ++i)
 			c_i[i] = values[i_c_i[i]];
 
-		dealii::Tensor<1,3> grad_eta;
+		dealii::Tensor<1,3> grad_eta, grad_eta_f;
+		std::vector<dealii::Tensor<1,3>> grad_eta_i(I);
 		for(unsigned int m = 0; m < 3; ++m)
+		{
 			grad_eta[m] = values[i_grad_eta_f + m];
+			grad_eta_f[m] = values[i_grad_eta_f + m];
+		}
 		for(unsigned int i = 0; i < I; ++i)
+		{
 			for(unsigned int m = 0; m < 3; ++m)
+			{
 				grad_eta[m] += c_i[i]/c_f * values[i_grad_eta_i[i] + m];
+				grad_eta_i[i][m] = values[i_grad_eta_i[i] + m];
+			}
+		}
 
 		const double eta_f = values[i_eta_f];
 
@@ -1665,8 +1685,9 @@ public:
 		C_inv = invert(C);
 		const dealii::Tensor<1, 3> C_inv_grad_eta = C_inv * grad_eta;
 		const double grad_eta_C_inv_grad_eta = C_inv_grad_eta * grad_eta;
+		const double J = determinant(F);
 
-		const double  K = D * determinant(F) / V_m_f;
+		const double  K = D * J / V_m_f;
 
 		if(get<0>(requested_quantities))
 		{
@@ -1687,7 +1708,7 @@ public:
 
 		if(get<2>(requested_quantities))
 		{
-			d2_omega.reinit(5 + 3*I, 5 + 3*I);
+			d2_omega = 0.0;
 
 			d2_omega[i_c_f_dot][i_eta_f] = d2_omega[i_eta_f][i_c_f_dot] = -1.0;
 
@@ -1703,6 +1724,47 @@ public:
 							d2_omega[i_grad_eta_i[i] + n][i_grad_eta_i[j] + m] = -K * C_inv[m][n] * (c_i[i] / c_f) * (c_i[j] / c_f);
 					}
 				}
+			}
+
+			if(compute_dq)
+			{
+				const dealii::Tensor<1,3> A = C_inv * grad_eta;
+				const dealii::Tensor<1,3> F_A = F * A;
+				const dealii::Tensor<2,3> F_C_inv = F * C_inv;
+				dealii::Vector<double> F_vect(9), dJ_dF(9);
+				for(unsigned i = 0; i < 9; ++i)
+					F_vect[i] = values[i_F + i];
+				get_dJ_dF(F_vect, dJ_dF);
+				dealii::Tensor<1,3> C_inv_sum_c_i_c_f_grad_eta_i;
+				for(unsigned int L = 0; L < 3; ++L)
+					for(unsigned int i = 0; i < I; ++i)
+						C_inv_sum_c_i_c_f_grad_eta_i[L] += c_i[i]/c_f * grad_eta_i[i][L];
+				C_inv_sum_c_i_c_f_grad_eta_i = C_inv * C_inv_sum_c_i_c_f_grad_eta_i;
+
+				for(unsigned int L = 0; L < 3; ++L)
+				{
+					for(unsigned int m = 0; m < 3; ++m)
+					{
+						for(unsigned int M = 0; M < 3; ++M)
+						{
+							d2_omega[i_grad_eta_f + L][i_F + m * 3 + M] = - D / V_m_f * A[L] * dJ_dF[m * 3 + M] + K * (C_inv[L][M] * F_A[m] + A[M] * F_C_inv[m][L] );
+							for(unsigned int i = 0; i < I; ++i)
+								d2_omega[i_grad_eta_i[i] + L][i_F + m * 3 + M] = d2_omega[i_grad_eta_f + L][i_F + m * 3 + M] * c_i[i] / c_f;
+						}
+					}
+					d2_omega[i_grad_eta_f + L][i_c_f] = 1.0 / c_f * K * C_inv_sum_c_i_c_f_grad_eta_i[L];
+					for(unsigned int i = 0; i < I; ++i)
+						d2_omega[i_grad_eta_i[i] + L][i_c_f] = K * (C_inv_sum_c_i_c_f_grad_eta_i[L] + A[L]) * c_i[i] / c_f / c_f;
+					for(unsigned int j = 0; j < I; ++j)
+					{
+						const dealii::Tensor<1,3> C_inv_grad_eta_j = C_inv * grad_eta_i[j];
+						d2_omega[i_grad_eta_f + L][i_c_i[j]] = -K * C_inv_grad_eta_j[L] / c_f;
+						for(unsigned int i = 0; i < I; ++i)
+							d2_omega[i_grad_eta_i[i] + L][i_c_i[j]] = -K * C_inv_grad_eta_j[L] * c_i[i] / c_f / c_f;
+						d2_omega[i_grad_eta_i[j] + L][i_c_i[j]] += -K * A[L] / c_f;
+					}
+				}
+
 			}
 		}
 

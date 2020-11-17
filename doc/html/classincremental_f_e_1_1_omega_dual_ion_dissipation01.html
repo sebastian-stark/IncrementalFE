@@ -129,13 +129,15 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a7f1db416dd6b487504856959c7253b53 inherit pub_attribs_classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a708fdb9951f4879eaa020219f19db115 inherit pub_attribs_classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a708fdb9951f4879eaa020219f19db115">n_q</a></td></tr>
 <tr class="separator:a708fdb9951f4879eaa020219f19db115 inherit pub_attribs_classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bdff9a76b27753ce791e612c04931ee inherit pub_attribs_classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a9bdff9a76b27753ce791e612c04931ee">compute_potential_value</a> = true</td></tr>
+<tr class="separator:a9bdff9a76b27753ce791e612c04931ee inherit pub_attribs_classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int spacedim&gt;<br />
 class incrementalFE::OmegaDualIonDissipation01&lt; spacedim &gt;</h3>
 
 <p>Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.</p>
-<p><img class="formulaInl" alt="$ \omega^\Omega = -\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $" src="form_222.png"/>,</p>
+<p><img class="formulaInl" alt="$ \omega^\Omega = -\dfrac{D c J}{2 c^\mathrm{f} V^\mathrm{f}_\mathrm{m}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $" src="form_277.png"/>,</p>
 <p>where <img class="formulaInl" alt="$c$" src="form_9.png"/> is the species concentration,<br  />
  <img class="formulaInl" alt="$c^\mathrm{f} = \dfrac{J-n_0}{V^\mathrm{f}_\mathrm{m}}$" src="form_223.png"/> the fluid concentration, with <img class="formulaInl" alt="$n_0$" src="form_175.png"/> being a material parameter,<br  />
  <img class="formulaInl" alt="$\eta$" src="form_26.png"/> the electrochemical potential corresponding to <img class="formulaInl" alt="$c$" src="form_9.png"/>,<br  />

@@ -116,6 +116,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aa57bdaa8fe076404a2a6c687717d38c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6e0ca6e8eb4d3aa0ae121d819cff4d8"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4.html#ab6e0ca6e8eb4d3aa0ae121d819cff4d8">n_q</a></td></tr>
 <tr class="separator:ab6e0ca6e8eb4d3aa0ae121d819cff4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4603c196301f95ae03d16198b5cd6260"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4.html#a4603c196301f95ae03d16198b5cd6260">compute_potential_value</a> = true</td></tr>
+<tr class="separator:a4603c196301f95ae03d16198b5cd6260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -428,6 +430,23 @@ template&lt;unsigned int spacedim&gt; </div>
 </div><div class="memdoc">
 <p>Numerical parameter between <code>0</code> and <code>1</code>.</p>
 <p>This parameter is only used for the <img class="formulaInl" alt="$\alpha$" src="form_5.png"/>-family and the modified <img class="formulaInl" alt="$\alpha$" src="form_5.png"/>-family </p>
+
+</div>
+</div>
+<a id="a4603c196301f95ae03d16198b5cd6260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4603c196301f95ae03d16198b5cd6260">&#9670;&nbsp;</a></span>compute_potential_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; 0, spacedim &gt;::compute_potential_value = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>indicates whether potential value is to be computed when <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_total_potential_contribution.html#a0d281fceeb90ece5c4d2655df5eb9948">TotalPotentialContribution::get_potential_contribution()</a> is called </p>
 
 </div>
 </div>

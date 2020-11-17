@@ -41,6 +41,8 @@ const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01sp
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_aa57bdaa8fe076404a2a6c687717d38c3}{n\+\_\+mu}}
 \item 
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_ab6e0ca6e8eb4d3aa0ae121d819cff4d8}{n\+\_\+q}}
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4603c196301f95ae03d16198b5cd6260}{compute\+\_\+potential\+\_\+value}} = true
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -169,7 +171,14 @@ const double \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\
 
 Numerical parameter between {\ttfamily 0} and {\ttfamily 1}.
 
-This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}} 
+This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4603c196301f95ae03d16198b5cd6260}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a4603c196301f95ae03d16198b5cd6260}} 
+\index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!compute\_potential\_value@{compute\_potential\_value}}
+\index{compute\_potential\_value@{compute\_potential\_value}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_potential\_value}{compute\_potential\_value}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ 0, spacedim $>$\+::compute\+\_\+potential\+\_\+value = true}
+
+indicates whether potential value is to be computed when \textbf{ Total\+Potential\+Contribution\+::get\+\_\+potential\+\_\+contribution()} is called \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}\label{classincremental_f_e_1_1_omega_3_010_00_01spacedim_01_4_a01b6835b2f31ed622c67a6efc7d754d5}} 
 \index{incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}!global\_data@{global\_data}}
 \index{global\_data@{global\_data}!incrementalFE::Omega$<$ 0, spacedim $>$@{incrementalFE::Omega$<$ 0, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}

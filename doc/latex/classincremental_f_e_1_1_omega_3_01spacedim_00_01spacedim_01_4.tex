@@ -41,6 +41,8 @@ const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a7f1db416dd6b487504856959c7253b53}{n\+\_\+mu}}
 \item 
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a708fdb9951f4879eaa020219f19db115}{n\+\_\+q}}
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a9bdff9a76b27753ce791e612c04931ee}{compute\+\_\+potential\+\_\+value}} = true
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -164,7 +166,14 @@ const double \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\
 
 Numerical parameter between {\ttfamily 0} and {\ttfamily 1}.
 
-This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}\label{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}} 
+This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a9bdff9a76b27753ce791e612c04931ee}\label{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a9bdff9a76b27753ce791e612c04931ee}} 
+\index{incrementalFE::Omega$<$ spacedim, spacedim $>$@{incrementalFE::Omega$<$ spacedim, spacedim $>$}!compute\_potential\_value@{compute\_potential\_value}}
+\index{compute\_potential\_value@{compute\_potential\_value}!incrementalFE::Omega$<$ spacedim, spacedim $>$@{incrementalFE::Omega$<$ spacedim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_potential\_value}{compute\_potential\_value}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ spacedim, spacedim $>$\+::compute\+\_\+potential\+\_\+value = true}
+
+indicates whether potential value is to be computed when \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+h\+\_\+omega()} is called \mbox{\Hypertarget{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}\label{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}} 
 \index{incrementalFE::Omega$<$ spacedim, spacedim $>$@{incrementalFE::Omega$<$ spacedim, spacedim $>$}!global\_data@{global\_data}}
 \index{global\_data@{global\_data}!incrementalFE::Omega$<$ spacedim, spacedim $>$@{incrementalFE::Omega$<$ spacedim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}

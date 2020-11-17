@@ -45,7 +45,7 @@ class incremental\+F\+E\+::\+Omega\+Dual\+Ion\+Dissipation00$<$ spacedim $>$}
 
 Class defining dual dissipation associated with flux of ions through fluid, which itself possibly flows through solid skeleton.
 
-$ \omega^\Omega = -\dfrac{D c J V^\mathrm{f}_\mathrm{m}}{2 c^\mathrm{f}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $,
+$ \omega^\Omega = -\dfrac{D c J}{2 c^\mathrm{f} V^\mathrm{f}_\mathrm{m}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $,
 
 where $c$ is the species concentration,~\newline
  $c^\mathrm{f}$ the fluid concentration,~\newline
@@ -57,9 +57,6 @@ where $c$ is the species concentration,~\newline
 
 The \char`\"{}mobility\char`\"{} $D$ is related to the usual \char`\"{}diffusion constant\char`\"{} $ \bar D $ by $D = \bar D/(RT)$. Moreover, it is related to the electrical mobility $\mu$ by $ D = \mu n/F$, where $n$ is the charge per molecule of the mobile species in multiples of the elementary charge and $F$ Faraday\textquotesingle{}s constant.
 
-\begin{DoxyWarning}{Warning}
-Currently, the derivatives required for the $\alpha$-\/family for temporal discretization are not implemented!
-\end{DoxyWarning}
 Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
 \mbox{[}0\mbox{]} $\dot{c}$~\newline
  \mbox{[}1\mbox{]} $\eta_{,x}$~\newline

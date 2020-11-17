@@ -33,6 +33,11 @@ virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spa
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_ac4ea5fab83e51805dc405517cb35570b}{get\+\_\+h\+\_\+omega}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+omega, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+omega\+\_\+ref\+\_\+sets, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, double \&h\+\_\+omega, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+omega\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+omega\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a1b7f147df4dbc0c3f61925f118cc24b2}{always\+\_\+compute\+\_\+potential\+\_\+value}} = false
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -135,7 +140,14 @@ Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_psi_neo_hooke_lagrange0
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 const double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ spacedim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
 
-Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}\label{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}} 
+Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a1b7f147df4dbc0c3f61925f118cc24b2}\label{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a1b7f147df4dbc0c3f61925f118cc24b2}} 
+\index{incrementalFE::Psi$<$ spacedim, spacedim $>$@{incrementalFE::Psi$<$ spacedim, spacedim $>$}!always\_compute\_potential\_value@{always\_compute\_potential\_value}}
+\index{always\_compute\_potential\_value@{always\_compute\_potential\_value}!incrementalFE::Psi$<$ spacedim, spacedim $>$@{incrementalFE::Psi$<$ spacedim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{always\_compute\_potential\_value}{always\_compute\_potential\_value}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ spacedim, spacedim $>$\+::always\+\_\+compute\+\_\+potential\+\_\+value = false}
+
+if this is true, \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::get\+\_\+h\+\_\+omega()} will always return the value of the potential independent of what alpha is used. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}\label{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_abf0a4804877fd7cc9bd1b90e52760ba9}} 
 \index{incrementalFE::Psi$<$ spacedim, spacedim $>$@{incrementalFE::Psi$<$ spacedim, spacedim $>$}!global\_data@{global\_data}}
 \index{global\_data@{global\_data}!incrementalFE::Psi$<$ spacedim, spacedim $>$@{incrementalFE::Psi$<$ spacedim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}

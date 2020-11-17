@@ -41,6 +41,8 @@ const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7fa938b26804
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{n\+\_\+mu}}
 \item 
 const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{n\+\_\+q}}
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_ac4bf419234cfacc3b7de36f39a36135a}{compute\+\_\+potential\+\_\+value}} = true
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -166,7 +168,14 @@ const double \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\
 
 Numerical parameter between {\ttfamily 0} and {\ttfamily 1}.
 
-This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}\label{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}} 
+This parameter is only used for the $\alpha$-\/family and the modified $\alpha$-\/family \mbox{\Hypertarget{classincremental_f_e_1_1_omega_ac4bf419234cfacc3b7de36f39a36135a}\label{classincremental_f_e_1_1_omega_ac4bf419234cfacc3b7de36f39a36135a}} 
+\index{incrementalFE::Omega$<$ dim, spacedim $>$@{incrementalFE::Omega$<$ dim, spacedim $>$}!compute\_potential\_value@{compute\_potential\_value}}
+\index{compute\_potential\_value@{compute\_potential\_value}!incrementalFE::Omega$<$ dim, spacedim $>$@{incrementalFE::Omega$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_potential\_value}{compute\_potential\_value}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega}{incremental\+F\+E\+::\+Omega}}$<$ dim, spacedim $>$\+::compute\+\_\+potential\+\_\+value = true}
+
+indicates whether potential value is to be computed when \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma()} is called \mbox{\Hypertarget{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}\label{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}} 
 \index{incrementalFE::Omega$<$ dim, spacedim $>$@{incrementalFE::Omega$<$ dim, spacedim $>$}!global\_data@{global\_data}}
 \index{global\_data@{global\_data}!incrementalFE::Omega$<$ dim, spacedim $>$@{incrementalFE::Omega$<$ dim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}
