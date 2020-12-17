@@ -61,7 +61,7 @@ n_q(n_q)
 
 template<unsigned int spacedim>
 bool
-Omega<spacedim, spacedim>::get_h_omega(	const Vector<double>&			e_omega,
+Omega<spacedim, spacedim>::get_h_omega(	Vector<double>&					e_omega,
 										const vector<Vector<double>>&	e_omega_ref_sets,
 										Vector<double>&					hidden_vars,
 										const Point<spacedim>&			x,
@@ -203,7 +203,7 @@ n_q(n_q)
 
 template<unsigned int dim, unsigned int spacedim>
 bool
-Omega<dim, spacedim>::get_h_sigma(	const Vector<double>& 			e_sigma,
+Omega<dim, spacedim>::get_h_sigma(	Vector<double>& 				e_sigma,
 									const vector<Vector<double>>&	e_sigma_ref_sets,
 									Vector<double>& 				hidden_vars,
 									const Point<spacedim>& 			x,

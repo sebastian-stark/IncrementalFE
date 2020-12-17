@@ -251,6 +251,39 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		Assert(false, ExcMessage("Break"));
 		*/
 
+
+
+		/*		FILE* printout = fopen ("K_2.dat","w");
+				for (unsigned int row = 0; row < K.m(); ++row)
+				{
+					for(auto p = K.begin(row); p != K.end(row); ++p)
+					{
+						fprintf(printout, "%i %i %- 1.16e\n", p->row(), p->column(), std::real(p->value()));
+					}
+				}
+				fclose(printout);
+		*/
+
+		// begin print the system for diagnosis
+/*		const auto& A = system_matrix.get_A();
+		const auto& f = rhs.block(0);
+		vector<unsigned int> components;
+		assembly_helper.get_dof_handler_system().get_map_dof_index_component_domain(components);
+		FILE* printout = fopen ("A.dat","w");
+		for (unsigned int row = 0; row < A.m(); ++row)
+		{
+			for(auto p = A.begin(row); p != A.end(row); ++p)
+			{
+				fprintf(printout, "%i %i %- 1.16e\n", p->row(), p->column(), std::real(p->value()));
+			}
+		}
+		fclose(printout);
+		printout = fopen ("f.dat","w");
+		for (unsigned int i = 0; i < f.size(); ++i)
+			fprintf(printout, "%i %i %- 1.16e\n", i, i < components.size() ? components[i] : -1, f[i]);
+		fclose(printout);
+		// end print the system for diagnosis*/
+
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
 
 
@@ -269,7 +302,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		{
 			// compute estimated potential increment
 			double estimated_potential_increment = compute_estimated_potential_increment(delta_solution);
-
 			// check termination criterion
 			if(global_data->threshold_residual > 0.0)
 				residual = get_residual();
@@ -329,7 +361,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 			}
 
 			residual = get_residual();
-			if( (!global_data->perform_line_search) /*|| (residual < 1e-4)*/)
+			if( !global_data->perform_line_search )
 				break;
 
 			if( (iter == 0) || (residual < residual_old) )
@@ -538,6 +570,13 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solution_r
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+MatrixType&
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_system_matrix()
+{
+	return system_matrix;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
 double
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_solve_time_last_step()
 const
@@ -660,13 +699,26 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	// assemble system
 	vector<const SolutionVectorType*> solution_ref_sets(1);
 	solution_ref_sets[0] = &solution_ref;
-	if(assembly_helper.assemble_system(	solution,
-										solution_ref_sets,
-										constraints,
-										potential_value,
-										rhs,
-										system_matrix,
-										make_tuple(true,true,true)))
+	this->pre_assembly();
+
+	map<unsigned int, double> local_solution;
+	const bool error = assembly_helper.assemble_system(	solution,
+														solution_ref_sets,
+														constraints,
+														potential_value,
+														rhs,
+														system_matrix,
+														make_tuple(true,true,true),
+														&local_solution);
+
+    zero_ghosts(solution);
+	for(const auto& dof_index : local_solution)
+		solution[dof_index.first] = dof_index.second;
+	solution.compress(VectorOperation::insert);
+	update_ghosts(solution);
+
+	this->post_assembly();
+	if(error)
 	{
 		return true;
 	}
@@ -682,13 +734,14 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 			for(unsigned j = 0; j < dim; ++j)
 			{
 				if(sparsity_pattern.exists(i,j))
-					if(fabs(system_matrix(i,j)) > 1e-16)
+					if(fabs(system_matrix(i,j)) != 0.0)
 						fprintf(printout, "%i %i %- 1.16e\n", i, j, system_matrix(i,j));
 			}
 		}
 		fclose(printout);
+		AssertThrow(false, ExcMessage("Stop"));*/
 
-		FILE* printout2 = fopen("f.dat","w");
+/*		FILE* printout2 = fopen("f.dat","w");
 
 		for(unsigned i = 0; i < dim; ++i)
 		{

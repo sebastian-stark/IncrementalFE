@@ -1246,7 +1246,6 @@ public:
 				e[m] = e_omega[m] + factor * delta_e_omega[m];
 			if(get_J(e) > 0.0)
 				return factor;
-
 			factor *= 0.5;
 			Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the determinant of the deformation gradient stays positive!"));
 		}
@@ -1275,7 +1274,7 @@ public:
 				if(ignore_dof_indices->find(dof_indices_local_global[scalar_functional_indices_to_cell_shapefuns[shapefun]]) != ignore_dof_indices->end())
 				{
 					for(unsigned int n = 0; n < K_cell.n(); ++n)
-						K_cell(shapefun, n) = 0.0;
+						K_cell(shapefun, n) = K_cell(n, shapefun) = 0.0;
 					f_cell(shapefun) = 0.0;
 				}
 			}

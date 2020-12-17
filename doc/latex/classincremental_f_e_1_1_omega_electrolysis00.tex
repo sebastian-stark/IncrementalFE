@@ -29,6 +29,15 @@ Collaboration diagram for incremental\+FE\+::Omega\+Electrolysis00$<$ spacedim $
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a8cee1ed8dec328c9cc6ee1218004ea27}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a79ac046815258853129ad8b008e7014c}{delta\+\_\+phi\+\_\+lb}} = -\/D\+B\+L\+\_\+\+M\+AX
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_add91dc4ba79492dc949688ef067635e7}{delta\+\_\+phi\+\_\+ub}} = D\+B\+L\+\_\+\+M\+AX
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_ade456170c9844d64e31181dd256d6d45}{electrolysis\+\_\+active}} = false
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,7 +53,6 @@ dealii\+::\+Function$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_
 \item 
 const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00_a950a1633952a7a5a7cd69f590aa90528}{regularization}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -129,7 +137,28 @@ Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00}{incremental\+F\+E\+::\+Omega\+Electrolysis00}}$<$ spacedim $>$\+::A\+\_\+e\hspace{0.3cm}{\ttfamily [private]}}
 
-$A^{\mathrm{e^-}}$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}\label{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}} 
+$A^{\mathrm{e^-}}$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrolysis00_a79ac046815258853129ad8b008e7014c}\label{classincremental_f_e_1_1_omega_electrolysis00_a79ac046815258853129ad8b008e7014c}} 
+\index{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}!delta\_phi\_lb@{delta\_phi\_lb}}
+\index{delta\_phi\_lb@{delta\_phi\_lb}!incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{delta\_phi\_lb}{delta\_phi\_lb}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00}{incremental\+F\+E\+::\+Omega\+Electrolysis00}}$<$ spacedim $>$\+::delta\+\_\+phi\+\_\+lb = -\/D\+B\+L\+\_\+\+M\+AX\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrolysis00_add91dc4ba79492dc949688ef067635e7}\label{classincremental_f_e_1_1_omega_electrolysis00_add91dc4ba79492dc949688ef067635e7}} 
+\index{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}!delta\_phi\_ub@{delta\_phi\_ub}}
+\index{delta\_phi\_ub@{delta\_phi\_ub}!incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{delta\_phi\_ub}{delta\_phi\_ub}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00}{incremental\+F\+E\+::\+Omega\+Electrolysis00}}$<$ spacedim $>$\+::delta\+\_\+phi\+\_\+ub = D\+B\+L\+\_\+\+M\+AX\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ade456170c9844d64e31181dd256d6d45}\label{classincremental_f_e_1_1_omega_electrolysis00_ade456170c9844d64e31181dd256d6d45}} 
+\index{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}!electrolysis\_active@{electrolysis\_active}}
+\index{electrolysis\_active@{electrolysis\_active}!incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{electrolysis\_active}{electrolysis\_active}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_electrolysis00}{incremental\+F\+E\+::\+Omega\+Electrolysis00}}$<$ spacedim $>$\+::electrolysis\+\_\+active = false\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}\label{classincremental_f_e_1_1_omega_electrolysis00_ae7bb59bca61e20800d8f26b18ea91f87}} 
 \index{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}!F@{F}}
 \index{F@{F}!incrementalFE::OmegaElectrolysis00$<$ spacedim $>$@{incrementalFE::OmegaElectrolysis00$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{F}{F}}

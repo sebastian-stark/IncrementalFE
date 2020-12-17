@@ -698,6 +698,93 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
+ * \f$ \omega^\Sigma =	-\bar i(t) \eta \f$
+ *
+ * where \f$\bar i\f$ is a prescrobed normal flux, and \f$\eta\f$ the corresponding potential.
+ *
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\eta\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaDualFluxPower00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+private:
+
+	/**
+	 * %Function determining \f$\bar i(t)\f$
+	 */
+	dealii::Function<spacedim>&
+	function_i;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		function_i				OmegaDualFluxPower00::function_i
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 */
+	OmegaDualFluxPower00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+							const std::set<dealii::types::material_id>										domain_of_integration,
+							const dealii::Quadrature<spacedim-1>											quadrature,
+							GlobalDataIncrementalFE<spacedim>&												global_data,
+							dealii::Function<spacedim>&														function_i,
+							const unsigned int																method,
+							const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 0, 0, 1, 0, method, alpha, "OmegaDualFluxPower00"),
+	function_i(function_i)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			/*d2_sigma*/,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+		const double time_old = function_i.get_time();
+		function_i.set_time(t);
+		const double i_bar = function_i.value(x);
+		function_i.set_time(time_old);
+
+		const double eta = values[0];
+
+		if(get<0>(requested_quantities))
+			sigma = -i_bar * eta;
+
+		if(get<1>(requested_quantities))
+			d_sigma[0] = - i_bar;
+
+		return false;
+	}
+
+};
+
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
  * \f$ \omega^\Sigma =	-\bar{\boldsymbol{f}}(t) \dot{\boldsymbol{u}} \f$
  *
  * where \f$\bar{\boldsymbol{f}}\f$ is the prescribed traction, and \f$\dot{\boldsymbol{u}}\f$ the corresponding displacement.
@@ -2431,6 +2518,15 @@ private:
 
 public:
 
+	mutable	double
+	delta_phi_lb = -DBL_MAX;
+
+	mutable double
+	delta_phi_ub = DBL_MAX;
+
+	mutable double
+	electrolysis_active = false;
+
 	/**
 	 * Constructor
 	 *
@@ -2506,6 +2602,22 @@ public:
 		const double eta_int = values[0];
 		const double delta_eta = eta_int + eta_bar_;
 
+		if(A_e > 0)
+		{
+			const double delta_phi_ub_ = 1.0 / F / A_e * (eta_c - delta_eta);
+			if(delta_phi_ub_ < delta_phi_ub)
+				delta_phi_ub = delta_phi_ub_;
+		}
+		else
+		{
+			const double delta_phi_lb_ = 1.0 / F / A_e * (eta_c - delta_eta);
+			if(delta_phi_lb_ > delta_phi_lb)
+				delta_phi_lb = delta_phi_lb_;
+		}
+
+		if(delta_eta >= eta_c)
+			electrolysis_active = true;
+
 		if(get<0>(requested_quantities))
 		{
 			if(delta_eta >= eta_c)
@@ -2536,6 +2648,175 @@ public:
 
 };
 
+/**
+ * Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
+ *
+ * \f$ \omega^\Sigma =	\inf\limits_{\dot{I}}[( \eta^\mathrm{int} - A^{\mathrm{e^-}} F \bar{\varphi} ) \dot{I} + \mathring{\delta}(\dot{I})] \f$,
+ *
+ * where \f$ \mathring{\delta} = -\dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{sinh}^{-1}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 \f$
+ *
+ * where \f$\eta^\mathrm{int}\f$ is the driving force for the reaction in the absence of an applied external potential,<br>
+ * \f$F\f$ is Faraday's constant,<br>
+ * \f$R\f$ is the gas constant,<br>
+ * \f$T\f$ is the absolute temperature<br>
+ * \f$A^{\mathrm{e^-}}\f$ is the number of electrons added to the solution during the reaction,<br>
+ * \f$\bar{\varphi}\f$ the prescribed external electrical potential,<br>
+ * \f$i_0\f$ the exchange current density,<br>
+ * and \f$R^\mathrm{el}\f$ an electrical "interface resistance".
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\eta^\mathrm{int}\f$
+ */
+template<unsigned int spacedim>
+class OmegaElectrolysis01 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+private:
+
+	/**
+	 * \f$F\f$
+	 */
+	const double
+	F;
+
+	/**
+	 * \f$R T\f$
+	 */
+	const double
+	RT;
+
+	/**
+	 * \f$A^{\mathrm{e^-}}\f$
+	 */
+	const double
+	A_e;
+
+	/**
+	 * %Function determining \f$\bar{\varphi}(\boldsymbol{X}, t)\f$
+	 */
+	dealii::Function<spacedim>&
+	phi_bar;
+
+	/**
+	 * \f$i_0\f$
+	 */
+	const double
+	i_0;
+
+	/**
+	 * \f$R^\mathrm{el}\f$
+	 */
+	const double
+	R_el;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		F						OmegaElectrolysis01::F
+	 *
+	 * @param[in]		RT						OmegaElectrolysis01::RT
+	 *
+	 * @param[in]		A_e						OmegaElectrolysis01::A_e
+	 *
+	 * @param[in]		phi_bar					OmegaElectrolysis01::phi_bar
+	 *
+	 * @param[in]		i_0						OmegaElectrolysis01::i_0
+	 *
+	 * @param[in]		R_el					OmegaElectrolysis01::R_el
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 *
+	 */
+	OmegaElectrolysis01(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+						const std::set<dealii::types::material_id>										domain_of_integration,
+						const dealii::Quadrature<spacedim-1>											quadrature,
+						GlobalDataIncrementalFE<spacedim>&												global_data,
+						const double																	F,
+						const double																	RT,
+						const double																	A_e,
+						dealii::Function<spacedim>&														phi_bar,
+						const double																	i_0,
+						const double																	R_el,
+						const unsigned int																method,
+						const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 0, 0, 1, 0, method, alpha, "OmegaElectrolysis01"),
+	F(F),
+	RT(RT),
+	A_e(A_e),
+	phi_bar(phi_bar),
+	i_0(i_0),
+	R_el(R_el)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+
+		const double time_old = phi_bar.get_time();
+		phi_bar.set_time(t);
+		const double eta_bar_ = -A_e * F * phi_bar.value(x);
+		phi_bar.set_time(time_old);
+
+		const double eta_int = values[0];
+		const double delta_eta = eta_int + eta_bar_;
+
+		// iterate for corresponding current
+		double I_k = 0.0;
+		double f_old = 1e16;
+		unsigned int iter = 0;
+		for(;;)
+		{
+			iter++;
+			const double f = asinh(I_k * F / i_0) + 1.0 / RT * R_el * F * F * I_k + delta_eta / RT;
+			if(fabs(fabs(f) - fabs(f_old)) < 1e-16)
+				break;
+			if(iter == 100)
+				return true;
+			f_old = f;
+			const double df_dI_k = (F / i_0) / sqrt( 1.0 + (I_k * F / i_0) * (I_k * F / i_0) ) + 1.0 / RT * R_el * F * F;
+			const double dI_k = - f / df_dI_k;
+			I_k = I_k + dI_k;
+		}
+
+		if(get<0>(requested_quantities))
+			sigma = delta_eta * I_k - i_0 * RT / F * ( sqrt( 1.0 + (I_k * F / i_0) * (I_k * F / i_0) ) - 1.0 ) + RT * I_k * asinh(I_k * F / i_0) + 0.5 * R_el * (I_k * F) * (I_k * F);
+
+		if(get<1>(requested_quantities))
+			d_sigma[0] = I_k;
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma[0][0] = -1.0 / (RT * F / i_0 / sqrt( 1.0 + (I_k * F / i_0) * (I_k * F / i_0) ) + R_el * F * F);
+		}
+
+		return false;
+	}
+
+};
 
 /**
  * Class defining a domain related scalar functional with the integrand

@@ -39,7 +39,16 @@ const Solution\+Vector\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_mo
 \item 
 Solution\+Vector\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_abbaf168f99be661e22d82ea1dd59d8ae}{get\+\_\+solution\+\_\+ref\+\_\+vector}} ()
 \item 
+Matrix\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2f5c0e7ac2d043a5c19fcc32927a76ce}{get\+\_\+system\+\_\+matrix}} ()
+\item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a9cd396b8078926ba01eafe296152917b}{get\+\_\+solve\+\_\+time\+\_\+last\+\_\+step}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::signals2\+::signal$<$ void()$>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a0992ed47497719c04caa8cbd5289a17b}{pre\+\_\+assembly}}
+\item 
+boost\+::signals2\+::signal$<$ void()$>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ac5c2edc96caa3b5ca1e55a655c56873e}{post\+\_\+assembly}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -463,7 +472,17 @@ const reference to solution vector
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::get\+\_\+solve\+\_\+time\+\_\+last\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-return \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a490d7393aa94d765ec0e2c302b2afe44}{F\+E\+Model\+::solve\+\_\+time\+\_\+last\+\_\+step}} \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_ae96fd0a7b6688ed844059d2636e923cc}\label{classincremental_f_e_1_1_f_e_model_ae96fd0a7b6688ed844059d2636e923cc}} 
+return \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a490d7393aa94d765ec0e2c302b2afe44}{F\+E\+Model\+::solve\+\_\+time\+\_\+last\+\_\+step}} \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a2f5c0e7ac2d043a5c19fcc32927a76ce}\label{classincremental_f_e_1_1_f_e_model_a2f5c0e7ac2d043a5c19fcc32927a76ce}} 
+\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
+Matrix\+Type\& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+reference to system matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_ae96fd0a7b6688ed844059d2636e923cc}\label{classincremental_f_e_1_1_f_e_model_ae96fd0a7b6688ed844059d2636e923cc}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!make\_constraints@{make\_constraints}}
 \index{make\_constraints@{make\_constraints}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{make\_constraints()}{make\_constraints()}}
@@ -696,14 +715,28 @@ Matrix with hanging node constraints (used internally during the solution proces
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
 const bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::make\+\_\+hanging\+\_\+node\+\_\+constraints = true\hspace{0.3cm}{\ttfamily [private]}}
 
-determines whether hanging node constraints are taken into account or ignored \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a04ea9240ef0084b44471a40f0d64ac54}\label{classincremental_f_e_1_1_f_e_model_a04ea9240ef0084b44471a40f0d64ac54}} 
+determines whether hanging node constraints are taken into account or ignored \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_ac5c2edc96caa3b5ca1e55a655c56873e}\label{classincremental_f_e_1_1_f_e_model_ac5c2edc96caa3b5ca1e55a655c56873e}} 
+\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!post\_assembly@{post\_assembly}}
+\index{post\_assembly@{post\_assembly}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
+\doxysubsubsection{\texorpdfstring{post\_assembly}{post\_assembly}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
+boost\+::signals2\+::signal$<$void ()$>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::post\+\_\+assembly\hspace{0.3cm}{\ttfamily [mutable]}}
+
+All functions attached to this signal will be called subsequent to each assembly of the finite element system. \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a04ea9240ef0084b44471a40f0d64ac54}\label{classincremental_f_e_1_1_f_e_model_a04ea9240ef0084b44471a40f0d64ac54}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!potential\_value@{potential\_value}}
 \index{potential\_value@{potential\_value}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{potential\_value}{potential\_value}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::potential\+\_\+value = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
 
-Current value of the total potential (used internally during the solution process) \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}\label{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}} 
+Current value of the total potential (used internally during the solution process) \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a0992ed47497719c04caa8cbd5289a17b}\label{classincremental_f_e_1_1_f_e_model_a0992ed47497719c04caa8cbd5289a17b}} 
+\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!pre\_assembly@{pre\_assembly}}
+\index{pre\_assembly@{pre\_assembly}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
+\doxysubsubsection{\texorpdfstring{pre\_assembly}{pre\_assembly}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
+boost\+::signals2\+::signal$<$void ()$>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::pre\+\_\+assembly\hspace{0.3cm}{\ttfamily [mutable]}}
+
+All functions attached to this signal will be called prior to each assembly of the finite element system. \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}\label{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!rhs@{rhs}}
 \index{rhs@{rhs}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{rhs}{rhs}}

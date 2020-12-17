@@ -276,3 +276,11 @@
 \_form#275:$\omega^\Omega$
 \_form#276:$\omega^\mathrm{C}$
 \_form#277:$ \omega^\Omega = -\dfrac{D c J}{2 c^\mathrm{f} V^\mathrm{f}_\mathrm{m}} \nabla\eta \cdot \boldsymbol{C}^{-1} \cdot \nabla\eta - \eta \dot{c} $
+\_form#278:$ \omega^\Sigma = -\bar i(t) \eta $
+\_form#279:$\bar i$
+\_form#280:$ \omega^\Sigma = \inf_{\dot{I}}[( \eta^\mathrm{int} - A^{\mathrm{e^-}} F \bar{\varphi} ) \dot{I} + \mathring{\delta}(\dot{I})] $
+\_form#281:$ \mathring{\delta} = \dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{asinh}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 $
+\_form#282:$\bar i(t)$
+\_form#283:$ \omega^\Sigma = \inf\limits_{\dot{I}}[( \eta^\mathrm{int} - A^{\mathrm{e^-}} F \bar{\varphi} ) \dot{I} + \mathring{\delta}(\dot{I})] $
+\_form#284:$ \mathring{\delta} = -\dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{asinh}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 $
+\_form#285:$ \mathring{\delta} = -\dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{sinh}^{-1}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 $

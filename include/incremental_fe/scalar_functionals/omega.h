@@ -182,7 +182,7 @@ public:
 	 * see ScalarFunctional::get_h_sigma
 	 */
 	bool
-	get_h_sigma(const dealii::Vector<double>& 				e_sigma,
+	get_h_sigma(dealii::Vector<double>& 					e_sigma,
 				const std::vector<dealii::Vector<double>>&	e_sigma_ref_sets,
 				dealii::Vector<double>& 					hidden_vars,
 				const dealii::Point<spacedim>& 				x,
@@ -343,7 +343,7 @@ public:
 	 * see ScalarFunctional<spacedim, spacedim>::get_h_omega
 	 */
 	bool
-	get_h_omega(const dealii::Vector<double>&				e_omega,
+	get_h_omega(dealii::Vector<double>&						e_omega,
 				const std::vector<dealii::Vector<double>>&	e_omega_ref_sets,
 				dealii::Vector<double>&						hidden_vars,
 				const dealii::Point<spacedim>&				x,

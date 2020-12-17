@@ -104,8 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a22a7b3d4fd98f6d0cff79623e13e0939"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2622e8f84590e8a821984181e31fbc76"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a2622e8f84590e8a821984181e31fbc76">get_values_and_derivatives</a> (const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;n, double &amp;psi, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;d_psi, dealii::FullMatrix&lt; double &gt; &amp;d2_psi, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const =0</td></tr>
 <tr class="separator:a2622e8f84590e8a821984181e31fbc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4e1abcaff9497eac5eb3c953f2c303a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ab4e1abcaff9497eac5eb3c953f2c303a">get_h_sigma</a> (const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_sigma, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_sigma_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;n, double &amp;h_sigma, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_sigma_1, dealii::FullMatrix&lt; double &gt; &amp;h_sigma_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
-<tr class="separator:ab4e1abcaff9497eac5eb3c953f2c303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35894d078906d7d765185886c9f48a92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a35894d078906d7d765185886c9f48a92">get_h_sigma</a> (<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_sigma, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_sigma_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;n, double &amp;h_sigma, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_sigma_1, dealii::FullMatrix&lt; double &gt; &amp;h_sigma_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
+<tr class="separator:a35894d078906d7d765185886c9f48a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -222,8 +222,8 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab4e1abcaff9497eac5eb3c953f2c303a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4e1abcaff9497eac5eb3c953f2c303a">&#9670;&nbsp;</a></span>get_h_sigma()</h2>
+<a id="a35894d078906d7d765185886c9f48a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35894d078906d7d765185886c9f48a92">&#9670;&nbsp;</a></span>get_h_sigma()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +236,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::get_h_sigma </td>
           <td>(</td>
-          <td class="paramtype">const <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>e_sigma</em>, </td>
         </tr>
         <tr>

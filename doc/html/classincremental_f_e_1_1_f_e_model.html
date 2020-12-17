@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_f_e_model-members.html">List of all members</a>  </div>
@@ -112,8 +113,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a43bb2f22537dcec62961fc59f450584c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbaf168f99be661e22d82ea1dd59d8ae"><td class="memItemLeft" align="right" valign="top">SolutionVectorType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#abbaf168f99be661e22d82ea1dd59d8ae">get_solution_ref_vector</a> ()</td></tr>
 <tr class="separator:abbaf168f99be661e22d82ea1dd59d8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f5c0e7ac2d043a5c19fcc32927a76ce"><td class="memItemLeft" align="right" valign="top">MatrixType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f5c0e7ac2d043a5c19fcc32927a76ce">get_system_matrix</a> ()</td></tr>
+<tr class="separator:a2f5c0e7ac2d043a5c19fcc32927a76ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd396b8078926ba01eafe296152917b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a> () const</td></tr>
 <tr class="separator:a9cd396b8078926ba01eafe296152917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0992ed47497719c04caa8cbd5289a17b"><td class="memItemLeft" align="right" valign="top">boost::signals2::signal&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a0992ed47497719c04caa8cbd5289a17b">pre_assembly</a></td></tr>
+<tr class="separator:a0992ed47497719c04caa8cbd5289a17b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c2edc96caa3b5ca1e55a655c56873e"><td class="memItemLeft" align="right" valign="top">boost::signals2::signal&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac5c2edc96caa3b5ca1e55a655c56873e">post_assembly</a></td></tr>
+<tr class="separator:ac5c2edc96caa3b5ca1e55a655c56873e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -961,6 +971,26 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
+<a id="a2f5c0e7ac2d043a5c19fcc32927a76ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f5c0e7ac2d043a5c19fcc32927a76ce">&#9670;&nbsp;</a></span>get_system_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">MatrixType&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_system_matrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>reference to system matrix </dd></dl>
+
+</div>
+</div>
 <a id="ae96fd0a7b6688ed844059d2636e923cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae96fd0a7b6688ed844059d2636e923cc">&#9670;&nbsp;</a></span>make_constraints()</h2>
 
@@ -1622,6 +1652,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
+<a id="ac5c2edc96caa3b5ca1e55a655c56873e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c2edc96caa3b5ca1e55a655c56873e">&#9670;&nbsp;</a></span>post_assembly</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::signals2::signal&lt;void ()&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::post_assembly</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>All functions attached to this signal will be called subsequent to each assembly of the finite element system. </p>
+
+</div>
+</div>
 <a id="a04ea9240ef0084b44471a40f0d64ac54"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04ea9240ef0084b44471a40f0d64ac54">&#9670;&nbsp;</a></span>potential_value</h2>
 
@@ -1644,6 +1699,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Current value of the total potential (used internally during the solution process) </p>
+
+</div>
+</div>
+<a id="a0992ed47497719c04caa8cbd5289a17b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0992ed47497719c04caa8cbd5289a17b">&#9670;&nbsp;</a></span>pre_assembly</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::signals2::signal&lt;void ()&gt; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::pre_assembly</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>All functions attached to this signal will be called prior to each assembly of the finite element system. </p>
 
 </div>
 </div>

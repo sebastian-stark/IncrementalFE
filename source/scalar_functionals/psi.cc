@@ -45,7 +45,7 @@ alpha(alpha)
 
 template<unsigned int spacedim>
 bool
-Psi<spacedim, spacedim>::get_h_omega(	const Vector<double>&			e_omega,
+Psi<spacedim, spacedim>::get_h_omega(	Vector<double>&					e_omega,
 										const vector<Vector<double>>&	e_omega_ref_sets,
 										Vector<double>&					/*hidden_vars*/,
 										const Point<spacedim>&			x,
@@ -113,7 +113,7 @@ alpha(alpha)
 
 template<unsigned int dim, unsigned int spacedim>
 bool
-Psi<dim, spacedim>::get_h_sigma(	const Vector<double>& 			e_sigma,
+Psi<dim, spacedim>::get_h_sigma(	Vector<double>& 				e_sigma,
 									const vector<Vector<double>>&	e_sigma_ref_sets,
 									Vector<double>& 				/*hidden_vars*/,
 									const Point<spacedim>& 			x,

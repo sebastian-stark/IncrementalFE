@@ -348,6 +348,18 @@ private:
 public:
 
 	/**
+	 * All functions attached to this signal will be called prior to each assembly of the finite element system.
+	 */
+	mutable boost::signals2::signal<void ()>
+	pre_assembly;
+
+	/**
+	 * All functions attached to this signal will be called subsequent to each assembly of the finite element system.
+	 */
+	mutable boost::signals2::signal<void ()>
+	post_assembly;
+
+	/**
 	 * Constructor
 	 *
 	 * @param[in]	total_potential					TotalPotential object defining the total potential
@@ -573,7 +585,6 @@ public:
 	SolutionVectorType&
 	get_solution_vector();
 
-
 	/**
 	 * @return		const reference to reference solution vector
 	 */
@@ -586,6 +597,12 @@ public:
 	 */
 	SolutionVectorType&
 	get_solution_ref_vector();
+
+	/**
+	 * @return		reference to system matrix
+	 */
+	MatrixType&
+	get_system_matrix();
 
 	/**
 	 * return FEModel::solve_time_last_step
