@@ -286,7 +286,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
 
-
 		solve_time_last_step += timer.wall_time();
 		timer.stop();
 		pout << "Elapsed CPU time solve: " << timer.cpu_time() << " seconds." << endl;
@@ -710,7 +709,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 														system_matrix,
 														make_tuple(true,true,true),
 														&local_solution);
-
     zero_ghosts(solution);
 	for(const auto& dof_index : local_solution)
 		solution[dof_index.first] = dof_index.second;
@@ -718,6 +716,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	update_ghosts(solution);
 
 	this->post_assembly();
+
+
+
 	if(error)
 	{
 		return true;
@@ -755,6 +756,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 			cout << "Not converged at local level!" << endl;
 		// just to be sure
 		constraints.set_zero(rhs);
+
 		return false;
 	}
 }
