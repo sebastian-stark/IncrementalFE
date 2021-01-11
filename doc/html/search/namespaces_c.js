@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['internal_9708',['internal',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers_1_1internal.html',1,'numbers']]],
-  ['nonmatching_9709',['NonMatching',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceNonMatching.html',1,'']]],
-  ['numbers_9710',['numbers',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers.html',1,'']]],
-  ['signalingnan_9711',['SignalingNaN',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers_1_1internal_1_1SignalingNaN.html',1,'numbers::internal']]]
+  ['internal_9720',['internal',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers_1_1internal.html',1,'numbers']]],
+  ['nonmatching_9721',['NonMatching',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceNonMatching.html',1,'']]],
+  ['numbers_9722',['numbers',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers.html',1,'']]],
+  ['signalingnan_9723',['SignalingNaN',['https://dealii.org/9.0.0/doxygen/deal.II/namespacenumbers_1_1internal_1_1SignalingNaN.html',1,'numbers::internal']]]
 ];

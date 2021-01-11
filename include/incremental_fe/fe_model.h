@@ -240,11 +240,14 @@ private:
 	 *
 	 * @param[in]	constraints		The constraints object
 	 *
+	 * @param[in]	first_assembly	Indicate whether this is the first assembly in a time step. If @p true, errors in the assembly process are ignored in an attempt to recover.
+	 *
 	 * @return						@p true: error, @p false: no error
 	 */
 	bool
 	compute_system(	const SolutionVectorType& 			solution_ref,
-					dealii::AffineConstraints<double>&	constraints);
+					dealii::AffineConstraints<double>&	constraints,
+					const bool 							first_assembly = false);
 
 	/**
 	 * %Function computing the FEModel::sparsity_pattern

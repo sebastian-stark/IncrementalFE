@@ -59,7 +59,7 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aa8f0eaa319c21a88310d81
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aca9a1d1eb2233b6dbfac86e14a092729}{reinit\+\_\+matrix}} (Matrix\+Type \&matrix)
 \item 
-bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a9ac2dbc4fdd4630cce4961a2360dc0f6}{compute\+\_\+system}} (const Solution\+Vector\+Type \&\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ad5f39fec8540d81155770764f945f572}{solution\+\_\+ref}}, dealii\+::\+Affine\+Constraints$<$ double $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a33a622c3c53ea4bee3bdefac06201c70}{constraints}})
+bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aa787a163ccf91fc13f2f5fb32d069253}{compute\+\_\+system}} (const Solution\+Vector\+Type \&\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ad5f39fec8540d81155770764f945f572}{solution\+\_\+ref}}, dealii\+::\+Affine\+Constraints$<$ double $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a33a622c3c53ea4bee3bdefac06201c70}{constraints}}, const bool first\+\_\+assembly=false)
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a7c5c84e081ebe20e373ec5d2abc359b7}{compute\+\_\+sparsity\+\_\+pattern}} (const dealii\+::\+Affine\+Constraints$<$ double $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a33a622c3c53ea4bee3bdefac06201c70}{constraints}})
 \item 
@@ -355,12 +355,12 @@ Function computing the \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ac5c0
 \mbox{\texttt{ in}}  & {\em constraints} & \mbox{\hyperlink{classincremental_f_e_1_1_constraints}{Constraints}} to be taken into account \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a9ac2dbc4fdd4630cce4961a2360dc0f6}\label{classincremental_f_e_1_1_f_e_model_a9ac2dbc4fdd4630cce4961a2360dc0f6}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_aa787a163ccf91fc13f2f5fb32d069253}\label{classincremental_f_e_1_1_f_e_model_aa787a163ccf91fc13f2f5fb32d069253}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!compute\_system@{compute\_system}}
 \index{compute\_system@{compute\_system}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_system()}{compute\_system()}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
-bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::compute\+\_\+system (\begin{DoxyParamCaption}\item[{const Solution\+Vector\+Type \&}]{solution\+\_\+ref,  }\item[{dealii\+::\+Affine\+Constraints$<$ double $>$ \&}]{constraints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::compute\+\_\+system (\begin{DoxyParamCaption}\item[{const Solution\+Vector\+Type \&}]{solution\+\_\+ref,  }\item[{dealii\+::\+Affine\+Constraints$<$ double $>$ \&}]{constraints,  }\item[{const bool}]{first\+\_\+assembly = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 Function computing current \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}{F\+E\+Model\+::rhs}} and \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_abc07b7d142d78230bcd55274f35514b3}{F\+E\+Model\+::system\+\_\+matrix}}
 
@@ -369,6 +369,8 @@ Function computing current \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a
 \mbox{\texttt{ in}}  & {\em solution\+\_\+ref} & The reference solution vector\\
 \hline
 \mbox{\texttt{ in}}  & {\em constraints} & The constraints object\\
+\hline
+\mbox{\texttt{ in}}  & {\em first\+\_\+assembly} & Indicate whether this is the first assembly in a time step. If {\ttfamily true}, errors in the assembly process are ignored in an attempt to recover.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

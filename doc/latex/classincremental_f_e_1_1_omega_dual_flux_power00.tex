@@ -29,12 +29,16 @@ Collaboration diagram for incremental\+FE\+::Omega\+Dual\+Flux\+Power00$<$ space
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_flux_power00_a450bbcd799b02e62d05860494f7746f4}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_flux_power00_a1d855a745f7b202917074627a5038b19}{is\+\_\+active}} = true
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 dealii\+::\+Function$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_flux_power00_a38ca67b038927a154e7601840e4c2038}{function\+\_\+i}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -105,7 +109,14 @@ Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 dealii\+::\+Function$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_flux_power00}{incremental\+F\+E\+::\+Omega\+Dual\+Flux\+Power00}}$<$ spacedim $>$\+::function\+\_\+i\hspace{0.3cm}{\ttfamily [private]}}
 
-Function determining $\bar i(t)$ 
+Function determining $\bar i(t)$ \mbox{\Hypertarget{classincremental_f_e_1_1_omega_dual_flux_power00_a1d855a745f7b202917074627a5038b19}\label{classincremental_f_e_1_1_omega_dual_flux_power00_a1d855a745f7b202917074627a5038b19}} 
+\index{incrementalFE::OmegaDualFluxPower00$<$ spacedim $>$@{incrementalFE::OmegaDualFluxPower00$<$ spacedim $>$}!is\_active@{is\_active}}
+\index{is\_active@{is\_active}!incrementalFE::OmegaDualFluxPower00$<$ spacedim $>$@{incrementalFE::OmegaDualFluxPower00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{is\_active}{is\_active}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_dual_flux_power00}{incremental\+F\+E\+::\+Omega\+Dual\+Flux\+Power00}}$<$ spacedim $>$\+::is\+\_\+active = true}
+
+whether this scalar functional is active 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

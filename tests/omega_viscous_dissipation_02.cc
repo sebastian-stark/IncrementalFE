@@ -33,7 +33,7 @@ using namespace incrementalFE;
 
 template<unsigned int spacedim>
 void
-check()
+check(unsigned int method)
 {
 
 	vector<DependentField<spacedim, spacedim>> dependent_fields(18, DependentField<spacedim, spacedim>("q"));
@@ -48,7 +48,7 @@ check()
 																		QGauss<spacedim>(1),
 																		global_data,
 																		eta,
-																		0,
+																		method,
 																		alpha);
 
 	Vector<double> e_omega(dependent_fields.size());
@@ -97,16 +97,22 @@ check()
 	omega_viscous_dissipation_02.compare_derivatives_with_numerical_derivatives(e_omega,
 																				e_omega_ref_sets,
 																				hidden_vars,
-																				x, "derivatives.dat");
+																				x);
 }
 
 
 int main()
 {
 	cout << "### 2D-Case ###\n\n";
-	check<2>();
+	check<2>(0);
 
 	cout << "\n### 3D-Case ###\n\n";
-	check<3>();
+	check<3>(0);
+
+	cout << "### 2D-Case ###\n\n";
+	check<2>(1);
+
+	cout << "\n### 3D-Case ###\n\n";
+	check<3>(1);
 
 }

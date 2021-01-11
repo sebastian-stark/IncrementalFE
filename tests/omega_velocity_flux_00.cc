@@ -36,7 +36,6 @@ void
 check()
 {
 
-	const unsigned int I = 2;
 	vector<DependentField<spacedim, spacedim>> dependent_fields(22, DependentField<spacedim, spacedim>("q"));
 
 	const double alpha = 1.0;

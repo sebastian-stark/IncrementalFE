@@ -1,7 +1,7 @@
 ### 2D-Case ###
 
 START CHECKING DERIVATIVES
-  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000003
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000002
   Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000001
                                                                                                          Value of integrand =  0.70914186
 FINISHED CHECKING DERIVATIVES
@@ -9,7 +9,22 @@ FINISHED CHECKING DERIVATIVES
 ### 3D-Case ###
 
 START CHECKING DERIVATIVES
-  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000003
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  0.00000002
   Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000001
                                                                                                          Value of integrand =  0.70914186
+FINISHED CHECKING DERIVATIVES
+### 2D-Case ###
+
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  1.00000000
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000001
+                                                                                                         Value of integrand =  0.00000000
+FINISHED CHECKING DERIVATIVES
+
+### 3D-Case ###
+
+START CHECKING DERIVATIVES
+  Maximum relative deviation between numerical first derivative and directly computed first derivative (in infinity norm)   =  1.00000000
+  Maximum relative deviation between numerical second derivative and directly computed second derivative (in infinity norm) =  0.00000001
+                                                                                                         Value of integrand =  0.00000000
 FINISHED CHECKING DERIVATIVES

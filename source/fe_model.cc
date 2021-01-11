@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------1
 // Copyright (C) 2020 by Sebastian Stark
 //
 // This file is part of the IncrementalFE library
@@ -197,12 +197,14 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	}
 
 	timer.start();
-	// assemble the system for the first iteration (before doing so, bring the constraints in the appropriate form)
-	if(compute_system(solution, constraints))
+	// assemble the system for the first iteration
+	if(compute_system(solution, constraints, true))
 	{
-		solution = solution_ref;
-		global_data->reset_t();
-		return -1;
+		// solution = solution_ref;
+		// global_data->reset_t();
+		// if the initial assembly fails, there is no way to recover
+		// return -1;
+		cout << "Error during first assembly during time step. Trying to recover during next iterations!" << endl;
 	}
 
 	timer.stop();
@@ -226,49 +228,10 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// solve the system
 		timer.start();
 
-/*		FILE* printout = fopen ("K_1.dat","w");
-		unsigned int dim = sparsity_pattern.n_cols();
-		for(unsigned i = 0; i < dim; ++i)
-		{
-			for(unsigned j = 0; j < dim; ++j)
-			{
-				if(sparsity_pattern.exists(i,j))
-					fprintf(printout, "%- 1.16e ", system_matrix(i,j));
-				else
-					fprintf(printout, "%- 1.16e ", 0.0);
-			}
-			fprintf(printout, "\n");
-		}
-		fclose(printout);
-
-		FILE* printout2 = fopen ("f.dat","w");
-		for(unsigned i = 0; i < dim; ++i)
-		{
-			fprintf(printout2, "%- 1.16e\n", rhs(i));
-		}
-		fclose(printout2);
-
-		Assert(false, ExcMessage("Break"));
-		*/
-
-
-
-		/*		FILE* printout = fopen ("K_2.dat","w");
-				for (unsigned int row = 0; row < K.m(); ++row)
-				{
-					for(auto p = K.begin(row); p != K.end(row); ++p)
-					{
-						fprintf(printout, "%i %i %- 1.16e\n", p->row(), p->column(), std::real(p->value()));
-					}
-				}
-				fclose(printout);
-		*/
-
+/*
 		// begin print the system for diagnosis
-/*		const auto& A = system_matrix.get_A();
+		const auto& A = system_matrix.get_A();
 		const auto& f = rhs.block(0);
-		vector<unsigned int> components;
-		assembly_helper.get_dof_handler_system().get_map_dof_index_component_domain(components);
 		FILE* printout = fopen ("A.dat","w");
 		for (unsigned int row = 0; row < A.m(); ++row)
 		{
@@ -280,8 +243,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		fclose(printout);
 		printout = fopen ("f.dat","w");
 		for (unsigned int i = 0; i < f.size(); ++i)
-			fprintf(printout, "%i %i %- 1.16e\n", i, i < components.size() ? components[i] : -1, f[i]);
+			fprintf(printout, "%i %- 1.16e\n", i, f[i]);
 		fclose(printout);
+		AssertThrow(false, ExcMessage("Stop"));
 		// end print the system for diagnosis*/
 
 		solver_wrapper->solve(system_matrix, delta_solution, rhs, global_data->sym_mode);
@@ -353,17 +317,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		for(;;)
 		{
 			// compute new rhs and system matrix here (update constraints before)
-			if(compute_system(solution_ref, constraints))
+			error = compute_system(solution_ref, constraints);
+
+			if(error == false)
 			{
-				error = true;
-				break;
+				residual = get_residual();
+				if( !global_data->perform_line_search )
+					break;
 			}
 
-			residual = get_residual();
-			if( !global_data->perform_line_search )
-				break;
-
-			if( (iter == 0) || (residual < residual_old) )
+			if( ((iter == 0) || (residual < residual_old)) && !error )
 			{
 				break;
 			}
@@ -598,8 +561,11 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_solutio
 	else if(vector_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(tria_domain_ptr != nullptr, ExcMessage("Internal error!"));
-		vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), tria_domain_ptr->get_communicator());
+		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		if(tria_domain_ptr == nullptr)
+			vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), MPI_COMM_WORLD);
+		else
+			vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), tria_domain_ptr->get_communicator());
 	}
 #endif // DEAL_II_WITH_MPI
 	else
@@ -642,8 +608,11 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_rhs_vec
 	else if(vector_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(tria_domain_ptr != nullptr, ExcMessage("Internal error!"));
-		vector_ptr_parallel->reinit(index_sets, tria_domain_ptr->get_communicator());
+		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		if(tria_domain_ptr == nullptr)
+			vector_ptr_parallel->reinit(index_sets, MPI_COMM_WORLD);
+		else
+			vector_ptr_parallel->reinit(index_sets, tria_domain_ptr->get_communicator());
 	}
 #endif // DEAL_II_WITH_PETSC
 #endif // DEAL_II_WITH_MPI
@@ -673,8 +642,11 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_matrix(
 	else if(matrix_ptr_parallel != nullptr)
 	{
 		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(tria_domain_ptr != nullptr, ExcMessage("You are trying to perform a parallel computation with a sequential triangulation, which is not possible!"));
-		matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), tria_domain_ptr->get_communicator());
+		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		if(tria_domain_ptr == nullptr)
+			matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), MPI_COMM_WORLD);
+		else
+			matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), tria_domain_ptr->get_communicator());
 	}
 #endif // DEAL_II_WITH_PETSC
 #endif // DEAL_II_WITH_MPI
@@ -687,7 +659,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_matrix(
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
 bool
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system(	const SolutionVectorType& 	solution_ref,
-																					AffineConstraints<double>&	constraints)
+																					AffineConstraints<double>&	constraints,
+																					const bool					first_assembly)
 {
 	global_data->converged_at_local_level = true;
 
@@ -709,6 +682,14 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 														system_matrix,
 														make_tuple(true,true,true),
 														&local_solution);
+	if(error && !first_assembly)
+	{
+		return true;
+		// write_output_independent_fields("err_domain", "err_interface", 2);
+		// AssertThrow(false, ExcMessage("Error in assembly!"));
+	}
+
+
     zero_ghosts(solution);
 	for(const auto& dof_index : local_solution)
 		solution[dof_index.first] = dof_index.second;
@@ -716,16 +697,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	update_ghosts(solution);
 
 	this->post_assembly();
-
-
-
-	if(error)
-	{
-		return true;
-	}
-	else
-	{
-
 /*		FILE* printout = fopen("K.dat","w");
 
 		unsigned int dim = sparsity_pattern.n_cols();
@@ -752,13 +723,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 
 		Assert(false, ExcMessage("break"));*/
 
-		if(global_data->converged_at_local_level == false)
-			cout << "Not converged at local level!" << endl;
-		// just to be sure
-		constraints.set_zero(rhs);
+	if(global_data->converged_at_local_level == false)
+		cout << "Not converged at local level!" << endl;
+	// just to be sure
+	constraints.set_zero(rhs);
 
-		return false;
-	}
+	return error;
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>

@@ -133,8 +133,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:aa8f0eaa319c21a88310d813fb34213f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aca9a1d1eb2233b6dbfac86e14a092729">reinit_matrix</a> (MatrixType &amp;matrix)</td></tr>
 <tr class="separator:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ac2dbc4fdd4630cce4961a2360dc0f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9ac2dbc4fdd4630cce4961a2360dc0f6">compute_system</a> (const SolutionVectorType &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad5f39fec8540d81155770764f945f572">solution_ref</a>, dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
-<tr class="separator:a9ac2dbc4fdd4630cce4961a2360dc0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa787a163ccf91fc13f2f5fb32d069253"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa787a163ccf91fc13f2f5fb32d069253">compute_system</a> (const SolutionVectorType &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad5f39fec8540d81155770764f945f572">solution_ref</a>, dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const bool first_assembly=false)</td></tr>
+<tr class="separator:aa787a163ccf91fc13f2f5fb32d069253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a7c5c84e081ebe20e373ec5d2abc359b7">compute_sparsity_pattern</a> (const dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
 <tr class="separator:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae96fd0a7b6688ed844059d2636e923cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae96fd0a7b6688ed844059d2636e923cc">make_constraints</a> (dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const dealii::AffineConstraints&lt; double &gt; &amp;custom_constraints=dealii::AffineConstraints&lt; double &gt;(), const dealii::AffineConstraints&lt; double &gt; &amp;ignore_constraints=dealii::AffineConstraints&lt; double &gt;())</td></tr>
@@ -710,8 +710,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
-<a id="a9ac2dbc4fdd4630cce4961a2360dc0f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ac2dbc4fdd4630cce4961a2360dc0f6">&#9670;&nbsp;</a></span>compute_system()</h2>
+<a id="aa787a163ccf91fc13f2f5fb32d069253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa787a163ccf91fc13f2f5fb32d069253">&#9670;&nbsp;</a></span>compute_system()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -731,7 +731,13 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">dealii::AffineConstraints&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>constraints</em>&#160;</td>
+          <td class="paramname"><em>constraints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>first_assembly</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -750,6 +756,7 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">solution_ref</td><td>The reference solution vector</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td>The constraints object</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">first_assembly</td><td>Indicate whether this is the first assembly in a time step. If <code>true</code>, errors in the assembly process are ignored in an attempt to recover.</td></tr>
   </table>
   </dd>
 </dl>

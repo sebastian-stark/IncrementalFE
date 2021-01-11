@@ -284,3 +284,30 @@
 \_form#283:$ \omega^\Sigma = \inf\limits_{\dot{I}}[( \eta^\mathrm{int} - A^{\mathrm{e^-}} F \bar{\varphi} ) \dot{I} + \mathring{\delta}(\dot{I})] $
 \_form#284:$ \mathring{\delta} = -\dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{asinh}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 $
 \_form#285:$ \mathring{\delta} = -\dfrac{i_0 R T}{F} \left[ \sqrt{1+\left( \dfrac{F\dot{I}}{i_0} \right)^2} - 1 \right] + RT\dot{I}\mathrm{sinh}^{-1}\left(\dfrac{F\dot{I}}{i_0}\right) + \dfrac{R^\mathrm{el}}{2} \left( F \dot{I} \right)^2 $
+\_form#286:$ \omega^\Omega = \left[ c^\mathrm{f} \boldsymbol{F}^{-1} \cdot \left( \nabla \dot{\xi} \cdot \boldsymbol{F}^{-1} - \dot{\boldsymbol{u}} \right) \right] \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#287:$F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}$
+\_form#288:$ \omega^\Omega = \left[ c^\mathrm{f} \boldsymbol{F}^{-1} \cdot \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \right] \cdot \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#289:$\dot{\boldsymbol{v}}$
+\_form#290:$\dot{v}_{x}$
+\_form#291:$\dot{v}_{y}$
+\_form#292:$\dot{v}_{z}$
+\_form#293:$ \omega^\Omega = \boldsymbol{t} \cdot \left( \boldsymbol{v} - \dot{\boldsymbol{u}} - \dfrac{V^\mathrm{f}_\mathrm{m}}{J} \boldsymbol{F}\cdot \boldsymbol{I} \right)$
+\_form#294:$ \omega^\Omega = J \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f} \dot{\xi} $
+\_form#295:$boldsymbol{f}$
+\_form#296:$\dot{\xi}$
+\_form#297:$f_{x,x}$
+\_form#298:$f_{x,y}$
+\_form#299:$f_{x,z}$
+\_form#300:$f_{y,x}$
+\_form#301:$f_{y,y}$
+\_form#302:$f_{y,z}$
+\_form#303:$f_{z,x}$
+\_form#304:$f_{z,y}$
+\_form#305:$f_{z,z}$
+\_form#306:$ \omega^\Omega = 2 J \boldsymbol{g}:\boldsymbol{d} $
+\_form#307:$\boldsymbol{g} = \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f}$
+\_form#308:$ \omega^\Sigma = \boldsymbol{t} \cdot \left[ \left(\dot{\boldsymbol{u}} - \dot{\boldsymbol{v}}\right) \times \boldsymbol{n} \right] + \dfrac{1}{2} \left(\boldsymbol{t} \cdot \boldsymbol{n} \right)^2 $
+\_form#309:$\boldsymbol{n} = J \boldsymbol{F}^{-\top} \cdot \boldsymbol{N}$
+\_form#310:$\boldsymbol{N}$
+\_form#311:$\dot{u}_{z}$
+\_form#312:$h^\Omega_\rho = RT c_0 h\left( \dfrac{a c + b}{c_0} \right)$

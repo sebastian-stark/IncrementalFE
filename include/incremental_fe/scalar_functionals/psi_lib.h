@@ -168,7 +168,7 @@ namespace
 /**
  * Class defining a domain related scalar functional with the integrand
  *
- * \f$h^\Omega_\rho = RT c_0 h\left( \dfrac{c}{c_0} \right)\f$,
+ * \f$h^\Omega_\rho = RT c_0 h\left( \dfrac{a c + b}{c_0} \right)\f$,
  *
  * where
  *
@@ -179,7 +179,7 @@ namespace
  *
  * \f$R\f$ is the gas constant, \f$T\f$ the temperature, \f$c_0\f$ a
  * reference species concentration, \f$\mu_0\f$ a corresponding reference value
- * for the potential, \f$c\f$ the species concentration, and \f$\epsilon \ll 1\f$ a regularization parameter
+ * for the potential, \f$a\f$ and \f$b\f$ are constants, \f$c\f$ the species concentration, and \f$\epsilon \ll 1\f$ a regularization parameter
  * to avoid ill-conditioning if \f$c\f$ is too close to zero.
  *
  * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$c\f$
@@ -220,6 +220,18 @@ private:
 	const double
 	log_eps;
 
+	/**
+	 * \f$a\f$
+	 */
+	const double
+	a;
+
+	/**
+	 * \f$b\f$
+	 */
+	const double
+	b;
+
 public:
 
 	/**
@@ -242,6 +254,10 @@ public:
 	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
 	 *
 	 * @param[in]		eps						PsiChemical00::eps
+	 *
+	 * @param[in]		a						PsiChemical00::a
+	 *
+	 * @param[in]		b						PsiChemical00::b
 	 */
 	PsiChemical00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
 					const std::set<dealii::types::material_id>									domain_of_integration,
@@ -251,14 +267,18 @@ public:
 					const double																c_0,
 					const double																mu_0,
 					const double																alpha,
-					const double																eps)
+					const double																eps,
+					const double																a = 1.0,
+					const double																b = 0.0)
 	:
 	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiChemical00"),
 	RT(RT),
 	c_0(c_0),
 	mu_0(mu_0),
 	eps(eps),
-	log_eps(log(eps))
+	log_eps(log(eps)),
+	a(a),
+	b(b)
 	{
 	}
 
@@ -274,9 +294,17 @@ public:
 								const std::tuple<bool, bool, bool>	requested_quantities)
 	const
 	{
-		const double c = values[0];
+		const double c = a * values[0] + b;
 		const double log_c_c_0 = log(c/c_0);
 		const double c_th = eps*c_0;
+
+
+		if( c <= 0.0 )
+		{
+			std::cout << "Negative concentration" << std::endl;
+			return true;
+		}
+
 
 		if(get<0>(requested_quantities))
 		{
@@ -289,17 +317,17 @@ public:
 		if(get<1>(requested_quantities))
 		{
 			if(c/c_0 < eps)
-				d_omega[0] = RT * eps * (c_0/c) * log_eps + mu_0;
+				d_omega[0] = (RT * eps * (c_0/c) * log_eps + mu_0) * a;
 			else
-				d_omega[0] = RT * log_c_c_0 + mu_0;
+				d_omega[0] = (RT * log_c_c_0 + mu_0) * a;
 		}
 
 		if(get<2>(requested_quantities))
 		{
 			if(c/c_0 < eps)
-				d2_omega(0,0) = - RT * eps * (c_0/c/c) * log_eps +  RT / c_th;
+				d2_omega(0,0) = (- RT * eps * (c_0/c/c) * log_eps +  RT / c_th) * a * a;
 			else
-				d2_omega(0,0) = RT / c;
+				d2_omega(0,0) = (RT / c) * a * a;
 		}
 
 		return false;
@@ -316,7 +344,7 @@ public:
 						const dealii::Point<spacedim>& 				/*x*/)
 	const
 	{
-		double max_step = - e_omega[0] / delta_e_omega[0];
+		double max_step = - 1.0 / delta_e_omega[0] * ( e_omega[0] + b / a );
 		if(isnan(max_step) || (max_step <= 0.0))
 			return DBL_MAX;
 		else
@@ -1625,8 +1653,18 @@ public:
 		const double c = values[0];
 		const double c_f = values[1];
 
-		if(c == 0)
+		if( c <= 0.0 )
+		{
+			std::cout << "Negative concentration" << std::endl;
 			return true;
+		}
+
+		if( c_f <= 0.0 )
+		{
+			std::cout << "Negative concentration" << std::endl;
+			return true;
+		}
+
 
 		const double log_c_c_f = log(c/c_f);
 

@@ -719,6 +719,13 @@ private:
 public:
 
 	/**
+	 * whether this scalar functional is active
+	 */
+	bool
+	is_active = true;
+
+
+	/**
 	 * Constructor
 	 *
 	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
@@ -763,18 +770,21 @@ public:
 								const bool							/*compute_dq*/)
 	const
 	{
-		const double time_old = function_i.get_time();
-		function_i.set_time(t);
-		const double i_bar = function_i.value(x);
-		function_i.set_time(time_old);
+		if(is_active)
+		{
+			const double time_old = function_i.get_time();
+			function_i.set_time(t);
+			const double i_bar = function_i.value(x);
+			function_i.set_time(time_old);
 
-		const double eta = values[0];
+			const double eta = values[0];
 
-		if(get<0>(requested_quantities))
-			sigma = -i_bar * eta;
+			if(get<0>(requested_quantities))
+				sigma = -i_bar * eta;
 
-		if(get<1>(requested_quantities))
-			d_sigma[0] = - i_bar;
+			if(get<1>(requested_quantities))
+				d_sigma[0] = - i_bar;
+		}
 
 		return false;
 	}
@@ -1926,7 +1936,7 @@ public:
 								const unsigned int															method,
 								const double																alpha = 0.0)
 	:
-	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 1, 3, 4+3*I, 1+I, method, alpha, "OmegaDualFluidDissipation00"),
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 1, 3, 4+3*I, 1+I, method, alpha, "OmegaDualFluidDissipation01"),
 	I(I)
 	{
 	}
@@ -1980,9 +1990,10 @@ public:
 		const double eta_f = values[i_eta_f];
 
 
+		const double eps = 0.0;
 		if(get<0>(requested_quantities))
 		{
-			omega = grad_xi_dot * grad_eta - eta_f * c_f_dot;
+			omega = grad_xi_dot * grad_eta - eta_f * c_f_dot + grad_xi_dot * grad_xi_dot * 0.5 * eps;
 		}
 
 		if(get<1>(requested_quantities))
@@ -1995,6 +2006,7 @@ public:
 				d_omega[i_grad_eta_f + m] = grad_xi_dot[m];
 				for(unsigned int i = 0; i < I; ++i)
 					d_omega[i_grad_eta_i[i] + m] = grad_xi_dot[m] * c_i[i]/c_f;
+				d_omega[i_grad_xi_dot + m] += grad_xi_dot[m] * eps;
 			}
 		}
 
@@ -2024,12 +2036,19 @@ public:
 				}
 
 			}
+
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d2_omega(i_grad_xi_dot + m, i_grad_xi_dot + m) += eps;
+			}
+
 		}
 
 		return false;
 
 	}
 };
+
 
 /**
  * Class defining dual dissipation associated with flux of fluid through a solid skeleton, where ions flow in addition through the fluid.
@@ -2456,6 +2475,482 @@ public:
 	}
 };
 
+/**
+ * Class defining Lagrangian multiplier term for equilibrium condition in the case that fluid flows without dissipation, where ions flow in addition with dissipation through the fluid.
+ *
+ * \f$ \omega^\Omega =	\left[ c^\mathrm{f} \boldsymbol{F}^{-1} \cdot \left( \nabla \dot{\xi} \cdot \boldsymbol{F}^{-1} - \dot{\boldsymbol{u}} \right) \right] \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ *
+ * where \f$\xi\f$ is a scalar potential,<br>
+ * \f$\boldsymbol{F}\f$ the deformation gradient,<br>
+ * \f$\boldsymbol{u}\f$ the displacement variable,<br>
+ * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
+ * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
+ * \f$\eta^\mathrm{f}\f$ is the fluid potential,<br>
+ * and \f$\eta^i\f$ are the ion potentials
+ *
+ * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  					\f$\dot{\xi}_{,x}\f$<br>
+ * 																				[1]						\f$\dot{\xi}_{,y}\f$<br>
+ * 																				[2]						\f$\dot{\xi}_{,z}\f$<br>
+ *																				[3]  					\f$\dot{c}^\mathrm{f}\f$<br>
+ *																				[4]						\f$\dot{u}_x\f$<br>
+ *																				[5]						\f$\dot{u}_y\f$<br>
+ *																				[6]						\f$\dot{u}_z\f$<br>
+ * 																				[7]  					\f$\eta^\mathrm{f}_{,x}\f$<br>
+ * 																				[8]  					\f$\eta^\mathrm{f}_{,y}\f$<br>
+ * 																				[9]  					\f$\eta^\mathrm{f}_{,z}\f$<br>
+ * 																				[10] ... [9+3I]			\f$\eta^i_{,x}\f$, \f$\eta^i_{,y}\f$, \f$\eta^i_{,z}\f$ (ordering: xyz, xyz, ...)<br>
+ * 																				[10+3I]					\f$\eta^\mathrm{f}\f$<br>
+ * 																				[11+3I]					\f$c^\mathrm{f}\f$<br>
+ * 																				[12+3I] ... [11+4I]		\f$c^i\f$<br>
+ * 																				[11+4I+1] ... [11+4I+9]	\f$F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaDualFluidDissipation04 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Number of ionic species \f$I\f$
+	 */
+	const unsigned int
+	I;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		I						OmegaDualFluidDissipation01::I
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaDualFluidDissipation04(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const unsigned int															I,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 4, 3, 4+3*I, 10+I, method, alpha, "OmegaDualFluidDissipation04"),
+	I(I)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		// start indices for respective quantities
+		const unsigned int i_grad_xi_dot = 0;
+		const unsigned int i_c_f_dot = 3;
+		const unsigned int i_u_dot = 4;
+		const unsigned int i_grad_eta_f = 7;
+		vector<unsigned int> i_grad_eta_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_grad_eta_i[i] = 10 + 3*i;
+		const unsigned int i_eta_f = 10 + 3*I;
+		const unsigned int i_c_f = 11 + 3*I;
+		vector<unsigned int> i_c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_c_i[i] = 12 + 3*I + i;
+		const unsigned int i_F = 11+ 4*I + 1;
+
+		dealii::Tensor<1,3> grad_xi_dot;
+		for(unsigned int m = 0; m < 3; ++m)
+			grad_xi_dot[m] = values[i_grad_xi_dot + m];
+
+		const double c_f_dot = values[i_c_f_dot];
+
+		dealii::Tensor<1,3> u_dot;
+		for(unsigned int m = 0; m < 3; ++m)
+			u_dot[m] = values[i_u_dot + m];
+
+		const double eta_f = values[i_eta_f];
+
+		const double c_f = values[i_c_f];
+		dealii::Vector<double> c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			c_i[i] = values[i_c_i[i]];
+
+		dealii::Tensor<2,3> F;
+		for(unsigned int m = 0; m < 3; ++m)
+			for(unsigned int n = 0; n < 3; ++n)
+				F[m][n] = values[i_F + m * 3 + n];
+
+		dealii::Tensor<1,3> grad_eta_c_f, grad_eta_f;
+		std::vector<dealii::Tensor<1,3>> grad_eta_i(I);
+		for(unsigned int m = 0; m < 3; ++m)
+		{
+			grad_eta_c_f[m] = c_f * values[i_grad_eta_f + m];
+			grad_eta_f[m] = values[i_grad_eta_f + m];
+		}
+		for(unsigned int i = 0; i < I; ++i)
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				grad_eta_c_f[m] += c_i[i] * values[i_grad_eta_i[i] + m];
+				grad_eta_i[i][m] = values[i_grad_eta_i[i] + m];
+			}
+		}
+
+		dealii::Tensor<2,3> F_inv, C_inv;
+		dealii::Tensor<1,3> C_inv_grad_xi_dot, grad_xi_dot_F_inv, I_dot_f_c_f, C_inv_grad_eta_c_f, grad_eta_c_f_F_inv, C_inv_grad_eta_f, F_inv_grad_eta_f, F_inv_u_dot;
+		std::vector<dealii::Tensor<1,3>> C_inv_grad_eta_i(I), F_inv_grad_eta_i(I);
+		F_inv = invert(F);
+		C_inv = F_inv * transpose(F_inv);
+		C_inv_grad_xi_dot = C_inv * grad_xi_dot;
+		grad_xi_dot_F_inv = transpose(F_inv) * grad_xi_dot;
+		I_dot_f_c_f = F_inv * (grad_xi_dot_F_inv - u_dot);
+		C_inv_grad_eta_c_f = C_inv * grad_eta_c_f;
+		grad_eta_c_f_F_inv = transpose(F_inv) * grad_eta_c_f;
+		C_inv_grad_eta_f = C_inv * grad_eta_f;
+		F_inv_grad_eta_f = transpose(F_inv) * grad_eta_f;
+		F_inv_u_dot = F_inv * u_dot;
+		for(unsigned int i = 0; i < I; ++i)
+		{
+			C_inv_grad_eta_i[i] = C_inv * grad_eta_i[i];
+			F_inv_grad_eta_i[i] = transpose(F_inv) * grad_eta_i[i];
+		}
+
+		if(get<0>(requested_quantities))
+		{
+			omega = I_dot_f_c_f * grad_eta_c_f - eta_f * c_f_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[i_c_f_dot] = -eta_f;
+			d_omega[i_eta_f]   = -c_f_dot;
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d_omega[i_grad_xi_dot + m] = C_inv_grad_eta_c_f[m];
+				d_omega[i_u_dot + m] = -grad_eta_c_f_F_inv[m];
+				d_omega[i_grad_eta_f + m] = I_dot_f_c_f [m] * c_f;
+				for(unsigned int i = 0; i < I; ++i)
+					d_omega[i_grad_eta_i[i] + m] = I_dot_f_c_f[m] * c_i[i];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+
+			d2_omega[i_c_f_dot][i_eta_f] = d2_omega[i_eta_f][i_c_f_dot] = -1.0;
+
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				for(unsigned int n = 0; n < 3; ++n)
+				{
+					d2_omega(i_grad_xi_dot + m, i_grad_eta_f + n) = d2_omega(i_grad_eta_f + n, i_grad_xi_dot + m) = C_inv[m][n] * c_f;
+					d2_omega(i_u_dot + m, i_grad_eta_f + n) = d2_omega(i_grad_eta_f + n, i_u_dot + m) = -F_inv[n][m] * c_f;
+				}
+				for(unsigned int i = 0; i < I; ++i)
+				{
+					for(unsigned int n = 0; n < 3; ++n)
+					{
+						d2_omega(i_grad_xi_dot + m, i_grad_eta_i[i] + n) = d2_omega(i_grad_eta_i[i] + n, i_grad_xi_dot + m) = C_inv[m][n] * c_i[i];
+						d2_omega(i_u_dot + m, i_grad_eta_i[i] + n) = d2_omega(i_grad_eta_i[i] + n, i_u_dot + m) = -F_inv[n][m] * c_i[i];
+					}
+				}
+
+			}
+
+
+			if(compute_dq)
+			{
+				for(unsigned int m = 0; m < 3; ++m)
+				{
+					d2_omega(i_grad_xi_dot + m, i_c_f) = C_inv_grad_eta_f[m];
+					d2_omega(i_u_dot + m, i_c_f) = -F_inv_grad_eta_f[m];
+					d2_omega(i_grad_eta_f + m, i_c_f) = d_omega(i_grad_eta_f + m) / c_f;
+					for(unsigned int i = 0; i < I; ++i)
+					{
+						d2_omega(i_grad_xi_dot + m, i_c_i[i]) = C_inv_grad_eta_i[i][m];
+						d2_omega(i_u_dot + m, i_c_i[i]) = -F_inv_grad_eta_i[i][m];
+						d2_omega(i_grad_eta_i[i] + m, i_c_i[i]) = d_omega(i_grad_eta_i[i] + m) / c_i[i];
+ 					}
+					for(unsigned int k = 0; k < 3; ++k)
+					{
+						for(unsigned int l = 0; l < 3; ++l)
+						{
+							d2_omega(i_grad_xi_dot + m, i_F + 3 * k + l) = -C_inv_grad_eta_c_f[l] * F_inv[m][k] - grad_eta_c_f_F_inv[k] * C_inv[l][m];
+							d2_omega(i_u_dot + m, i_F + 3 * k + l) = grad_eta_c_f_F_inv[k] * F_inv[l][m];
+							d2_omega(i_grad_eta_f + m, i_F + 3 * k + l) = (-C_inv_grad_xi_dot[l] * F_inv[m][k] - grad_xi_dot_F_inv[k] * C_inv[l][m] + F_inv_u_dot[l] * F_inv[m][k]) * c_f;
+							for(unsigned int i = 0; i < I; ++i)
+								d2_omega(i_grad_eta_i[i] + m, i_F + 3 * k + l) = (-C_inv_grad_xi_dot[l] * F_inv[m][k] - grad_xi_dot_F_inv[k] * C_inv[l][m] + F_inv_u_dot[l] * F_inv[m][k]) * c_i[i];
+
+						}
+					}
+
+				}
+
+			}
+
+		}
+
+		return false;
+
+	}
+};
+
+/**
+ * Class defining Lagrangian multiplier term for equilibrium condition in the case that fluid flows without dissipation, where ions flow in addition with dissipation through the fluid.
+ *
+ * \f$ \omega^\Omega =	\left[ c^\mathrm{f} \boldsymbol{F}^{-1} \cdot \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \right] \cdot  \left(\nabla \eta^\mathrm{f} + \sum^I_{i=1} \dfrac{c^i}{c^\mathrm{f}} \nabla\eta^i \right) - \eta^\mathrm{f} \dot{c}^\mathrm{f}\f$,
+ *
+ * where \f$\dot{\boldsymbol{v}}\f$ is the fluid velocity,<br>
+ * \f$\boldsymbol{F}\f$ the deformation gradient,<br>
+ * \f$\boldsymbol{u}\f$ the displacement variable,<br>
+ * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
+ * \f$c^i\f$ are the ion concentrations (\f$i\f$ runs from \f$1\f$ to \f$I\f$),<br>
+ * \f$\eta^\mathrm{f}\f$ is the fluid potential,<br>
+ * and \f$\eta^i\f$ are the ion potentials
+ *
+ * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  					\f$\dot{v}_{x}\f$<br>
+ * 																				[1]						\f$\dot{v}_{y}\f$<br>
+ * 																				[2]						\f$\dot{v}_{z}\f$<br>
+ *																				[3]  					\f$\dot{c}^\mathrm{f}\f$<br>
+ *																				[4]						\f$\dot{u}_x\f$<br>
+ *																				[5]						\f$\dot{u}_y\f$<br>
+ *																				[6]						\f$\dot{u}_z\f$<br>
+ * 																				[7]  					\f$\eta^\mathrm{f}_{,x}\f$<br>
+ * 																				[8]  					\f$\eta^\mathrm{f}_{,y}\f$<br>
+ * 																				[9]  					\f$\eta^\mathrm{f}_{,z}\f$<br>
+ * 																				[10] ... [9+3I]			\f$\eta^i_{,x}\f$, \f$\eta^i_{,y}\f$, \f$\eta^i_{,z}\f$ (ordering: xyz, xyz, ...)<br>
+ * 																				[10+3I]					\f$\eta^\mathrm{f}\f$<br>
+ * 																				[11+3I]					\f$c^\mathrm{f}\f$<br>
+ * 																				[12+3I] ... [11+4I]		\f$c^i\f$<br>
+ * 																				[11+4I+1] ... [11+4I+9]	\f$F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaDualFluidDissipation05 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * Number of ionic species \f$I\f$
+	 */
+	const unsigned int
+	I;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		I						OmegaDualFluidDissipation01::I
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaDualFluidDissipation05(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const unsigned int															I,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 4, 3, 4+3*I, 10+I, method, alpha, "OmegaDualFluidDissipation05"),
+	I(I)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		// start indices for respective quantities
+		const unsigned int i_v_dot = 0;
+		const unsigned int i_c_f_dot = 3;
+		const unsigned int i_u_dot = 4;
+		const unsigned int i_grad_eta_f = 7;
+		std::vector<unsigned int> i_grad_eta_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_grad_eta_i[i] = 10 + 3*i;
+		const unsigned int i_eta_f = 10 + 3*I;
+		const unsigned int i_c_f = 11 + 3*I;
+		std::vector<unsigned int> i_c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			i_c_i[i] = 12 + 3*I + i;
+		const unsigned int i_F = 11+ 4*I + 1;
+
+		dealii::Tensor<1,3> v_dot;
+		for(unsigned int m = 0; m < 3; ++m)
+			v_dot[m] = values[i_v_dot + m];
+
+		const double c_f_dot = values[i_c_f_dot];
+
+		dealii::Tensor<1,3> u_dot;
+		for(unsigned int m = 0; m < 3; ++m)
+			u_dot[m] = values[i_u_dot + m];
+
+		const double eta_f = values[i_eta_f];
+
+		const double c_f = values[i_c_f];
+		dealii::Vector<double> c_i(I);
+		for(unsigned int i = 0; i < I; ++i)
+			c_i[i] = values[i_c_i[i]];
+
+		dealii::Tensor<2,3> F;
+		for(unsigned int m = 0; m < 3; ++m)
+			for(unsigned int n = 0; n < 3; ++n)
+				F[m][n] = values[i_F + m * 3 + n];
+
+		dealii::Tensor<1,3> grad_eta_c_f, grad_eta_f;
+		std::vector<dealii::Tensor<1,3>> grad_eta_i(I);
+		for(unsigned int m = 0; m < 3; ++m)
+		{
+			grad_eta_c_f[m] = c_f * values[i_grad_eta_f + m];
+			grad_eta_f[m] = values[i_grad_eta_f + m];
+		}
+		for(unsigned int i = 0; i < I; ++i)
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				grad_eta_c_f[m] += c_i[i] * values[i_grad_eta_i[i] + m];
+				grad_eta_i[i][m] = values[i_grad_eta_i[i] + m];
+			}
+		}
+
+		dealii::Tensor<2,3> F_inv;
+		dealii::Tensor<1,3> F_inv_delta_v_dot, grad_eta_f_F_inv, grad_eta_c_f_F_inv, delta_v_dot;
+		std::vector<dealii::Tensor<1,3>> grad_eta_i_F_inv(I);
+		F_inv = invert(F);
+		delta_v_dot = v_dot - u_dot;
+		F_inv_delta_v_dot = F_inv * delta_v_dot;
+		grad_eta_f_F_inv = transpose(F_inv) * grad_eta_f;
+		grad_eta_c_f_F_inv = transpose(F_inv) * grad_eta_c_f;
+		for(unsigned int i = 0; i < I; ++i)
+			grad_eta_i_F_inv[i] = transpose(F_inv) * grad_eta_i[i];
+
+		if(get<0>(requested_quantities))
+		{
+			omega = F_inv_delta_v_dot * grad_eta_c_f - eta_f * c_f_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[i_c_f_dot] = -eta_f;
+			d_omega[i_eta_f]   = -c_f_dot;
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				d_omega[i_v_dot + m] = grad_eta_c_f_F_inv[m];
+				d_omega[i_u_dot + m] = -grad_eta_c_f_F_inv[m];
+				d_omega[i_grad_eta_f + m] = F_inv_delta_v_dot[m] * c_f;
+				for(unsigned int i = 0; i < I; ++i)
+					d_omega[i_grad_eta_i[i] + m] = F_inv_delta_v_dot[m] * c_i[i];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+
+			d2_omega[i_c_f_dot][i_eta_f] = d2_omega[i_eta_f][i_c_f_dot] = -1.0;
+
+			for(unsigned int m = 0; m < 3; ++m)
+			{
+				for(unsigned int n = 0; n < 3; ++n)
+				{
+					d2_omega(i_v_dot + m, i_grad_eta_f + n) = d2_omega(i_grad_eta_f + n, i_v_dot + m) = F_inv[n][m] * c_f;
+					d2_omega(i_u_dot + m, i_grad_eta_f + n) = d2_omega(i_grad_eta_f + n, i_u_dot + m) = -F_inv[n][m] * c_f;
+				}
+				for(unsigned int i = 0; i < I; ++i)
+				{
+					for(unsigned int n = 0; n < 3; ++n)
+					{
+						d2_omega(i_v_dot + m, i_grad_eta_i[i] + n) = d2_omega(i_grad_eta_i[i] + n, i_v_dot + m) = F_inv[n][m] * c_i[i];
+						d2_omega(i_u_dot + m, i_grad_eta_i[i] + n) = d2_omega(i_grad_eta_i[i] + n, i_u_dot + m) = -F_inv[n][m] * c_i[i];
+					}
+				}
+
+			}
+
+
+			if(compute_dq)
+			{
+				for(unsigned int m = 0; m < 3; ++m)
+				{
+					d2_omega(i_v_dot + m, i_c_f) = grad_eta_f_F_inv[m];
+					d2_omega(i_u_dot + m, i_c_f) = -grad_eta_f_F_inv[m];
+					d2_omega(i_grad_eta_f + m, i_c_f) = d_omega(i_grad_eta_f + m) / c_f;
+					for(unsigned int i = 0; i < I; ++i)
+					{
+						d2_omega(i_v_dot + m, i_c_i[i]) = grad_eta_i_F_inv[i][m];
+						d2_omega(i_u_dot + m, i_c_i[i]) = -grad_eta_i_F_inv[i][m];
+						d2_omega(i_grad_eta_i[i] + m, i_c_i[i]) = d_omega(i_grad_eta_i[i] + m) / c_i[i];
+ 					}
+					for(unsigned int k = 0; k < 3; ++k)
+					{
+						for(unsigned int l = 0; l < 3; ++l)
+						{
+							d2_omega(i_v_dot + m, i_F + 3 * k + l) = -grad_eta_c_f_F_inv[k] * F_inv[l][m];
+							d2_omega(i_u_dot + m, i_F + 3 * k + l) = grad_eta_c_f_F_inv[k] * F_inv[l][m];
+							d2_omega(i_grad_eta_f + m, i_F + 3 * k + l) = -F_inv_delta_v_dot[l] * F_inv[m][k] * c_f;
+							for(unsigned int i = 0; i < I; ++i)
+								d2_omega(i_grad_eta_i[i] + m, i_F + 3 * k + l) = -F_inv_delta_v_dot[l] * F_inv[m][k] * c_i[i];
+
+						}
+					}
+
+				}
+
+			}
+
+		}
+		return false;
+
+	}
+};
+
+
 
 /**
  * Class defining an interface related scalar functional for an idealized description of electrolysis reactions with the integrand
@@ -2526,6 +3021,12 @@ public:
 
 	mutable double
 	electrolysis_active = false;
+
+	/**
+	 * whether to take this scalar functional into account
+	 */
+	bool
+	is_active = true;
 
 	/**
 	 * Constructor
@@ -2618,29 +3119,32 @@ public:
 		if(delta_eta >= eta_c)
 			electrolysis_active = true;
 
-		if(get<0>(requested_quantities))
+		if(is_active)
 		{
-			if(delta_eta >= eta_c)
-				sigma = -1.0 / (2.0 * R) * (delta_eta - eta_c) * (delta_eta - eta_c);
-			else
-				sigma = 0.0;
-		}
+			if(get<0>(requested_quantities))
+			{
+				if(delta_eta >= eta_c)
+					sigma = -1.0 / (2.0 * R) * (delta_eta - eta_c) * (delta_eta - eta_c);
+				else
+					sigma = 0.0;
+			}
 
-		if(get<1>(requested_quantities))
-		{
-			if(delta_eta >= eta_c)
-				d_sigma[0] = -1.0 / R * (delta_eta - eta_c);
-			else
-				d_sigma = 0.0;
-		}
+			if(get<1>(requested_quantities))
+			{
+				if(delta_eta >= eta_c)
+					d_sigma[0] = -1.0 / R * (delta_eta - eta_c);
+				else
+					d_sigma = 0.0;
+			}
 
-		if(get<2>(requested_quantities))
-		{
-			if(delta_eta >= eta_c)
-				d2_sigma[0][0] = -1.0 / R;
-			else
-				// small second derivative to ensure definiteness of system
-				d2_sigma[0][0] = -regularization / R;
+			if(get<2>(requested_quantities))
+			{
+				if(delta_eta >= eta_c)
+					d2_sigma[0][0] = -1.0 / R;
+				else
+					// small second derivative to ensure definiteness of system
+					d2_sigma[0][0] = -regularization / R;
+			}
 		}
 
 		return false;
@@ -3539,6 +4043,181 @@ public:
 	}
 };
 
+/**
+ * Class defining Lagrangian multiplier term coupling fluid velocity to fluid flux.
+ *
+ * \f$ \omega^\Omega =	\boldsymbol{t} \cdot \left( \boldsymbol{v} - \dot{\boldsymbol{u}} - \dfrac{V^\mathrm{f}_\mathrm{m}}{J} \boldsymbol{F}\cdot \boldsymbol{I} \right)\f$,
+ *
+ * where \f$t\f$ is the Lagrangian multiplier,<br>
+ * \f$\boldsymbol{v}\f$ the fluid velocity,<br>
+ * \f$\boldsymbol{u}\f$ the velocity of the moving fictitious skeleton,<br>
+ * \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of the fluid,<br>
+ * \f$J\f$ the determinant of the deformation gradient,<br>
+ * \f$\boldsymbol{F}\f$ the deformation gradient related to the motion of the fictitious skeleton,<br>
+ * and \f$\boldsymbol{I}\f$ is the fluid flux.
+ *
+ * @warning Currently, the derivatives required for the \f$\alpha\f$-family for temporal discretization are not implemented!
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{u}_x\f$<br>
+ * 																				[1]	 \f$\dot{u}_y\f$<br>
+ * 																				[2]	 \f$\dot{u}_z\f$<br>
+ *																				[3]  \f$v_x\f$<br>
+ * 																				[4]  \f$v_y\f$<br>
+ * 																				[5]  \f$v_z\f$<br>
+ * 																				[6]  \f$I_x\f$<br>
+ * 																				[7]  \f$I_y\f$<br>
+ * 																				[8]  \f$I_z\f$<br>
+ * 																				[9]	 \f$t_x\f$<br>
+ * 																				[10] \f$t_y\f$<br>
+ * 																				[11] \f$t_z\f$<br>
+ * 																				[12] \f$F_{xx}\f$<br>
+ * 																				[13] \f$F_{xy}\f$<br>
+ * 																				[14] \f$F_{xz}\f$<br>
+ * 																				[15] \f$F_{yx}\f$<br>
+ * 																				[16] \f$F_{yy}\f$<br>
+ * 																				[17] \f$F_{yz}\f$<br>
+ * 																				[18] \f$F_{zx}\f$<br>
+ * 																				[19] \f$F_{zy}\f$<br>
+ * 																				[20] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaVelocityFlux01 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * molar volume of fluid
+	 */
+	const double
+	V_m_f;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		V_m_f					OmegaVelocityFlux01::V_m_f
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaVelocityFlux01(const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																V_m_f,
+								const unsigned int															method,
+								const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 3, 6, 3, 9, method, alpha, "OmegaVelocityFlux01"),
+	V_m_f(V_m_f)
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		// start indices for respective quantities
+		const unsigned int i_u_dot = 0;
+		const unsigned int i_v = 3;
+		const unsigned int i_I = 6;
+		const unsigned int i_t = 9;
+		const unsigned int i_F = 12;
+
+		dealii::Tensor<1,3> u_dot, v, I, t_;
+		dealii::Tensor<2,3> F;
+		for(unsigned int i = 0; i < 3; ++i)
+		{
+			u_dot[i] = values[i_u_dot + i];
+			v[i] = values[i_v + i];
+			I[i] = values[i_I + i];
+			t_[i] = values[i_t + i];
+		}
+		for(unsigned int i = 0; i < 3; ++i)
+			for(unsigned int j = 0; j < 3; ++j)
+				F[i][j] = values[i_F + i * 3 + j];
+
+		const double J = determinant(F);
+		const double c = J / V_m_f;
+
+		dealii::Tensor<1,3> c_F_I = 1.0/c * F * I;
+		dealii::Tensor<1,3> c_t_F = 1.0/c * transpose(F) * t_;
+
+		if(get<0>(requested_quantities))
+		{
+			omega = t_ * (v - u_dot - c_F_I);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 3; ++i)
+			{
+				d_omega[i_u_dot + i] = -t_[i];
+				d_omega[i_v + i] = t_[i];
+				d_omega[i_I + i] = -c_t_F[i];
+				d_omega[i_t + i] = (v - u_dot - c_F_I)[i];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 3; ++i)
+			{
+				d2_omega[i_u_dot + i][i_t + i] = d2_omega[i_t + i][i_u_dot + i] = -1.0;
+				d2_omega[i_v + i][i_t + i] = d2_omega[i_t + i][i_v + i] = 1.0;
+				for(unsigned int j = 0; j < 3; ++j)
+					d2_omega[i_I + i][i_t + j] = d2_omega[i_t + j][i_I + i] = -1.0 / c * F[j][i];
+			}
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> F_inv = invert(F);
+				for(unsigned int k = 0; k < 3; ++k)
+				{
+					for(unsigned int r = 0; r < 3; ++r)
+					{
+						for(unsigned int R = 0; R < 3; ++R)
+						{
+							d2_omega(i_I + k, i_F + 3*r + R) = c_t_F[k] * F_inv[R][r];
+							d2_omega(i_t + k, i_F + 3*r + R) = c_F_I[k] * F_inv[R][r];
+							if(R == k)
+								d2_omega(i_I + k, i_F + 3*r + R) += -1.0/c * t_[r];
+							if(r == k)
+								d2_omega(i_t + k, i_F + 3*r + R) += -1.0/c * I[R];
+
+						}
+					}
+				}
+
+			}
+		}
+
+		return false;
+
+	}
+};
+
 
 /**
  * Class defining a domain related scalar functional with the integrand
@@ -3627,8 +4306,6 @@ public:
 								const bool							compute_dq)
 	const
 	{
-		(void)compute_dq;
-		Assert(!compute_dq, dealii::ExcMessage("The alpha-family for temporal discretization is not currently implemented!"));
 
 		dealii::Tensor<2,3> grad_ref_v, F, F_inv, C_inv, grad_v, delta;
 		for(unsigned int r = 0; r < 3; ++r)
@@ -3650,13 +4327,16 @@ public:
 			omega = 0.5 * J * eta * ( trace(grad_v * transpose(grad_v)) + trace(grad_v * grad_v) );
 		}
 
-		if(get<1>(requested_quantities))
+		dealii::Tensor<2,3> T;
+		if(get<1>(requested_quantities) || get<2>(requested_quantities))
 		{
-			dealii::Tensor<2,3> T;
 			T = J * eta * (grad_v + transpose(grad_v)) * transpose(F_inv);
-			for(unsigned int r = 0; r < 3; ++r)
-				for(unsigned int S = 0; S < 3; ++S)
-					d_omega[r * 3 + S] = T[r][S];
+			if(get<1>(requested_quantities))
+			{
+				for(unsigned int r = 0; r < 3; ++r)
+					for(unsigned int S = 0; S < 3; ++S)
+						d_omega[r * 3 + S] = T[r][S];
+			}
 		}
 
 		if(get<2>(requested_quantities))
@@ -3666,6 +4346,18 @@ public:
 					for(unsigned int p = 0; p < 3; ++p)
 						for(unsigned int Q = 0; Q < 3; ++Q)
 							d2_omega(r * 3 + S, p * 3 + Q) = J * eta * (delta[r][p] * C_inv[S][Q] + F_inv[Q][r] * F_inv[S][p]);
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> F_inv_grad_v, F_inv_grad_v_T;
+				F_inv_grad_v = F_inv * grad_v;
+				F_inv_grad_v_T = F_inv * transpose(grad_v);
+
+				for(unsigned int r = 0; r < 3; ++r)
+					for(unsigned int S = 0; S < 3; ++S)
+						for(unsigned int p = 0; p < 3; ++p)
+							for(unsigned int Q = 0; Q < 3; ++Q)
+								d2_omega(r * 3 + S, p * 3 + Q + 9) = F_inv[Q][p] * T[r][S] - J * eta * ( F_inv_grad_v[S][p] * F_inv[Q][r] + C_inv[Q][S] * grad_v[r][p] + ( F_inv_grad_v[Q][r] + F_inv_grad_v_T[Q][r] ) * F_inv[S][p] );
+			}
 		}
 
 		return false;
@@ -3674,9 +4366,483 @@ public:
 
 
 /**
- * Class defining a domain related scalar functional  constraining the tangential relative velocity between a fluid and a solid surface to zero
+ * Class defining a domain related scalar functional with the integrand
  *
- * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{u}_{x}\f$<br>
+ * \f$ \omega^\Omega =	J \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f} \dot{\xi} \f$,
+ *
+ * where \f$\boldsymbol{F}\f$ is the deformation gradient, \f$J\f$ its determinant,  \f$boldsymbol{f}\f$ a Lagrangian multiplier vector
+ * and \f$\dot{\xi}\f$ the rate of a scalar field.
+ *
+ * This defines an "incompressibility" condition for the Lagrangian multiplier.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{\xi}\f$<br>
+ * 																				[1]  \f$f_{x,x}\f$<br>
+ * 																				[2]  \f$f_{x,y}\f$<br>
+ * 																				[3]  \f$f_{x,z}\f$<br>
+ * 																				[4]  \f$f_{y,x}\f$<br>
+ * 																				[5]  \f$f_{y,y}\f$<br>
+ * 																				[6]  \f$f_{y,z}\f$<br>
+ * 																				[7]  \f$f_{z,x}\f$<br>
+ * 																				[8]  \f$f_{z,y}\f$<br>
+ * 																				[9]  \f$f_{z,z}\f$<br>
+ * 																				[10] \f$F_{xx}\f$<br>
+ * 																				[11] \f$F_{xy}\f$<br>
+ * 																				[12] \f$F_{xz}\f$<br>
+ * 																				[13] \f$F_{yx}\f$<br>
+ * 																				[14] \f$F_{yy}\f$<br>
+ * 																				[15] \f$F_{yz}\f$<br>
+ * 																				[16] \f$F_{zx}\f$<br>
+ * 																				[17] \f$F_{zy}\f$<br>
+ * 																				[18] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaLagrangeIncompressibility00 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaLagrangeIncompressibility00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+										const std::set<dealii::types::material_id>									domain_of_integration,
+										const dealii::Quadrature<spacedim>											quadrature,
+										GlobalDataIncrementalFE<spacedim>&											global_data,
+										const unsigned int															method,
+										const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 1, 0, 9, 9, method, alpha, "OmegaLagrangeIncompressibility00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		dealii::Tensor<2,3> grad_ref_f, F, F_inv, grad_f;
+
+		const double xi_dot = values[0];
+		for(unsigned int r = 0; r < 3; ++r)
+		{
+			for(unsigned int S = 0; S < 3; ++S)
+			{
+				grad_ref_f[r][S] = values[1 + 3 * r + S];
+				F[r][S] = values[1 + 9 + 3 * r + S];
+			}
+		}
+		F_inv = invert(F);
+		grad_f = grad_ref_f * F_inv;
+		const double J = determinant(F);
+		const double tr_grad_f = trace(grad_f);
+
+		if(get<0>(requested_quantities))
+		{
+			omega = J * tr_grad_f * xi_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[0] = J *tr_grad_f;
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int R = 0; R < 3; ++R)
+					d_omega[1 + r * 3 + R] = J * F_inv[R][r] * xi_dot;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int R = 0; R < 3; ++R)
+					d2_omega(0, 1 + r * 3 + R) = d2_omega(1 + r * 3 + R, 0) = J * F_inv[R][r];
+
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> F_inv_grad_f = F_inv * grad_f;
+				for(unsigned int r = 0; r < 3; ++r)
+				{
+					for(unsigned int R = 0; R < 3; ++R)
+					{
+						d2_omega(0, 1 + 9 + r * 3 + R) = J * ( tr_grad_f * F_inv[R][r] - F_inv_grad_f[R][r]);
+						for(unsigned int k = 0; k < 3; ++k)
+							for(unsigned int K = 0; K < 3; ++K)
+								d2_omega(1 + k * 3 + K, 1 + 9 + r * 3 + R) = J * xi_dot * ( F_inv[R][r] * F_inv[K][k] - F_inv[K][r] * F_inv[R][k] );
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
+
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$ \omega^\Omega =	2 J \boldsymbol{g}:\boldsymbol{d} \f$,
+ *
+ * where \f$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{v} + \nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1} \right)\f$ is the stretching,
+ * \f$\boldsymbol{g} = \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f}\f$ a corresponding Lagrangian multiplier term,
+ * \f$\boldsymbol{F}\f$ the deformation gradient, and \f$J = \det\boldsymbol{F}\f$.
+ *
+ * This enforces the equilibrium applicable to a viscous fluid by means of a Lagrangian multiplier.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$v_{x,x}\f$<br>
+ * 																				[1]  \f$v_{x,y}\f$<br>
+ * 																				[2]  \f$v_{x,z}\f$<br>
+ * 																				[3]  \f$v_{y,x}\f$<br>
+ * 																				[4]  \f$v_{y,y}\f$<br>
+ * 																				[5]  \f$v_{y,z}\f$<br>
+ * 																				[6]  \f$v_{z,x}\f$<br>
+ * 																				[7]  \f$v_{z,y}\f$<br>
+ * 																				[8]  \f$v_{z,z}\f$<br>
+ * 																				[9]  \f$f_{x,x}\f$<br>
+ * 																				[10] \f$f_{x,y}\f$<br>
+ * 																				[11] \f$f_{x,z}\f$<br>
+ * 																				[12] \f$f_{y,x}\f$<br>
+ * 																				[13] \f$f_{y,y}\f$<br>
+ * 																				[14] \f$f_{y,z}\f$<br>
+ * 																				[15] \f$f_{z,x}\f$<br>
+ * 																				[16] \f$f_{z,y}\f$<br>
+ * 																				[17] \f$f_{z,z}\f$<br>
+ * 																				[18] \f$F_{xx}\f$<br>
+ * 																				[19] \f$F_{xy}\f$<br>
+ * 																				[20] \f$F_{xz}\f$<br>
+ * 																				[21] \f$F_{yx}\f$<br>
+ * 																				[22] \f$F_{yy}\f$<br>
+ * 																				[23] \f$F_{yz}\f$<br>
+ * 																				[24] \f$F_{zx}\f$<br>
+ * 																				[25] \f$F_{zy}\f$<br>
+ * 																				[26] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaLagrangeViscousDissipation00 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaLagrangeViscousDissipation00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+										const std::set<dealii::types::material_id>									domain_of_integration,
+										const dealii::Quadrature<spacedim>											quadrature,
+										GlobalDataIncrementalFE<spacedim>&											global_data,
+										const unsigned int															method,
+										const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 9, 0, 9, 9, method, alpha, "OmegaLagrangeViscousDissipation00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		dealii::Tensor<2,3> grad_ref_v, grad_ref_f, F, F_inv, C_inv, grad_v, grad_f, grad_v_sym, grad_f_sym, delta;
+		for(unsigned int r = 0; r < 3; ++r)
+		{
+			for(unsigned int S = 0; S < 3; ++S)
+			{
+				grad_ref_v[r][S] = values[3 * r + S];
+				grad_ref_f[r][S] = values[9 + 3 * r + S];
+				F[r][S] = values[18 + 3 * r + S];
+			}
+		}
+		F_inv = invert(F);
+		C_inv = F_inv * transpose(F_inv);
+		grad_v = grad_ref_v * F_inv;
+		grad_v_sym = symmetrize(grad_v);
+		grad_f = grad_ref_f * F_inv;
+		grad_f_sym = symmetrize(grad_f);
+		delta[0][0] = delta[1][1] = delta[2][2] = 1.0;
+		const double J = determinant(F);
+
+		if(get<0>(requested_quantities))
+		{
+			omega = 2.0 * J * trace( grad_f * symmetrize(grad_v) );
+		}
+
+		dealii::Tensor<2,3> T_f, T_v;
+		if(get<1>(requested_quantities) || get<2>(requested_quantities))
+		{
+			T_f = 2.0 * J * grad_f_sym * transpose(F_inv);
+			T_v = 2.0 * J * grad_v_sym * transpose(F_inv);
+			if(get<1>(requested_quantities))
+			{
+				for(unsigned int r = 0; r < 3; ++r)
+				{
+					for(unsigned int S = 0; S < 3; ++S)
+						d_omega[r * 3 + S] = T_f[r][S];
+					for(unsigned int S = 0; S < 3; ++S)
+						d_omega[9 + r * 3 + S] = T_v[r][S];
+				}
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int S = 0; S < 3; ++S)
+					for(unsigned int p = 0; p < 3; ++p)
+						for(unsigned int Q = 0; Q < 3; ++Q)
+							d2_omega(r * 3 + S, 9 + p * 3 + Q) = d2_omega(9 + p * 3 + Q, r * 3 + S) = J * (delta[r][p] * C_inv[S][Q] + F_inv[Q][r] * F_inv[S][p]);
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> F_inv_grad_v, F_inv_grad_v_T, F_inv_grad_f, F_inv_grad_f_T;
+				F_inv_grad_v = F_inv * grad_v;
+				F_inv_grad_v_T = F_inv * transpose(grad_v);
+				F_inv_grad_f = F_inv * grad_f;
+				F_inv_grad_f_T = F_inv * transpose(grad_f);
+
+				for(unsigned int i = 0; i < 3; ++i)
+				{
+					for(unsigned int I = 0; I < 3; ++I)
+					{
+						for(unsigned int r = 0; r < 3; ++r)
+						{
+							for(unsigned int R = 0; R < 3; ++R)
+							{
+								d2_omega(i * 3 + I, r * 3 + R + 18) = F_inv[R][r] * T_f[i][I] - J * ( F_inv_grad_f[I][r] * F_inv[R][i] + C_inv[R][I] * grad_f[i][r] + ( F_inv_grad_f[R][i] + F_inv_grad_f_T[R][i] ) * F_inv[I][r] );
+								d2_omega(9 + i * 3 + I, r * 3 + R + 18) = F_inv[R][r] * T_v[i][I] - J * ( F_inv_grad_v[I][r] * F_inv[R][i] + C_inv[R][I] * grad_v[i][r] + ( F_inv_grad_v[R][i] + F_inv_grad_v_T[R][i] ) * F_inv[I][r] );
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
+ * \f$ \omega^\Sigma =	\boldsymbol{t} \cdot \left[ \left(\dot{\boldsymbol{u}} - \dot{\boldsymbol{v}}\right) \times \boldsymbol{n} \right] + \dfrac{1}{2} \left(\boldsymbol{t} \cdot \boldsymbol{n} \right)^2 \f$,
+ *
+ * where \f$\dot{\boldsymbol{u}}\f$ is the velocity of a solid at an interface to a fluid, \f$\dot{\boldsymbol{v}}\f$ is the velocity of the fluid at the interface,
+ * \f$\boldsymbol{t}\f$ is a Lagrangian multiplier, \f$\boldsymbol{n} = J \boldsymbol{F}^{-\top} \cdot \boldsymbol{N}\f$ is the normal vector on the interface in the deformed configuration,
+ * with \f$\boldsymbol{F}\f$ being the deformation gradient, \f$J\f$ its determinant, and \f$\boldsymbol{N}\f$ the normal vector on the interface in the reference configuration.
+ *
+ * This constrains the tangential relative velocity between a fluid and a solid surface to zero. In order to regularize the problem, a positive definite term is added for the normal component of \f$\boldsymbol{t}\f$.
+ *
+ *
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :					<br>[0]  \f$\dot{u}_{x}\f$<br>
+ * 																				[1]  \f$\dot{u}_{y}\f$<br>
+ * 																				[2]  \f$\dot{u}_{z}\f$<br>
+ * 																				[3]  \f$\dot{v}_{x}\f$<br>
+ * 																				[4]  \f$\dot{v}_{y}\f$<br>
+ * 																				[5]  \f$\dot{v}_{z}\f$<br>
+ * 																				[6]  \f$t_x\f$<br>
+ * 																				[7]  \f$t_y\f$<br>
+ * 																				[8]  \f$t_z\f$<br>
+ * 																				[9]  \f$F_{xx}\f$<br>
+ * 																				[10] \f$F_{xy}\f$<br>
+ * 																				[11] \f$F_{xz}\f$<br>
+ * 																				[12] \f$F_{yx}\f$<br>
+ * 																				[13] \f$F_{yy}\f$<br>
+ * 																				[14] \f$F_{yz}\f$<br>
+ * 																				[15] \f$F_{zx}\f$<br>
+ * 																				[16] \f$F_{zy}\f$<br>
+ * 																				[17] \f$F_{zz}\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaZeroTangentialFlux00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaZeroTangentialFlux00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const unsigned int																method,
+								const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 6, 0, 3, 9, method, alpha, "OmegaZeroTangentialFlux00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	n,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		dealii::Tensor<1,3> u_dot, v_dot, u_dot_v_dot, t;
+		dealii::Tensor<2,3> F, F_inv;
+
+
+		for(unsigned int r = 0; r < 3; ++r)
+		{
+			u_dot[r] = values[r];
+			v_dot[r] = values[3 + r];
+			t[r] = values[6 + r];
+			for(unsigned int S = 0; S < 3; ++S)
+				F[r][S] = values[9 + 3 * r + S];
+		}
+		F_inv = invert(F);
+		u_dot_v_dot = u_dot - v_dot;
+		const double J = determinant(F);
+
+		dealii::Tensor<1, 3> n__, n_;
+		n__[0] = n[0];
+		n__[1] = spacedim < 2 ? 0.0 : n[1];
+		n__[2] = spacedim < 3 ? 0.0 : n[2];
+		n_ = J * transpose(F_inv) * n__;
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = t * cross_product_3d(u_dot_v_dot, n_) + 0.5 * (t * n_) * (t * n_);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int r = 0; r < 3; ++r)
+			{
+				d_sigma[r] = cross_product_3d(n_, t)[r];
+				d_sigma[3 + r] = -cross_product_3d(n_, t)[r];
+				d_sigma[6 + r] = cross_product_3d(u_dot_v_dot, n_)[r] + (t * n_) * n_[r];
+			}
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma(6 + 0, 0) = d2_sigma(0, 6 + 0) = 0.0;
+			d2_sigma(6 + 1, 0) = d2_sigma(0, 6 + 1) = -n_[2];
+			d2_sigma(6 + 2, 0) = d2_sigma(0, 6 + 2) = n_[1];
+			d2_sigma(6 + 0, 1) = d2_sigma(1, 6 + 0) = n_[2];
+			d2_sigma(6 + 1, 1) = d2_sigma(1, 6 + 1) = 0.0;
+			d2_sigma(6 + 2, 1) = d2_sigma(1, 6 + 2) = -n_[0];
+			d2_sigma(6 + 0, 2) = d2_sigma(2, 6 + 0) = -n_[1];
+			d2_sigma(6 + 1, 2) = d2_sigma(2, 6 + 1) = n_[0];
+			d2_sigma(6 + 2, 2) = d2_sigma(2, 6 + 2) = 0.0;
+
+			d2_sigma(6 + 0, 3) = d2_sigma(3, 6 + 0) = 0.0;
+			d2_sigma(6 + 1, 3) = d2_sigma(3, 6 + 1) = n_[2];
+			d2_sigma(6 + 2, 3) = d2_sigma(3, 6 + 2) = -n_[1];
+			d2_sigma(6 + 0, 4) = d2_sigma(4, 6 + 0) = -n_[2];
+			d2_sigma(6 + 1, 4) = d2_sigma(4, 6 + 1) = 0.0;
+			d2_sigma(6 + 2, 4) = d2_sigma(4, 6 + 2) = n_[0];
+			d2_sigma(6 + 0, 5) = d2_sigma(5, 6 + 0) = n_[1];
+			d2_sigma(6 + 1, 5) = d2_sigma(5, 6 + 1) = -n_[0];
+			d2_sigma(6 + 2, 5) = d2_sigma(5, 6 + 2) = 0.0;
+
+			for(unsigned int m = 0; m < 3; ++m)
+				for(unsigned int l = 0; l < 3; ++l)
+					d2_sigma(6 + m, 6 + l) = n_[m] * n_[l];
+
+			if(compute_dq)
+			{
+				dealii::Tensor<3,3> dn_dF;
+				dealii::Tensor<2,3> t_dn_dF;
+				const double t_n = t * n_;
+				for(unsigned int m = 0; m < 3; ++m)
+					for(unsigned int r = 0; r < 3; ++r)
+						for(unsigned int R = 0; R < 3; ++R)
+							dn_dF[m][r][R] = F_inv[R][r] * n_[m] - F_inv[R][m] * n_[r];
+				t_dn_dF = t * dn_dF;
+				for(unsigned int r = 0; r < 3; ++r)
+				{
+					for(unsigned int R = 0; R < 3; ++R)
+					{
+						d2_sigma(0, 9 + 3 * r + R) = dn_dF[1][r][R] * t[2] - dn_dF[2][r][R] * t[1];
+						d2_sigma(1, 9 + 3 * r + R) = dn_dF[2][r][R] * t[0] - dn_dF[0][r][R] * t[2];
+						d2_sigma(2, 9 + 3 * r + R) = dn_dF[0][r][R] * t[1] - dn_dF[1][r][R] * t[0];
+						d2_sigma(3, 9 + 3 * r + R) = -dn_dF[1][r][R] * t[2] + dn_dF[2][r][R] * t[1];
+						d2_sigma(4, 9 + 3 * r + R) = -dn_dF[2][r][R] * t[0] + dn_dF[0][r][R] * t[2];
+						d2_sigma(5, 9 + 3 * r + R) = -dn_dF[0][r][R] * t[1] + dn_dF[1][r][R] * t[0];
+						d2_sigma(6, 9 + 3 * r + R) = -dn_dF[1][r][R] * u_dot_v_dot[2] + dn_dF[2][r][R] * u_dot_v_dot[1] + t_dn_dF[r][R] * n_[0] + t_n * dn_dF[0][r][R];
+						d2_sigma(7, 9 + 3 * r + R) = -dn_dF[2][r][R] * u_dot_v_dot[0] + dn_dF[0][r][R] * u_dot_v_dot[2] + t_dn_dF[r][R] * n_[1] + t_n * dn_dF[1][r][R];
+						d2_sigma(8, 9 + 3 * r + R) = -dn_dF[0][r][R] * u_dot_v_dot[1] + dn_dF[1][r][R] * u_dot_v_dot[0] + t_dn_dF[r][R] * n_[2] + t_n * dn_dF[2][r][R];
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
+
+
+/**
+ * Class defining an interface related scalar functional  constraining the tangential relative velocity between a fluid and a solid surface to zero
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim>::e_sigma :			<br>[0]  \f$\dot{u}_{x}\f$<br>
  * 																				[1]  \f$\dot{u}_{y}\f$<br>
  * 																				[2]  \f$v_{x}\f$<br>
  * 																				[3]  \f$v_{y}\f$<br>
