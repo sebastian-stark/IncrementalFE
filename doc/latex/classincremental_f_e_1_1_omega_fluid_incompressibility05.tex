@@ -1,0 +1,128 @@
+\hypertarget{classincremental_f_e_1_1_omega_fluid_incompressibility05}{}\doxysection{incremental\+FE\+::Omega\+Fluid\+Incompressibility05$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_fluid_incompressibility05}\index{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Fluid\+Incompressibility05$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classincremental_f_e_1_1_omega_fluid_incompressibility05__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Fluid\+Incompressibility05$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classincremental_f_e_1_1_omega_fluid_incompressibility05__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05_a90f1212d9c4d2a401218156ae14ebe07}{Omega\+Fluid\+Incompressibility05}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05_a06b991ff536d5afc7968fe080f963461}{V\+\_\+m\+\_\+f}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05_a25f99edfe630f5102738d430bec91424}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05_a06b991ff536d5afc7968fe080f963461}{V\+\_\+m\+\_\+f}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Fluid\+Incompressibility05$<$ spacedim $>$}
+
+Class defining Lagrangian multiplier term for an incompressible fluid.
+
+$ \omega^\Sigma = -\dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \nabla \dot{\boldsymbol{v}} \, \eta $,
+
+where $\dot{\boldsymbol{v}}$ is the fluid velocity,~\newline
+ $\boldsymbol{F}$ the deformation gradient,~\newline
+ $J$ the determinant of the deformation gradient,~\newline
+ $V^\mathrm{f}_\mathrm{m}$ the molar volume of the fluid,~\newline
+ and $\eta$ a Lagrange multiplier.~\newline
+
+
+This enforces incompressibility as an interface condition
+
+Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma} \+:~\newline
+\mbox{[}0\mbox{]} $\dot{v}_{,xx}$~\newline
+ \mbox{[}1\mbox{]} $\dot{v}_{,xy}$~\newline
+ \mbox{[}2\mbox{]} $\dot{v}_{,xz}$~\newline
+ \mbox{[}3\mbox{]} $\dot{v}_{,yx}$~\newline
+ \mbox{[}4\mbox{]} $\dot{v}_{,yy}$~\newline
+ \mbox{[}5\mbox{]} $\dot{v}_{,yz}$~\newline
+ \mbox{[}6\mbox{]} $\dot{v}_{,zx}$~\newline
+ \mbox{[}7\mbox{]} $\dot{v}_{,zy}$~\newline
+ \mbox{[}8\mbox{]} $\dot{v}_{,zz}$~\newline
+ \mbox{[}9\mbox{]} $\eta$~\newline
+ \mbox{[}10\mbox{]} ... \mbox{[}18\mbox{]} $F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_fluid_incompressibility05_a90f1212d9c4d2a401218156ae14ebe07}\label{classincremental_f_e_1_1_omega_fluid_incompressibility05_a90f1212d9c4d2a401218156ae14ebe07}} 
+\index{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}!OmegaFluidIncompressibility05@{OmegaFluidIncompressibility05}}
+\index{OmegaFluidIncompressibility05@{OmegaFluidIncompressibility05}!incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaFluidIncompressibility05()}{OmegaFluidIncompressibility05()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05}{incremental\+F\+E\+::\+Omega\+Fluid\+Incompressibility05}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05}{Omega\+Fluid\+Incompressibility05}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{V\+\_\+m\+\_\+f,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em V\+\_\+m\+\_\+f} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05_a06b991ff536d5afc7968fe080f963461}{Omega\+Fluid\+Incompressibility05\+::\+V\+\_\+m\+\_\+f}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_fluid_incompressibility05_a25f99edfe630f5102738d430bec91424}\label{classincremental_f_e_1_1_omega_fluid_incompressibility05_a25f99edfe630f5102738d430bec91424}} 
+\index{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05}{incremental\+F\+E\+::\+Omega\+Fluid\+Incompressibility05}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_fluid_incompressibility05_a06b991ff536d5afc7968fe080f963461}\label{classincremental_f_e_1_1_omega_fluid_incompressibility05_a06b991ff536d5afc7968fe080f963461}} 
+\index{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}!V\_m\_f@{V\_m\_f}}
+\index{V\_m\_f@{V\_m\_f}!incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$@{incrementalFE::OmegaFluidIncompressibility05$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{V\_m\_f}{V\_m\_f}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_incompressibility05}{incremental\+F\+E\+::\+Omega\+Fluid\+Incompressibility05}}$<$ spacedim $>$\+::V\+\_\+m\+\_\+f\hspace{0.3cm}{\ttfamily [private]}}
+
+Number of ionic species $V^\mathrm{f}_\mathrm{m}$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

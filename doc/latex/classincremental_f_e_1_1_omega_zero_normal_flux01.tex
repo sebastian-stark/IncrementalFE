@@ -1,0 +1,129 @@
+\hypertarget{classincremental_f_e_1_1_omega_zero_normal_flux01}{}\doxysection{incremental\+FE\+::Omega\+Zero\+Normal\+Flux01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_zero_normal_flux01}\index{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Zero\+Normal\+Flux01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classincremental_f_e_1_1_omega_zero_normal_flux01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Zero\+Normal\+Flux01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classincremental_f_e_1_1_omega_zero_normal_flux01__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01_aef725f3446180dc9bd7029bd6c3d9b85}{Omega\+Zero\+Normal\+Flux01}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01_a169ebcef1cf68442c980d9de41576401}{flip\+\_\+normal}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01_a2da292fa16195c4396fbe55b1b3f65df}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01_a169ebcef1cf68442c980d9de41576401}{flip\+\_\+normal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux01$<$ spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$ \omega^\Sigma = t \left(\dot{\boldsymbol{u}} - \dot{\boldsymbol{v}}\right) \cdot \boldsymbol{n} $,
+
+where $\dot{\boldsymbol{u}}$ is the velocity of a solid at an interface to a fluid, $\dot{\boldsymbol{v}}$ is the velocity of the fluid at the interface, $t$ is a Lagrangian multiplier, $\boldsymbol{n} = J \boldsymbol{F}^{-\top} \cdot \boldsymbol{N}$ is the normal vector on the interface in the deformed configuration, with $\boldsymbol{F}$ being the deformation gradient, $J$ its determinant, and $\boldsymbol{N}$ the normal vector on the interface in the reference configuration.
+
+This constrains the normal relative velocity between a fluid and a solid surface to zero.
+
+Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma} \+: ~\newline
+\mbox{[}0\mbox{]} $\dot{u}_{x}$~\newline
+ \mbox{[}1\mbox{]} $\dot{u}_{y}$~\newline
+ \mbox{[}2\mbox{]} $\dot{u}_{z}$~\newline
+ \mbox{[}3\mbox{]} $\dot{v}_{x}$~\newline
+ \mbox{[}4\mbox{]} $\dot{v}_{y}$~\newline
+ \mbox{[}5\mbox{]} $\dot{v}_{z}$~\newline
+ \mbox{[}6\mbox{]} $t$~\newline
+ \mbox{[}7\mbox{]} $F_{xx}$~\newline
+ \mbox{[}8\mbox{]} $F_{xy}$~\newline
+ \mbox{[}9\mbox{]} $F_{xz}$~\newline
+ \mbox{[}10\mbox{]} $F_{yx}$~\newline
+ \mbox{[}11\mbox{]} $F_{yy}$~\newline
+ \mbox{[}12\mbox{]} $F_{yz}$~\newline
+ \mbox{[}13\mbox{]} $F_{zx}$~\newline
+ \mbox{[}14\mbox{]} $F_{zy}$~\newline
+ \mbox{[}15\mbox{]} $F_{zz}$~\newline
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_normal_flux01_aef725f3446180dc9bd7029bd6c3d9b85}\label{classincremental_f_e_1_1_omega_zero_normal_flux01_aef725f3446180dc9bd7029bd6c3d9b85}} 
+\index{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}!OmegaZeroNormalFlux01@{OmegaZeroNormalFlux01}}
+\index{OmegaZeroNormalFlux01@{OmegaZeroNormalFlux01}!incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaZeroNormalFlux01()}{OmegaZeroNormalFlux01()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01}{incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux01}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01}{Omega\+Zero\+Normal\+Flux01}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const bool}]{flip\+\_\+normal,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em flip\+\_\+normal} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01_a169ebcef1cf68442c980d9de41576401}{Omega\+Zero\+Normal\+Flux01\+::flip\+\_\+normal}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_normal_flux01_a2da292fa16195c4396fbe55b1b3f65df}\label{classincremental_f_e_1_1_omega_zero_normal_flux01_a2da292fa16195c4396fbe55b1b3f65df}} 
+\index{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01}{incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux01}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_normal_flux01_a169ebcef1cf68442c980d9de41576401}\label{classincremental_f_e_1_1_omega_zero_normal_flux01_a169ebcef1cf68442c980d9de41576401}} 
+\index{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}!flip\_normal@{flip\_normal}}
+\index{flip\_normal@{flip\_normal}!incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$@{incrementalFE::OmegaZeroNormalFlux01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{flip\_normal}{flip\_normal}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_normal_flux01}{incremental\+F\+E\+::\+Omega\+Zero\+Normal\+Flux01}}$<$ spacedim $>$\+::flip\+\_\+normal\hspace{0.3cm}{\ttfamily [private]}}
+
+orientation of normal vector (if false, the normal vector points from -\/ to +, if true the other way round) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

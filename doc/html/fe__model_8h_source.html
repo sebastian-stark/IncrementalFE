@@ -321,16 +321,19 @@ $(function() {
 <div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;    MatrixType&amp;</div>
 <div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;    <a class="code" href="classincremental_f_e_1_1_f_e_model.html#a2f5c0e7ac2d043a5c19fcc32927a76ce">get_system_matrix</a>();</div>
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160; </div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    <span class="keywordtype">double</span></div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <a class="code" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a>()</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160; </div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;};</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160; </div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;}</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160; </div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_FEMODEL_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    RHSVectorType&amp;</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <a class="code" href="classincremental_f_e_1_1_f_e_model.html#a2940e902f0f30ae4b9b122f7c573a20d">get_rhs</a>();</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160; </div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;    <span class="keywordtype">double</span></div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    <a class="code" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a>()</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160; </div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;};</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160; </div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;}</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_FEMODEL_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_ae3bd54f0440c5dcaf08066efd786c341"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#ae3bd54f0440c5dcaf08066efd786c341">incrementalFE::FEModel::dof_renumbering</a></div><div class="ttdeci">dealii::GalerkinTools::DoFRenumberingOffset dof_renumbering</div><div class="ttdef"><b>Definition:</b> fe_model.h:66</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_acb0d11f9d7a71971732d041a5cb4376a"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#acb0d11f9d7a71971732d041a5cb4376a">incrementalFE::FEModel::read_solution_from_file</a></div><div class="ttdeci">void read_solution_from_file(const std::string file_name)</div></div>
@@ -397,6 +400,7 @@ $(function() {
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_a937ea806f50796c76a45f36e6ec3cd29"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#a937ea806f50796c76a45f36e6ec3cd29">incrementalFE::FEModel::assembly_helper</a></div><div class="ttdeci">dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt; assembly_helper</div><div class="ttdef"><b>Definition:</b> fe_model.h:72</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_ae06daeaed072ca50f43eccec359b3da3"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#ae06daeaed072ca50f43eccec359b3da3">incrementalFE::FEModel::post_refinement</a></div><div class="ttdeci">void post_refinement()</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_ae4d9513474928ef225245928410f984b"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#ae4d9513474928ef225245928410f984b">incrementalFE::FEModel::~FEModel</a></div><div class="ttdeci">~FEModel()</div></div>
+<div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_a2940e902f0f30ae4b9b122f7c573a20d"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#a2940e902f0f30ae4b9b122f7c573a20d">incrementalFE::FEModel::get_rhs</a></div><div class="ttdeci">RHSVectorType &amp; get_rhs()</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_aff2f85b08282289389284138ca708eca"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#aff2f85b08282289389284138ca708eca">incrementalFE::FEModel::dp_domain</a></div><div class="ttdeci">std::vector&lt; dealii::SmartPointer&lt; const dealii::DataPostprocessor&lt; spacedim &gt; &gt; &gt; dp_domain</div><div class="ttdef"><b>Definition:</b> fe_model.h:185</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_aaa0e0ef1be909224dfe6f28484b9d754"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#aaa0e0ef1be909224dfe6f28484b9d754">incrementalFE::FEModel::times_and_names_interface</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; double, std::string &gt; &gt; times_and_names_interface</div><div class="ttdef"><b>Definition:</b> fe_model.h:173</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_f_e_model_html_a65b5910cfba2feb26933ad451ceff628"><div class="ttname"><a href="classincremental_f_e_1_1_f_e_model.html#a65b5910cfba2feb26933ad451ceff628">incrementalFE::FEModel::make_hanging_node_constraints</a></div><div class="ttdeci">const bool make_hanging_node_constraints</div><div class="ttdef"><b>Definition:</b> fe_model.h:197</div></div>

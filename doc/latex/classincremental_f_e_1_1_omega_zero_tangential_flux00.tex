@@ -25,9 +25,14 @@ Collaboration diagram for incremental\+FE\+::Omega\+Zero\+Tangential\+Flux00$<$ 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_a85e9fc236244fc21c0d8d17ea9957a02}{Omega\+Zero\+Tangential\+Flux00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_ad96f0c4c372698dc69be81e1e0c72f3e}{Omega\+Zero\+Tangential\+Flux00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_a9354cbdaa80460acbe69074507e55337}{flip\+\_\+normal}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_a3700bbdf53e4c271ff86d918b3988619}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_a9354cbdaa80460acbe69074507e55337}{flip\+\_\+normal}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -66,12 +71,12 @@ Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma} \+: ~\new
  
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_tangential_flux00_a85e9fc236244fc21c0d8d17ea9957a02}\label{classincremental_f_e_1_1_omega_zero_tangential_flux00_a85e9fc236244fc21c0d8d17ea9957a02}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_tangential_flux00_ad96f0c4c372698dc69be81e1e0c72f3e}\label{classincremental_f_e_1_1_omega_zero_tangential_flux00_ad96f0c4c372698dc69be81e1e0c72f3e}} 
 \index{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$@{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$}!OmegaZeroTangentialFlux00@{OmegaZeroTangentialFlux00}}
 \index{OmegaZeroTangentialFlux00@{OmegaZeroTangentialFlux00}!incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$@{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{OmegaZeroTangentialFlux00()}{OmegaZeroTangentialFlux00()}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
-\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{incremental\+F\+E\+::\+Omega\+Zero\+Tangential\+Flux00}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{Omega\+Zero\+Tangential\+Flux00}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{incremental\+F\+E\+::\+Omega\+Zero\+Tangential\+Flux00}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{Omega\+Zero\+Tangential\+Flux00}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const bool}]{flip\+\_\+normal,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Constructor
 
@@ -84,6 +89,8 @@ Constructor
 \mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
 \hline
 \mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em flip\+\_\+normal} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00_a9354cbdaa80460acbe69074507e55337}{Omega\+Zero\+Tangential\+Flux00\+::flip\+\_\+normal}}\\
 \hline
 \mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
 \hline
@@ -108,6 +115,16 @@ bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{inc
 Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_zero_tangential_flux00_a9354cbdaa80460acbe69074507e55337}\label{classincremental_f_e_1_1_omega_zero_tangential_flux00_a9354cbdaa80460acbe69074507e55337}} 
+\index{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$@{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$}!flip\_normal@{flip\_normal}}
+\index{flip\_normal@{flip\_normal}!incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$@{incrementalFE::OmegaZeroTangentialFlux00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{flip\_normal}{flip\_normal}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_zero_tangential_flux00}{incremental\+F\+E\+::\+Omega\+Zero\+Tangential\+Flux00}}$<$ spacedim $>$\+::flip\+\_\+normal\hspace{0.3cm}{\ttfamily [private]}}
+
+orientation of normal vector (if false, the normal vector points from -\/ to +, if true the other way round) 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -374,6 +374,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	//if no success, reset to old state here
 	if(error)
 	{
+		write_output_independent_fields("err_domain", "err_interface", 2);
 		solution = solution_ref;
 		global_data->reset_t();
 		return -1;
@@ -536,6 +537,13 @@ MatrixType&
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_system_matrix()
 {
 	return system_matrix;
+}
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+RHSVectorType&
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_rhs()
+{
+	return rhs;
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>

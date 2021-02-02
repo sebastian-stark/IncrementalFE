@@ -1288,6 +1288,8 @@ public:
 	modify_K_cell_f_cell(	const dealii::GalerkinTools::DomainCellDoFIterator<spacedim>&	domain_cell,
 							dealii::FullMatrix<double>&										K_cell,
 							dealii::Vector<double>&											f_cell,
+							const dealii::Vector<double>&									/*solution*/,
+							const dealii::Vector<double>&									/*solution_C*/,
 							const std::vector<unsigned int>&								scalar_functional_indices_to_cell_shapefuns,
 							const std::vector<unsigned int>&								/*scalar_functional_indices_to_independent_scalar_indices*/)
 	const

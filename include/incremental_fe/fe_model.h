@@ -608,6 +608,12 @@ public:
 	get_system_matrix();
 
 	/**
+	 * @return		reference to rhs
+	 */
+	RHSVectorType&
+	get_rhs();
+
+	/**
 	 * return FEModel::solve_time_last_step
 	 */
 	double

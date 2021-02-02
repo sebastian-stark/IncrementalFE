@@ -41,6 +41,8 @@ Solution\+Vector\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ab
 \item 
 Matrix\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2f5c0e7ac2d043a5c19fcc32927a76ce}{get\+\_\+system\+\_\+matrix}} ()
 \item 
+R\+H\+S\+Vector\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2940e902f0f30ae4b9b122f7c573a20d}{get\+\_\+rhs}} ()
+\item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a9cd396b8078926ba01eafe296152917b}{get\+\_\+solve\+\_\+time\+\_\+last\+\_\+step}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -426,6 +428,16 @@ double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+:
 
 \begin{DoxyReturn}{Returns}
 The 2-\/norm of the scaled version of \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aba8e9e925aa72d2dd0f86c451b2cf3d6}{F\+E\+Model\+::rhs}}, for details regarding the scaling see \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a26ffe7f5ecf94f3bdbe27f4ea3e577dc}{F\+E\+Model\+::rhs\+\_\+scaling\+\_\+vector}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a2940e902f0f30ae4b9b122f7c573a20d}\label{classincremental_f_e_1_1_f_e_model_a2940e902f0f30ae4b9b122f7c573a20d}} 
+\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!get\_rhs@{get\_rhs}}
+\index{get\_rhs@{get\_rhs}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_rhs()}{get\_rhs()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
+R\+H\+S\+Vector\+Type\& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::get\+\_\+rhs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+reference to rhs 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_abbaf168f99be661e22d82ea1dd59d8ae}\label{classincremental_f_e_1_1_f_e_model_abbaf168f99be661e22d82ea1dd59d8ae}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!get\_solution\_ref\_vector@{get\_solution\_ref\_vector}}

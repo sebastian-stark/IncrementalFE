@@ -311,3 +311,42 @@
 \_form#310:$\boldsymbol{N}$
 \_form#311:$\dot{u}_{z}$
 \_form#312:$h^\Omega_\rho = RT c_0 h\left( \dfrac{a c + b}{c_0} \right)$
+\_form#313:$ \omega^\Sigma = -\dot{I} \eta $
+\_form#314:$\dot{I}$
+\_form#315:$ \omega^\Omega = -J \boldsymbol{F}^{-\top} : \nabla \boldsymbol{f} \dot{\xi} $
+\_form#316:$ \omega^\Omega = J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \nabla \dot{\xi} $
+\_form#317:$\dot{\xi}_x$
+\_form#318:$\dot{\xi}_y$
+\_form#319:$\dot{\xi}_z$
+\_form#320:$f_x$
+\_form#321:$f_y$
+\_form#322:$f_z$
+\_form#323:$ \omega^\Sigma = J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{N} \dot{\xi} $
+\_form#324:$ \omega^\Omega = \left[ \dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} \cdot \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \right] \cdot \nabla \eta^\mathrm{f} - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#325:$ \omega^\Omega = -\dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \nabla\left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \eta^\mathrm{f} - \eta^\mathrm{f} \dot{c}^\mathrm{f}$
+\_form#326:$\dot{v}_{,xx}$
+\_form#327:$\dot{v}_{,xy}$
+\_form#328:$\dot{v}_{,xz}$
+\_form#329:$\dot{v}_{,yx}$
+\_form#330:$\dot{v}_{,yy}$
+\_form#331:$\dot{v}_{,yz}$
+\_form#332:$\dot{v}_{,zx}$
+\_form#333:$\dot{v}_{,zy}$
+\_form#334:$\dot{v}_{,zz}$
+\_form#335:$\dot{u}_{,xx}$
+\_form#336:$\dot{u}_{,xy}$
+\_form#337:$\dot{u}_{,xz}$
+\_form#338:$\dot{u}_{,yx}$
+\_form#339:$\dot{u}_{,yy}$
+\_form#340:$\dot{u}_{,yz}$
+\_form#341:$\dot{u}_{,zx}$
+\_form#342:$\dot{u}_{,zy}$
+\_form#343:$\dot{u}_{,zz}$
+\_form#344:$ \omega^\Sigma = \dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \left[ \boldsymbol{N} \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \right] \eta^\mathrm{f}$
+\_form#345:$\dot{v}_x$
+\_form#346:$\dot{v}_y$
+\_form#347:$\dot{v}_z$
+\_form#348:$ \omega^\Omega = -\dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \nabla\left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) \eta^\mathrm{f}$
+\_form#349:$ \omega^\Sigma = \dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \left[ \boldsymbol{N} \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) - \dot{I} \right] \eta^\mathrm{f}$
+\_form#350:$ \omega^\Sigma = -\dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \nabla \dot{\boldsymbol{v}} \, \eta $
+\_form#351:$ \omega^\Sigma = t \left(\dot{\boldsymbol{u}} - \dot{\boldsymbol{v}}\right) \cdot \boldsymbol{n} $

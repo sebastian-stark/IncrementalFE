@@ -1,0 +1,125 @@
+\hypertarget{classincremental_f_e_1_1_omega_lagrange_incompressibility02}{}\doxysection{incremental\+FE\+::Omega\+Lagrange\+Incompressibility02$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_lagrange_incompressibility02}\index{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Lagrange\+Incompressibility02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classincremental_f_e_1_1_omega_lagrange_incompressibility02__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Lagrange\+Incompressibility02$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classincremental_f_e_1_1_omega_lagrange_incompressibility02__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad95722008ac78e6dc8e9976943532375}{Omega\+Lagrange\+Incompressibility02}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+omega, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad830717531bab70a9bad63a3c4883fb3}{flip\+\_\+normal}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad2574d3781a065469f168b94dca60a4b}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad830717531bab70a9bad63a3c4883fb3}{flip\+\_\+normal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Lagrange\+Incompressibility02$<$ spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$ \omega^\Sigma = J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{N} \dot{\xi} $,
+
+where $\boldsymbol{F}$ is the deformation gradient, $J$ its determinant, $boldsymbol{f}$ a Lagrangian multiplier vector, $\dot{\xi}$ the rate of a scalar field, and $\boldsymbol{N}$ the unit normal vector.
+
+This is the interfacial counterpart to \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility00}{Omega\+Lagrange\+Incompressibility00}}.
+
+Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma}\+: ~\newline
+\mbox{[}0\mbox{]} $\xi$~\newline
+ \mbox{[}1\mbox{]} $f_x$~\newline
+ \mbox{[}2\mbox{]} $f_y$~\newline
+ \mbox{[}3\mbox{]} $f_z$~\newline
+ \mbox{[}4\mbox{]} $F_{xx}$~\newline
+ \mbox{[}5\mbox{]} $F_{xy}$~\newline
+ \mbox{[}6\mbox{]} $F_{xz}$~\newline
+ \mbox{[}7\mbox{]} $F_{yx}$~\newline
+ \mbox{[}8\mbox{]} $F_{yy}$~\newline
+ \mbox{[}9\mbox{]} $F_{yz}$~\newline
+ \mbox{[}10\mbox{]} $F_{zx}$~\newline
+ \mbox{[}11\mbox{]} $F_{zy}$~\newline
+ \mbox{[}12\mbox{]} $F_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad95722008ac78e6dc8e9976943532375}\label{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad95722008ac78e6dc8e9976943532375}} 
+\index{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}!OmegaLagrangeIncompressibility02@{OmegaLagrangeIncompressibility02}}
+\index{OmegaLagrangeIncompressibility02@{OmegaLagrangeIncompressibility02}!incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaLagrangeIncompressibility02()}{OmegaLagrangeIncompressibility02()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02}{incremental\+F\+E\+::\+Omega\+Lagrange\+Incompressibility02}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02}{Omega\+Lagrange\+Incompressibility02}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+omega,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const bool}]{flip\+\_\+normal,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+omega} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_afffe781a5a2032ec003032adc78e1bf3}{Omega$<$spacedim, spacedim$>$\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em flip\+\_\+normal} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad830717531bab70a9bad63a3c4883fb3}{Omega\+Lagrange\+Incompressibility02\+::flip\+\_\+normal}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a6c95d57122261e8a2e26d3818251bc9b}{Omega$<$spacedim, spacedim$>$\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_ad881c36804cc027c301f4f069756c2db}{Omega$<$spacedim, spacedim$>$\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad2574d3781a065469f168b94dca60a4b}\label{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad2574d3781a065469f168b94dca60a4b}} 
+\index{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02}{incremental\+F\+E\+::\+Omega\+Lagrange\+Incompressibility02}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad830717531bab70a9bad63a3c4883fb3}\label{classincremental_f_e_1_1_omega_lagrange_incompressibility02_ad830717531bab70a9bad63a3c4883fb3}} 
+\index{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}!flip\_normal@{flip\_normal}}
+\index{flip\_normal@{flip\_normal}!incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$@{incrementalFE::OmegaLagrangeIncompressibility02$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{flip\_normal}{flip\_normal}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_lagrange_incompressibility02}{incremental\+F\+E\+::\+Omega\+Lagrange\+Incompressibility02}}$<$ spacedim $>$\+::flip\+\_\+normal\hspace{0.3cm}{\ttfamily [private]}}
+
+orientation of normal vector (if false, the normal vector points from -\/ to +, if true the other way round) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

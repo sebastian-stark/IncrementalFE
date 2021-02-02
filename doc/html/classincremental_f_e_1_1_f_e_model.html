@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abbaf168f99be661e22d82ea1dd59d8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f5c0e7ac2d043a5c19fcc32927a76ce"><td class="memItemLeft" align="right" valign="top">MatrixType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f5c0e7ac2d043a5c19fcc32927a76ce">get_system_matrix</a> ()</td></tr>
 <tr class="separator:a2f5c0e7ac2d043a5c19fcc32927a76ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2940e902f0f30ae4b9b122f7c573a20d"><td class="memItemLeft" align="right" valign="top">RHSVectorType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2940e902f0f30ae4b9b122f7c573a20d">get_rhs</a> ()</td></tr>
+<tr class="separator:a2940e902f0f30ae4b9b122f7c573a20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd396b8078926ba01eafe296152917b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a> () const</td></tr>
 <tr class="separator:a9cd396b8078926ba01eafe296152917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -875,6 +877,26 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The 2-norm of the scaled version of <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a>, for details regarding the scaling see <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a26ffe7f5ecf94f3bdbe27f4ea3e577dc">FEModel::rhs_scaling_vector</a> </dd></dl>
+
+</div>
+</div>
+<a id="a2940e902f0f30ae4b9b122f7c573a20d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2940e902f0f30ae4b9b122f7c573a20d">&#9670;&nbsp;</a></span>get_rhs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">RHSVectorType&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_rhs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>reference to rhs </dd></dl>
 
 </div>
 </div>
