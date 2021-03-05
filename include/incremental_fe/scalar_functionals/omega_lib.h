@@ -4855,6 +4855,140 @@ public:
 };
 
 
+/**
+ * Class defining an interface-related scalar functional with the integrand
+ *
+ * \f$ \omega^\Sigma =	-J \boldsymbol{F}^{-\top} : \nabla \boldsymbol{f} \dot{\xi} \f$,
+ *
+ * where \f$\boldsymbol{F}\f$ is the deformation gradient, \f$J\f$ its determinant,  \f$boldsymbol{f}\f$ a Lagrangian multiplier vector
+ * and \f$\dot{\xi}\f$ the rate of a scalar field.
+ *
+ * This defines an "incompressibility" condition for the Lagrangian multiplier.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  \f$\dot{\xi}\f$<br>
+ * 																				[1]  \f$f_{x,x}\f$<br>
+ * 																				[2]  \f$f_{x,y}\f$<br>
+ * 																				[3]  \f$f_{x,z}\f$<br>
+ * 																				[4]  \f$f_{y,x}\f$<br>
+ * 																				[5]  \f$f_{y,y}\f$<br>
+ * 																				[6]  \f$f_{y,z}\f$<br>
+ * 																				[7]  \f$f_{z,x}\f$<br>
+ * 																				[8]  \f$f_{z,y}\f$<br>
+ * 																				[9]  \f$f_{z,z}\f$<br>
+ * 																				[10] \f$F_{xx}\f$<br>
+ * 																				[11] \f$F_{xy}\f$<br>
+ * 																				[12] \f$F_{xz}\f$<br>
+ * 																				[13] \f$F_{yx}\f$<br>
+ * 																				[14] \f$F_{yy}\f$<br>
+ * 																				[15] \f$F_{yz}\f$<br>
+ * 																				[16] \f$F_{zx}\f$<br>
+ * 																				[17] \f$F_{zy}\f$<br>
+ * 																				[18] \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaLagrangeIncompressibility03 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaLagrangeIncompressibility03(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
+										const std::set<dealii::types::material_id>										domain_of_integration,
+										const dealii::Quadrature<spacedim-1>											quadrature,
+										GlobalDataIncrementalFE<spacedim>&												global_data,
+										const unsigned int																method,
+										const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 1, 0, 9, 9, method, alpha, "OmegaLagrangeIncompressibility03")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+		dealii::Tensor<2,3> grad_ref_f, F, F_inv, grad_f;
+
+		const double xi_dot = values[0];
+		for(unsigned int r = 0; r < 3; ++r)
+		{
+			for(unsigned int S = 0; S < 3; ++S)
+			{
+				grad_ref_f[r][S] = values[1 + 3 * r + S];
+				F[r][S] = values[1 + 9 + 3 * r + S];
+			}
+		}
+		F_inv = invert(F);
+		grad_f = grad_ref_f * F_inv;
+		const double J = determinant(F);
+		const double tr_grad_f = trace(grad_f);
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = -J * tr_grad_f * xi_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_sigma[0] = -J *tr_grad_f;
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int R = 0; R < 3; ++R)
+					d_sigma[1 + r * 3 + R] = -J * F_inv[R][r] * xi_dot;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			for(unsigned int r = 0; r < 3; ++r)
+				for(unsigned int R = 0; R < 3; ++R)
+					d2_sigma(0, 1 + r * 3 + R) = d2_sigma(1 + r * 3 + R, 0) = -J * F_inv[R][r];
+
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> F_inv_grad_f = F_inv * grad_f;
+				for(unsigned int r = 0; r < 3; ++r)
+				{
+					for(unsigned int R = 0; R < 3; ++R)
+					{
+						d2_sigma(0, 1 + 9 + r * 3 + R) = -J * ( tr_grad_f * F_inv[R][r] - F_inv_grad_f[R][r]);
+						for(unsigned int k = 0; k < 3; ++k)
+							for(unsigned int K = 0; K < 3; ++K)
+								d2_sigma(1 + k * 3 + K, 1 + 9 + r * 3 + R) = -J * xi_dot * ( F_inv[R][r] * F_inv[K][k] - F_inv[K][r] * F_inv[R][k] );
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
+
 
 /**
  * Class defining Lagrangian multiplier term for an incompressible fluid.
@@ -5817,7 +5951,7 @@ public:
 	get_values_and_derivatives( const dealii::Vector<double>& 		values,
 								const double						/*t*/,
 								const dealii::Point<spacedim>& 		/*x*/,
-								const dealii::Tensor<1, spacedim>&	n,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
 								double&								sigma,
 								dealii::Vector<double>&				d_sigma,
 								dealii::FullMatrix<double>&			d2_sigma,
@@ -5888,6 +6022,346 @@ public:
 };
 
 
+/**
+ * Class defining a normal boundary condition of the form.
+ *
+ * \f$ \omega^\Sigma =	\eta (\boldsymbol{N} \cdot \boldsymbol{F}^{-1}) \cdot \mathrm{sym}\left( \nabla \dot{\boldsymbol{v}} \cdot \boldsymbol{F}^{-1} + \dot{\xi} \boldsymbol{I} \right) \cdot (\boldsymbol{N} \cdot \boldsymbol{F}^{-1}) \f$,
+ *
+ * where \f$\dot{\boldsymbol{v}}\f$ is the fluid velocity,<br>
+ * \f$\boldsymbol{F}\f$ the deformation gradient,<br>
+ * \f$\dot{\xi}\f$ a scalar process variable,<br>
+ * and \f$\eta\f$ a Lagrange multiplier.<br>
+ *
+ * This enforces incompressibility as an interface condition
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\dot{v}_{,xx}\f$<br>
+ * 															[1]	\f$\dot{v}_{,xy}\f$<br>
+ * 															[2]	\f$\dot{v}_{,xz}\f$<br>
+ * 															[3] \f$\dot{v}_{,yx}\f$<br>
+ * 															[4]	\f$\dot{v}_{,yy}\f$<br>
+ * 															[5]	\f$\dot{v}_{,yz}\f$<br>
+ * 															[6] \f$\dot{v}_{,zx}\f$<br>
+ * 															[7]	\f$\dot{v}_{,zy}\f$<br>
+ * 															[8]	\f$\dot{v}_{,zz}\f$<br>
+ * 															[9]	\f$\dot{\xi}\f$<br>
+ * 															[10] \f$\eta\f$<br>
+ * 															[11] ... [19]	\f$F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaFluidNormalCondition00 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaFluidNormalCondition00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const unsigned int																method,
+								const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 10, 0, 1, 9, method, alpha, "OmegaFluidNormalCondition00")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	n,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+
+		// start indices for respective quantities
+		const unsigned int i_grad_v_dot = 0;
+		const unsigned int i_xi_dot = 9;
+		const unsigned int i_eta = 10;
+		const unsigned int i_F = 11;
+
+		dealii::Tensor<2,3> grad_v_dot_ref, grad_v_dot, d;
+		for(unsigned int r = 0; r < 3; ++r)
+			for(unsigned int R = 0; R < 3; ++R)
+				grad_v_dot_ref[r][R] = values[i_grad_v_dot + 3 * r + R];
+
+		const double xi_dot = values[i_xi_dot];
+
+		const double eta = values[i_eta];
+
+		dealii::Tensor<2,3> F;
+		for(unsigned int m = 0; m < 3; ++m)
+			for(unsigned int n = 0; n < 3; ++n)
+				F[m][n] = values[i_F + m * 3 + n];
+		dealii::Tensor<2,3> F_inv;
+		F_inv = invert(F);
+
+		grad_v_dot = grad_v_dot_ref * F_inv;
+
+		dealii::Tensor<1, 3> n__, n_tilde, F_inv_n_tilde;
+		n__[0] = n[0];
+		n__[1] = spacedim < 2 ? 0.0 : n[1];
+		n__[2] = spacedim < 3 ? 0.0 : n[2];
+		n_tilde = transpose(F_inv) * n__;
+
+		F_inv_n_tilde = F_inv * n_tilde;
+
+		d = 2.0 * symmetrize(grad_v_dot);
+
+		for(unsigned int m = 0; m < 3; ++m)
+			d[m][m] += xi_dot;
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = eta * (n_tilde * d) * n_tilde;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int i = 0; i < 3; ++i)
+				for(unsigned int J = 0; J < 3; ++J)
+					d_sigma[i_grad_v_dot + 3 * i + J] = 2.0 * eta * n_tilde[i] * F_inv_n_tilde[J];
+			d_sigma[i_xi_dot]   = eta * (n_tilde * n_tilde);
+			d_sigma[i_eta]   = (n_tilde * d) * n_tilde;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+
+			d2_sigma(i_xi_dot, i_eta) = d2_sigma(i_eta, i_xi_dot) = n_tilde * n_tilde;
+			for(unsigned int i = 0; i < 3; ++i)
+				for(unsigned int J = 0; J < 3; ++J)
+					d2_sigma(i_eta, i_grad_v_dot + 3 * i + J) = d2_sigma(i_grad_v_dot + 3 * i + J, i_eta) = 2.0 * n_tilde[i] * F_inv_n_tilde[J];
+
+			if(compute_dq)
+			{
+				dealii::Tensor<3,3> dn_tilde_dF, F_inv_dn_tilde_dF;
+				for(unsigned int k = 0; k < 3; ++k)
+					for(unsigned int i = 0; i < 3; ++i)
+						for(unsigned int J = 0; J < 3; ++J)
+							dn_tilde_dF[k][i][J] = -n_tilde[i] * F_inv[J][k];
+				F_inv_dn_tilde_dF = F_inv * dn_tilde_dF;
+				dealii::Tensor<2,3> n_tilde_dn_tilde_dF = n_tilde * dn_tilde_dF;
+
+				for(unsigned int i = 0; i < 3; ++i)
+					for(unsigned int J = 0; J < 3; ++J)
+						for(unsigned int r = 0; r < 3; ++r)
+							for(unsigned int R = 0; R < 3; ++R)
+								d2_sigma(i_grad_v_dot + 3 * i + J, i_F + 3 * r + R) = 2.0 * eta * ( dn_tilde_dF[i][r][R] * F_inv_n_tilde[J] + F_inv_dn_tilde_dF[J][r][R] * n_tilde[i] - n_tilde[i] * F_inv[J][r] * F_inv_n_tilde[R] );
+				for(unsigned int r = 0; r < 3; ++r)
+				{
+					for(unsigned int R = 0; R < 3; ++R)
+					{
+						d2_sigma(i_xi_dot, i_F + 3 * r + R) = 2.0 * eta * n_tilde_dn_tilde_dF[r][R];
+						for(unsigned int k = 0; k < 3; ++k)
+							for(unsigned int l = 0; l < 3; ++l)
+								d2_sigma(i_eta, i_F + 3 * r + R) += 2.0 * ( dn_tilde_dF[l][r][R] * d[k][l] * n_tilde[k] - n_tilde[k] * grad_v_dot[k][r] * F_inv[R][l] * n_tilde[l]);
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+};
+
+/**
+ * Class defining a normal boundary condition of the form.
+ *
+ * \f$ \omega^\Sigma =	- \boldsymbol{n}\cdot\boldsymbol{d}\cdot\boldsymbol{n} \, J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{N} \f$,
+ *
+ * where \f$ \boldsymbol{d} = \mathrm{sym}\left( \nabla \dot{\boldsymbol{v}} \cdot \boldsymbol{F}^{-1} \right) \f$,
+ * \f$ \boldsymbol{n} = J\,\boldsymbol{F}^{-\top} \cdot \boldsymbol{N} / \sqrt{ \boldsymbol{N} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{F} \cdot \boldsymbol{N} } \f$
+ * \f$\boldsymbol{F}\f$ the deformation gradient,<br>
+ * \f$J\f$ its determinant,
+ * \f$\dot{\boldsymbol{v}}\f$ a process variable,
+ * \f$\boldsymbol{f}\f$ a Lagrangian multiplier.
+ *
+ * This enforces incompressibility as an interface condition
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$\dot{v}_{,xx}\f$<br>
+ * 															[1]	\f$\dot{v}_{,xy}\f$<br>
+ * 															[2]	\f$\dot{v}_{,xz}\f$<br>
+ * 															[3] \f$\dot{v}_{,yx}\f$<br>
+ * 															[4]	\f$\dot{v}_{,yy}\f$<br>
+ * 															[5]	\f$\dot{v}_{,yz}\f$<br>
+ * 															[6] \f$\dot{v}_{,zx}\f$<br>
+ * 															[7]	\f$\dot{v}_{,zy}\f$<br>
+ * 															[8]	\f$\dot{v}_{,zz}\f$<br>
+ * 															[9]	\f$f_x\f$<br>
+ * 															[10] \f$f_y\f$<br>
+ * 															[11] \f$f_z\f$<br>
+ * 															[12] ... [20]	\f$F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaFluidNormalCondition01 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 */
+	OmegaFluidNormalCondition01(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const unsigned int																method,
+								const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 9, 0, 3, 9, method, alpha, "OmegaFluidNormalCondition01")
+	{
+	}
+
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1, spacedim>&	n,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
+
+
+		// start indices for respective quantities
+		const unsigned int i_grad_v_dot = 0;
+		const unsigned int i_f = 9;
+		const unsigned int i_F = 12;
+
+		dealii::Tensor<2,3> grad_v_dot_ref, grad_v_dot, d;
+		for(unsigned int r = 0; r < 3; ++r)
+			for(unsigned int R = 0; R < 3; ++R)
+				grad_v_dot_ref[r][R] = values[i_grad_v_dot + 3 * r + R];
+
+		dealii::Tensor<1,3> f;
+		for(unsigned int r = 0; r < 3; ++r)
+			f[r] = values[i_f + r];
+
+		dealii::Tensor<2,3> F;
+		for(unsigned int m = 0; m < 3; ++m)
+			for(unsigned int n = 0; n < 3; ++n)
+				F[m][n] = values[i_F + m * 3 + n];
+		dealii::Tensor<2,3> F_inv, C_inv;
+		F_inv = invert(F);
+		C_inv = F_inv * transpose(F_inv);
+		const double J = determinant(F);
+
+		grad_v_dot = grad_v_dot_ref * F_inv;
+
+		dealii::Tensor<1,3> N, n_, n_tilde;
+		N[0] = n[0];
+		N[1] = spacedim < 2 ? 0.0 : n[1];
+		N[2] = spacedim < 3 ? 0.0 : n[2];
+
+		const double h = sqrt(N * C_inv * N);
+		n_tilde = J * N * F_inv;
+		n_ = n_tilde / h;
+
+		dealii::Tensor<1,3> F_inv_n = F_inv * n_;
+		const double n_tilde_f = n_tilde * f;
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = - 2.0 * (n_ * grad_v_dot * n_) * (n_tilde * f);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			for(unsigned int m = 0; m < 3; ++m)
+				for(unsigned int N = 0; N < 3; ++N)
+					d_sigma[i_grad_v_dot + 3 * m + N] = -2.0 * n_[m] * F_inv_n[N] * n_tilde_f;
+			for(unsigned int i = 0; i < 3; ++i)
+				d_sigma[i_f + i] = -2.0 * (n_ * grad_v_dot * n_) * n_tilde[i];
+		}
+
+		if(get<2>(requested_quantities))
+		{
+
+			for(unsigned int m = 0; m < 3; ++m)
+				for(unsigned int N = 0; N < 3; ++N)
+					for(unsigned int i = 0; i < 3; ++i)
+						d2_sigma(i_grad_v_dot + 3 * m + N, i_f + i) = d2_sigma(i_f + i, i_grad_v_dot + 3 * m + N) = -2.0 * n_[m] * F_inv_n[N] * n_tilde[i];
+
+			if(compute_dq)
+			{
+				dealii::Tensor<2,3> dh_dF;
+				for(unsigned int r = 0; r < 3; ++r)
+					for(unsigned int R = 0; R < 3; ++R)
+						dh_dF[r][R] = -1.0 / J * n_[r] * (N * C_inv)[R];
+				dealii::Tensor<3,3> dn_dF, F_inv_dn_dF;
+				for(unsigned int k = 0; k < 3; ++k)
+					for(unsigned int r = 0; r < 3; ++r)
+						for(unsigned int R = 0; R < 3; ++R)
+							dn_dF[k][r][R] = F_inv[R][r] * n_[k] - F_inv[R][k] * n_[r] - n_[k] / h * dh_dF[r][R];
+				F_inv_dn_dF = F_inv * dn_dF;
+				dealii::Tensor<1,3> F_inv_f = F_inv * f;
+
+//				dealii::Tensor<2,3> n_tilde_dn_tilde_dF = n_tilde * dn_tilde_dF;
+
+				for(unsigned int m = 0; m < 3; ++m)
+					for(unsigned int N = 0; N < 3; ++N)
+						for(unsigned int r = 0; r < 3; ++r)
+							for(unsigned int R = 0; R < 3; ++R)
+								d2_sigma(i_grad_v_dot + 3 * m + N, i_F + 3 * r + R) = 	-2.0 * dn_dF[m][r][R] * F_inv_n[N] * n_tilde_f
+																						- 2.0 * n_[m] * F_inv_dn_dF[N][r][R] * n_tilde_f
+																						- 2.0 * n_[m] * F_inv_n[N] *(F_inv[R][r] * n_tilde_f - F_inv_f[R] * n_tilde[r])
+																						+ 2.0 * n_[m] * ( F_inv[N][r] * F_inv_n[R] * n_tilde_f);
+				for(unsigned int i = 0; i < 3; ++i)
+					for(unsigned int r = 0; r < 3; ++r)
+						for(unsigned int R = 0; R < 3; ++R)
+							for(unsigned int k = 0; k < 3; ++k)
+								for(unsigned int l = 0; l < 3; ++l)
+									d2_sigma(i_f + i, i_F + 3 * r + R) += -2.0 * dn_dF[k][r][R] * grad_v_dot[k][l] * n_[l] * n_tilde[i]
+																		  -2.0 * n_[k] * grad_v_dot[k][l] * dn_dF[l][r][R] * n_tilde[i]
+																		  -2.0 * n_[k] * grad_v_dot[k][l] * n_[l] * ( F_inv[R][r] * n_tilde[i] - F_inv[R][i] * n_tilde[r])
+																		  +2.0 * n_[k] * grad_v_dot[k][r] * F_inv[R][l] * n_[l] * n_tilde[i];
+			}
+		}
+
+		return false;
+	}
+};
 
 
 
@@ -5896,8 +6370,8 @@ public:
  *
  * \f$ \omega^\Omega =	2 J \boldsymbol{g}:\boldsymbol{d} \f$,
  *
- * where \f$\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{v} + \nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1} \right)\f$ is the stretching,
- * \f$\boldsymbol{g} = \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f}\f$ a corresponding Lagrangian multiplier term,
+ * where \f$\boldsymbol{d} = \mathrm{sym}\left(\nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1}\right)\f$ is the stretching,
+ * \f$\boldsymbol{g} = \nabla \boldsymbol{f} \cdot \boldsymbol{F}^{-1}\f$ a corresponding Lagrangian multiplier term,
  * \f$\boldsymbol{F}\f$ the deformation gradient, and \f$J = \det\boldsymbol{F}\f$.
  *
  * This enforces the equilibrium applicable to a viscous fluid by means of a Lagrangian multiplier.
@@ -6117,13 +6591,13 @@ public:
 	 *
 	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
 	 */
-	OmegaZeroTangentialFlux00(const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
-								const std::set<dealii::types::material_id>									domain_of_integration,
-								const dealii::Quadrature<spacedim-1>										quadrature,
-								GlobalDataIncrementalFE<spacedim>&											global_data,
-								const bool																	flip_normal,
-								const unsigned int															method,
-								const double																alpha = 0.0)
+	OmegaZeroTangentialFlux00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>										domain_of_integration,
+								const dealii::Quadrature<spacedim-1>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&												global_data,
+								const bool																		flip_normal,
+								const unsigned int																method,
+								const double																	alpha = 0.0)
 	:
 	Omega<spacedim-1, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 6, 0, 3, 9, method, alpha, "OmegaZeroTangentialFlux00"),
 	flip_normal(flip_normal)
