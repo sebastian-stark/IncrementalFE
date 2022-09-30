@@ -122,7 +122,7 @@ public:
 		const static Tensor<2, 3> I = unit_symmetric_tensor<3,double>();
 		static Tensor<2, 3> F, E, T;
 		static SymmetricTensor<2,3> sigma, s;
-		const auto current_cell = input_data.template get_cell<hp::DoFHandler<spacedim>>();
+		const auto current_cell = input_data.template get_cell<spacedim>();
 
 		for (unsigned int dataset = 0; dataset < input_data.solution_gradients.size(); ++dataset)
 		{

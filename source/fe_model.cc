@@ -568,10 +568,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_solutio
 #ifdef DEAL_II_WITH_MPI
 	else if(vector_ptr_parallel != nullptr)
 	{
-		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::distributed::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		if(tria_domain_ptr == nullptr)
+		{
+			Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
 			vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), MPI_COMM_WORLD);
+		}
 		else
 			vector_ptr_parallel->reinit(assembly_helper.get_locally_owned_indices(), assembly_helper.get_locally_relevant_indices(), tria_domain_ptr->get_communicator());
 	}
@@ -615,10 +617,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_rhs_vec
 #ifdef DEAL_II_WITH_MPI
 	else if(vector_ptr_parallel != nullptr)
 	{
-		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::distributed::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		if(tria_domain_ptr == nullptr)
+		{
+			Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
 			vector_ptr_parallel->reinit(index_sets, MPI_COMM_WORLD);
+		}
 		else
 			vector_ptr_parallel->reinit(index_sets, tria_domain_ptr->get_communicator());
 	}
@@ -649,10 +653,12 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_matrix(
 #ifdef DEAL_II_WITH_MPI
 	else if(matrix_ptr_parallel != nullptr)
 	{
-		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
-		Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
+		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::distributed::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		if(tria_domain_ptr == nullptr)
+		{
+			Assert(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second == 1, ExcMessage("If you use a sequential triangulation, only one processor can be used"));
 			matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), MPI_COMM_WORLD);
+		}
 		else
 			matrix_ptr_parallel->reinit(sparsity_pattern, assembly_helper.get_locally_owned_indices(), tria_domain_ptr->get_communicator());
 	}
@@ -750,7 +756,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_sparsi
 
 	assembly_helper.generate_sparsity_pattern_by_simulation(sparsity_pattern, constraints);
 #ifdef DEAL_II_WITH_MPI
-	const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
+	const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::distributed::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 	if(tria_domain_ptr != nullptr)
 		sparsity_pattern.distribute(assembly_helper.get_locally_owned_indices(), tria_domain_ptr->get_communicator());
 #endif //DEAL_II_WITH_MPI
@@ -869,7 +875,7 @@ const
 #ifdef DEAL_II_WITH_MPI
 	if(assembly_helper.get_triangulation_system().get_this_proc_n_procs().second > 1)
 	{
-		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
+		const auto tria_domain_ptr = dynamic_cast<const dealii::parallel::distributed::Triangulation<spacedim, spacedim>*>(&(assembly_helper.get_triangulation_system().get_triangulation_domain()));
 		Assert(tria_domain_ptr != nullptr, ExcMessage("Internal error!"));
 		double send_value = estimated_potential_increment;
 		int ierr = MPI_Allreduce(&send_value, &estimated_potential_increment, 1, MPI_DOUBLE, MPI_SUM, tria_domain_ptr->get_communicator());
