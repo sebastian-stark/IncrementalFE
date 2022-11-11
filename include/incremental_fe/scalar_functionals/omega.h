@@ -69,6 +69,12 @@ private:
 	const unsigned int
 	method;
 
+	/**
+	 * The time at which the next call of ScalarFunctional::get_h_sigma is performed
+	 */
+	mutable double
+	eval_time = 0.0;
+
 public:
 
 	/**
@@ -193,6 +199,13 @@ public:
 				const std::tuple<bool, bool, bool>			requested_quantities)
 	const
 	final;
+
+	/**
+	 * @return 	The time at which the next call of ScalarFunctional::get_h_sigma is performed.
+	 */
+	double
+	get_eval_time()
+	const;
 };
 
 /**
@@ -208,13 +221,15 @@ template<unsigned int spacedim>
 class Omega<spacedim, spacedim> : public dealii::GalerkinTools::ScalarFunctional<spacedim, spacedim>
 {
 
-private:
+protected:
 
 	/**
 	 * global data object
 	 */
 	const dealii::SmartPointer<GlobalDataIncrementalFE<spacedim>>
 	global_data;
+
+private:
 
 	/**
 	 * Numerical parameter between @p 0 and @p 1.
@@ -232,6 +247,12 @@ private:
 	 */
 	const unsigned int
 	method;
+
+	/**
+	 * The time at which the next call of ScalarFunctional::get_h_omega is performed
+	 */
+	mutable double
+	eval_time = 0.0;
 
 public:
 
@@ -354,6 +375,13 @@ public:
 	const
 	final;
 
+	/**
+	 * @return 	The time at which the next call of ScalarFunctional::get_h_omega is performed.
+	 */
+	double
+	get_eval_time()
+	const;
+
 };
 
 
@@ -373,13 +401,15 @@ template<unsigned int spacedim>
 class Omega<0, spacedim> : public dealii::GalerkinTools::TotalPotentialContribution<spacedim>
 {
 
-private:
+protected:
 
 	/**
 	 * global data object
 	 */
 	const dealii::SmartPointer<GlobalDataIncrementalFE<spacedim>>
 	global_data;
+
+private:
 
 	/**
 	 * Numerical parameter between @p 0 and @p 1.

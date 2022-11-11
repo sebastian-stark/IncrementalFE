@@ -61,6 +61,7 @@ const
 	if(get<2>(requested_quantities))
 		h_omega_2.reinit(e_omega.size(), e_omega.size());
 
+	eval_time = global_data->get_t();
 	if(get_values_and_derivatives(e_omega, x, h_omega, h_omega_1, h_omega_2, requested_quantities))
 		return true;
 
@@ -74,6 +75,7 @@ const
 		if(get<0>(requested_quantities) || get<1>(requested_quantities))
 		{
 			h_omega_1_ref.reinit(e_omega.size());
+			eval_time = global_data->get_t_ref();
 			if(get_values_and_derivatives(e_omega_ref_sets[0], x, h_omega_ref, h_omega_1_ref, h_omega_2_ref, make_tuple(true, true, false)))
 				return true;
 		}
@@ -93,6 +95,14 @@ const
 	}
 
 	return false;
+}
+
+template<unsigned int spacedim>
+double
+Psi<spacedim,spacedim>::get_eval_time()
+const
+{
+	return eval_time;
 }
 
 template<unsigned int dim, unsigned int spacedim>
@@ -130,6 +140,7 @@ const
 	if(get<2>(requested_quantities))
 		h_sigma_2.reinit(e_sigma.size(), e_sigma.size());
 
+	eval_time = global_data->get_t();
 	if(get_values_and_derivatives(e_sigma, x, n, h_sigma, h_sigma_1, h_sigma_2, requested_quantities))
 		return true;
 
@@ -143,6 +154,7 @@ const
 		if(get<0>(requested_quantities) || get<1>(requested_quantities))
 		{
 			h_sigma_1_ref.reinit(e_sigma.size());
+			eval_time = global_data->get_t_ref();
 			if(get_values_and_derivatives(e_sigma_ref_sets[0], x, n, h_sigma_ref, h_sigma_1_ref, h_sigma_2_ref, make_tuple(false, true, false)))
 				return true;
 		}
@@ -163,6 +175,15 @@ const
 
 	return false;
 }
+
+template<unsigned int dim, unsigned int spacedim>
+double
+Psi<dim,spacedim>::get_eval_time()
+const
+{
+	return eval_time;
+}
+
 
 template class incrementalFE::Psi<2,2>;
 template class incrementalFE::Psi<3,3>;

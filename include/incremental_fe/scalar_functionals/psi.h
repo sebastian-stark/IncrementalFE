@@ -41,8 +41,7 @@ namespace incrementalFE
 template<unsigned int dim, unsigned int spacedim>
 class Psi: public dealii::GalerkinTools::ScalarFunctional<dim, spacedim>
 {
-
-private:
+protected:
 
 	/**
 	 * global data object
@@ -50,11 +49,19 @@ private:
 	const dealii::SmartPointer<GlobalDataIncrementalFE<spacedim>>
 	global_data;
 
+private:
+
 	/**
 	 * Numerical parameter between @p 0 and @p 1.
 	 */
 	const double
 	alpha;
+
+	/**
+	 * The time at which the next call of ScalarFunctional::get_h_sigma is performed
+	 */
+	mutable double
+	eval_time = 0.0;
 
 public:
 
@@ -138,6 +145,14 @@ public:
 				const std::tuple<bool, bool, bool>			requested_quantities)
 	const
 	final;
+
+	/**
+	 * @return 	The time at which the next call of ScalarFunctional::get_h_sigma is performed.
+	 */
+	double
+	get_eval_time()
+	const;
+
 };
 
 /**
@@ -152,7 +167,7 @@ template<unsigned int spacedim>
 class Psi<spacedim, spacedim> : public dealii::GalerkinTools::ScalarFunctional<spacedim, spacedim>
 {
 
-private:
+protected:
 
 	/**
 	 * global data object
@@ -160,11 +175,19 @@ private:
 	const dealii::SmartPointer<GlobalDataIncrementalFE<spacedim>>
 	global_data;
 
+private:
+
 	/**
 	 * Numerical parameter between @p 0 and @p 1.
 	 */
 	const double
 	alpha;
+
+	/**
+	 * The time at which the next call of ScalarFunctional::get_h_omega is performed
+	 */
+	mutable double
+	eval_time = 0.0;
 
 public:
 
@@ -244,6 +267,13 @@ public:
 				const std::tuple<bool, bool, bool>			requested_quantities)
 	const
 	final;
+
+	/**
+	 * @return 	The time at which the next call of ScalarFunctional::get_h_omega is performed.
+	 */
+	double
+	get_eval_time()
+	const;
 
 };
 

@@ -89,12 +89,14 @@ const
 		t = global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = e_omega_ref_sets[0][m];
+		eval_time = global_data->get_t_ref();
 	}
 	else if(method == 1)
 	{
 		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * e_omega[m];
+		eval_time = t;
 	}
 	else if(method == 2)
 	{
@@ -107,11 +109,13 @@ const
 				// make sure that predicted values are stored
 				hidden_vars[m - n_v_q_dot - n_mu] = e_omega[m];
 			}
+			eval_time = global_data->get_t_ref();
 		}
 		else
 		{
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 				values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
+			eval_time = t;
 		}
 	}
 
@@ -168,6 +172,14 @@ const
 	}
 
 	return false;
+}
+
+template<unsigned int spacedim>
+double
+Omega<spacedim,spacedim>::get_eval_time()
+const
+{
+	return eval_time;
 }
 
 template<unsigned int dim, unsigned int spacedim>
@@ -232,12 +244,14 @@ const
 		t = global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = e_sigma_ref_sets[0][m];
+		eval_time = global_data->get_t_ref();
 	}
 	else if(method == 1)
 	{
 		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * e_sigma[m];
+		eval_time = t;
 	}
 	else if(method == 2)
 	{
@@ -250,11 +264,13 @@ const
 				// make sure that predicted values are stored
 				hidden_vars[m - n_v_q_dot - n_mu] = e_sigma[m];
 			}
+			eval_time = global_data->get_t_ref();
 		}
 		else
 		{
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 				values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
+			eval_time = t;
 		}
 	}
 
@@ -311,6 +327,14 @@ const
 	}
 
 	return false;
+}
+
+template<unsigned int dim, unsigned int spacedim>
+double
+Omega<dim,spacedim>::get_eval_time()
+const
+{
+	return eval_time;
 }
 
 template<unsigned int spacedim>
