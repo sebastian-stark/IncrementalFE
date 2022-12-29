@@ -185,24 +185,29 @@ const
 	return eval_time;
 }
 
+#ifdef INCREMENTAL_FE_WITH_CMF
+
 template<unsigned int dim, unsigned int spacedim>
-PsiWrapperCMF<dim,spacedim>::PsiWrapperCMF(	const vector<DependentField<dim,spacedim>>														e_sigma,
+PsiWrapperCMF<dim,spacedim>::PsiWrapperCMF(	ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+											const vector<DependentField<dim,spacedim>>														e_sigma,
 											const set<types::material_id>																	domain_of_integration,
 											const Quadrature<dim>																			quadrature,
 											GlobalDataIncrementalFE<spacedim>&																global_data,
 											const double																					alpha,
-											ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 											const string																					name)
 :
 Psi<dim, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, alpha, name),
 psi(psi)
 {
+	Assert( (psi.get_N_parameters() >= 2*spacedim),
+			ExcMessage("The function psi must have at least 2*spacedim parameters to store the position vector and the normal vector."));
+
 }
 
 template<unsigned int dim, unsigned int spacedim>
 bool
 PsiWrapperCMF<dim,spacedim>::get_values_and_derivatives(const Vector<double>& 			values,
-														const Point<spacedim>& 			/*x*/,
+														const Point<spacedim>& 			x,
 														const Tensor<1,spacedim>& 		n,
 														double&							psi_,
 														Vector<double>&					d_psi,
@@ -217,16 +222,19 @@ const
 
 	for(unsigned int m = 0; m < values.size(); ++m)
 		arguments(m) = values(m);
-	psi.set_arguments(arguments);
+	if(psi.set_arguments(arguments))
+		return true;
 
 	auto parameters = psi.get_parameters();
-	Assert( (parameters.size() >= dim),
-			ExcMessage("The function psi must have at least dim parameters to store the normal vector"));
-	for(unsigned int m = 0; m < dim; ++m)
+	for(unsigned int m = 0; m < spacedim; ++m)
+		parameters(m) = x[m];
+	for(unsigned int m = spacedim; m < 2*spacedim; ++m)
 		parameters(m) = n[m];
-	psi.set_parameters(parameters);
+	if(psi.set_parameters(parameters))
+		return true;
 
-	psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities));
+	if(psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
+		return true;
 
 	if(get<1>(requested_quantities))
 	{
@@ -245,26 +253,28 @@ const
 }
 
 template<unsigned int spacedim>
-PsiWrapperCMF<spacedim,spacedim>::PsiWrapperCMF(const vector<DependentField<spacedim,spacedim>>													e_omega,
+PsiWrapperCMF<spacedim,spacedim>::PsiWrapperCMF(ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+												const vector<DependentField<spacedim,spacedim>>													e_omega,
 												const set<types::material_id>																	domain_of_integration,
 												const Quadrature<spacedim>																		quadrature,
 												GlobalDataIncrementalFE<spacedim>&																global_data,
 												const double																					alpha,
-												ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 												const string																					name)
 :
 Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, name),
 psi(psi)
 {
+	Assert( (psi.get_N_parameters() >= spacedim),
+			ExcMessage("The function psi must have at least spacedim parameters to store the position vector."));
 }
 
 template<unsigned int spacedim>
 bool
 PsiWrapperCMF<spacedim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
-																const Point<spacedim>& 			/*x*/,
-																double&							omega,
-																Vector<double>&					d_omega,
-																FullMatrix<double>&				d2_omega,
+																const Point<spacedim>& 			x,
+																double&							psi_,
+																Vector<double>&					d_psi,
+																FullMatrix<double>&				d2_psi,
 																const tuple<bool, bool, bool>	requested_quantities)
 const
 {
@@ -274,24 +284,35 @@ const
 	Eigen::VectorXd arguments(values.size());
 	for(unsigned int m = 0; m < values.size(); ++m)
 		arguments(m) = values(m);
-	psi.set_arguments(arguments);
-	psi.compute(omega, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities));
+	if(psi.set_arguments(arguments))
+		return true;
+
+	auto parameters = psi.get_parameters();
+	for(unsigned int m = 0; m < spacedim; ++m)
+		parameters(m) = x[m];
+	if(psi.set_parameters(parameters))
+		return true;
+
+	if(psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
+		return true;
 
 	if(get<1>(requested_quantities))
 	{
-		for(unsigned int m = 0; m < d_omega.size(); ++m)
-			d_omega(m) = gradient(m);
+		for(unsigned int m = 0; m < d_psi.size(); ++m)
+			d_psi(m) = gradient(m);
 	}
 
 	if(get<2>(requested_quantities))
 	{
-		for(unsigned int m = 0; m < d2_omega.m(); ++m)
-			for(unsigned int n = 0; n < d2_omega.n(); ++n)
-				d2_omega(m,n) = hessian(m,n);
+		for(unsigned int m = 0; m < d2_psi.m(); ++m)
+			for(unsigned int n = 0; n < d2_psi.n(); ++n)
+				d2_psi(m,n) = hessian(m,n);
 	}
 
 	return false;
 }
+
+#endif /* INCREMENTAL_FE_WITH_CMF */
 
 
 template class incrementalFE::Psi<2,2>;

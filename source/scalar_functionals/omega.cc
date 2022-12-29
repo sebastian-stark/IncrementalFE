@@ -479,6 +479,151 @@ const
 	return false;
 }
 
+#ifdef INCREMENTAL_FE_WITH_CMF
+
+template<unsigned int dim, unsigned int spacedim>
+OmegaWrapperCMF<dim,spacedim>::OmegaWrapperCMF(	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& omega,
+												const vector<DependentField<dim,spacedim>>													e_sigma,
+												const set<types::material_id>																domain_of_integration,
+												const Quadrature<dim>																		quadrature,
+												GlobalDataIncrementalFE<spacedim>&															global_data,
+												const unsigned int																			n_v_dot,
+												const unsigned int																			n_q_dot,
+												const unsigned int																			n_mu,
+												const unsigned int																			n_q,
+												const unsigned int																			method,
+												const double																				alpha,
+												const string																				name)
+:
+Omega<dim, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, n_v_dot, n_q_dot, n_mu, n_q, method, alpha, name),
+omega(omega)
+{
+	Assert( (omega.get_N_parameters() >= 2*spacedim + 1),
+			ExcMessage("The function omega must have at least 2*spacedim+1 parameters to store the time, the position vector and the normal vector."));
+}
+
+template<unsigned int dim, unsigned int spacedim>
+bool
+OmegaWrapperCMF<dim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
+															const double					t,
+															const Point<spacedim>& 			x,
+															const Tensor<1,spacedim>& 		n,
+															double&							omega_,
+															Vector<double>&					d_omega,
+															FullMatrix<double>&				d2_omega,
+															const tuple<bool, bool, bool>	requested_quantities,
+															const bool						/*compute_d2q*/)
+const
+{
+	Eigen::VectorXd gradient;
+	Eigen::MatrixXd hessian;
+
+	Eigen::VectorXd arguments(values.size());
+	for(unsigned int m = 0; m < values.size(); ++m)
+		arguments(m) = values(m);
+	if(omega.set_arguments(arguments))
+		return true;
+
+	auto parameters = omega.get_parameters();
+	parameters(0) = t;
+	for(unsigned int m = 1; m < spacedim + 1; ++m)
+		parameters(m) = x[m];
+	for(unsigned int m = spacedim + 1; m < 2*spacedim + 1; ++m)
+		parameters(m) = n[m];
+	if(omega.set_parameters(parameters))
+		return true;
+
+	if(omega.compute(omega_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
+		return true;
+
+	if(get<1>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d_omega.size(); ++m)
+			d_omega(m) = gradient(m);
+	}
+
+	if(get<2>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d2_omega.m(); ++m)
+			for(unsigned int n = 0; n < d2_omega.n(); ++n)
+				d2_omega(m,n) = hessian(m,n);
+	}
+
+	return false;
+}
+
+template<unsigned int spacedim>
+OmegaWrapperCMF<spacedim,spacedim>::OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& omega,
+													const vector<DependentField<spacedim,spacedim>>													e_omega,
+													const set<types::material_id>																	domain_of_integration,
+													const Quadrature<spacedim>																		quadrature,
+													GlobalDataIncrementalFE<spacedim>&																global_data,
+													const unsigned int																				n_v_dot,
+													const unsigned int																				n_q_dot,
+													const unsigned int																				n_mu,
+													const unsigned int																				n_q,
+													const unsigned int																				method,
+													const double																					alpha,
+													const string																					name)
+:
+Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, n_v_dot, n_q_dot, n_mu, n_q, method, alpha, name),
+omega(omega)
+{
+	Assert( (omega.get_N_parameters() >= spacedim+1),
+			ExcMessage("The function omega must have at least spacedim+1 parameters to store the time and the position vector."));
+}
+
+
+template<unsigned int spacedim>
+bool
+OmegaWrapperCMF<spacedim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
+																const double					t,
+																const Point<spacedim>& 			x,
+																double&							omega_,
+																Vector<double>&					d_omega,
+																FullMatrix<double>&				d2_omega,
+																const tuple<bool, bool, bool>	requested_quantities,
+																const bool						/*compute_d2q*/)
+const
+{
+	Eigen::VectorXd gradient;
+	Eigen::MatrixXd hessian;
+
+	Eigen::VectorXd arguments(values.size());
+	for(unsigned int m = 0; m < values.size(); ++m)
+		arguments(m) = values(m);
+	if(omega.set_arguments(arguments))
+		return true;
+
+	auto parameters = omega.get_parameters();
+	parameters(0) = t;
+	for(unsigned int m = 1; m < spacedim + 1; ++m)
+		parameters(m) = x[m];
+	if(omega.set_parameters(parameters))
+		return true;
+
+	if(omega.compute(omega_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
+		return true;
+
+	if(get<1>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d_omega.size(); ++m)
+			d_omega(m) = gradient(m);
+	}
+
+	if(get<2>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d2_omega.m(); ++m)
+			for(unsigned int n = 0; n < d2_omega.n(); ++n)
+				d2_omega(m,n) = hessian(m,n);
+	}
+
+	return false;
+}
+
+
+#endif /* INCREMENTAL_FE_WITH_CMF */
+
 
 template class incrementalFE::Omega<2,2>;
 template class incrementalFE::Omega<3,3>;
@@ -486,3 +631,7 @@ template class incrementalFE::Omega<1,2>;
 template class incrementalFE::Omega<2,3>;
 template class incrementalFE::Omega<0,2>;
 template class incrementalFE::Omega<0,3>;
+template class incrementalFE::OmegaWrapperCMF<2,2>;
+template class incrementalFE::OmegaWrapperCMF<3,3>;
+template class incrementalFE::OmegaWrapperCMF<1,2>;
+template class incrementalFE::OmegaWrapperCMF<2,3>;

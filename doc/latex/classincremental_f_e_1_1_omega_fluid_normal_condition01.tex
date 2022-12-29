@@ -1,0 +1,109 @@
+\hypertarget{classincremental_f_e_1_1_omega_fluid_normal_condition01}{}\doxysection{incremental\+FE\+::Omega\+Fluid\+Normal\+Condition01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_fluid_normal_condition01}\index{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$@{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Fluid\+Normal\+Condition01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classincremental_f_e_1_1_omega_fluid_normal_condition01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Fluid\+Normal\+Condition01$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classincremental_f_e_1_1_omega_fluid_normal_condition01__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_normal_condition01_a18f7c4b3f5f821d3ededef4a42a2d4d4}{Omega\+Fluid\+Normal\+Condition01}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_normal_condition01_afce4f69c5773776886c46ec48877fb78}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double, const dealii\+::\+Point$<$ spacedim $>$ \&, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+dq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Fluid\+Normal\+Condition01$<$ spacedim $>$}
+
+Class defining a normal boundary condition of the form.
+
+$ \omega^\Sigma = - \boldsymbol{n}\cdot\boldsymbol{d}\cdot\boldsymbol{n} \, J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{N} $,
+
+where $ \boldsymbol{d} = \mathrm{sym}\left( \nabla \dot{\boldsymbol{v}} \cdot \boldsymbol{F}^{-1} \right) $, $ \boldsymbol{n} = J\,\boldsymbol{F}^{-\top} \cdot \boldsymbol{N} / \sqrt{ \boldsymbol{N} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{F} \cdot \boldsymbol{N} } $ $\boldsymbol{F}$ the deformation gradient,~\newline
+ $J$ its determinant, $\dot{\boldsymbol{v}}$ a process variable, $\boldsymbol{f}$ a Lagrangian multiplier.
+
+This enforces incompressibility as an interface condition
+
+Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma} \+:~\newline
+\mbox{[}0\mbox{]} $\dot{v}_{,xx}$~\newline
+ \mbox{[}1\mbox{]} $\dot{v}_{,xy}$~\newline
+ \mbox{[}2\mbox{]} $\dot{v}_{,xz}$~\newline
+ \mbox{[}3\mbox{]} $\dot{v}_{,yx}$~\newline
+ \mbox{[}4\mbox{]} $\dot{v}_{,yy}$~\newline
+ \mbox{[}5\mbox{]} $\dot{v}_{,yz}$~\newline
+ \mbox{[}6\mbox{]} $\dot{v}_{,zx}$~\newline
+ \mbox{[}7\mbox{]} $\dot{v}_{,zy}$~\newline
+ \mbox{[}8\mbox{]} $\dot{v}_{,zz}$~\newline
+ \mbox{[}9\mbox{]} $f_x$~\newline
+ \mbox{[}10\mbox{]} $f_y$~\newline
+ \mbox{[}11\mbox{]} $f_z$~\newline
+ \mbox{[}12\mbox{]} ... \mbox{[}20\mbox{]} $F_{xx}, F_{xy}, F_{xz}, F_{yx}, F_{yy}, F_{yz}, F_{zx}, F_{zy}, F_{zz}$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_fluid_normal_condition01_a18f7c4b3f5f821d3ededef4a42a2d4d4}\label{classincremental_f_e_1_1_omega_fluid_normal_condition01_a18f7c4b3f5f821d3ededef4a42a2d4d4}} 
+\index{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$@{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$}!OmegaFluidNormalCondition01@{OmegaFluidNormalCondition01}}
+\index{OmegaFluidNormalCondition01@{OmegaFluidNormalCondition01}!incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$@{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaFluidNormalCondition01()}{OmegaFluidNormalCondition01()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_normal_condition01}{incremental\+F\+E\+::\+Omega\+Fluid\+Normal\+Condition01}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_normal_condition01}{Omega\+Fluid\+Normal\+Condition01}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+sigma} & \textbf{ Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{Omega\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{Omega\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_a891688560ec0ad8dc5a0058a7b400269}{Omega\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_fluid_normal_condition01_afce4f69c5773776886c46ec48877fb78}\label{classincremental_f_e_1_1_omega_fluid_normal_condition01_afce4f69c5773776886c46ec48877fb78}} 
+\index{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$@{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$@{incrementalFE::OmegaFluidNormalCondition01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_fluid_normal_condition01}{incremental\+F\+E\+::\+Omega\+Fluid\+Normal\+Condition01}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{compute\+\_\+dq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_a40131354ef0a28ca48a0e6c9ed33aa33}{Omega$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

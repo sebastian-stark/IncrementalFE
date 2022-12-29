@@ -281,9 +281,19 @@ public:
 
 };
 
-//#ifdef INCREMENTAL_FE_WITH_CMF
+#ifdef INCREMENTAL_FE_WITH_CMF
+
 /**
- * Free Energy wrapping a function defined with the CMF library
+ * Interface Free Energy wrapping a function defined with the CMF library.
+ *
+ * It is assumed that the first parameters of the CMF function are as follows:<br>
+ *
+ * parameters[0]          ... parameters[spacedim-1]	- position vector x<br>
+ * parameters[spacedim]   ... parameters[2*spacedim-1]	- normal vector n<br>
+ *
+ * Further parameters may follow.
+ *
+ * @warning	This class is untested so far!
  */
 template<unsigned int dim, unsigned int spacedim>
 class PsiWrapperCMF: public incrementalFE::Psi<dim, spacedim>
@@ -302,6 +312,8 @@ public:
 	/**
 	 * Constructor
 	 *
+	 * @param[in]		psi						The function to be wrapped
+	 *
 	 * @param[in]		e_sigma					Dependent fields \f$q\f$
 	 *
 	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
@@ -312,38 +324,61 @@ public:
 	 *
 	 * @param[in]		alpha					Psi::alpha
 	 *
-	 * @param[in]		psi						The function to be wrapped
-	 *
 	 * @param[in]		name					ScalarFunctional::name
 	 */
-	PsiWrapperCMF(	const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
+	PsiWrapperCMF(	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+					const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
 					const std::set<dealii::types::material_id>															domain_of_integration,
 					const dealii::Quadrature<dim>																		quadrature,
 					GlobalDataIncrementalFE<spacedim>&																	global_data,
 					const double																						alpha,
-					CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 					const std::string																					name);
 
 	/**
-	 * @copydoc Psi::get_values_and_derivatives()
+	 * This function defines \f$\psi(q)\f$ based on the wrapped function.
 	 *
-	 * @warning It is assumed that the first dim parameters of the wrapped function store the normal vector
+	 * @param[in]	values					Values at which \f$\psi\f$ and its derivatives are evaluated
+	 *
+	 * @param[in]	x						Position
+	 *
+	 * @param[in]	n						Normal vector
+	 *
+	 * @param[out]	psi						Value of \f$\psi\f$
+	 *
+	 * @param[out]	d_psi					Values of first derivatives of \f$\psi\f$ w.r.t. \f$q\f$
+	 *
+	 * @param[out]	d2_psi					Values of second derivatives of \f$\psi\f$ w.r.t. \f$q\f$
+	 *
+	 * @param[in]	requested_quantities	Tuple indicating which of the quantities @p psi, @p d_psi, @p d2_psi are to be computed (note that only those quantities
+	 * 										are initialized to the correct size, which are actually requested).
+	 *
+	 * @return								@p true indicates that an error has occurred in the function
 	 */
-	virtual
 	bool
 	get_values_and_derivatives( const dealii::Vector<double>& 		values,
-								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Point<spacedim>& 		x,
 								const dealii::Tensor<1,spacedim>& 	n,
 								double&								psi,
 								dealii::Vector<double>&				d_psi,
 								dealii::FullMatrix<double>&			d2_psi,
 								const std::tuple<bool, bool, bool>	requested_quantities)
 	const
-	override;
+	override
+	final;
 
 };
 
-
+/**
+ * Volume Free Energy wrapping a function defined with the CMF library
+ *
+ * It is assumed that the first parameters of the CMF function are as follows:<br>
+ *
+ * parameters[0]          ... parameters[spacedim-1]	- position vector x<br>
+ *
+ * Further parameters may follow.
+ *
+ * @warning	This class is untested so far!
+ */
 template<unsigned int spacedim>
 class PsiWrapperCMF<spacedim,spacedim> : public incrementalFE::Psi<spacedim, spacedim>
 {
@@ -361,6 +396,8 @@ public:
 	/**
 	 * Constructor
 	 *
+	 * @param[in]		psi						The function to be wrapped
+	 *
 	 * @param[in]		e_omega					Dependent fields \f$q\f$
 	 *
 	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
@@ -371,34 +408,47 @@ public:
 	 *
 	 * @param[in]		alpha					Psi::alpha
 	 *
-	 * @param[in]		psi						The function to be wrapped
-	 *
 	 * @param[in]		name					ScalarFunctional::name
 	 */
-	PsiWrapperCMF(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
+	PsiWrapperCMF(	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+					const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
 					const std::set<dealii::types::material_id>															domain_of_integration,
 					const dealii::Quadrature<spacedim>																	quadrature,
 					GlobalDataIncrementalFE<spacedim>&																	global_data,
 					const double																						alpha,
-					CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 					const std::string																					name);
 
 	/**
-	 * @copydoc Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 * This function defines \f$\psi(q)\f$ based on the wrapped function.
+	 *
+	 * @param[in]	values					Values at which \f$\psi\f$ and its derivatives are evaluated
+	 *
+	 * @param[in]	x						Position
+	 *
+	 * @param[out]	psi						Value of \f$\psi\f$
+	 *
+	 * @param[out]	d_psi					Values of first derivatives of \f$\psi\f$ w.r.t. \f$q\f$
+	 *
+	 * @param[out]	d2_psi					Values of second derivatives of \f$\psi\f$ w.r.t. \f$q\f$
+	 *
+	 * @param[in]	requested_quantities	Tuple indicating which of the quantities @p psi, @p d_psi, @p d2_psi are to be computed (note that only those quantities
+	 * 										are initialized to the correct size, which are actually requested).
+	 *
+	 * @return								@p true indicates that an error has occurred in the function
 	 */
-	virtual
 	bool
 	get_values_and_derivatives( const dealii::Vector<double>& 		values,
-								const dealii::Point<spacedim>& 		/*x*/,
-								double&								omega,
-								dealii::Vector<double>&				d_omega,
-								dealii::FullMatrix<double>&			d2_omega,
+								const dealii::Point<spacedim>& 		x,
+								double&								psi,
+								dealii::Vector<double>&				d_psi,
+								dealii::FullMatrix<double>&			d2_psi,
 								const std::tuple<bool, bool, bool>	requested_quantities)
 	const
-	override;
+	override
+	final;
 };
 
-//#endif
+#endif /* INCREMENTAL_FE_WITH_CMF */
 
 }
 

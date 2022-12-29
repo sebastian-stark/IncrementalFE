@@ -69,6 +69,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -82,7 +83,7 @@ Inheritance diagram for incrementalFE::Psi&lt; spacedim, spacedim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4__inherit__graph.png" border="0" usemap="#incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map" id="incremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="272,561,459,603"/>
+<area shape="rect" title=" " alt="" coords="272,593,459,635"/>
 <area shape="rect" href="classincremental_f_e_1_1_kirchhoff_material00.html" title=" " alt="" coords="552,5,737,47"/>
 <area shape="rect" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html" title=" " alt="" coords="507,71,783,112"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_chemical00.html" title=" " alt="" coords="535,136,755,177"/>
@@ -101,7 +102,8 @@ Inheritance diagram for incrementalFE::Psi&lt; spacedim, spacedim &gt;:</div>
 <area shape="rect" href="classincremental_f_e_1_1_psi_neo_hooke00.html" title=" " alt="" coords="531,985,758,1027"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html" title=" " alt="" coords="539,1051,750,1092"/>
 <area shape="rect" href="classincremental_f_e_1_1_psi_transformed00.html" title=" " alt="" coords="524,1116,765,1157"/>
-<area shape="rect" title=" " alt="" coords="5,554,224,610"/>
+<area shape="rect" href="classincremental_f_e_1_1_psi_wrapper_c_m_f_3_01spacedim_00_01spacedim_01_4.html" title=" " alt="" coords="537,1181,752,1223"/>
+<area shape="rect" title=" " alt="" coords="5,586,224,642"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -124,18 +126,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a17f3559c196edb5487b591bb6061667e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96c5cae7f14a42085b33322455d0fcc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#a96c5cae7f14a42085b33322455d0fcc6">get_h_omega</a> (<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_omega, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_omega_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, double &amp;h_omega, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_omega_1, dealii::FullMatrix&lt; double &gt; &amp;h_omega_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
 <tr class="separator:a96c5cae7f14a42085b33322455d0fcc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ba8b8c2d3c51841cd3c2e35f7cac59"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#a71ba8b8c2d3c51841cd3c2e35f7cac59">get_eval_time</a> () const</td></tr>
+<tr class="separator:a71ba8b8c2d3c51841cd3c2e35f7cac59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1b7f147df4dbc0c3f61925f118cc24b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#a1b7f147df4dbc0c3f61925f118cc24b2">always_compute_potential_value</a> = false</td></tr>
 <tr class="separator:a1b7f147df4dbc0c3f61925f118cc24b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:abf0a4804877fd7cc9bd1b90e52760ba9"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#abf0a4804877fd7cc9bd1b90e52760ba9">global_data</a></td></tr>
 <tr class="separator:abf0a4804877fd7cc9bd1b90e52760ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:af7b8227188dbdd6ada35b9445d96c79d"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#af7b8227188dbdd6ada35b9445d96c79d">alpha</a></td></tr>
 <tr class="separator:af7b8227188dbdd6ada35b9445d96c79d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4218b3010dfc0b1ba87b8e5a175107e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4.html#a4218b3010dfc0b1ba87b8e5a175107e0">eval_time</a> = 0.0</td></tr>
+<tr class="separator:a4218b3010dfc0b1ba87b8e5a175107e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int spacedim&gt;<br />
@@ -240,6 +249,26 @@ template&lt;unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a71ba8b8c2d3c51841cd3c2e35f7cac59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ba8b8c2d3c51841cd3c2e35f7cac59">&#9670;&nbsp;</a></span>get_eval_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; spacedim, spacedim &gt;::get_eval_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The time at which the next call of ScalarFunctional::get_h_omega is performed. </dd></dl>
+
+</div>
+</div>
 <a id="a96c5cae7f14a42085b33322455d0fcc6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a96c5cae7f14a42085b33322455d0fcc6">&#9670;&nbsp;</a></span>get_h_omega()</h2>
 
@@ -388,7 +417,7 @@ template&lt;unsigned int spacedim&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> indicates that an error has occurred in the function </dd></dl>
 
-<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html#a0a930a5f49cb001179590c819fbce3c5">incrementalFE::PsiNeoHookeLagrange00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a49b4a67e26ad8a34d61fea6a348017d3">incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_initial_pressure00.html#ab73f396d058eeba3de66c054781aff8b">incrementalFE::PsiInitialPressure00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_incompressibility01.html#ad2ca9358bd1bb39e1f7de76874c48fb0">incrementalFE::PsiIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical07.html#a3a870334fcf35b6f1a9efccafeeb6229">incrementalFE::PsiChemical07&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical06.html#afd9e4632ee3152f93dca35db3a0ddcd2">incrementalFE::PsiChemical06&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical05.html#ad62b3f30e8a8e5e79885f30e0faafaac">incrementalFE::PsiChemical05&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical04.html#ac93560346243d92ccdf2dad1fe286802">incrementalFE::PsiChemical04&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical03.html#a60b290fc79c88a5525dc447a2e3f0637">incrementalFE::PsiChemical03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#addfb3bb4446157cfe28064f34f67429d">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#ab062fe5ffbea799d817b3106d15cefc3">incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_kirchhoff_material00.html#aac6a9a65711a61f97f5a22fd581d884e">incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_linear00.html#a67659a64476352053fd55c6441336283">incrementalFE::PsiLinear00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_transformed00.html#a4d996bc1b437b748918c0c031267b5b9">incrementalFE::PsiTransformed00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical01.html#a75fc8b6eb7a68ad30d27e1de6738366d">incrementalFE::PsiChemical01&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a52e3a124fe8200a1cad668b12d4be439">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_wrapper_c_m_f_3_01spacedim_00_01spacedim_01_4.html#ae8f737c1055446ec13fdd06141b9f3ca">incrementalFE::PsiWrapperCMF&lt; spacedim, spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke_lagrange00.html#a0a930a5f49cb001179590c819fbce3c5">incrementalFE::PsiNeoHookeLagrange00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_neo_hooke00.html#a49b4a67e26ad8a34d61fea6a348017d3">incrementalFE::PsiNeoHooke00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_elastic_plastic_material00.html#aa9f7d892dbf2eb27903c13d1f67e8bfa">incrementalFE::PsiElasticPlasticMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_initial_pressure00.html#ab73f396d058eeba3de66c054781aff8b">incrementalFE::PsiInitialPressure00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_incompressibility01.html#ad2ca9358bd1bb39e1f7de76874c48fb0">incrementalFE::PsiIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_incompressibility00.html#a5d26b5e370dc3cbf5ab60887517c5ebc">incrementalFE::PsiIncompressibility00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical07.html#a3a870334fcf35b6f1a9efccafeeb6229">incrementalFE::PsiChemical07&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical06.html#afd9e4632ee3152f93dca35db3a0ddcd2">incrementalFE::PsiChemical06&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical05.html#ad62b3f30e8a8e5e79885f30e0faafaac">incrementalFE::PsiChemical05&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical04.html#ac93560346243d92ccdf2dad1fe286802">incrementalFE::PsiChemical04&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical03.html#a60b290fc79c88a5525dc447a2e3f0637">incrementalFE::PsiChemical03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical02.html#addfb3bb4446157cfe28064f34f67429d">incrementalFE::PsiChemical02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#ab062fe5ffbea799d817b3106d15cefc3">incrementalFE::NeoHookeCompressionPoint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_kirchhoff_material00.html#aac6a9a65711a61f97f5a22fd581d884e">incrementalFE::KirchhoffMaterial00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_linear00.html#a67659a64476352053fd55c6441336283">incrementalFE::PsiLinear00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_transformed00.html#a4d996bc1b437b748918c0c031267b5b9">incrementalFE::PsiTransformed00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_psi_chemical01.html#a75fc8b6eb7a68ad30d27e1de6738366d">incrementalFE::PsiChemical01&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_psi_chemical00.html#a52e3a124fe8200a1cad668b12d4be439">incrementalFE::PsiChemical00&lt; spacedim &gt;</a>.</p>
 
 </div>
 </div>
@@ -435,6 +464,31 @@ template&lt;unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="a4218b3010dfc0b1ba87b8e5a175107e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4218b3010dfc0b1ba87b8e5a175107e0">&#9670;&nbsp;</a></span>eval_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; spacedim, spacedim &gt;::eval_time = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The time at which the next call of ScalarFunctional::get_h_omega is performed </p>
+
+</div>
+</div>
 <a id="abf0a4804877fd7cc9bd1b90e52760ba9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf0a4804877fd7cc9bd1b90e52760ba9">&#9670;&nbsp;</a></span>global_data</h2>
 
@@ -452,7 +506,7 @@ template&lt;unsigned int spacedim&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

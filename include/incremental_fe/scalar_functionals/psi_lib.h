@@ -2662,7 +2662,7 @@ private:
 	F_as_parameter;
 
 	/**
-	 * If @p true, f$c^\mathrm{f}\f$ is considered as parameter in potential (i.e., it is held fixed when computing the first derivative)
+	 * If @p true, \f$c^\mathrm{f}\f$ is considered as parameter in potential (i.e., it is held fixed when computing the first derivative)
 	 */
 	const bool
 	c_f_as_parameter;

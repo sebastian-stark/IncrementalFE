@@ -350,3 +350,11 @@
 \_form#349:$ \omega^\Sigma = \dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \left[ \boldsymbol{N} \left( \dot{\boldsymbol{v}} - \dot{\boldsymbol{u}} \right) - \dot{I} \right] \eta^\mathrm{f}$
 \_form#350:$ \omega^\Sigma = -\dfrac{J}{V^\mathrm{f}_\mathrm{m}}\boldsymbol{F}^{-1} : \nabla \dot{\boldsymbol{v}} \, \eta $
 \_form#351:$ \omega^\Sigma = t \left(\dot{\boldsymbol{u}} - \dot{\boldsymbol{v}}\right) \cdot \boldsymbol{n} $
+\_form#352:$ \omega^\Sigma = -J \boldsymbol{F}^{-\top} : \nabla \boldsymbol{f} \dot{\xi} $
+\_form#353:$ \omega^\Sigma = \eta (\boldsymbol{N} \cdot \boldsymbol{F}^{-1}) \cdot \mathrm{sym}\left( \nabla \dot{\boldsymbol{v}} \cdot \boldsymbol{F}^{-1} + \dot{\xi} \boldsymbol{I} \right) \cdot (\boldsymbol{N} \cdot \boldsymbol{F}^{-1}) $
+\_form#354:$ \omega^\Sigma = - \boldsymbol{n}\cdot\boldsymbol{d}\cdot\boldsymbol{n} \, J \boldsymbol{f} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{N} $
+\_form#355:$ \boldsymbol{d} = \mathrm{sym}\left( \nabla \dot{\boldsymbol{v}} \cdot \boldsymbol{F}^{-1} \right) $
+\_form#356:$ \boldsymbol{n} = J\,\boldsymbol{F}^{-\top} \cdot \boldsymbol{N} / \sqrt{ \boldsymbol{N} \cdot \boldsymbol{F}^{-\top} \cdot \boldsymbol{F} \cdot \boldsymbol{N} } $
+\_form#357:$\boldsymbol{f}$
+\_form#358:$\boldsymbol{d} = \mathrm{sym}\left(\nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1}\right)$
+\_form#359:$\boldsymbol{g} = \nabla \boldsymbol{f} \cdot \boldsymbol{F}^{-1}$

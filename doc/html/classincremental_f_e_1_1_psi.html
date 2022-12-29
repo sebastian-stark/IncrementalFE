@@ -69,6 +69,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_psi-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -82,8 +83,9 @@ Inheritance diagram for incrementalFE::Psi&lt; dim, spacedim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classincremental_f_e_1_1_psi__inherit__graph.png" border="0" usemap="#incremental_f_e_1_1_psi_3_01dim_00_01spacedim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="incremental_f_e_1_1_psi_3_01dim_00_01spacedim_01_4_inherit__map" id="incremental_f_e_1_1_psi_3_01dim_00_01spacedim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="22,109,170,151"/>
-<area shape="rect" title=" " alt="" coords="5,5,187,61"/>
+<area shape="rect" title=" " alt="" coords="31,109,179,151"/>
+<area shape="rect" href="classincremental_f_e_1_1_psi_wrapper_c_m_f.html" title=" " alt="" coords="5,199,204,240"/>
+<area shape="rect" title=" " alt="" coords="14,5,195,61"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -106,18 +108,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2622e8f84590e8a821984181e31fbc76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35894d078906d7d765185886c9f48a92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a35894d078906d7d765185886c9f48a92">get_h_sigma</a> (<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_sigma, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_sigma_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;n, double &amp;h_sigma, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_sigma_1, dealii::FullMatrix&lt; double &gt; &amp;h_sigma_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
 <tr class="separator:a35894d078906d7d765185886c9f48a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade290e6a616da613b4174a6b37f2d8a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ade290e6a616da613b4174a6b37f2d8a2">get_eval_time</a> () const</td></tr>
+<tr class="separator:ade290e6a616da613b4174a6b37f2d8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a17bf6a889ca06a4079541339c4d34cd8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a17bf6a889ca06a4079541339c4d34cd8">always_compute_potential_value</a> = false</td></tr>
 <tr class="separator:a17bf6a889ca06a4079541339c4d34cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:ae77b2e13385734b19d6ee445c477a6eb"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a></td></tr>
 <tr class="separator:ae77b2e13385734b19d6ee445c477a6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:a0d59fde4728962fa75449a3444341dcf"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a></td></tr>
 <tr class="separator:a0d59fde4728962fa75449a3444341dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81b7504e16d7db3bf14029a3f7670e1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ad81b7504e16d7db3bf14029a3f7670e1">eval_time</a> = 0.0</td></tr>
+<tr class="separator:ad81b7504e16d7db3bf14029a3f7670e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int dim, unsigned int spacedim&gt;<br />
@@ -222,6 +231,26 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ade290e6a616da613b4174a6b37f2d8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade290e6a616da613b4174a6b37f2d8a2">&#9670;&nbsp;</a></span>get_eval_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::get_eval_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The time at which the next call of <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a1b9874b2fd591c844ecfcd1db8212c54">ScalarFunctional::get_h_sigma</a> is performed. </dd></dl>
+
+</div>
+</div>
 <a id="a35894d078906d7d765185886c9f48a92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35894d078906d7d765185886c9f48a92">&#9670;&nbsp;</a></span>get_h_sigma()</h2>
 
@@ -383,7 +412,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> indicates that an error has occurred in the function </dd></dl>
 
-<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_linear_interface00.html#a5484f908e32ff84cc12501a33243f30f">incrementalFE::PsiLinearInterface00&lt; spacedim &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classincremental_f_e_1_1_psi_wrapper_c_m_f.html#a124baf9dea9273a9e18a20e556430c09">incrementalFE::PsiWrapperCMF&lt; dim, spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_psi_linear_interface00.html#a5484f908e32ff84cc12501a33243f30f">incrementalFE::PsiLinearInterface00&lt; spacedim &gt;</a>.</p>
 
 </div>
 </div>
@@ -430,6 +459,31 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="ad81b7504e16d7db3bf14029a3f7670e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81b7504e16d7db3bf14029a3f7670e1">&#9670;&nbsp;</a></span>eval_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::eval_time = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The time at which the next call of <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a1b9874b2fd591c844ecfcd1db8212c54">ScalarFunctional::get_h_sigma</a> is performed </p>
+
+</div>
+</div>
 <a id="ae77b2e13385734b19d6ee445c477a6eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae77b2e13385734b19d6ee445c477a6eb">&#9670;&nbsp;</a></span>global_data</h2>
 
@@ -447,7 +501,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

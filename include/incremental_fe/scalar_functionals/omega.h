@@ -28,6 +28,7 @@
 #include <galerkin_tools/total_potential_contribution.h>
 #include <incremental_fe/global_data_incremental_fe.h>
 #include <incremental_fe/config.h>
+#include <cmf/scalar_function.h>
 
 namespace incrementalFE
 {
@@ -553,6 +554,227 @@ public:
 	final;
 
 };
+
+#ifdef INCREMENTAL_FE_WITH_CMF
+
+/**
+ * Interface Dissipation potential wrapping a function defined with the CMF library.
+ *
+ * It is assumed that the first parameters of the CMF function are as follows:<br>
+ *
+ * parameters[0]										- time<br>
+ * parameters[1]          ... parameters[spacedim]		- position vector x<br>
+ * parameters[spacedim+1]   ... parameters[2*spacedim]	- normal vector n<br>
+ *
+ * Further parameters may follow.
+ *
+ * @warning	This class is untested so far!
+ */
+template<unsigned int dim, unsigned int spacedim>
+class OmegaWrapperCMF: public incrementalFE::Omega<dim, spacedim>
+{
+
+private:
+
+	/**
+	 * The function wrapped
+	 */
+	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
+	omega;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		omega					The function to be wrapped
+	 *
+	 * @param[in]		e_sigma					Dependent fields (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		n_v_dot					The number of \f$\dot{v}\f$
+	 *
+	 * @param[in]		n_q_dot					The number of \f$\dot{q}\f$
+	 *
+	 * @param[in]		n_mu					The number of \f$\mu\f$
+	 *
+	 * @param[in]		n_q						The number of \f$q\f$
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 *
+	 * @param[in]		name					ScalarFunctional::name
+	 */
+	OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	omega,
+					const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
+					const std::set<dealii::types::material_id>															domain_of_integration,
+					const dealii::Quadrature<dim>																		quadrature,
+					GlobalDataIncrementalFE<spacedim>&																	global_data,
+					const unsigned int																					n_v_dot,
+					const unsigned int																					n_q_dot,
+					const unsigned int																					n_mu,
+					const unsigned int																					n_q,
+					const unsigned int																					method,
+					const double																						alpha,
+					const std::string																					name);
+
+	/**
+	 * This function defines \f$\omega^\Sigma\f$ based on the wrapped function.
+	 *
+	 * @param[in]	values					Values at which \f$\omega^\Sigma\f$ and its derivatives are evaluated (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
+	 *
+	 * @param[in]	t						Time at which \f$\omega^\Sigma\f$ is evaluated
+	 *
+	 * @param[in]	x						Position
+	 *
+	 * @param[in]	n						Normal vector
+	 *
+	 * @param[out]	omega					Value of \f$\omega^\Sigma\f$
+	 *
+	 * @param[out]	d_omega					Values of first derivatives of \f$\omega^\Sigma\f$ w.r.t. \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$ (in this order)
+	 *
+	 * @param[out]	d2_omega				Values of second derivatives of \f$\omega^\Sigma\f$ w.r.t. \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$ (in this order). If @p compute_d2q == @p true,
+	 * 										also the derivatives of @p d_omega w.r.t. \f$q\f$ need to be computed. In this case, @p d2_omega is initialized to the size
+	 * 										Omega::n_v_q_dot + Omega::n_mu x Omega::n_v_q_dot + Omega::n_mu + Omega::n_q, so that derivatives of @p d_omega w.r.t. \f$q\f$ can be stored in
+	 * 										the rightmost part of the matrix.
+	 *
+	 * @param[in]	requested_quantities	Tuple indicating which of the quantities @p omega, @p d_omega, @p d2_omega are to be computed.
+	 * 										Note that only those quantities are passed in initialized to the correct size, which are actually requested
+	 *
+	 * @param[in]	compute_d2q				If @p true, also compute second derivatives w.r.t. \f$q\f$
+	 *
+	 * @return								@p true indicates that an error has occurred in the function
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1,spacedim>& 	n,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_d2q)
+	const
+	override
+	final;
+
+};
+
+/**
+ * Volume Dissipation potential wrapping a function defined with the CMF library.
+ *
+ * It is assumed that the first parameters of the CMF function are as follows:<br>
+ *
+ * parameters[0]										- time<br>
+ * parameters[1]          ... parameters[spacedim]		- position vector x<br>
+ *
+ * Further parameters may follow.
+ *
+ * @warning	This class is untested so far!
+ */
+template<unsigned int spacedim>
+class OmegaWrapperCMF<spacedim,spacedim> : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * The function wrapped
+	 */
+	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
+	omega;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		omega					The function to be wrapped
+	 *
+	 * @param[in]		e_omega					Dependent fields (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		n_v_dot					The number of \f$\dot{v}\f$
+	 *
+	 * @param[in]		n_q_dot					The number of \f$\dot{q}\f$
+	 *
+	 * @param[in]		n_mu					The number of \f$\mu\f$
+	 *
+	 * @param[in]		n_q						The number of \f$q\f$
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 *
+	 * @param[in]		name					ScalarFunctional::name
+	 */
+	OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	omega,
+					const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
+					const std::set<dealii::types::material_id>															domain_of_integration,
+					const dealii::Quadrature<spacedim>																	quadrature,
+					GlobalDataIncrementalFE<spacedim>&																	global_data,
+					const unsigned int																					n_v_dot,
+					const unsigned int																					n_q_dot,
+					const unsigned int																					n_mu,
+					const unsigned int																					n_q,
+					const unsigned int																					method,
+					const double																						alpha = 0.0,
+					const std::string																					name = "Omega");
+
+	/**
+	 * This function defines \f$\omega^\Omega\f$ based on the wrapped function.
+	 *
+	 * @param[in]	values					Values at which \f$\omega^\Omega\f$ and its derivatives are evaluated (in the order \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$, \f$q\f$)
+	 *
+	 * @param[in]	t						Time at which \f$\omega^\Omega\f$ is evaluated
+	 *
+	 * @param[in]	x						Position
+	 *
+	 * @param[out]	omega					Value of \f$\omega^\Omega\f$
+	 *
+	 * @param[out]	d_omega					Values of first derivatives of \f$\omega^\Omega\f$ w.r.t. \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$ (in this order)
+	 *
+	 * @param[out]	d2_omega				Values of second derivatives of \f$\omega^\Omega\f$ w.r.t. \f$\dot{v}\f$, \f$\dot{q}\f$, \f$\mu\f$ (in this order). If @p compute_d2q == @p true,
+	 * 										also the derivatives of @p d_omega w.r.t. \f$q\f$ need to be computed. In this case, @p d2_omega is initialized to the size
+	 * 										Omega::n_v_q_dot + Omega::n_mu x Omega::n_v_q_dot + Omega::n_mu + Omega::n_q, so that derivatives of @p d_omega w.r.t. \f$q\f$ can be stored in
+	 * 										the rightmost part of the matrix.
+	 *
+	 * @param[in]	requested_quantities	Tuple indicating which of the quantities @p omega, @p d_omega, @p d2_omega are to be computed.
+	 * 										Note that only those quantities are passed in initialized to the correct size, which are actually requested
+	 *
+	 * @param[in]	compute_d2q				If @p true, also compute second derivatives w.r.t. \f$q\f$
+	 *
+	 * @return								@p true indicates that an error has occurred in the function
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_d2q)
+	const
+	override
+	final;
+
+};
+
+#endif /* INCREMENTAL_FE_WITH_CMF */
+
 
 
 }

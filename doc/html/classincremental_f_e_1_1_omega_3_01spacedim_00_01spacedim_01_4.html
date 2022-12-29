@@ -69,6 +69,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -82,7 +83,7 @@ Inheritance diagram for incrementalFE::Omega&lt; spacedim, spacedim &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4__inherit__graph.png" border="0" usemap="#incremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="incremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_inherit__map" id="incremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="272,757,459,799"/>
+<area shape="rect" title=" " alt="" coords="272,789,459,831"/>
 <area shape="rect" href="classincremental_f_e_1_1_omega_divergence_constraint00.html" title=" " alt="" coords="511,5,757,47"/>
 <area shape="rect" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html" title=" " alt="" coords="516,71,752,112"/>
 <area shape="rect" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html" title=" " alt="" coords="516,136,752,177"/>
@@ -107,7 +108,8 @@ Inheritance diagram for incrementalFE::Omega&lt; spacedim, spacedim &gt;:</div>
 <area shape="rect" href="classincremental_f_e_1_1_omega_viscous_dissipation00.html" title=" " alt="" coords="523,1377,745,1419"/>
 <area shape="rect" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html" title=" " alt="" coords="523,1443,745,1484"/>
 <area shape="rect" href="classincremental_f_e_1_1_omega_viscous_dissipation02.html" title=" " alt="" coords="523,1508,745,1549"/>
-<area shape="rect" title=" " alt="" coords="5,750,224,806"/>
+<area shape="rect" href="classincremental_f_e_1_1_omega_wrapper_c_m_f_3_01spacedim_00_01spacedim_01_4.html" title=" " alt="" coords="521,1573,747,1615"/>
+<area shape="rect" title=" " alt="" coords="5,782,224,838"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -130,6 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a40131354ef0a28ca48a0e6c9ed33aa33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8706bcb4f96a80e22e7d6049d7322d9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a8706bcb4f96a80e22e7d6049d7322d9f">get_h_omega</a> (<a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;e_omega, const std::vector&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt;&gt; &amp;e_omega_ref_sets, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;hidden_vars, const dealii::Point&lt; spacedim &gt; &amp;x, double &amp;h_omega, <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespaceLinearAlgebraTrilinos_1_1MPI.html#a6c5bf277e53c73f3d252d6a8455c21a4">dealii::Vector</a>&lt; double &gt; &amp;h_omega_1, dealii::FullMatrix&lt; double &gt; &amp;h_omega_2, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const final</td></tr>
 <tr class="separator:a8706bcb4f96a80e22e7d6049d7322d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53eb0de072c84ca29f50a3d0ed0fc4ae"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a53eb0de072c84ca29f50a3d0ed0fc4ae">get_eval_time</a> () const</td></tr>
+<tr class="separator:a53eb0de072c84ca29f50a3d0ed0fc4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -142,14 +146,19 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a9bdff9a76b27753ce791e612c04931ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a9bdff9a76b27753ce791e612c04931ee">compute_potential_value</a> = true</td></tr>
 <tr class="separator:a9bdff9a76b27753ce791e612c04931ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:afffe781a5a2032ec003032adc78e1bf3"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#afffe781a5a2032ec003032adc78e1bf3">global_data</a></td></tr>
 <tr class="separator:afffe781a5a2032ec003032adc78e1bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
 <tr class="memitem:ad881c36804cc027c301f4f069756c2db"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#ad881c36804cc027c301f4f069756c2db">alpha</a></td></tr>
 <tr class="separator:ad881c36804cc027c301f4f069756c2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c95d57122261e8a2e26d3818251bc9b"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#a6c95d57122261e8a2e26d3818251bc9b">method</a></td></tr>
 <tr class="separator:a6c95d57122261e8a2e26d3818251bc9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5107cc7a96183ab61e430aac012939b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega_3_01spacedim_00_01spacedim_01_4.html#ac5107cc7a96183ab61e430aac012939b">eval_time</a> = 0.0</td></tr>
+<tr class="separator:ac5107cc7a96183ab61e430aac012939b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int spacedim&gt;<br />
@@ -290,6 +299,26 @@ template&lt;unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a53eb0de072c84ca29f50a3d0ed0fc4ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53eb0de072c84ca29f50a3d0ed0fc4ae">&#9670;&nbsp;</a></span>get_eval_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; spacedim, spacedim &gt;::get_eval_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The time at which the next call of ScalarFunctional::get_h_omega is performed. </dd></dl>
+
+</div>
+</div>
 <a id="a8706bcb4f96a80e22e7d6049d7322d9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8706bcb4f96a80e22e7d6049d7322d9f">&#9670;&nbsp;</a></span>get_h_omega()</h2>
 
@@ -452,7 +481,7 @@ template&lt;unsigned int spacedim&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> indicates that an error has occurred in the function </dd></dl>
 
-<p>Implemented in <a class="el" href="classincremental_f_e_1_1_omega_divergence_constraint00.html#abf4f1c8217a266dd3afec26d140759b5">incrementalFE::OmegaDivergenceConstraint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_mixed_term01.html#a0093470d676684f47e72a86bbe4a222d">incrementalFE::OmegaMixedTerm01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_mixed_term00.html#af873a7c1117c3fd63de2b0a7879d3aef">incrementalFE::OmegaMixedTerm00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_viscous_dissipation00.html#a9bc2757768e12e908555369f5af6ba19">incrementalFE::OmegaLagrangeViscousDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility03.html#aa2f17bc8b2fb85d123c5797cacf27232">incrementalFE::OmegaFluidIncompressibility03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility01.html#a4c9f65000d00400e5df5f01d614b33db">incrementalFE::OmegaFluidIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility00.html#ad7a83db1f3970d83dcbaf2128f5b232d">incrementalFE::OmegaFluidIncompressibility00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_incompressibility01.html#a92befdec92edb6315cb01332237195a3">incrementalFE::OmegaLagrangeIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_incompressibility00.html#ad6921a984f6a7d104b0089cea2fae76d">incrementalFE::OmegaLagrangeIncompressibility00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation02.html#a1d8cff0b7c0d77d191daa4b5cedb3a72">incrementalFE::OmegaViscousDissipation02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_velocity_flux01.html#a25bb3bf327ba23b5dfd1e0f02a24f5f6">incrementalFE::OmegaVelocityFlux01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_velocity_flux00.html#a68636b19c80896557dd1f85ef1bdfa91">incrementalFE::OmegaVelocityFlux00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html#a794a4e2e77cb590f3fcea84c7939d4b3">incrementalFE::OmegaViscousDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation00.html#af2d3ed2d8e3d59d070eaf6dd7348209f">incrementalFE::OmegaViscousDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation05.html#abb6b513bf4d3155638a03de7e3fbaaf5">incrementalFE::OmegaDualFluidDissipation05&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation04.html#a1e629b24cec9685c2a3e976a67465c19">incrementalFE::OmegaDualFluidDissipation04&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation03.html#a311456c3d75f03d70dc086d03ea82cc9">incrementalFE::OmegaDualFluidDissipation03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation02.html#a0964f07e56cbd88759059666182dd064">incrementalFE::OmegaDualFluidDissipation02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html#a5e0bf3610ca448e0134bfa08c4c14dad">incrementalFE::OmegaDualFluidDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html#ae6aba81c3a697c74f24a14aa889f9c4a">incrementalFE::OmegaDualFluidDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation01.html#abd77284b0740481711eb7b7953dd6386">incrementalFE::OmegaDualIonDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation00.html#aa7e62ef3ded75ea3c6e67977c2cc2d3d">incrementalFE::OmegaDualIonDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_flux_dissipation00.html#a74ae73b7e52de1c084992628ab2a6328">incrementalFE::OmegaDualFluxDissipation00&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_omega_flux_dissipation00.html#ae1189d7eedba56295ee1e0acd2b9229f">incrementalFE::OmegaFluxDissipation00&lt; spacedim &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classincremental_f_e_1_1_omega_divergence_constraint00.html#abf4f1c8217a266dd3afec26d140759b5">incrementalFE::OmegaDivergenceConstraint00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_mixed_term01.html#a0093470d676684f47e72a86bbe4a222d">incrementalFE::OmegaMixedTerm01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_mixed_term00.html#af873a7c1117c3fd63de2b0a7879d3aef">incrementalFE::OmegaMixedTerm00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_viscous_dissipation00.html#a9bc2757768e12e908555369f5af6ba19">incrementalFE::OmegaLagrangeViscousDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility03.html#aa2f17bc8b2fb85d123c5797cacf27232">incrementalFE::OmegaFluidIncompressibility03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility01.html#a4c9f65000d00400e5df5f01d614b33db">incrementalFE::OmegaFluidIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_fluid_incompressibility00.html#ad7a83db1f3970d83dcbaf2128f5b232d">incrementalFE::OmegaFluidIncompressibility00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_incompressibility01.html#a92befdec92edb6315cb01332237195a3">incrementalFE::OmegaLagrangeIncompressibility01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_lagrange_incompressibility00.html#ad6921a984f6a7d104b0089cea2fae76d">incrementalFE::OmegaLagrangeIncompressibility00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation02.html#a1d8cff0b7c0d77d191daa4b5cedb3a72">incrementalFE::OmegaViscousDissipation02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_velocity_flux01.html#a25bb3bf327ba23b5dfd1e0f02a24f5f6">incrementalFE::OmegaVelocityFlux01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_velocity_flux00.html#a68636b19c80896557dd1f85ef1bdfa91">incrementalFE::OmegaVelocityFlux00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation01.html#a794a4e2e77cb590f3fcea84c7939d4b3">incrementalFE::OmegaViscousDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_viscous_dissipation00.html#af2d3ed2d8e3d59d070eaf6dd7348209f">incrementalFE::OmegaViscousDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation05.html#abb6b513bf4d3155638a03de7e3fbaaf5">incrementalFE::OmegaDualFluidDissipation05&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation04.html#a1e629b24cec9685c2a3e976a67465c19">incrementalFE::OmegaDualFluidDissipation04&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation03.html#a311456c3d75f03d70dc086d03ea82cc9">incrementalFE::OmegaDualFluidDissipation03&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation02.html#a0964f07e56cbd88759059666182dd064">incrementalFE::OmegaDualFluidDissipation02&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation01.html#a5e0bf3610ca448e0134bfa08c4c14dad">incrementalFE::OmegaDualFluidDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_fluid_dissipation00.html#ae6aba81c3a697c74f24a14aa889f9c4a">incrementalFE::OmegaDualFluidDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation01.html#abd77284b0740481711eb7b7953dd6386">incrementalFE::OmegaDualIonDissipation01&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_ion_dissipation00.html#aa7e62ef3ded75ea3c6e67977c2cc2d3d">incrementalFE::OmegaDualIonDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_dual_flux_dissipation00.html#a74ae73b7e52de1c084992628ab2a6328">incrementalFE::OmegaDualFluxDissipation00&lt; spacedim &gt;</a>, <a class="el" href="classincremental_f_e_1_1_omega_flux_dissipation00.html#ae1189d7eedba56295ee1e0acd2b9229f">incrementalFE::OmegaFluxDissipation00&lt; spacedim &gt;</a>, and <a class="el" href="classincremental_f_e_1_1_omega_wrapper_c_m_f_3_01spacedim_00_01spacedim_01_4.html#ac5a3a1d93b6525785535babcb7cfcced">incrementalFE::OmegaWrapperCMF&lt; spacedim, spacedim &gt;</a>.</p>
 
 </div>
 </div>
@@ -500,6 +529,31 @@ template&lt;unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="ac5107cc7a96183ab61e430aac012939b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5107cc7a96183ab61e430aac012939b">&#9670;&nbsp;</a></span>eval_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; spacedim, spacedim &gt;::eval_time = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The time at which the next call of ScalarFunctional::get_h_omega is performed </p>
+
+</div>
+</div>
 <a id="afffe781a5a2032ec003032adc78e1bf3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afffe781a5a2032ec003032adc78e1bf3">&#9670;&nbsp;</a></span>global_data</h2>
 
@@ -517,7 +571,7 @@ template&lt;unsigned int spacedim&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

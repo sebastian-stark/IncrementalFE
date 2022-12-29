@@ -10,7 +10,7 @@ Inheritance diagram for incremental\+FE\+::Psi$<$ dim, spacedim $>$\+:\nopagebre
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=216pt]{classincremental_f_e_1_1_psi__inherit__graph}
+\includegraphics[width=229pt]{classincremental_f_e_1_1_psi__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -32,18 +32,25 @@ virtual \mbox{\hyperlink{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e
 virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&psi, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+psi, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+psi, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const =0
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a35894d078906d7d765185886c9f48a92}{get\+\_\+h\+\_\+sigma}} (\textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_ade290e6a616da613b4174a6b37f2d8a2}{get\+\_\+eval\+\_\+time}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a17bf6a889ca06a4079541339c4d34cd8}{always\+\_\+compute\+\_\+potential\+\_\+value}} = false
 \end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
+\doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 const dealii\+::\+Smart\+Pointer$<$ \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
 const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}}
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_ad81b7504e16d7db3bf14029a3f7670e1}{eval\+\_\+time}} = 0.\+0
 \end{DoxyCompactItemize}
 
 
@@ -92,6 +99,16 @@ virtual \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Ps
 Destructor 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_ade290e6a616da613b4174a6b37f2d8a2}\label{classincremental_f_e_1_1_psi_ade290e6a616da613b4174a6b37f2d8a2}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!get\_eval\_time@{get\_eval\_time}}
+\index{get\_eval\_time@{get\_eval\_time}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_eval\_time()}{get\_eval\_time()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::get\+\_\+eval\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+The time at which the next call of \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} is performed. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classincremental_f_e_1_1_psi_a35894d078906d7d765185886c9f48a92}\label{classincremental_f_e_1_1_psi_a35894d078906d7d765185886c9f48a92}} 
 \index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!get\_h\_sigma@{get\_h\_sigma}}
 \index{get\_h\_sigma@{get\_h\_sigma}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
@@ -130,7 +147,7 @@ This function defines $\psi(q)$ and needs to be implemented by classes inheritin
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_psi_linear_interface00_a5484f908e32ff84cc12501a33243f30f}{incremental\+F\+E\+::\+Psi\+Linear\+Interface00$<$ spacedim $>$}}.
+Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_psi_wrapper_c_m_f_a124baf9dea9273a9e18a20e556430c09}{incremental\+F\+E\+::\+Psi\+Wrapper\+C\+M\+F$<$ dim, spacedim $>$}}, and \mbox{\hyperlink{classincremental_f_e_1_1_psi_linear_interface00_a5484f908e32ff84cc12501a33243f30f}{incremental\+F\+E\+::\+Psi\+Linear\+Interface00$<$ spacedim $>$}}.
 
 
 
@@ -149,12 +166,19 @@ Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \mbox{\Hypertarget{
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::always\+\_\+compute\+\_\+potential\+\_\+value = false}
 
-if this is true, \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma()} will always return the value of the potential independent of what alpha is used. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}\label{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}} 
+if this is true, \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma()} will always return the value of the potential independent of what alpha is used. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_ad81b7504e16d7db3bf14029a3f7670e1}\label{classincremental_f_e_1_1_psi_ad81b7504e16d7db3bf14029a3f7670e1}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!eval\_time@{eval\_time}}
+\index{eval\_time@{eval\_time}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{eval\_time}{eval\_time}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::eval\+\_\+time = 0.\+0\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+The time at which the next call of \textbf{ Scalar\+Functional\+::get\+\_\+h\+\_\+sigma} is performed \mbox{\Hypertarget{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}\label{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}} 
 \index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!global\_data@{global\_data}}
 \index{global\_data@{global\_data}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{global\_data}{global\_data}}
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
-const dealii\+::\+Smart\+Pointer$<$\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$spacedim$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+const dealii\+::\+Smart\+Pointer$<$\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$spacedim$>$ $>$ \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::global\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
 
 global data object 
 

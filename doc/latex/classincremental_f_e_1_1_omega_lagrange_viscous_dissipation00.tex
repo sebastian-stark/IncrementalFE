@@ -40,7 +40,7 @@ Class defining a domain related scalar functional with the integrand
 
 $ \omega^\Omega = 2 J \boldsymbol{g}:\boldsymbol{d} $,
 
-where $\boldsymbol{d} = \dfrac{1}{2}\left( \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{v} + \nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1} \right)$ is the stretching, $\boldsymbol{g} = \boldsymbol{F}^{-1} \cdot \nabla \boldsymbol{f}$ a corresponding Lagrangian multiplier term, $\boldsymbol{F}$ the deformation gradient, and $J = \det\boldsymbol{F}$.
+where $\boldsymbol{d} = \mathrm{sym}\left(\nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1}\right)$ is the stretching, $\boldsymbol{g} = \nabla \boldsymbol{f} \cdot \boldsymbol{F}^{-1}$ a corresponding Lagrangian multiplier term, $\boldsymbol{F}$ the deformation gradient, and $J = \det\boldsymbol{F}$.
 
 This enforces the equilibrium applicable to a viscous fluid by means of a Lagrangian multiplier.
 
