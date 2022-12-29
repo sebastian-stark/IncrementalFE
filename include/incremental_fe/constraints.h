@@ -23,6 +23,8 @@
 #include <vector>
 #include <atomic>
 
+#include <incremental_fe/config.h>
+
 #include <deal.II/base/subscriptor.h>
 
 #include <galerkin_tools/dirichlet_constraint.h>

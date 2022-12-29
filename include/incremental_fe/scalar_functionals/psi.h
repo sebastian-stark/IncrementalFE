@@ -26,6 +26,10 @@
 
 #include <galerkin_tools/scalar_functional.h>
 #include <incremental_fe/global_data_incremental_fe.h>
+#include <incremental_fe/config.h>
+#include <cmf/scalar_function.h>
+
+#include <string>
 
 namespace incrementalFE
 {
@@ -276,6 +280,125 @@ public:
 	const;
 
 };
+
+//#ifdef INCREMENTAL_FE_WITH_CMF
+/**
+ * Free Energy wrapping a function defined with the CMF library
+ */
+template<unsigned int dim, unsigned int spacedim>
+class PsiWrapperCMF: public incrementalFE::Psi<dim, spacedim>
+{
+
+private:
+
+	/**
+	 * The function wrapped
+	 */
+	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
+	psi;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					Dependent fields \f$q\f$
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Psi::global_data
+	 *
+	 * @param[in]		alpha					Psi::alpha
+	 *
+	 * @param[in]		psi						The function to be wrapped
+	 *
+	 * @param[in]		name					ScalarFunctional::name
+	 */
+	PsiWrapperCMF(	const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
+					const std::set<dealii::types::material_id>															domain_of_integration,
+					const dealii::Quadrature<dim>																		quadrature,
+					GlobalDataIncrementalFE<spacedim>&																	global_data,
+					const double																						alpha,
+					CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+					const std::string																					name);
+
+	/**
+	 * @copydoc Psi::get_values_and_derivatives()
+	 *
+	 * @warning It is assumed that the first dim parameters of the wrapped function store the normal vector
+	 */
+	virtual
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								const dealii::Tensor<1,spacedim>& 	n,
+								double&								psi,
+								dealii::Vector<double>&				d_psi,
+								dealii::FullMatrix<double>&			d2_psi,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	override;
+
+};
+
+
+template<unsigned int spacedim>
+class PsiWrapperCMF<spacedim,spacedim> : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * The function wrapped
+	 */
+	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
+	psi;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					Dependent fields \f$q\f$
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Psi::global_data
+	 *
+	 * @param[in]		alpha					Psi::alpha
+	 *
+	 * @param[in]		psi						The function to be wrapped
+	 *
+	 * @param[in]		name					ScalarFunctional::name
+	 */
+	PsiWrapperCMF(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
+					const std::set<dealii::types::material_id>															domain_of_integration,
+					const dealii::Quadrature<spacedim>																	quadrature,
+					GlobalDataIncrementalFE<spacedim>&																	global_data,
+					const double																						alpha,
+					CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+					const std::string																					name);
+
+	/**
+	 * @copydoc Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	virtual
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	override;
+};
+
+//#endif
 
 }
 

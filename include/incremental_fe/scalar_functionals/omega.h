@@ -27,6 +27,7 @@
 #include <galerkin_tools/scalar_functional.h>
 #include <galerkin_tools/total_potential_contribution.h>
 #include <incremental_fe/global_data_incremental_fe.h>
+#include <incremental_fe/config.h>
 
 namespace incrementalFE
 {

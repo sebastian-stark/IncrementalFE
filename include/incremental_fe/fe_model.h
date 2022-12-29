@@ -30,6 +30,7 @@
 #include <galerkin_tools/dof_renumbering.h>
 #include <incremental_fe/constraints.h>
 #include <incremental_fe/global_data_incremental_fe.h>
+#include <incremental_fe/config.h>
 #include <boost/signals2.hpp>
 
 namespace incrementalFE

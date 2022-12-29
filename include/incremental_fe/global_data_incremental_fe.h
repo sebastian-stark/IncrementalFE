@@ -20,6 +20,8 @@
 #ifndef INCREMENTALFE_GLOBALDATAINCREMENTALFE_H_
 #define INCREMENTALFE_GLOBALDATAINCREMENTALFE_H_
 
+#include <incremental_fe/config.h>
+
 #include <string>
 #include <vector>
 

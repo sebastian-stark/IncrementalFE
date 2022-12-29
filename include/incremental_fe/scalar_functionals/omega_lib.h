@@ -23,6 +23,7 @@
 #include <incremental_fe/scalar_functionals/omega.h>
 #include <incremental_fe/scalar_functionals/psi_lib.h>
 #include <incremental_fe/fe_model.h>
+#include <incremental_fe/config.h>
 #include <deal.II/base/exceptions.h>
 
 namespace incrementalFE

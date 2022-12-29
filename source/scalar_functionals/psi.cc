@@ -26,6 +26,7 @@ using namespace dealii;
 using namespace std;
 using namespace dealii::GalerkinTools;
 using namespace incrementalFE;
+using namespace CMF;
 
 template<unsigned int spacedim>
 Psi<spacedim, spacedim>::Psi(	const vector<DependentField<spacedim,spacedim>>	e_omega,
@@ -184,8 +185,120 @@ const
 	return eval_time;
 }
 
+template<unsigned int dim, unsigned int spacedim>
+PsiWrapperCMF<dim,spacedim>::PsiWrapperCMF(	const vector<DependentField<dim,spacedim>>														e_sigma,
+											const set<types::material_id>																	domain_of_integration,
+											const Quadrature<dim>																			quadrature,
+											GlobalDataIncrementalFE<spacedim>&																global_data,
+											const double																					alpha,
+											ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+											const string																					name)
+:
+Psi<dim, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, alpha, name),
+psi(psi)
+{
+}
+
+template<unsigned int dim, unsigned int spacedim>
+bool
+PsiWrapperCMF<dim,spacedim>::get_values_and_derivatives(const Vector<double>& 			values,
+														const Point<spacedim>& 			/*x*/,
+														const Tensor<1,spacedim>& 		n,
+														double&							psi_,
+														Vector<double>&					d_psi,
+														FullMatrix<double>&				d2_psi,
+														const tuple<bool, bool, bool>	requested_quantities)
+const
+{
+	Eigen::VectorXd gradient;
+	Eigen::MatrixXd hessian;
+
+	Eigen::VectorXd arguments(values.size());
+
+	for(unsigned int m = 0; m < values.size(); ++m)
+		arguments(m) = values(m);
+	psi.set_arguments(arguments);
+
+	auto parameters = psi.get_parameters();
+	Assert( (parameters.size() >= dim),
+			ExcMessage("The function psi must have at least dim parameters to store the normal vector"));
+	for(unsigned int m = 0; m < dim; ++m)
+		parameters(m) = n[m];
+	psi.set_parameters(parameters);
+
+	psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities));
+
+	if(get<1>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d_psi.size(); ++m)
+			d_psi(m) = gradient(m);
+	}
+
+	if(get<2>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d2_psi.m(); ++m)
+			for(unsigned int n = 0; n < d2_psi.n(); ++n)
+				d2_psi(m,n) = hessian(m,n);
+	}
+
+	return false;
+}
+
+template<unsigned int spacedim>
+PsiWrapperCMF<spacedim,spacedim>::PsiWrapperCMF(const vector<DependentField<spacedim,spacedim>>													e_omega,
+												const set<types::material_id>																	domain_of_integration,
+												const Quadrature<spacedim>																		quadrature,
+												GlobalDataIncrementalFE<spacedim>&																global_data,
+												const double																					alpha,
+												ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
+												const string																					name)
+:
+Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, name),
+psi(psi)
+{
+}
+
+template<unsigned int spacedim>
+bool
+PsiWrapperCMF<spacedim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
+																const Point<spacedim>& 			/*x*/,
+																double&							omega,
+																Vector<double>&					d_omega,
+																FullMatrix<double>&				d2_omega,
+																const tuple<bool, bool, bool>	requested_quantities)
+const
+{
+	Eigen::VectorXd gradient;
+	Eigen::MatrixXd hessian;
+
+	Eigen::VectorXd arguments(values.size());
+	for(unsigned int m = 0; m < values.size(); ++m)
+		arguments(m) = values(m);
+	psi.set_arguments(arguments);
+	psi.compute(omega, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities));
+
+	if(get<1>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d_omega.size(); ++m)
+			d_omega(m) = gradient(m);
+	}
+
+	if(get<2>(requested_quantities))
+	{
+		for(unsigned int m = 0; m < d2_omega.m(); ++m)
+			for(unsigned int n = 0; n < d2_omega.n(); ++n)
+				d2_omega(m,n) = hessian(m,n);
+	}
+
+	return false;
+}
+
 
 template class incrementalFE::Psi<2,2>;
 template class incrementalFE::Psi<3,3>;
 template class incrementalFE::Psi<1,2>;
 template class incrementalFE::Psi<2,3>;
+template class incrementalFE::PsiWrapperCMF<2,2>;
+template class incrementalFE::PsiWrapperCMF<3,3>;
+template class incrementalFE::PsiWrapperCMF<1,2>;
+template class incrementalFE::PsiWrapperCMF<2,3>;

@@ -7,6 +7,18 @@ SET(_target_src
     scalar_functionals/psi.cc
 )
 
+#link against cmf and include headers
+FIND_PACKAGE(cmf QUIET HINTS $ENV{CMF_DIR} ${CMF_DIR})
+IF(NOT ${cmf_FOUND})
+  MESSAGE("Checking for libCMF ...  not found")
+ELSE()
+  MESSAGE("Checking for libCMF ...  found")
+  LINK_LIBRARIES(${CMF_LIBRARIES})
+  INCLUDE_DIRECTORIES(${CMF_INSTALL_PATH_HEADERS})
+  INCLUDE_DIRECTORIES(${CMF_INCLUDE_DIRECTORIES})
+  OPTION(INCREMENTAL_FE_WITH_CMF "Enable CMF" ON)
+ENDIF()
+
 #define the debug and release targets of the library incremental_fe
 FOREACH(_build "debug" "release")
 
@@ -55,7 +67,13 @@ SET_PROPERTY(GLOBAL PROPERTY INCREMENTAL_FE_INCLUDE_DIRECTORIES ${INCREMENTAL_FE
 
 #headers of library incremental_fe itself
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/../include)
+
+#make config.h
+CONFIGURE_FILE(../include/incremental_fe/config.h.in ../include/incremental_fe/config.h)
 
 #install the headers of the library incremental_fe
 INSTALL(DIRECTORY ${CMAKE_SOURCE_DIR}/include/incremental_fe DESTINATION ${INCREMENTAL_FE_INSTALL_PATH_HEADERS} FILES_MATCHING PATTERN "*.h")
+INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../include/incremental_fe DESTINATION ${INCREMENTAL_FE_INSTALL_PATH_HEADERS} FILES_MATCHING PATTERN "*.h")
+
 

@@ -22,6 +22,7 @@
 
 #include <incremental_fe/scalar_functionals/psi.h>
 #include <incremental_fe/fe_model.h>
+#include <incremental_fe/config.h>
 #include <deal.II/base/exceptions.h>
 #include <deal.II/base/tensor.h>
 #include <deal.II/base/symmetric_tensor.h>
