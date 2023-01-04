@@ -229,7 +229,7 @@ const
 	for(unsigned int m = 0; m < spacedim; ++m)
 		parameters(m) = x[m];
 	for(unsigned int m = spacedim; m < 2*spacedim; ++m)
-		parameters(m) = n[m];
+		parameters(m) = n[m-spacedim];
 	if(psi.set_parameters(parameters))
 		return true;
 

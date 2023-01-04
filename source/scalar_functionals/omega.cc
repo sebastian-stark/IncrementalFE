@@ -529,7 +529,7 @@ const
 	for(unsigned int m = 1; m < spacedim + 1; ++m)
 		parameters(m) = x[m];
 	for(unsigned int m = spacedim + 1; m < 2*spacedim + 1; ++m)
-		parameters(m) = n[m];
+		parameters(m) = n[m-spacedim];
 	if(omega.set_parameters(parameters))
 		return true;
 
@@ -598,7 +598,7 @@ const
 	auto parameters = omega.get_parameters();
 	parameters(0) = t;
 	for(unsigned int m = 1; m < spacedim + 1; ++m)
-		parameters(m) = x[m];
+		parameters(m) = x[m-1];
 	if(omega.set_parameters(parameters))
 		return true;
 
