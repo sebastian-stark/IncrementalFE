@@ -474,7 +474,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::write_output_i
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
-const AssemblyHelper<spacedim>&
+AssemblyHelper<spacedim>&
 FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::get_assembly_helper()
 {
 	return assembly_helper;

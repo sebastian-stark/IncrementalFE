@@ -550,7 +550,7 @@ public:
 	/**
 	 * @return the FEModel::assembly_helper object
 	 */
-	const dealii::GalerkinTools::AssemblyHelper<spacedim>&
+	dealii::GalerkinTools::AssemblyHelper<spacedim>&
 	get_assembly_helper();
 
 	/**
