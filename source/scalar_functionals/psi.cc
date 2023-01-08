@@ -228,8 +228,12 @@ const
 	auto parameters = psi.get_parameters();
 	for(unsigned int m = 0; m < spacedim; ++m)
 		parameters(m) = x[m];
-	for(unsigned int m = spacedim; m < 2*spacedim; ++m)
-		parameters(m) = n[m-spacedim];
+	if(spacedim == 2)
+		parameters(2) = 0.0;
+	for(unsigned int m = 3; m < 3 + spacedim; ++m)
+		parameters(m) = n[m-3];
+	if(spacedim == 2)
+		parameters(5) = 0.0;
 	if(psi.set_parameters(parameters))
 		return true;
 
@@ -290,6 +294,9 @@ const
 	auto parameters = psi.get_parameters();
 	for(unsigned int m = 0; m < spacedim; ++m)
 		parameters(m) = x[m];
+	if(spacedim == 2)
+		parameters(2) = 0.0;
+
 	if(psi.set_parameters(parameters))
 		return true;
 

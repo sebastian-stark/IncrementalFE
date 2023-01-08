@@ -46,9 +46,11 @@ Interface Free Energy wrapping a function defined with the C\+MF library.
 It is assumed that the first parameters of the C\+MF function are as follows\+:~\newline
 
 
-parameters\mbox{[}0\mbox{]} ... parameters\mbox{[}spacedim-\/1\mbox{]} -\/ position vector x~\newline
- parameters\mbox{[}spacedim\mbox{]} ... parameters\mbox{[}2$\ast$spacedim-\/1\mbox{]} -\/ normal vector n~\newline
+parameters\mbox{[}0\mbox{]} ... parameters\mbox{[}2\mbox{]} -\/ position vector x~\newline
+ parameters\mbox{[}3\mbox{]} ... parameters\mbox{[}5\mbox{]} -\/ normal vector n~\newline
 
+
+In two dimensions, the third components of x and n are filled with zeroes.
 
 Further parameters may follow.
 

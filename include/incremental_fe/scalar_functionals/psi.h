@@ -288,8 +288,10 @@ public:
  *
  * It is assumed that the first parameters of the CMF function are as follows:<br>
  *
- * parameters[0]          ... parameters[spacedim-1]	- position vector x<br>
- * parameters[spacedim]   ... parameters[2*spacedim-1]	- normal vector n<br>
+ * parameters[0]   ... parameters[2]	- position vector x<br>
+ * parameters[3]   ... parameters[5]	- normal vector n<br>
+ *
+ * In two dimensions, the third components of x and n are filled with zeroes.
  *
  * Further parameters may follow.
  *
@@ -373,7 +375,9 @@ public:
  *
  * It is assumed that the first parameters of the CMF function are as follows:<br>
  *
- * parameters[0]          ... parameters[spacedim-1]	- position vector x<br>
+ * parameters[0]          ... parameters[2]	- position vector x<br>
+ *
+ * In two dimensions, the third component of x is set to zero.
  *
  * Further parameters may follow.
  *

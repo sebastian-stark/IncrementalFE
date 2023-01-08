@@ -134,9 +134,10 @@ class incrementalFE::PsiWrapperCMF&lt; dim, spacedim &gt;</h3>
 <p>Interface Free Energy wrapping a function defined with the CMF library.</p>
 <p>It is assumed that the first parameters of the CMF function are as follows:<br  />
 </p>
-<p>parameters[0] ... parameters[spacedim-1] - position vector x<br  />
- parameters[spacedim] ... parameters[2*spacedim-1] - normal vector n<br  />
+<p>parameters[0] ... parameters[2] - position vector x<br  />
+ parameters[3] ... parameters[5] - normal vector n<br  />
 </p>
+<p>In two dimensions, the third components of x and n are filled with zeroes.</p>
 <p>Further parameters may follow.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This class is untested so far! </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

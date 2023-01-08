@@ -2400,68 +2400,66 @@ $(function() {
 <div class="line"><a name="l03444"></a><span class="lineno"> 3444</span>&#160;                                        <a class="code" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE&lt;spacedim&gt;</a>&amp;                                              <a class="code" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a>,</div>
 <div class="line"><a name="l03445"></a><span class="lineno"> 3445</span>&#160;                                        <span class="keyword">const</span> <span class="keywordtype">double</span>                                                                    <a class="code" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a>)</div>
 <div class="line"><a name="l03446"></a><span class="lineno"> 3446</span>&#160;    :</div>
-<div class="line"><a name="l03447"></a><span class="lineno"> 3447</span>&#160;    <a class="code" href="classincremental_f_e_1_1_psi.html">Psi</a>&lt;spacedim-1, spacedim&gt;(e_sigma, domain_of_integration, quadrature, <a class="code" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a>, <a class="code" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a>, <span class="stringliteral">&quot;PsiCylindricalSymmetryInterface00&quot;</span>),</div>
-<div class="line"><a name="l03448"></a><span class="lineno"> 3448</span>&#160;    A(A),</div>
-<div class="line"><a name="l03449"></a><span class="lineno"> 3449</span>&#160;    <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>(<a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>)</div>
-<div class="line"><a name="l03450"></a><span class="lineno"> 3450</span>&#160;    {</div>
-<div class="line"><a name="l03451"></a><span class="lineno"> 3451</span>&#160;    }</div>
-<div class="line"><a name="l03452"></a><span class="lineno"> 3452</span>&#160; </div>
-<div class="line"><a name="l03456"></a><span class="lineno"> 3456</span>&#160;    <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l03457"></a><span class="lineno"><a class="line" href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c"> 3457</a></span>&#160;    <a class="code" href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c">get_values_and_derivatives</a>( <span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp;       <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>,</div>
-<div class="line"><a name="l03458"></a><span class="lineno"> 3458</span>&#160;                                <span class="keyword">const</span> dealii::Point&lt;spacedim&gt;&amp;      x,</div>
-<div class="line"><a name="l03459"></a><span class="lineno"> 3459</span>&#160;                                <span class="keyword">const</span> dealii::Tensor&lt;1, spacedim&gt;&amp;  <span class="comment">/*n*/</span>,</div>
-<div class="line"><a name="l03460"></a><span class="lineno"> 3460</span>&#160;                                <span class="keywordtype">double</span>&amp;                             sigma,</div>
-<div class="line"><a name="l03461"></a><span class="lineno"> 3461</span>&#160;                                dealii::Vector&lt;double&gt;&amp;             d_sigma,</div>
-<div class="line"><a name="l03462"></a><span class="lineno"> 3462</span>&#160;                                dealii::FullMatrix&lt;double&gt;&amp;         d2_sigma,</div>
-<div class="line"><a name="l03463"></a><span class="lineno"> 3463</span>&#160;                                <span class="keyword">const</span> std::tuple&lt;bool, bool, bool&gt;  requested_quantities)<span class="keyword"></span></div>
-<div class="line"><a name="l03464"></a><span class="lineno"> 3464</span>&#160;<span class="keyword">    const</span></div>
-<div class="line"><a name="l03465"></a><span class="lineno"> 3465</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l03466"></a><span class="lineno"> 3466</span>&#160; </div>
-<div class="line"><a name="l03467"></a><span class="lineno"> 3467</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> R = x[0];</div>
-<div class="line"><a name="l03468"></a><span class="lineno"> 3468</span>&#160;        <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(R &gt;= 0, <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">dealii::ExcMessage</a>(<span class="stringliteral">&quot;Locations with negative radial position are not admissible for cylindrical symmetry&quot;</span>));</div>
-<div class="line"><a name="l03469"></a><span class="lineno"> 3469</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> P = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[0];</div>
-<div class="line"><a name="l03470"></a><span class="lineno"> 3470</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> eps = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[1];</div>
-<div class="line"><a name="l03471"></a><span class="lineno"> 3471</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> u = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[2];</div>
-<div class="line"><a name="l03472"></a><span class="lineno"> 3472</span>&#160; </div>
-<div class="line"><a name="l03473"></a><span class="lineno"> 3473</span>&#160;        <span class="keywordflow">if</span>(get&lt;0&gt;(requested_quantities))</div>
-<div class="line"><a name="l03474"></a><span class="lineno"> 3474</span>&#160;        {</div>
-<div class="line"><a name="l03475"></a><span class="lineno"> 3475</span>&#160;            sigma = P * (R*eps - u);</div>
-<div class="line"><a name="l03476"></a><span class="lineno"> 3476</span>&#160;        }</div>
-<div class="line"><a name="l03477"></a><span class="lineno"> 3477</span>&#160; </div>
-<div class="line"><a name="l03478"></a><span class="lineno"> 3478</span>&#160;        <span class="keywordflow">if</span>(get&lt;1&gt;(requested_quantities))</div>
-<div class="line"><a name="l03479"></a><span class="lineno"> 3479</span>&#160;        {</div>
-<div class="line"><a name="l03480"></a><span class="lineno"> 3480</span>&#160;            d_sigma[0] = (R*eps - u);</div>
-<div class="line"><a name="l03481"></a><span class="lineno"> 3481</span>&#160;            d_sigma[1] = P*R;</div>
-<div class="line"><a name="l03482"></a><span class="lineno"> 3482</span>&#160;            d_sigma[2] = -P;</div>
-<div class="line"><a name="l03483"></a><span class="lineno"> 3483</span>&#160;        }</div>
-<div class="line"><a name="l03484"></a><span class="lineno"> 3484</span>&#160; </div>
-<div class="line"><a name="l03485"></a><span class="lineno"> 3485</span>&#160;        <span class="keywordflow">if</span>(get&lt;2&gt;(requested_quantities))</div>
-<div class="line"><a name="l03486"></a><span class="lineno"> 3486</span>&#160;        {</div>
-<div class="line"><a name="l03487"></a><span class="lineno"> 3487</span>&#160;            d2_sigma(0,0) = 0.0;</div>
-<div class="line"><a name="l03488"></a><span class="lineno"> 3488</span>&#160;            d2_sigma(0,1) = R;</div>
-<div class="line"><a name="l03489"></a><span class="lineno"> 3489</span>&#160;            d2_sigma(0,2) = -1.0;</div>
-<div class="line"><a name="l03490"></a><span class="lineno"> 3490</span>&#160; </div>
-<div class="line"><a name="l03491"></a><span class="lineno"> 3491</span>&#160;            d2_sigma(1,0) = R;</div>
-<div class="line"><a name="l03492"></a><span class="lineno"> 3492</span>&#160;            d2_sigma(1,1) = 0.0;</div>
-<div class="line"><a name="l03493"></a><span class="lineno"> 3493</span>&#160;            d2_sigma(1,2) = 0.0;</div>
-<div class="line"><a name="l03494"></a><span class="lineno"> 3494</span>&#160; </div>
-<div class="line"><a name="l03495"></a><span class="lineno"> 3495</span>&#160;            d2_sigma(2,0) = -1.0;</div>
-<div class="line"><a name="l03496"></a><span class="lineno"> 3496</span>&#160;            d2_sigma(2,1) = 0.0;</div>
-<div class="line"><a name="l03497"></a><span class="lineno"> 3497</span>&#160;            d2_sigma(2,2) = 0.0;</div>
-<div class="line"><a name="l03498"></a><span class="lineno"> 3498</span>&#160;        }</div>
-<div class="line"><a name="l03499"></a><span class="lineno"> 3499</span>&#160; </div>
-<div class="line"><a name="l03500"></a><span class="lineno"> 3500</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l03501"></a><span class="lineno"> 3501</span>&#160;    }</div>
+<div class="line"><a name="l03447"></a><span class="lineno"> 3447</span>&#160;    <a class="code" href="classincremental_f_e_1_1_psi.html">Psi</a>&lt;spacedim-1, spacedim&gt;(e_sigma, domain_of_integration, quadrature, <a class="code" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a>, <a class="code" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a>, <span class="stringliteral">&quot;PsiCylindricalSymmetryInterface00&quot;</span>)</div>
+<div class="line"><a name="l03448"></a><span class="lineno"> 3448</span>&#160;    {</div>
+<div class="line"><a name="l03449"></a><span class="lineno"> 3449</span>&#160;    }</div>
+<div class="line"><a name="l03450"></a><span class="lineno"> 3450</span>&#160; </div>
+<div class="line"><a name="l03454"></a><span class="lineno"> 3454</span>&#160;    <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l03455"></a><span class="lineno"><a class="line" href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c"> 3455</a></span>&#160;    <a class="code" href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c">get_values_and_derivatives</a>( <span class="keyword">const</span> dealii::Vector&lt;double&gt;&amp;       <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>,</div>
+<div class="line"><a name="l03456"></a><span class="lineno"> 3456</span>&#160;                                <span class="keyword">const</span> dealii::Point&lt;spacedim&gt;&amp;      x,</div>
+<div class="line"><a name="l03457"></a><span class="lineno"> 3457</span>&#160;                                <span class="keyword">const</span> dealii::Tensor&lt;1, spacedim&gt;&amp;  <span class="comment">/*n*/</span>,</div>
+<div class="line"><a name="l03458"></a><span class="lineno"> 3458</span>&#160;                                <span class="keywordtype">double</span>&amp;                             sigma,</div>
+<div class="line"><a name="l03459"></a><span class="lineno"> 3459</span>&#160;                                dealii::Vector&lt;double&gt;&amp;             d_sigma,</div>
+<div class="line"><a name="l03460"></a><span class="lineno"> 3460</span>&#160;                                dealii::FullMatrix&lt;double&gt;&amp;         d2_sigma,</div>
+<div class="line"><a name="l03461"></a><span class="lineno"> 3461</span>&#160;                                <span class="keyword">const</span> std::tuple&lt;bool, bool, bool&gt;  requested_quantities)<span class="keyword"></span></div>
+<div class="line"><a name="l03462"></a><span class="lineno"> 3462</span>&#160;<span class="keyword">    const</span></div>
+<div class="line"><a name="l03463"></a><span class="lineno"> 3463</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l03464"></a><span class="lineno"> 3464</span>&#160; </div>
+<div class="line"><a name="l03465"></a><span class="lineno"> 3465</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> R = x[0];</div>
+<div class="line"><a name="l03466"></a><span class="lineno"> 3466</span>&#160;        <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(R &gt;= 0, <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">dealii::ExcMessage</a>(<span class="stringliteral">&quot;Locations with negative radial position are not admissible for cylindrical symmetry&quot;</span>));</div>
+<div class="line"><a name="l03467"></a><span class="lineno"> 3467</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> P = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[0];</div>
+<div class="line"><a name="l03468"></a><span class="lineno"> 3468</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> eps = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[1];</div>
+<div class="line"><a name="l03469"></a><span class="lineno"> 3469</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> u = <a class="codeRef" href="https://dealii.org/9.0.0/doxygen/deal.II/group__Vectors.html#ga40c50779cd14ba89bbf0bd9b4561964c">values</a>[2];</div>
+<div class="line"><a name="l03470"></a><span class="lineno"> 3470</span>&#160; </div>
+<div class="line"><a name="l03471"></a><span class="lineno"> 3471</span>&#160;        <span class="keywordflow">if</span>(get&lt;0&gt;(requested_quantities))</div>
+<div class="line"><a name="l03472"></a><span class="lineno"> 3472</span>&#160;        {</div>
+<div class="line"><a name="l03473"></a><span class="lineno"> 3473</span>&#160;            sigma = P * (R*eps - u);</div>
+<div class="line"><a name="l03474"></a><span class="lineno"> 3474</span>&#160;        }</div>
+<div class="line"><a name="l03475"></a><span class="lineno"> 3475</span>&#160; </div>
+<div class="line"><a name="l03476"></a><span class="lineno"> 3476</span>&#160;        <span class="keywordflow">if</span>(get&lt;1&gt;(requested_quantities))</div>
+<div class="line"><a name="l03477"></a><span class="lineno"> 3477</span>&#160;        {</div>
+<div class="line"><a name="l03478"></a><span class="lineno"> 3478</span>&#160;            d_sigma[0] = (R*eps - u);</div>
+<div class="line"><a name="l03479"></a><span class="lineno"> 3479</span>&#160;            d_sigma[1] = P*R;</div>
+<div class="line"><a name="l03480"></a><span class="lineno"> 3480</span>&#160;            d_sigma[2] = -P;</div>
+<div class="line"><a name="l03481"></a><span class="lineno"> 3481</span>&#160;        }</div>
+<div class="line"><a name="l03482"></a><span class="lineno"> 3482</span>&#160; </div>
+<div class="line"><a name="l03483"></a><span class="lineno"> 3483</span>&#160;        <span class="keywordflow">if</span>(get&lt;2&gt;(requested_quantities))</div>
+<div class="line"><a name="l03484"></a><span class="lineno"> 3484</span>&#160;        {</div>
+<div class="line"><a name="l03485"></a><span class="lineno"> 3485</span>&#160;            d2_sigma(0,0) = 0.0;</div>
+<div class="line"><a name="l03486"></a><span class="lineno"> 3486</span>&#160;            d2_sigma(0,1) = R;</div>
+<div class="line"><a name="l03487"></a><span class="lineno"> 3487</span>&#160;            d2_sigma(0,2) = -1.0;</div>
+<div class="line"><a name="l03488"></a><span class="lineno"> 3488</span>&#160; </div>
+<div class="line"><a name="l03489"></a><span class="lineno"> 3489</span>&#160;            d2_sigma(1,0) = R;</div>
+<div class="line"><a name="l03490"></a><span class="lineno"> 3490</span>&#160;            d2_sigma(1,1) = 0.0;</div>
+<div class="line"><a name="l03491"></a><span class="lineno"> 3491</span>&#160;            d2_sigma(1,2) = 0.0;</div>
+<div class="line"><a name="l03492"></a><span class="lineno"> 3492</span>&#160; </div>
+<div class="line"><a name="l03493"></a><span class="lineno"> 3493</span>&#160;            d2_sigma(2,0) = -1.0;</div>
+<div class="line"><a name="l03494"></a><span class="lineno"> 3494</span>&#160;            d2_sigma(2,1) = 0.0;</div>
+<div class="line"><a name="l03495"></a><span class="lineno"> 3495</span>&#160;            d2_sigma(2,2) = 0.0;</div>
+<div class="line"><a name="l03496"></a><span class="lineno"> 3496</span>&#160;        }</div>
+<div class="line"><a name="l03497"></a><span class="lineno"> 3497</span>&#160; </div>
+<div class="line"><a name="l03498"></a><span class="lineno"> 3498</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l03499"></a><span class="lineno"> 3499</span>&#160;    }</div>
+<div class="line"><a name="l03500"></a><span class="lineno"> 3500</span>&#160; </div>
+<div class="line"><a name="l03501"></a><span class="lineno"> 3501</span>&#160;};</div>
 <div class="line"><a name="l03502"></a><span class="lineno"> 3502</span>&#160; </div>
-<div class="line"><a name="l03503"></a><span class="lineno"> 3503</span>&#160;};</div>
+<div class="line"><a name="l03503"></a><span class="lineno"> 3503</span>&#160; </div>
 <div class="line"><a name="l03504"></a><span class="lineno"> 3504</span>&#160; </div>
 <div class="line"><a name="l03505"></a><span class="lineno"> 3505</span>&#160; </div>
-<div class="line"><a name="l03506"></a><span class="lineno"> 3506</span>&#160; </div>
+<div class="line"><a name="l03506"></a><span class="lineno"> 3506</span>&#160;}</div>
 <div class="line"><a name="l03507"></a><span class="lineno"> 3507</span>&#160; </div>
-<div class="line"><a name="l03508"></a><span class="lineno"> 3508</span>&#160;}</div>
-<div class="line"><a name="l03509"></a><span class="lineno"> 3509</span>&#160; </div>
-<div class="line"><a name="l03510"></a><span class="lineno"> 3510</span>&#160; </div>
-<div class="line"><a name="l03511"></a><span class="lineno"> 3511</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_SCALARFUNCTIONALS_PSILIB_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l03508"></a><span class="lineno"> 3508</span>&#160; </div>
+<div class="line"><a name="l03509"></a><span class="lineno"> 3509</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INCREMENTALFE_SCALARFUNCTIONALS_PSILIB_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_neo_hooke00_html_a8d6349afc4a3053f86b33db165a9a158"><div class="ttname"><a href="classincremental_f_e_1_1_psi_neo_hooke00.html#a8d6349afc4a3053f86b33db165a9a158">incrementalFE::PsiNeoHooke00::lambda</a></div><div class="ttdeci">const double lambda</div><div class="ttdef"><b>Definition:</b> psi_lib.h:1113</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_incompressibility00_html_aca72a8996f35c7dbd664765af62dec95"><div class="ttname"><a href="classincremental_f_e_1_1_psi_incompressibility00.html#aca72a8996f35c7dbd664765af62dec95">incrementalFE::PsiIncompressibility00::F_as_parameter</a></div><div class="ttdeci">const bool F_as_parameter</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2662</div></div>
@@ -2547,7 +2545,6 @@ $(function() {
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_transformed00_html"><div class="ttname"><a href="classincremental_f_e_1_1_psi_transformed00.html">incrementalFE::PsiTransformed00</a></div><div class="ttdef"><b>Definition:</b> psi_lib.h:461</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical05_html_a7310898fdcdd27a7e0dad6839b626899"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical05.html#a7310898fdcdd27a7e0dad6839b626899">incrementalFE::PsiChemical05::mu_0</a></div><div class="ttdeci">const double mu_0</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2181</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical05_html_a573a1346c714392a1221667e6884f194"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical05.html#a573a1346c714392a1221667e6884f194">incrementalFE::PsiChemical05::PsiChemical05</a></div><div class="ttdeci">PsiChemical05(const std::vector&lt; dealii::GalerkinTools::DependentField&lt; spacedim, spacedim &gt;&gt; e_omega, const std::set&lt; dealii::types::material_id &gt; domain_of_integration, const dealii::Quadrature&lt; spacedim &gt; quadrature, GlobalDataIncrementalFE&lt; spacedim &gt; &amp;global_data, const double RT, const double mu_0, const double n_0, const double V_m_f, const double alpha, const double eps=0.0, const double c_0_c_f_0=1.0)</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2246</div></div>
-<div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_ae880749870e5b45fbb6a441fd96c1a07"><div class="ttname"><a href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; b(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_adb1b44ad6f1741fbbbecc43f95d26baf"><div class="ttname"><a href="https://dealii.org/9.0.0/doxygen/deal.II/namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a></div><div class="ttdeci">Tensor&lt; 2, dim, Number &gt; l(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical00_html_a0e615fbb99f3fb0826992f4eb925c947"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical00.html#a0e615fbb99f3fb0826992f4eb925c947">incrementalFE::PsiChemical00::get_maximum_step</a></div><div class="ttdeci">double get_maximum_step(const dealii::Vector&lt; double &gt; &amp;e_omega, const std::vector&lt; dealii::Vector&lt; double &gt;&gt; &amp;, const dealii::Vector&lt; double &gt; &amp;delta_e_omega, const dealii::Vector&lt; double &gt; &amp;, const dealii::Point&lt; spacedim &gt; &amp;) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:341</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical05_html_aca0a22582667fecc01e432d61d6b875b"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical05.html#aca0a22582667fecc01e432d61d6b875b">incrementalFE::PsiChemical05::n_0</a></div><div class="ttdeci">const double n_0</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2187</div></div>
@@ -2607,7 +2604,7 @@ $(function() {
 <div class="ttc" id="aclassincremental_f_e_1_1_kirchhoff_material00_html_a4471a11a192ede0c9b16ea8ac9a35c4d"><div class="ttname"><a href="classincremental_f_e_1_1_kirchhoff_material00.html#a4471a11a192ede0c9b16ea8ac9a35c4d">incrementalFE::KirchhoffMaterial00::c_ref</a></div><div class="ttdeci">const double c_ref</div><div class="ttdef"><b>Definition:</b> psi_lib.h:806</div></div>
 <div class="ttc" id="asymmetric__tensor_8h_html_a05096e7bc18fa734eae3bd1a5f08138e"><div class="ttname"><a href="https://dealii.org/9.0.0/doxygen/deal.II/symmetric__tensor_8h.html#a05096e7bc18fa734eae3bd1a5f08138e">trace</a></div><div class="ttdeci">Number trace(const SymmetricTensor&lt; 2, dim, Number &gt; &amp;d)</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_neo_hooke_compression_point00_html_a647e6e22708201ca6093e1daeaf7326c"><div class="ttname"><a href="classincremental_f_e_1_1_neo_hooke_compression_point00.html#a647e6e22708201ca6093e1daeaf7326c">incrementalFE::NeoHookeCompressionPoint00::mu</a></div><div class="ttdeci">const double mu</div><div class="ttdef"><b>Definition:</b> psi_lib.h:946</div></div>
-<div class="ttc" id="aclassincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_html_ae3d482e66a69b8f0ba149c57960f633c"><div class="ttname"><a href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c">incrementalFE::PsiCylindricalSymmetryInterface00::get_values_and_derivatives</a></div><div class="ttdeci">bool get_values_and_derivatives(const dealii::Vector&lt; double &gt; &amp;values, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;, double &amp;sigma, dealii::Vector&lt; double &gt; &amp;d_sigma, dealii::FullMatrix&lt; double &gt; &amp;d2_sigma, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:3457</div></div>
+<div class="ttc" id="aclassincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_html_ae3d482e66a69b8f0ba149c57960f633c"><div class="ttname"><a href="classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00.html#ae3d482e66a69b8f0ba149c57960f633c">incrementalFE::PsiCylindricalSymmetryInterface00::get_values_and_derivatives</a></div><div class="ttdeci">bool get_values_and_derivatives(const dealii::Vector&lt; double &gt; &amp;values, const dealii::Point&lt; spacedim &gt; &amp;x, const dealii::Tensor&lt; 1, spacedim &gt; &amp;, double &amp;sigma, dealii::Vector&lt; double &gt; &amp;d_sigma, dealii::FullMatrix&lt; double &gt; &amp;d2_sigma, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:3455</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_cylindrical_symmetry00_html_a7db289bda171407e329e694816998168"><div class="ttname"><a href="classincremental_f_e_1_1_psi_cylindrical_symmetry00.html#a7db289bda171407e329e694816998168">incrementalFE::PsiCylindricalSymmetry00::get_values_and_derivatives</a></div><div class="ttdeci">bool get_values_and_derivatives(const dealii::Vector&lt; double &gt; &amp;values, const dealii::Point&lt; spacedim &gt; &amp;x, double &amp;omega, dealii::Vector&lt; double &gt; &amp;d_omega, dealii::FullMatrix&lt; double &gt; &amp;d2_omega, const std::tuple&lt; bool, bool, bool &gt; requested_quantities) const</div><div class="ttdef"><b>Definition:</b> psi_lib.h:3364</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_linear_interface00_html_a0044414c2ebe5dd31faae421ec5f6383"><div class="ttname"><a href="classincremental_f_e_1_1_psi_linear_interface00.html#a0044414c2ebe5dd31faae421ec5f6383">incrementalFE::PsiLinearInterface00::PsiLinearInterface00</a></div><div class="ttdeci">PsiLinearInterface00(const std::vector&lt; dealii::GalerkinTools::DependentField&lt; spacedim-1, spacedim &gt;&gt; e_sigma, const std::set&lt; dealii::types::material_id &gt; domain_of_integration, const dealii::Quadrature&lt; spacedim-1 &gt; quadrature, GlobalDataIncrementalFE&lt; spacedim &gt; &amp;global_data, const dealii::FullMatrix&lt; double &gt; &amp;A, const dealii::Vector&lt; double &gt; &amp;b, const double alpha)</div><div class="ttdef"><b>Definition:</b> psi_lib.h:693</div></div>
 <div class="ttc" id="aclassincremental_f_e_1_1_psi_chemical05_html_ab8a5bf2b4ebe4891c6ed15f287a5af61"><div class="ttname"><a href="classincremental_f_e_1_1_psi_chemical05.html#ab8a5bf2b4ebe4891c6ed15f287a5af61">incrementalFE::PsiChemical05::V_m_f</a></div><div class="ttdeci">const double V_m_f</div><div class="ttdef"><b>Definition:</b> psi_lib.h:2193</div></div>
