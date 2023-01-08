@@ -358,3 +358,10 @@
 \_form#357:$\boldsymbol{f}$
 \_form#358:$\boldsymbol{d} = \mathrm{sym}\left(\nabla \boldsymbol{v} \cdot \boldsymbol{F}^{-1}\right)$
 \_form#359:$\boldsymbol{g} = \nabla \boldsymbol{f} \cdot \boldsymbol{F}^{-1}$
+\_form#360:$h^\Omega_\rho = P_{\varphi\varphi}(R F_{\varphi\varphi}-u_R)$
+\_form#361:$P_{\varphi\varphi}$
+\_form#362:$u_R$
+\_form#363:$F_{\varphi\varphi}$
+\_form#364:$h^\Sigma_\tau = _{\varphi\varphi}(R F_{\varphi\varphi}-u_R)$
+\_form#365:$\varepsilon_{\varphi\varphi}$
+\_form#366:$h^\Sigma_\tau = P_{\varphi\varphi}(R \varepsilon_{\varphi\varphi}-u_R)$

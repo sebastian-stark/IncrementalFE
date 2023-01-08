@@ -3317,6 +3317,191 @@ public:
 };
 
 
+/**
+ * Class defining a domain related scalar functional with the integrand
+ *
+ * \f$h^\Omega_\rho = P_{\varphi\varphi}(R F_{\varphi\varphi}-u_R)\f$,
+ *
+ * where \f$P_{\varphi\varphi}\f$ is a Lagrange multiplier, \f$u_R\f$ the radial displacement, \f$R\f$ the radial coordinate, and \f$\varepsilon_{\varphi\varphi}\f$ the circumferential strain.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$P_{\varphi\varphi}\f$<br>
+ * 																					[1] \f$\varepsilon_{\varphi\varphi}\f$<br>
+ * 																					[2] \f$u_R\f$
+ */
+template<unsigned int spacedim>
+class PsiCylindricalSymmetry00 : public incrementalFE::Psi<spacedim, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Psi<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		alpha					Psi<spacedim, spacedim>::alpha
+	 */
+	PsiCylindricalSymmetry00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+								const std::set<dealii::types::material_id>									domain_of_integration,
+								const dealii::Quadrature<spacedim>											quadrature,
+								GlobalDataIncrementalFE<spacedim>&											global_data,
+								const double																alpha)
+	:
+	Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, "PsiCylindricalSymmetry00")
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		x,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+
+		const double R = x[0];
+		Assert(R >= 0, dealii::ExcMessage("Locations with negative radial position are not admissible for cylindrical symmetry"));
+		const double P = values[0];
+		const double eps = values[1];
+		const double u = values[2];
+
+		if(get<0>(requested_quantities))
+		{
+			omega = P * (R*eps - u);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega[0] = (R*eps - u);
+			d_omega[1] = P*R;
+			d_omega[2] = -P;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega(0,0) = 0.0;
+			d2_omega(0,1) = R;
+			d2_omega(0,2) = -1.0;
+
+			d2_omega(1,0) = R;
+			d2_omega(1,1) = 0.0;
+			d2_omega(1,2) = 0.0;
+
+			d2_omega(2,0) = -1.0;
+			d2_omega(2,1) = 0.0;
+			d2_omega(2,2) = 0.0;
+		}
+
+		return false;
+	}
+
+};
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
+ * \f$h^\Sigma_\tau = P_{\varphi\varphi}(R \varepsilon_{\varphi\varphi}-u_R)\f$,
+ *
+ * where \f$P_{\varphi\varphi}\f$ is a Lagrange multiplier, \f$u_R\f$ the radial displacement, \f$R\f$ the radial coordinate, and \f$\varepsilon_{\varphi\varphi}\f$ the circumferential strain.
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>	[0] \f$P_{\varphi\varphi}\f$<br>
+ * 																					[1] \f$\varepsilon_{\varphi\varphi}\f$<br>
+ * 																					[2] \f$u_R\f$
+ */
+template<unsigned int spacedim>
+class PsiCylindricalSymmetryInterface00 : public incrementalFE::Psi<spacedim-1, spacedim>
+{
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Psi::global_data
+	 *
+	 * @param[in]		alpha					Psi::alpha
+	 */
+	PsiCylindricalSymmetryInterface00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+										const std::set<dealii::types::material_id>										domain_of_integration,
+										const dealii::Quadrature<spacedim-1>											quadrature,
+										GlobalDataIncrementalFE<spacedim>&												global_data,
+										const double																	alpha)
+	:
+	Psi<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, alpha, "PsiCylindricalSymmetryInterface00")
+	{
+	}
+
+	/**
+	 * @see Psi<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			d2_sigma,
+								const std::tuple<bool, bool, bool>	requested_quantities)
+	const
+	{
+
+		const double R = x[0];
+		Assert(R >= 0, dealii::ExcMessage("Locations with negative radial position are not admissible for cylindrical symmetry"));
+		const double P = values[0];
+		const double eps = values[1];
+		const double u = values[2];
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = P * (R*eps - u);
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_sigma[0] = (R*eps - u);
+			d_sigma[1] = P*R;
+			d_sigma[2] = -P;
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_sigma(0,0) = 0.0;
+			d2_sigma(0,1) = R;
+			d2_sigma(0,2) = -1.0;
+
+			d2_sigma(1,0) = R;
+			d2_sigma(1,1) = 0.0;
+			d2_sigma(1,2) = 0.0;
+
+			d2_sigma(2,0) = -1.0;
+			d2_sigma(2,1) = 0.0;
+			d2_sigma(2,2) = 0.0;
+		}
+
+		return false;
+	}
+
+};
+
+
+
 
 }
 

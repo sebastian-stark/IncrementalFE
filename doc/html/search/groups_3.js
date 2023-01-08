@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['deal_2eii_20and_20the_20c_2b_2b11_20standard_17039',['deal.II and the C++11 standard',['https://dealii.org/9.0.0/doxygen/deal.II/group__CPP11.html',1,'']]],
-  ['data_20storage_20primitives_17040',['Data storage primitives',['https://dealii.org/9.0.0/doxygen/deal.II/group__data.html',1,'']]],
-  ['degrees_20of_20freedom_17041',['Degrees of Freedom',['https://dealii.org/9.0.0/doxygen/deal.II/group__dofs.html',1,'']]],
-  ['derived_20matrices_17042',['Derived matrices',['https://dealii.org/9.0.0/doxygen/deal.II/group__Matrix2.html',1,'']]]
+  ['deal_2eii_20and_20the_20c_2b_2b11_20standard_17045',['deal.II and the C++11 standard',['https://dealii.org/9.0.0/doxygen/deal.II/group__CPP11.html',1,'']]],
+  ['data_20storage_20primitives_17046',['Data storage primitives',['https://dealii.org/9.0.0/doxygen/deal.II/group__data.html',1,'']]],
+  ['degrees_20of_20freedom_17047',['Degrees of Freedom',['https://dealii.org/9.0.0/doxygen/deal.II/group__dofs.html',1,'']]],
+  ['derived_20matrices_17048',['Derived matrices',['https://dealii.org/9.0.0/doxygen/deal.II/group__Matrix2.html',1,'']]]
 ];

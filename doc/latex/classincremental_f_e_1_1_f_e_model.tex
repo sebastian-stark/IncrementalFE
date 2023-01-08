@@ -23,7 +23,7 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ac358550b1f5b47486199bc
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2e13285d3ec061e14dacaaf174ee5bf5}{write\+\_\+output\+\_\+independent\+\_\+fields}} (const std\+::string file\+\_\+name\+\_\+domain, const std\+::string file\+\_\+name\+\_\+interface, const unsigned int n\+\_\+subdivisions=1)
 \item 
-const dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a32bc459c2816503c0b70a4f1a6730917}{get\+\_\+assembly\+\_\+helper}} ()
+dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aa3df4f846cc765c10e7c939353c845c6}{get\+\_\+assembly\+\_\+helper}} ()
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aef592e091e60e8b3f99f601a59a68da6}{get\+\_\+potential\+\_\+value}} () const
 \item 
@@ -265,9 +265,9 @@ Note that the values of the independent scalars are currently not taken into acc
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em exact\+\_\+solution\+\_\+domain} & Exact solution on domain (use \textbf{ Assembly\+Helper\+::get\+\_\+u\+\_\+omega\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying \textbf{ Assembly\+Helper} needed for this can be obtained by \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a32bc459c2816503c0b70a4f1a6730917}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()}})\\
+\mbox{\texttt{ in}}  & {\em exact\+\_\+solution\+\_\+domain} & Exact solution on domain (use \textbf{ Assembly\+Helper\+::get\+\_\+u\+\_\+omega\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying \textbf{ Assembly\+Helper} needed for this can be obtained by \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aa3df4f846cc765c10e7c939353c845c6}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()}})\\
 \hline
-\mbox{\texttt{ in}}  & {\em exact\+\_\+solution\+\_\+interface} & Exact solution on interface (use \textbf{ Assembly\+Helper\+::get\+\_\+u\+\_\+sigma\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying \textbf{ Assembly\+Helper} needed for this can be obtained by \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a32bc459c2816503c0b70a4f1a6730917}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()}})\\
+\mbox{\texttt{ in}}  & {\em exact\+\_\+solution\+\_\+interface} & Exact solution on interface (use \textbf{ Assembly\+Helper\+::get\+\_\+u\+\_\+sigma\+\_\+global\+\_\+component\+\_\+indices()} to obtain information about the component indexing; the underlying \textbf{ Assembly\+Helper} needed for this can be obtained by \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aa3df4f846cc765c10e7c939353c845c6}{F\+E\+Model\+::get\+\_\+assembly\+\_\+helper()}})\\
 \hline
 \mbox{\texttt{ in}}  & {\em quadrature\+\_\+domain} & \textbf{ Quadrature} scheme to be used on the domain for the computation of the norm\\
 \hline
@@ -399,12 +399,12 @@ Method to compute a single time step
 \begin{DoxyReturn}{Returns}
 Number of Newton-\/\+Raphson iterations required for time step, returns -\/1 if no convergence or other error 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a32bc459c2816503c0b70a4f1a6730917}\label{classincremental_f_e_1_1_f_e_model_a32bc459c2816503c0b70a4f1a6730917}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_aa3df4f846cc765c10e7c939353c845c6}\label{classincremental_f_e_1_1_f_e_model_aa3df4f846cc765c10e7c939353c845c6}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!get\_assembly\_helper@{get\_assembly\_helper}}
 \index{get\_assembly\_helper@{get\_assembly\_helper}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_assembly\_helper()}{get\_assembly\_helper()}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
-const dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::get\+\_\+assembly\+\_\+helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+dealii\+::\+Galerkin\+Tools\+::\+Assembly\+Helper$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::get\+\_\+assembly\+\_\+helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
 the \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a937ea806f50796c76a45f36e6ec3cd29}{F\+E\+Model\+::assembly\+\_\+helper}} object 

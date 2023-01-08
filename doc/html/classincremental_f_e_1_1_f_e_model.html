@@ -97,8 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac358550b1f5b47486199bcc870621d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e13285d3ec061e14dacaaf174ee5bf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2e13285d3ec061e14dacaaf174ee5bf5">write_output_independent_fields</a> (const std::string file_name_domain, const std::string file_name_interface, const unsigned int n_subdivisions=1)</td></tr>
 <tr class="separator:a2e13285d3ec061e14dacaaf174ee5bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32bc459c2816503c0b70a4f1a6730917"><td class="memItemLeft" align="right" valign="top">const dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">get_assembly_helper</a> ()</td></tr>
-<tr class="separator:a32bc459c2816503c0b70a4f1a6730917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3df4f846cc765c10e7c939353c845c6"><td class="memItemLeft" align="right" valign="top">dealii::GalerkinTools::AssemblyHelper&lt; spacedim &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa3df4f846cc765c10e7c939353c845c6">get_assembly_helper</a> ()</td></tr>
+<tr class="separator:aa3df4f846cc765c10e7c939353c845c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef592e091e60e8b3f99f601a59a68da6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aef592e091e60e8b3f99f601a59a68da6">get_potential_value</a> () const</td></tr>
 <tr class="separator:aef592e091e60e8b3f99f601a59a68da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af838cd26f882b0a70ece37a0199a0384"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#af838cd26f882b0a70ece37a0199a0384">attach_data_postprocessor_domain</a> (const dealii::DataPostprocessor&lt; spacedim &gt; &amp;dp)</td></tr>
@@ -535,8 +535,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 <p>Note that the values of the independent scalars are currently not taken into account in this method.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_domain</td><td>Exact solution on domain (use <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#a396b89981e546af6b9bc0e35634290b3">AssemblyHelper::get_u_omega_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">FEModel::get_assembly_helper()</a>)</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_interface</td><td>Exact solution on interface (use <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#aca4d34e08f177e8d075c86bb34906f2f">AssemblyHelper::get_u_sigma_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a32bc459c2816503c0b70a4f1a6730917">FEModel::get_assembly_helper()</a>)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_domain</td><td>Exact solution on domain (use <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#a396b89981e546af6b9bc0e35634290b3">AssemblyHelper::get_u_omega_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa3df4f846cc765c10e7c939353c845c6">FEModel::get_assembly_helper()</a>)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exact_solution_interface</td><td>Exact solution on interface (use <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html#aca4d34e08f177e8d075c86bb34906f2f">AssemblyHelper::get_u_sigma_global_component_indices()</a> to obtain information about the component indexing; the underlying <a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_assembly_helper.html">AssemblyHelper</a> needed for this can be obtained by <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa3df4f846cc765c10e7c939353c845c6">FEModel::get_assembly_helper()</a>)</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_domain</td><td><a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the domain for the computation of the norm</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature_interface</td><td><a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/classQuadrature.html">Quadrature</a> scheme to be used on the interface for the computation of the norm</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">norm_type</td><td>Type of the norm</td></tr>
@@ -812,8 +812,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
-<a id="a32bc459c2816503c0b70a4f1a6730917"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32bc459c2816503c0b70a4f1a6730917">&#9670;&nbsp;</a></span>get_assembly_helper()</h2>
+<a id="aa3df4f846cc765c10e7c939353c845c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3df4f846cc765c10e7c939353c845c6">&#9670;&nbsp;</a></span>get_assembly_helper()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -821,7 +821,7 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt;&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_assembly_helper </td>
+          <td class="memname">dealii::GalerkinTools::AssemblyHelper&lt;spacedim&gt;&amp; <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::get_assembly_helper </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

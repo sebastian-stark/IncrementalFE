@@ -1,0 +1,94 @@
+\hypertarget{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00}{}\doxysection{incremental\+FE\+::Psi\+Cylindrical\+Symmetry\+Interface00$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00}\index{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$@{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$psi\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Psi\+Cylindrical\+Symmetry\+Interface00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Psi\+Cylindrical\+Symmetry\+Interface00$<$ spacedim $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_a0f9c674f3be0a2e5b750f9350a40591a}{Psi\+Cylindrical\+Symmetry\+Interface00}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}})
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_ae3d482e66a69b8f0ba149c57960f633c}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+sigma, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Psi\+Cylindrical\+Symmetry\+Interface00$<$ spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$h^\Sigma_\tau = P_{\varphi\varphi}(R \varepsilon_{\varphi\varphi}-u_R)$,
+
+where $P_{\varphi\varphi}$ is a Lagrange multiplier, $u_R$ the radial displacement, $R$ the radial coordinate, and $\varepsilon_{\varphi\varphi}$ the circumferential strain.
+
+Ordering of quantities in \textbf{ Scalar\+Functional$<$spacedim, spacedim$>$\+::e\+\_\+omega} \+:~\newline
+ \mbox{[}0\mbox{]} $P_{\varphi\varphi}$~\newline
+ \mbox{[}1\mbox{]} $\varepsilon_{\varphi\varphi}$~\newline
+ \mbox{[}2\mbox{]} $u_R$ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_a0f9c674f3be0a2e5b750f9350a40591a}\label{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_a0f9c674f3be0a2e5b750f9350a40591a}} 
+\index{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$@{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$}!PsiCylindricalSymmetryInterface00@{PsiCylindricalSymmetryInterface00}}
+\index{PsiCylindricalSymmetryInterface00@{PsiCylindricalSymmetryInterface00}!incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$@{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{PsiCylindricalSymmetryInterface00()}{PsiCylindricalSymmetryInterface00()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00}{incremental\+F\+E\+::\+Psi\+Cylindrical\+Symmetry\+Interface00}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00}{Psi\+Cylindrical\+Symmetry\+Interface00}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const double}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+sigma} & Scalar\+Functional\+::e\+\_\+omega\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{Psi\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{Psi\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_ae3d482e66a69b8f0ba149c57960f633c}\label{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_ae3d482e66a69b8f0ba149c57960f633c}} 
+\index{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$@{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$@{incrementalFE::PsiCylindricalSymmetryInterface00$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00}{incremental\+F\+E\+::\+Psi\+Cylindrical\+Symmetry\+Interface00}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{d2\+\_\+sigma,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_3_01spacedim_00_01spacedim_01_4_a17f3559c196edb5487b591bb6061667e}{Psi$<$spacedim, spacedim$>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_psi_a2622e8f84590e8a821984181e31fbc76}{incremental\+F\+E\+::\+Psi$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{psi__lib_8h}{psi\+\_\+lib.\+h}}\end{DoxyCompactItemize}
