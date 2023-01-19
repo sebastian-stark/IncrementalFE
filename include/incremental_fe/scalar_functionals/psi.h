@@ -58,7 +58,7 @@ private:
 	/**
 	 * Numerical parameter between @p 0 and @p 1.
 	 */
-	const double
+	double
 	alpha;
 
 	/**
@@ -157,6 +157,12 @@ public:
 	get_eval_time()
 	const;
 
+	/**
+	 * @param[in]	alpha	value to set for Psi::alpha
+	 */
+	void
+	set_alpha(const double alpha);
+
 };
 
 /**
@@ -184,7 +190,7 @@ private:
 	/**
 	 * Numerical parameter between @p 0 and @p 1.
 	 */
-	const double
+	double
 	alpha;
 
 	/**
@@ -278,6 +284,12 @@ public:
 	double
 	get_eval_time()
 	const;
+
+	/**
+	 * @param[in]	alpha	value to set for Psi<spacedim, spacedim>::alpha
+	 */
+	void
+	set_alpha(const double alpha);
 
 };
 

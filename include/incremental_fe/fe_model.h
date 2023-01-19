@@ -621,7 +621,6 @@ public:
 	get_solve_time_last_step()
 	const;
 
-
 };
 
 }

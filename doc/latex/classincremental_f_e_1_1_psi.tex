@@ -25,7 +25,7 @@ Collaboration diagram for incremental\+FE\+::Psi$<$ dim, spacedim $>$\+:\nopageb
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}{Psi}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}}=0.\+0, const std\+::string name=\char`\"{}Psi\char`\"{})
+\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae8a4aab5ee5381799379b8de2bc1f67d}{Psi}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{global\+\_\+data}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}{alpha}}=0.\+0, const std\+::string name=\char`\"{}Psi\char`\"{})
 \item 
 virtual \mbox{\hyperlink{classincremental_f_e_1_1_psi_a22a7b3d4fd98f6d0cff79623e13e0939}{$\sim$\+Psi}} ()=default
 \item 
@@ -34,6 +34,8 @@ virtual bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a2622e8f84590e8a82198
 bool \mbox{\hyperlink{classincremental_f_e_1_1_psi_a35894d078906d7d765185886c9f48a92}{get\+\_\+h\+\_\+sigma}} (\textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&h\+\_\+sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&h\+\_\+sigma\+\_\+1, dealii\+::\+Full\+Matrix$<$ double $>$ \&h\+\_\+sigma\+\_\+2, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities) const final
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_psi_ade290e6a616da613b4174a6b37f2d8a2}{get\+\_\+eval\+\_\+time}} () const
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_psi_a75f28e3da2591efa037208af169ae95a}{set\+\_\+alpha}} (const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}{alpha}})
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -48,7 +50,7 @@ const dealii\+::\+Smart\+Pointer$<$ \mbox{\hyperlink{classincremental_f_e_1_1_gl
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{alpha}}
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}{alpha}}
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_psi_ad81b7504e16d7db3bf14029a3f7670e1}{eval\+\_\+time}} = 0.\+0
 \end{DoxyCompactItemize}
@@ -84,7 +86,7 @@ Constructor
 \hline
 \mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_ae77b2e13385734b19d6ee445c477a6eb}{Psi\+::global\+\_\+data}}\\
 \hline
-\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}{Psi\+::alpha}}\\
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}{Psi\+::alpha}}\\
 \hline
 \mbox{\texttt{ in}}  & {\em name} & \textbf{ Scalar\+Functional\+::name} \\
 \hline
@@ -149,15 +151,27 @@ This function defines $\psi(q)$ and needs to be implemented by classes inheritin
 
 Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_psi_wrapper_c_m_f_a124baf9dea9273a9e18a20e556430c09}{incremental\+F\+E\+::\+Psi\+Wrapper\+C\+M\+F$<$ dim, spacedim $>$}}, \mbox{\hyperlink{classincremental_f_e_1_1_psi_cylindrical_symmetry_interface00_ae3d482e66a69b8f0ba149c57960f633c}{incremental\+F\+E\+::\+Psi\+Cylindrical\+Symmetry\+Interface00$<$ spacedim $>$}}, and \mbox{\hyperlink{classincremental_f_e_1_1_psi_linear_interface00_a5484f908e32ff84cc12501a33243f30f}{incremental\+F\+E\+::\+Psi\+Linear\+Interface00$<$ spacedim $>$}}.
 
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_a75f28e3da2591efa037208af169ae95a}\label{classincremental_f_e_1_1_psi_a75f28e3da2591efa037208af169ae95a}} 
+\index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!set\_alpha@{set\_alpha}}
+\index{set\_alpha@{set\_alpha}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{set\_alpha()}{set\_alpha()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::set\+\_\+alpha (\begin{DoxyParamCaption}\item[{const double}]{alpha }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em alpha} & value to set for \mbox{\hyperlink{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}{Psi\+::alpha}} \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}\label{classincremental_f_e_1_1_psi_a0d59fde4728962fa75449a3444341dcf}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}\label{classincremental_f_e_1_1_psi_a5112e8bd1a2d5230d39937f16466d76f}} 
 \index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{alpha}{alpha}}
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
-const double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
+double \mbox{\hyperlink{classincremental_f_e_1_1_psi}{incremental\+F\+E\+::\+Psi}}$<$ dim, spacedim $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
 
 Numerical parameter between {\ttfamily 0} and {\ttfamily 1}. \mbox{\Hypertarget{classincremental_f_e_1_1_psi_a17bf6a889ca06a4079541339c4d34cd8}\label{classincremental_f_e_1_1_psi_a17bf6a889ca06a4079541339c4d34cd8}} 
 \index{incrementalFE::Psi$<$ dim, spacedim $>$@{incrementalFE::Psi$<$ dim, spacedim $>$}!always\_compute\_potential\_value@{always\_compute\_potential\_value}}

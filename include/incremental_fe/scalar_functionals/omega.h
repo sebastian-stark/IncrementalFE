@@ -59,7 +59,7 @@ private:
 	 *
 	 * This parameter is only used for the \f$\alpha\f$-family and the modified \f$\alpha\f$-family
 	 */
-	const double
+	double
 	alpha;
 
 	/**
@@ -208,6 +208,12 @@ public:
 	double
 	get_eval_time()
 	const;
+
+	/**
+	 * @param[in]	alpha	value to set for Omega::alpha
+	 */
+	void
+	set_alpha(const double alpha);
 };
 
 /**
@@ -238,7 +244,7 @@ private:
 	 *
 	 * This parameter is only used for the \f$\alpha\f$-family and the modified \f$\alpha\f$-family
 	 */
-	const double
+	double
 	alpha;
 
 	/**
@@ -384,6 +390,13 @@ public:
 	get_eval_time()
 	const;
 
+	/**
+	 * @param[in]	alpha	value to set for Omega<spacedim, spacedim>::alpha
+	 */
+	void
+	set_alpha(const double alpha);
+
+
 };
 
 
@@ -418,7 +431,7 @@ private:
 	 *
 	 * This parameter is only used for the \f$\alpha\f$-family and the modified \f$\alpha\f$-family
 	 */
-	const double
+	double
 	alpha;
 
 	/**
@@ -552,6 +565,13 @@ public:
 								const std::tuple<bool,bool,bool>&			requested_quantities)
 	const
 	final;
+
+	/**
+	 * @param[in]	alpha	value to set for Omega<0, spacedim>::alpha
+	 */
+	void
+	set_alpha(const double alpha);
+
 
 };
 

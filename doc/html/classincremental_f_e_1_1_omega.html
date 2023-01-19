@@ -99,7 +99,7 @@ Collaboration diagram for incrementalFE::Omega&lt; dim, spacedim &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a53ca9e46c52887166cbb4f393d37f432"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a53ca9e46c52887166cbb4f393d37f432">Omega</a> (const std::vector&lt; dealii::GalerkinTools::DependentField&lt; dim, spacedim &gt;&gt; e_sigma, const std::set&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacetypes.html#afb65af4be8a9a1d09a0c3ecc967c9d4c">dealii::types::material_id</a> &gt; domain_of_integration, const dealii::Quadrature&lt; dim &gt; quadrature, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_omega.html#abd23d288a7a4a43f9b528be968cd2113">global_data</a>, const unsigned int n_v_dot, const unsigned int n_q_dot, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#a322340b50451ab46f91cdcec95248f16">n_mu</a>, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#addbf75c949792f6340ea40164a2bfee3">n_q</a>, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#a7600d263ebf98129629e44fa67e8a58c">method</a>, const double <a class="el" href="classincremental_f_e_1_1_omega.html#a891688560ec0ad8dc5a0058a7b400269">alpha</a>=0.0, const std::string name=&quot;Omega&quot;)</td></tr>
+<tr class="memitem:a53ca9e46c52887166cbb4f393d37f432"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a53ca9e46c52887166cbb4f393d37f432">Omega</a> (const std::vector&lt; dealii::GalerkinTools::DependentField&lt; dim, spacedim &gt;&gt; e_sigma, const std::set&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacetypes.html#afb65af4be8a9a1d09a0c3ecc967c9d4c">dealii::types::material_id</a> &gt; domain_of_integration, const dealii::Quadrature&lt; dim &gt; quadrature, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_omega.html#abd23d288a7a4a43f9b528be968cd2113">global_data</a>, const unsigned int n_v_dot, const unsigned int n_q_dot, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#a322340b50451ab46f91cdcec95248f16">n_mu</a>, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#addbf75c949792f6340ea40164a2bfee3">n_q</a>, const unsigned int <a class="el" href="classincremental_f_e_1_1_omega.html#a7600d263ebf98129629e44fa67e8a58c">method</a>, const double <a class="el" href="classincremental_f_e_1_1_omega.html#ae09e949c58fe8e7a7f3ae6031e6435b9">alpha</a>=0.0, const std::string name=&quot;Omega&quot;)</td></tr>
 <tr class="separator:a53ca9e46c52887166cbb4f393d37f432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a262968e5daadc162b22fdc58dd760976"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a262968e5daadc162b22fdc58dd760976">~Omega</a> ()=default</td></tr>
 <tr class="separator:a262968e5daadc162b22fdc58dd760976"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2faafa9ed88581fc3a4ff6967a8d64e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa489114011d0ba86334db55cf5bb244f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#aa489114011d0ba86334db55cf5bb244f">get_eval_time</a> () const</td></tr>
 <tr class="separator:aa489114011d0ba86334db55cf5bb244f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609ca437f85458e8253ae1f17ae75eeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a609ca437f85458e8253ae1f17ae75eeb">set_alpha</a> (const double <a class="el" href="classincremental_f_e_1_1_omega.html#ae09e949c58fe8e7a7f3ae6031e6435b9">alpha</a>)</td></tr>
+<tr class="separator:a609ca437f85458e8253ae1f17ae75eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -125,8 +127,8 @@ Public Attributes</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:abd23d288a7a4a43f9b528be968cd2113"><td class="memItemLeft" align="right" valign="top">const dealii::SmartPointer&lt; <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#abd23d288a7a4a43f9b528be968cd2113">global_data</a></td></tr>
 <tr class="separator:abd23d288a7a4a43f9b528be968cd2113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a891688560ec0ad8dc5a0058a7b400269"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a891688560ec0ad8dc5a0058a7b400269">alpha</a></td></tr>
-<tr class="separator:a891688560ec0ad8dc5a0058a7b400269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae09e949c58fe8e7a7f3ae6031e6435b9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#ae09e949c58fe8e7a7f3ae6031e6435b9">alpha</a></td></tr>
+<tr class="separator:ae09e949c58fe8e7a7f3ae6031e6435b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7600d263ebf98129629e44fa67e8a58c"><td class="memItemLeft" align="right" valign="top">const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#a7600d263ebf98129629e44fa67e8a58c">method</a></td></tr>
 <tr class="separator:a7600d263ebf98129629e44fa67e8a58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba9e58bf34955133f0209840f83b1f42"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_omega.html#aba9e58bf34955133f0209840f83b1f42">eval_time</a> = 0.0</td></tr>
@@ -234,7 +236,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">n_mu</td><td>The number of <img class="formulaInl" alt="$\mu$" src="form_3.png"/></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n_q</td><td>The number of <img class="formulaInl" alt="$q$" src="form_4.png"/></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">method</td><td><a class="el" href="classincremental_f_e_1_1_omega.html#a7600d263ebf98129629e44fa67e8a58c">Omega::method</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td><a class="el" href="classincremental_f_e_1_1_omega.html#a891688560ec0ad8dc5a0058a7b400269">Omega::alpha</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td><a class="el" href="classincremental_f_e_1_1_omega.html#ae09e949c58fe8e7a7f3ae6031e6435b9">Omega::alpha</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td><a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a4d184688053b3443d10e228e4a8eba60">ScalarFunctional::name</a> </td></tr>
   </table>
   </dd>
@@ -470,9 +472,35 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="a609ca437f85458e8253ae1f17ae75eeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a609ca437f85458e8253ae1f17ae75eeb">&#9670;&nbsp;</a></span>set_alpha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; dim, spacedim &gt;::set_alpha </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>value to set for <a class="el" href="classincremental_f_e_1_1_omega.html#ae09e949c58fe8e7a7f3ae6031e6435b9">Omega::alpha</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a891688560ec0ad8dc5a0058a7b400269"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a891688560ec0ad8dc5a0058a7b400269">&#9670;&nbsp;</a></span>alpha</h2>
+<a id="ae09e949c58fe8e7a7f3ae6031e6435b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae09e949c58fe8e7a7f3ae6031e6435b9">&#9670;&nbsp;</a></span>alpha</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,7 +511,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const double <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; dim, spacedim &gt;::alpha</td>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_omega.html">incrementalFE::Omega</a>&lt; dim, spacedim &gt;::alpha</td>
         </tr>
       </table>
   </td>

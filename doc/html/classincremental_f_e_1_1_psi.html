@@ -100,7 +100,7 @@ Collaboration diagram for incrementalFE::Psi&lt; dim, spacedim &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae8a4aab5ee5381799379b8de2bc1f67d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ae8a4aab5ee5381799379b8de2bc1f67d">Psi</a> (const std::vector&lt; dealii::GalerkinTools::DependentField&lt; dim, spacedim &gt;&gt; e_sigma, const std::set&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacetypes.html#afb65af4be8a9a1d09a0c3ecc967c9d4c">dealii::types::material_id</a> &gt; domain_of_integration, const dealii::Quadrature&lt; dim &gt; quadrature, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a>, const double <a class="el" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a>=0.0, const std::string name=&quot;Psi&quot;)</td></tr>
+<tr class="memitem:ae8a4aab5ee5381799379b8de2bc1f67d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ae8a4aab5ee5381799379b8de2bc1f67d">Psi</a> (const std::vector&lt; dealii::GalerkinTools::DependentField&lt; dim, spacedim &gt;&gt; e_sigma, const std::set&lt; <a class="elRef" href="https://dealii.org/9.0.0/doxygen/deal.II/namespacetypes.html#afb65af4be8a9a1d09a0c3ecc967c9d4c">dealii::types::material_id</a> &gt; domain_of_integration, const dealii::Quadrature&lt; dim &gt; quadrature, <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">GlobalDataIncrementalFE</a>&lt; spacedim &gt; &amp;<a class="el" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">global_data</a>, const double <a class="el" href="classincremental_f_e_1_1_psi.html#a5112e8bd1a2d5230d39937f16466d76f">alpha</a>=0.0, const std::string name=&quot;Psi&quot;)</td></tr>
 <tr class="separator:ae8a4aab5ee5381799379b8de2bc1f67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22a7b3d4fd98f6d0cff79623e13e0939"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a22a7b3d4fd98f6d0cff79623e13e0939">~Psi</a> ()=default</td></tr>
 <tr class="separator:a22a7b3d4fd98f6d0cff79623e13e0939"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a35894d078906d7d765185886c9f48a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade290e6a616da613b4174a6b37f2d8a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ade290e6a616da613b4174a6b37f2d8a2">get_eval_time</a> () const</td></tr>
 <tr class="separator:ade290e6a616da613b4174a6b37f2d8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f28e3da2591efa037208af169ae95a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a75f28e3da2591efa037208af169ae95a">set_alpha</a> (const double <a class="el" href="classincremental_f_e_1_1_psi.html#a5112e8bd1a2d5230d39937f16466d76f">alpha</a>)</td></tr>
+<tr class="separator:a75f28e3da2591efa037208af169ae95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -123,8 +125,8 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a0d59fde4728962fa75449a3444341dcf"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">alpha</a></td></tr>
-<tr class="separator:a0d59fde4728962fa75449a3444341dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5112e8bd1a2d5230d39937f16466d76f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#a5112e8bd1a2d5230d39937f16466d76f">alpha</a></td></tr>
+<tr class="separator:a5112e8bd1a2d5230d39937f16466d76f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad81b7504e16d7db3bf14029a3f7670e1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_psi.html#ad81b7504e16d7db3bf14029a3f7670e1">eval_time</a> = 0.0</td></tr>
 <tr class="separator:ad81b7504e16d7db3bf14029a3f7670e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -194,7 +196,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
     <tr><td class="paramdir">[in]</td><td class="paramname">domain_of_integration</td><td><a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#ae3b6dd6934e1cd55fcc55cf344179407">ScalarFunctional::domain_of_integration</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">quadrature</td><td><a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#adea9ff214aeb2a1d8c3712a9d2433883">ScalarFunctional::quadrature</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">global_data</td><td><a class="el" href="classincremental_f_e_1_1_psi.html#ae77b2e13385734b19d6ee445c477a6eb">Psi::global_data</a></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td><a class="el" href="classincremental_f_e_1_1_psi.html#a0d59fde4728962fa75449a3444341dcf">Psi::alpha</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td><a class="el" href="classincremental_f_e_1_1_psi.html#a5112e8bd1a2d5230d39937f16466d76f">Psi::alpha</a></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td><a class="elRef" href="https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/class_scalar_functional.html#a4d184688053b3443d10e228e4a8eba60">ScalarFunctional::name</a> </td></tr>
   </table>
   </dd>
@@ -416,9 +418,35 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
 
 </div>
 </div>
+<a id="a75f28e3da2591efa037208af169ae95a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f28e3da2591efa037208af169ae95a">&#9670;&nbsp;</a></span>set_alpha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::set_alpha </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>value to set for <a class="el" href="classincremental_f_e_1_1_psi.html#a5112e8bd1a2d5230d39937f16466d76f">Psi::alpha</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a0d59fde4728962fa75449a3444341dcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d59fde4728962fa75449a3444341dcf">&#9670;&nbsp;</a></span>alpha</h2>
+<a id="a5112e8bd1a2d5230d39937f16466d76f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5112e8bd1a2d5230d39937f16466d76f">&#9670;&nbsp;</a></span>alpha</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -429,7 +457,7 @@ template&lt;unsigned int dim, unsigned int spacedim&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::alpha</td>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_psi.html">incrementalFE::Psi</a>&lt; dim, spacedim &gt;::alpha</td>
         </tr>
       </table>
   </td>

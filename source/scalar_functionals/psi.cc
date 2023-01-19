@@ -106,6 +106,13 @@ const
 	return eval_time;
 }
 
+template<unsigned int spacedim>
+void
+Psi<spacedim,spacedim>::set_alpha(const double alpha)
+{
+	this->alpha = alpha;
+}
+
 template<unsigned int dim, unsigned int spacedim>
 Psi<dim,spacedim>::Psi(	const vector<DependentField<dim,spacedim>>	e_sigma,
 						const set<types::material_id>				domain_of_integration,
@@ -183,6 +190,13 @@ Psi<dim,spacedim>::get_eval_time()
 const
 {
 	return eval_time;
+}
+
+template<unsigned int dim, unsigned int spacedim>
+void
+Psi<dim,spacedim>::set_alpha(const double alpha)
+{
+	this->alpha = alpha;
 }
 
 #ifdef INCREMENTAL_FE_WITH_CMF

@@ -182,6 +182,13 @@ const
 	return eval_time;
 }
 
+template<unsigned int spacedim>
+void
+Omega<spacedim,spacedim>::set_alpha(const double alpha)
+{
+	this->alpha = alpha;
+}
+
 template<unsigned int dim, unsigned int spacedim>
 Omega<dim,spacedim>::Omega(	const vector<DependentField<dim,spacedim>>	e_sigma,
 							const set<types::material_id>				domain_of_integration,
@@ -337,6 +344,13 @@ const
 	return eval_time;
 }
 
+template<unsigned int dim, unsigned int spacedim>
+void
+Omega<dim,spacedim>::set_alpha(const double alpha)
+{
+	this->alpha = alpha;
+}
+
 template<unsigned int spacedim>
 Omega<0, spacedim>::Omega(	const std::vector<const dealii::GalerkinTools::IndependentField<0, spacedim>*>	C,
 							GlobalDataIncrementalFE<spacedim>&												global_data,
@@ -477,6 +491,13 @@ const
 	}
 
 	return false;
+}
+
+template<unsigned int spacedim>
+void
+Omega<0,spacedim>::set_alpha(const double alpha)
+{
+	this->alpha = alpha;
 }
 
 #ifdef INCREMENTAL_FE_WITH_CMF

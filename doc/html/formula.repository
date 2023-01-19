@@ -365,3 +365,7 @@
 \_form#364:$h^\Sigma_\tau = _{\varphi\varphi}(R F_{\varphi\varphi}-u_R)$
 \_form#365:$\varepsilon_{\varphi\varphi}$
 \_form#366:$h^\Sigma_\tau = P_{\varphi\varphi}(R \varepsilon_{\varphi\varphi}-u_R)$
+\_form#367:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m}}{2 D J} \dot{\boldsymbol{I}} \cdot \boldsymbol{C} \dot{\boldsymbol{I}}$
+\_form#368:$\dot{I}_x$
+\_form#369:$\dot{I}_y$
+\_form#370:$\dot{I}_z$
