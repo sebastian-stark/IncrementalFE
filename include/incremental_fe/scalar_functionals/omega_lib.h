@@ -7133,7 +7133,7 @@ public:
 /**
  * Class defining a dissipation associated with flux of fluid through a solid skeleton.
  *
- * \f$ \omega^\Omega =	\dfrac{V^\mathrm{f}_\mathrm{m}}{2 D J}  \dot{\boldsymbol{I}} \cdot \boldsymbol{C} \dot{\boldsymbol{I}}\f$,
+ * \f$ \omega^\Omega =	\dfrac{V^\mathrm{f}_\mathrm{m}}{2 D J}  \dot{\boldsymbol{I}} \cdot \boldsymbol{C} \cdot \dot{\boldsymbol{I}}\f$,
  *
  * where \f$\dot{\boldsymbol{I}}\f$ is the fluid flux,<br>
  * \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of the fluid,<br>
@@ -7285,10 +7285,247 @@ public:
 		}
 
 		return false;
+	}
+};
 
+/**
+ * Class defining a dissipation associated with the flux of ions relative to a flowing fluid.
+ *
+ * \f$ \omega^\Omega =	\dfrac{V^\mathrm{f}_\mathrm{m} c^\mathrm{f}}{2 J D c}  (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f}) \cdot \boldsymbol{C} \cdot (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f})\f$,
+ *
+ * where \f$\dot{\boldsymbol{I}}\f$ is the ion flux,<br>
+ * \f$\dot{\boldsymbol{I}}^\mathrm{f}\f$ is the fluid flux,<br>
+ * \f$c\f$ the ion concentration,<br>
+ * \f$c^\mathrm{f}\f$ the fluid concentration,<br>
+ * \f$V^\mathrm{f}_\mathrm{m}\f$ the molar volume of the fluid,<br>
+ * \f$J\f$ the determinant of the deformation gradient \f$\boldsymbol{F}\f$,<br>
+ * \f$\boldsymbol{C} = \boldsymbol{F}^\top\cdot \boldsymbol{F}\f$,<br>
+ * and \f$D\f$ an "ion mobility".
+ *
+ * Ordering of quantities in ScalarFunctional<spacedim, spacedim>::e_omega :<br>[0]  			\f$\dot{I}_x\f$<br>
+ * 																				[1]  			\f$\dot{I}_y\f$<br>
+ * 																				[2]  			\f$\dot{I}_z\f$<br>
+ * 																				[3]  			\f$\dot{I}^\mathrm{f}_x\f$<br>
+ * 																				[4]  			\f$\dot{I}^\mathrm{f}_y\f$<br>
+ * 																				[5]  			\f$\dot{I}^\mathrm{f}_z\f$<br>
+ * 																				[6]  			\f$c\f$<br>
+ * 																				[7]  			\f$c^\mathrm{f}\f$<br>
+ * 																				[8] ... [16]	\f$F_{xx}\f$, \f$F_{xy}\f$, \f$F_{xz}\f$, \f$F_{yx}\f$, \f$F_{yy}\f$, \f$F_{yz}\f$, \f$F_{zx}\f$, \f$F_{zy}\f$, \f$F_{zz}\f$
+ */
+template<unsigned int spacedim>
+class OmegaIonDissipation00 : public incrementalFE::Omega<spacedim, spacedim>
+{
+
+private:
+
+	/**
+	 * mobility \f$D\f$
+	 */
+	const double
+	D;
+
+	/**
+	 * molar volume of fluid \f$V^\mathrm{f}_\mathrm{m}\f$
+	 */
+	const double
+	V_m_f;
+
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_omega					ScalarFunctional<spacedim, spacedim>::e_omega
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional<spacedim, spacedim>::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional<spacedim, spacedim>::quadrature
+	 *
+	 * @param[in]		global_data				Omega<spacedim, spacedim>::global_data
+	 *
+	 * @param[in]		D						OmegaDualFluidDissipation00::D
+	 *
+	 * @param[in]		V_m_f					OmegaDualFluidDissipation00::V_m_f
+	 *
+	 * @param[in]		method					Omega<spacedim, spacedim>::method
+	 *
+	 * @param[in]		alpha					Omega<spacedim, spacedim>::alpha
+	 */
+	OmegaIonDissipation00(	const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>	e_omega,
+							const std::set<dealii::types::material_id>									domain_of_integration,
+							const dealii::Quadrature<spacedim>											quadrature,
+							GlobalDataIncrementalFE<spacedim>&											global_data,
+							const double																D,
+							const double																V_m_f,
+							const unsigned int															method,
+							const double																alpha = 0.0)
+	:
+	Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, 0, 6, 0, 11, method, alpha, "OmegaIonDissipation00"),
+	D(D),
+	V_m_f(V_m_f)
+	{
 	}
 
+	/**
+	 * @see Omega<spacedim, spacedim>::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						/*t*/,
+								const dealii::Point<spacedim>& 		/*x*/,
+								double&								omega,
+								dealii::Vector<double>&				d_omega,
+								dealii::FullMatrix<double>&			d2_omega,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							compute_dq)
+	const
+	{
 
+		const double Idot11 = values[0];
+		const double Idot21 = values[1];
+		const double Idot31 = values[2];
+		const double IFdot11 = values[3];
+		const double IFdot21 = values[4];
+		const double IFdot31 = values[5];
+		const double c = values[6];
+		const double cF = values[7];
+		const double F11 = values[8];
+		const double F21 = values[9];
+		const double F31 = values[10];
+		const double F41 = values[11];
+		const double F51 = values[12];
+		const double F61 = values[13];
+		const double F71 = values[14];
+		const double F81 = values[15];
+		const double F91 = values[16];
+
+		if(get<0>(requested_quantities))
+		{
+			omega = (1.0/2.0)*V_m_f*((IFdot11*c - Idot11*cF)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) + (IFdot21*c - Idot21*cF)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21))+ ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (IFdot31*c - Idot31*cF)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_omega(0) = -V_m_f*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91))/(D*c*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d_omega(1) = -V_m_f*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91))/(D*c*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d_omega(2) = -V_m_f*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91))))/(D*c*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d_omega(3) = V_m_f*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91))/(D*cF*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d_omega(4) = V_m_f*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91))/(D*cF*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d_omega(5) = V_m_f*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61+ F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91))))/(D*cF*(F11*F51*F91 - F11*F61*F81- F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+		}
+
+		if(get<2>(requested_quantities))
+		{
+			d2_omega(0,0) = V_m_f*cF*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71)))/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(0,1) = V_m_f*cF*(F11*F21 + F41*F51 + F71*F81)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(0,2) = V_m_f*cF*(F11*F31 + F41*F61 + F71*F91)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(0,3) = -V_m_f*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(0,4) = -V_m_f*(F11*F21 + F41*F51 + F71*F81)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(0,5) = -V_m_f*(F11*F31 + F41*F61 + F71*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,0) = V_m_f*cF*(F11*F21 + F41*F51 + F71*F81)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,1) = V_m_f*cF*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81)))/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,2) = V_m_f*cF*(F21*F31 + F51*F61 + F81*F91)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,3) = -V_m_f*(F11*F21 + F41*F51 + F71*F81)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,4) = -V_m_f*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(1,5) = -V_m_f*(F21*F31 + F51*F61 + F81*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,0) = V_m_f*cF*(F11*F31 + F41*F61 + F71*F91)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,1) = V_m_f*cF*(F21*F31 + F51*F61 + F81*F91)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,2) = V_m_f*cF*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,3) = -V_m_f*(F11*F31 + F41*F61 + F71*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,4) = -V_m_f*(F21*F31 + F51*F61 + F81*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(2,5) = -V_m_f*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,0) = -V_m_f*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,1) = -V_m_f*(F11*F21 + F41*F51 + F71*F81)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,2) = -V_m_f*(F11*F31 + F41*F61 + F71*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,3) = V_m_f*c*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71)))/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,4) = V_m_f*c*(F11*F21 + F41*F51 + F71*F81)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(3,5) = V_m_f*c*(F11*F31 + F41*F61 + F71*F91)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,0) = -V_m_f*(F11*F21 + F41*F51 + F71*F81)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,1) = -V_m_f*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,2) = -V_m_f*(F21*F31 + F51*F61 + F81*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,3) = V_m_f*c*(F11*F21 + F41*F51 + F71*F81)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,4) = V_m_f*c*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81)))/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(4,5) = V_m_f*c*(F21*F31 + F51*F61 + F81*F91)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,0) = -V_m_f*(F11*F31 + F41*F61 + F71*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,1) = -V_m_f*(F21*F31 + F51*F61 + F81*F91)/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,2) = -V_m_f*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))/(D*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,3) = V_m_f*c*(F11*F31 + F41*F61 + F71*F91)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,4) = V_m_f*c*(F21*F31 + F51*F61 + F81*F91)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			d2_omega(5,5) = V_m_f*c*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+			if(compute_dq)
+			{
+				d2_omega(0,6) = -V_m_f*cF*(((F11)*(F11))*Idot11 + F11*F21*Idot21 + F11*F31*Idot31 + ((F41)*(F41))*Idot11 + F41*F51*Idot21 + F41*F61*Idot31 + ((F71)*(F71))*Idot11 + F71*F81*Idot21 + F71*F91*Idot31)/(D*((c)*(c))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(0,7) = V_m_f*(((F11)*(F11))*Idot11 + F11*F21*Idot21 + F11*F31*Idot31 + ((F41)*(F41))*Idot11 + F41*F51*Idot21 + F41*F61*Idot31 + ((F71)*(F71))*Idot11 + F71*F81*Idot21 + F71*F91*Idot31)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(0,8) = V_m_f*((F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) - (2*F11*(IFdot11*c - Idot11*cF) + F21*(IFdot21*c - Idot21*cF) + F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,9) = -V_m_f*(F11*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,10) = V_m_f*(-F11*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,11) = -V_m_f*((F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) + (2*F41*(IFdot11*c - Idot11*cF) + F51*(IFdot21*c - Idot21*cF) + F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,12) = V_m_f*(-F41*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,13) = -V_m_f*(F41*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,14) = V_m_f*((F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) +(IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) - (2*F71*(IFdot11*c - Idot11*cF) + F81*(IFdot21*c - Idot21*cF) + F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,15) = -V_m_f*(F71*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(0,16) = V_m_f*(-F71*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,6) = -V_m_f*cF*(F11*F21*Idot11 + ((F21)*(F21))*Idot21 + F21*F31*Idot31 + F41*F51*Idot11 + ((F51)*(F51))*Idot21 + F51*F61*Idot31 + F71*F81*Idot11 + ((F81)*(F81))*Idot21 + F81*F91*Idot31)/(D*((c)*(c))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(1,7) = V_m_f*(F11*F21*Idot11 + ((F21)*(F21))*Idot21 + F21*F31*Idot31 + F41*F51*Idot11 + ((F51)*(F51))*Idot21 + F51*F61*Idot31 + F71*F81*Idot11 + ((F81)*(F81))*Idot21 + F81*F91*Idot31)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(1,8) = V_m_f*(-F21*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,9) = -V_m_f*((F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (F11*(IFdot11*c - Idot11*cF) + 2*F21*(IFdot21*c - Idot21*cF) + F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,10) = V_m_f*(-F21*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,11) = -V_m_f*(F51*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,12) = V_m_f*((F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) - (F41*(IFdot11*c - Idot11*cF) + 2*F51*(IFdot21*c - Idot21*cF) + F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,13) = -V_m_f*(F51*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,14) = V_m_f*(-F81*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,15) = -V_m_f*((F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (F71*(IFdot11*c - Idot11*cF) + 2*F81*(IFdot21*c - Idot21*cF) + F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(1,16) = V_m_f*(-F81*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,6) = -V_m_f*cF*(F11*F31*Idot11 + F21*F31*Idot21 + ((F31)*(F31))*Idot31 + F41*F61*Idot11 + F51*F61*Idot21 + ((F61)*(F61))*Idot31 + F71*F91*Idot11 + F81*F91*Idot21 + ((F91)*(F91))*Idot31)/(D*((c)*(c))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(2,7) = V_m_f*(F11*F31*Idot11 + F21*F31*Idot21 + ((F31)*(F31))*Idot31 + F41*F61*Idot11 + F51*F61*Idot21 + ((F61)*(F61))*Idot31 + F71*F91*Idot11 + F81*F91*Idot21 + ((F91)*(F91))*Idot31)/(D*c*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(2,8) = V_m_f*(-F31*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,9) = -V_m_f*(F31*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,10) = V_m_f*((F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) - (F11*(IFdot11*c - Idot11*cF) + F21*(IFdot21*c - Idot21*cF) + 2*F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,11) = -V_m_f*(F61*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,12) = V_m_f*(-F61*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,13) = -V_m_f*((F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) + (F41*(IFdot11*c - Idot11*cF) + F51*(IFdot21*c - Idot21*cF) + 2*F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,14) = V_m_f*(-F91*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,15) = -V_m_f*(F91*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(2,16) = V_m_f*((F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) - (F71*(IFdot11*c - Idot11*cF) + F81*(IFdot21*c - Idot21*cF) + 2*F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*c*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,6) = V_m_f*(((F11)*(F11))*IFdot11 + F11*F21*IFdot21 + F11*F31*IFdot31 + ((F41)*(F41))*IFdot11 + F41*F51*IFdot21 + F41*F61*IFdot31 + ((F71)*(F71))*IFdot11 + F71*F81*IFdot21 + F71*F91*IFdot31)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(3,7) = -V_m_f*c*(((F11)*(F11))*IFdot11 + F11*F21*IFdot21 + F11*F31*IFdot31 + ((F41)*(F41))*IFdot11 + F41*F51*IFdot21 + F41*F61*IFdot31 + ((F71)*(F71))*IFdot11 + F71*F81*IFdot21 + F71*F91*IFdot31)/(D*((cF)*(cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(3,8) = V_m_f*(-(F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) +(IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) + (2*F11*(IFdot11*c - Idot11*cF) + F21*(IFdot21*c - Idot21*cF) + F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,9) = V_m_f*(F11*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,10) = V_m_f*(F11*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,11) = V_m_f*((F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) +(IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) + (2*F41*(IFdot11*c - Idot11*cF) + F51*(IFdot21*c - Idot21*cF) + F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,12) = V_m_f*(F41*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,13) = V_m_f*(F41*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,14) = V_m_f*(-(F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)) + (2*F71*(IFdot11*c - Idot11*cF) + F81*(IFdot21*c - Idot21*cF) + F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,15) = V_m_f*(F71*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(3,16) = V_m_f*(F71*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(((F11)*(F11)) + ((F41)*(F41)) + ((F71)*(F71))) + (IFdot21*c - Idot21*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot31*c - Idot31*cF)*(F11*F31 + F41*F61 + F71*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,6) = V_m_f*(F11*F21*IFdot11 + ((F21)*(F21))*IFdot21 + F21*F31*IFdot31 + F41*F51*IFdot11 + ((F51)*(F51))*IFdot21 + F51*F61*IFdot31 + F71*F81*IFdot11 + ((F81)*(F81))*IFdot21 + F81*F91*IFdot31)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(4,7) = -V_m_f*c*(F11*F21*IFdot11 + ((F21)*(F21))*IFdot21 + F21*F31*IFdot31 + F41*F51*IFdot11 + ((F51)*(F51))*IFdot21 + F51*F61*IFdot31 + F71*F81*IFdot11 + ((F81)*(F81))*IFdot21 + F81*F91*IFdot31)/(D*((cF)*(cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(4,8) = V_m_f*(F21*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,9) = V_m_f*((F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (F11*(IFdot11*c - Idot11*cF) + 2*F21*(IFdot21*c - Idot21*cF) + F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,10) = V_m_f*(F21*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,11) = V_m_f*(F51*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,12) = V_m_f*(-(F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (F41*(IFdot11*c - Idot11*cF) + 2*F51*(IFdot21*c - Idot21*cF) + F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,13) = V_m_f*(F51*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,14) = V_m_f*(F81*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,15) = V_m_f*((F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)) + (F71*(IFdot11*c - Idot11*cF) + 2*F81*(IFdot21*c - Idot21*cF) + F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(4,16) = V_m_f*(F81*(IFdot31*c - Idot31*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(F11*F21 + F41*F51 + F71*F81) + (IFdot21*c - Idot21*cF)*(((F21)*(F21)) + ((F51)*(F51)) + ((F81)*(F81))) + (IFdot31*c - Idot31*cF)*(F21*F31 + F51*F61 + F81*F91)))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,6) = V_m_f*(F11*F31*IFdot11 + F21*F31*IFdot21 + ((F31)*(F31))*IFdot31 + F41*F61*IFdot11 + F51*F61*IFdot21 +((F61)*(F61))*IFdot31 + F71*F91*IFdot11 + F81*F91*IFdot21 + ((F91)*(F91))*IFdot31)/(D*cF*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(5,7) = -V_m_f*c*(F11*F31*IFdot11 + F21*F31*IFdot21 + ((F31)*(F31))*IFdot31 + F41*F61*IFdot11 + F51*F61*IFdot21 + ((F61)*(F61))*IFdot31 + F71*F91*IFdot11 + F81*F91*IFdot21 + ((F91)*(F91))*IFdot31)/(D*((cF)*(cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71));
+				d2_omega(5,8) = V_m_f*(F31*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F51*F91 - F61*F81)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,9) = V_m_f*(F31*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F41*F91 - F61*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91+ F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,10) = V_m_f*(-(F41*F81 - F51*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) + (F11*(IFdot11*c - Idot11*cF) + F21*(IFdot21*c - Idot21*cF) + 2*F31*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,11) = V_m_f*(F61*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F21*F91 - F31*F81)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,12) = V_m_f*(F61*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F11*F91 - F31*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,13) = V_m_f*((F11*F81 - F21*F71)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) + (F41*(IFdot11*c - Idot11*cF) + F51*(IFdot21*c - Idot21*cF) + 2*F61*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,14) = V_m_f*(F91*(IFdot11*c - Idot11*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) - (F21*F61 - F31*F51)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,15) = V_m_f*(F91*(IFdot21*c - Idot21*cF)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71) + (F11*F61 - F31*F41)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+				d2_omega(5,16) = V_m_f*(-(F11*F51 - F21*F41)*((IFdot11*c - Idot11*cF)*(F11*F31 + F41*F61 + F71*F91) + (IFdot21*c - Idot21*cF)*(F21*F31 + F51*F61 + F81*F91) + (IFdot31*c - Idot31*cF)*(((F31)*(F31)) + ((F61)*(F61)) + ((F91)*(F91)))) + (F71*(IFdot11*c - Idot11*cF) + F81*(IFdot21*c - Idot21*cF) + 2*F91*(IFdot31*c - Idot31*cF))*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71))/(D*cF*((F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)*(F11*F51*F91 - F11*F61*F81 - F21*F41*F91 + F21*F61*F71 + F31*F41*F81 - F31*F51*F71)));
+			}
+		}
+
+		return false;
+	}
 };
 
 }

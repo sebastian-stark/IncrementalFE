@@ -369,3 +369,10 @@
 \_form#368:$\dot{I}_x$
 \_form#369:$\dot{I}_y$
 \_form#370:$\dot{I}_z$
+\_form#371:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m} c^\mathrm{f}}{2 J D c} (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f}) \cdot \boldsymbol{C} (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f})$
+\_form#372:$\dot{\boldsymbol{I}}^\mathrm{f}$
+\_form#373:$\dot{I}^\mathrm{f}_x$
+\_form#374:$\dot{I}^\mathrm{f}_y$
+\_form#375:$\dot{I}^\mathrm{f}_z$
+\_form#376:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m}}{2 D J} \dot{\boldsymbol{I}} \cdot \boldsymbol{C} \cdot \dot{\boldsymbol{I}}$
+\_form#377:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m} c^\mathrm{f}}{2 J D c} (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f}) \cdot \boldsymbol{C} \cdot (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f})$
