@@ -1,0 +1,114 @@
+\hypertarget{classincremental_f_e_1_1_omega_flux_power01}{}\doxysection{incremental\+FE\+::Omega\+Flux\+Power01$<$ spacedim $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_omega_flux_power01}\index{incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}}
+
+
+{\ttfamily \#include $<$omega\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Omega\+Flux\+Power01$<$ spacedim $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_flux_power01__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Omega\+Flux\+Power01$<$ spacedim $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classincremental_f_e_1_1_omega_flux_power01__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01_afe250398ac50926c3660aa493c42969b}{Omega\+Flux\+Power01}} (const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, dealii\+::\+Function$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01_a54c6144e69104dc98d17d3c7bde5b385}{function\+\_\+mu}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_ae09e949c58fe8e7a7f3ae6031e6435b9}{alpha}}=0.\+0)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01_a85b38c798b3e840265248b00e6e66899}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&, double \&sigma, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+sigma, dealii\+::\+Full\+Matrix$<$ double $>$ \&, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dealii\+::\+Function$<$ spacedim $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01_a54c6144e69104dc98d17d3c7bde5b385}{function\+\_\+mu}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int spacedim$>$\newline
+class incremental\+F\+E\+::\+Omega\+Flux\+Power01$<$ spacedim $>$}
+
+Class defining an interface related scalar functional with the integrand
+
+$ \omega^\Sigma = \bar\mu(t) \dot{I}_n $
+
+where $\bar\mu$ is a prescribed potential, and $\dot{I}_n$ a normal flux.
+
+Ordering of quantities in \textbf{ Scalar\+Functional\+::e\+\_\+sigma} \+:~\newline
+\mbox{[}0\mbox{]} $I_n$~\newline
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_power01_afe250398ac50926c3660aa493c42969b}\label{classincremental_f_e_1_1_omega_flux_power01_afe250398ac50926c3660aa493c42969b}} 
+\index{incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}!OmegaFluxPower01@{OmegaFluxPower01}}
+\index{OmegaFluxPower01@{OmegaFluxPower01}!incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{OmegaFluxPower01()}{OmegaFluxPower01()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01}{incremental\+F\+E\+::\+Omega\+Flux\+Power01}}$<$ spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01}{Omega\+Flux\+Power01}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ spacedim-\/1, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ spacedim-\/1 $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{dealii\+::\+Function$<$ spacedim $>$ \&}]{function\+\_\+mu,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em e\+\_\+sigma} & \textbf{ Scalar\+Functional\+::e\+\_\+sigma}\\
+\hline
+\mbox{\texttt{ in}}  & {\em domain\+\_\+of\+\_\+integration} & \textbf{ Scalar\+Functional\+::domain\+\_\+of\+\_\+integration}\\
+\hline
+\mbox{\texttt{ in}}  & {\em quadrature} & \textbf{ Scalar\+Functional\+::quadrature}\\
+\hline
+\mbox{\texttt{ in}}  & {\em global\+\_\+data} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{Omega\+::global\+\_\+data}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em function\+\_\+mu} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power00_a9b8beb230f2a0609646ddebe08c1c236}{Omega\+Flux\+Power00\+::function\+\_\+mu}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em method} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{Omega\+::method}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_ae09e949c58fe8e7a7f3ae6031e6435b9}{Omega\+::alpha}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_power01_a85b38c798b3e840265248b00e6e66899}\label{classincremental_f_e_1_1_omega_flux_power01_a85b38c798b3e840265248b00e6e66899}} 
+\index{incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
+\index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_and\_derivatives()}{get\_values\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01}{incremental\+F\+E\+::\+Omega\+Flux\+Power01}}$<$ spacedim $>$\+::get\+\_\+values\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{values,  }\item[{const double}]{t,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{,  }\item[{double \&}]{sigma,  }\item[{\textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{d\+\_\+sigma,  }\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{,  }\item[{const std\+::tuple$<$ bool, bool, bool $>$}]{requested\+\_\+quantities,  }\item[{const bool}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{Omega\+::get\+\_\+values\+\_\+and\+\_\+derivatives()}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5b7c7411e45df}{incremental\+F\+E\+::\+Omega$<$ spacedim-\/1, spacedim $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_flux_power01_a54c6144e69104dc98d17d3c7bde5b385}\label{classincremental_f_e_1_1_omega_flux_power01_a54c6144e69104dc98d17d3c7bde5b385}} 
+\index{incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}!function\_mu@{function\_mu}}
+\index{function\_mu@{function\_mu}!incrementalFE::OmegaFluxPower01$<$ spacedim $>$@{incrementalFE::OmegaFluxPower01$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{function\_mu}{function\_mu}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+dealii\+::\+Function$<$spacedim$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_omega_flux_power01}{incremental\+F\+E\+::\+Omega\+Flux\+Power01}}$<$ spacedim $>$\+::function\+\_\+mu\hspace{0.3cm}{\ttfamily [private]}}
+
+Function determining $\bar \mu(t)$ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/scalar\+\_\+functionals/\mbox{\hyperlink{omega__lib_8h}{omega\+\_\+lib.\+h}}\end{DoxyCompactItemize}

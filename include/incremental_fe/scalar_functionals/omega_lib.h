@@ -784,6 +784,97 @@ public:
 /**
  * Class defining an interface related scalar functional with the integrand
  *
+ * \f$ \omega^\Sigma =	\bar\mu(t) \dot{I}_n \f$
+ *
+ * where \f$\bar\mu\f$ is a prescribed potential, and \f$\dot{I}_n\f$ a normal flux.
+ *
+ *
+ * Ordering of quantities in ScalarFunctional::e_sigma :<br>[0] \f$I_n\f$<br>
+ */
+template<unsigned int spacedim>
+class OmegaFluxPower01 : public incrementalFE::Omega<spacedim-1, spacedim>
+{
+private:
+
+	/**
+	 * %Function determining \f$\bar \mu(t)\f$
+	 */
+	dealii::Function<spacedim>&
+	function_mu;
+
+public:
+
+	/**
+	 * Constructor
+	 *
+	 * @param[in]		e_sigma					ScalarFunctional::e_sigma
+	 *
+	 * @param[in] 		domain_of_integration	ScalarFunctional::domain_of_integration
+	 *
+	 * @param[in]		quadrature				ScalarFunctional::quadrature
+	 *
+	 * @param[in]		global_data				Omega::global_data
+	 *
+	 * @param[in]		function_mu				OmegaFluxPower00::function_mu
+	 *
+	 * @param[in]		method					Omega::method
+	 *
+	 * @param[in]		alpha					Omega::alpha
+	 */
+	OmegaFluxPower01(	const std::vector<dealii::GalerkinTools::DependentField<spacedim-1,spacedim>>	e_sigma,
+						const std::set<dealii::types::material_id>										domain_of_integration,
+						const dealii::Quadrature<spacedim-1>											quadrature,
+						GlobalDataIncrementalFE<spacedim>&												global_data,
+						dealii::Function<spacedim>&														function_mu,
+						const unsigned int																method,
+						const double																	alpha = 0.0)
+	:
+	Omega<spacedim-1, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, 1, 0, 0, 0, method, alpha, "OmegaFluxPower01"),
+	function_mu(function_mu)
+	{
+	}
+
+	/**
+	 * @see Omega::get_values_and_derivatives()
+	 */
+	bool
+	get_values_and_derivatives( const dealii::Vector<double>& 		values,
+								const double						t,
+								const dealii::Point<spacedim>& 		x,
+								const dealii::Tensor<1, spacedim>&	/*n*/,
+								double&								sigma,
+								dealii::Vector<double>&				d_sigma,
+								dealii::FullMatrix<double>&			/*d2_sigma*/,
+								const std::tuple<bool, bool, bool>	requested_quantities,
+								const bool							/*compute_dq*/)
+	const
+	{
+		const double time_old = function_mu.get_time();
+		function_mu.set_time(t);
+		const double mu_bar = function_mu.value(x);
+		function_mu.set_time(time_old);
+
+		const double I_dot = values[0];
+
+		if(get<0>(requested_quantities))
+		{
+			sigma = mu_bar * I_dot;
+		}
+
+		if(get<1>(requested_quantities))
+		{
+			d_sigma[0] = mu_bar;
+		}
+
+		return false;
+	}
+
+};
+
+
+/**
+ * Class defining an interface related scalar functional with the integrand
+ *
  * \f$ \omega^\Sigma =	-\bar i(t) \eta \f$
  *
  * where \f$\bar i\f$ is a prescrobed normal flux, and \f$\eta\f$ the corresponding potential.

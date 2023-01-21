@@ -376,3 +376,6 @@
 \_form#375:$\dot{I}^\mathrm{f}_z$
 \_form#376:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m}}{2 D J} \dot{\boldsymbol{I}} \cdot \boldsymbol{C} \cdot \dot{\boldsymbol{I}}$
 \_form#377:$ \omega^\Omega = \dfrac{V^\mathrm{f}_\mathrm{m} c^\mathrm{f}}{2 J D c} (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f}) \cdot \boldsymbol{C} \cdot (\dot{\boldsymbol{I}} - c/c^\mathrm{f}\dot{\boldsymbol{I}}^\mathrm{f})$
+\_form#378:$ \omega^\Sigma = \bar\mu(t) \dot{I}_n $
+\_form#379:$\dot{I}_n$
+\_form#380:$I_n$
