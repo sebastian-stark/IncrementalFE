@@ -362,7 +362,10 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		if(iter > global_data->max_iter)
 		{
 			global_data->write_error_message("Exceeded the allowed number of iterations, solution unconverged!");
-			error = true;
+			if(!global_data->continue_on_nonconvergence)
+			{
+				error = true;
+			}
 			break;
 		}
 

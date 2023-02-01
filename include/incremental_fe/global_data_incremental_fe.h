@@ -205,6 +205,12 @@ private:
 	scale_residual = true;
 
 	/**
+	 * if true, the solution is not reset to the solution in the beginning of the time-increment in case the maximum number of iterations is exceeded
+	 */
+	bool
+	continue_on_nonconvergence = false;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -446,6 +452,14 @@ public:
 	void
 	set_scale_residual(const bool scale_residual = true);
 
+	/**
+	 * Sets GlobalDataIncrementalFE::continue_on_nonconvergence
+	 *
+	 * @param[in]	continue_on_nonconvergence	GlobalDataIncrementalFE::continue_on_nonconvergence
+	 *
+	 */
+	void
+	set_continue_on_nonconvergence(const bool continue_on_nonconvergence=true);
 
 };
 

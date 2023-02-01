@@ -264,6 +264,12 @@ GlobalDataIncrementalFE<spacedim>::set_scale_residual(const bool scale_residual)
 	this->scale_residual = scale_residual;
 }
 
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_continue_on_nonconvergence(const bool continue_on_nonconvergence)
+{
+	this->continue_on_nonconvergence = continue_on_nonconvergence;
+}
 
 template class incrementalFE::GlobalDataIncrementalFE<2>;
 template class incrementalFE::GlobalDataIncrementalFE<3>;
