@@ -97,18 +97,27 @@ private:
 
 	/**
 	 * Termination criterion for Newton-Raphson iteration.
-	 * If the estimated increment in the (quadratically approximated) potential is below this threshold,
-	 * the Newton-Raphson iteration of a single time step is terminated.
+	 * If sqrt(RHS*DU) (RHS: right hand side of finite element system DU: solution increment) is below this threshold,
+	 * the Newton-Raphson iteration of a time increment is terminated.
 	 */
 	double
 	threshold_potential_increment = 1e-14;
 
 	/**
-	 * Additional termination criterion for Newton-Raphson iteration. In addition to GlobalDataIncrementalFE::threshold_potential_increment,
-	 * also the (scaled) residual is checked to be below the given tolerance. If @p threshold_residual is negative, checking is disabled (default).
+	 * Termination criterion for Newton-Raphson iteration. If the 2-norm of the (scaled) residual is below this threshold,
+	 * the Newton-Raphson iteration of a time increment is terminated.
+	 * If @p threshold_residual is negative, checking is disabled (default).
 	 */
 	double
 	threshold_residual = -1.0;
+
+	/**
+	 * Termination criterion for Newton-Raphson iteration. If the maximum step size is below this threshold,
+	 * the Newton-Raphson iteration of a time increment is terminated.
+ 	 * If @p threshold_residual is negative, checking is disabled (default).
+	 */
+	double
+	threshold_step_size = -1.0;
 
 	/**
 	 * If this is set to @p true, only one iteration is performed for each time step.
@@ -330,6 +339,14 @@ public:
 	 */
 	void
 	set_threshold_residual(const double threshold_residual);
+
+	/**
+	 * Sets GlobalDataIncrementalFE::threshold_step_size
+	 *
+	 * @param[in]	threshold_step_size	GlobalDataIncrementalFE::threshold_step_size;
+	 */
+	void
+	set_threshold_step_size(const double threshold_step_size);
 
 	/**
 	 * Sets GlobalDataIncrementalFE::force_linear

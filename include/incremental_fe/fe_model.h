@@ -293,7 +293,7 @@ private:
 	update_rhs_scaling_vector();
 
 	/**
-	 * computes estimated potential increment (inner product between @p delta_solution and FEModel::rhs)
+	 * computes estimated potential increment (square root of inner product between @p delta_solution and FEModel::rhs)
 	 *
 	 * @param[in]	delta_solution		solution increment
 	 *

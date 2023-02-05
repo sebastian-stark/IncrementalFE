@@ -53,6 +53,8 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a09f0
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a552c44097fe7241bb20a3cdca6f75fab}{set\+\_\+threshold\+\_\+residual}} (const double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}{threshold\+\_\+residual}})
 \item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6f6043e4a7c0a215a56936bcd762dc1b}{set\+\_\+threshold\+\_\+step\+\_\+size}} (const double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}{threshold\+\_\+step\+\_\+size}})
+\item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}{set\+\_\+force\+\_\+linear}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{force\+\_\+linear}}=true)
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a82d4ae6026b8c8a4a4da1c54e81fd64a}{set\+\_\+predictor\+\_\+corrector}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a5cc0d20e5e389c149bbd288f57dee953}{predictor\+\_\+corrector}}=true)
@@ -82,6 +84,8 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a55fb
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6c1f9fb0de787b0d386dca99ad8f207a}{set\+\_\+use\+\_\+previous\+\_\+increment\+\_\+for\+\_\+initial\+\_\+guess}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}{use\+\_\+previous\+\_\+increment\+\_\+for\+\_\+initial\+\_\+guess}}=true)
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a667ab8cf1e876fc505544e1e3f6d18ea}{set\+\_\+scale\+\_\+residual}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae5fd438fcf3af31f9324db63113acc1b}{scale\+\_\+residual}}=true)
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad1f7a02a4825fbb8401a22798f957144}{set\+\_\+continue\+\_\+on\+\_\+nonconvergence}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}}=true)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -103,6 +107,8 @@ unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f
 double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2f7adb8b4f7f8875715e1dbd0edd9ac8}{threshold\+\_\+potential\+\_\+increment}} = 1\textbf{ e}-\/14
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}{threshold\+\_\+residual}} = -\/1.\+0
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}{threshold\+\_\+step\+\_\+size}} = -\/1.\+0
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a37c1d42902e74f13f3c4ba82d2dabd67}{force\+\_\+linear}} = false
 \item 
@@ -127,6 +133,8 @@ bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af4f4
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}{use\+\_\+previous\+\_\+increment\+\_\+for\+\_\+initial\+\_\+guess}} = false
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae5fd438fcf3af31f9324db63113acc1b}{scale\+\_\+residual}} = true
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}} = false
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -274,6 +282,20 @@ Sets \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad5
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em compute\+\_\+sparsity\+\_\+pattern} & \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}{Global\+Data\+Incremental\+F\+E\+::compute\+\_\+sparsity\+\_\+pattern}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_ad1f7a02a4825fbb8401a22798f957144}\label{classincremental_f_e_1_1_global_data_incremental_f_e_ad1f7a02a4825fbb8401a22798f957144}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!set\_continue\_on\_nonconvergence@{set\_continue\_on\_nonconvergence}}
+\index{set\_continue\_on\_nonconvergence@{set\_continue\_on\_nonconvergence}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{set\_continue\_on\_nonconvergence()}{set\_continue\_on\_nonconvergence()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::set\+\_\+continue\+\_\+on\+\_\+nonconvergence (\begin{DoxyParamCaption}\item[{const bool}]{continue\+\_\+on\+\_\+nonconvergence = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Sets \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{Global\+Data\+Incremental\+F\+E\+::continue\+\_\+on\+\_\+nonconvergence}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em continue\+\_\+on\+\_\+nonconvergence} & \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{Global\+Data\+Incremental\+F\+E\+::continue\+\_\+on\+\_\+nonconvergence}} \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}\label{classincremental_f_e_1_1_global_data_incremental_f_e_aba65d5da0031c2f1bc1ceb87dc524b8d}} 
@@ -465,6 +487,20 @@ Sets \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a7573
 \mbox{\texttt{ in}}  & {\em threshold\+\_\+residual} & Global\+Data\+Incremental\+F\+E\+::threshold\+\_\+potential\+\_\+residual; \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a6f6043e4a7c0a215a56936bcd762dc1b}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a6f6043e4a7c0a215a56936bcd762dc1b}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!set\_threshold\_step\_size@{set\_threshold\_step\_size}}
+\index{set\_threshold\_step\_size@{set\_threshold\_step\_size}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{set\_threshold\_step\_size()}{set\_threshold\_step\_size()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::set\+\_\+threshold\+\_\+step\+\_\+size (\begin{DoxyParamCaption}\item[{const double}]{threshold\+\_\+step\+\_\+size }\end{DoxyParamCaption})}
+
+Sets \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}{Global\+Data\+Incremental\+F\+E\+::threshold\+\_\+step\+\_\+size}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em threshold\+\_\+step\+\_\+size} & \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}{Global\+Data\+Incremental\+F\+E\+::threshold\+\_\+step\+\_\+size}}; \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a6c1f9fb0de787b0d386dca99ad8f207a}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a6c1f9fb0de787b0d386dca99ad8f207a}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!set\_use\_previous\_increment\_for\_initial\_guess@{set\_use\_previous\_increment\_for\_initial\_guess}}
 \index{set\_use\_previous\_increment\_for\_initial\_guess@{set\_use\_previous\_increment\_for\_initial\_guess}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
@@ -538,7 +574,14 @@ Key indicating when to rebuild the sparsity pattern\+:~\newline
 \begin{DoxyWarning}{Warning}
 The user must ensure that \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}{Global\+Data\+Incremental\+F\+E\+::compute\+\_\+sparsity\+\_\+pattern}}=0 or \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}{Global\+Data\+Incremental\+F\+E\+::compute\+\_\+sparsity\+\_\+pattern}}=1 whenever the sparsity pattern of the matrix needs to be adjusted (during the first time step; when constraints have changed; when dofs have changed; ...). Currently, no internal checking is performed. 
 \end{DoxyWarning}
-\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af4f41178d7650c9fa2631f2d3a4c4c2d}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af4f41178d7650c9fa2631f2d3a4c4c2d}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!continue\_on\_nonconvergence@{continue\_on\_nonconvergence}}
+\index{continue\_on\_nonconvergence@{continue\_on\_nonconvergence}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{continue\_on\_nonconvergence}{continue\_on\_nonconvergence}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::continue\+\_\+on\+\_\+nonconvergence = false\hspace{0.3cm}{\ttfamily [private]}}
+
+if true, the solution is not reset to the solution in the beginning of the time-\/increment in case the maximum number of iterations is exceeded \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af4f41178d7650c9fa2631f2d3a4c4c2d}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af4f41178d7650c9fa2631f2d3a4c4c2d}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!converged\_at\_local\_level@{converged\_at\_local\_level}}
 \index{converged\_at\_local\_level@{converged\_at\_local\_level}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{converged\_at\_local\_level}{converged\_at\_local\_level}}
@@ -657,14 +700,21 @@ previous reference time \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::threshold\+\_\+potential\+\_\+increment = 1\textbf{ e}-\/14\hspace{0.3cm}{\ttfamily [private]}}
 
-Termination criterion for Newton-\/\+Raphson iteration. If the estimated increment in the (quadratically approximated) potential is below this threshold, the Newton-\/\+Raphson iteration of a single time step is terminated. \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}} 
+Termination criterion for Newton-\/\+Raphson iteration. If sqrt(\+R\+H\+S$\ast$\+D\+U) (R\+HS\+: right hand side of finite element system DU\+: solution increment) is below this threshold, the Newton-\/\+Raphson iteration of a time increment is terminated. \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a75738f9c13b8b545090674ae7972cdb7}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!threshold\_residual@{threshold\_residual}}
 \index{threshold\_residual@{threshold\_residual}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{threshold\_residual}{threshold\_residual}}
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::threshold\+\_\+residual = -\/1.\+0\hspace{0.3cm}{\ttfamily [private]}}
 
-Additional termination criterion for Newton-\/\+Raphson iteration. In addition to \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2f7adb8b4f7f8875715e1dbd0edd9ac8}{Global\+Data\+Incremental\+F\+E\+::threshold\+\_\+potential\+\_\+increment}}, also the (scaled) residual is checked to be below the given tolerance. If {\ttfamily threshold\+\_\+residual} is negative, checking is disabled (default). \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}} 
+Termination criterion for Newton-\/\+Raphson iteration. If the 2-\/norm of the (scaled) residual is below this threshold, the Newton-\/\+Raphson iteration of a time increment is terminated. If {\ttfamily threshold\+\_\+residual} is negative, checking is disabled (default). \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}\label{classincremental_f_e_1_1_global_data_incremental_f_e_aab6da96a20fc9faa25256fb0d87f90b3}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!threshold\_step\_size@{threshold\_step\_size}}
+\index{threshold\_step\_size@{threshold\_step\_size}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{threshold\_step\_size}{threshold\_step\_size}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::threshold\+\_\+step\+\_\+size = -\/1.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+Termination criterion for Newton-\/\+Raphson iteration. If the maximum step size is below this threshold, the Newton-\/\+Raphson iteration of a time increment is terminated. If {\ttfamily threshold\+\_\+residual} is negative, checking is disabled (default). \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!time\_step@{time\_step}}
 \index{time\_step@{time\_step}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{time\_step}{time\_step}}

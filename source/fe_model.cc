@@ -263,16 +263,46 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// only perform check of termination criterion starting from the second iteration
 		if(iter > 0)
 		{
-			// compute estimated potential increment
-			double estimated_potential_increment = compute_estimated_potential_increment(delta_solution);
-			// check termination criterion
+			bool converged_by_potential_increment = true;
+			double potential_increment = 0.0;
+			if(global_data->threshold_potential_increment > 0.0)
+			{
+				potential_increment = compute_estimated_potential_increment(delta_solution);
+				if(!(fabs(potential_increment) < global_data->threshold_potential_increment))
+					converged_by_potential_increment = false;
+			}
+
+			bool converged_by_residual = true;
+			double residual = 0.0;
 			if(global_data->threshold_residual > 0.0)
-				residual = get_residual();
-			if((fabs(estimated_potential_increment) < global_data->threshold_potential_increment) && ( (global_data->threshold_residual <= 0.0) || (residual < global_data->threshold_residual) ) && (global_data->converged_at_local_level))
+			{
+				residual =  get_residual();
+				if(!(fabs(residual) < global_data->threshold_residual))
+					converged_by_residual = false;
+			}
+
+			bool converged_by_step_size = true;
+			double step_size = 0.0;
+			if(global_data->threshold_step_size > 0.0)
+			{
+				step_size = delta_solution.linfty_norm();
+				if(!(fabs(step_size) < global_data->threshold_step_size))
+					converged_by_step_size = false;
+			}
+
+			if(global_data->threshold_potential_increment > 0.0)
+				pout << "Potential increment: " << potential_increment << endl;
+			if(global_data->threshold_residual > 0.0)
+				pout << "Residual: " << residual << endl;
+			if(global_data->threshold_step_size > 0.0)
+				pout << "Step size: " << step_size << endl;
+
+			// check termination criterion
+			if(converged_by_potential_increment && converged_by_residual && converged_by_step_size && global_data->converged_at_local_level)
 			{
 				if(global_data->threshold_residual <= 0.0)
 					residual = get_residual();
-				pout << "Converged with residual: " << residual << " and potential increment " << estimated_potential_increment << endl << endl;
+				pout << "Converged!" << endl;
 
 				// if this was the predictor step, continue with the corrector step, otherwise the time step is completed
 				if(global_data->predictor_step)
@@ -370,7 +400,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		}
 
 		pout << "Iteration " << iter << endl;
-		pout << "Residual:" << residual << endl;
 
 	}
 
@@ -885,7 +914,7 @@ const
 		AssertThrowMPI(ierr);
 	}
 #endif //DEAL_II_WITH_MPI
-	return estimated_potential_increment;
+	return sqrt(estimated_potential_increment);
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
