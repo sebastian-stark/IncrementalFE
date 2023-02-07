@@ -914,7 +914,7 @@ const
 		AssertThrowMPI(ierr);
 	}
 #endif //DEAL_II_WITH_MPI
-	return sqrt(estimated_potential_increment);
+	return sqrt(fabs(estimated_potential_increment));
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
