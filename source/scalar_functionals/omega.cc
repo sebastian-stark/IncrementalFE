@@ -89,14 +89,12 @@ const
 		t = global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = e_omega_ref_sets[0][m];
-		eval_time = global_data->get_t_ref();
 	}
 	else if(method == 1)
 	{
 		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * e_omega[m];
-		eval_time = t;
 	}
 	else if(method == 2)
 	{
@@ -109,15 +107,15 @@ const
 				// make sure that predicted values are stored
 				hidden_vars[m - n_v_q_dot - n_mu] = e_omega[m];
 			}
-			eval_time = global_data->get_t_ref();
 		}
 		else
 		{
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 				values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
-			eval_time = t;
+
 		}
 	}
+	eval_time = t;
 
 	double omega;
 	Vector<double> d_omega;
@@ -251,14 +249,12 @@ const
 		t = global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = e_sigma_ref_sets[0][m];
-		eval_time = global_data->get_t_ref();
 	}
 	else if(method == 1)
 	{
 		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * e_sigma[m];
-		eval_time = t;
 	}
 	else if(method == 2)
 	{
@@ -271,15 +267,14 @@ const
 				// make sure that predicted values are stored
 				hidden_vars[m - n_v_q_dot - n_mu] = e_sigma[m];
 			}
-			eval_time = global_data->get_t_ref();
 		}
 		else
 		{
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 				values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
-			eval_time = t;
 		}
 	}
+	eval_time = t;
 
 	double sigma;
 	Vector<double> d_sigma;
@@ -514,19 +509,28 @@ OmegaWrapperCMF<dim,spacedim>::OmegaWrapperCMF(	CMF::ScalarFunction<double, Eige
 												const unsigned int																			n_q,
 												const unsigned int																			method,
 												const double																				alpha,
-												const string																				name)
+												const string																				name,
+												const bool																					use_param,
+												dealii::Function<spacedim> *const															param_fun)
 :
 Omega<dim, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, n_v_dot, n_q_dot, n_mu, n_q, method, alpha, name),
-omega(omega)
+omega(omega),
+use_param(use_param),
+param_fun(param_fun)
 {
-	Assert( (omega.get_N_parameters() >= 2*spacedim + 1),
-			ExcMessage("The function omega must have at least 2*spacedim+1 parameters to store the time, the position vector and the normal vector."));
+#ifdef DEBUG
+	const unsigned int N_params_x_n = use_param ? 7 : 0;
+	const unsigned int N_params_fun = param_fun ? param_fun->n_components : 0;
+
+	Assert( (omega.get_N_parameters() >= N_params_x_n + N_params_fun),
+			ExcMessage("The function omega does not have enough parameters to store the time, the position vector, the normal vector and the extra parameters."));
+#endif
 }
 
 template<unsigned int dim, unsigned int spacedim>
 bool
 OmegaWrapperCMF<dim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
-															const double					t,
+															const double					/*t*/,
 															const Point<spacedim>& 			x,
 															const Tensor<1,spacedim>& 		n,
 															double&							omega_,
@@ -546,13 +550,32 @@ const
 		return true;
 
 	auto parameters = omega.get_parameters();
-	parameters(0) = t;
-	for(unsigned int m = 1; m < spacedim + 1; ++m)
-		parameters(m) = x[m];
-	for(unsigned int m = spacedim + 1; m < 2*spacedim + 1; ++m)
-		parameters(m) = n[m-spacedim];
-	if(omega.set_parameters(parameters))
-		return true;
+	if(use_param)
+	{
+		parameters(0) = this->get_eval_time();
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m+1) = x[m];
+		if(spacedim == 2)
+			parameters(3) = 0.0;
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m+4) = n[m];
+		if(spacedim == 2)
+			parameters(6) = 0.0;
+	}
+	if(param_fun)
+	{
+		const double t_ = param_fun->get_time();
+		param_fun->set_time(this->get_eval_time());
+		const unsigned int start_index = use_param ? 7 : 0;
+		for(unsigned int m = 0; m < param_fun->n_components; ++m)
+			parameters(start_index + m) = param_fun->value(x, m);
+		param_fun->set_time(t_);
+	}
+	if(use_param || param_fun)
+	{
+		if(omega.set_parameters(parameters))
+			return true;
+	}
 
 	if(omega.compute(omega_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
 		return true;
@@ -573,6 +596,34 @@ const
 	return false;
 }
 
+template<unsigned int dim, unsigned int spacedim>
+double
+OmegaWrapperCMF<dim,spacedim>::get_maximum_step(const Vector<double>& 					e_omega,
+												const vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+												const Vector<double>& 					delta_e_omega,
+												const Vector<double>& 					/*hidden_vars*/,
+												const Point<spacedim>& 					/*x*/,
+												const Tensor<1, spacedim>&				/*n*/)
+const
+{
+	double factor = 2.0;
+	Eigen::VectorXd e(e_omega.size());
+
+	while(true)
+	{
+		for(unsigned int m = 0; m < e.size(); ++m)
+			e[m] = e_omega[m] + factor * delta_e_omega[m];
+
+		if(omega.is_in_domain(e))
+			return factor;
+
+		factor *= 0.5;
+		Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the resulting state is admissible!"));
+	}
+
+	return factor;
+}
+
 template<unsigned int spacedim>
 OmegaWrapperCMF<spacedim,spacedim>::OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& omega,
 													const vector<DependentField<spacedim,spacedim>>													e_omega,
@@ -585,20 +636,29 @@ OmegaWrapperCMF<spacedim,spacedim>::OmegaWrapperCMF(CMF::ScalarFunction<double, 
 													const unsigned int																				n_q,
 													const unsigned int																				method,
 													const double																					alpha,
-													const string																					name)
+													const string																					name,
+													const bool																						use_param,
+													dealii::Function<spacedim> *const																param_fun)
 :
 Omega<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, n_v_dot, n_q_dot, n_mu, n_q, method, alpha, name),
-omega(omega)
+omega(omega),
+use_param(use_param),
+param_fun(param_fun)
 {
-	Assert( (omega.get_N_parameters() >= spacedim+1),
-			ExcMessage("The function omega must have at least spacedim+1 parameters to store the time and the position vector."));
+#ifdef DEBUG
+	const unsigned int N_params_x = use_param ? 4 : 0;
+	const unsigned int N_params_fun = param_fun ? param_fun->n_components : 0;
+
+	Assert( (omega.get_N_parameters() >= N_params_x + N_params_fun),
+			ExcMessage("The function omega does not have enough parameters to store the time, the position vector, the normal vector and the extra parameters."));
+#endif
 }
 
 
 template<unsigned int spacedim>
 bool
 OmegaWrapperCMF<spacedim,spacedim>::get_values_and_derivatives(	const Vector<double>& 			values,
-																const double					t,
+																const double					/*t*/,
 																const Point<spacedim>& 			x,
 																double&							omega_,
 																Vector<double>&					d_omega,
@@ -617,11 +677,28 @@ const
 		return true;
 
 	auto parameters = omega.get_parameters();
-	parameters(0) = t;
-	for(unsigned int m = 1; m < spacedim + 1; ++m)
-		parameters(m) = x[m-1];
-	if(omega.set_parameters(parameters))
-		return true;
+	if(use_param)
+	{
+		parameters(0) = this->get_eval_time();
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m+1) = x[m];
+		if(spacedim == 2)
+			parameters(3) = 0.0;
+	}
+	if(param_fun)
+	{
+		const double t_ = param_fun->get_time();
+		param_fun->set_time(this->get_eval_time());
+		const unsigned int start_index = use_param ? 4 : 0;
+		for(unsigned int m = 0; m < param_fun->n_components; ++m)
+			parameters(start_index + m) = param_fun->value(x, m);
+		param_fun->set_time(t_);
+	}
+	if(use_param || param_fun)
+	{
+		if(omega.set_parameters(parameters))
+			return true;
+	}
 
 	if(omega.compute(omega_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
 		return true;
@@ -642,6 +719,32 @@ const
 	return false;
 }
 
+template<unsigned int spacedim>
+double
+OmegaWrapperCMF<spacedim,spacedim>::get_maximum_step(	const Vector<double>& 					e_omega,
+														const vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+														const Vector<double>& 					delta_e_omega,
+														const Vector<double>& 					/*hidden_vars*/,
+														const Point<spacedim>& 					/*x*/)
+const
+{
+	double factor = 2.0;
+	Eigen::VectorXd e(e_omega.size());
+
+	while(true)
+	{
+		for(unsigned int m = 0; m < e.size(); ++m)
+			e[m] = e_omega[m] + factor * delta_e_omega[m];
+
+		if(omega.is_in_domain(e))
+			return factor;
+
+		factor *= 0.5;
+		Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the resulting state is admissible!"));
+	}
+
+	return factor;
+}
 
 #endif /* INCREMENTAL_FE_WITH_CMF */
 

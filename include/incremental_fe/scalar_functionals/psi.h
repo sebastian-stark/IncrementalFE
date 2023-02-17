@@ -298,14 +298,14 @@ public:
 /**
  * Interface Free Energy wrapping a function defined with the CMF library.
  *
- * It is assumed that the first parameters of the CMF function are as follows:<br>
+ * If PsiWrapperCMF::use_param is true, it is assumed that the first six parameters of the CMF function are as follows:<br>
  *
  * parameters[0]   ... parameters[2]	- position vector x<br>
  * parameters[3]   ... parameters[5]	- normal vector n<br>
  *
  * In two dimensions, the third components of x and n are filled with zeroes.
  *
- * Further parameters may follow.
+ * Further parameters may follow and are defined through PsiWrapperCMF::param_fun.
  *
  * @warning	This class is untested so far!
  */
@@ -320,6 +320,18 @@ private:
 	 */
 	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
 	psi;
+
+	/**
+	 * Whether to use position vector and normal vector as parameters
+	 */
+	const bool
+	use_param = true;
+
+	/**
+	 * Parameter function (corresponding parameters are appended to parameter vector)
+	 */
+	dealii::Function<spacedim> *const
+	param_fun;
 
 public:
 
@@ -339,6 +351,10 @@ public:
 	 * @param[in]		alpha					Psi::alpha
 	 *
 	 * @param[in]		name					ScalarFunctional::name
+	 *
+	 * @param[in]		use_param				PsiWrapperCMF<spacedim,spacedim>::use_param
+	 *
+	 * @param[in]		param_fun				PsiWrapperCMF<spacedim,spacedim>::param_fun
 	 */
 	PsiWrapperCMF(	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 					const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
@@ -346,7 +362,9 @@ public:
 					const dealii::Quadrature<dim>																		quadrature,
 					GlobalDataIncrementalFE<spacedim>&																	global_data,
 					const double																						alpha,
-					const std::string																					name);
+					const std::string																					name,
+					const bool																							use_param = true,
+					dealii::Function<spacedim> *const																	param_fun = nullptr);
 
 	/**
 	 * This function defines \f$\psi(q)\f$ based on the wrapped function.
@@ -380,18 +398,32 @@ public:
 	override
 	final;
 
+	/**
+	 * @see ScalarFunctional::get_maximum_step()
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_sigma,
+						const std::vector<dealii::Vector<double>>&	e_sigma_ref_sets,
+						const dealii::Vector<double>& 				delta_e_sigma,
+						const dealii::Vector<double>&				hidden_vars,
+						const dealii::Point<spacedim>&				x,
+						const dealii::Tensor<1, spacedim>&			n)
+	const
+	override
+	final;
+
 };
 
 /**
  * Volume Free Energy wrapping a function defined with the CMF library
  *
- * It is assumed that the first parameters of the CMF function are as follows:<br>
+ * If PsiWrapperCMF<spacedim,spacedim>::use_param is true, it is assumed that the first three parameters of the CMF function are as follows:<br>
  *
  * parameters[0]          ... parameters[2]	- position vector x<br>
  *
  * In two dimensions, the third component of x is set to zero.
  *
- * Further parameters may follow.
+ * Further parameters may follow and are defined through PsiWrapperCMF<spacedim,spacedim>::param_fun.
  *
  * @warning	This class is untested so far!
  */
@@ -406,6 +438,18 @@ private:
 	 */
 	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
 	psi;
+
+	/**
+	 * Whether to use position vector as parameter
+	 */
+	const bool
+	use_param = true;
+
+	/**
+	 * Parameter function (corresponding parameters are appended to parameter vector)
+	 */
+	dealii::Function<spacedim> *const
+	param_fun = nullptr;
 
 public:
 
@@ -425,6 +469,10 @@ public:
 	 * @param[in]		alpha					Psi::alpha
 	 *
 	 * @param[in]		name					ScalarFunctional::name
+	 *
+	 * @param[in]		use_param				PsiWrapperCMF<spacedim,spacedim>::use_param
+	 *
+	 * @param[in]		param_fun				PsiWrapperCMF<spacedim,spacedim>::param_fun
 	 */
 	PsiWrapperCMF(	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 					const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
@@ -432,7 +480,9 @@ public:
 					const dealii::Quadrature<spacedim>																	quadrature,
 					GlobalDataIncrementalFE<spacedim>&																	global_data,
 					const double																						alpha,
-					const std::string																					name);
+					const std::string																					name,
+					const bool																							use_param = true,
+					dealii::Function<spacedim> *const																	param_fun = nullptr);
 
 	/**
 	 * This function defines \f$\psi(q)\f$ based on the wrapped function.
@@ -462,6 +512,20 @@ public:
 	const
 	override
 	final;
+
+	/**
+	 * @see ScalarFunctional<spacedim,spacedim>::get_maximum_step()
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	e_omega_ref_sets,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				hidden_vars,
+						const dealii::Point<spacedim>& 				x)
+	const
+	override
+	final;
+
 };
 
 #endif /* INCREMENTAL_FE_WITH_CMF */

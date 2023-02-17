@@ -25,14 +25,20 @@ Collaboration diagram for incremental\+FE\+::Omega\+Wrapper\+C\+MF$<$ dim, space
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_ab215a6326e7bc64027150c57d03803c9}{Omega\+Wrapper\+C\+MF}} (C\+M\+F\+::\+Scalar\+Function$<$ double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_aa91891c75a28d25107463ceb717cca87}{omega}}, const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const unsigned int n\+\_\+v\+\_\+dot, const unsigned int n\+\_\+q\+\_\+dot, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{n\+\_\+mu}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{n\+\_\+q}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_ae09e949c58fe8e7a7f3ae6031e6435b9}{alpha}}, const std\+::string name)
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_abc857fff71e0c5dc7680afef63be6ed1}{Omega\+Wrapper\+C\+MF}} (C\+M\+F\+::\+Scalar\+Function$<$ double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_aa91891c75a28d25107463ceb717cca87}{omega}}, const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$ e\+\_\+sigma, const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$ domain\+\_\+of\+\_\+integration, const dealii\+::\+Quadrature$<$ dim $>$ quadrature, \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_abd23d288a7a4a43f9b528be968cd2113}{global\+\_\+data}}, const unsigned int n\+\_\+v\+\_\+dot, const unsigned int n\+\_\+q\+\_\+dot, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a322340b50451ab46f91cdcec95248f16}{n\+\_\+mu}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_addbf75c949792f6340ea40164a2bfee3}{n\+\_\+q}}, const unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_omega_a7600d263ebf98129629e44fa67e8a58c}{method}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_omega_ae09e949c58fe8e7a7f3ae6031e6435b9}{alpha}}, const std\+::string name, const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a1660368a9fd39f03d33133878bf61544}{use\+\_\+param}}=true, dealii\+::\+Function$<$ spacedim $>$ $\ast$const \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a9756f3b67d9a7ff37cb8c3590bde3ffa}{param\+\_\+fun}}=nullptr)
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_aebc8de8299c280b8579893fad895b642}{get\+\_\+values\+\_\+and\+\_\+derivatives}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&\textbf{ values}, const double t, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n, double \&\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_aa91891c75a28d25107463ceb717cca87}{omega}}, \textbf{ dealii\+::\+Vector}$<$ double $>$ \&d\+\_\+omega, dealii\+::\+Full\+Matrix$<$ double $>$ \&d2\+\_\+omega, const std\+::tuple$<$ bool, bool, bool $>$ requested\+\_\+quantities, const bool compute\+\_\+d2q) const override final
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a2a080b3926fb82e645e41934fd264fa9}{get\+\_\+maximum\+\_\+step}} (const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&e\+\_\+sigma, const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&e\+\_\+sigma\+\_\+ref\+\_\+sets, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&delta\+\_\+e\+\_\+sigma, const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&hidden\+\_\+vars, const dealii\+::\+Point$<$ spacedim $>$ \&x, const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&n) const override final
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 C\+M\+F\+::\+Scalar\+Function$<$ double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd $>$ \& \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_aa91891c75a28d25107463ceb717cca87}{omega}}
+\item 
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a1660368a9fd39f03d33133878bf61544}{use\+\_\+param}} = true
+\item 
+dealii\+::\+Function$<$ spacedim $>$ $\ast$const \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a9756f3b67d9a7ff37cb8c3590bde3ffa}{param\+\_\+fun}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -43,15 +49,17 @@ class incremental\+F\+E\+::\+Omega\+Wrapper\+C\+M\+F$<$ dim, spacedim $>$}
 
 Interface Dissipation potential wrapping a function defined with the C\+MF library.
 
-It is assumed that the first parameters of the C\+MF function are as follows\+:~\newline
+If \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a1660368a9fd39f03d33133878bf61544}{Omega\+Wrapper\+C\+M\+F\+::use\+\_\+param}} is true, it is assumed that the first seven parameters of the C\+MF function are as follows\+:~\newline
 
 
 parameters\mbox{[}0\mbox{]} -\/ time~\newline
- parameters\mbox{[}1\mbox{]} ... parameters\mbox{[}spacedim\mbox{]} -\/ position vector x~\newline
- parameters\mbox{[}spacedim+1\mbox{]} ... parameters\mbox{[}2$\ast$spacedim\mbox{]} -\/ normal vector n~\newline
+ parameters\mbox{[}1\mbox{]} ... parameters\mbox{[}3\mbox{]} -\/ position vector x~\newline
+ parameters\mbox{[}4\mbox{]} ... parameters\mbox{[}6\mbox{]} -\/ normal vector n~\newline
 
 
-Further parameters may follow.
+In two dimensions, the third components of x and n are filled with zeroes.
+
+Further parameters may follow and are defined through \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f_a9756f3b67d9a7ff37cb8c3590bde3ffa}{Omega\+Wrapper\+C\+M\+F\+::param\+\_\+fun}}.
 
 \begin{DoxyWarning}{Warning}
 This class is untested so far! 
@@ -59,12 +67,12 @@ This class is untested so far!
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_ab215a6326e7bc64027150c57d03803c9}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_ab215a6326e7bc64027150c57d03803c9}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_abc857fff71e0c5dc7680afef63be6ed1}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_abc857fff71e0c5dc7680afef63be6ed1}} 
 \index{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}!OmegaWrapperCMF@{OmegaWrapperCMF}}
 \index{OmegaWrapperCMF@{OmegaWrapperCMF}!incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{OmegaWrapperCMF()}{OmegaWrapperCMF()}}
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
-\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{Omega\+Wrapper\+C\+MF}} (\begin{DoxyParamCaption}\item[{C\+M\+F\+::\+Scalar\+Function$<$ double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd $>$ \&}]{omega,  }\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{n\+\_\+v\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+q\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+mu,  }\item[{const unsigned int}]{n\+\_\+q,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha,  }\item[{const std\+::string}]{name }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{Omega\+Wrapper\+C\+MF}} (\begin{DoxyParamCaption}\item[{C\+M\+F\+::\+Scalar\+Function$<$ double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd $>$ \&}]{omega,  }\item[{const std\+::vector$<$ dealii\+::\+Galerkin\+Tools\+::\+Dependent\+Field$<$ dim, spacedim $>$$>$}]{e\+\_\+sigma,  }\item[{const std\+::set$<$ \textbf{ dealii\+::types\+::material\+\_\+id} $>$}]{domain\+\_\+of\+\_\+integration,  }\item[{const dealii\+::\+Quadrature$<$ dim $>$}]{quadrature,  }\item[{\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}}$<$ spacedim $>$ \&}]{global\+\_\+data,  }\item[{const unsigned int}]{n\+\_\+v\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+q\+\_\+dot,  }\item[{const unsigned int}]{n\+\_\+mu,  }\item[{const unsigned int}]{n\+\_\+q,  }\item[{const unsigned int}]{method,  }\item[{const double}]{alpha,  }\item[{const std\+::string}]{name,  }\item[{const bool}]{use\+\_\+param = {\ttfamily true},  }\item[{dealii\+::\+Function$<$ spacedim $>$ $\ast$const}]{param\+\_\+fun = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 Constructor
 
@@ -92,12 +100,26 @@ Constructor
 \hline
 \mbox{\texttt{ in}}  & {\em alpha} & \mbox{\hyperlink{classincremental_f_e_1_1_omega_ae09e949c58fe8e7a7f3ae6031e6435b9}{Omega\+::alpha}}\\
 \hline
-\mbox{\texttt{ in}}  & {\em name} & \textbf{ Scalar\+Functional\+::name} \\
+\mbox{\texttt{ in}}  & {\em name} & \textbf{ Scalar\+Functional\+::name}\\
+\hline
+\mbox{\texttt{ in}}  & {\em use\+\_\+param} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_wrapper_c_m_f_a873bba0dc308ba5852e459d27df26011}{Psi\+Wrapper\+C\+M\+F\+::use\+\_\+param}}\\
+\hline
+\mbox{\texttt{ in}}  & {\em param\+\_\+fun} & \mbox{\hyperlink{classincremental_f_e_1_1_psi_wrapper_c_m_f_a8466d1650b08569e656328665f5df42a}{Psi\+Wrapper\+C\+M\+F\+::param\+\_\+fun}} \\
 \hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_a2a080b3926fb82e645e41934fd264fa9}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_a2a080b3926fb82e645e41934fd264fa9}} 
+\index{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}!get\_maximum\_step@{get\_maximum\_step}}
+\index{get\_maximum\_step@{get\_maximum\_step}!incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_step()}{get\_maximum\_step()}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::get\+\_\+maximum\+\_\+step (\begin{DoxyParamCaption}\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{e\+\_\+sigma,  }\item[{const std\+::vector$<$ \textbf{ dealii\+::\+Vector}$<$ double $>$$>$ \&}]{e\+\_\+sigma\+\_\+ref\+\_\+sets,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{delta\+\_\+e\+\_\+sigma,  }\item[{const \textbf{ dealii\+::\+Vector}$<$ double $>$ \&}]{hidden\+\_\+vars,  }\item[{const dealii\+::\+Point$<$ spacedim $>$ \&}]{x,  }\item[{const dealii\+::\+Tensor$<$ 1, spacedim $>$ \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [override]}}
+
+\begin{DoxySeeAlso}{See also}
+\textbf{ Scalar\+Functional\+::get\+\_\+maximum\+\_\+step()} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_aebc8de8299c280b8579893fad895b642}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_aebc8de8299c280b8579893fad895b642}} 
 \index{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}!get\_values\_and\_derivatives@{get\_values\_and\_derivatives}}
 \index{get\_values\_and\_derivatives@{get\_values\_and\_derivatives}!incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}}
@@ -145,7 +167,21 @@ Implements \mbox{\hyperlink{classincremental_f_e_1_1_omega_a2f35d862aefa11151de5
 {\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
 C\+M\+F\+::\+Scalar\+Function$<$double, Eigen\+::\+Vector\+Xd, Eigen\+::\+Matrix\+Xd, Eigen\+::\+Vector\+Xd, Eigen\+::\+Vector\+Xd$>$\& \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::omega\hspace{0.3cm}{\ttfamily [private]}}
 
-The function wrapped 
+The function wrapped \mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_a9756f3b67d9a7ff37cb8c3590bde3ffa}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_a9756f3b67d9a7ff37cb8c3590bde3ffa}} 
+\index{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}!param\_fun@{param\_fun}}
+\index{param\_fun@{param\_fun}!incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{param\_fun}{param\_fun}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+dealii\+::\+Function$<$spacedim$>$$\ast$ const \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::param\+\_\+fun\hspace{0.3cm}{\ttfamily [private]}}
+
+Parameter function (corresponding parameters are appended to parameter vector) \mbox{\Hypertarget{classincremental_f_e_1_1_omega_wrapper_c_m_f_a1660368a9fd39f03d33133878bf61544}\label{classincremental_f_e_1_1_omega_wrapper_c_m_f_a1660368a9fd39f03d33133878bf61544}} 
+\index{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}!use\_param@{use\_param}}
+\index{use\_param@{use\_param}!incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$@{incrementalFE::OmegaWrapperCMF$<$ dim, spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{use\_param}{use\_param}}
+{\footnotesize\ttfamily template$<$unsigned int dim, unsigned int spacedim$>$ \\
+const bool \mbox{\hyperlink{classincremental_f_e_1_1_omega_wrapper_c_m_f}{incremental\+F\+E\+::\+Omega\+Wrapper\+C\+MF}}$<$ dim, spacedim $>$\+::use\+\_\+param = true\hspace{0.3cm}{\ttfamily [private]}}
+
+Whether to use time, position vector and normal vector as parameters 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

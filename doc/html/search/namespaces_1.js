@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['algorithms_9560',['Algorithms',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceAlgorithms.html',1,'']]],
-  ['arpacksolver_9561',['ArpackSolver',['https://dealii.org/9.0.0/doxygen/deal.II/structArpackSolver_1_1AdditionalData.html',1,'']]],
-  ['auxiliary_9562',['Auxiliary',['https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/namespace_auxiliary.html',1,'']]],
-  ['events_9563',['Events',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceAlgorithms_1_1Events.html',1,'Algorithms']]]
+  ['algorithms_9562',['Algorithms',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceAlgorithms.html',1,'']]],
+  ['arpacksolver_9563',['ArpackSolver',['https://dealii.org/9.0.0/doxygen/deal.II/structArpackSolver_1_1AdditionalData.html',1,'']]],
+  ['auxiliary_9564',['Auxiliary',['https://htmlpreview.github.io/?https://github.com/starki0815/GalerkinTools/blob/master/doc/html/namespace_auxiliary.html',1,'']]],
+  ['events_9565',['Events',['https://dealii.org/9.0.0/doxygen/deal.II/namespaceAlgorithms_1_1Events.html',1,'Algorithms']]]
 ];

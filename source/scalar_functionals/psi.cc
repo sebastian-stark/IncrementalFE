@@ -208,14 +208,22 @@ PsiWrapperCMF<dim,spacedim>::PsiWrapperCMF(	ScalarFunction<double, Eigen::Vector
 											const Quadrature<dim>																			quadrature,
 											GlobalDataIncrementalFE<spacedim>&																global_data,
 											const double																					alpha,
-											const string																					name)
+											const string																					name,
+											const bool																						use_param,
+											dealii::Function<spacedim> *const																param_fun)
 :
 Psi<dim, spacedim>(e_sigma, domain_of_integration, quadrature, global_data, alpha, name),
-psi(psi)
+psi(psi),
+use_param(use_param),
+param_fun(param_fun)
 {
-	Assert( (psi.get_N_parameters() >= 2*spacedim),
-			ExcMessage("The function psi must have at least 2*spacedim parameters to store the position vector and the normal vector."));
+#ifdef DEBUG
+	const unsigned int N_params_x_n = use_param ? 6 : 0;
+	const unsigned int N_params_fun = param_fun ? param_fun->n_components : 0;
 
+	Assert( (psi.get_N_parameters() >= N_params_x_n + N_params_fun),
+			ExcMessage("The function psi does not have enough parameters to store the position vector, the normal vector and the extra parameters."));
+#endif
 }
 
 template<unsigned int dim, unsigned int spacedim>
@@ -240,16 +248,31 @@ const
 		return true;
 
 	auto parameters = psi.get_parameters();
-	for(unsigned int m = 0; m < spacedim; ++m)
-		parameters(m) = x[m];
-	if(spacedim == 2)
-		parameters(2) = 0.0;
-	for(unsigned int m = 3; m < 3 + spacedim; ++m)
-		parameters(m) = n[m-3];
-	if(spacedim == 2)
-		parameters(5) = 0.0;
-	if(psi.set_parameters(parameters))
-		return true;
+	if(use_param)
+	{
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m) = x[m];
+		if(spacedim == 2)
+			parameters(2) = 0.0;
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m+3) = n[m];
+		if(spacedim == 2)
+			parameters(5) = 0.0;
+	}
+	if(param_fun)
+	{
+		const double t_ = param_fun->get_time();
+		param_fun->set_time(this->get_eval_time());
+		const unsigned int start_index = use_param ? 6 : 0;
+		for(unsigned int m = 0; m < param_fun->n_components; ++m)
+			parameters(start_index + m) = param_fun->value(x, m);
+		param_fun->set_time(t_);
+	}
+	if(use_param || param_fun)
+	{
+		if(psi.set_parameters(parameters))
+			return true;
+	}
 
 	if(psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
 		return true;
@@ -270,6 +293,34 @@ const
 	return false;
 }
 
+template<unsigned int dim, unsigned int spacedim>
+double
+PsiWrapperCMF<dim,spacedim>::get_maximum_step(	const Vector<double>& 					e_omega,
+												const vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+												const Vector<double>& 					delta_e_omega,
+												const Vector<double>& 					/*hidden_vars*/,
+												const Point<spacedim>& 					/*x*/,
+												const Tensor<1, spacedim>&				/*n*/)
+const
+{
+	double factor = 2.0;
+	Eigen::VectorXd e(e_omega.size());
+
+	while(true)
+	{
+		for(unsigned int m = 0; m < e.size(); ++m)
+			e[m] = e_omega[m] + factor * delta_e_omega[m];
+
+		if(psi.is_in_domain(e))
+			return factor;
+
+		factor *= 0.5;
+		Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the resulting state is admissible!"));
+	}
+
+	return factor;
+}
+
 template<unsigned int spacedim>
 PsiWrapperCMF<spacedim,spacedim>::PsiWrapperCMF(ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	psi,
 												const vector<DependentField<spacedim,spacedim>>													e_omega,
@@ -277,13 +328,22 @@ PsiWrapperCMF<spacedim,spacedim>::PsiWrapperCMF(ScalarFunction<double, Eigen::Ve
 												const Quadrature<spacedim>																		quadrature,
 												GlobalDataIncrementalFE<spacedim>&																global_data,
 												const double																					alpha,
-												const string																					name)
+												const string																					name,
+												const bool																						use_param,
+												dealii::Function<spacedim> *const																param_fun)
 :
 Psi<spacedim, spacedim>(e_omega, domain_of_integration, quadrature, global_data, alpha, name),
-psi(psi)
+psi(psi),
+use_param(use_param),
+param_fun(param_fun)
 {
-	Assert( (psi.get_N_parameters() >= spacedim),
-			ExcMessage("The function psi must have at least spacedim parameters to store the position vector."));
+#ifdef DEBUG
+	const unsigned int N_params_x = use_param ? 3 : 0;
+	const unsigned int N_params_fun = param_fun ? param_fun->n_components : 0;
+
+	Assert( (psi.get_N_parameters() >= N_params_x + N_params_fun),
+			ExcMessage("The function psi does not have enough parameters to store the position vector, the normal vector and the extra parameters."));
+#endif
 }
 
 template<unsigned int spacedim>
@@ -306,13 +366,27 @@ const
 		return true;
 
 	auto parameters = psi.get_parameters();
-	for(unsigned int m = 0; m < spacedim; ++m)
-		parameters(m) = x[m];
-	if(spacedim == 2)
-		parameters(2) = 0.0;
-
-	if(psi.set_parameters(parameters))
-		return true;
+	if(use_param)
+	{
+		for(unsigned int m = 0; m < spacedim; ++m)
+			parameters(m) = x[m];
+		if(spacedim == 2)
+			parameters(2) = 0.0;
+	}
+	if(param_fun)
+	{
+		const double t_ = param_fun->get_time();
+		param_fun->set_time(this->get_eval_time());
+		const unsigned int start_index = use_param ? 3 : 0;
+		for(unsigned int m = 0; m < param_fun->n_components; ++m)
+			parameters(start_index + m) = param_fun->value(x, m);
+		param_fun->set_time(t_);
+	}
+	if(use_param || param_fun)
+	{
+		if(psi.set_parameters(parameters))
+			return true;
+	}
 
 	if(psi.compute(psi_, gradient, hessian, get<0>(requested_quantities), get<1>(requested_quantities), get<2>(requested_quantities)))
 		return true;
@@ -331,6 +405,33 @@ const
 	}
 
 	return false;
+}
+
+template<unsigned int spacedim>
+double
+PsiWrapperCMF<spacedim,spacedim>::get_maximum_step(	const Vector<double>& 					e_omega,
+													const vector<dealii::Vector<double>>&	/*e_omega_ref_sets*/,
+													const Vector<double>& 					delta_e_omega,
+													const Vector<double>& 					/*hidden_vars*/,
+													const Point<spacedim>& 					/*x*/)
+const
+{
+	double factor = 2.0;
+	Eigen::VectorXd e(e_omega.size());
+
+	while(true)
+	{
+		for(unsigned int m = 0; m < e.size(); ++m)
+			e[m] = e_omega[m] + factor * delta_e_omega[m];
+
+		if(psi.is_in_domain(e))
+			return factor;
+
+		factor *= 0.5;
+		Assert(factor > 0.0, dealii::ExcMessage("Cannot determine a positive scaling of the load step such that the resulting state is admissible!"));
+	}
+
+	return factor;
 }
 
 #endif /* INCREMENTAL_FE_WITH_CMF */

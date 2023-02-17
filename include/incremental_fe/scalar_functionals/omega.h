@@ -580,13 +580,15 @@ public:
 /**
  * Interface Dissipation potential wrapping a function defined with the CMF library.
  *
- * It is assumed that the first parameters of the CMF function are as follows:<br>
+ * If OmegaWrapperCMF::use_param is true, it is assumed that the first seven parameters of the CMF function are as follows:<br>
  *
- * parameters[0]										- time<br>
- * parameters[1]          ... parameters[spacedim]		- position vector x<br>
- * parameters[spacedim+1]   ... parameters[2*spacedim]	- normal vector n<br>
+ * parameters[0]						- time<br>
+ * parameters[1]   ... parameters[3]	- position vector x<br>
+ * parameters[4]   ... parameters[6]	- normal vector n<br>
  *
- * Further parameters may follow.
+ * In two dimensions, the third components of x and n are filled with zeroes.
+ *
+ * Further parameters may follow and are defined through OmegaWrapperCMF::param_fun.
  *
  * @warning	This class is untested so far!
  */
@@ -601,6 +603,18 @@ private:
 	 */
 	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
 	omega;
+
+	/**
+	 * Whether to use time, position vector and normal vector as parameters
+	 */
+	const bool
+	use_param = true;
+
+	/**
+	 * Parameter function (corresponding parameters are appended to parameter vector)
+	 */
+	dealii::Function<spacedim> *const
+	param_fun;
 
 public:
 
@@ -630,6 +644,11 @@ public:
 	 * @param[in]		alpha					Omega::alpha
 	 *
 	 * @param[in]		name					ScalarFunctional::name
+	 *
+	 * @param[in]		use_param				PsiWrapperCMF::use_param
+	 *
+	 * @param[in]		param_fun				PsiWrapperCMF::param_fun
+	 *
 	 */
 	OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	omega,
 					const std::vector<dealii::GalerkinTools::DependentField<dim,spacedim>>								e_sigma,
@@ -642,7 +661,9 @@ public:
 					const unsigned int																					n_q,
 					const unsigned int																					method,
 					const double																						alpha,
-					const std::string																					name);
+					const std::string																					name,
+					const bool																							use_param = true,
+					dealii::Function<spacedim> *const																	param_fun = nullptr);
 
 	/**
 	 * This function defines \f$\omega^\Sigma\f$ based on the wrapped function.
@@ -685,17 +706,33 @@ public:
 	override
 	final;
 
+	/**
+	 * @see ScalarFunctional::get_maximum_step()
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_sigma,
+						const std::vector<dealii::Vector<double>>&	e_sigma_ref_sets,
+						const dealii::Vector<double>& 				delta_e_sigma,
+						const dealii::Vector<double>&				hidden_vars,
+						const dealii::Point<spacedim>&				x,
+						const dealii::Tensor<1, spacedim>&			n)
+	const
+	override
+	final;
+
 };
 
 /**
  * Volume Dissipation potential wrapping a function defined with the CMF library.
  *
- * It is assumed that the first parameters of the CMF function are as follows:<br>
+ * If OmegaWrapperCMF<spacedim,spacedim>::use_param is true, it is assumed that the first four parameters of the CMF function are as follows:<br>
  *
- * parameters[0]										- time<br>
- * parameters[1]          ... parameters[spacedim]		- position vector x<br>
+ * parameters[0]						- time<br>
+ * parameters[1]   ... parameters[3]	- position vector x<br>
  *
- * Further parameters may follow.
+ * In two dimensions, the third component of x is filled with zeroes.
+ *
+ * Further parameters may follow and are defined through OmegaWrapperCMF<spacedim,spacedim>::param_fun.
  *
  * @warning	This class is untested so far!
  */
@@ -710,6 +747,18 @@ private:
 	 */
 	CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>&
 	omega;
+
+	/**
+	 * Whether to use time and position vector as parameters
+	 */
+	const bool
+	use_param = true;
+
+	/**
+	 * Parameter function (corresponding parameters are appended to parameter vector)
+	 */
+	dealii::Function<spacedim> *const
+	param_fun;
 
 public:
 
@@ -739,6 +788,10 @@ public:
 	 * @param[in]		alpha					Omega::alpha
 	 *
 	 * @param[in]		name					ScalarFunctional::name
+	 *
+	 * @param[in]		use_param				PsiWrapperCMF::use_param
+	 *
+	 * @param[in]		param_fun				PsiWrapperCMF::param_fun
 	 */
 	OmegaWrapperCMF(CMF::ScalarFunction<double, Eigen::VectorXd, Eigen::MatrixXd, Eigen::VectorXd, Eigen::VectorXd>& 	omega,
 					const std::vector<dealii::GalerkinTools::DependentField<spacedim,spacedim>>							e_omega,
@@ -751,7 +804,9 @@ public:
 					const unsigned int																					n_q,
 					const unsigned int																					method,
 					const double																						alpha = 0.0,
-					const std::string																					name = "Omega");
+					const std::string																					name = "Omega",
+					const bool																							use_param = true,
+					dealii::Function<spacedim> *const																	param_fun = nullptr);
 
 	/**
 	 * This function defines \f$\omega^\Omega\f$ based on the wrapped function.
@@ -787,6 +842,19 @@ public:
 								dealii::FullMatrix<double>&			d2_omega,
 								const std::tuple<bool, bool, bool>	requested_quantities,
 								const bool							compute_d2q)
+	const
+	override
+	final;
+
+	/**
+	 * @see ScalarFunctional<spacedim,spacedim>::get_maximum_step()
+	 */
+	double
+	get_maximum_step(	const dealii::Vector<double>& 				e_omega,
+						const std::vector<dealii::Vector<double>>&	e_omega_ref_sets,
+						const dealii::Vector<double>& 				delta_e_omega,
+						const dealii::Vector<double>& 				hidden_vars,
+						const dealii::Point<spacedim>& 				x)
 	const
 	override
 	final;
