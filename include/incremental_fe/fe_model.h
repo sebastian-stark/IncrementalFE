@@ -31,6 +31,7 @@
 #include <incremental_fe/constraints.h>
 #include <incremental_fe/global_data_incremental_fe.h>
 #include <incremental_fe/config.h>
+#include <incremental_fe/manufactured_solution.h>
 #include <boost/signals2.hpp>
 
 namespace incrementalFE
@@ -209,6 +210,18 @@ private:
 	 */
 	double
 	solve_time_last_step = 0.0;
+
+	/**
+	 * This holds an object representing the manufactured solution.
+	 */
+	ManufacturedSolution<SolutionVectorType>*
+	manufactured_solution = nullptr;
+
+	/**
+	 * The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals.
+	 */
+	double
+	alpha_manufactured = 0.5;
 
 	/**
 	 * Reinit a solution type vector
@@ -620,6 +633,15 @@ public:
 	double
 	get_solve_time_last_step()
 	const;
+
+	/**
+	 * @param[in]	manufactured_solution	Object representing the manufactured solution.
+	 *
+	 * @param[in]	alpha					The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals.
+	 */
+	void
+	set_manufactured_solution(	ManufacturedSolution<SolutionVectorType>* 	manufactured_solution,
+								const double 								alpha_manufactured);
 
 };
 

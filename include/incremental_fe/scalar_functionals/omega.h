@@ -77,6 +77,34 @@ private:
 	mutable double
 	eval_time = 0.0;
 
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time t_k
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_0;
+
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time (1-alpha)*t_k + alpha*t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_alpha;
+
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_1;
+
+	/**
+	 * map between unique quadrature point identifier and derivative of manufactured solution for dependent fields at time (1-alpha)*t_k + alpha*t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_alpha_der;
+
 public:
 
 	/**
@@ -261,6 +289,34 @@ private:
 	 */
 	mutable double
 	eval_time = 0.0;
+
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time t_k
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_0;
+
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time (1-alpha)*t_k + alpha*t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_alpha;
+
+	/**
+	 * map between unique quadrature point identifier and manufactured solution for dependent fields at time t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_1;
+
+	/**
+	 * map between unique quadrature point identifier and derivative of manufactured solution for dependent fields at time (1-alpha)*t_k + alpha*t_k+1
+	 */
+	mutable
+	std::map<std::string, dealii::Vector<double>>
+	manufactured_sol_alpha_der;
 
 public:
 

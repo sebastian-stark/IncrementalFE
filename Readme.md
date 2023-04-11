@@ -15,5 +15,7 @@ Installation of the IncrementalFE library is through cmake:
 7. optionally set an environment variable to INCREMENTAL_FE_DIR=/path/to/install/dir
 8. optionally run the tests (first cd /path/to/folder/build, then ctest)
 
+If you want to use the spline library of T. Kluge ([https://kluge.in-chemnitz.de/opensource/spline/](https://kluge.in-chemnitz.de/opensource/spline/)) for the manufactured solution capability (class ManufacturedSolutionSpline), you must pass the path to the header file to cmake by a flag -DSPLINE_DIR=/path/to/spline/header
+
 Acknowledgements:
 The IncrementalFE library has been developed during a project supported by the Deutsche Forschungsgemeinschaft (DFG) under Grants STA 1593/1-1 and STA 1593/2-1.

@@ -71,102 +71,173 @@ Omega<spacedim, spacedim>::get_h_omega(	Vector<double>&					e_omega,
 										const tuple<bool, bool, bool>	requested_quantities)
 const
 {
-	// times
-	const double dt = global_data->get_t() - global_data->get_t_ref();
-
-	// Vector in which the approximated values of q_dot, mu, q are sorted
-	Vector<double> values(n_v_q_dot + n_mu + n_q);
-
-	// time of evaluation
-	double t = 0.0;
-
-	for(unsigned int m = 0; m < n_v_q_dot; ++m)
-		values[m] = (e_omega[m] - e_omega_ref_sets[0][m])/dt;
-	for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
-		values[m] = e_omega[m];
-	if(method == 0)
+	if(global_data->get_update_manufactured_solution()==1)
 	{
-		t = global_data->get_t();
-		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			values[m] = e_omega_ref_sets[0][m];
+		manufactured_sol_0[this->q_point_id] = e_omega;
 	}
-	else if(method == 1)
+	else if(global_data->get_update_manufactured_solution()==2)
 	{
-		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
-		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * e_omega[m];
+		manufactured_sol_alpha[this->q_point_id] = e_omega;
 	}
-	else if(method == 2)
+	else if(global_data->get_update_manufactured_solution()==3)
 	{
-		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
-		if(global_data->get_predictor_step())
+		manufactured_sol_1[this->q_point_id] = e_omega;
+	}
+	else if(global_data->get_update_manufactured_solution()==4)
+	{
+		manufactured_sol_alpha_der[this->q_point_id] = e_omega;
+	}
+/*	else
+	{
+		if(manufactured_sol_0.size() > 0)
 		{
+			cout << "Omega" << endl;
+			for(unsigned int m = 0; m < e_omega.size(); ++ m)
+				printf("%- 1.16e %- 1.16e %- 1.16e %- 1.16e %- 1.16e %- 1.16e\n", e_omega[m], e_omega_ref_sets[0][m], manufactured_sol_0[this->q_point_id][m], manufactured_sol_alpha[this->q_point_id][m], manufactured_sol_1[this->q_point_id][m], manufactured_sol_alpha_der[this->q_point_id][m]);
+			cout << endl;
+		}
+	}*/
+	else
+	{
+		// times
+		const double dt = global_data->get_t() - global_data->get_t_ref();
+
+		// Vector in which the approximated values of q_dot, mu, q are sorted
+		Vector<double> values(n_v_q_dot + n_mu + n_q);
+
+		// time of evaluation
+		double t = 0.0;
+
+		for(unsigned int m = 0; m < n_v_q_dot; ++m)
+			values[m] = (e_omega[m] - e_omega_ref_sets[0][m])/dt;
+		for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+			values[m] = e_omega[m];
+		if(method == 0)
+		{
+			t = global_data->get_t();
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			{
 				values[m] = e_omega_ref_sets[0][m];
-				// make sure that predicted values are stored
-				hidden_vars[m - n_v_q_dot - n_mu] = e_omega[m];
-			}
 		}
-		else
+		else if(method == 1)
 		{
+			t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-				values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
-
+				values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * e_omega[m];
 		}
-	}
-	eval_time = t;
-
-	double omega;
-	Vector<double> d_omega;
-	FullMatrix<double> d2_omega;
-	if(get<1>(requested_quantities))
-		d_omega.reinit(n_v_q_dot + n_mu);
-	if(get<2>(requested_quantities))
-		d2_omega.reinit(n_v_q_dot + n_mu, method == 1 ? n_v_q_dot + n_mu + n_q : n_v_q_dot + n_mu);
-
-	//get derivatives
-	if(get_values_and_derivatives(values, t, x, omega, d_omega, d2_omega, requested_quantities, method == 1 ? true : false))
-		return true;
-
-	// sort into return quantities
-	if(get<0>(requested_quantities))
-	{
-		if((method != 1) && compute_potential_value)
-			h_omega = dt * omega;
-		else
-			h_omega = 0.0;
-	}
-	if(get<1>(requested_quantities))
-	{
-		h_omega_1.reinit(e_omega.size());
-		for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
-			h_omega_1[m] = dt * d_omega[m];
-		for(unsigned int m = 0; m < n_v_q_dot; ++m)
-			h_omega_1[m] *= 1.0/dt;
-	}
-	if(get<2>(requested_quantities))
-	{
-		h_omega_2.reinit(e_omega.size(), e_omega.size());
-		for(unsigned int m = 0; m < d2_omega.m(); ++m)
-			for(unsigned int n = 0; n < d2_omega.n(); ++n)
-				h_omega_2(m, n) = dt * d2_omega(m,n);
-
-		for(unsigned int m = 0; m < n_v_q_dot; ++m)
+		else if(method == 2)
 		{
-			for(unsigned int n = 0; n < n_v_q_dot + n_mu + n_q; ++n)
+			t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
+			if(global_data->get_predictor_step())
 			{
-				h_omega_2(m, n) *= 1.0/dt;
-				h_omega_2(n, m) *= 1.0/dt;
+				for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				{
+					values[m] = e_omega_ref_sets[0][m];
+					// make sure that predicted values are stored
+					hidden_vars[m - n_v_q_dot - n_mu] = e_omega[m];
+				}
+			}
+			else
+			{
+				for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+					values[m] = (1.0 - alpha) * e_omega_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
+
+			}
+		}
+		eval_time = t;
+
+		double omega;
+		Vector<double> d_omega;
+		FullMatrix<double> d2_omega;
+		if(get<1>(requested_quantities))
+			d_omega.reinit(n_v_q_dot + n_mu);
+		if(get<2>(requested_quantities))
+			d2_omega.reinit(n_v_q_dot + n_mu, method == 1 ? n_v_q_dot + n_mu + n_q : n_v_q_dot + n_mu);
+
+		//get derivatives
+		if(get_values_and_derivatives(values, t, x, omega, d_omega, d2_omega, requested_quantities, method == 1 ? true : false))
+			return true;
+
+		// sort into return quantities
+		if(get<0>(requested_quantities))
+		{
+			if((method != 1) && compute_potential_value)
+				h_omega = dt * omega;
+			else
+				h_omega = 0.0;
+		}
+		if(get<1>(requested_quantities))
+		{
+			h_omega_1.reinit(e_omega.size());
+			for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
+				h_omega_1[m] = dt * d_omega[m];
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+				h_omega_1[m] *= 1.0/dt;
+		}
+		if(get<2>(requested_quantities))
+		{
+			h_omega_2.reinit(e_omega.size(), e_omega.size());
+			for(unsigned int m = 0; m < d2_omega.m(); ++m)
+				for(unsigned int n = 0; n < d2_omega.n(); ++n)
+					h_omega_2(m, n) = dt * d2_omega(m,n);
+
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+			{
+				for(unsigned int n = 0; n < n_v_q_dot + n_mu + n_q; ++n)
+				{
+					h_omega_2(m, n) *= 1.0/dt;
+					h_omega_2(n, m) *= 1.0/dt;
+				}
+			}
+
+			if(method == 1)
+			{
+				for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
+					for(unsigned int n = n_v_q_dot + n_mu; n < n_v_q_dot + n_mu + n_q; ++n)
+						h_omega_2(m, n) *= alpha;
 			}
 		}
 
-		if(method == 1)
+		if(global_data->get_use_manufactured_solution())
 		{
-			for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
-				for(unsigned int n = n_v_q_dot + n_mu; n < n_v_q_dot + n_mu + n_q; ++n)
-					h_omega_2(m, n) *= alpha;
+			Assert(	n_mu == 0,
+					ExcMessage("The manufactured solution capability is entirely untested with Lagrange multipliers. If you want to use it, this assertion must be removed followed by proper testing!") );
+
+			double h_omega_manufactured;
+			Vector<double>	h_omega_1_manufactured(e_omega.size()), e_manufactured(e_omega.size());
+			FullMatrix<double>	h_omega_2_manufactured;
+
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+				e_manufactured[m] = manufactured_sol_alpha_der[this->q_point_id][m];
+			for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+				e_manufactured[m] = manufactured_sol_alpha[this->q_point_id][m];
+			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				e_manufactured[m] = manufactured_sol_alpha[this->q_point_id][m];
+
+			h_omega_1_manufactured = 0.0;
+			eval_time = t;
+
+			if(get_values_and_derivatives(e_manufactured, t, x, h_omega_manufactured, h_omega_1_manufactured, h_omega_2_manufactured, make_tuple(true, true, false), false))
+				return true;
+
+			for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+				h_omega_1_manufactured[m] *= dt;
+
+			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				h_omega_1_manufactured[m] = 0.0;
+
+
+//			cout << "Delta / " << this->q_point_id <<  endl;
+//			for(unsigned int m = 0; m < e_omega.size(); ++ m)
+//				printf("%- 1.16e %- 1.16e\n", h_omega_1[m], h_omega_1_manufactured[m]);
+//			for(unsigned int m = 0; m < e_omega.size(); ++ m)
+//				printf("%- 1.16e %- 1.16e\n", e_manufactured[m], values[m]);
+//			for(unsigned int m = 0; m < e_omega.size(); ++ m)
+//				printf("%- 1.16e %- 1.16e %- 1.16e %- 1.16e\n", e_omega_ref_sets[0][m], e_omega[m], manufactured_sol_alpha[this->q_point_id][m], values[m]);
+//			cout << endl;
+
+			// Here: Add terms
 		}
+
 	}
 
 	return false;
@@ -231,101 +302,162 @@ Omega<dim, spacedim>::get_h_sigma(	Vector<double>& 				e_sigma,
 									const tuple<bool, bool, bool>	requested_quantities)
 const
 {
-	// times
-	const double dt = global_data->get_t() - global_data->get_t_ref();
-
-	// Vector in which the approximated values of q_dot, mu, q are sorted
-	Vector<double> values(n_v_q_dot + n_mu + n_q);
-
-	// time of evaluation
-	double t = 0.0;
-
-	for(unsigned int m = 0; m < n_v_q_dot; ++m)
-		values[m] = (e_sigma[m] - e_sigma_ref_sets[0][m])/dt;
-	for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
-		values[m] = e_sigma[m];
-	if(method == 0)
+	if(global_data->get_update_manufactured_solution()==1)
 	{
-		t = global_data->get_t();
-		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			values[m] = e_sigma_ref_sets[0][m];
+		manufactured_sol_0[this->q_point_id] = e_sigma;
 	}
-	else if(method == 1)
+	else if(global_data->get_update_manufactured_solution()==2)
 	{
-		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
-		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * e_sigma[m];
+		manufactured_sol_alpha[this->q_point_id] = e_sigma;
 	}
-	else if(method == 2)
+	else if(global_data->get_update_manufactured_solution()==3)
 	{
-		t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
-		if(global_data->get_predictor_step())
+		manufactured_sol_1[this->q_point_id] = e_sigma;
+	}
+	else if(global_data->get_update_manufactured_solution()==4)
+	{
+		manufactured_sol_alpha_der[this->q_point_id] = e_sigma;
+	}
+	/*	else
+	{
+		if(manufactured_sol_0.size() > 0)
 		{
+			cout << "Omega" << endl;
+			for(unsigned int m = 0; m < e_sigma.size(); ++ m)
+				printf("%- 1.16e %- 1.16e %- 1.16e %- 1.16e %- 1.16e\n", e_sigma[m], e_sigma_ref_sets[0][m], manufactured_sol_0[this->q_point_id][m], manufactured_sol_alpha[this->q_point_id][m], manufactured_sol_1[this->q_point_id][m]);
+			cout << endl;
+		}
+	}*/
+	else
+	{
+		// times
+		const double dt = global_data->get_t() - global_data->get_t_ref();
+
+		// Vector in which the approximated values of q_dot, mu, q are sorted
+		Vector<double> values(n_v_q_dot + n_mu + n_q);
+
+		// time of evaluation
+		double t = 0.0;
+
+		for(unsigned int m = 0; m < n_v_q_dot; ++m)
+			values[m] = (e_sigma[m] - e_sigma_ref_sets[0][m])/dt;
+		for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+			values[m] = e_sigma[m];
+		if(method == 0)
+		{
+			t = global_data->get_t();
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			{
 				values[m] = e_sigma_ref_sets[0][m];
-				// make sure that predicted values are stored
-				hidden_vars[m - n_v_q_dot - n_mu] = e_sigma[m];
-			}
 		}
-		else
+		else if(method == 1)
 		{
+			t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
 			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-				values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
+				values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * e_sigma[m];
 		}
-	}
-	eval_time = t;
-
-	double sigma;
-	Vector<double> d_sigma;
-	FullMatrix<double> d2_sigma;
-	if(get<1>(requested_quantities))
-		d_sigma.reinit(n_v_q_dot + n_mu);
-	if(get<2>(requested_quantities))
-		d2_sigma.reinit(n_v_q_dot + n_mu, method == 1 ? n_v_q_dot + n_mu + n_q : n_v_q_dot + n_mu);
-
-	//get derivatives
-	if(get_values_and_derivatives(values, t, x, n, sigma, d_sigma, d2_sigma, requested_quantities, method == 1 ? true : false))
-		return true;
-
-	// sort into return quantities
-	if(get<0>(requested_quantities))
-	{
-		if((method != 1) && compute_potential_value)
-			h_sigma = dt * sigma;
-		else
-			h_sigma = 0.0;
-	}
-	if(get<1>(requested_quantities))
-	{
-		h_sigma_1.reinit(e_sigma.size());
-		for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
-			h_sigma_1[m] = dt * d_sigma[m];
-		for(unsigned int m = 0; m < n_v_q_dot; ++m)
-			h_sigma_1[m] *= 1.0/dt;
-	}
-	if(get<2>(requested_quantities))
-	{
-		h_sigma_2.reinit(e_sigma.size(), e_sigma.size());
-		for(unsigned int m = 0; m < d2_sigma.m(); ++m)
-			for(unsigned int n = 0; n < d2_sigma.n(); ++n)
-				h_sigma_2(m, n) = dt * d2_sigma(m,n);
-
-		for(unsigned int m = 0; m < n_v_q_dot; ++m)
+		else if(method == 2)
 		{
-			for(unsigned int n = 0; n < n_v_q_dot + n_mu + n_q; ++n)
+			t = (1.0 - alpha) * global_data->get_t_ref() + alpha * global_data->get_t();
+			if(global_data->get_predictor_step())
 			{
-				h_sigma_2(m, n) *= 1.0/dt;
-				h_sigma_2(n, m) *= 1.0/dt;
+				for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				{
+					values[m] = e_sigma_ref_sets[0][m];
+					// make sure that predicted values are stored
+					hidden_vars[m - n_v_q_dot - n_mu] = e_sigma[m];
+				}
+			}
+			else
+			{
+				for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+					values[m] = (1.0 - alpha) * e_sigma_ref_sets[0][m] + alpha * hidden_vars[m - n_v_q_dot - n_mu];
+			}
+		}
+		eval_time = t;
+
+		double sigma;
+		Vector<double> d_sigma;
+		FullMatrix<double> d2_sigma;
+		if(get<1>(requested_quantities))
+			d_sigma.reinit(n_v_q_dot + n_mu);
+		if(get<2>(requested_quantities))
+			d2_sigma.reinit(n_v_q_dot + n_mu, method == 1 ? n_v_q_dot + n_mu + n_q : n_v_q_dot + n_mu);
+
+		//get derivatives
+		if(get_values_and_derivatives(values, t, x, n, sigma, d_sigma, d2_sigma, requested_quantities, method == 1 ? true : false))
+			return true;
+
+		// sort into return quantities
+		if(get<0>(requested_quantities))
+		{
+			if((method != 1) && compute_potential_value)
+				h_sigma = dt * sigma;
+			else
+				h_sigma = 0.0;
+		}
+		if(get<1>(requested_quantities))
+		{
+			h_sigma_1.reinit(e_sigma.size());
+			for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
+				h_sigma_1[m] = dt * d_sigma[m];
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+				h_sigma_1[m] *= 1.0/dt;
+		}
+		if(get<2>(requested_quantities))
+		{
+			h_sigma_2.reinit(e_sigma.size(), e_sigma.size());
+			for(unsigned int m = 0; m < d2_sigma.m(); ++m)
+				for(unsigned int n = 0; n < d2_sigma.n(); ++n)
+					h_sigma_2(m, n) = dt * d2_sigma(m,n);
+
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+			{
+				for(unsigned int n = 0; n < n_v_q_dot + n_mu + n_q; ++n)
+				{
+					h_sigma_2(m, n) *= 1.0/dt;
+					h_sigma_2(n, m) *= 1.0/dt;
+				}
+			}
+
+			if(method == 1)
+			{
+				for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
+					for(unsigned int n = n_v_q_dot + n_mu; n < n_v_q_dot + n_mu + n_q; ++n)
+						h_sigma_2(m, n) *= alpha;
 			}
 		}
 
-		if(method == 1)
+		if(global_data->get_use_manufactured_solution())
 		{
-			for(unsigned int m = 0; m < n_v_q_dot + n_mu; ++m)
-				for(unsigned int n = n_v_q_dot + n_mu; n < n_v_q_dot + n_mu + n_q; ++n)
-					h_sigma_2(m, n) *= alpha;
+			Assert(	n_mu == 0,
+					ExcMessage("The manufactured solution capability is entirely untested with Lagrange multipliers. If you want to use it, this assertion must be removed followed by proper testing!") );
+
+			double h_omega_manufactured;
+			Vector<double>	h_omega_1_manufactured(e_sigma.size()), e_manufactured(e_sigma.size());
+			FullMatrix<double>	h_omega_2_manufactured;
+
+			for(unsigned int m = 0; m < n_v_q_dot; ++m)
+				e_manufactured[m] = manufactured_sol_alpha_der[this->q_point_id][m];
+			for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+				e_manufactured[m] = manufactured_sol_alpha[this->q_point_id][m];
+			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				e_manufactured[m] = manufactured_sol_alpha[this->q_point_id][m];
+
+			h_omega_1_manufactured = 0.0;
+			eval_time = t;
+
+			if(get_values_and_derivatives(e_manufactured, t, x, n, h_omega_manufactured, h_omega_1_manufactured, h_omega_2_manufactured, make_tuple(true, true, false), false))
+				return true;
+
+			for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
+				h_omega_1_manufactured[m] *= dt;
+
+			for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
+				h_omega_1_manufactured[m] = 0.0;
+
+			// Here: Add terms
 		}
+
 	}
 
 	return false;

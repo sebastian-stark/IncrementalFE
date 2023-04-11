@@ -3,6 +3,7 @@ SET(_target_src
     global_data_incremental_fe.cc
     fe_model.cc
     constraints.cc
+    manufactured_solution.cc
     scalar_functionals/omega.cc
     scalar_functionals/psi.cc
 )
@@ -17,6 +18,14 @@ ELSE()
   INCLUDE_DIRECTORIES(${CMF_INSTALL_PATH_HEADERS})
   INCLUDE_DIRECTORIES(${CMF_INCLUDE_DIRECTORIES})
   OPTION(INCREMENTAL_FE_WITH_CMF "Enable CMF" ON)
+ENDIF()
+
+#find spline library of T. Kluge
+IF(SPLINE_DIR)
+  INCLUDE_DIRECTORIES (${SPLINE_DIR})
+  OPTION(INCREMENTAL_FE_WITH_SPLINE "Enable SPLINE" ON)
+ELSE()
+  MESSAGE("You must pass the path to the header file of the spline library of T. Kluge (https://kluge.in-chemnitz.de/opensource/spline/) if you want to use that library. Note that the SPLINE library is distributed under GPLv2, while this library is distributed under LGPLv2.")
 ENDIF()
 
 #define the debug and release targets of the library incremental_fe

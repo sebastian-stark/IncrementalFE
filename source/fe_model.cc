@@ -142,6 +142,54 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	// set new time
 	global_data->set_t(t);
 
+	// get manufactured solution
+	//auto vector_ptr_sequential = dynamic_cast<Vector<double>*>(&vector);
+	if(manufactured_solution)
+	{
+//		vector<SolutionVectorType> manufactured_solutions(3, SolutionVectorType(solution.size()));
+//		vector<const SolutionVectorType*> solution_ref_sets(3);
+
+//		const auto manufactured_solution = static_cast<const ManufacturedSolution<SolutionVectorType>*>(global_data->get_manufactured_solution());
+
+		SolutionVectorType manufactured_solution_data(solution.size());
+		vector<const SolutionVectorType*> manufactured_solution_data_sets(1);
+		manufactured_solution_data_sets[0] = &manufactured_solution_data;
+
+		global_data->update_manufactured_solution = 1;
+		manufactured_solution->get_manufactured_solution(global_data->get_t_ref(), manufactured_solution_data, 0);
+		assembly_helper.call_scalar_functionals(manufactured_solution_data,
+												manufactured_solution_data_sets,
+												{nullptr},
+												{nullptr},
+												true);
+
+		global_data->update_manufactured_solution = 2;
+		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data, 0);
+		assembly_helper.call_scalar_functionals(manufactured_solution_data,
+												manufactured_solution_data_sets,
+												{nullptr},
+												{nullptr},
+												true);
+
+		global_data->update_manufactured_solution = 3;
+		manufactured_solution->get_manufactured_solution(global_data->get_t(), manufactured_solution_data, 0);
+		assembly_helper.call_scalar_functionals(manufactured_solution_data,
+												manufactured_solution_data_sets,
+												{nullptr},
+												{nullptr},
+												true);
+
+		global_data->update_manufactured_solution = 4;
+		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data, 1);
+		assembly_helper.call_scalar_functionals(manufactured_solution_data,
+												manufactured_solution_data_sets,
+												{nullptr},
+												{nullptr},
+												true);
+
+		global_data->update_manufactured_solution = 0;
+	}
+
 	timer.start();
 	// set up constraints
 	AffineConstraints<double> constraints(assembly_helper.get_locally_relevant_indices());
@@ -1010,6 +1058,18 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::post_refinemen
 {
 	Assert(false, ExcMessage("Refinement is currently not implemented for the FEModel!"));
 }
+
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+void
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::set_manufactured_solution(ManufacturedSolution<SolutionVectorType>* 	manufactured_solution,
+																							const double								alpha_manufactured)
+{
+	this->manufactured_solution = manufactured_solution;
+	this->alpha_manufactured = alpha_manufactured;
+	global_data->use_manufactured_solution = true;
+}
+
 
 template class incrementalFE::FEModel<2, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;
 template class incrementalFE::FEModel<3, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;

@@ -21,6 +21,7 @@
 #define INCREMENTALFE_GLOBALDATAINCREMENTALFE_H_
 
 #include <incremental_fe/config.h>
+#include <incremental_fe/manufactured_solution.h>
 
 #include <string>
 #include <vector>
@@ -218,6 +219,18 @@ private:
 	 */
 	bool
 	continue_on_nonconvergence = false;
+
+	/**
+	 * This is zero, if manufactured solution data does not need to be updated, 1 if it needs to be updated to the values in the beginning of the current time increment, 2 if it needs to be updated to the values corresponding to alpha, 3 if it needs to be updated to the values at the end of the current time increment, and , 4 if it needs to be updated to the time derivative corresponding to alpha.
+	 */
+	unsigned int
+	update_manufactured_solution = 0;
+
+	/**
+	 * This indicates whether manufactured solution terms are to be taken into account
+	 */
+	bool
+	use_manufactured_solution = false;
 
 	/**
 	 * Allow the FEModel class to directly access all members.
@@ -477,6 +490,21 @@ public:
 	 */
 	void
 	set_continue_on_nonconvergence(const bool continue_on_nonconvergence=true);
+
+	/**
+	 * @return	GlobalDataIncrementalFE::update_manufactured_solution
+	 */
+	unsigned int
+	get_update_manufactured_solution()
+	const;
+
+	/**
+	 * @return	GlobalDataIncrementalFE::use_manufactured_solution
+	 */
+	bool
+	get_use_manufactured_solution()
+	const;
+
 
 };
 

@@ -56,45 +56,92 @@ Psi<spacedim, spacedim>::get_h_omega(	Vector<double>&					e_omega,
 										const tuple<bool, bool, bool>	requested_quantities)
 const
 {
-	//compute derivatives at alpha = 1.0
-	if(get<1>(requested_quantities))
-		h_omega_1.reinit(e_omega.size());
-	if(get<2>(requested_quantities))
-		h_omega_2.reinit(e_omega.size(), e_omega.size());
-
-	eval_time = global_data->get_t();
-	if(get_values_and_derivatives(e_omega, x, h_omega, h_omega_1, h_omega_2, requested_quantities))
-		return true;
-
-	//now weight derivatives according to alpha
-	if (alpha != 1.)
+	if(global_data->get_update_manufactured_solution()==1)
 	{
-		//gradient at reference state
-		double h_omega_ref;
-		Vector<double>	h_omega_1_ref;
-		FullMatrix<double>	h_omega_2_ref;
-		if(get<0>(requested_quantities) || get<1>(requested_quantities))
-		{
-			h_omega_1_ref.reinit(e_omega.size());
-			eval_time = global_data->get_t_ref();
-			if(get_values_and_derivatives(e_omega_ref_sets[0], x, h_omega_ref, h_omega_1_ref, h_omega_2_ref, make_tuple(true, true, false)))
-				return true;
-		}
-
-		if(get<0>(requested_quantities))
-		{
-			if(!always_compute_potential_value)
-				h_omega = h_omega * alpha + ( h_omega_ref + h_omega_1_ref * e_omega - h_omega_1_ref * e_omega_ref_sets[0] ) * (1. - alpha);
-		}
-
-		if(get<1>(requested_quantities))
-			for(unsigned int m = 0; m < e_omega.size(); ++m)
-				h_omega_1[m] = h_omega_1[m] * alpha + h_omega_1_ref[m] * (1. - alpha);
-
-		if(get<2>(requested_quantities))
-			h_omega_2 *= alpha;
+		manufactured_sol_0[this->q_point_id] = e_omega;
 	}
+	else if(global_data->get_update_manufactured_solution()==2)
+	{
+		manufactured_sol_alpha[this->q_point_id] = e_omega;
+	}
+	else if(global_data->get_update_manufactured_solution()==3)
+	{
+		manufactured_sol_1[this->q_point_id] = e_omega;
+	}
+	else if(global_data->get_update_manufactured_solution()==4)
+	{
+		manufactured_sol_alpha_der[this->q_point_id] = e_omega;
+	}
+	/*	else
+	{
+		if(manufactured_sol_0.size() > 0)
+		{
+			cout << "Psi" << endl;
+			for(unsigned int m = 0; m < e_omega.size(); ++ m)
+				printf("%- 1.16e %- 1.16e %- 1.16e %- 1.16e %- 1.16e\n", e_omega[m], e_omega_ref_sets[0][m], manufactured_sol_0[this->q_point_id][m], manufactured_sol_alpha[this->q_point_id][m], manufactured_sol_1[this->q_point_id][m]);
+			cout << endl;
+		}
+	}*/
+	else
+	{
+		//compute derivatives at alpha = 1.0
+		if(get<1>(requested_quantities))
+			h_omega_1.reinit(e_omega.size());
+		if(get<2>(requested_quantities))
+			h_omega_2.reinit(e_omega.size(), e_omega.size());
 
+		eval_time = global_data->get_t();
+		if(get_values_and_derivatives(e_omega, x, h_omega, h_omega_1, h_omega_2, requested_quantities))
+			return true;
+
+		//now weight derivatives according to alpha
+		if(alpha != 1.)
+		{
+			//gradient at reference state
+			double h_omega_ref;
+			Vector<double>	h_omega_1_ref;
+			FullMatrix<double>	h_omega_2_ref;
+			if(get<0>(requested_quantities) || get<1>(requested_quantities))
+			{
+				h_omega_1_ref.reinit(e_omega.size());
+				eval_time = global_data->get_t_ref();
+				if(get_values_and_derivatives(e_omega_ref_sets[0], x, h_omega_ref, h_omega_1_ref, h_omega_2_ref, make_tuple(true, true, false)))
+					return true;
+			}
+
+			if(get<0>(requested_quantities))
+			{
+				if(!always_compute_potential_value)
+					h_omega = h_omega * alpha + ( h_omega_ref + h_omega_1_ref * e_omega - h_omega_1_ref * e_omega_ref_sets[0] ) * (1. - alpha);
+			}
+
+			if(get<1>(requested_quantities))
+				for(unsigned int m = 0; m < e_omega.size(); ++m)
+					h_omega_1[m] = h_omega_1[m] * alpha + h_omega_1_ref[m] * (1. - alpha);
+
+			if(get<2>(requested_quantities))
+				h_omega_2 *= alpha;
+		}
+
+		if(global_data->get_use_manufactured_solution())
+		{
+			double h_omega_manufactured;
+			Vector<double>	h_omega_1_manufactured_0(e_omega.size()), h_omega_1_manufactured_1(e_omega.size());
+			FullMatrix<double>	h_omega_2_manufactured;
+
+			h_omega_1_manufactured_1 = 0.0;
+			eval_time = global_data->get_t();
+			if(get_values_and_derivatives(manufactured_sol_1[this->q_point_id], x, h_omega_manufactured, h_omega_1_manufactured_1, h_omega_2_manufactured, make_tuple(true, true, false)))
+				return true;
+
+			h_omega_1_manufactured_0 = 0.0;
+			eval_time = global_data->get_t_ref();
+			if(get_values_and_derivatives(manufactured_sol_0[this->q_point_id], x, h_omega_manufactured, h_omega_1_manufactured_0, h_omega_2_manufactured, make_tuple(true, true, false)))
+				return true;
+
+			// Here: Add terms
+		}
+	}
 	return false;
 }
 
@@ -142,45 +189,93 @@ Psi<dim, spacedim>::get_h_sigma(	Vector<double>& 				e_sigma,
 									const tuple<bool, bool, bool>	requested_quantities)
 const
 {
-	//compute derivatives at alpha = 1.0
-	if(get<1>(requested_quantities))
-		h_sigma_1.reinit(e_sigma.size());
-	if(get<2>(requested_quantities))
-		h_sigma_2.reinit(e_sigma.size(), e_sigma.size());
-
-	eval_time = global_data->get_t();
-	if(get_values_and_derivatives(e_sigma, x, n, h_sigma, h_sigma_1, h_sigma_2, requested_quantities))
-		return true;
-
-	//now weight derivatives according to alpha
-	if (alpha != 1.)
+	if(global_data->get_update_manufactured_solution()==1)
 	{
-		//gradient at reference state
-		double h_sigma_ref;
-		Vector<double>	h_sigma_1_ref;
-		FullMatrix<double>	h_sigma_2_ref;
-		if(get<0>(requested_quantities) || get<1>(requested_quantities))
-		{
-			h_sigma_1_ref.reinit(e_sigma.size());
-			eval_time = global_data->get_t_ref();
-			if(get_values_and_derivatives(e_sigma_ref_sets[0], x, n, h_sigma_ref, h_sigma_1_ref, h_sigma_2_ref, make_tuple(false, true, false)))
-				return true;
-		}
-
-		if(get<0>(requested_quantities))
-		{
-			if(!always_compute_potential_value)
-				h_sigma = h_sigma * alpha + ( h_sigma_ref + h_sigma_1_ref * e_sigma - h_sigma_1_ref * e_sigma_ref_sets[0] ) * (1. - alpha);
-		}
-
-		if(get<1>(requested_quantities))
-			for(unsigned int m = 0; m < e_sigma.size(); ++m)
-				h_sigma_1[m] = h_sigma_1[m] * alpha + h_sigma_1_ref[m] * (1. - alpha);
-
-		if(get<2>(requested_quantities))
-			h_sigma_2 *= alpha;
+		manufactured_sol_0[this->q_point_id] = e_sigma;
 	}
+	else if(global_data->get_update_manufactured_solution()==2)
+	{
+		manufactured_sol_alpha[this->q_point_id] = e_sigma;
+	}
+	else if(global_data->get_update_manufactured_solution()==3)
+	{
+		manufactured_sol_1[this->q_point_id] = e_sigma;
+	}
+	else if(global_data->get_update_manufactured_solution()==4)
+	{
+		manufactured_sol_alpha_der[this->q_point_id] = e_sigma;
+	}
+/*	else
+	{
+		if(manufactured_sol_0.size() > 0)
+		{
+			cout << "Psi" << endl;
+			for(unsigned int m = 0; m < e_sigma.size(); ++ m)
+				printf("%- 1.16e %- 1.16e %- 1.16e %- 1.16e %- 1.16e\n", e_sigma[m], e_sigma_ref_sets[0][m], manufactured_sol_0[this->q_point_id][m], manufactured_sol_alpha[this->q_point_id][m], manufactured_sol_1[this->q_point_id][m]);
+			cout << endl;
 
+		}
+	}*/
+	else
+	{
+		//compute derivatives at alpha = 1.0
+		if(get<1>(requested_quantities))
+			h_sigma_1.reinit(e_sigma.size());
+		if(get<2>(requested_quantities))
+			h_sigma_2.reinit(e_sigma.size(), e_sigma.size());
+
+		eval_time = global_data->get_t();
+		if(get_values_and_derivatives(e_sigma, x, n, h_sigma, h_sigma_1, h_sigma_2, requested_quantities))
+			return true;
+
+		//now weight derivatives according to alpha
+		if (alpha != 1.)
+		{
+			//gradient at reference state
+			double h_sigma_ref;
+			Vector<double>	h_sigma_1_ref;
+			FullMatrix<double>	h_sigma_2_ref;
+			if(get<0>(requested_quantities) || get<1>(requested_quantities))
+			{
+				h_sigma_1_ref.reinit(e_sigma.size());
+				eval_time = global_data->get_t_ref();
+				if(get_values_and_derivatives(e_sigma_ref_sets[0], x, n, h_sigma_ref, h_sigma_1_ref, h_sigma_2_ref, make_tuple(false, true, false)))
+					return true;
+			}
+
+			if(get<0>(requested_quantities))
+			{
+				if(!always_compute_potential_value)
+					h_sigma = h_sigma * alpha + ( h_sigma_ref + h_sigma_1_ref * e_sigma - h_sigma_1_ref * e_sigma_ref_sets[0] ) * (1. - alpha);
+			}
+
+			if(get<1>(requested_quantities))
+				for(unsigned int m = 0; m < e_sigma.size(); ++m)
+					h_sigma_1[m] = h_sigma_1[m] * alpha + h_sigma_1_ref[m] * (1. - alpha);
+
+			if(get<2>(requested_quantities))
+				h_sigma_2 *= alpha;
+		}
+
+		if(global_data->get_use_manufactured_solution())
+		{
+			double h_omega_manufactured;
+			Vector<double>	h_omega_1_manufactured_0(e_sigma.size()), h_omega_1_manufactured_1(e_sigma.size());
+			FullMatrix<double>	h_omega_2_manufactured;
+
+			h_omega_1_manufactured_1 = 0.0;
+			eval_time = global_data->get_t();
+			if(get_values_and_derivatives(manufactured_sol_1[this->q_point_id], x, n, h_omega_manufactured, h_omega_1_manufactured_1, h_omega_2_manufactured, make_tuple(true, true, false)))
+				return true;
+
+			h_omega_1_manufactured_0 = 0.0;
+			eval_time = global_data->get_t_ref();
+			if(get_values_and_derivatives(manufactured_sol_0[this->q_point_id], x, n, h_omega_manufactured, h_omega_1_manufactured_0, h_omega_2_manufactured, make_tuple(true, true, false)))
+				return true;
+
+			// Here: Add terms
+		}
+	}
 	return false;
 }
 

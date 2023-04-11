@@ -22,7 +22,7 @@ IF(NOT ${deal.II_FOUND})
 ENDIF()
 
 #locate galerkin_tools
-FIND_PACKAGE(galerkin_tools 1.0.0 QUIET HINTS $ENV{GALERKIN_TOOLS_DIR} ${GALERKIN_TOOLS_DIR})
+FIND_PACKAGE(galerkin_tools 0.1.0 QUIET HINTS $ENV{GALERKIN_TOOLS_DIR} ${GALERKIN_TOOLS_DIR})
 IF(NOT ${galerkin_tools_FOUND})
   MESSAGE(FATAL_ERROR "\n"
     "*** Could not locate a (sufficiently recent) version of galerkin_tools. ***\n\n"
