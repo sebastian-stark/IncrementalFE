@@ -1,0 +1,110 @@
+\hypertarget{classincremental_f_e_1_1_manufactured_solution_spline}{}\doxysection{incremental\+FE\+::Manufactured\+Solution\+Spline$<$ Solution\+Vector\+Type $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_manufactured_solution_spline}\index{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}}
+
+
+{\ttfamily \#include $<$manufactured\+\_\+solution.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Manufactured\+Solution\+Spline$<$ Solution\+Vector\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classincremental_f_e_1_1_manufactured_solution_spline__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for incremental\+FE\+::Manufactured\+Solution\+Spline$<$ Solution\+Vector\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classincremental_f_e_1_1_manufactured_solution_spline__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline_a63983f82684ad7db826f882a16837f6e}{Manufactured\+Solution\+Spline}} (const std\+::vector$<$ double $>$ \&times, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&solution)
+\item 
+void \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline_a8dd9121c6eb77e3cf65ca6a670188fae}{get\+\_\+manufactured\+\_\+solution}} (const double t, Solution\+Vector\+Type \&solution, const unsigned int der=0) const override final
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ tk\+::spline $>$ \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline_a8d6f21ef502f7683bc6d0f0b5f6a5c71}{splines}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Solution\+Vector\+Type$>$\newline
+class incremental\+F\+E\+::\+Manufactured\+Solution\+Spline$<$ Solution\+Vector\+Type $>$}
+
+This class constructs a manufactured solution based on spline interpolation of a discrete dof solution at certain time instants.
+
+This functionality is based on the spline library of T. Kluge (\href{https://kluge.in-chemnitz.de/opensource/spline/}{\texttt{ https\+://kluge.\+in-\/chemnitz.\+de/opensource/spline/}}). If you want to use it, you must pass the path to the header file to cmake by a flag -\/D\+S\+P\+L\+I\+N\+E\+\_\+\+D\+IR=/path/to/spline/header.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Solution\+Vector\+Type} & Type of the solution vector used in \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model}} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_manufactured_solution_spline_a63983f82684ad7db826f882a16837f6e}\label{classincremental_f_e_1_1_manufactured_solution_spline_a63983f82684ad7db826f882a16837f6e}} 
+\index{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}!ManufacturedSolutionSpline@{ManufacturedSolutionSpline}}
+\index{ManufacturedSolutionSpline@{ManufacturedSolutionSpline}!incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}}
+\doxysubsubsection{\texorpdfstring{ManufacturedSolutionSpline()}{ManufacturedSolutionSpline()}}
+{\footnotesize\ttfamily template$<$class Solution\+Vector\+Type $>$ \\
+\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline}{incremental\+F\+E\+::\+Manufactured\+Solution\+Spline}}$<$ Solution\+Vector\+Type $>$\+::\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline}{Manufactured\+Solution\+Spline}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{times,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{solution }\end{DoxyParamCaption})}
+
+Constructor.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em times} & The instants of time at which discrete dof solutions are passed with the second argument\\
+\hline
+\mbox{\texttt{ in}}  & {\em solution} & The discrete dof solution upon which spline interpolation is based. solution\mbox{[}m\mbox{]}\mbox{[}n\mbox{]} is the value of dof \mbox{[}m\mbox{]} at time times\mbox{[}n\mbox{]}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_manufactured_solution_spline_a8dd9121c6eb77e3cf65ca6a670188fae}\label{classincremental_f_e_1_1_manufactured_solution_spline_a8dd9121c6eb77e3cf65ca6a670188fae}} 
+\index{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}!get\_manufactured\_solution@{get\_manufactured\_solution}}
+\index{get\_manufactured\_solution@{get\_manufactured\_solution}!incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_manufactured\_solution()}{get\_manufactured\_solution()}}
+{\footnotesize\ttfamily template$<$class Solution\+Vector\+Type $>$ \\
+void \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline}{incremental\+F\+E\+::\+Manufactured\+Solution\+Spline}}$<$ Solution\+Vector\+Type $>$\+::get\+\_\+manufactured\+\_\+solution (\begin{DoxyParamCaption}\item[{const double}]{t,  }\item[{Solution\+Vector\+Type \&}]{solution,  }\item[{const unsigned int}]{der = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\textbf{ Function} returning the manufactured solution
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em t} & Instant of time for evaluation of manufactured solution\\
+\hline
+\mbox{\texttt{ out}}  & {\em solution} & D\+OF values of manufactured solution evaluated at time t\\
+\hline
+\mbox{\texttt{ in}}  & {\em der} & if greater than 0, store the {\ttfamily der} derivative in {\ttfamily solution} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_a30e49abb1b517d7d0a96b92c25024b2d}{incremental\+F\+E\+::\+Manufactured\+Solution$<$ Solution\+Vector\+Type $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_manufactured_solution_spline_a8d6f21ef502f7683bc6d0f0b5f6a5c71}\label{classincremental_f_e_1_1_manufactured_solution_spline_a8d6f21ef502f7683bc6d0f0b5f6a5c71}} 
+\index{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}!splines@{splines}}
+\index{splines@{splines}!incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolutionSpline$<$ SolutionVectorType $>$}}
+\doxysubsubsection{\texorpdfstring{splines}{splines}}
+{\footnotesize\ttfamily template$<$class Solution\+Vector\+Type $>$ \\
+std\+::vector$<$tk\+::spline$>$ \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline}{incremental\+F\+E\+::\+Manufactured\+Solution\+Spline}}$<$ Solution\+Vector\+Type $>$\+::splines\hspace{0.3cm}{\ttfamily [private]}}
+
+The vector with the spline representation of the manufactured solution. Each entry corresponds to a single dof. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/\mbox{\hyperlink{manufactured__solution_8h}{manufactured\+\_\+solution.\+h}}\end{DoxyCompactItemize}

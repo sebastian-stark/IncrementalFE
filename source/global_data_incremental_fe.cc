@@ -279,14 +279,6 @@ GlobalDataIncrementalFE<spacedim>::set_continue_on_nonconvergence(const bool con
 }
 
 template<unsigned int spacedim>
-unsigned int
-GlobalDataIncrementalFE<spacedim>::get_update_manufactured_solution()
-const
-{
-	return update_manufactured_solution;
-}
-
-template<unsigned int spacedim>
 bool
 GlobalDataIncrementalFE<spacedim>::get_use_manufactured_solution()
 const

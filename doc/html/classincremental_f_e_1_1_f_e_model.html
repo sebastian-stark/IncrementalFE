@@ -93,6 +93,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0dd4646e08210f326f304814808e92e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb0d11f9d7a71971732d041a5cb4376a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#acb0d11f9d7a71971732d041a5cb4376a">read_solution_from_file</a> (const std::string file_name)</td></tr>
 <tr class="separator:acb0d11f9d7a71971732d041a5cb4376a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ebab6e6405f1ea373bc3958b3f27464"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9ebab6e6405f1ea373bc3958b3f27464">set_solution</a> (const SolutionVectorType &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a02134975db38fcf4f7ce698d605baa30">solution</a>)</td></tr>
+<tr class="separator:a9ebab6e6405f1ea373bc3958b3f27464"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac358550b1f5b47486199bcc870621d4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ac358550b1f5b47486199bcc870621d4f">write_solution_to_file</a> (const std::string file_name) const</td></tr>
 <tr class="separator:ac358550b1f5b47486199bcc870621d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e13285d3ec061e14dacaaf174ee5bf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2e13285d3ec061e14dacaaf174ee5bf5">write_output_independent_fields</a> (const std::string file_name_domain, const std::string file_name_interface, const unsigned int n_subdivisions=1)</td></tr>
@@ -119,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2940e902f0f30ae4b9b122f7c573a20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd396b8078926ba01eafe296152917b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a> () const</td></tr>
 <tr class="separator:a9cd396b8078926ba01eafe296152917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea2ab158ff4d489df2773bb23159f200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aea2ab158ff4d489df2773bb23159f200">set_manufactured_solution</a> (<a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *<a class="el" href="classincremental_f_e_1_1_f_e_model.html#abfa82cec71c452b3f880c9db0229601c">manufactured_solution</a>, const double <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f120dec98a00102c846099dcc3db015">alpha_manufactured</a>)</td></tr>
+<tr class="separator:aea2ab158ff4d489df2773bb23159f200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -135,8 +139,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:aa8f0eaa319c21a88310d813fb34213f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aca9a1d1eb2233b6dbfac86e14a092729">reinit_matrix</a> (MatrixType &amp;matrix)</td></tr>
 <tr class="separator:aca9a1d1eb2233b6dbfac86e14a092729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa787a163ccf91fc13f2f5fb32d069253"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aa787a163ccf91fc13f2f5fb32d069253">compute_system</a> (const SolutionVectorType &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#ad5f39fec8540d81155770764f945f572">solution_ref</a>, dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const bool first_assembly=false)</td></tr>
-<tr class="separator:aa787a163ccf91fc13f2f5fb32d069253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab733923a16cd40238221b021a021f5c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ab733923a16cd40238221b021a021f5c4">compute_system</a> (const std::vector&lt; const SolutionVectorType * &gt; solution_ref_sets, dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const bool first_assembly=false)</td></tr>
+<tr class="separator:ab733923a16cd40238221b021a021f5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a7c5c84e081ebe20e373ec5d2abc359b7">compute_sparsity_pattern</a> (const dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>)</td></tr>
 <tr class="separator:a7c5c84e081ebe20e373ec5d2abc359b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae96fd0a7b6688ed844059d2636e923cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#ae96fd0a7b6688ed844059d2636e923cc">make_constraints</a> (dealii::AffineConstraints&lt; double &gt; &amp;<a class="el" href="classincremental_f_e_1_1_f_e_model.html#a33a622c3c53ea4bee3bdefac06201c70">constraints</a>, const dealii::AffineConstraints&lt; double &gt; &amp;custom_constraints=dealii::AffineConstraints&lt; double &gt;(), const dealii::AffineConstraints&lt; double &gt; &amp;ignore_constraints=dealii::AffineConstraints&lt; double &gt;())</td></tr>
@@ -206,6 +210,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ace70f6d085e2b37c0241f9eb0ca5d178"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a490d7393aa94d765ec0e2c302b2afe44"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a490d7393aa94d765ec0e2c302b2afe44">solve_time_last_step</a> = 0.0</td></tr>
 <tr class="separator:a490d7393aa94d765ec0e2c302b2afe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa82cec71c452b3f880c9db0229601c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#abfa82cec71c452b3f880c9db0229601c">manufactured_solution</a> = nullptr</td></tr>
+<tr class="separator:abfa82cec71c452b3f880c9db0229601c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f120dec98a00102c846099dcc3db015"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f120dec98a00102c846099dcc3db015">alpha_manufactured</a> = 0.5</td></tr>
+<tr class="separator:a2f120dec98a00102c846099dcc3db015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt;<br />
@@ -712,8 +720,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
-<a id="aa787a163ccf91fc13f2f5fb32d069253"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa787a163ccf91fc13f2f5fb32d069253">&#9670;&nbsp;</a></span>compute_system()</h2>
+<a id="ab733923a16cd40238221b021a021f5c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab733923a16cd40238221b021a021f5c4">&#9670;&nbsp;</a></span>compute_system()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -726,8 +734,8 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
         <tr>
           <td class="memname">bool <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::compute_system </td>
           <td>(</td>
-          <td class="paramtype">const SolutionVectorType &amp;&#160;</td>
-          <td class="paramname"><em>solution_ref</em>, </td>
+          <td class="paramtype">const std::vector&lt; const SolutionVectorType * &gt;&#160;</td>
+          <td class="paramname"><em>solution_ref_sets</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -756,7 +764,7 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 <p>Function computing current <a class="el" href="classincremental_f_e_1_1_f_e_model.html#aba8e9e925aa72d2dd0f86c451b2cf3d6">FEModel::rhs</a> and <a class="el" href="classincremental_f_e_1_1_f_e_model.html#abc07b7d142d78230bcd55274f35514b3">FEModel::system_matrix</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">solution_ref</td><td>The reference solution vector</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">solution_ref_sets</td><td>The reference solution vectors</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">constraints</td><td>The constraints object</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">first_assembly</td><td>Indicate whether this is the first assembly in a time step. If <code>true</code>, errors in the assembly process are ignored in an attempt to recover.</td></tr>
   </table>
@@ -1235,6 +1243,71 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 
 </div>
 </div>
+<a id="aea2ab158ff4d489df2773bb23159f200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea2ab158ff4d489df2773bb23159f200">&#9670;&nbsp;</a></span>set_manufactured_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::set_manufactured_solution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *&#160;</td>
+          <td class="paramname"><em>manufactured_solution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha_manufactured</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">manufactured_solution</td><td>Object representing the manufactured solution.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha_manufactured</td><td>The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9ebab6e6405f1ea373bc3958b3f27464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebab6e6405f1ea373bc3958b3f27464">&#9670;&nbsp;</a></span>set_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::set_solution </td>
+          <td>(</td>
+          <td class="paramtype">const SolutionVectorType &amp;&#160;</td>
+          <td class="paramname"><em>solution</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the solution vector</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">solution</td><td>The solution to be set.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>This function does nothing apart from setting the solution vector. It is the user's responsibility that the <a class="el" href="classincremental_f_e_1_1_f_e_model.html">FEModel</a> is left in a usable state afterwards. In particular, no checking for the size of the solution vector or for the satisfaction of constraints is done. Also, this function does not read in the values of the hidden variables at the material points. Essentially, the purpose of this function is to make a computed solution available for post-processing without having to repeat the entire solution process. In particular, this function is not meant for restarting an analysis at a certain point. </dd></dl>
+
+</div>
+</div>
 <a id="a5ecf05b93871cc936364d85d990c80e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ecf05b93871cc936364d85d990c80e0">&#9670;&nbsp;</a></span>update_ghosts()</h2>
 
@@ -1428,6 +1501,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Matrix with all combined constraints (used internally during the solution process) </p>
+
+</div>
+</div>
+<a id="a2f120dec98a00102c846099dcc3db015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f120dec98a00102c846099dcc3db015">&#9670;&nbsp;</a></span>alpha_manufactured</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::alpha_manufactured = 0.5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals. </p>
 
 </div>
 </div>
@@ -1678,6 +1776,31 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>determines whether hanging node constraints are taken into account or ignored </p>
+
+</div>
+</div>
+<a id="abfa82cec71c452b3f880c9db0229601c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfa82cec71c452b3f880c9db0229601c">&#9670;&nbsp;</a></span>manufactured_solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt;SolutionVectorType&gt;* <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::manufactured_solution = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This holds an object representing the manufactured solution. </p>
 
 </div>
 </div>

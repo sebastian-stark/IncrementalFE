@@ -68,7 +68,10 @@ public:
 
 #ifdef INCREMENTAL_FE_WITH_SPLINE
 /**
- * This class constructs a manufactured solution based on spline interpolation of a discrete dof solution at certain time instants
+ * This class constructs a manufactured solution based on spline interpolation of a discrete dof solution at certain time instants.
+ *
+ * This functionality is based on the spline library of T. Kluge (https://kluge.in-chemnitz.de/opensource/spline/).
+ * If you want to use it, you must pass the path to the header file to cmake by a flag -DSPLINE_DIR=/path/to/spline/header.
  *
  * @tparam SolutionVectorType	Type of the solution vector used in FEModel
  */

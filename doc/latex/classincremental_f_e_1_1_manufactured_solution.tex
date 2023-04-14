@@ -1,0 +1,79 @@
+\hypertarget{classincremental_f_e_1_1_manufactured_solution}{}\doxysection{incremental\+FE\+::Manufactured\+Solution$<$ Solution\+Vector\+Type $>$ Class Template Reference}
+\label{classincremental_f_e_1_1_manufactured_solution}\index{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$}}
+
+
+{\ttfamily \#include $<$manufactured\+\_\+solution.\+h$>$}
+
+
+
+Inheritance diagram for incremental\+FE\+::Manufactured\+Solution$<$ Solution\+Vector\+Type $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{classincremental_f_e_1_1_manufactured_solution__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_a30e49abb1b517d7d0a96b92c25024b2d}{get\+\_\+manufactured\+\_\+solution}} (const double t, Solution\+Vector\+Type \&solution, const unsigned int der=0) const =0
+\item 
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_a65632830cf243dd8e7ef08c9f52c35c1}{$\sim$\+Manufactured\+Solution}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Solution\+Vector\+Type$>$\newline
+class incremental\+F\+E\+::\+Manufactured\+Solution$<$ Solution\+Vector\+Type $>$}
+
+Class providing with a manufactured solution for convergence testing
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]This does not work in parallel yet\end{DoxyRefDesc}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Solution\+Vector\+Type} & Type of the solution vector used in \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model}} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_manufactured_solution_a65632830cf243dd8e7ef08c9f52c35c1}\label{classincremental_f_e_1_1_manufactured_solution_a65632830cf243dd8e7ef08c9f52c35c1}} 
+\index{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$}!````~ManufacturedSolution@{$\sim$ManufacturedSolution}}
+\index{````~ManufacturedSolution@{$\sim$ManufacturedSolution}!incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ManufacturedSolution()}{~ManufacturedSolution()}}
+{\footnotesize\ttfamily template$<$class Solution\+Vector\+Type $>$ \\
+virtual \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{incremental\+F\+E\+::\+Manufactured\+Solution}}$<$ Solution\+Vector\+Type $>$\+::$\sim$\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{Manufactured\+Solution}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+virtual destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_manufactured_solution_a30e49abb1b517d7d0a96b92c25024b2d}\label{classincremental_f_e_1_1_manufactured_solution_a30e49abb1b517d7d0a96b92c25024b2d}} 
+\index{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$}!get\_manufactured\_solution@{get\_manufactured\_solution}}
+\index{get\_manufactured\_solution@{get\_manufactured\_solution}!incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$@{incrementalFE::ManufacturedSolution$<$ SolutionVectorType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_manufactured\_solution()}{get\_manufactured\_solution()}}
+{\footnotesize\ttfamily template$<$class Solution\+Vector\+Type $>$ \\
+virtual void \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{incremental\+F\+E\+::\+Manufactured\+Solution}}$<$ Solution\+Vector\+Type $>$\+::get\+\_\+manufactured\+\_\+solution (\begin{DoxyParamCaption}\item[{const double}]{t,  }\item[{Solution\+Vector\+Type \&}]{solution,  }\item[{const unsigned int}]{der = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\textbf{ Function} returning the manufactured solution
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em t} & Instant of time for evaluation of manufactured solution\\
+\hline
+\mbox{\texttt{ out}}  & {\em solution} & D\+OF values of manufactured solution evaluated at time t\\
+\hline
+\mbox{\texttt{ in}}  & {\em der} & if greater than 0, store the {\ttfamily der} derivative in {\ttfamily solution} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution_spline_a8dd9121c6eb77e3cf65ca6a670188fae}{incremental\+F\+E\+::\+Manufactured\+Solution\+Spline$<$ Solution\+Vector\+Type $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sst/code/\+Incremental\+F\+E/\+Incremental\+F\+E/include/incremental\+\_\+fe/\mbox{\hyperlink{manufactured__solution_8h}{manufactured\+\_\+solution.\+h}}\end{DoxyCompactItemize}

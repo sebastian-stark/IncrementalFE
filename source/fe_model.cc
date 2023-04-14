@@ -142,52 +142,25 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	// set new time
 	global_data->set_t(t);
 
+	vector<const SolutionVectorType*> solution_ref_sets(1);
+
 	// get manufactured solution
-	//auto vector_ptr_sequential = dynamic_cast<Vector<double>*>(&vector);
+	vector<SolutionVectorType> manufactured_solution_data;
 	if(manufactured_solution)
 	{
-//		vector<SolutionVectorType> manufactured_solutions(3, SolutionVectorType(solution.size()));
-//		vector<const SolutionVectorType*> solution_ref_sets(3);
+		manufactured_solution_data.resize(4);
 
-//		const auto manufactured_solution = static_cast<const ManufacturedSolution<SolutionVectorType>*>(global_data->get_manufactured_solution());
+		manufactured_solution->get_manufactured_solution(global_data->get_t_ref(), manufactured_solution_data[0], 0);
+		solution_ref_sets.push_back(&manufactured_solution_data[0]);
 
-		SolutionVectorType manufactured_solution_data(solution.size());
-		vector<const SolutionVectorType*> manufactured_solution_data_sets(1);
-		manufactured_solution_data_sets[0] = &manufactured_solution_data;
+		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data[1], 0);
+		solution_ref_sets.push_back(&manufactured_solution_data[1]);
 
-		global_data->update_manufactured_solution = 1;
-		manufactured_solution->get_manufactured_solution(global_data->get_t_ref(), manufactured_solution_data, 0);
-		assembly_helper.call_scalar_functionals(manufactured_solution_data,
-												manufactured_solution_data_sets,
-												{nullptr},
-												{nullptr},
-												true);
+		manufactured_solution->get_manufactured_solution(global_data->get_t(), manufactured_solution_data[2], 0);
+		solution_ref_sets.push_back(&manufactured_solution_data[2]);
 
-		global_data->update_manufactured_solution = 2;
-		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data, 0);
-		assembly_helper.call_scalar_functionals(manufactured_solution_data,
-												manufactured_solution_data_sets,
-												{nullptr},
-												{nullptr},
-												true);
-
-		global_data->update_manufactured_solution = 3;
-		manufactured_solution->get_manufactured_solution(global_data->get_t(), manufactured_solution_data, 0);
-		assembly_helper.call_scalar_functionals(manufactured_solution_data,
-												manufactured_solution_data_sets,
-												{nullptr},
-												{nullptr},
-												true);
-
-		global_data->update_manufactured_solution = 4;
-		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data, 1);
-		assembly_helper.call_scalar_functionals(manufactured_solution_data,
-												manufactured_solution_data_sets,
-												{nullptr},
-												{nullptr},
-												true);
-
-		global_data->update_manufactured_solution = 0;
+		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data[3], 1);
+		solution_ref_sets.push_back(&manufactured_solution_data[3]);
 	}
 
 	timer.start();
@@ -246,7 +219,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 
 	timer.start();
 	// assemble the system for the first iteration
-	if(compute_system(solution, constraints, true))
+	solution_ref_sets[0] = &solution;
+	if(compute_system(solution_ref_sets, constraints, true))
 	{
 		// solution = solution_ref;
 		// global_data->reset_t();
@@ -395,7 +369,8 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		for(;;)
 		{
 			// compute new rhs and system matrix here (update constraints before)
-			error = compute_system(solution_ref, constraints);
+			solution_ref_sets[0] = &solution_ref;
+			error = compute_system(solution_ref_sets, constraints);
 
 			if(error == false)
 			{
@@ -513,6 +488,18 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::read_solution_
 	solution.compress(VectorOperation::insert);
 	update_ghosts(solution);
 }
+
+template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
+void
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::set_solution(const SolutionVectorType& solution)
+{
+	this->solution = solution;
+
+	zero_ghosts(this->solution);
+	this->solution.compress(VectorOperation::insert);
+	update_ghosts(this->solution);
+}
+
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
 void
@@ -752,9 +739,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::reinit_matrix(
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
 bool
-FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system(	const SolutionVectorType& 	solution_ref,
-																					AffineConstraints<double>&	constraints,
-																					const bool					first_assembly)
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system(	const vector<const SolutionVectorType*> solution_ref_sets,
+																					AffineConstraints<double>&				constraints,
+																					const bool								first_assembly)
 {
 	global_data->converged_at_local_level = true;
 
@@ -763,8 +750,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	reinit_rhs_vector(rhs);
 
 	// assemble system
-	vector<const SolutionVectorType*> solution_ref_sets(1);
-	solution_ref_sets[0] = &solution_ref;
 	this->pre_assembly();
 
 	map<unsigned int, double> local_solution;

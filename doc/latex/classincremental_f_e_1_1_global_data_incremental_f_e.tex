@@ -86,6 +86,8 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a6c1f
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a667ab8cf1e876fc505544e1e3f6d18ea}{set\+\_\+scale\+\_\+residual}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae5fd438fcf3af31f9324db63113acc1b}{scale\+\_\+residual}}=true)
 \item 
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad1f7a02a4825fbb8401a22798f957144}{set\+\_\+continue\+\_\+on\+\_\+nonconvergence}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}}=true)
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a8ac63617286fa6a6b835c7b3d077dc20}{get\+\_\+use\+\_\+manufactured\+\_\+solution}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -135,6 +137,8 @@ bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af94c
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae5fd438fcf3af31f9324db63113acc1b}{scale\+\_\+residual}} = true
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}} = false
+\item 
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0067364590a112c1c5d01ccf2e8867ba}{use\+\_\+manufactured\+\_\+solution}} = false
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -234,6 +238,16 @@ unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f
 
 \begin{DoxyReturn}{Returns}
 current time step number \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a2aa7544464ad55c39f44c9e7e04b4bf6}{Global\+Data\+Incremental\+F\+E\+::time\+\_\+step}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a8ac63617286fa6a6b835c7b3d077dc20}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a8ac63617286fa6a6b835c7b3d077dc20}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!get\_use\_manufactured\_solution@{get\_use\_manufactured\_solution}}
+\index{get\_use\_manufactured\_solution@{get\_use\_manufactured\_solution}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_use\_manufactured\_solution()}{get\_use\_manufactured\_solution()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::get\+\_\+use\+\_\+manufactured\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0067364590a112c1c5d01ccf2e8867ba}{Global\+Data\+Incremental\+F\+E\+::use\+\_\+manufactured\+\_\+solution}} 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a05339d08517cf5f7091f1eb95848d2fd}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a05339d08517cf5f7091f1eb95848d2fd}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!print\_error\_messages@{print\_error\_messages}}
@@ -721,7 +735,14 @@ Termination criterion for Newton-\/\+Raphson iteration. If the maximum step size
 {\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
 unsigned int \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::time\+\_\+step = 0\hspace{0.3cm}{\ttfamily [private]}}
 
-current time step number \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}} 
+current time step number \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a0067364590a112c1c5d01ccf2e8867ba}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a0067364590a112c1c5d01ccf2e8867ba}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!use\_manufactured\_solution@{use\_manufactured\_solution}}
+\index{use\_manufactured\_solution@{use\_manufactured\_solution}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{use\_manufactured\_solution}{use\_manufactured\_solution}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::use\+\_\+manufactured\+\_\+solution = false\hspace{0.3cm}{\ttfamily [private]}}
+
+This indicates whether manufactured solution terms are to be taken into account \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af94c89d99685ca7e610a883cf97b690a}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!use\_previous\_increment\_for\_initial\_guess@{use\_previous\_increment\_for\_initial\_guess}}
 \index{use\_previous\_increment\_for\_initial\_guess@{use\_previous\_increment\_for\_initial\_guess}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{use\_previous\_increment\_for\_initial\_guess}{use\_previous\_increment\_for\_initial\_guess}}

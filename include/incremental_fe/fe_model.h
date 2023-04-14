@@ -250,18 +250,18 @@ private:
 	/**
 	 * %Function computing current FEModel::rhs and FEModel::system_matrix
 	 *
-	 * @param[in]	solution_ref	The reference solution vector
+	 * @param[in]	solution_ref_sets	The reference solution vectors
 	 *
-	 * @param[in]	constraints		The constraints object
+	 * @param[in]	constraints			The constraints object
 	 *
-	 * @param[in]	first_assembly	Indicate whether this is the first assembly in a time step. If @p true, errors in the assembly process are ignored in an attempt to recover.
+	 * @param[in]	first_assembly		Indicate whether this is the first assembly in a time step. If @p true, errors in the assembly process are ignored in an attempt to recover.
 	 *
-	 * @return						@p true: error, @p false: no error
+	 * @return							@p true: error, @p false: no error
 	 */
 	bool
-	compute_system(	const SolutionVectorType& 			solution_ref,
-					dealii::AffineConstraints<double>&	constraints,
-					const bool 							first_assembly = false);
+	compute_system(	const std::vector<const SolutionVectorType*> solution_ref_sets,
+					dealii::AffineConstraints<double>&			constraints,
+					const bool 									first_assembly = false);
 
 	/**
 	 * %Function computing the FEModel::sparsity_pattern
@@ -534,6 +534,21 @@ public:
 	read_solution_from_file(const std::string file_name);
 
 	/**
+	 * Sets the solution vector
+	 *
+	 * @param[in]	solution	The solution to be set.
+	 *
+	 * @warning		This function does nothing apart from setting the solution vector. It is the user's responsibility that the FEModel is left in a
+	 * 				usable state afterwards. In particular, no checking for the size of the solution vector or
+	 * 				for the satisfaction of constraints is done. Also, this function does not read in the values of
+	 * 				the hidden variables at the material points. Essentially, the purpose of this function is to
+	 * 				make a computed solution available for post-processing without having to repeat the entire solution
+	 * 				process. In particular, this function is not meant for restarting an analysis at a certain point.
+	 */
+	void
+	set_solution(const SolutionVectorType& solution);
+
+	/**
 	 * Writes the solution vector to a file
 	 *
 	 * @param[in]	file_name		Name of the file to be written to (including extension)
@@ -637,7 +652,7 @@ public:
 	/**
 	 * @param[in]	manufactured_solution	Object representing the manufactured solution.
 	 *
-	 * @param[in]	alpha					The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals.
+	 * @param[in]	alpha_manufactured		The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals.
 	 */
 	void
 	set_manufactured_solution(	ManufacturedSolution<SolutionVectorType>* 	manufactured_solution,
