@@ -227,6 +227,12 @@ private:
 	use_manufactured_solution = false;
 
 	/**
+	 * The value of alpha used for the evaluation of the manufactured solution. Should be consistent with what is prescribed in the scalar functionals.
+	 */
+	double
+	alpha_manufactured = 0.5;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -492,6 +498,12 @@ public:
 	get_use_manufactured_solution()
 	const;
 
+	/**
+	 * @return	GlobalDataIncrementalFE::alpha_manufactured
+	 */
+	double
+	get_alpha_manufactured()
+	const;
 
 };
 

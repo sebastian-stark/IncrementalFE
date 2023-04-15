@@ -218,12 +218,6 @@ private:
 	manufactured_solution = nullptr;
 
 	/**
-	 * The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals.
-	 */
-	double
-	alpha_manufactured = 0.5;
-
-	/**
 	 * Reinit a solution type vector
 	 *
 	 * @param[in]	vector	The vector to be re-inited

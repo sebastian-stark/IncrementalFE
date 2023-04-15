@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['zerofunction_9575',['ZeroFunction',['https://dealii.org/9.0.0/doxygen/deal.II/classFunctions_1_1ZeroFunction.html',1,'Functions']]],
-  ['zerotensorfunction_9576',['ZeroTensorFunction',['https://dealii.org/9.0.0/doxygen/deal.II/classZeroTensorFunction.html',1,'']]]
+  ['zerofunction_9576',['ZeroFunction',['https://dealii.org/9.0.0/doxygen/deal.II/classFunctions_1_1ZeroFunction.html',1,'Functions']]],
+  ['zerotensorfunction_9577',['ZeroTensorFunction',['https://dealii.org/9.0.0/doxygen/deal.II/classZeroTensorFunction.html',1,'']]]
 ];

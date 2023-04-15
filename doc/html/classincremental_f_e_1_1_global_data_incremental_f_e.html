@@ -162,6 +162,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad1f7a02a4825fbb8401a22798f957144"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ac63617286fa6a6b835c7b3d077dc20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a8ac63617286fa6a6b835c7b3d077dc20">get_use_manufactured_solution</a> () const</td></tr>
 <tr class="separator:a8ac63617286fa6a6b835c7b3d077dc20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa350f7d3a44089b4c6bb1bcce1b7b3a6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#aa350f7d3a44089b4c6bb1bcce1b7b3a6">get_alpha_manufactured</a> () const</td></tr>
+<tr class="separator:aa350f7d3a44089b4c6bb1bcce1b7b3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -213,6 +215,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a208183ae9f22bdde61ebeb1e533e615a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0067364590a112c1c5d01ccf2e8867ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#a0067364590a112c1c5d01ccf2e8867ba">use_manufactured_solution</a> = false</td></tr>
 <tr class="separator:a0067364590a112c1c5d01ccf2e8867ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6c871cdc8f913c86895a3a95ea4e623"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#af6c871cdc8f913c86895a3a95ea4e623">alpha_manufactured</a> = 0.5</td></tr>
+<tr class="separator:af6c871cdc8f913c86895a3a95ea4e623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -282,6 +286,26 @@ template&lt;unsigned int spacedim&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa350f7d3a44089b4c6bb1bcce1b7b3a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa350f7d3a44089b4c6bb1bcce1b7b3a6">&#9670;&nbsp;</a></span>get_alpha_manufactured()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::get_alpha_manufactured </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html#af6c871cdc8f913c86895a3a95ea4e623">GlobalDataIncrementalFE::alpha_manufactured</a> </dd></dl>
+
+</div>
+</div>
 <a id="a2a5480a5855d46a985b295c117c1f9ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a5480a5855d46a985b295c117c1f9ba">&#9670;&nbsp;</a></span>get_output_level()</h2>
 
@@ -1062,6 +1086,31 @@ template&lt;unsigned int , class SolutionVectorType , class RHSVectorType , clas
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="af6c871cdc8f913c86895a3a95ea4e623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6c871cdc8f913c86895a3a95ea4e623">&#9670;&nbsp;</a></span>alpha_manufactured</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned int spacedim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_global_data_incremental_f_e.html">incrementalFE::GlobalDataIncrementalFE</a>&lt; spacedim &gt;::alpha_manufactured = 0.5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The value of alpha used for the evaluation of the manufactured solution. Should be consistent with what is prescribed in the scalar functionals. </p>
+
+</div>
+</div>
 <a id="a2ad559967aae7632f26f6ee0c7390347"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ad559967aae7632f26f6ee0c7390347">&#9670;&nbsp;</a></span>compute_sparsity_pattern</h2>
 

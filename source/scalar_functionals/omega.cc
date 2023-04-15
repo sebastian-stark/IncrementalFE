@@ -169,7 +169,7 @@ const
 		}
 	}
 
-	if(global_data->get_use_manufactured_solution())
+	if(global_data->get_use_manufactured_solution() && get<1>(requested_quantities))
 	{
 		Assert(	n_mu == 0,
 				ExcMessage("The manufactured solution capability is entirely untested with Lagrange multipliers. If you want to use it, this assertion must be removed followed by proper testing!") );
@@ -179,15 +179,14 @@ const
 		FullMatrix<double>	h_omega_2_manufactured;
 
 		for(unsigned int m = 0; m < n_v_q_dot; ++m)
-			e_manufactured[m] = e_omega_ref_sets[4][m];
+			e_manufactured[m] = e_omega_ref_sets[2][m];
 		for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
-			e_manufactured[m] = e_omega_ref_sets[2][m];
+			e_manufactured[m] = e_omega_ref_sets[1][m];
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			e_manufactured[m] = e_omega_ref_sets[2][m];
+			e_manufactured[m] = e_omega_ref_sets[1][m];
 
 		h_omega_1_manufactured = 0.0;
-		eval_time = t;
-
+		eval_time = (1.0 - global_data->get_alpha_manufactured()) * global_data->get_t_ref() + global_data->get_alpha_manufactured() * global_data->get_t();
 		if(get_values_and_derivatives(e_manufactured, t, x, h_omega_manufactured, h_omega_1_manufactured, h_omega_2_manufactured, make_tuple(true, true, false), false))
 			return true;
 
@@ -197,10 +196,8 @@ const
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
 			h_omega_1_manufactured[m] = 0.0;
 
-		// Here: Add terms
-		if(get<1>(requested_quantities))
-			for(unsigned int m = 0; m < e_omega.size(); ++m)
-				h_omega_1[m] += -h_omega_1_manufactured[m];
+		for(unsigned int m = 0; m < e_omega.size(); ++m)
+			h_omega_1[m] += -h_omega_1_manufactured[m];
 
 	}
 
@@ -363,38 +360,36 @@ const
 		}
 	}
 
-	if(global_data->get_use_manufactured_solution())
+	if(global_data->get_use_manufactured_solution() && get<1>(requested_quantities))
 	{
 		Assert(	n_mu == 0,
 				ExcMessage("The manufactured solution capability is entirely untested with Lagrange multipliers. If you want to use it, this assertion must be removed followed by proper testing!") );
 
-		double h_omega_manufactured;
-		Vector<double>	h_omega_1_manufactured(e_sigma.size()), e_manufactured(e_sigma.size());
-		FullMatrix<double>	h_omega_2_manufactured;
+		double h_sigma_manufactured;
+		Vector<double>	h_sigma_1_manufactured(e_sigma.size()), e_manufactured(e_sigma.size());
+		FullMatrix<double>	h_sigma_2_manufactured;
 
 		for(unsigned int m = 0; m < n_v_q_dot; ++m)
-			e_manufactured[m] = e_sigma_ref_sets[4][m];
+			e_manufactured[m] = e_sigma_ref_sets[2][m];
 		for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
-			e_manufactured[m] = e_sigma_ref_sets[2][m];
+			e_manufactured[m] = e_sigma_ref_sets[1][m];
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			e_manufactured[m] = e_sigma_ref_sets[2][m];
+			e_manufactured[m] = e_sigma_ref_sets[1][m];
 
-		h_omega_1_manufactured = 0.0;
-		eval_time = t;
-
-		if(get_values_and_derivatives(e_manufactured, t, x, n, h_omega_manufactured, h_omega_1_manufactured, h_omega_2_manufactured, make_tuple(true, true, false), false))
+		h_sigma_1_manufactured = 0.0;
+		eval_time = (1.0 - global_data->get_alpha_manufactured()) * global_data->get_t_ref() + global_data->get_alpha_manufactured() * global_data->get_t();
+		if(get_values_and_derivatives(e_manufactured, t, x, n, h_sigma_manufactured, h_sigma_1_manufactured, h_sigma_2_manufactured, make_tuple(true, true, false), false))
 			return true;
 
 		for(unsigned int m = n_v_q_dot; m < n_v_q_dot + n_mu; ++m)
-			h_omega_1_manufactured[m] *= dt;
+			h_sigma_1_manufactured[m] *= dt;
 
 		for(unsigned int m = n_v_q_dot + n_mu; m < n_v_q_dot + n_mu + n_q; ++m)
-			h_omega_1_manufactured[m] = 0.0;
+			h_sigma_1_manufactured[m] = 0.0;
 
 		// Here: Add terms
-		if(get<1>(requested_quantities))
-			for(unsigned int m = 0; m < e_sigma.size(); ++m)
-				h_sigma_1[m] += -h_omega_1_manufactured[m];
+		for(unsigned int m = 0; m < e_sigma.size(); ++m)
+			h_sigma_1[m] += -h_sigma_1_manufactured[m];
 	}
 
 	return false;

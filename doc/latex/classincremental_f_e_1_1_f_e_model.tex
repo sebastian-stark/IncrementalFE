@@ -47,7 +47,7 @@ R\+H\+S\+Vector\+Type \& \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a29
 \item 
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a9cd396b8078926ba01eafe296152917b}{get\+\_\+solve\+\_\+time\+\_\+last\+\_\+step}} () const
 \item 
-void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aea2ab158ff4d489df2773bb23159f200}{set\+\_\+manufactured\+\_\+solution}} (\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{Manufactured\+Solution}}$<$ Solution\+Vector\+Type $>$ $\ast$\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_abfa82cec71c452b3f880c9db0229601c}{manufactured\+\_\+solution}}, const double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2f120dec98a00102c846099dcc3db015}{alpha\+\_\+manufactured}})
+void \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_aea2ab158ff4d489df2773bb23159f200}{set\+\_\+manufactured\+\_\+solution}} (\mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{Manufactured\+Solution}}$<$ Solution\+Vector\+Type $>$ $\ast$\mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_abfa82cec71c452b3f880c9db0229601c}{manufactured\+\_\+solution}}, const double alpha\+\_\+manufactured)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -137,8 +137,6 @@ const bool \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_ace70f6d085e2b37c
 double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a490d7393aa94d765ec0e2c302b2afe44}{solve\+\_\+time\+\_\+last\+\_\+step}} = 0.\+0
 \item 
 \mbox{\hyperlink{classincremental_f_e_1_1_manufactured_solution}{Manufactured\+Solution}}$<$ Solution\+Vector\+Type $>$ $\ast$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_abfa82cec71c452b3f880c9db0229601c}{manufactured\+\_\+solution}} = nullptr
-\item 
-double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model_a2f120dec98a00102c846099dcc3db015}{alpha\+\_\+manufactured}} = 0.\+5
 \end{DoxyCompactItemize}
 
 
@@ -698,14 +696,7 @@ Zero the ghost values of {\ttfamily vector}
 {\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
 dealii\+::\+Affine\+Constraints$<$double$>$ \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::all\+\_\+constraints\hspace{0.3cm}{\ttfamily [private]}}
 
-Matrix with all combined constraints (used internally during the solution process) \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a2f120dec98a00102c846099dcc3db015}\label{classincremental_f_e_1_1_f_e_model_a2f120dec98a00102c846099dcc3db015}} 
-\index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!alpha\_manufactured@{alpha\_manufactured}}
-\index{alpha\_manufactured@{alpha\_manufactured}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
-\doxysubsubsection{\texorpdfstring{alpha\_manufactured}{alpha\_manufactured}}
-{\footnotesize\ttfamily template$<$unsigned int spacedim, class Solution\+Vector\+Type , class R\+H\+S\+Vector\+Type , class Matrix\+Type $>$ \\
-double \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{incremental\+F\+E\+::\+F\+E\+Model}}$<$ spacedim, Solution\+Vector\+Type, R\+H\+S\+Vector\+Type, Matrix\+Type $>$\+::alpha\+\_\+manufactured = 0.\+5\hspace{0.3cm}{\ttfamily [private]}}
-
-The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals. \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a937ea806f50796c76a45f36e6ec3cd29}\label{classincremental_f_e_1_1_f_e_model_a937ea806f50796c76a45f36e6ec3cd29}} 
+Matrix with all combined constraints (used internally during the solution process) \mbox{\Hypertarget{classincremental_f_e_1_1_f_e_model_a937ea806f50796c76a45f36e6ec3cd29}\label{classincremental_f_e_1_1_f_e_model_a937ea806f50796c76a45f36e6ec3cd29}} 
 \index{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}!assembly\_helper@{assembly\_helper}}
 \index{assembly\_helper@{assembly\_helper}!incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$@{incrementalFE::FEModel$<$ spacedim, SolutionVectorType, RHSVectorType, MatrixType $>$}}
 \doxysubsubsection{\texorpdfstring{assembly\_helper}{assembly\_helper}}

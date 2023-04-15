@@ -88,6 +88,8 @@ void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a667a
 void \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ad1f7a02a4825fbb8401a22798f957144}{set\+\_\+continue\+\_\+on\+\_\+nonconvergence}} (const bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}}=true)
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a8ac63617286fa6a6b835c7b3d077dc20}{get\+\_\+use\+\_\+manufactured\+\_\+solution}} () const
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_aa350f7d3a44089b4c6bb1bcce1b7b3a6}{get\+\_\+alpha\+\_\+manufactured}} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -139,6 +141,8 @@ bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_ae5fd
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a208183ae9f22bdde61ebeb1e533e615a}{continue\+\_\+on\+\_\+nonconvergence}} = false
 \item 
 bool \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_a0067364590a112c1c5d01ccf2e8867ba}{use\+\_\+manufactured\+\_\+solution}} = false
+\item 
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af6c871cdc8f913c86895a3a95ea4e623}{alpha\+\_\+manufactured}} = 0.\+5
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -189,6 +193,16 @@ Constructor allowing to construct object with non-\/default initial time
 The destructor of \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}} essentially checks before destruction that the \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{Global\+Data\+Incremental\+FE}} object is not used by other objects. If this is the case, the program will be aborted. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_aa350f7d3a44089b4c6bb1bcce1b7b3a6}\label{classincremental_f_e_1_1_global_data_incremental_f_e_aa350f7d3a44089b4c6bb1bcce1b7b3a6}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!get\_alpha\_manufactured@{get\_alpha\_manufactured}}
+\index{get\_alpha\_manufactured@{get\_alpha\_manufactured}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{get\_alpha\_manufactured()}{get\_alpha\_manufactured()}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::get\+\_\+alpha\+\_\+manufactured (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e_af6c871cdc8f913c86895a3a95ea4e623}{Global\+Data\+Incremental\+F\+E\+::alpha\+\_\+manufactured}} 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2a5480a5855d46a985b295c117c1f9ba}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2a5480a5855d46a985b295c117c1f9ba}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!get\_output\_level@{get\_output\_level}}
 \index{get\_output\_level@{get\_output\_level}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
@@ -573,7 +587,14 @@ friend class \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model}}\
 Allow the \mbox{\hyperlink{classincremental_f_e_1_1_f_e_model}{F\+E\+Model}} class to directly access all members. 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}} 
+\mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_af6c871cdc8f913c86895a3a95ea4e623}\label{classincremental_f_e_1_1_global_data_incremental_f_e_af6c871cdc8f913c86895a3a95ea4e623}} 
+\index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!alpha\_manufactured@{alpha\_manufactured}}
+\index{alpha\_manufactured@{alpha\_manufactured}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
+\doxysubsubsection{\texorpdfstring{alpha\_manufactured}{alpha\_manufactured}}
+{\footnotesize\ttfamily template$<$unsigned int spacedim$>$ \\
+double \mbox{\hyperlink{classincremental_f_e_1_1_global_data_incremental_f_e}{incremental\+F\+E\+::\+Global\+Data\+Incremental\+FE}}$<$ spacedim $>$\+::alpha\+\_\+manufactured = 0.\+5\hspace{0.3cm}{\ttfamily [private]}}
+
+The value of alpha used for the evaluation of the manufactured solution. Should be consistent with what is prescribed in the scalar functionals. \mbox{\Hypertarget{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}\label{classincremental_f_e_1_1_global_data_incremental_f_e_a2ad559967aae7632f26f6ee0c7390347}} 
 \index{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}!compute\_sparsity\_pattern@{compute\_sparsity\_pattern}}
 \index{compute\_sparsity\_pattern@{compute\_sparsity\_pattern}!incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$@{incrementalFE::GlobalDataIncrementalFE$<$ spacedim $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_sparsity\_pattern}{compute\_sparsity\_pattern}}

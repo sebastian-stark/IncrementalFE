@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2940e902f0f30ae4b9b122f7c573a20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd396b8078926ba01eafe296152917b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a9cd396b8078926ba01eafe296152917b">get_solve_time_last_step</a> () const</td></tr>
 <tr class="separator:a9cd396b8078926ba01eafe296152917b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea2ab158ff4d489df2773bb23159f200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aea2ab158ff4d489df2773bb23159f200">set_manufactured_solution</a> (<a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *<a class="el" href="classincremental_f_e_1_1_f_e_model.html#abfa82cec71c452b3f880c9db0229601c">manufactured_solution</a>, const double <a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f120dec98a00102c846099dcc3db015">alpha_manufactured</a>)</td></tr>
+<tr class="memitem:aea2ab158ff4d489df2773bb23159f200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#aea2ab158ff4d489df2773bb23159f200">set_manufactured_solution</a> (<a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *<a class="el" href="classincremental_f_e_1_1_f_e_model.html#abfa82cec71c452b3f880c9db0229601c">manufactured_solution</a>, const double alpha_manufactured)</td></tr>
 <tr class="separator:aea2ab158ff4d489df2773bb23159f200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -212,8 +212,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a490d7393aa94d765ec0e2c302b2afe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfa82cec71c452b3f880c9db0229601c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classincremental_f_e_1_1_manufactured_solution.html">ManufacturedSolution</a>&lt; SolutionVectorType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#abfa82cec71c452b3f880c9db0229601c">manufactured_solution</a> = nullptr</td></tr>
 <tr class="separator:abfa82cec71c452b3f880c9db0229601c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f120dec98a00102c846099dcc3db015"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classincremental_f_e_1_1_f_e_model.html#a2f120dec98a00102c846099dcc3db015">alpha_manufactured</a> = 0.5</td></tr>
-<tr class="separator:a2f120dec98a00102c846099dcc3db015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType&gt;<br />
@@ -1501,31 +1499,6 @@ template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorTyp
 </table>
 </div><div class="memdoc">
 <p>Matrix with all combined constraints (used internally during the solution process) </p>
-
-</div>
-</div>
-<a id="a2f120dec98a00102c846099dcc3db015"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f120dec98a00102c846099dcc3db015">&#9670;&nbsp;</a></span>alpha_manufactured</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;unsigned int spacedim, class SolutionVectorType , class RHSVectorType , class MatrixType &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="classincremental_f_e_1_1_f_e_model.html">incrementalFE::FEModel</a>&lt; spacedim, SolutionVectorType, RHSVectorType, MatrixType &gt;::alpha_manufactured = 0.5</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The value of alpha used for the evaluation of the manufactured solution at the intermediate point during a time increment. Needs to be consistent with what is prescribed in the scalar functionals. </p>
 
 </div>
 </div>

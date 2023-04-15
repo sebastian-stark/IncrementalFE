@@ -148,7 +148,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	vector<SolutionVectorType> manufactured_solution_data;
 	if(manufactured_solution)
 	{
-		manufactured_solution_data.resize(4);
+/*		manufactured_solution_data.resize(4);
 
 		manufactured_solution->get_manufactured_solution(global_data->get_t_ref(), manufactured_solution_data[0], 0);
 		solution_ref_sets.push_back(&manufactured_solution_data[0]);
@@ -161,6 +161,16 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 
 		manufactured_solution->get_manufactured_solution((1-alpha_manufactured)*global_data->get_t_ref() + alpha_manufactured*global_data->get_t(), manufactured_solution_data[3], 1);
 		solution_ref_sets.push_back(&manufactured_solution_data[3]);
+*/
+
+		manufactured_solution_data.resize(2);
+
+		manufactured_solution->get_manufactured_solution((1.0-global_data->alpha_manufactured)*global_data->get_t_ref() + global_data->alpha_manufactured*global_data->get_t(), manufactured_solution_data[0], 0);
+		solution_ref_sets.push_back(&manufactured_solution_data[0]);
+
+		manufactured_solution->get_manufactured_solution((1.0-global_data->alpha_manufactured)*global_data->get_t_ref() + global_data->alpha_manufactured*global_data->get_t(), manufactured_solution_data[1], 1);
+		solution_ref_sets.push_back(&manufactured_solution_data[1]);
+
 	}
 
 	timer.start();
@@ -1051,7 +1061,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::set_manufactur
 																							const double								alpha_manufactured)
 {
 	this->manufactured_solution = manufactured_solution;
-	this->alpha_manufactured = alpha_manufactured;
+	global_data->alpha_manufactured = alpha_manufactured;
 	global_data->use_manufactured_solution = true;
 }
 

@@ -286,5 +286,13 @@ const
 	return use_manufactured_solution;
 }
 
+template<unsigned int spacedim>
+double
+GlobalDataIncrementalFE<spacedim>::get_alpha_manufactured()
+const
+{
+	return alpha_manufactured;
+}
+
 template class incrementalFE::GlobalDataIncrementalFE<2>;
 template class incrementalFE::GlobalDataIncrementalFE<3>;

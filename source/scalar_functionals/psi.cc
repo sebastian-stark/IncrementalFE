@@ -95,13 +95,21 @@ const
 			h_omega_2 *= alpha;
 	}
 
-	if(global_data->get_use_manufactured_solution())
+	if(global_data->get_use_manufactured_solution() && get<1>(requested_quantities))
 	{
 		double h_omega_manufactured;
-		Vector<double>	h_omega_1_manufactured_0(e_omega.size()), h_omega_1_manufactured_1(e_omega.size());
+		Vector<double>	h_omega_1_manufactured(e_omega.size());//h_omega_1_manufactured_0(e_omega.size()), h_omega_1_manufactured_1(e_omega.size());
 		FullMatrix<double>	h_omega_2_manufactured;
 
-		h_omega_1_manufactured_1 = 0.0;
+		h_omega_1_manufactured = 0.0;
+		eval_time = (1.0 - global_data->get_alpha_manufactured()) * global_data->get_t_ref() + global_data->get_alpha_manufactured() * global_data->get_t();
+		if(get_values_and_derivatives(e_omega_ref_sets[1], x, h_omega_manufactured, h_omega_1_manufactured, h_omega_2_manufactured, make_tuple(true, true, false)))
+			return true;
+
+		for(unsigned int m = 0; m < e_omega.size(); ++m)
+			h_omega_1[m] += -h_omega_1_manufactured[m];
+
+/*		h_omega_1_manufactured_1 = 0.0;
 		eval_time = global_data->get_t();
 		if(get_values_and_derivatives(e_omega_ref_sets[3], x, h_omega_manufactured, h_omega_1_manufactured_1, h_omega_2_manufactured, make_tuple(true, true, false)))
 			return true;
@@ -115,6 +123,7 @@ const
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_omega.size(); ++m)
 				h_omega_1[m] += -h_omega_1_manufactured_1[m] * alpha - h_omega_1_manufactured_0[m] * (1. - alpha);
+*/
 	}
 
 	return false;
@@ -203,13 +212,21 @@ const
 			h_sigma_2 *= alpha;
 	}
 
-	if(global_data->get_use_manufactured_solution())
+	if(global_data->get_use_manufactured_solution() && get<1>(requested_quantities))
 	{
-		double h_omega_manufactured;
-		Vector<double>	h_omega_1_manufactured_0(e_sigma.size()), h_omega_1_manufactured_1(e_sigma.size());
-		FullMatrix<double>	h_omega_2_manufactured;
+		double h_sigma_manufactured;
+		Vector<double>	h_sigma_1_manufactured(e_sigma.size()); //h_sigma_1_manufactured_0(e_sigma.size()), h_omega_1_manufactured_1(e_sigma.size());
+		FullMatrix<double>	h_sigma_2_manufactured;
 
-		h_omega_1_manufactured_1 = 0.0;
+		h_sigma_1_manufactured = 0.0;
+		eval_time = (1.0 - global_data->get_alpha_manufactured()) * global_data->get_t_ref() + global_data->get_alpha_manufactured() * global_data->get_t();
+		if(get_values_and_derivatives(e_sigma_ref_sets[1], x, n, h_sigma_manufactured, h_sigma_1_manufactured, h_sigma_2_manufactured, make_tuple(true, true, false)))
+			return true;
+
+		for(unsigned int m = 0; m < e_sigma.size(); ++m)
+			h_sigma_1[m] += -h_sigma_1_manufactured[m];
+
+/*		h_omega_1_manufactured_1 = 0.0;
 		eval_time = global_data->get_t();
 		if(get_values_and_derivatives(e_sigma_ref_sets[3], x, n, h_omega_manufactured, h_omega_1_manufactured_1, h_omega_2_manufactured, make_tuple(true, true, false)))
 			return true;
@@ -223,6 +240,7 @@ const
 		if(get<1>(requested_quantities))
 			for(unsigned int m = 0; m < e_sigma.size(); ++m)
 				h_sigma_1[m] += -h_omega_1_manufactured_1[m] * alpha - h_omega_1_manufactured_0[m] * (1. - alpha);
+*/
 	}
 
 	return false;
