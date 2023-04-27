@@ -1,0 +1,35 @@
+\hypertarget{namespaceincremental_f_e_1_1_auxiliary}{}\doxysection{incremental\+FE\+::Auxiliary Namespace Reference}
+\label{namespaceincremental_f_e_1_1_auxiliary}\index{incrementalFE::Auxiliary@{incrementalFE::Auxiliary}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{namespaceincremental_f_e_1_1_auxiliary_aa0a363f2b53a7fb35d7d1bc01fe6a215}{get\+\_\+time\+\_\+increments}} (const double dt, const unsigned int \textbf{ N}, const double q, const unsigned int m)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for auxiliary functions of Incremental\+FE 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceincremental_f_e_1_1_auxiliary_aa0a363f2b53a7fb35d7d1bc01fe6a215}\label{namespaceincremental_f_e_1_1_auxiliary_aa0a363f2b53a7fb35d7d1bc01fe6a215}} 
+\index{incrementalFE::Auxiliary@{incrementalFE::Auxiliary}!get\_time\_increments@{get\_time\_increments}}
+\index{get\_time\_increments@{get\_time\_increments}!incrementalFE::Auxiliary@{incrementalFE::Auxiliary}}
+\doxysubsubsection{\texorpdfstring{get\_time\_increments()}{get\_time\_increments()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ incremental\+F\+E\+::\+Auxiliary\+::get\+\_\+time\+\_\+increments (\begin{DoxyParamCaption}\item[{const double}]{dt,  }\item[{const unsigned int}]{N,  }\item[{const double}]{q,  }\item[{const unsigned int}]{m }\end{DoxyParamCaption})}
+
+function implementing time stepping based on geometric series, with smaller or larger time increments in the beginning of the time interval under consideration if needed (put q=1 for equidistant time increments)
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em dt} & length of time interval\\
+\hline
+\mbox{\texttt{ in}}  & {\em N} & number of time increments covering time interval\\
+\hline
+\mbox{\texttt{ in}}  & {\em q} & ratio between two subsequent time increments\\
+\hline
+\mbox{\texttt{ in}}  & {\em m} & 2$^\wedge$m is the number of equally spaced sub-\/time-\/increments to be used for each time increment\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of time increments covering the time interval 
+\end{DoxyReturn}

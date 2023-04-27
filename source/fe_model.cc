@@ -66,7 +66,7 @@ single_block(single_block)
 	if(tria_system.get_this_proc_n_procs().second > 1)
 	{
 #ifdef DEAL_II_WITH_MPI
-		Auxiliary::compute_dof_renumbering_contiguous(assembly_helper.get_dof_handler_system(), dof_renumbering);
+		GalerkinTools::Auxiliary::compute_dof_renumbering_contiguous(assembly_helper.get_dof_handler_system(), dof_renumbering);
 		dof_renumbering.add_range(assembly_helper.system_size() - assembly_helper.get_n_stretched_rows(), assembly_helper.system_size() - 1, 0);
 		assembly_helper.get_dof_handler_system().attach_dof_renumbering(dof_renumbering);
 #else
@@ -1065,6 +1065,35 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::set_manufactur
 	global_data->use_manufactured_solution = true;
 }
 
+namespace incrementalFE
+{
+vector<double>
+Auxiliary::get_time_increments(	const double 		dt,
+								const unsigned int	N,
+								const double		q,
+								const unsigned int	m)
+{
+	vector<double> time_increments;
+
+	vector<double> time_increments_unrefined;
+	for(unsigned int k = 0; k < N; ++k)
+	{
+		if(q != 1.0)
+			time_increments_unrefined.push_back( dt * pow(q, (double)(N - 1 - k)) / ( ( 1.0 - pow(q, (double)N) ) / ( 1.0 - q ) ) );
+		else
+			time_increments_unrefined.push_back( dt / (double)N );
+	}
+
+	const unsigned int I = pow(2.0, (double)m ) + 0.5;
+	for(const auto& time_increment : time_increments_unrefined)
+	{
+		for(unsigned int i = 0; i < I; ++i)
+			time_increments.push_back(time_increment / I);
+	}
+
+	return time_increments;
+}
+}
 
 template class incrementalFE::FEModel<2, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;
 template class incrementalFE::FEModel<3, Vector<double>, BlockVector<double>, GalerkinTools::TwoBlockMatrix<SparseMatrix<double>>>;

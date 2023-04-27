@@ -654,6 +654,32 @@ public:
 
 };
 
+/**
+ * Namespace for auxiliary functions of IncrementalFE
+ */
+namespace Auxiliary
+{
+
+/**
+ * function implementing time stepping based on geometric series, with smaller or larger time increments in the beginning of the time interval under consideration if needed (put q=1 for equidistant time increments)
+ *
+ * @param[in]	dt		length of time interval
+ *
+ * @param[in]	N		number of time increments covering time interval
+ *
+ * @param[in]	q		ratio between two subsequent time increments
+ *
+ * @param[in]	m		2^m is the number of equally spaced sub-time-increments to be used for each time increment
+ *
+ * @return				a vector of time increments covering the time interval
+ */
+std::vector<double> get_time_increments(	const double 		dt,
+											const unsigned int	N,
+											const double		q,
+											const unsigned int	m);
+
+}
+
 }
 
 #endif /* INCREMENTALFE_FEMODEL_H_ */
