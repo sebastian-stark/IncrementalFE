@@ -293,13 +293,14 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		constraints.distribute(delta_solution);
 
 		// only perform check of termination criterion starting from the second iteration
+		double potential_increment = 0.0;
+		potential_increment = compute_estimated_potential_increment(delta_solution);
+		cout << "Pot_inc = " <<  compute_estimated_potential_increment(delta_solution, false) << endl;
 		if(iter > 0)
 		{
 			bool converged_by_potential_increment = true;
-			double potential_increment = 0.0;
 			if(global_data->threshold_potential_increment > 0.0)
 			{
-				potential_increment = compute_estimated_potential_increment(delta_solution);
 				if(!(fabs(potential_increment) < global_data->threshold_potential_increment))
 					converged_by_potential_increment = false;
 			}
@@ -384,9 +385,17 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 
 			if(error == false)
 			{
-				residual = get_residual();
+				residual = global_data->use_potential_for_line_search ? potential_value : get_residual();
+				printf("pot_val = %- 1.16e \n", potential_value);
 				if( !global_data->perform_line_search )
+				{
 					break;
+				}
+				else if( (global_data->use_potential_for_line_search) && (potential_increment*potential_increment < 1e-12))
+				{
+					cout << "Skipping potential based line search due to very small potential increment!" << endl;
+					break;
+				}
 			}
 
 			if( ((iter == 0) || (residual < residual_old)) && !error )
@@ -940,7 +949,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::update_rhs_sca
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>
 double
-FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_estimated_potential_increment(const SolutionVectorType& delta_solution)
+FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_estimated_potential_increment(const SolutionVectorType& delta_solution, const bool square_root)
 const
 {
 	// compute estimated potential increment
@@ -957,7 +966,10 @@ const
 		AssertThrowMPI(ierr);
 	}
 #endif //DEAL_II_WITH_MPI
-	return sqrt(fabs(estimated_potential_increment));
+	if(square_root)
+		return sqrt(fabs(estimated_potential_increment));
+	else
+		return estimated_potential_increment;
 }
 
 template<unsigned int spacedim, class SolutionVectorType, class RHSVectorType, class MatrixType>

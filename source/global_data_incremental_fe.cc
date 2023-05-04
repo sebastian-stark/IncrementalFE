@@ -294,5 +294,12 @@ const
 	return alpha_manufactured;
 }
 
+template<unsigned int spacedim>
+void
+GlobalDataIncrementalFE<spacedim>::set_use_potential_for_line_search(const bool use_potential_for_line_search)
+{
+	this->use_potential_for_line_search = use_potential_for_line_search;
+}
+
 template class incrementalFE::GlobalDataIncrementalFE<2>;
 template class incrementalFE::GlobalDataIncrementalFE<3>;

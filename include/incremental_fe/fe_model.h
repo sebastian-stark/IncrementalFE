@@ -200,7 +200,7 @@ private:
 
 	/**
 	 * if @p true, system matrix is treated as a single block. This is useful in case the A block of the
-	 * block system is singular.
+	 * block system is singular. Also, it can be used if checking is desired that the finite element matrix is p.d. during solution of the linear system.
 	 */
 	const bool
 	single_block = false;
@@ -300,14 +300,17 @@ private:
 	update_rhs_scaling_vector();
 
 	/**
-	 * computes estimated potential increment (square root of inner product between @p delta_solution and FEModel::rhs)
+	 * computes estimated potential increment
 	 *
 	 * @param[in]	delta_solution		solution increment
+	 *
+	 * @param[in]	square_root			if true: result is square root of absolute value of inner product between @p delta_solution and FEModel::rhs, if false: result is inner product between @p delta_solution and FEModel::rhs
 	 *
 	 * @return							estimated potential increment
 	 */
 	double
-	compute_estimated_potential_increment(const SolutionVectorType& delta_solution)
+	compute_estimated_potential_increment(	const SolutionVectorType& 	delta_solution,
+											const bool					square_root = true)
 	const;
 
 	/**

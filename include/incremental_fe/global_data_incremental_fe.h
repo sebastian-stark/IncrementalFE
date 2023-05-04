@@ -233,6 +233,12 @@ private:
 	alpha_manufactured = 0.5;
 
 	/**
+	 * If this is true, the potential value is used for the line search and not the norm of the gradient
+	 */
+	bool
+	use_potential_for_line_search = false;
+
+	/**
 	 * Allow the FEModel class to directly access all members.
 	 */
 	template <unsigned int, class SolutionVectorType, class RHSVectorType, class MatrixType> friend class FEModel;
@@ -504,6 +510,15 @@ public:
 	double
 	get_alpha_manufactured()
 	const;
+
+	/**
+	 * Sets GlobalDataIncrementalFE::use_potential_for_line_search
+	 *
+	 * @param[in]	use_potential_for_line_search	GlobalDataIncrementalFE::use_potential_for_line_search
+	 */
+	void
+	set_use_potential_for_line_search(const bool use_potential_for_line_search = true);
+
 
 };
 
