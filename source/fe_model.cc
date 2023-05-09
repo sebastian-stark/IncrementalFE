@@ -128,6 +128,9 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 	// old/reference values of solution
 	solution_ref = solution;
 
+	// old local solution backup
+	const auto local_solution_old = local_solution;
+
 
 	// make sure that ghosts are imported
 	update_ghosts(solution);
@@ -295,7 +298,6 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 		// only perform check of termination criterion starting from the second iteration
 		double potential_increment = 0.0;
 		potential_increment = compute_estimated_potential_increment(delta_solution);
-		cout << "Pot_inc = " <<  compute_estimated_potential_increment(delta_solution, false) << endl;
 		if(iter > 0)
 		{
 			bool converged_by_potential_increment = true;
@@ -397,6 +399,15 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 					break;
 				}
 			}
+			else
+			{
+				// if there was an error during assembly, try to start over again with original local solution as initial guess
+				zero_ghosts(solution);
+				for(const auto& dof_index : local_solution_old)
+					solution[dof_index.first] = dof_index.second;
+				solution.compress(VectorOperation::insert);
+				update_ghosts(solution);
+			}
 
 			if( ((iter == 0) || (residual < residual_old)) && !error )
 			{
@@ -421,6 +432,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::do_time_step(	
 				solution += delta_solution;
 
 				delta_solution *= -1.0;
+				constraints.distribute(delta_solution);
 			}
 		}
 		if(error == true)
@@ -771,7 +783,7 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 	// assemble system
 	this->pre_assembly();
 
-	map<unsigned int, double> local_solution;
+	local_solution.clear();
 	const bool error = assembly_helper.assemble_system(	solution,
 														solution_ref_sets,
 														constraints,
@@ -787,12 +799,14 @@ FEModel<spacedim, SolutionVectorType, RHSVectorType, MatrixType>::compute_system
 		// AssertThrow(false, ExcMessage("Error in assembly!"));
 	}
 
-
-    zero_ghosts(solution);
-	for(const auto& dof_index : local_solution)
-		solution[dof_index.first] = dof_index.second;
-	solution.compress(VectorOperation::insert);
-	update_ghosts(solution);
+	if(!error)
+	{
+		zero_ghosts(solution);
+		for(const auto& dof_index : local_solution)
+			solution[dof_index.first] = dof_index.second;
+		solution.compress(VectorOperation::insert);
+		update_ghosts(solution);
+	}
 
 	this->post_assembly();
 /*		FILE* printout = fopen("K.dat","w");

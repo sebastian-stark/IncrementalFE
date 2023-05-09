@@ -218,6 +218,12 @@ private:
 	manufactured_solution = nullptr;
 
 	/**
+	 * last computed local solution (map between local dof indices and solution values)
+	 */
+	std::map<unsigned int, double>
+	local_solution;
+
+	/**
 	 * Reinit a solution type vector
 	 *
 	 * @param[in]	vector	The vector to be re-inited
