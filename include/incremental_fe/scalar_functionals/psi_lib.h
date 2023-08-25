@@ -28,6 +28,7 @@
 #include <deal.II/base/symmetric_tensor.h>
 #include <deal.II/lac/vector.h>
 #include <deal.II/lac/lapack_full_matrix.h>
+#include <limits>
 
 namespace incrementalFE
 {
@@ -347,7 +348,7 @@ public:
 	{
 		double max_step = - 1.0 / delta_e_omega[0] * ( e_omega[0] + b / a );
 		if(isnan(max_step) || (max_step <= 0.0))
-			return DBL_MAX;
+			return numeric_limits<double>::max();
 		else
 			return max_step;
 	}
@@ -1734,7 +1735,7 @@ public:
 		const double max_step_1 = - e_omega[0] / delta_e_omega[0];
 		const double max_step_2 = - e_omega[1] / delta_e_omega[1];
 		if( (isnan(max_step_1) || (max_step_1 < 0.0)) && (isnan(max_step_2) || (max_step_2 < 0.0)) )
-			return DBL_MAX;
+			return numeric_limits<double>::max();
 		else
 		{
 			if(max_step_1 < 0.0)
@@ -2129,7 +2130,7 @@ public:
 	{
 		double max_step = - e_omega[0] / delta_e_omega[0];
 		if(isnan(max_step) || (max_step <= 0.0))
-			return DBL_MAX;
+			return numeric_limits<double>::max();
 		else
 			return max_step;
 	}
@@ -2348,7 +2349,7 @@ public:
 	{
 		double max_step = - e_omega[0] / delta_e_omega[0];
 		if(isnan(max_step) || (max_step <= 0.0))
-			return DBL_MAX;
+			return numeric_limits<double>::max();
 		else
 			return max_step;
 	}

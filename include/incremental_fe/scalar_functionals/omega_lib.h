@@ -26,6 +26,7 @@
 #include <incremental_fe/config.h>
 #include <deal.II/base/exceptions.h>
 #include <iostream>
+#include <limits>
 
 namespace incrementalFE
 {
@@ -3188,10 +3189,10 @@ private:
 public:
 
 	mutable	double
-	delta_phi_lb = -DBL_MAX;
+	delta_phi_lb = -numeric_limits<double>::max();
 
 	mutable double
-	delta_phi_ub = DBL_MAX;
+	delta_phi_ub = numeric_limits<double>::max();
 
 	mutable double
 	electrolysis_active = false;
