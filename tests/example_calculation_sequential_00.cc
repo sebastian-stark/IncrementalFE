@@ -766,6 +766,7 @@ int main()
 	// iteration settings
 	global_data.set_max_iter(20);
 	global_data.set_max_cutbacks(1);
+	global_data.set_threshold_potential_increment(1e-7);
 
 // first step
 	electrical_loading_tpc.loading_type = 0;
